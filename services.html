@@ -558,7 +558,7 @@
     }
 
     /* ========================================
-       4. PRICING CARDS
+       4. PRICING CARDS (Enhanced)
        ======================================== */
     .pricing {
       padding: var(--section-padding) 0;
@@ -569,74 +569,134 @@
     .pricing__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
+      gap: 24px;
       align-items: start;
     }
 
     .pricing-card {
       background: var(--white);
       border-radius: var(--radius-lg);
-      padding: 36px 28px 32px;
+      padding: 0;
       border: 2px solid var(--sand-dark);
       position: relative;
       transition: transform 0.35s ease, box-shadow 0.35s ease;
       box-shadow: var(--shadow-sm);
+      overflow: hidden;
     }
 
     .pricing-card:hover {
       box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
     }
 
     .pricing-card--highlighted {
       border-color: var(--amber);
       box-shadow: var(--shadow-lg), 0 0 0 1px var(--amber);
-      transform: scale(1.03);
+      transform: scale(1.04);
       z-index: 2;
     }
 
     .pricing-card--highlighted:hover {
       box-shadow: var(--shadow-xl), 0 0 0 1px var(--amber);
-      transform: scale(1.05);
+      transform: scale(1.06);
+    }
+
+    .pricing-card__header {
+      padding: 32px 28px 24px;
+      text-align: center;
+      position: relative;
+    }
+
+    .pricing-card--highlighted .pricing-card__header {
+      background: linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
+    }
+
+    .pricing-card:first-child .pricing-card__header {
+      background: linear-gradient(135deg, var(--sand) 0%, var(--sand-dark) 100%);
+    }
+
+    .pricing-card:last-child .pricing-card__header {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
     }
 
     .pricing-card__badge {
       position: absolute;
-      top: -14px;
+      top: 0;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
       background: var(--teal);
       color: var(--white);
       padding: 6px 24px;
       border-radius: var(--radius-xl);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       white-space: nowrap;
+      letter-spacing: 0.3px;
+    }
+
+    .pricing-card__icon {
+      font-size: 44px;
+      margin-bottom: 12px;
+      display: block;
+      line-height: 1;
     }
 
     .pricing-card__name {
       font-family: var(--font-heading);
-      font-size: 26px;
-      color: var(--charcoal);
+      font-size: 30px;
       margin-bottom: 4px;
+    }
+
+    .pricing-card:first-child .pricing-card__name,
+    .pricing-card--highlighted .pricing-card__name {
+      color: var(--charcoal);
+    }
+
+    .pricing-card:last-child .pricing-card__name {
+      color: var(--white);
+    }
+
+    .pricing-card__tagline {
+      font-size: 14px;
+      font-weight: 400;
+      opacity: 0.75;
+    }
+
+    .pricing-card:last-child .pricing-card__tagline {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .pricing-card__body {
+      padding: 28px 28px 32px;
+    }
+
+    .pricing-card__price-row {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--sand-dark);
     }
 
     .pricing-card__price {
       font-family: var(--font-heading);
-      font-size: clamp(36px, 4vw, 44px);
+      font-size: clamp(40px, 4.5vw, 50px);
       color: var(--teal);
-      margin-bottom: 8px;
-      line-height: 1.2;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .pricing-card--highlighted .pricing-card__price {
+      color: var(--amber-dark);
     }
 
     .pricing-card__for {
-      font-size: 15px;
-      color: #666;
-      margin-bottom: 24px;
-      line-height: 1.6;
+      font-size: 14px;
+      color: #888;
+      font-weight: 400;
     }
 
     .pricing-card__features {
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .pricing-card__feature {
@@ -645,7 +705,7 @@
       gap: 10px;
       font-size: 15px;
       line-height: 1.6;
-      padding: 6px 0;
+      padding: 7px 0;
       color: var(--charcoal);
     }
 
@@ -673,6 +733,14 @@
       color: #999;
       text-align: center;
       margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .pricing-card__delivery-icon {
+      font-size: 15px;
     }
 
     /* ========================================
@@ -1296,7 +1364,7 @@
 
       .pricing__grid {
         grid-template-columns: 1fr;
-        max-width: 480px;
+        max-width: 520px;
         margin: 0 auto;
       }
 
@@ -1492,161 +1560,179 @@
   <section class="pricing" id="pricing" aria-labelledby="pricing-title">
     <div class="container">
       <div class="section-header" style="text-align: center;">
-        <h2 class="section-header__title" id="pricing-title">בחר את החבילה שלך</h2>
-        <p class="section-header__subtitle">כל חבילה כוללת מסלול שנבנה אישית — ההבדל הוא ברמת הליווי</p>
+        <h2 class="section-header__title" id="pricing-title">בחר את המסלול שלך</h2>
+        <p class="section-header__subtitle">כל חבילה כוללת תכנון אישי — ההבדל הוא ברמת הליווי והעומק</p>
       </div>
 
       <div class="pricing__grid">
-        <!-- Card 1 — בסיסי -->
+        <!-- Card 1 — מצפן -->
         <div class="pricing-card reveal">
-          <h3 class="pricing-card__name">בסיסי</h3>
-          <div class="pricing-card__price">&#8362;890</div>
-          <p class="pricing-card__for">מי שרוצה כיוון ברור ומסלול מוכן</p>
-
-          <div class="pricing-card__features">
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>מסלול מפורט ל-7 ימים</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>המלצות לינה (3 אפשרויות לכל לילה)</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>רשימת אטרקציות מתאימות לגיל</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--excluded">
-              <span class="pricing-card__check" aria-hidden="true">&#10007;</span>
-              <span>התאמות אישיות לאחר קבלה</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--excluded">
-              <span class="pricing-card__check" aria-hidden="true">&#10007;</span>
-              <span>ליווי בזמן הטיול</span>
-            </div>
+          <div class="pricing-card__header">
+            <span class="pricing-card__icon" aria-hidden="true">&#129517;</span>
+            <h3 class="pricing-card__name">מצפן</h3>
+            <p class="pricing-card__tagline">כיוון ברור. מסלול מוכן. יאללה לדרך.</p>
           </div>
-
-          <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%97%D7%91%D7%99%D7%9C%D7%94%20%D7%91%D7%A1%D7%99%D7%A1%D7%99%D7%AA" class="btn btn--outline-dark btn--block">בחר חבילה בסיסית</a>
-          <p class="pricing-card__delivery">מוכן תוך 5 ימי עסקים</p>
+          <div class="pricing-card__body">
+            <div class="pricing-card__price-row">
+              <div class="pricing-card__price">&#8362;890</div>
+              <p class="pricing-card__for">לטיול עד 7 ימים</p>
+            </div>
+            <div class="pricing-card__features">
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>מסלול יום-יום מפורט</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>המלצות לינה (3 אפשרויות לכל לילה)</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>אטרקציות מותאמות לגיל הילדים</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--excluded">
+                <span class="pricing-card__check" aria-hidden="true">&#10007;</span>
+                <span>התאמות אישיות לאחר קבלה</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--excluded">
+                <span class="pricing-card__check" aria-hidden="true">&#10007;</span>
+                <span>ליווי בזמן הטיול</span>
+              </div>
+            </div>
+            <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%97%D7%91%D7%99%D7%9C%D7%AA%20%D7%9E%D7%A6%D7%A4%D7%9F" class="btn btn--outline-dark btn--block" target="_blank" rel="noopener noreferrer">בחר את מצפן</a>
+            <p class="pricing-card__delivery"><span class="pricing-card__delivery-icon" aria-hidden="true">&#128197;</span> מוכן תוך 5 ימי עסקים</p>
+          </div>
         </div>
 
-        <!-- Card 2 — מלא (HIGHLIGHTED) -->
+        <!-- Card 2 — הרפתקה (HIGHLIGHTED) -->
         <div class="pricing-card pricing-card--highlighted reveal reveal-delay-1">
-          <span class="pricing-card__badge">הכי פופולרי</span>
-          <h3 class="pricing-card__name">מלא</h3>
-          <div class="pricing-card__price">&#8362;1,490</div>
-          <p class="pricing-card__for">מי שרוצה שהכל יהיה מסודר מראש</p>
-
-          <div class="pricing-card__features">
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>מסלול מפורט ל-7 ימים</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>המלצות לינה (3 אפשרויות לכל לילה)</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>רשימת אטרקציות מתאימות לגיל</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>התאמות אישיות עד 3 סבבי עריכה</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>המלצות מסעדות (כולל ילדים)</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>גיליון Excel מסודר לכל היום</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>רשימת ציוד להכין מראש</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>שיחת וידאו לפני הטיול (30 דקות)</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--excluded">
-              <span class="pricing-card__check" aria-hidden="true">&#10007;</span>
-              <span>ליווי בזמן הטיול</span>
-            </div>
+          <span class="pricing-card__badge">&#11088; הכי פופולרי</span>
+          <div class="pricing-card__header">
+            <span class="pricing-card__icon" aria-hidden="true">&#127758;</span>
+            <h3 class="pricing-card__name">הרפתקה</h3>
+            <p class="pricing-card__tagline">הכל מתוכנן. הכל מסודר. רק ליהנות.</p>
           </div>
-
-          <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%97%D7%91%D7%99%D7%9C%D7%94%20%D7%9E%D7%9C%D7%90%D7%94" class="btn btn--primary btn--block">בחר חבילה מלאה</a>
-          <p class="pricing-card__delivery">מוכן תוך 3 ימי עסקים</p>
+          <div class="pricing-card__body">
+            <div class="pricing-card__price-row">
+              <div class="pricing-card__price">&#8362;1,490</div>
+              <p class="pricing-card__for">לטיול עד 7 ימים + ליווי מלא</p>
+            </div>
+            <div class="pricing-card__features">
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>מסלול יום-יום מפורט</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>המלצות לינה (3 אפשרויות לכל לילה)</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>אטרקציות מותאמות לגיל הילדים</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>התאמות אישיות עד 3 סבבי עריכה</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>המלצות מסעדות ידידותיות לילדים</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>גיליון Excel מסודר לכל יום</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>רשימת ציוד מלאה להכנה מראש</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>שיחת וידאו לפני הטיול (30 דק׳)</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--excluded">
+                <span class="pricing-card__check" aria-hidden="true">&#10007;</span>
+                <span>ליווי בזמן הטיול</span>
+              </div>
+            </div>
+            <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%97%D7%91%D7%99%D7%9C%D7%AA%20%D7%94%D7%A8%D7%A4%D7%AA%D7%A7%D7%94" class="btn btn--primary btn--block" target="_blank" rel="noopener noreferrer">בחר את הרפתקה</a>
+            <p class="pricing-card__delivery"><span class="pricing-card__delivery-icon" aria-hidden="true">&#9889;</span> מוכן תוך 3 ימי עסקים</p>
+          </div>
         </div>
 
-        <!-- Card 3 — פרימיום -->
+        <!-- Card 3 — אודיסיאה -->
         <div class="pricing-card reveal reveal-delay-2">
-          <h3 class="pricing-card__name">פרימיום</h3>
-          <div class="pricing-card__price">&#8362;2,490</div>
-          <p class="pricing-card__for">מי שרוצה ראש שקט מלא — לפני ובמהלך הטיול</p>
-
-          <div class="pricing-card__features">
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>תכנון מסלול ל-14 ימים</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>המלצות לינה (3 אפשרויות לכל לילה)</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>רשימת אטרקציות מתאימות לגיל</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>התאמות אישיות ללא הגבלה</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>המלצות מסעדות (כולל ילדים)</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>גיליון Excel מסודר לכל היום</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>רשימת ציוד להכין מראש</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>שיחות וידאו ללא הגבלה (לפני הטיול)</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>ליווי וואטסאפ בזמן הטיול (עד 14 יום)</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>עדכונים בזמן אמת (מזג אוויר, שינויים)</span>
-            </div>
-            <div class="pricing-card__feature pricing-card__feature--included">
-              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
-              <span>תכנון חלופות למקרה חירום</span>
-            </div>
+          <div class="pricing-card__header">
+            <span class="pricing-card__icon" aria-hidden="true">&#128640;</span>
+            <h3 class="pricing-card__name">אודיסיאה</h3>
+            <p class="pricing-card__tagline">ראש שקט מלא — מהרגע הראשון ועד הנחיתה.</p>
           </div>
-
-          <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%97%D7%91%D7%99%D7%9C%D7%94%20%D7%A4%D7%A8%D7%99%D7%9E%D7%99%D7%95%D7%9D" class="btn btn--outline-dark btn--block">בחר חבילה פרימיום</a>
-          <p class="pricing-card__delivery">מוכן תוך 3 ימי עסקים</p>
+          <div class="pricing-card__body">
+            <div class="pricing-card__price-row">
+              <div class="pricing-card__price">&#8362;2,490</div>
+              <p class="pricing-card__for">לטיול עד 14 ימים + ליווי VIP</p>
+            </div>
+            <div class="pricing-card__features">
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>מסלול מפורט עד 14 ימים</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>המלצות לינה (3 אפשרויות לכל לילה)</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>אטרקציות מותאמות לגיל הילדים</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>התאמות אישיות ללא הגבלה</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>המלצות מסעדות ידידותיות לילדים</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>גיליון Excel מסודר לכל יום</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>רשימת ציוד מלאה להכנה מראש</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>שיחות וידאו ללא הגבלה לפני הטיול</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>ליווי וואטסאפ בזמן הטיול (עד 14 יום)</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>עדכונים בזמן אמת (מזג אוויר, שינויים)</span>
+              </div>
+              <div class="pricing-card__feature pricing-card__feature--included">
+                <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+                <span>תכנית חלופית למקרה חירום</span>
+              </div>
+            </div>
+            <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%97%D7%91%D7%99%D7%9C%D7%AA%20%D7%90%D7%95%D7%93%D7%99%D7%A1%D7%99%D7%90%D7%94" class="btn btn--outline-dark btn--block" target="_blank" rel="noopener noreferrer">בחר את אודיסיאה</a>
+            <p class="pricing-card__delivery"><span class="pricing-card__delivery-icon" aria-hidden="true">&#9889;</span> מוכן תוך 3 ימי עסקים</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1872,9 +1958,9 @@
         <div class="footer__col">
           <h3 class="footer__col-title">שירותים</h3>
           <ul>
-            <li><a href="#pricing">תכנון טיול אישי</a></li>
-            <li><a href="#pricing">מסלולים מוכנים</a></li>
-            <li><a href="#pricing">ייעוץ טלפוני</a></li>
+            <li><a href="#pricing">חבילת מצפן</a></li>
+            <li><a href="#pricing">חבילת הרפתקה</a></li>
+            <li><a href="#pricing">חבילת אודיסיאה</a></li>
             <li><a href="#final-cta">צור קשר</a></li>
           </ul>
         </div>
