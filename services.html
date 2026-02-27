@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TripWithKids — שירותי תכנון טיולים משפחתיים לחו״ל. חבילות תכנון מותאמות אישית למשפחות עם ילדים.">
+  <title>שירותים ומחירים — TripWithKids</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       CSS Custom Properties
+       ======================================== */
+    :root {
+      --amber: #E8A045;
+      --amber-light: #f0b868;
+      --amber-dark: #c4872e;
+      --teal: #1A6B72;
+      --teal-light: #238a93;
+      --teal-dark: #124d52;
+      --coral: #F07060;
+      --coral-light: #f49185;
+      --cream: #FDF8F2;
+      --charcoal: #2C2C2C;
+      --sand: #F5EDD8;
+      --sand-dark: #e8ddc4;
+      --green: #4A9B6F;
+      --green-dark: #3b7d5a;
+      --white: #FFFFFF;
+
+      --font-heading: 'Secular One', sans-serif;
+      --font-body: 'Rubik', sans-serif;
+
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+      --shadow-xl: 0 16px 48px rgba(0,0,0,0.15);
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+
+      --nav-height: 72px;
+      --section-padding: clamp(60px, 10vw, 120px);
+    }
+
+    /* ========================================
+       Reset & Base
+       ======================================== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--charcoal);
+      background-color: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: var(--font-body);
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ========================================
+       Utility
+       ======================================== */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ========================================
+       Buttons
+       ======================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: var(--radius-xl);
+      font-size: 16px;
+      font-weight: 600;
+      min-height: 48px;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      white-space: nowrap;
+    }
+
+    .btn--primary {
+      background: var(--amber);
+      color: var(--charcoal);
+      box-shadow: 0 4px 14px rgba(232, 160, 69, 0.35);
+    }
+
+    .btn--primary:hover,
+    .btn--primary:focus-visible {
+      background: var(--amber-dark);
+      box-shadow: 0 6px 20px rgba(232, 160, 69, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn--outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid var(--white);
+    }
+
+    .btn--outline:hover,
+    .btn--outline:focus-visible {
+      background: var(--white);
+      color: var(--charcoal);
+      transform: translateY(-2px);
+    }
+
+    .btn--outline-dark {
+      background: transparent;
+      color: var(--charcoal);
+      border: 2px solid var(--charcoal);
+    }
+
+    .btn--outline-dark:hover,
+    .btn--outline-dark:focus-visible {
+      background: var(--charcoal);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .btn--green {
+      background: var(--green);
+      color: var(--white);
+      box-shadow: 0 4px 14px rgba(74, 155, 111, 0.35);
+    }
+
+    .btn--green:hover,
+    .btn--green:focus-visible {
+      background: var(--green-dark);
+      box-shadow: 0 6px 20px rgba(74, 155, 111, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn--sm {
+      padding: 10px 24px;
+      font-size: 15px;
+      min-height: 44px;
+    }
+
+    .btn--block {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid var(--teal);
+      outline-offset: 3px;
+    }
+
+    /* ========================================
+       Scroll Animations
+       ======================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ========================================
+       1. NAVIGATION
+       ======================================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      background: var(--cream);
+      border-bottom: 1px solid var(--sand-dark);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .nav.scrolled {
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .nav__logo {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav__logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--amber);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav__link {
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+      font-size: 15px;
+      transition: background 0.2s ease, color 0.2s ease;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav__link:hover,
+    .nav__link:focus-visible {
+      background: var(--sand);
+      color: var(--teal);
+    }
+
+    .nav__link:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+
+    .nav__link[aria-current="page"] {
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    .nav__link[aria-current="page"]:hover,
+    .nav__link[aria-current="page"]:focus-visible {
+      background: var(--teal-dark);
+      color: var(--white);
+    }
+
+    .nav__cta {
+      margin-right: 8px;
+    }
+
+    .nav__mobile-actions {
+      display: none;
+    }
+
+    .nav__hamburger {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--charcoal);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .nav__whatsapp-mobile {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-size: 22px;
+    }
+
+    .nav__mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-height);
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background: var(--cream);
+      padding: 32px 24px;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 999;
+      overflow-y: auto;
+    }
+
+    .nav__mobile-menu.open {
+      display: flex;
+    }
+
+    .nav__mobile-menu .nav__link {
+      font-size: 20px;
+      padding: 16px;
+      justify-content: flex-start;
+    }
+
+    .nav__mobile-menu .btn {
+      margin-top: 16px;
+      justify-content: center;
+    }
+
+    /* ========================================
+       Section Header (shared)
+       ======================================== */
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    .section-header__title {
+      font-size: clamp(28px, 4vw, 42px);
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+
+    .section-header__subtitle {
+      font-size: 17px;
+      color: #666;
+      font-weight: 400;
+    }
+
+    /* ========================================
+       2. PAGE HERO
+       ======================================== */
+    .page-hero {
+      position: relative;
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: var(--nav-height);
+      padding-bottom: 48px;
+      overflow: hidden;
+    }
+
+    .page-hero__bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(160deg,
+          var(--teal) 0%,
+          var(--teal-dark) 60%,
+          #0e3d42 100%);
+      z-index: 0;
+    }
+
+    .page-hero__bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(232, 160, 69, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(35, 138, 147, 0.3) 0%, transparent 60%);
+    }
+
+    .page-hero__bg::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: linear-gradient(to top, var(--cream), transparent);
+    }
+
+    .page-hero__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: var(--white);
+      padding: 60px 24px 40px;
+      max-width: 800px;
+    }
+
+    .page-hero__breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      opacity: 0.7;
+      margin-bottom: 24px;
+    }
+
+    .page-hero__breadcrumb a {
+      transition: opacity 0.2s ease;
+    }
+
+    .page-hero__breadcrumb a:hover {
+      opacity: 1;
+    }
+
+    .page-hero__breadcrumb-sep {
+      opacity: 0.5;
+    }
+
+    .page-hero__title {
+      font-size: clamp(28px, 4.5vw, 48px);
+      line-height: 1.25;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+
+    .page-hero__subtitle {
+      font-size: clamp(16px, 2vw, 19px);
+      font-weight: 300;
+      line-height: 1.7;
+      opacity: 0.9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ========================================
+       3. VALUE PROPOSITION
+       ======================================== */
+    .value-prop {
+      padding: var(--section-padding) 0;
+      background: var(--cream);
+    }
+
+    .value-prop__headline {
+      font-size: clamp(26px, 3.8vw, 40px);
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+
+    .value-prop__subheadline {
+      font-size: 17px;
+      color: #666;
+      font-weight: 400;
+      margin-bottom: 56px;
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    .value-prop__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .value-prop__item {
+      text-align: center;
+    }
+
+    .value-prop__icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .value-prop__item-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+
+    .value-prop__item-desc {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* ========================================
+       4. PRICING CARDS
+       ======================================== */
+    .pricing {
+      padding: var(--section-padding) 0;
+      padding-top: 0;
+      background: var(--cream);
+    }
+
+    .pricing__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .pricing-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px 32px;
+      border: 2px solid var(--sand-dark);
+      position: relative;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .pricing-card:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .pricing-card--highlighted {
+      border-color: var(--amber);
+      box-shadow: var(--shadow-lg), 0 0 0 1px var(--amber);
+      transform: scale(1.03);
+      z-index: 2;
+    }
+
+    .pricing-card--highlighted:hover {
+      box-shadow: var(--shadow-xl), 0 0 0 1px var(--amber);
+      transform: scale(1.05);
+    }
+
+    .pricing-card__badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--teal);
+      color: var(--white);
+      padding: 6px 24px;
+      border-radius: var(--radius-xl);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .pricing-card__name {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+    }
+
+    .pricing-card__price {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 4vw, 44px);
+      color: var(--teal);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .pricing-card__for {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .pricing-card__features {
+      margin-bottom: 28px;
+    }
+
+    .pricing-card__feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 6px 0;
+      color: var(--charcoal);
+    }
+
+    .pricing-card__feature--included .pricing-card__check {
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 16px;
+      margin-top: 2px;
+    }
+
+    .pricing-card__feature--excluded {
+      color: #bbb;
+    }
+
+    .pricing-card__feature--excluded .pricing-card__check {
+      color: #ccc;
+      flex-shrink: 0;
+      font-size: 16px;
+      margin-top: 2px;
+    }
+
+    .pricing-card__delivery {
+      font-size: 13px;
+      color: #999;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    /* ========================================
+       5. HOW IT WORKS (process)
+       ======================================== */
+    .process {
+      padding: var(--section-padding) 0;
+      background: var(--sand);
+    }
+
+    .process .section-header {
+      text-align: center;
+    }
+
+    .process__steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+
+    .process__steps::before {
+      content: '';
+      position: absolute;
+      top: 44px;
+      right: 12.5%;
+      left: 12.5%;
+      height: 2px;
+      background: var(--sand-dark);
+    }
+
+    .process__step {
+      text-align: center;
+      position: relative;
+    }
+
+    .process__step-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 16px;
+      background: var(--white);
+      border: 2px solid var(--sand-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .process__step-number {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--amber);
+      color: var(--charcoal);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      z-index: 2;
+    }
+
+    .process__step-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+
+    .process__step-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* ========================================
+       6. FAQ ACCORDION
+       ======================================== */
+    .faq {
+      padding: var(--section-padding) 0;
+      background: var(--cream);
+    }
+
+    .faq .section-header {
+      text-align: center;
+    }
+
+    .faq__list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq__item {
+      border-bottom: 1px solid var(--sand-dark);
+    }
+
+    .faq__item:first-child {
+      border-top: 1px solid var(--sand-dark);
+    }
+
+    .faq__question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0;
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-align: right;
+      cursor: pointer;
+      background: none;
+      border: none;
+      min-height: 44px;
+      transition: color 0.2s ease;
+    }
+
+    .faq__question:hover {
+      color: var(--teal);
+    }
+
+    .faq__question:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    .faq__icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--sand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 300;
+      transition: transform 0.3s ease, background 0.3s ease;
+      color: var(--charcoal);
+    }
+
+    .faq__item[data-open="true"] .faq__icon {
+      transform: rotate(45deg);
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    .faq__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .faq__answer-inner {
+      padding: 0 0 20px;
+      font-size: 16px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    /* ========================================
+       7. TESTIMONIALS
+       ======================================== */
+    .testimonials {
+      background: var(--teal);
+      padding: var(--section-padding) 0;
+      color: var(--white);
+    }
+
+    .testimonials .section-header {
+      text-align: center;
+    }
+
+    .testimonials .section-header__title {
+      color: var(--white);
+    }
+
+    .testimonials .section-header__subtitle {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .testimonials__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .testimonial-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+    }
+
+    .testimonial-card__stars {
+      color: var(--amber);
+      font-size: 18px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 2px;
+    }
+
+    .testimonial-card__quote {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    .testimonial-card__author {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--amber-light);
+    }
+
+    /* ========================================
+       8. FINAL CTA
+       ======================================== */
+    .final-cta {
+      background: var(--amber);
+      padding: var(--section-padding) 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .final-cta::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      right: -80px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(26,107,114,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .final-cta__content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .final-cta__title {
+      font-size: clamp(28px, 4.5vw, 46px);
+      color: var(--charcoal);
+      margin-bottom: 16px;
+    }
+
+    .final-cta__subtitle {
+      font-size: 18px;
+      color: rgba(44,44,44,0.8);
+      margin-bottom: 36px;
+      font-weight: 400;
+    }
+
+    .final-cta__actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .final-cta__trust {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+
+    .final-cta__trust span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .final-cta__trust .check {
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    /* ========================================
+       9. FOOTER
+       ======================================== */
+    .footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.7);
+      padding: 64px 0 0;
+    }
+
+    .footer__inner {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer__brand .nav__logo {
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer__tagline {
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer__social {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .footer__social a {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .footer__social a:hover {
+      background: var(--amber);
+      transform: translateY(-2px);
+    }
+
+    .footer__social a:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+    }
+
+    .footer__col-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .footer__col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer__col ul li a {
+      font-size: 14px;
+      transition: color 0.2s ease;
+      padding: 4px 0;
+      display: inline-block;
+    }
+
+    .footer__col ul li a:hover {
+      color: var(--amber);
+    }
+
+    .footer__col ul li a:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 24px 0;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* ========================================
+       WhatsApp FAB
+       ======================================== */
+    .whatsapp-fab {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 999;
+      width: 60px;
+      height: 60px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 28px;
+      box-shadow: 0 4px 16px rgba(74, 155, 111, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .whatsapp-fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 24px rgba(74, 155, 111, 0.5);
+    }
+
+    .whatsapp-fab:focus-visible {
+      outline: 3px solid var(--white);
+      outline-offset: 3px;
+    }
+
+    .whatsapp-fab__pulse {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid var(--green);
+      animation: fabPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes fabPulse {
+      0% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.15); opacity: 0; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+
+    /* ========================================
+       SVG Icons (inline)
+       ======================================== */
+    .icon-wa {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      vertical-align: middle;
+    }
+
+    /* ========================================
+       CONTACT MODAL
+       ======================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      box-shadow: var(--shadow-xl);
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal__close {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--sand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--charcoal);
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s ease;
+    }
+
+    .modal__close:hover {
+      background: var(--sand-dark);
+    }
+
+    .modal__title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+
+    .modal__subtitle {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 28px;
+    }
+
+    .modal__field {
+      margin-bottom: 18px;
+    }
+
+    .modal__field label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 6px;
+    }
+
+    .modal__field input,
+    .modal__field textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--sand-dark);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--charcoal);
+      background: var(--cream);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+    }
+
+    .modal__field input:focus,
+    .modal__field textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(26, 107, 114, 0.12);
+    }
+
+    .modal__field input::placeholder,
+    .modal__field textarea::placeholder {
+      color: #bbb;
+    }
+
+    .modal__field textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .modal__field input.error,
+    .modal__field textarea.error {
+      border-color: var(--coral);
+      box-shadow: 0 0 0 3px rgba(240, 112, 96, 0.12);
+    }
+
+    .modal__success {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .modal__success-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--green);
+      color: var(--white);
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .modal__success-text {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--charcoal);
+    }
+
+    @media (max-width: 480px) {
+      .modal {
+        padding: 32px 20px;
+      }
+    }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      .value-prop__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+
+      .pricing__grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .pricing-card--highlighted {
+        transform: none;
+      }
+
+      .pricing-card--highlighted:hover {
+        transform: translateY(-4px);
+      }
+
+      .process__steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+      }
+
+      .process__steps::before {
+        display: none;
+      }
+
+      .testimonials__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer__inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav__links {
+        display: none;
+      }
+
+      .nav__cta.desktop-only {
+        display: none;
+      }
+
+      .nav__mobile-actions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .nav__hamburger {
+        display: flex;
+      }
+
+      .nav__logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 20px;
+      }
+
+      .value-prop__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process__steps {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer__inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        text-align: center;
+      }
+
+      .footer__brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer__social {
+        justify-content: center;
+      }
+
+      .footer__tagline {
+        max-width: none;
+      }
+
+      .final-cta__trust {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .final-cta__actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .final-cta__actions .btn {
+        width: 100%;
+        justify-content: center;
+        max-width: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="TripWithKids - דף הבית">
+        <span class="nav__logo-icon" aria-hidden="true">&#9992;</span>
+        TripWithKids
+      </a>
+
+      <ul class="nav__links" role="menubar">
+        <li role="none"><a href="index.html#blog" class="nav__link" role="menuitem">בלוג</a></li>
+        <li role="none"><a href="index.html#destinations" class="nav__link" role="menuitem">יעדים</a></li>
+        <li role="none"><a href="services.html" class="nav__link" role="menuitem" aria-current="page">שירותים</a></li>
+        <li role="none"><a href="index.html#about" class="nav__link" role="menuitem">אודות</a></li>
+        <li role="none"><a href="#final-cta" class="nav__link" role="menuitem">צור קשר</a></li>
+      </ul>
+
+      <a href="#pricing" class="btn btn--primary btn--sm nav__cta desktop-only">לחבילות</a>
+
+      <div class="nav__mobile-actions">
+        <a href="https://wa.me/972546758145" class="nav__whatsapp-mobile" aria-label="שלח הודעת וואטסאפ">
+          <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
+      <a href="index.html#blog" class="nav__link" role="menuitem">בלוג</a>
+      <a href="index.html#destinations" class="nav__link" role="menuitem">יעדים</a>
+      <a href="services.html" class="nav__link" role="menuitem" aria-current="page">שירותים</a>
+      <a href="index.html#about" class="nav__link" role="menuitem">אודות</a>
+      <a href="#final-cta" class="nav__link" role="menuitem">צור קשר</a>
+      <a href="#pricing" class="btn btn--primary">לחבילות</a>
+    </div>
+  </nav>
+
+  <!-- ============ PAGE HERO ============ -->
+  <header class="page-hero" id="page-hero">
+    <div class="page-hero__bg" aria-hidden="true"></div>
+    <div class="page-hero__content">
+      <nav class="page-hero__breadcrumb" aria-label="מיקום בדף">
+        <a href="index.html">ראשי</a>
+        <span class="page-hero__breadcrumb-sep" aria-hidden="true">/</span>
+        <span>שירותים</span>
+      </nav>
+      <h1 class="page-hero__title">תכנון טיול שנבנה סביב הילדים שלך — לא סביב לוח זמנים גנרי</h1>
+      <p class="page-hero__subtitle">בחר את החבילה שמתאימה לך. אני בונה את המסלול. אתה נהנה.</p>
+    </div>
+  </header>
+
+  <!-- ============ VALUE PROPOSITION ============ -->
+  <section class="value-prop" aria-labelledby="vp-title">
+    <div class="container">
+      <h2 class="value-prop__headline reveal" id="vp-title">לא עוד לילות של חיפושים בגוגל.</h2>
+      <p class="value-prop__subheadline reveal reveal-delay-1">מקבל תכנית טיול מלאה — בדיוק לפי הילדים שלך, התקציב שלך, והתאריכים שלך.</p>
+
+      <div class="value-prop__grid">
+        <div class="value-prop__item reveal">
+          <span class="value-prop__icon" aria-hidden="true">&#128506;</span>
+          <h3 class="value-prop__item-title">מסלול יום-יום</h3>
+          <p class="value-prop__item-desc">לא "ביקרו בכנסייה X" — מה שילדים יזכרו. כל יום מתוכנן עם קצב שמתאים למשפחה, לא למבוגרים.</p>
+        </div>
+        <div class="value-prop__item reveal reveal-delay-1">
+          <span class="value-prop__icon" aria-hidden="true">&#127976;</span>
+          <h3 class="value-prop__item-title">המלצות לינה</h3>
+          <p class="value-prop__item-desc">רק מקומות שאני בדקתי בעצמי עם ילדים. לא דירות עם מדרגות מפחידות ולא מלונות בלי מקום לעגלה.</p>
+        </div>
+        <div class="value-prop__item reveal reveal-delay-2">
+          <span class="value-prop__icon" aria-hidden="true">&#127829;</span>
+          <h3 class="value-prop__item-title">אוכל ואטרקציות</h3>
+          <p class="value-prop__item-desc">כולל המסעדות שסובלות לרעש ואטרקציות שפתוחות ב-8 בבוקר — כי ילדים לא ישנים עד 10.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING CARDS ============ -->
+  <section class="pricing" id="pricing" aria-labelledby="pricing-title">
+    <div class="container">
+      <div class="section-header" style="text-align: center;">
+        <h2 class="section-header__title" id="pricing-title">בחר את החבילה שלך</h2>
+        <p class="section-header__subtitle">כל חבילה כוללת מסלול שנבנה אישית — ההבדל הוא ברמת הליווי</p>
+      </div>
+
+      <div class="pricing__grid">
+        <!-- Card 1 — בסיסי -->
+        <div class="pricing-card reveal">
+          <h3 class="pricing-card__name">בסיסי</h3>
+          <div class="pricing-card__price">&#8362;890</div>
+          <p class="pricing-card__for">מי שרוצה כיוון ברור ומסלול מוכן</p>
+
+          <div class="pricing-card__features">
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>מסלול מפורט ל-7 ימים</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>המלצות לינה (3 אפשרויות לכל לילה)</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>רשימת אטרקציות מתאימות לגיל</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--excluded">
+              <span class="pricing-card__check" aria-hidden="true">&#10007;</span>
+              <span>התאמות אישיות לאחר קבלה</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--excluded">
+              <span class="pricing-card__check" aria-hidden="true">&#10007;</span>
+              <span>ליווי בזמן הטיול</span>
+            </div>
+          </div>
+
+          <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%97%D7%91%D7%99%D7%9C%D7%94%20%D7%91%D7%A1%D7%99%D7%A1%D7%99%D7%AA" class="btn btn--outline-dark btn--block">בחר חבילה בסיסית</a>
+          <p class="pricing-card__delivery">מוכן תוך 5 ימי עסקים</p>
+        </div>
+
+        <!-- Card 2 — מלא (HIGHLIGHTED) -->
+        <div class="pricing-card pricing-card--highlighted reveal reveal-delay-1">
+          <span class="pricing-card__badge">הכי פופולרי</span>
+          <h3 class="pricing-card__name">מלא</h3>
+          <div class="pricing-card__price">&#8362;1,490</div>
+          <p class="pricing-card__for">מי שרוצה שהכל יהיה מסודר מראש</p>
+
+          <div class="pricing-card__features">
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>מסלול מפורט ל-7 ימים</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>המלצות לינה (3 אפשרויות לכל לילה)</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>רשימת אטרקציות מתאימות לגיל</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>התאמות אישיות עד 3 סבבי עריכה</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>המלצות מסעדות (כולל ילדים)</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>גיליון Excel מסודר לכל היום</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>רשימת ציוד להכין מראש</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>שיחת וידאו לפני הטיול (30 דקות)</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--excluded">
+              <span class="pricing-card__check" aria-hidden="true">&#10007;</span>
+              <span>ליווי בזמן הטיול</span>
+            </div>
+          </div>
+
+          <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%97%D7%91%D7%99%D7%9C%D7%94%20%D7%9E%D7%9C%D7%90%D7%94" class="btn btn--primary btn--block">בחר חבילה מלאה</a>
+          <p class="pricing-card__delivery">מוכן תוך 3 ימי עסקים</p>
+        </div>
+
+        <!-- Card 3 — פרימיום -->
+        <div class="pricing-card reveal reveal-delay-2">
+          <h3 class="pricing-card__name">פרימיום</h3>
+          <div class="pricing-card__price">&#8362;2,490</div>
+          <p class="pricing-card__for">מי שרוצה ראש שקט מלא — לפני ובמהלך הטיול</p>
+
+          <div class="pricing-card__features">
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>תכנון מסלול ל-14 ימים</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>המלצות לינה (3 אפשרויות לכל לילה)</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>רשימת אטרקציות מתאימות לגיל</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>התאמות אישיות ללא הגבלה</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>המלצות מסעדות (כולל ילדים)</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>גיליון Excel מסודר לכל היום</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>רשימת ציוד להכין מראש</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>שיחות וידאו ללא הגבלה (לפני הטיול)</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>ליווי וואטסאפ בזמן הטיול (עד 14 יום)</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>עדכונים בזמן אמת (מזג אוויר, שינויים)</span>
+            </div>
+            <div class="pricing-card__feature pricing-card__feature--included">
+              <span class="pricing-card__check" aria-hidden="true">&#10003;</span>
+              <span>תכנון חלופות למקרה חירום</span>
+            </div>
+          </div>
+
+          <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%97%D7%91%D7%99%D7%9C%D7%94%20%D7%A4%D7%A8%D7%99%D7%9E%D7%99%D7%95%D7%9D" class="btn btn--outline-dark btn--block">בחר חבילה פרימיום</a>
+          <p class="pricing-card__delivery">מוכן תוך 3 ימי עסקים</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS (Process) ============ -->
+  <section class="process" id="process" aria-labelledby="process-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-header__title" id="process-title">איך זה עובד?</h2>
+        <p class="section-header__subtitle">מהרגע שאתה שולח הודעה ועד שאתה עולה על המטוס — 4 שלבים פשוטים</p>
+      </div>
+
+      <div class="process__steps">
+        <div class="process__step reveal">
+          <div class="process__step-icon">
+            <span class="process__step-number">1</span>
+            <span aria-hidden="true">&#128172;</span>
+          </div>
+          <h3 class="process__step-title">שולח לי הודעה</h3>
+          <p class="process__step-desc">ספר לי על הטיול, הילדים והתקציב — 5 דקות ואתה יודע בדיוק מה לצפות</p>
+        </div>
+        <div class="process__step reveal reveal-delay-1">
+          <div class="process__step-icon">
+            <span class="process__step-number">2</span>
+            <span aria-hidden="true">&#128203;</span>
+          </div>
+          <h3 class="process__step-title">אני בונה</h3>
+          <p class="process__step-desc">מכין מסלול מלא מותאם לך — בתוך הזמן שהובטח. כל יום, כל שעה, כל פרט.</p>
+        </div>
+        <div class="process__step reveal reveal-delay-2">
+          <div class="process__step-icon">
+            <span class="process__step-number">3</span>
+            <span aria-hidden="true">&#128260;</span>
+          </div>
+          <h3 class="process__step-title">מתכוננים ביחד</h3>
+          <p class="process__step-desc">סבבי עריכה עד שזה מושלם (לפי חבילה). שינויים, התאמות, שאלות — הכל פתוח.</p>
+        </div>
+        <div class="process__step reveal reveal-delay-3">
+          <div class="process__step-icon">
+            <span class="process__step-number">4</span>
+            <span aria-hidden="true">&#9992;&#65039;</span>
+          </div>
+          <h3 class="process__step-title">טס בביטחון</h3>
+          <p class="process__step-desc">עם התכנית ביד ואני זמין (בפרימיום — גם בדרך). ראש שקט, ילדים שמחים.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ACCORDION ============ -->
+  <section class="faq" id="faq" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-header__title" id="faq-title">שאלות שכולם שואלים לפני שהם מזמינים</h2>
+      </div>
+
+      <div class="faq__list" role="list">
+        <div class="faq__item" data-open="false" role="listitem">
+          <button class="faq__question" aria-expanded="false">
+            <span>האם אפשר להתאים את המסלול אחרי שקיבלתי אותו?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" role="region">
+            <div class="faq__answer-inner">
+              תלוי בחבילה שבחרת. בחבילה הבסיסית — המסלול סופי כפי שהוא נמסר. בחבילה המלאה — עד 3 סבבי עריכה, כולל שינויים ביעדים, ימים, או אטרקציות. בפרימיום — עריכות ללא הגבלה עד שאתה מרגיש שזה 100%.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" data-open="false" role="listitem">
+          <button class="faq__question" aria-expanded="false">
+            <span>מה קורה אם הטיול מבוטל?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" role="region">
+            <div class="faq__answer-inner">
+              ניתן לשמור את המסלול לתאריך אחר ללא עלות. המסלול שלך, אתה לא מפסיד אותו. אם היעד משתנה לגמרי — נדבר ונמצא פתרון.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" data-open="false" role="listitem">
+          <button class="faq__question" aria-expanded="false">
+            <span>לאיזה יעדים אתה מתמחה?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" role="region">
+            <div class="faq__answer-inner">
+              בעיקר אירופה ואסיה — אלה היעדים שיש לי הכי הרבה ניסיון ישיר איתם עם ילדים. אבל אני עובד על כל יעד שתבקש. אם אני מרגיש שאין לי מספיק ידע — אגיד לך בכנות לפני שאקבל את העבודה.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" data-open="false" role="listitem">
+          <button class="faq__question" aria-expanded="false">
+            <span>כמה זמן לפני הטיול כדאי להזמין?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" role="region">
+            <div class="faq__answer-inner">
+              לפחות 3 שבועות לפני. ככה יש מספיק זמן לתכנון, לסבבי עריכה, ולהזמין לינה ואטרקציות במחירים טובים. בעונת שיא (קיץ, חגים) — חודש וחצי לפחות. ככל שמוקדם יותר — כך יש יותר גמישות.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" data-open="false" role="listitem">
+          <button class="faq__question" aria-expanded="false">
+            <span>האם כלול גם תכנון טיסות ומלונות?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" role="region">
+            <div class="faq__answer-inner">
+              המלצות — כן, כולל השוואת מחירים וקישורים ממוקדים. הזמנות בפועל — לא. אני רוצה שתשמור שליטה מלאה על התקציב שלך. אתה מזמין, אתה מחליט, ואני מכוון אותך למקומות הנכונים.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item" data-open="false" role="listitem">
+          <button class="faq__question" aria-expanded="false">
+            <span>מה אם הילדים שלי ממש לא אוהבים מוזיאונים?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" role="region">
+            <div class="faq__answer-inner">
+              מושלם. המסלול נבנה סביב מה שהם כן אוהבים — לא סביב מה שנראה טוב בתמונות. אם הילד שלך אוהב חיות — נמצא חוות ופארקים. אם הוא אוהב מים — חופים, נהרות, פארקי מים. בשביל זה אני שואל שאלות לפני שאני מתחיל לבנות.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="testimonials" id="testimonials" aria-labelledby="testimonials-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-header__title" id="testimonials-title">מה אומרים מי שכבר הזמינו</h2>
+        <p class="section-header__subtitle">ביקורות על שירות התכנון — מהשטח, לא מהדמיון</p>
+      </div>
+
+      <div class="testimonials__grid">
+        <div class="testimonial-card reveal">
+          <div class="testimonial-card__stars" aria-label="5 מתוך 5 כוכבים">
+            <span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span>
+          </div>
+          <p class="testimonial-card__quote">"קיבלתי מסלול ל-10 ימים באיטליה תוך 3 ימים. כל שעה הייתה מחושבת — אבל לא מדויקת מדי. בדיוק מה שצריך עם ילדים. הבן שלי בן ה-5 עדיין מדבר על הפיצריה שהמליץ."</p>
+          <cite class="testimonial-card__author">— אורי כהן, אבא ל-2, רמת גן</cite>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-card__stars" aria-label="5 מתוך 5 כוכבים">
+            <span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span>
+          </div>
+          <p class="testimonial-card__quote">"לקחתי את חבילת הפרימיום ליוון. באמצע הטיול ירד גשם — שלחתי הודעה ותוך 20 דקות קיבלתי תכנית חלופית ליום שלם. זה שווה כל שקל."</p>
+          <cite class="testimonial-card__author">— שירה וגיל ברגמן, הרצליה</cite>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-card__stars" aria-label="5 מתוך 5 כוכבים">
+            <span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span>
+          </div>
+          <p class="testimonial-card__quote">"בתור אמא חד-הורית עם שני ילדים, התכנון הלוגיסטי היה הדבר הכי מלחיץ. קיבלתי אקסל שסידר לי את הראש — ידעתי בדיוק מה עושים בכל שעה. הטיול הכי רגוע שעשיתי."</p>
+          <cite class="testimonial-card__author">— נועה אביב, אמא ל-2, תל אביב</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="final-cta" id="final-cta" aria-labelledby="cta-title">
+    <div class="container final-cta__content">
+      <h2 class="final-cta__title reveal" id="cta-title">מוכן להתחיל לתכנן?</h2>
+      <p class="final-cta__subtitle reveal reveal-delay-1">שלח לי הודעה — נדבר 10 דקות ואני אגיד לך בדיוק איזו חבילה מתאימה לך</p>
+      <div class="final-cta__actions reveal reveal-delay-2">
+        <button type="button" class="btn btn--outline-dark" id="openContactModal">שלח פנייה בכתב <span aria-hidden="true">&larr;</span></button>
+        <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%20%D7%9E%D7%A9%D7%A4%D7%97%D7%AA%D7%99%20%D7%A2%D7%9D%20%D7%99%D7%9C%D7%93%D7%99%D7%9D!" class="btn btn--green" target="_blank" rel="noopener noreferrer">
+          <svg style="width:20px;height:20px;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          דבר איתי בוואטסאפ
+        </a>
+      </div>
+      <div class="final-cta__trust reveal reveal-delay-3">
+        <span><span class="check" aria-hidden="true">&#10003;</span> שיחה ראשונה ללא עלות</span>
+        <span><span class="check" aria-hidden="true">&#10003;</span> עונה תוך יום עסקים</span>
+        <span><span class="check" aria-hidden="true">&#10003;</span> לא מחויב לכלום</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="index.html" class="nav__logo" aria-label="TripWithKids - דף הבית">
+            <span class="nav__logo-icon" aria-hidden="true">&#9992;</span>
+            TripWithKids
+          </a>
+          <p class="footer__tagline">טיולים שמתחילים בשיחה אחת, ומסתיימים בזכרון שהילדים שלך יספרו לנכדים שלך.</p>
+          <div class="footer__social">
+            <a href="#" aria-label="פייסבוק">&#128266;</a>
+            <a href="#" aria-label="אינסטגרם">&#128247;</a>
+            <a href="#" aria-label="יוטיוב">&#9654;</a>
+            <a href="https://wa.me/972546758145" aria-label="וואטסאפ" target="_blank" rel="noopener noreferrer">&#128172;</a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">ניווט</h3>
+          <ul>
+            <li><a href="index.html">דף הבית</a></li>
+            <li><a href="index.html#blog">בלוג</a></li>
+            <li><a href="index.html#destinations">יעדים</a></li>
+            <li><a href="index.html#about">אודות</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">יעדים פופולריים</h3>
+          <ul>
+            <li><a href="#">איטליה עם ילדים</a></li>
+            <li><a href="#">יוון עם ילדים</a></li>
+            <li><a href="#">פורטוגל עם ילדים</a></li>
+            <li><a href="#">ברצלונה עם ילדים</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h3 class="footer__col-title">שירותים</h3>
+          <ul>
+            <li><a href="#pricing">תכנון טיול אישי</a></li>
+            <li><a href="#pricing">מסלולים מוכנים</a></li>
+            <li><a href="#pricing">ייעוץ טלפוני</a></li>
+            <li><a href="#final-cta">צור קשר</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 TripWithKids | כל הזכויות שמורות</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ CONTACT MODAL ============ -->
+  <div class="modal-overlay" id="contactModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal">
+      <button class="modal__close" id="closeContactModal" aria-label="סגור טופס">&times;</button>
+      <h3 class="modal__title" id="modalTitle">שלח לי פנייה</h3>
+      <p class="modal__subtitle">מלא את הפרטים ואחזור אליך תוך יום עסקים</p>
+      <div class="modal__form" id="contactForm">
+        <div class="modal__field">
+          <label for="contactName">שם מלא</label>
+          <input type="text" id="contactName" name="name" placeholder="השם שלך" required>
+        </div>
+        <div class="modal__field">
+          <label for="contactEmail">אימייל</label>
+          <input type="email" id="contactEmail" name="email" placeholder="your@email.com" dir="ltr" required>
+        </div>
+        <div class="modal__field">
+          <label for="contactMessage">תוכן הפנייה</label>
+          <textarea id="contactMessage" name="message" rows="4" placeholder="ספר לי על הטיול שאתה מתכנן..." required></textarea>
+        </div>
+        <button type="button" class="btn btn--primary btn--block" id="submitContact">שלח פנייה</button>
+      </div>
+      <div class="modal__success" id="modalSuccess" style="display:none;">
+        <span class="modal__success-icon" aria-hidden="true">&#10003;</span>
+        <p class="modal__success-text">הפנייה נשלחה בהצלחה! אחזור אליך בהקדם.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ WhatsApp FAB ============ -->
+  <a href="https://wa.me/972546758145" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="צור קשר בוואטסאפ">
+    <span class="whatsapp-fab__pulse" aria-hidden="true"></span>
+    <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- ============ JAVASCRIPT ============ -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ---- Mobile Menu Toggle ----
+      var hamburger = document.getElementById('hamburgerBtn');
+      var mobileMenu = document.getElementById('mobileMenu');
+
+      hamburger.addEventListener('click', function () {
+        var isOpen = mobileMenu.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', isOpen.toString());
+        hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      var mobileLinks = mobileMenu.querySelectorAll('a');
+      mobileLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          mobileMenu.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          hamburger.setAttribute('aria-label', 'פתח תפריט');
+          document.body.style.overflow = '';
+        });
+      });
+
+      // ---- Sticky Nav Shadow ----
+      var nav = document.getElementById('nav');
+      var scrollThreshold = 10;
+
+      function updateNavShadow() {
+        if (window.scrollY > scrollThreshold) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', updateNavShadow, { passive: true });
+      updateNavShadow();
+
+      // ---- Scroll Reveal (IntersectionObserver) ----
+      var reveals = document.querySelectorAll('.reveal');
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.15,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        reveals.forEach(function (el) {
+          observer.observe(el);
+        });
+      } else {
+        reveals.forEach(function (el) {
+          el.classList.add('visible');
+        });
+      }
+
+      // ---- FAQ Accordion ----
+      var faqItems = document.querySelectorAll('.faq__item');
+
+      faqItems.forEach(function (item) {
+        var questionBtn = item.querySelector('.faq__question');
+        var answer = item.querySelector('.faq__answer');
+
+        questionBtn.addEventListener('click', function () {
+          var isOpen = item.getAttribute('data-open') === 'true';
+
+          // Close all others first
+          faqItems.forEach(function (otherItem) {
+            if (otherItem !== item) {
+              otherItem.setAttribute('data-open', 'false');
+              otherItem.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+              otherItem.querySelector('.faq__answer').style.maxHeight = null;
+            }
+          });
+
+          // Toggle current
+          if (isOpen) {
+            item.setAttribute('data-open', 'false');
+            questionBtn.setAttribute('aria-expanded', 'false');
+            answer.style.maxHeight = null;
+          } else {
+            item.setAttribute('data-open', 'true');
+            questionBtn.setAttribute('aria-expanded', 'true');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+          }
+        });
+      });
+
+      // ---- Keyboard: close menu on Escape ----
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+          mobileMenu.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          hamburger.setAttribute('aria-label', 'פתח תפריט');
+          document.body.style.overflow = '';
+          hamburger.focus();
+        }
+      });
+
+      // ---- Contact Modal ----
+      var contactModal = document.getElementById('contactModal');
+      var openBtn = document.getElementById('openContactModal');
+      var closeBtn = document.getElementById('closeContactModal');
+      var submitBtn = document.getElementById('submitContact');
+      var contactForm = document.getElementById('contactForm');
+      var modalSuccess = document.getElementById('modalSuccess');
+
+      function openModal() {
+        contactModal.classList.add('active');
+        contactModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        setTimeout(function() {
+          document.getElementById('contactName').focus();
+        }, 300);
+      }
+
+      function closeModal() {
+        contactModal.classList.remove('active');
+        contactModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        // Reset form after closing
+        setTimeout(function() {
+          contactForm.style.display = '';
+          modalSuccess.style.display = 'none';
+          document.querySelector('.modal__title').style.display = '';
+          document.querySelector('.modal__subtitle').style.display = '';
+          document.getElementById('contactName').value = '';
+          document.getElementById('contactEmail').value = '';
+          document.getElementById('contactMessage').value = '';
+          var errorFields = contactModal.querySelectorAll('.error');
+          errorFields.forEach(function(f) { f.classList.remove('error'); });
+        }, 300);
+      }
+
+      openBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+
+      contactModal.addEventListener('click', function(e) {
+        if (e.target === contactModal) closeModal();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && contactModal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+
+      submitBtn.addEventListener('click', function() {
+        var name = document.getElementById('contactName');
+        var email = document.getElementById('contactEmail');
+        var message = document.getElementById('contactMessage');
+        var valid = true;
+
+        [name, email, message].forEach(function(f) { f.classList.remove('error'); });
+
+        if (!name.value.trim()) { name.classList.add('error'); valid = false; }
+        if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { email.classList.add('error'); valid = false; }
+        if (!message.value.trim()) { message.classList.add('error'); valid = false; }
+
+        if (!valid) return;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'שולח...';
+
+        var formData = new FormData();
+        formData.append('name', name.value.trim());
+        formData.append('email', email.value.trim());
+        formData.append('message', message.value.trim());
+        formData.append('_subject', 'פנייה חדשה מאתר TripWithKids');
+        formData.append('_template', 'table');
+
+        fetch('https://formsubmit.co/ajax/ormanela@gmail.com', {
+          method: 'POST',
+          body: formData
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(data) {
+          contactForm.style.display = 'none';
+          document.querySelector('.modal__title').style.display = 'none';
+          document.querySelector('.modal__subtitle').style.display = 'none';
+          modalSuccess.style.display = 'block';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'שלח פנייה';
+        })
+        .catch(function() {
+          // Fallback — open mailto
+          var subject = encodeURIComponent('פנייה מאתר TripWithKids — ' + name.value.trim());
+          var body = encodeURIComponent('שם: ' + name.value.trim() + '\nאימייל: ' + email.value.trim() + '\n\n' + message.value.trim());
+          window.location.href = 'mailto:ormanela@gmail.com?subject=' + subject + '&body=' + body;
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'שלח פנייה';
+          closeModal();
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>
