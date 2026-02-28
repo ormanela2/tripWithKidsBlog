@@ -1565,7 +1565,7 @@
                 <span>ליווי בזמן הטיול</span>
               </div>
             </div>
-            <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%97%D7%91%D7%99%D7%9C%D7%AA%20%D7%9E%D7%A6%D7%A4%D7%9F" class="btn btn--outline-dark btn--block" target="_blank" rel="noopener noreferrer">בחר את מצפן</a>
+            <button type="button" class="btn btn--outline-dark btn--block" onclick="openContactModalWithPackage('מצפן')">בחר את מצפן</button>
             <p class="pricing-card__delivery"><span class="pricing-card__delivery-icon" aria-hidden="true">&#128197;</span> מוכן תוך 5 ימי עסקים</p>
           </div>
         </div>
@@ -1625,7 +1625,7 @@
                 <span>ליווי בזמן הטיול</span>
               </div>
             </div>
-            <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%97%D7%91%D7%99%D7%9C%D7%AA%20%D7%94%D7%A8%D7%A4%D7%AA%D7%A7%D7%94" class="btn btn--primary btn--block" target="_blank" rel="noopener noreferrer">בחר את הרפתקה</a>
+            <button type="button" class="btn btn--primary btn--block" onclick="openContactModalWithPackage('הרפתקה')">בחר את הרפתקה</button>
             <p class="pricing-card__delivery"><span class="pricing-card__delivery-icon" aria-hidden="true">&#9889;</span> מוכן תוך 3 ימי עסקים</p>
           </div>
         </div>
@@ -1692,7 +1692,7 @@
                 <span>תכנית חלופית למקרה חירום</span>
               </div>
             </div>
-            <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%97%D7%91%D7%99%D7%9C%D7%AA%20%D7%90%D7%95%D7%93%D7%99%D7%A1%D7%99%D7%90%D7%94" class="btn btn--outline-dark btn--block" target="_blank" rel="noopener noreferrer">בחר את אודיסיאה</a>
+            <button type="button" class="btn btn--outline-dark btn--block" onclick="openContactModalWithPackage('אודיסיאה')">בחר את אודיסיאה</button>
             <p class="pricing-card__delivery"><span class="pricing-card__delivery-icon" aria-hidden="true">&#9889;</span> מוכן תוך 3 ימי עסקים</p>
           </div>
         </div>
@@ -2055,6 +2055,14 @@
           document.getElementById('contactName').focus();
         }, 300);
       }
+
+      function openContactModalWithPackage(packageName) {
+        openModal();
+        setTimeout(function() {
+          document.getElementById('contactMessage').value = 'אני מתעניין בחבילת ' + packageName;
+        }, 320);
+      }
+      window.openContactModalWithPackage = openContactModalWithPackage;
 
       function closeModal() {
         contactModal.classList.remove('active');
