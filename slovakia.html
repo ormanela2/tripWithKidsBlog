@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="מדריך טיול לסלובקיה עם ילדים - מסלול יום יום, אטרקציות, לינה, אוכל וטיפים מניסיון אישי. TripWithKids.">
+  <title>טיול לסלובקיה עם ילדים - מדריך מלא | TripWithKids</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <style>
+    :root {
+      --amber: #E8A045;
+      --amber-light: #f0b868;
+      --amber-dark: #c4872e;
+      --teal: #1A6B72;
+      --teal-dark: #124d52;
+      --cream: #FDF8F2;
+      --charcoal: #2C2C2C;
+      --sand: #F5EDD8;
+      --sand-dark: #e8ddc4;
+      --green: #4A9B6F;
+      --white: #FFFFFF;
+      --font-heading: 'Secular One', sans-serif;
+      --font-body: 'Rubik', sans-serif;
+      --nav-height: 72px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); font-size: 17px; line-height: 1.8; color: var(--charcoal); background: var(--cream); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 400; line-height: 1.3; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .container--narrow { max-width: 780px; }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; right: 0; left: 0; z-index: 1000; height: var(--nav-height); background: var(--cream); border-bottom: 1px solid var(--sand-dark); transition: box-shadow 0.3s ease; }
+    .nav.scrolled { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+    .nav__logo { font-family: var(--font-heading); font-size: 24px; color: var(--teal); display: flex; align-items: center; gap: 8px; }
+    .nav__logo-icon { width: 36px; height: 36px; background: var(--amber); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .nav__links { display: flex; align-items: center; gap: 8px; }
+    .nav__link { padding: 8px 16px; border-radius: 8px; font-weight: 500; font-size: 15px; transition: background 0.2s, color 0.2s; min-height: 44px; display: flex; align-items: center; }
+    .nav__link:hover { background: var(--sand); color: var(--teal); }
+    .nav__link[aria-current="page"] { background: var(--teal); color: var(--white); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 28px; font-size: 16px; font-weight: 600; min-height: 48px; transition: all 0.3s ease; white-space: nowrap; }
+    .btn--primary { background: var(--amber); color: var(--charcoal); box-shadow: 0 4px 14px rgba(232,160,69,0.35); }
+    .btn--primary:hover { background: var(--amber-dark); transform: translateY(-2px); }
+    .btn--sm { padding: 10px 24px; font-size: 15px; min-height: 44px; }
+    .nav__mobile-actions { display: none; }
+    .nav__hamburger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; flex-direction: column; gap: 5px; padding: 8px; }
+    .nav__hamburger span { display: block; width: 24px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: all 0.3s ease; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .nav__whatsapp-mobile { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: var(--green); }
+    .nav__mobile-menu { display: none; position: fixed; top: var(--nav-height); right: 0; left: 0; bottom: 0; background: var(--cream); padding: 32px 24px; flex-direction: column; gap: 8px; z-index: 999; overflow-y: auto; }
+    .nav__mobile-menu.open { display: flex; }
+    .nav__mobile-menu .nav__link { font-size: 20px; padding: 16px; }
+    .nav__mobile-menu .btn { margin-top: 16px; justify-content: center; }
+
+    /* HERO */
+    .article-hero {
+      background: linear-gradient(155deg, #2a5a3a 0%, #4a8a5a 50%, #3a7a8a 100%);
+      padding-top: calc(var(--nav-height) + 56px);
+      padding-bottom: 70px;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .article-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(232,160,69,0.1) 0%, transparent 60%);
+    }
+    .article-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 70px;
+      background: linear-gradient(to top, var(--cream), transparent);
+    }
+    .article-hero__inner { position: relative; max-width: 780px; }
+    .article-hero__breadcrumb { font-size: 13px; opacity: 0.7; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .article-hero__breadcrumb a { opacity: 0.8; transition: opacity 0.2s; }
+    .article-hero__breadcrumb a:hover { opacity: 1; }
+    .article-hero__flag { font-size: 56px; margin-bottom: 16px; display: block; }
+    .article-hero__title { font-size: clamp(28px, 4.5vw, 50px); margin-bottom: 18px; }
+    .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.88; margin-bottom: 32px; max-width: 600px; line-height: 1.7; }
+    .article-hero__meta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
+
+    /* ARTICLE LAYOUT */
+    .article-body { padding: 60px 0 80px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
+
+    /* MAIN CONTENT */
+    .article-content { min-width: 0; }
+
+    .article-section { margin-bottom: 52px; }
+    .article-section__title {
+      font-size: clamp(20px, 2.5vw, 26px);
+      color: var(--teal);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--sand-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .article-section__title-icon { font-size: 24px; }
+    .article-content p { margin-bottom: 16px; color: #444; line-height: 1.85; }
+    .article-content p:last-child { margin-bottom: 0; }
+
+    /* MAP */
+    .map-card {
+      background: var(--white);
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid var(--sand-dark);
+      margin-bottom: 28px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    }
+    .map-card__header { padding: 16px 20px 12px; border-bottom: 1px solid var(--sand-dark); }
+    .map-card__title { font-family: var(--font-heading); font-size: 16px; color: var(--teal); }
+    .map-card__subtitle { font-size: 12px; color: #aaa; margin-top: 2px; }
+    #map { height: 340px; width: 100%; }
+
+    /* ── TIMELINE ITINERARY ── */
+    .timeline {
+      position: relative;
+      padding: 8px 0 0;
+    }
+
+    /* vertical spine */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      right: 50%;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--teal), var(--amber), var(--teal-dark));
+      transform: translateX(50%);
+      border-radius: 3px;
+    }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 1fr 56px 1fr;
+      gap: 0 0;
+      margin-bottom: 48px;
+      position: relative;
+      align-items: start;
+    }
+
+    /* alternating: odd items → card on RIGHT, label on LEFT */
+    /* even items  → card on LEFT,  label on RIGHT */
+
+    .tl-item__label {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      color: #aaa;
+      letter-spacing: 0.5px;
+      padding-top: 18px;
+    }
+    .tl-item:nth-child(odd)  .tl-item__label { text-align: left;  padding-right: 28px; }
+    .tl-item:nth-child(even) .tl-item__label { text-align: right; padding-left: 28px;  order: 3; }
+
+    /* CENTER NODE */
+    .tl-item__node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      position: relative;
+      z-index: 2;
+      padding-top: 12px;
+    }
+    .tl-item__icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      border: 4px solid var(--cream);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+    .tl-item__day-label {
+      margin-top: 6px;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 0.5px;
+    }
+
+    /* CARD */
+    .tl-item__card {
+      background: var(--white);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 2px solid var(--sand-dark);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: pointer;
+    }
+    .tl-item__card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.13); }
+    .tl-item:nth-child(odd)  .tl-item__card { margin-left: 24px; }
+    .tl-item:nth-child(even) .tl-item__card { margin-right: 24px; order: -1; }
+
+    /* connector dot on spine */
+    .tl-item__node::before {
+      content: '';
+      position: absolute;
+      top: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 3px solid var(--teal);
+      z-index: 3;
+      display: none; /* hidden — icon already marks position */
+    }
+
+    /* CARD HEADER BAND */
+    .tl-card__band {
+      height: 6px;
+      width: 100%;
+    }
+    .tl-card__header {
+      padding: 16px 20px 12px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .tl-card__title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      color: var(--charcoal);
+      line-height: 1.35;
+    }
+    .tl-card__where {
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .tl-card__star {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* EXPANDABLE BODY */
+    .tl-card__toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px 14px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--teal);
+      font-weight: 600;
+      border-top: 1px solid var(--sand);
+    }
+    .tl-card__toggle:hover { background: var(--sand); }
+    .tl-card__chevron { transition: transform 0.3s; font-style: normal; }
+    .tl-card.open .tl-card__chevron { transform: rotate(180deg); }
+
+    .tl-card__body { display: none; padding: 0 20px 18px; }
+    .tl-card.open .tl-card__body { display: block; }
+
+    .tl-activity {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--sand-dark);
+    }
+    .tl-activity:last-of-type { border-bottom: none; }
+    .tl-activity__time {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--teal);
+      min-width: 46px;
+      padding-top: 2px;
+      letter-spacing: 0.3px;
+    }
+    .tl-activity__name { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+    .tl-activity__desc { font-size: 13px; color: #666; line-height: 1.55; }
+
+    .tl-tip {
+      margin-top: 12px;
+      background: rgba(232,160,69,0.1);
+      border-right: 3px solid var(--amber);
+      border-radius: 0 8px 8px 0;
+      padding: 9px 13px;
+      font-size: 13px;
+      color: #666;
+    }
+    .tl-tip strong { color: var(--amber-dark); }
+
+    /* ZONE COLORS */
+    .tl-item--bratislava .tl-item__icon { background: linear-gradient(135deg, #1A6B72, #238a93); color: #fff; }
+    .tl-item--bratislava .tl-card__band { background: linear-gradient(90deg, #1A6B72, #238a93); }
+    .tl-item--tatry       .tl-item__icon { background: linear-gradient(135deg, #4A9B6F, #2d7550); color: #fff; }
+    .tl-item--tatry       .tl-card__band { background: linear-gradient(90deg, #4A9B6F, #2d7550); }
+    .tl-item--caves       .tl-item__icon { background: linear-gradient(135deg, #6b4aa0, #8a60c0); color: #fff; }
+    .tl-item--caves       .tl-card__band { background: linear-gradient(90deg, #6b4aa0, #8a60c0); }
+    .tl-item--castle      .tl-item__icon { background: linear-gradient(135deg, #E8A045, #c4872e); color: #fff; }
+    .tl-item--castle      .tl-card__band { background: linear-gradient(90deg, #E8A045, #c4872e); }
+    .tl-item--kosice      .tl-item__icon { background: linear-gradient(135deg, #c0504a, #a03530); color: #fff; }
+    .tl-item--kosice      .tl-card__band { background: linear-gradient(90deg, #c0504a, #a03530); }
+    .tl-item--farewell    .tl-item__icon { background: linear-gradient(135deg, #1A6B72, #E8A045); color: #fff; }
+    .tl-item--farewell    .tl-card__band { background: linear-gradient(90deg, #1A6B72, #E8A045); }
+
+    .tl-card__star--tatry   { background: rgba(74,155,111,0.12); color: #2d7550; }
+    .tl-card__star--castle  { background: rgba(232,160,69,0.15); color: #b07020; }
+
+    /* RESPONSIVE – stack on mobile */
+    @media (max-width: 680px) {
+      .timeline::before { right: 28px; transform: none; }
+      .tl-item { grid-template-columns: 56px 1fr; grid-template-rows: auto auto; }
+      .tl-item__label { display: none; }
+      .tl-item__node { padding-top: 10px; }
+      .tl-item:nth-child(odd)  .tl-item__card { margin-left: 12px; }
+      .tl-item:nth-child(even) .tl-item__card { margin-right: 0; margin-left: 12px; order: unset; }
+      .tl-item:nth-child(even) .tl-item__label { order: unset; }
+    }
+
+    /* ATTRACTION GRID */
+    .attraction-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .attraction-card {
+      background: var(--white);
+      border-radius: 14px;
+      border: 2px solid var(--sand-dark);
+      padding: 18px;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .attraction-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.09); }
+    .attraction-card__icon { font-size: 28px; margin-bottom: 8px; display: block; }
+    .attraction-card__name { font-family: var(--font-heading); font-size: 15px; margin-bottom: 6px; color: var(--charcoal); }
+    .attraction-card__desc { font-size: 13px; color: #777; line-height: 1.6; }
+    .attraction-card__age { display: inline-block; margin-top: 8px; font-size: 11px; background: rgba(26,107,114,0.08); color: var(--teal); border-radius: 6px; padding: 2px 8px; font-weight: 600; }
+
+    /* TIPS LIST */
+    .tips-list { display: flex; flex-direction: column; gap: 10px; }
+    .tip-item { background: var(--white); border-radius: 12px; border: 2px solid var(--sand-dark); padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
+    .tip-item__icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .tip-item__text { color: #555; line-height: 1.65; }
+    .tip-item__text strong { color: var(--charcoal); }
+
+    /* FOOD LIST */
+    .food-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .food-item { background: var(--white); border-radius: 12px; border: 2px solid var(--sand-dark); padding: 16px; }
+    .food-item__name { font-family: var(--font-heading); font-size: 15px; margin-bottom: 5px; color: var(--charcoal); }
+    .food-item__icon { font-size: 24px; margin-bottom: 6px; display: block; }
+    .food-item__desc { font-size: 13px; color: #777; line-height: 1.5; }
+
+    /* SIDEBAR */
+    .sidebar { position: sticky; top: calc(var(--nav-height) + 20px); }
+
+    .sidebar-card {
+      background: var(--white);
+      border-radius: 18px;
+      border: 2px solid var(--sand-dark);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .sidebar-card__title { font-family: var(--font-heading); font-size: 17px; color: var(--teal); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .sidebar-card__row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--sand); font-size: 14px; }
+    .sidebar-card__row:last-child { border-bottom: none; padding-bottom: 0; }
+    .sidebar-card__label { color: #888; }
+    .sidebar-card__value { font-weight: 600; color: var(--charcoal); }
+    .sidebar-card__value--green { color: var(--green); }
+    .sidebar-card__value--amber { color: var(--amber-dark); }
+
+    .cta-card {
+      background: var(--teal);
+      border-radius: 18px;
+      padding: 24px;
+      color: var(--white);
+      text-align: center;
+    }
+    .cta-card__title { font-family: var(--font-heading); font-size: 18px; margin-bottom: 10px; }
+    .cta-card__text { font-size: 14px; opacity: 0.85; margin-bottom: 20px; line-height: 1.6; }
+    .cta-card__btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--amber); color: var(--charcoal); border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 700; transition: background 0.2s, transform 0.2s; width: 100%; }
+    .cta-card__btn:hover { background: var(--amber-dark); transform: translateY(-2px); }
+    .cta-card__wa { display: flex; align-items: center; justify-content: center; gap: 8px; background: #25D366; color: var(--white); border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 600; transition: background 0.2s; margin-top: 10px; }
+    .cta-card__wa:hover { background: #1da851; }
+
+    /* TOC */
+    .toc { background: var(--sand); border-radius: 14px; padding: 20px; margin-bottom: 36px; }
+    .toc__title { font-family: var(--font-heading); font-size: 15px; color: var(--teal); margin-bottom: 12px; }
+    .toc__list { display: flex; flex-direction: column; gap: 6px; }
+    .toc__link { font-size: 14px; color: var(--teal); display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .toc__link:hover { color: var(--amber-dark); }
+    .toc__num { font-size: 11px; background: var(--teal); color: var(--white); border-radius: 4px; padding: 1px 6px; font-weight: 600; }
+
+    /* FOOTER */
+    .footer { background: var(--charcoal); color: rgba(255,255,255,0.6); padding: 40px 0; text-align: center; font-size: 14px; }
+    .footer a { color: var(--amber-light); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .article-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .attraction-grid { grid-template-columns: 1fr; }
+      .food-list { grid-template-columns: 1fr; }
+      .nav__links { display: none; }
+      .nav__mobile-actions { display: flex; align-items: center; gap: 4px; }
+      .nav__hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="services.html" class="nav__logo">
+        <span class="nav__logo-icon">&#9992;</span>
+        TripWithKids
+      </a>
+      <ul class="nav__links">
+        <li><a href="tips.html" class="nav__link">טיפים</a></li>
+        <li><a href="destinations.html" class="nav__link" aria-current="page">יעדים</a></li>
+        <li><a href="services.html#services-content" class="nav__link">שירותים</a></li>
+        <li><a href="services.html#about" class="nav__link">אודות</a></li>
+        <li><a href="services.html#final-cta" class="nav__link">צור קשר</a></li>
+      </ul>
+      <a href="services.html#pricing" class="btn btn--primary btn--sm" style="display:flex;">לחבילות</a>
+      <div class="nav__mobile-actions">
+        <a href="https://wa.me/972546758145" class="nav__whatsapp-mobile" aria-label="וואטסאפ">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__mobile-menu" id="mobileMenu">
+      <a href="tips.html" class="nav__link">טיפים</a>
+      <a href="destinations.html" class="nav__link" aria-current="page">יעדים</a>
+      <a href="services.html#services-content" class="nav__link">שירותים</a>
+      <a href="services.html#about" class="nav__link">אודות</a>
+      <a href="services.html#final-cta" class="nav__link">צור קשר</a>
+      <a href="services.html#pricing" class="btn btn--primary">לחבילות</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="article-hero">
+    <div class="container">
+      <div class="article-hero__inner">
+        <nav class="article-hero__breadcrumb">
+          <a href="services.html">דף הבית</a> ›
+          <a href="destinations.html">יעדים</a> ›
+          <span>סלובקיה</span>
+        </nav>
+        <span class="article-hero__flag">🇸🇰</span>
+        <h1 class="article-hero__title">טיול לסלובקיה עם ילדים - המדריך המלא</h1>
+        <p class="article-hero__subtitle">טירות מהאגדות, הרי הטטרה, נהר הדנובה ובירה ציורית - סלובקיה היא אחת ההפתעות הכי טובות של אירופה לטיול משפחתי</p>
+        <div class="article-hero__meta">
+          <span class="article-hero__badge">🟢 קל עם ילדים</span>
+          <span class="article-hero__badge">📅 7-10 ימים מומלץ</span>
+          <span class="article-hero__badge">☀️ מאי-ספטמבר</span>
+          <span class="article-hero__badge">👧 מגיל 4</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE BODY -->
+  <section class="article-body">
+    <div class="container">
+      <div class="article-layout">
+
+        <!-- MAIN CONTENT -->
+        <main class="article-content">
+
+          <!-- TOC -->
+          <div class="toc">
+            <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
+            <div class="toc__list">
+              <a href="#intro" class="toc__link"><span class="toc__num">1</span> למה סלובקיה עם ילדים?</a>
+              <a href="#itinerary" class="toc__link"><span class="toc__num">2</span> מסלול יום-יום מומלץ</a>
+              <a href="#attractions" class="toc__link"><span class="toc__num">3</span> אטרקציות מובילות לילדים</a>
+              <a href="#food" class="toc__link"><span class="toc__num">4</span> אוכל מקומי מומלץ</a>
+              <a href="#accommodation" class="toc__link"><span class="toc__num">5</span> המלצות לינה</a>
+              <a href="#logistics" class="toc__link"><span class="toc__num">6</span> טיפים לוגיסטיים</a>
+            </div>
+          </div>
+
+          <!-- INTRO -->
+          <div class="article-section" id="intro">
+            <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> למה סלובקיה עם ילדים?</h2>
+            <p>סלובקיה היא אחת מהיעדים הכי מוצלחים לטיול משפחתי באירופה - ועדיין לא מוכרת מספיק לישראלים. זה בדיוק היתרון שלה. אין את הצפיפות של פראג, אין את המחירים של וינה, ויש שפע של דברים לראות ולעשות עם ילדים.</p>
+            <p>הטירות כאן הן לא רק "תמונה יפה" - הן מבצרים אמיתיים עם חצרות ענק שילדים פשוט נכנסים לתוכם. הרי הטטרה מציעים טיולים שמתאימים לכל גיל, וברטיסלווה היא בירה קטנה ונוחה שקל מאוד לסייר בה עם ילדים ברגל.</p>
+            <p>מבחינת תקציב - סלובקיה זולה משמעותית מגרמניה, צרפת ואוסטריה. ארוחות מצוינות, לינה נוחה ואטרקציות - הכל במחיר שפוי. בשבילי, זה היתרון שמכריע.</p>
+          </div>
+
+          <!-- MAP -->
+          <!-- ITINERARY -->
+          <div class="article-section" id="itinerary">
+            <h2 class="article-section__title"><span class="article-section__title-icon">🗓️</span> מסלול יום-יום מומלץ (7 ימים)</h2>
+
+            <div class="timeline">
+
+              <!-- DAY 1 -->
+              <div class="tl-item tl-item--bratislava">
+                <div class="tl-item__label">יום 1<br><span style="font-size:11px;color:#ccc;">ברטיסלווה</span></div>
+                <div class="tl-item__node">
+                  <div class="tl-item__icon">🏰</div>
+                  <span class="tl-item__day-label">יום 1</span>
+                </div>
+                <div class="tl-item__card tl-card open" id="tl1">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header">
+                    <div>
+                      <div class="tl-card__title">הגעה וברטיסלווה העתיקה</div>
+                      <div class="tl-card__where">📍 ברטיסלווה</div>
+                    </div>
+                  </div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">בוקר</span>
+                      <div><div class="tl-activity__name">נחיתה ואיסוף רכב</div><div class="tl-activity__desc">שדה התעופה קטן ונוח. איסוף רכב מהיר - 20 דקות עד מרכז העיר.</div></div>
+                    </div>
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">צהריים</span>
+                      <div><div class="tl-activity__name">טיול ברובע העתיק</div><div class="tl-activity__desc">שעה וחצי ברגל מכסה הכל. הילדים יאהבו את הפסלים המצחיקים ברחוב.</div></div>
+                    </div>
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">אחה״צ</span>
+                      <div><div class="tl-activity__name">טירת ברטיסלווה</div><div class="tl-activity__desc">הטירה מעל העיר עם נוף מדהים לדנובה. ילדים אוהבים את הטיפוס ואת החצר הגדולה.</div></div>
+                    </div>
+                    <div class="tl-tip"><strong>טיפ:</strong> יש גן שעשועים קטן ליד הטירה - שימושי אם הילדים צריכים לרוץ אחרי הטיסה.</div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl1')">
+                    <span>פרטי היום</span>
+                    <span class="tl-card__chevron">▲</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- DAY 2 -->
+              <div class="tl-item tl-item--bratislava">
+                <div class="tl-item__label">יום 2<br><span style="font-size:11px;color:#ccc;">ברטיסלווה ← צפון</span></div>
+                <div class="tl-item__node">
+                  <div class="tl-item__icon">🚗</div>
+                  <span class="tl-item__day-label">יום 2</span>
+                </div>
+                <div class="tl-item__card tl-card" id="tl2">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header">
+                    <div>
+                      <div class="tl-card__title">אי דנובה ונסיעה צפונה</div>
+                      <div class="tl-card__where">📍 ברטיסלווה → הטטרה</div>
+                    </div>
+                  </div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">בוקר</span>
+                      <div><div class="tl-activity__name">אי דנובה (Danubiána)</div><div class="tl-activity__desc">מוזיאון אמנות על אי קטן בנהר. הילדים נהנים מהטבע סביב ומהדרך לשם.</div></div>
+                    </div>
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">אחה״צ</span>
+                      <div><div class="tl-activity__name">נסיעה לכיוון הטטרה</div><div class="tl-activity__desc">כ-3 שעות נסיעה עם נוף מדהים. כדאי לעצור ב-Ružomberok לאכול ולמתוח רגליים.</div></div>
+                    </div>
+                    <div class="tl-tip"><strong>טיפ:</strong> הילדים ישנים בנסיעה? השאירו את הנסיעה הארוכה לאחר הצהריים.</div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl2')">
+                    <span>פרטי היום</span>
+                    <span class="tl-card__chevron">▼</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- DAY 3 – HIGHLIGHT -->
+              <div class="tl-item tl-item--tatry">
+                <div class="tl-item__label">יום 3<br><span style="font-size:11px;color:#ccc;">הטטרה</span></div>
+                <div class="tl-item__node">
+                  <div class="tl-item__icon">⛰️</div>
+                  <span class="tl-item__day-label">יום 3</span>
+                </div>
+                <div class="tl-item__card tl-card" id="tl3">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header">
+                    <div>
+                      <div class="tl-card__title">הטטרה הגבוהים — יום הילדים</div>
+                      <div class="tl-card__where">📍 Vysoké Tatry</div>
+                    </div>
+                    <span class="tl-card__star tl-card__star--tatry">⭐ מומלץ</span>
+                  </div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">בוקר</span>
+                      <div><div class="tl-activity__name">רכבל לשטרבסקה פלסו</div><div class="tl-activity__desc">מטפס לגובה 2000 מטר - נוף עוצר נשימה. ילדים מגיל 3 נהנים, לוקח 15 דקות.</div></div>
+                    </div>
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">צהריים</span>
+                      <div><div class="tl-activity__name">אגם Štrbské Pleso</div><div class="tl-activity__desc">אגם הרים ציורי עם שביל סביבו שמתאים לכל גיל. שעה הליכה קלה.</div></div>
+                    </div>
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">אחה״צ</span>
+                      <div><div class="tl-activity__name">פארק מים Tatralandia</div><div class="tl-activity__desc">אחד מפארקי המים הגדולים במרכז אירופה - מושלם לאחר הטיול ההרי.</div></div>
+                    </div>
+                    <div class="tl-tip"><strong>טיפ:</strong> קנו כרטיסים ל-Tatralandia מראש - חוסכים זמן ועולה פחות.</div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl3')">
+                    <span>פרטי היום</span>
+                    <span class="tl-card__chevron">▼</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- DAY 4 -->
+              <div class="tl-item tl-item--caves">
+                <div class="tl-item__label">יום 4<br><span style="font-size:11px;color:#ccc;">מערות</span></div>
+                <div class="tl-item__node">
+                  <div class="tl-item__icon">🦇</div>
+                  <span class="tl-item__day-label">יום 4</span>
+                </div>
+                <div class="tl-item__card tl-card" id="tl4">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header">
+                    <div>
+                      <div class="tl-card__title">מערות דומיצה UNESCO</div>
+                      <div class="tl-card__where">📍 Domica → Spiš</div>
+                    </div>
+                  </div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">בוקר</span>
+                      <div><div class="tl-activity__name">מערות דומיצה</div><div class="tl-activity__desc">מערות נטיפים מרהיבות - אתר UNESCO. סיור מודרך כ-80 דקות עם אגם תת-קרקעי.</div></div>
+                    </div>
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">אחה״צ</span>
+                      <div><div class="tl-activity__name">נסיעה לאזור הספיש</div><div class="tl-activity__desc">כ-2 שעות נסיעה דרך נוף כפרי מרהיב עם שדות ויערות.</div></div>
+                    </div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl4')">
+                    <span>פרטי היום</span>
+                    <span class="tl-card__chevron">▼</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- DAY 5 – HIGHLIGHT -->
+              <div class="tl-item tl-item--castle">
+                <div class="tl-item__label">יום 5<br><span style="font-size:11px;color:#ccc;">ספיש</span></div>
+                <div class="tl-item__node">
+                  <div class="tl-item__icon">🏯</div>
+                  <span class="tl-item__day-label">יום 5</span>
+                </div>
+                <div class="tl-item__card tl-card" id="tl5">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header">
+                    <div>
+                      <div class="tl-card__title">טירת ספיש — הטירה הגדולה</div>
+                      <div class="tl-card__where">📍 Spišský hrad</div>
+                    </div>
+                    <span class="tl-card__star tl-card__star--castle">⭐ חובה</span>
+                  </div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">בוקר</span>
+                      <div><div class="tl-activity__name">טירת ספיש</div><div class="tl-activity__desc">אחת הטירות הגדולות באירופה - אתר UNESCO. חצר ענקית, מגדלים, תערוכות. תכנו לפחות 2.5 שעות.</div></div>
+                    </div>
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">אחה״צ</span>
+                      <div><div class="tl-activity__name">כפר ספיש-פודהרדיה</div><div class="tl-activity__desc">הכפר הציורי מתחת לטירה - מסעדה מצוינת ותמונות שלא תשכחו.</div></div>
+                    </div>
+                    <div class="tl-tip"><strong>טיפ:</strong> הגיעו לפני 9 בבוקר - אחרי 10 מתחילות להגיע אוטובוסי תיירים.</div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl5')">
+                    <span>פרטי היום</span>
+                    <span class="tl-card__chevron">▼</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- DAY 6 -->
+              <div class="tl-item tl-item--kosice">
+                <div class="tl-item__label">יום 6<br><span style="font-size:11px;color:#ccc;">קושיצה</span></div>
+                <div class="tl-item__node">
+                  <div class="tl-item__icon">🌆</div>
+                  <span class="tl-item__day-label">יום 6</span>
+                </div>
+                <div class="tl-item__card tl-card" id="tl6">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header">
+                    <div>
+                      <div class="tl-card__title">קושיצה — העיר השנייה</div>
+                      <div class="tl-card__where">📍 Košice</div>
+                    </div>
+                  </div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">בוקר</span>
+                      <div><div class="tl-activity__name">הרחוב הראשי של קושיצה</div><div class="tl-activity__desc">אחד הרחובות היפים ביותר במזרח אירופה - עצירות לקפה, גלידה ותמונות.</div></div>
+                    </div>
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">אחה״צ</span>
+                      <div><div class="tl-activity__name">נסיעה חזרה לברטיסלווה</div><div class="tl-activity__desc">4 שעות נסיעה - הילדים ישנים בדרך. הלילה האחרון בברטיסלווה.</div></div>
+                    </div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl6')">
+                    <span>פרטי היום</span>
+                    <span class="tl-card__chevron">▼</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- DAY 7 -->
+              <div class="tl-item tl-item--farewell">
+                <div class="tl-item__label">יום 7<br><span style="font-size:11px;color:#ccc;">פרידה</span></div>
+                <div class="tl-item__node">
+                  <div class="tl-item__icon">✈️</div>
+                  <span class="tl-item__day-label">יום 7</span>
+                </div>
+                <div class="tl-item__card tl-card" id="tl7">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header">
+                    <div>
+                      <div class="tl-card__title">שוקולד, קניות ופרידה</div>
+                      <div class="tl-card__where">📍 ברטיסלווה ✈ הביתה</div>
+                    </div>
+                  </div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">בוקר</span>
+                      <div><div class="tl-activity__name">שוק הבוקר ושוקולד Figaro</div><div class="tl-activity__desc">מפעל השוקולד המקומי - הילדים מתים עליו. קונים שוקולד לחזור הביתה.</div></div>
+                    </div>
+                    <div class="tl-activity">
+                      <span class="tl-activity__time">צהריים</span>
+                      <div><div class="tl-activity__name">החזרת רכב ופרידה</div><div class="tl-activity__desc">שדה התעופה 20 דקות מהמרכז. החזרת רכב קלה ומהירה.</div></div>
+                    </div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl7')">
+                    <span>פרטי היום</span>
+                    <span class="tl-card__chevron">▼</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ATTRACTIONS -->
+          <div class="article-section" id="attractions">
+            <h2 class="article-section__title"><span class="article-section__title-icon">🎡</span> אטרקציות מובילות לילדים</h2>
+            <div class="attraction-grid">
+              <div class="attraction-card">
+                <span class="attraction-card__icon">🏰</span>
+                <div class="attraction-card__name">טירת ספיש</div>
+                <div class="attraction-card__desc">הטירה הגדולה ביותר בסלובקיה ואחת הגדולות באירופה. חצר ענקית עם תצוגות לילדים.</div>
+                <span class="attraction-card__age">מגיל 4</span>
+              </div>
+              <div class="attraction-card">
+                <span class="attraction-card__icon">🌊</span>
+                <div class="attraction-card__name">Tatralandia</div>
+                <div class="attraction-card__desc">פארק מים ענקי ליד הטטרה עם מגלשות, בריכות חיצוניות ופנימיות ומתחם לפעוטות.</div>
+                <span class="attraction-card__age">מגיל 2</span>
+              </div>
+              <div class="attraction-card">
+                <span class="attraction-card__icon">🚠</span>
+                <div class="attraction-card__name">רכבל הטטרה</div>
+                <div class="attraction-card__desc">עלייה לגובה 2000 מטר בנוף מרהיב. בקיץ טיולים, בחורף - סקי.</div>
+                <span class="attraction-card__age">מגיל 3</span>
+              </div>
+              <div class="attraction-card">
+                <span class="attraction-card__icon">🦇</span>
+                <div class="attraction-card__name">מערות דומיצה</div>
+                <div class="attraction-card__desc">אתר UNESCO - מערות נטיפים עם אגם תת-קרקעי. סיור מודרך מרתק לילדים.</div>
+                <span class="attraction-card__age">מגיל 5</span>
+              </div>
+              <div class="attraction-card">
+                <span class="attraction-card__icon">🚂</span>
+                <div class="attraction-card__name">רכבת הצחצחית לטטרה</div>
+                <div class="attraction-card__desc">רכבת קטנה ישנה שמחברת את כפרי הטטרה - ילדים מאוד אוהבים אותה.</div>
+                <span class="attraction-card__age">מגיל 2</span>
+              </div>
+              <div class="attraction-card">
+                <span class="attraction-card__icon">🏊</span>
+                <div class="attraction-card__name">בריכות תרמיות Bešeňová</div>
+                <div class="attraction-card__desc">בריכות מים חמים טבעיות ליד לפטוביצה-מיקולאש - מושלם לרגיעה עם ילדים.</div>
+                <span class="attraction-card__age">מגיל 1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FOOD -->
+          <div class="article-section" id="food">
+            <h2 class="article-section__title"><span class="article-section__title-icon">🍽️</span> אוכל מקומי מומלץ</h2>
+            <p>האוכל הסלובקי כבד וטעים - ילדים בדרך כלל אוהבים אותו. הכל מגיע במנות גדולות ובמחיר נמוך יחסית לאירופה המערבית.</p>
+            <div class="food-list">
+              <div class="food-item">
+                <span class="food-item__icon">🥟</span>
+                <div class="food-item__name">Bryndzové Halušky</div>
+                <div class="food-item__desc">המאכל הלאומי - כופתאות תפוחי אדמה עם גבינה רכה. ילדים מתים עליהם.</div>
+              </div>
+              <div class="food-item">
+                <span class="food-item__icon">🥣</span>
+                <div class="food-item__name">Kapustnica</div>
+                <div class="food-item__desc">מרק כרוב חמוץ עם נקניק - מחמם בימים קרירים בהרים.</div>
+              </div>
+              <div class="food-item">
+                <span class="food-item__icon">🧀</span>
+                <div class="food-item__name">Ostiepok</div>
+                <div class="food-item__desc">גבינה מעושנת מחלב כבשים - נמכרת בשווקים בצורת לב. ילדים אוהבים את הצורה.</div>
+              </div>
+              <div class="food-item">
+                <span class="food-item__icon">🍩</span>
+                <div class="food-item__name">Trdelník</div>
+                <div class="food-item__desc">מאפה קינמון אפוי על שיפוד - נמכר ברחוב. חובה לכל ילד.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACCOMMODATION -->
+          <div class="article-section" id="accommodation">
+            <h2 class="article-section__title"><span class="article-section__title-icon">🏨</span> המלצות לינה</h2>
+            <p>סלובקיה מציעה מגוון רחב של אפשרויות לינה - ממלונות בוטיק יפים בברטיסלווה, דרך צימרים משפחתיים באזור הטטרה ועד פנסיונים כפריים ליד הטירות.</p>
+            <div class="tips-list">
+              <div class="tip-item">
+                <span class="tip-item__icon">🏙️</span>
+                <div class="tip-item__text"><strong>ברטיסלווה:</strong> כדאי לישון ב-Old Town - הכל ברגל ולא צריך רכב. מלון Marrol's או Sheraton נוחים למשפחות.</div>
+              </div>
+              <div class="tip-item">
+                <span class="tip-item__icon">⛰️</span>
+                <div class="tip-item__text"><strong>אזור הטטרה:</strong> שטרבסקה פלסו או לפטובי מיקולאש הן נקודות מרכזיות נוחות. הרבה פנסיונים משפחתיים עם מטבח.</div>
+              </div>
+              <div class="tip-item">
+                <span class="tip-item__icon">🏰</span>
+                <div class="tip-item__text"><strong>ליד הטירות:</strong> ספיש-פודהרדיה ולבוצ'ה - כפרים קטנים עם לינה ובוקר נוח ויפה.</div>
+              </div>
+              <div class="tip-item">
+                <span class="tip-item__icon">💡</span>
+                <div class="tip-item__text"><strong>טיפ כללי:</strong> פנסיונים משפחתיים (Penzión) בדרך כלל מציעים חדרים גדולים יותר ממלונות באותה עלות - מתאים מאוד לטיול עם ילדים.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LOGISTICS -->
+          <div class="article-section" id="logistics">
+            <h2 class="article-section__title"><span class="article-section__title-icon">🚗</span> טיפים לוגיסטיים</h2>
+            <div class="tips-list">
+              <div class="tip-item">
+                <span class="tip-item__icon">✈️</span>
+                <div class="tip-item__text"><strong>הגעה:</strong> טיסה ישירה לברטיסלווה אין - הכי נוח לטוס לוינה (45 דקות נסיעה) או דרך בודפשט (2.5 שעות). אפשר גם וינה ואז רכב לסלובקיה.</div>
+              </div>
+              <div class="tip-item">
+                <span class="tip-item__icon">🚘</span>
+                <div class="tip-item__text"><strong>רכב:</strong> חובה לטיול מלא. כבישים טובים, סימון ברור. מדבקת וינייט (תשלום אגרה) חובה - קונים בכניסה לארץ. זולה מאוד.</div>
+              </div>
+              <div class="tip-item">
+                <span class="tip-item__icon">💶</span>
+                <div class="tip-item__text"><strong>כסף:</strong> סלובקיה נמצאת באיחוד האירופי ומשתמשת ביורו. כרטיסי אשראי מקובלים בכל מקום, אבל כדאי לשאת מזומן לשווקים ולפנסיונים קטנים.</div>
+              </div>
+              <div class="tip-item">
+                <span class="tip-item__icon">🌡️</span>
+                <div class="tip-item__text"><strong>מזג אוויר:</strong> קיץ נעים (20-28 מעלות), בהרים יותר קריר. כדאי להביא שכבת ביניים לילדים אפילו בקיץ.</div>
+              </div>
+              <div class="tip-item">
+                <span class="tip-item__icon">🗣️</span>
+                <div class="tip-item__text"><strong>שפה:</strong> סלובקית - אנגלית מדוברת בערים ובאתרי תיירות. ברובעים כפריים פחות. Google Translate עם מצלמה עוזר מאוד.</div>
+              </div>
+            </div>
+          </div>
+
+        </main>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+          <div class="sidebar-card">
+            <div class="sidebar-card__title">📊 מידע מהיר</div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__label">רמת קושי</span>
+              <span class="sidebar-card__value sidebar-card__value--green">🟢 קל</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__label">ימים מומלצים</span>
+              <span class="sidebar-card__value">7-10 ימים</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__label">עונה מומלצת</span>
+              <span class="sidebar-card__value">מאי - ספטמבר</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__label">גיל מינימלי</span>
+              <span class="sidebar-card__value">מגיל 3</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__label">תקציב יחסי</span>
+              <span class="sidebar-card__value sidebar-card__value--green">💰 נמוך</span>
+            </div>
+            <div class="sidebar-card__row">
+              <span class="sidebar-card__label">מטבע</span>
+              <span class="sidebar-card__value">€ יורו</span>
+            </div>
+          </div>
+
+          <div class="cta-card">
+            <div class="cta-card__title">רוצים מסלול מותאם?</div>
+            <div class="cta-card__text">אבנה לכם מסלול מלא לסלובקיה - יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.</div>
+            <a href="services.html#pricing" class="cta-card__btn">לחבילות תכנון ←</a>
+            <a href="https://wa.me/972546758145?text=אני מתעניין בתכנון טיול לסלובקיה עם ילדים" class="cta-card__wa" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              שלחו הודעה
+            </a>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>TripWithKids &copy; 2025 - <a href="services.html">דף הבית</a> | <a href="tips.html">טיפים</a> | <a href="destinations.html">יעדים</a> | <a href="https://wa.me/972546758145">וואטסאפ</a></p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/972546758145" style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;" target="_blank" aria-label="וואטסאפ">
+    <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script>
+  (function() {
+
+    // Nav
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
+    var hamburger = document.getElementById('hamburgerBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', function() {
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen.toString());
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }); });
+
+    // Timeline toggle
+    window.toggleTl = function(id) {
+      var card = document.getElementById(id);
+      var isOpen = card.classList.toggle('open');
+      var chevron = card.querySelector('.tl-card__chevron');
+      if (chevron) chevron.textContent = isOpen ? '▲' : '▼';
+    };
+
+    // Map
+    var mapEl = document.getElementById('map');
+    if (mapEl) {
+      var map = L.map('map', {
+        center: [48.7, 19.5],
+        zoom: 6,
+        zoomControl: true,
+        scrollWheelZoom: false
+      });
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap © CARTO',
+        maxZoom: 18
+      }).addTo(map);
+
+      var spots = [
+        { lat: 48.145, lng: 17.107, flag: '🏙️', name: 'ברטיסלווה', desc: 'הבירה - טירה, עיר עתיקה, דנובה' },
+        { lat: 49.12,  lng: 20.07,  flag: '⛰️', name: 'הטטרה הגבוהים', desc: 'רכבל, אגמים, פארק מים' },
+        { lat: 49.0,   lng: 20.58,  flag: '🏰', name: 'טירת ספיש', desc: 'הטירה הגדולה - אתר UNESCO' },
+        { lat: 48.72,  lng: 20.49,  flag: '🦇', name: 'מערות דומיצה', desc: 'מערות נטיפים - אתר UNESCO' },
+        { lat: 48.72,  lng: 21.26,  flag: '🌆', name: 'קושיצה', desc: 'העיר השנייה - רחוב ראשי יפהפה' }
+      ];
+
+      spots.forEach(function(s) {
+        var icon = L.divIcon({
+          className: '',
+          html: '<div style="width:38px;height:38px;border-radius:50%;background:#1A6B72;border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 3px 10px rgba(0,0,0,0.25);">' + s.flag + '</div>',
+          iconSize: [38, 38],
+          iconAnchor: [19, 19],
+          popupAnchor: [0, -22]
+        });
+        L.marker([s.lat, s.lng], { icon: icon })
+          .addTo(map)
+          .bindPopup('<div dir="rtl" style="font-family:Rubik,sans-serif;padding:8px 4px;"><strong style="font-size:15px;color:#1A6B72;">' + s.name + '</strong><br><span style="font-size:13px;color:#666;">' + s.desc + '</span></div>');
+      });
+    }
+
+  })();
+  </script>
+</body>
+</html>
