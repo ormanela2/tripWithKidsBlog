@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="טיפים לטיול עם ילדים - מה לקחת, מה לארגן לפני הטיסה וטיפים לשהייה בחול עם ילדים. המדריך המלא של TripWithKids.">
+  <title>טיפים לטיול עם ילדים - TripWithKids</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --amber: #E8A045;
+      --amber-light: #f0b868;
+      --amber-dark: #c4872e;
+      --teal: #1A6B72;
+      --teal-light: #238a93;
+      --teal-dark: #124d52;
+      --cream: #FDF8F2;
+      --charcoal: #2C2C2C;
+      --sand: #F5EDD8;
+      --sand-dark: #e8ddc4;
+      --green: #4A9B6F;
+      --white: #FFFFFF;
+      --font-heading: 'Secular One', sans-serif;
+      --font-body: 'Rubik', sans-serif;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --nav-height: 72px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--charcoal);
+      background: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 400; line-height: 1.3; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+
+    .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; right: 0; left: 0; z-index: 1000;
+      height: var(--nav-height); background: var(--cream);
+      border-bottom: 1px solid var(--sand-dark);
+      transition: box-shadow 0.3s ease;
+    }
+    .nav.scrolled { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+    .nav__logo { font-family: var(--font-heading); font-size: 24px; color: var(--teal); display: flex; align-items: center; gap: 8px; }
+    .nav__logo-icon { width: 36px; height: 36px; background: var(--amber); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .nav__links { display: flex; align-items: center; gap: 8px; }
+    .nav__link { padding: 8px 16px; border-radius: 8px; font-weight: 500; font-size: 15px; transition: background 0.2s, color 0.2s; min-height: 44px; display: flex; align-items: center; }
+    .nav__link:hover { background: var(--sand); color: var(--teal); }
+    .nav__link[aria-current="page"] { background: var(--teal); color: var(--white); }
+    .nav__cta { margin-right: 8px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: var(--radius-xl); font-size: 16px; font-weight: 600; min-height: 48px; transition: all 0.3s ease; white-space: nowrap; }
+    .btn--primary { background: var(--amber); color: var(--charcoal); box-shadow: 0 4px 14px rgba(232,160,69,0.35); }
+    .btn--primary:hover { background: var(--amber-dark); transform: translateY(-2px); }
+    .btn--sm { padding: 10px 24px; font-size: 15px; min-height: 44px; }
+    .desktop-only { display: flex; }
+    .nav__mobile-actions { display: none; }
+    .nav__hamburger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; flex-direction: column; gap: 5px; padding: 8px; }
+    .nav__hamburger span { display: block; width: 24px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: all 0.3s ease; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .nav__whatsapp-mobile { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: var(--green); font-size: 22px; }
+    .nav__mobile-menu { display: none; position: fixed; top: var(--nav-height); right: 0; left: 0; bottom: 0; background: var(--cream); padding: 32px 24px; flex-direction: column; gap: 8px; z-index: 999; overflow-y: auto; }
+    .nav__mobile-menu.open { display: flex; }
+    .nav__mobile-menu .nav__link { font-size: 20px; padding: 16px; }
+    .nav__mobile-menu .btn { margin-top: 16px; justify-content: center; }
+
+    /* HERO */
+    .tips-hero {
+      background: linear-gradient(160deg, var(--teal) 0%, var(--teal-dark) 100%);
+      padding-top: calc(var(--nav-height) + 60px);
+      padding-bottom: 70px;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .tips-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to top, var(--cream), transparent);
+    }
+    .tips-hero__label {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 6px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    .tips-hero__title { font-size: clamp(28px, 4.5vw, 50px); margin-bottom: 20px; }
+    .tips-hero__subtitle { font-size: clamp(16px, 2vw, 19px); font-weight: 300; opacity: 0.9; max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+    /* TAB NAV */
+    .tab-nav {
+      background: var(--white);
+      border-bottom: 2px solid var(--sand-dark);
+      position: sticky;
+      top: var(--nav-height);
+      z-index: 100;
+    }
+    .tab-nav__inner { display: flex; justify-content: center; gap: 0; }
+    .tab-btn {
+      padding: 18px 36px;
+      font-family: var(--font-heading);
+      font-size: 17px;
+      color: #888;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+    .tab-btn:hover { color: var(--teal); }
+    .tab-btn.active { color: var(--teal); border-bottom-color: var(--amber); }
+
+    /* TIPS SECTIONS */
+    .tips-section { padding: 70px 0; display: none; }
+    .tips-section.active { display: block; }
+
+    .section-intro {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-intro__icon { font-size: 48px; display: block; margin-bottom: 16px; }
+    .section-intro__title { font-size: clamp(24px, 3.5vw, 36px); color: var(--charcoal); margin-bottom: 12px; }
+    .section-intro__desc { font-size: 16px; color: #666; max-width: 560px; margin: 0 auto; }
+
+    /* TIPS GRID */
+    .tips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
+    .tip-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      border: 2px solid var(--sand-dark);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .tip-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .tip-card--full { grid-column: 1 / -1; }
+    .tip-card__header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+    .tip-card__emoji { font-size: 32px; flex-shrink: 0; }
+    .tip-card__title { font-family: var(--font-heading); font-size: 20px; color: var(--teal); }
+    .tip-card__list { padding-right: 0; }
+    .tip-card__list li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--sand);
+      font-size: 15px;
+      line-height: 1.65;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .tip-card__list li:last-child { border-bottom: none; }
+    .tip-card__list li::before {
+      content: '✓';
+      color: var(--amber);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .tip-card__note {
+      margin-top: 16px;
+      background: var(--sand);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+    }
+    .tip-card__note strong { color: var(--charcoal); }
+
+    /* HIGHLIGHT CARD */
+    .tip-card--highlight {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--white);
+    }
+    .tip-card--highlight .tip-card__title { color: var(--amber-light); }
+    .tip-card--highlight .tip-card__list li { border-bottom-color: rgba(255,255,255,0.1); font-size: 15px; }
+    .tip-card--highlight .tip-card__list li::before { color: var(--amber-light); }
+    .tip-card--highlight .tip-card__note { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); }
+    .tip-card--highlight .tip-card__note strong { color: var(--white); }
+
+    /* FOOTER */
+    .footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.7);
+      padding: 40px 0;
+      text-align: center;
+      font-size: 14px;
+    }
+    .footer a { color: var(--amber-light); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .desktop-only { display: none; }
+      .nav__mobile-actions { display: flex; align-items: center; gap: 4px; }
+      .nav__hamburger { display: flex; }
+      .nav__links { display: none; }
+      .tips-grid { grid-template-columns: 1fr; }
+      .tip-card--full { grid-column: 1; }
+      .tab-btn { padding: 14px 20px; font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="TripWithKids - דף הבית">
+        <span class="nav__logo-icon" aria-hidden="true">&#9992;</span>
+        TripWithKids
+      </a>
+      <ul class="nav__links" role="menubar">
+        <li role="none"><a href="tips.html" class="nav__link" role="menuitem" aria-current="page">טיפים</a></li>
+        <li role="none"><a href="index.html#destinations" class="nav__link" role="menuitem">יעדים</a></li>
+        <li role="none"><a href="services.html" class="nav__link" role="menuitem">שירותים</a></li>
+        <li role="none"><a href="services.html#about" class="nav__link" role="menuitem">אודות</a></li>
+        <li role="none"><a href="services.html#final-cta" class="nav__link" role="menuitem">צור קשר</a></li>
+      </ul>
+      <a href="services.html#pricing" class="btn btn--primary btn--sm nav__cta desktop-only">לחבילות</a>
+      <div class="nav__mobile-actions">
+        <a href="https://wa.me/972546758145" class="nav__whatsapp-mobile" aria-label="שלח הודעת וואטסאפ">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
+      <a href="tips.html" class="nav__link" role="menuitem" aria-current="page">טיפים</a>
+      <a href="index.html#destinations" class="nav__link" role="menuitem">יעדים</a>
+      <a href="services.html" class="nav__link" role="menuitem">שירותים</a>
+      <a href="services.html#about" class="nav__link" role="menuitem">אודות</a>
+      <a href="services.html#final-cta" class="nav__link" role="menuitem">צור קשר</a>
+      <a href="services.html#pricing" class="btn btn--primary">לחבילות</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="tips-hero">
+    <div class="container">
+      <span class="tips-hero__label">✈️ המדריך המעשי</span>
+      <h1 class="tips-hero__title">טיפים לטיול עם ילדים</h1>
+      <p class="tips-hero__subtitle">כל מה שצריך לדעת - לפני הטיסה ובזמן השהייה בחול. מניסיון אישי.</p>
+    </div>
+  </section>
+
+  <!-- TAB NAV -->
+  <div class="tab-nav">
+    <div class="container tab-nav__inner">
+      <button class="tab-btn active" data-tab="before">לפני הטיסה</button>
+      <button class="tab-btn" data-tab="during">בזמן השהייה</button>
+    </div>
+  </div>
+
+  <!-- SECTION: לפני הטיסה -->
+  <section class="tips-section active" id="tab-before">
+    <div class="container">
+
+      <div class="section-intro reveal">
+        <span class="section-intro__icon">🧳</span>
+        <h2 class="section-intro__title">לפני הטיסה - מה לקחת ומה לארגן</h2>
+        <p class="section-intro__desc">כמה שיותר מוכנים מראש - כך הטיול מתחיל בצורה טובה יותר. הנה הדברים שחשוב לא לשכוח.</p>
+      </div>
+
+      <div class="tips-grid">
+
+        <div class="tip-card reveal">
+          <div class="tip-card__header">
+            <span class="tip-card__emoji">📋</span>
+            <h3 class="tip-card__title">מסמכים ומנהלה</h3>
+          </div>
+          <ul class="tip-card__list">
+            <li>לוודא שדרכונים בתוקף לפחות 6 חודשים מיום החזרה</li>
+            <li>להוציא ביטוח נסיעות שמכסה ילדים - כולל ביטול טיסה</li>
+            <li>לצלם את כל המסמכים ולשמור בענן (גוגל דרייב / אימייל)</li>
+            <li>כרטיסי טיסה מודפסים ודיגיטליים</li>
+            <li>אישורי הזמנת מלון - מודפס ובמייל</li>
+            <li>כרטיסי אשראי - לוודא שעובדים בחול ולהודיע לבנק</li>
+          </ul>
+        </div>
+
+        <div class="tip-card reveal reveal-delay-1">
+          <div class="tip-card__header">
+            <span class="tip-card__emoji">💊</span>
+            <h3 class="tip-card__title">בריאות ותרופות</h3>
+          </div>
+          <ul class="tip-card__list">
+            <li>ערכת עזרה ראשונה קטנה - פלסטרים, חיטוי</li>
+            <li>חומר מניעה וטיפול נגד כינים - חובה עם ילדים</li>
+            <li>תרופות לחום, כאב ושלשולים בגרסת ילדים</li>
+            <li>תרופת מנע לבחילות בנסיעה אם הילדים רגישים</li>
+            <li>קרם הגנה גבוה + אחרי שמש</li>
+            <li>תרופות קבועות עם מרשם מתורגם לאנגלית</li>
+            <li>מספר הביטוח ופרטי חברת הביטוח נגיש בנייד</li>
+          </ul>
+          <div class="tip-card__note"><strong>טיפ:</strong> לשמור צילום המרשמים בנייד - שימושי אם צריך לקנות בחול.</div>
+        </div>
+
+        <div class="tip-card reveal">
+          <div class="tip-card__header">
+            <span class="tip-card__emoji">🎒</span>
+            <h3 class="tip-card__title">ציוד לטיסה עם ילדים</h3>
+          </div>
+          <ul class="tip-card__list">
+            <li>אוזניות לילדים - חיוניות לטיסה ארוכה</li>
+            <li>טאבלט / אייפד עם תוכן מורד מראש (בלי WiFi)</li>
+            <li>חטיפים מהבית - לחם, פירות, חטיפים אהובים</li>
+            <li>שינוי בגדים בתיק ידני לכל ילד</li>
+            <li>שמיכה קטנה ורכה לטיסות לילה</li>
+            <li>משחקים קטנים, קלפים, ספר צביעה</li>
+          </ul>
+        </div>
+
+        <div class="tip-card reveal reveal-delay-1">
+          <div class="tip-card__header">
+            <span class="tip-card__emoji">📦</span>
+            <h3 class="tip-card__title">ארגון המזוודות</h3>
+          </div>
+          <ul class="tip-card__list">
+            <li>שקיות רשת לסדר ביגוד לפי ימים - חוסך זמן בחול</li>
+            <li>מזוודה נפרדת לילדים עם כל הדברים שלהם</li>
+            <li>נעל אחת פחות - הילדים לא יניחו לבד</li>
+            <li>להשאיר מקום במזוודה לקניות בחול</li>
+            <li>מטען נייד גדול לסוללות כל הנייד</li>
+            <li>מתאם חשמל לפי היעד</li>
+          </ul>
+          <div class="tip-card__note"><strong>טיפ:</strong> לצלם את תכולת המזוודה לפני הסגירה - שימושי אם אובדת.</div>
+        </div>
+
+        <div class="tip-card tip-card--highlight tip-card--full reveal">
+          <div class="tip-card__header">
+            <span class="tip-card__emoji">🗓️</span>
+            <h3 class="tip-card__title">לפני היציאה - רשימת הכנות</h3>
+          </div>
+          <ul class="tip-card__list">
+            <li>להזמין אטרקציות פופולריות מראש - לא לסמוך על קנייה בכניסה</li>
+            <li>להוריד מפות אופליין (Google Maps) ליעד</li>
+            <li>להגדיר eSIM או לקנות SIM מקומי</li>
+            <li>לתדרך את הילדים - לאן טסים, כמה זמן, מה יהיה</li>
+            <li>לגבות כסף מזומן מקומי - לא תמיד מקבלים כרטיס</li>
+            <li>לשמור כתובת המלון בנייד + נייר - אם מתפצלים</li>
+            <li>לוודא שמגיעים לנמל תעופה עם מספיק זמן - עם ילדים לוקח יותר</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: בזמן השהייה -->
+  <section class="tips-section" id="tab-during">
+    <div class="container">
+
+      <div class="section-intro reveal">
+        <span class="section-intro__icon">🌍</span>
+        <h2 class="section-intro__title">בזמן השהייה בחול עם ילדים</h2>
+        <p class="section-intro__desc">הטיול כבר התחיל - הנה הטיפים שיעשו את ההבדל בין טיול מתיש לטיול שכולם יזכרו.</p>
+      </div>
+
+      <div class="tips-grid">
+
+        <div class="tip-card reveal">
+          <div class="tip-card__header">
+            <span class="tip-card__emoji">⏰</span>
+            <h3 class="tip-card__title">קצב וזמנים</h3>
+          </div>
+          <ul class="tip-card__list">
+            <li>לצאת מוקדם - הכל פחות עמוס ב-8-9 בבוקר</li>
+            <li>פעילות אחת גדולה ביום - לא שתיים. פחות זה יותר</li>
+            <li>שעת מנוחה אחר הצהריים - חוסכת את הטנטרום של הערב</li>
+            <li>לא לתכנן יותר מדי - להשאיר זמן לנדוד ולהתפלא</li>
+            <li>לאכול מוקדם - מסעדות עם ילדים לפני 19:00 הרבה יותר קלות</li>
+          </ul>
+        </div>
+
+        <div class="tip-card reveal reveal-delay-1">
+          <div class="tip-card__header">
+            <span class="tip-card__emoji">🍕</span>
+            <h3 class="tip-card__title">אוכל ושתייה</h3>
+          </div>
+          <ul class="tip-card__list">
+            <li>לזהות סופרמרקט קרוב למלון ביום הראשון</li>
+            <li>חטיפים בתיק תמיד - ילד רעב = טיול רע</li>
+            <li>לחפש מסעדות עם תפריט ילדים מראש</li>
+            <li>לא לכפות אוכל מקומי - לאפשר גם פיצה / פסטה</li>
+            <li>לשמור בקבוק מים ממולא - מים בחול יקרים</li>
+          </ul>
+          <div class="tip-card__note"><strong>טיפ:</strong> גלידה פותרת כמעט כל מצב קשה בטיול עם ילדים.</div>
+        </div>
+
+        <div class="tip-card reveal">
+          <div class="tip-card__header">
+            <span class="tip-card__emoji">🧠</span>
+            <h3 class="tip-card__title">לשמור על שפיות ההורים</h3>
+          </div>
+          <ul class="tip-card__list">
+            <li>לא לנסות לכסות הכל - לבחור מה חשוב לכם</li>
+            <li>לתת לילדים להוביל לפעמים - לאן ללכת, מה לאכול</li>
+            <li>לתעד פחות, לחוות יותר - לשים את הטלפון</li>
+            <li>לצפות שיהיו רגעים קשים - זה חלק מהעניין</li>
+            <li>להנות מהדברים הקטנים - גינה, פסל, קפה בכיכר</li>
+          </ul>
+        </div>
+
+        <div class="tip-card reveal reveal-delay-1">
+          <div class="tip-card__header">
+            <span class="tip-card__emoji">🔒</span>
+            <h3 class="tip-card__title">בטיחות ואבטחה</h3>
+          </div>
+          <ul class="tip-card__list">
+            <li>ללמד ילדים את שם המלון ומספר הטלפון שלכם</li>
+            <li>לקבוע נקודת מפגש אם נפרדים</li>
+            <li>לצלם את הילדים כל בוקר - מה לובשים היום</li>
+            <li>לא לשים ארנק ודרכון באותו מקום</li>
+            <li>תיק בטיחות קטן מתחת לבגדים לדרכונים</li>
+          </ul>
+        </div>
+
+        <div class="tip-card tip-card--highlight tip-card--full reveal">
+          <div class="tip-card__header">
+            <span class="tip-card__emoji">💡</span>
+            <h3 class="tip-card__title">הטיפ הכי חשוב שיש - גמישות</h3>
+          </div>
+          <ul class="tip-card__list">
+            <li>התכנית היא נקודת התחלה - לא חוק</li>
+            <li>אם הילד מאוהב במגרש משחקים - להישאר עוד שעה</li>
+            <li>גשם, עייפות, כאב בטן - הכל קורה. לא להילחם</li>
+            <li>לפעמים היום הכי טוב הוא זה שלא תוכנן</li>
+            <li>לזכור למה יצאתם - להיות יחד ולהנות</li>
+          </ul>
+          <div class="tip-card__note"><strong>מניסיון אישי:</strong> הטיולים הכי טובים שלנו היו אלה שבהם השלכנו את התכנית ופשוט הלכנו לאן שהרגשנו.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>TripWithKids &copy; 2025 - <a href="services.html">שירותים ומחירים</a> | <a href="https://wa.me/972546758145">וואטסאפ</a></p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp FAB -->
+  <a href="https://wa.me/972546758145" style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:999;" target="_blank" rel="noopener noreferrer" aria-label="צור קשר בוואטסאפ">
+    <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // Nav shadow
+      var nav = document.getElementById('nav');
+      window.addEventListener('scroll', function() {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      }, { passive: true });
+
+      // Mobile menu
+      var hamburger = document.getElementById('hamburgerBtn');
+      var mobileMenu = document.getElementById('mobileMenu');
+      hamburger.addEventListener('click', function() {
+        var isOpen = mobileMenu.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', isOpen.toString());
+        hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+      mobileMenu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        });
+      });
+
+      // Tabs
+      var tabBtns = document.querySelectorAll('.tab-btn');
+      var tabSections = document.querySelectorAll('.tips-section');
+      tabBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var target = btn.dataset.tab;
+          tabBtns.forEach(function(b) { b.classList.remove('active'); });
+          tabSections.forEach(function(s) { s.classList.remove('active'); });
+          btn.classList.add('active');
+          document.getElementById('tab-' + target).classList.add('active');
+          // Re-trigger reveal for newly visible section
+          triggerReveals();
+        });
+      });
+
+      // Scroll reveal
+      function triggerReveals() {
+        if (!('IntersectionObserver' in window)) {
+          document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('visible'); });
+          return;
+        }
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal:not(.visible)').forEach(function(el) { observer.observe(el); });
+      }
+      triggerReveals();
+
+    })();
+  </script>
+</body>
+</html>
