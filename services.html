@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TripWithKids — שירותי תכנון טיולים משפחתיים לחו״ל. חבילות תכנון מותאמות אישית למשפחות עם ילדים.">
+  <meta name="description" content="המדריך המלא לטיול עם ילדים לחו״ל — מסלולים, יעדים וטיפים לתכנון טיול משפחתי מוצלח. חבילות תכנון מותאמות אישית למשפחות עם ילדים.">
   <title>שירותים ומחירים — TripWithKids</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -517,6 +517,7 @@
       font-size: clamp(26px, 3.8vw, 40px);
       color: var(--charcoal);
       margin-bottom: 12px;
+      text-align: center;
     }
 
     .value-prop__subheadline {
@@ -526,6 +527,9 @@
       margin-bottom: 56px;
       max-width: 640px;
       line-height: 1.7;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .value-prop__grid {
@@ -915,61 +919,6 @@
     /* ========================================
        7. TESTIMONIALS
        ======================================== */
-    .testimonials {
-      background: var(--teal);
-      padding: var(--section-padding) 0;
-      color: var(--white);
-    }
-
-    .testimonials .section-header {
-      text-align: center;
-    }
-
-    .testimonials .section-header__title {
-      color: var(--white);
-    }
-
-    .testimonials .section-header__subtitle {
-      color: rgba(255,255,255,0.7);
-    }
-
-    .testimonials__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    .testimonial-card {
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: var(--radius-lg);
-      padding: 32px 28px;
-    }
-
-    .testimonial-card__stars {
-      color: var(--amber);
-      font-size: 18px;
-      margin-bottom: 16px;
-      display: flex;
-      gap: 2px;
-    }
-
-    .testimonial-card__quote {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.8;
-      margin-bottom: 20px;
-      opacity: 0.95;
-    }
-
-    .testimonial-card__author {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--amber-light);
-    }
-
     /* ========================================
        8. FINAL CTA
        ======================================== */
@@ -1385,10 +1334,6 @@
         display: none;
       }
 
-      .testimonials__grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
       .footer__inner {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1426,10 +1371,6 @@
       }
 
       .process__steps {
-        grid-template-columns: 1fr;
-      }
-
-      .testimonials__grid {
         grid-template-columns: 1fr;
       }
 
@@ -1525,16 +1466,16 @@
         <span class="page-hero__breadcrumb-sep" aria-hidden="true">/</span>
         <span>שירותים</span>
       </nav>
-      <h1 class="page-hero__title">תכנון טיול שנבנה סביב הילדים שלך — לא סביב לוח זמנים גנרי</h1>
-      <p class="page-hero__subtitle">בחר את החבילה שמתאימה לך. אני בונה את המסלול. אתה נהנה.</p>
+      <h1 class="page-hero__title">המדריך לטיול עם ילדים לחו"ל — מסלולים, יעדים וטיפים שיהפכו כל טיול לחוויה</h1>
+      <p class="page-hero__subtitle">תכנון טיול משפחתי מותאם אישית — כי כל משפחה, כל יעד וכל ילד הם סיפור אחר.</p>
     </div>
   </header>
 
   <!-- ============ VALUE PROPOSITION ============ -->
   <section class="value-prop" aria-labelledby="vp-title">
     <div class="container">
-      <h2 class="value-prop__headline reveal" id="vp-title">לא עוד לילות של חיפושים בגוגל.</h2>
-      <p class="value-prop__subheadline reveal reveal-delay-1">מקבל תכנית טיול מלאה — בדיוק לפי הילדים שלך, התקציב שלך, והתאריכים שלך.</p>
+      <h2 class="value-prop__headline reveal" id="vp-title">לא עוד לילות של תכנון אינסופי.</h2>
+      <p class="value-prop__subheadline reveal reveal-delay-1">מקבל תכנית טיול מלאה לטיול עם ילדים — בדיוק לפי הילדים שלך, התקציב שלך, והתאריכים שלך.</p>
 
       <div class="value-prop__grid">
         <div class="value-prop__item reveal">
@@ -1867,39 +1808,6 @@
   </section>
 
   <!-- ============ TESTIMONIALS ============ -->
-  <section class="testimonials" id="testimonials" aria-labelledby="testimonials-title">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-header__title" id="testimonials-title">מה אומרים מי שכבר הזמינו</h2>
-        <p class="section-header__subtitle">ביקורות על שירות התכנון — מהשטח, לא מהדמיון</p>
-      </div>
-
-      <div class="testimonials__grid">
-        <div class="testimonial-card reveal">
-          <div class="testimonial-card__stars" aria-label="5 מתוך 5 כוכבים">
-            <span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span>
-          </div>
-          <p class="testimonial-card__quote">"קיבלתי מסלול ל-10 ימים באיטליה תוך 3 ימים. כל שעה הייתה מחושבת — אבל לא מדויקת מדי. בדיוק מה שצריך עם ילדים. הבן שלי בן ה-5 עדיין מדבר על הפיצריה שהמליץ."</p>
-          <cite class="testimonial-card__author">— אורי כהן, אבא ל-2, רמת גן</cite>
-        </div>
-        <div class="testimonial-card reveal reveal-delay-1">
-          <div class="testimonial-card__stars" aria-label="5 מתוך 5 כוכבים">
-            <span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span>
-          </div>
-          <p class="testimonial-card__quote">"לקחתי את חבילת הפרימיום ליוון. באמצע הטיול ירד גשם — שלחתי הודעה ותוך 20 דקות קיבלתי תכנית חלופית ליום שלם. זה שווה כל שקל."</p>
-          <cite class="testimonial-card__author">— שירה וגיל ברגמן, הרצליה</cite>
-        </div>
-        <div class="testimonial-card reveal reveal-delay-2">
-          <div class="testimonial-card__stars" aria-label="5 מתוך 5 כוכבים">
-            <span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span><span aria-hidden="true">&#9733;</span>
-          </div>
-          <p class="testimonial-card__quote">"בתור אמא חד-הורית עם שני ילדים, התכנון הלוגיסטי היה הדבר הכי מלחיץ. קיבלתי אקסל שסידר לי את הראש — ידעתי בדיוק מה עושים בכל שעה. הטיול הכי רגוע שעשיתי."</p>
-          <cite class="testimonial-card__author">— נועה אביב, אמא ל-2, תל אביב</cite>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ FINAL CTA ============ -->
   <section class="final-cta" id="final-cta" aria-labelledby="cta-title">
     <div class="container final-cta__content">
