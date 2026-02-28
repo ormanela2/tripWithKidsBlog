@@ -443,15 +443,7 @@
       background: rgba(10, 40, 45, 0.62);
     }
 
-    .page-hero__bg::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      right: 0;
-      height: 120px;
-      background: linear-gradient(to top, var(--cream), transparent);
-    }
+
 
     .page-hero__content {
       position: relative;
@@ -948,58 +940,6 @@
     /* ========================================
        ABOUT US SECTION
        ======================================== */
-    .about-us {
-      position: relative;
-      min-height: 520px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .about-us__bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('familyPic.jpg');
-      background-size: cover;
-      background-position: center 25%;
-      z-index: 0;
-    }
-
-    .about-us__bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(10, 40, 45, 0.65);
-    }
-
-    .about-us__content {
-      position: relative;
-      z-index: 1;
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 80px 32px;
-      text-align: center;
-      color: var(--white);
-    }
-
-    .about-us__title {
-      font-size: clamp(28px, 4vw, 44px);
-      margin-bottom: 32px;
-      color: var(--amber-light);
-    }
-
-    .about-us__text {
-      font-size: 17px;
-      line-height: 1.85;
-      margin-bottom: 16px;
-      opacity: 0.93;
-    }
-
-    .about-us__text:last-child {
-      margin-bottom: 0;
-    }
-
     /* ========================================
        8. FINAL CTA
        ======================================== */
