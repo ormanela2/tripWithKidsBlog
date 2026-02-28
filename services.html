@@ -430,11 +430,9 @@
     .page-hero__bg {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(160deg,
-          var(--teal) 0%,
-          var(--teal-dark) 60%,
-          #0e3d42 100%);
+      background-image: url('familyPic.jpg');
+      background-size: cover;
+      background-position: center 30%;
       z-index: 0;
     }
 
@@ -442,9 +440,12 @@
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse at 80% 20%, rgba(232, 160, 69, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 20% 80%, rgba(35, 138, 147, 0.3) 0%, transparent 60%);
+      background: linear-gradient(
+        to bottom,
+        rgba(10, 40, 45, 0.55) 0%,
+        rgba(10, 40, 45, 0.45) 60%,
+        rgba(10, 40, 45, 0.3) 100%
+      );
     }
 
     .page-hero__bg::after {
@@ -919,6 +920,61 @@
     /* ========================================
        7. TESTIMONIALS
        ======================================== */
+    /* ========================================
+       ABOUT US SECTION
+       ======================================== */
+    .about-us {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .about-us__bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('familyPic.jpg');
+      background-size: cover;
+      background-position: center 25%;
+      z-index: 0;
+    }
+
+    .about-us__bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 40, 45, 0.65);
+    }
+
+    .about-us__content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 32px;
+      text-align: center;
+      color: var(--white);
+    }
+
+    .about-us__title {
+      font-size: clamp(28px, 4vw, 44px);
+      margin-bottom: 32px;
+      color: var(--amber-light);
+    }
+
+    .about-us__text {
+      font-size: 17px;
+      line-height: 1.85;
+      margin-bottom: 16px;
+      opacity: 0.93;
+    }
+
+    .about-us__text:last-child {
+      margin-bottom: 0;
+    }
+
     /* ========================================
        8. FINAL CTA
        ======================================== */
@@ -1470,6 +1526,19 @@
       <p class="page-hero__subtitle">תכנון טיול משפחתי מותאם אישית — כי כל משפחה, כל יעד וכל ילד הם סיפור אחר.</p>
     </div>
   </header>
+
+  <!-- ============ ABOUT US ============ -->
+  <section class="about-us" id="about-us" aria-labelledby="about-title">
+    <div class="about-us__bg" aria-hidden="true"></div>
+    <div class="about-us__content reveal">
+      <h2 class="about-us__title" id="about-title">מי אנחנו</h2>
+      <p class="about-us__text">היי, אני אור — בן 42, נשוי לנועה ואבא של שלושה ילדים חמודים: יהונתן, רוני ועומר.</p>
+      <p class="about-us__text">בשנים האחרונות טיילנו רחבי אירופה עם הילדים, וגיליתי שני דברים: הראשון — שטיול משפחתי עם תכנון דינמי שבנוי לשינויים הוא פשוט כיף אחר לגמרי. השני — שהמידע הזה כמעט לא קיים בעברית.</p>
+      <p class="about-us__text">אז החלטתי לשתף. אני אוהב את כל עניין התכנון — חיפוש יעדים, אטרקציות ידידותיות לילדים, מקומות לינה שבאמת מתאימים למשפחות. זה לא עבודה בשבילי, זה תשוקה.</p>
+      <p class="about-us__text">TripWithKids נולד מתוך הרצון להנגיש את כל הידע הזה לכל משפחה שרוצה לצאת לדרך — בלי ללכת לאיבוד בים המידע.</p>
+      <p class="about-us__text">אני פה לכל שאלה, עצה, או סתם שיחה על הטיול הבא שלכם. 🙂</p>
+    </div>
+  </section>
 
   <!-- ============ VALUE PROPOSITION ============ -->
   <section class="value-prop" aria-labelledby="vp-title">
