@@ -418,12 +418,12 @@
        ======================================== */
     .page-hero {
       position: relative;
-      min-height: 50vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding-top: var(--nav-height);
-      padding-bottom: 48px;
+      padding-bottom: 80px;
       overflow: hidden;
     }
 
@@ -432,7 +432,7 @@
       inset: 0;
       background-image: url('familyPic.jpg');
       background-size: cover;
-      background-position: center 30%;
+      background-position: center 25%;
       z-index: 0;
     }
 
@@ -440,12 +440,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(10, 40, 45, 0.55) 0%,
-        rgba(10, 40, 45, 0.45) 60%,
-        rgba(10, 40, 45, 0.3) 100%
-      );
+      background: rgba(10, 40, 45, 0.62);
     }
 
     .page-hero__bg::after {
@@ -454,7 +449,7 @@
       bottom: -2px;
       left: 0;
       right: 0;
-      height: 80px;
+      height: 120px;
       background: linear-gradient(to top, var(--cream), transparent);
     }
 
@@ -504,6 +499,36 @@
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    .page-hero__divider {
+      width: 60px;
+      height: 2px;
+      background: var(--amber);
+      margin: 48px auto;
+      border-radius: 2px;
+      opacity: 0.8;
+    }
+
+    .page-hero__about-title {
+      font-size: clamp(24px, 3vw, 36px);
+      color: var(--amber-light);
+      margin-bottom: 28px;
+    }
+
+    .page-hero__about-text {
+      font-size: clamp(15px, 1.6vw, 17px);
+      font-weight: 300;
+      line-height: 1.9;
+      opacity: 0.9;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 14px;
+    }
+
+    .page-hero__about-text:last-child {
+      margin-bottom: 0;
     }
 
     /* ========================================
@@ -1524,21 +1549,16 @@
       </nav>
       <h1 class="page-hero__title">המדריך לטיול עם ילדים לחו"ל — מסלולים, יעדים וטיפים שיהפכו כל טיול לחוויה</h1>
       <p class="page-hero__subtitle">תכנון טיול משפחתי מותאם אישית — כי כל משפחה, כל יעד וכל ילד הם סיפור אחר.</p>
+
+      <div class="page-hero__divider" aria-hidden="true"></div>
+
+      <h2 class="page-hero__about-title">מי אנחנו</h2>
+      <p class="page-hero__about-text">היי, אני אור — בן 42, נשוי לנועה ואבא של שלושה ילדים חמודים: יהונתן, רוני ועומר.</p>
+      <p class="page-hero__about-text">בשנים האחרונות טיילנו רחבי אירופה עם הילדים, וגיליתי שני דברים: הראשון — שטיול משפחתי עם תכנון דינמי שבנוי לשינויים הוא פשוט כיף אחר לגמרי. השני — שהמידע הזה כמעט לא קיים בעברית.</p>
+      <p class="page-hero__about-text">אז החלטתי לשתף. אני אוהב את כל עניין התכנון — חיפוש יעדים, אטרקציות ידידותיות לילדים, מקומות לינה שבאמת מתאימים למשפחות. זה לא עבודה בשבילי, זה תשוקה.</p>
+      <p class="page-hero__about-text">TripWithKids נולד מתוך הרצון להנגיש את כל הידע הזה לכל משפחה שרוצה לצאת לדרך — בלי ללכת לאיבוד בים המידע. אני פה לכל שאלה, עצה, או סתם שיחה על הטיול הבא שלכם. 🙂</p>
     </div>
   </header>
-
-  <!-- ============ ABOUT US ============ -->
-  <section class="about-us" id="about-us" aria-labelledby="about-title">
-    <div class="about-us__bg" aria-hidden="true"></div>
-    <div class="about-us__content reveal">
-      <h2 class="about-us__title" id="about-title">מי אנחנו</h2>
-      <p class="about-us__text">היי, אני אור — בן 42, נשוי לנועה ואבא של שלושה ילדים חמודים: יהונתן, רוני ועומר.</p>
-      <p class="about-us__text">בשנים האחרונות טיילנו רחבי אירופה עם הילדים, וגיליתי שני דברים: הראשון — שטיול משפחתי עם תכנון דינמי שבנוי לשינויים הוא פשוט כיף אחר לגמרי. השני — שהמידע הזה כמעט לא קיים בעברית.</p>
-      <p class="about-us__text">אז החלטתי לשתף. אני אוהב את כל עניין התכנון — חיפוש יעדים, אטרקציות ידידותיות לילדים, מקומות לינה שבאמת מתאימים למשפחות. זה לא עבודה בשבילי, זה תשוקה.</p>
-      <p class="about-us__text">TripWithKids נולד מתוך הרצון להנגיש את כל הידע הזה לכל משפחה שרוצה לצאת לדרך — בלי ללכת לאיבוד בים המידע.</p>
-      <p class="about-us__text">אני פה לכל שאלה, עצה, או סתם שיחה על הטיול הבא שלכם. 🙂</p>
-    </div>
-  </section>
 
   <!-- ============ VALUE PROPOSITION ============ -->
   <section class="value-prop" aria-labelledby="vp-title">
