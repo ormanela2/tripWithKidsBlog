@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="המדריך המלא לטיול עם ילדים לחו״ל - מסלולים, יעדים וטיפים לתכנון טיול משפחתי מוצלח. חבילות תכנון מותאמות אישית למשפחות עם ילדים.">
-  <title>שירותים ומחירים - TripWithKids</title>
+  <title>שירותים ומחירים - מתי טסים</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&display=swap" rel="stylesheet">
@@ -1434,9 +1434,8 @@
   <!-- ============ NAVIGATION ============ -->
   <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
     <div class="container nav__inner">
-      <a href="services.html" class="nav__logo" aria-label="TripWithKids - דף הבית">
-        <span class="nav__logo-icon" aria-hidden="true">&#9992;</span>
-        TripWithKids
+      <a href="services.html" class="nav__logo" aria-label="מתי טסים - דף הבית">
+        <img src="logo.png" alt="מתי טסים" style="height:48px;width:auto;">
       </a>
 
       <ul class="nav__links" role="menubar">
@@ -1488,7 +1487,7 @@
       <p class="page-hero__about-text">היי, אני אור - בן 42, נשוי לנועה ואבא לשלושה ילדים חמודים: יהונתן, רוני ועומר.</p>
       <p class="page-hero__about-text">בשנים האחרונות טיילנו ברחבי אירופה עם הילדים, וגיליתי שני דברים: הראשון - שטיול משפחתי עם תכנון דינמי שבנוי לשינויים הוא פשוט כיף אחר לגמרי. השני - שהמידע הזה כמעט לא קיים בעברית.</p>
       <p class="page-hero__about-text">אז החלטתי לשתף. אני אוהב את כל עניין התכנון - חיפוש יעדים, אטרקציות ידידותיות לילדים, מקומות לינה שבאמת מתאימים למשפחות. זה לא עבודה בשבילי, זה תשוקה.</p>
-      <p class="page-hero__about-text">TripWithKids נולד מתוך הרצון להנגיש את כל הידע הזה לכל משפחה שרוצה לצאת לדרך - בלי ללכת לאיבוד בים המידע. אני פה לכל שאלה, עצה, או סתם שיחה על הטיול הבא שלכם. 🙂</p>
+      <p class="page-hero__about-text">מתי טסים נולד מתוך הרצון להנגיש את כל הידע הזה לכל משפחה שרוצה לצאת לדרך - בלי ללכת לאיבוד בים המידע. אני פה לכל שאלה, עצה, או סתם שיחה על הטיול הבא שלכם. 🙂</p>
     </div>
   </header>
 
@@ -1827,9 +1826,8 @@
     <div class="container">
       <div class="footer__inner">
         <div class="footer__brand">
-          <a href="services.html" class="nav__logo" aria-label="TripWithKids - דף הבית">
-            <span class="nav__logo-icon" aria-hidden="true">&#9992;</span>
-            TripWithKids
+          <a href="services.html" class="nav__logo" aria-label="מתי טסים - דף הבית">
+            <img src="logo.png" alt="מתי טסים" style="height:52px;width:auto;">
           </a>
           <p class="footer__tagline">טיולים שמתחילים בשיחה אחת, ומסתיימים בזכרון שהילדים שלך יספרו לנכדים שלך.</p>
 
@@ -1860,7 +1858,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <p>&copy; 2026 TripWithKids | כל הזכויות שמורות</p>
+        <p>&copy; 2026 מתי טסים | כל הזכויות שמורות</p>
       </div>
     </div>
   </footer>
@@ -2085,7 +2083,7 @@
         formData.append('name', name.value.trim());
         formData.append('email', email.value.trim());
         formData.append('message', message.value.trim());
-        formData.append('_subject', 'פנייה חדשה מאתר TripWithKids');
+        formData.append('_subject', 'פנייה חדשה מאתר מתי טסים');
         formData.append('_template', 'table');
 
         fetch('https://formsubmit.co/ajax/ormanela@gmail.com', {
@@ -2103,7 +2101,7 @@
         })
         .catch(function() {
           // Fallback - open mailto
-          var subject = encodeURIComponent('פנייה מאתר TripWithKids - ' + name.value.trim());
+          var subject = encodeURIComponent('פנייה מאתר מתי טסים - ' + name.value.trim());
           var body = encodeURIComponent('שם: ' + name.value.trim() + '\nאימייל: ' + email.value.trim() + '\n\n' + message.value.trim());
           window.location.href = 'mailto:ormanela@gmail.com?subject=' + subject + '&body=' + body;
           submitBtn.disabled = false;
