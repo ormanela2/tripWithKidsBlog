@@ -1374,10 +1374,18 @@
       }
 
       .nav__logo {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        position: static;
+        left: auto;
+        transform: none;
         font-size: 20px;
+      }
+
+      .nav__logo img {
+        height: 44px !important;
+      }
+
+      .nav__logo span {
+        font-size: 18px !important;
       }
 
       .value-prop__grid {
