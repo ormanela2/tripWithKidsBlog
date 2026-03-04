@@ -529,4 +529,13 @@
       pillsContainer.appendChild(btn);
     });
     days.forEach(function(d) {
-      var item = document.getE
+      var item = document.getElementById(d.id);
+      if (!item) return;
+      var header = item.querySelector('.tl-card__header');
+      if (header) { header.style.cursor = 'pointer'; header.addEventListener('click', function() { flyTo(d); }); }
+    });
+
+  })();
+  </script>
+</body>
+</html>
