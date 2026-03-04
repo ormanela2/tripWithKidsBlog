@@ -188,7 +188,7 @@
               <div class="dest-card__flag">🇸🇰</div>
               <div class="dest-card__info">
                 <div class="dest-card__name">סלובקיה</div>
-                <div class="dest-card__hint">לחצו לפרטים</div>
+                <div class="dest-card__hint">לחצו למדריך המלא</div>
               </div>
               <span class="dest-card__arrow">›</span>
             </div>
@@ -263,7 +263,7 @@
     menu.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { menu.classList.remove('open'); document.body.style.overflow = ''; }); });
 
     var destinations = [
-      { id: 'slovakia', lat: 48.7,  lng: 19.5,  flag: '🇸🇰', name: 'סלובקיה', days: '7-10 ימים' }
+      { id: 'slovakia', lat: 48.7,  lng: 19.5,  flag: '🇸🇰', name: 'סלובקיה', days: '7-10 ימים', url: 'slovakia.html' }
     ];
 
     var map = L.map('map', { center: [46, 17], zoom: 5, scrollWheelZoom: false });
@@ -308,13 +308,12 @@
         if (e.target.closest('a, button')) return;
         var id = card.dataset.id;
         if (card.classList.contains('active')) {
-          card.classList.remove('active');
-          destinations.forEach(function(d) { if (markers[d.id]) markers[d.id].setIcon(markerIcon(d.flag, false)); });
-        } else {
-          activate(id);
           var dest = destinations.find(function(d) { return d.id === id; });
-          if (dest) map.flyTo([dest.lat, dest.lng], 7, { duration: 1 });
+          if (dest && dest.url) { window.location.href = dest.url; return; }
         }
+        activate(id);
+        var dest = destinations.find(function(d) { return d.id === id; });
+        if (dest) map.flyTo([dest.lat, dest.lng], 7, { duration: 1 });
       });
     });
 
