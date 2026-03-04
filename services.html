@@ -550,14 +550,65 @@
     }
 
     .value-prop__item {
-      text-align: center;
+      text-align: right;
     }
+    .vp-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 32px 26px 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .vp-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
+    .vp-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; left: 0;
+      height: 5px;
+      border-radius: 20px 20px 0 0;
+    }
+    .vp-card--teal::before  { background: linear-gradient(90deg, var(--teal), #238a93); }
+    .vp-card--amber::before { background: linear-gradient(90deg, var(--amber), var(--amber-dark)); }
+    .vp-card--green::before { background: linear-gradient(90deg, var(--green), #2d7550); }
+    .vp-icon-wrap {
+      width: 62px;
+      height: 62px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+    .vp-card--teal  .vp-icon-wrap { background: rgba(26,107,114,0.1); }
+    .vp-card--amber .vp-icon-wrap { background: rgba(232,160,69,0.12); }
+    .vp-card--green .vp-icon-wrap { background: rgba(74,155,111,0.1); }
+    .vp-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      align-self: flex-start;
+    }
+    .vp-card--teal  .vp-tag { background: rgba(26,107,114,0.1);  color: var(--teal); }
+    .vp-card--amber .vp-tag { background: rgba(232,160,69,0.15); color: var(--amber-dark); }
+    .vp-card--green .vp-tag { background: rgba(74,155,111,0.1);  color: #2d7550; }
 
     .value-prop__icon {
       font-size: 48px;
       margin-bottom: 16px;
       display: block;
     }
+    .value-prop__item-title { text-align: right; }
 
     .value-prop__item-title {
       font-family: var(--font-heading);
@@ -1507,20 +1558,23 @@
       <p class="value-prop__subheadline reveal reveal-delay-1">מקבלים תכנית טיול מלאה לטיול עם ילדים - בדיוק לפי הילדים שלך, התקציב שלך, והתאריכים שלך.</p>
 
       <div class="value-prop__grid">
-        <div class="value-prop__item reveal">
-          <span class="value-prop__icon" aria-hidden="true">&#128506;</span>
+        <div class="value-prop__item vp-card vp-card--teal reveal">
+          <div class="vp-icon-wrap">📋</div>
           <h3 class="value-prop__item-title">מסלול יום-יום</h3>
-          <p class="value-prop__item-desc">לא "ביקרו בכנסייה X" - מה שילדים יזכרו. כל יום מתוכנן עם קצב שמתאים למשפחה, לא למבוגרים.</p>
+          <p class="value-prop__item-desc">אני בונה מסלולים שמתאימים לקצב של משפחות ולא מסלולים בקצב מהיר בלי זכרונות משפחתיים.</p>
+          <span class="vp-tag">✓ כולל שעות ומסלול</span>
         </div>
-        <div class="value-prop__item reveal reveal-delay-1">
-          <span class="value-prop__icon" aria-hidden="true">&#127976;</span>
+        <div class="value-prop__item vp-card vp-card--amber reveal reveal-delay-1">
+          <div class="vp-icon-wrap">🛏️</div>
           <h3 class="value-prop__item-title">המלצות לינה</h3>
           <p class="value-prop__item-desc">רק מקומות שבדקתי עם המשפחה שלי — כי לנסוע עם שלושה ילדים זה אתגר משל עצמו.</p>
+          <span class="vp-tag">✓ נבדק בשטח</span>
         </div>
-        <div class="value-prop__item reveal reveal-delay-2">
-          <span class="value-prop__icon" aria-hidden="true">&#127829;</span>
-          <h3 class="value-prop__item-title">אוכל ואטרקציות</h3>
-          <p class="value-prop__item-desc">כולל המסעדות שסובלות את הרעש ואטרקציות שפתוחות ב-8 בבוקר - כי ילדים לא ישנים עד 10.</p>
+        <div class="value-prop__item vp-card vp-card--green reveal reveal-delay-2">
+          <div class="vp-icon-wrap">🎯</div>
+          <h3 class="value-prop__item-title">אטרקציות</h3>
+          <p class="value-prop__item-desc">כולל מקומות טעימים ואטרקציות שפתוחות ב-8 בבוקר.</p>
+          <span class="vp-tag">✓ ידידותי לילדים</span>
         </div>
       </div>
     </div>
