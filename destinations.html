@@ -297,7 +297,7 @@
           '<div class="map-popup" dir="rtl"><span class="map-popup__flag">' + d.flag + '</span>' +
           '<div class="map-popup__name">' + d.name + '</div>' +
           '<div class="map-popup__days">📅 ' + d.days + '</div>' +
-          '<button class="map-popup__btn" onclick="activateDest(\'' + d.id + '\')">לפרטים ↓</button></div>'
+          '<a href="slovakia.html" class="map-popup__btn" style="display:block;text-align:center;">לפרטים ↓</a></div>'
         );
       m.on('click', function() { activate(d.id); });
       markers[d.id] = m;
