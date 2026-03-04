@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="מדריך טיול לרומניה עם ילדים - טירת דרקולה, הרי הקרפטים, Dino Park ועוד. מסלול יום יום מניסיון אישי. מתי טסים.">
+  <title>טיול לרומניה עם ילדים - מדריך מלא | מתי טסים</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <style>
+    :root {
+      --amber: #E8A045; --amber-light: #f0b868; --amber-dark: #c4872e;
+      --teal: #1A6B72; --teal-dark: #124d52;
+      --cream: #FDF8F2; --charcoal: #2C2C2C; --sand: #F5EDD8; --sand-dark: #e8ddc4;
+      --green: #4A9B6F; --white: #FFFFFF;
+      --ro1: #002B7F; --ro2: #FCD116; --ro3: #CE1126;
+      --font-heading: 'Secular One', sans-serif; --font-body: 'Rubik', sans-serif;
+      --nav-height: 72px;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); font-size: 17px; line-height: 1.8; color: var(--charcoal); background: var(--cream); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 400; line-height: 1.3; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .nav { position: fixed; top: 0; right: 0; left: 0; z-index: 1000; height: var(--nav-height); background: var(--cream); border-bottom: 1px solid var(--sand-dark); transition: box-shadow 0.3s ease; }
+    .nav.scrolled { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+    .nav__logo { font-family: var(--font-heading); font-size: 24px; color: var(--teal); display: flex; align-items: center; gap: 8px; }
+    .nav__links { display: flex; align-items: center; gap: 8px; }
+    .nav__link { padding: 8px 16px; border-radius: 8px; font-weight: 500; font-size: 15px; transition: background 0.2s, color 0.2s; min-height: 44px; display: flex; align-items: center; }
+    .nav__link:hover { background: var(--sand); color: var(--teal); }
+    .nav__link[aria-current="page"] { background: var(--teal); color: var(--white); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 28px; font-size: 16px; font-weight: 600; min-height: 48px; transition: all 0.3s ease; white-space: nowrap; }
+    .btn--primary { background: var(--amber); color: var(--charcoal); box-shadow: 0 4px 14px rgba(232,160,69,0.35); }
+    .btn--primary:hover { background: var(--amber-dark); transform: translateY(-2px); }
+    .btn--sm { padding: 10px 24px; font-size: 15px; min-height: 44px; }
+    .nav__mobile-actions { display: none; }
+    .nav__hamburger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; flex-direction: column; gap: 5px; padding: 8px; }
+    .nav__hamburger span { display: block; width: 24px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: all 0.3s ease; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .nav__whatsapp-mobile { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: var(--green); }
+    .nav__mobile-menu { display: none; position: fixed; top: var(--nav-height); right: 0; left: 0; bottom: 0; background: var(--cream); padding: 32px 24px; flex-direction: column; gap: 8px; z-index: 999; overflow-y: auto; }
+    .nav__mobile-menu.open { display: flex; }
+    .nav__mobile-menu .nav__link { font-size: 20px; padding: 16px; }
+    .nav__mobile-menu .btn { margin-top: 16px; justify-content: center; }
+
+    /* HERO */
+    .article-hero { background: linear-gradient(155deg, var(--ro1) 0%, #1a3a8a 40%, #0d2060 100%); padding-top: calc(var(--nav-height) + 56px); padding-bottom: 70px; color: var(--white); position: relative; overflow: hidden; }
+    .article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(252,209,22,0.1) 0%, transparent 60%); }
+    .article-hero::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 70px; background: linear-gradient(to top, var(--cream), transparent); }
+    .article-hero__inner { position: relative; max-width: 780px; }
+    .article-hero__breadcrumb { font-size: 13px; opacity: 0.7; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .article-hero__breadcrumb a { opacity: 0.8; }
+    .article-hero__flag { font-size: 56px; margin-bottom: 16px; display: block; }
+    .article-hero__title { font-size: clamp(28px, 4.5vw, 50px); margin-bottom: 18px; }
+    .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.88; margin-bottom: 32px; max-width: 600px; line-height: 1.7; }
+    .article-hero__meta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
+
+    /* BODY */
+    .article-body { padding: 60px 0 80px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
+    .article-content { min-width: 0; }
+    .article-section { margin-bottom: 52px; }
+    .article-section__title { font-size: clamp(20px, 2.5vw, 26px); color: var(--teal); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--sand-dark); display: flex; align-items: center; gap: 10px; }
+    .article-section__title-icon { font-size: 24px; }
+    .article-content p { margin-bottom: 16px; color: #444; line-height: 1.85; }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding: 8px 0 0; }
+    .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; right: 50%; width: 3px; background: linear-gradient(to bottom, var(--ro1), var(--ro2), var(--ro3)); transform: translateX(50%); border-radius: 3px; }
+    .tl-item { display: grid; grid-template-columns: 1fr 56px 1fr; margin-bottom: 48px; position: relative; align-items: start; }
+    .tl-item__label { font-family: var(--font-heading); font-size: 13px; color: #aaa; letter-spacing: 0.5px; padding-top: 18px; }
+    .tl-item:nth-child(odd)  .tl-item__label { text-align: left; padding-right: 28px; }
+    .tl-item:nth-child(even) .tl-item__label { text-align: right; padding-left: 28px; order: 3; }
+    .tl-item__node { display: flex; flex-direction: column; align-items: center; gap: 0; position: relative; z-index: 2; padding-top: 12px; }
+    .tl-item__icon { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 4px solid var(--cream); box-shadow: 0 2px 12px rgba(0,0,0,0.15); flex-shrink: 0; }
+    .tl-item__day-label { margin-top: 6px; font-family: var(--font-heading); font-size: 11px; color: #aaa; }
+    .tl-item__card { background: var(--white); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 2px solid var(--sand-dark); transition: transform 0.35s, box-shadow 0.35s; cursor: pointer; }
+    .tl-item__card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.13); }
+    .tl-item:nth-child(odd)  .tl-item__card { margin-left: 24px; }
+    .tl-item:nth-child(even) .tl-item__card { margin-right: 24px; order: -1; }
+    .tl-card__band { height: 6px; }
+    .tl-card__header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .tl-card__title { font-family: var(--font-heading); font-size: 16px; color: var(--charcoal); line-height: 1.35; }
+    .tl-card__where { font-size: 12px; color: #aaa; margin-top: 4px; display: flex; align-items: center; gap: 3px; }
+    .tl-card__star { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+    .tl-card__star--must { background: rgba(232,160,69,0.15); color: #b07020; }
+    .tl-card__star--rec  { background: rgba(74,155,111,0.12); color: #2d7550; }
+    .tl-card__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px 14px; font-size: 13px; color: var(--teal); font-weight: 600; border-top: 1px solid var(--sand); }
+    .tl-card__toggle:hover { background: var(--sand); }
+    .tl-card__chevron { transition: transform 0.3s; }
+    .tl-card.open .tl-card__chevron { transform: rotate(180deg); }
+    .tl-card__body { display: none; padding: 0 20px 18px; }
+    .tl-card.open .tl-card__body { display: block; }
+    .tl-activity { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--sand-dark); }
+    .tl-activity:last-of-type { border-bottom: none; }
+    .tl-activity__time { font-size: 11px; font-weight: 700; color: var(--teal); min-width: 46px; padding-top: 2px; }
+    .tl-activity__name { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+    .tl-activity__desc { font-size: 13px; color: #666; line-height: 1.55; }
+    .tl-tip { margin-top: 12px; background: rgba(232,160,69,0.1); border-right: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 9px 13px; font-size: 13px; color: #666; }
+    .tl-tip strong { color: var(--amber-dark); }
+    /* ZONE COLORS */
+    .tl-item--arrive .tl-item__icon  { background: linear-gradient(135deg, var(--ro1), #1a3a8a); color: #fff; }
+    .tl-item--arrive .tl-card__band  { background: linear-gradient(90deg, var(--ro1), #1a3a8a); }
+    .tl-item--castle .tl-item__icon  { background: linear-gradient(135deg, #4a2060, #7a3a9a); color: #fff; }
+    .tl-item--castle .tl-card__band  { background: linear-gradient(90deg, #4a2060, #7a3a9a); }
+    .tl-item--nature .tl-item__icon  { background: linear-gradient(135deg, var(--green), #2d7550); color: #fff; }
+    .tl-item--nature .tl-card__band  { background: linear-gradient(90deg, var(--green), #2d7550); }
+    .tl-item--fun    .tl-item__icon  { background: linear-gradient(135deg, var(--amber), var(--amber-dark)); color: #fff; }
+    .tl-item--fun    .tl-card__band  { background: linear-gradient(90deg, var(--amber), var(--amber-dark)); }
+    .tl-item--city   .tl-item__icon  { background: linear-gradient(135deg, var(--teal), #238a93); color: #fff; }
+    .tl-item--city   .tl-card__band  { background: linear-gradient(90deg, var(--teal), #238a93); }
+    .tl-item--farewell .tl-item__icon { background: linear-gradient(135deg, var(--ro3), #8a0a18); color: #fff; }
+    .tl-item--farewell .tl-card__band { background: linear-gradient(90deg, var(--ro3), #8a0a18); }
+    @media (max-width: 680px) {
+      .timeline::before { right: 28px; transform: none; }
+      .tl-item { grid-template-columns: 56px 1fr; }
+      .tl-item__label { display: none; }
+      .tl-item:nth-child(odd)  .tl-item__card { margin-left: 12px; }
+      .tl-item:nth-child(even) .tl-item__card { margin-right: 0; margin-left: 12px; order: unset; }
+      .tl-item:nth-child(even) .tl-item__label { order: unset; }
+    }
+
+    /* ACCOMMODATION */
+    .accom-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .accom-card { background: var(--white); border: 1.5px solid var(--sand-dark); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+    .accom-card__icon { font-size: 22px; flex-shrink: 0; }
+    .accom-card__info { flex: 1; min-width: 0; }
+    .accom-card__name { font-weight: 700; font-size: 14px; }
+    .accom-card__loc { font-size: 12px; color: #888; margin: 2px 0 8px; }
+    .accom-card__btns { display: flex; gap: 6px; flex-wrap: wrap; }
+    .accom-card__btn { font-size: 12px; border-radius: 14px; padding: 3px 10px; font-weight: 600; text-decoration: none; }
+    .accom-card__btn--map  { color: var(--teal); border: 1px solid var(--teal); }
+    .accom-card__btn--book { color: #fff; background: var(--teal); }
+
+    /* TIPS */
+    .tips-list { display: flex; flex-direction: column; gap: 10px; }
+    .tip-item { background: var(--white); border-radius: 12px; border: 2px solid var(--sand-dark); padding: 14px 18px; display: flex; gap: 12px; font-size: 15px; }
+    .tip-item__icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .tip-item__text { color: #555; line-height: 1.65; }
+    .tip-item__text strong { color: var(--charcoal); }
+
+    /* TOC */
+    .toc { background: var(--sand); border-radius: 14px; padding: 20px; margin-bottom: 36px; }
+    .toc__title { font-family: var(--font-heading); font-size: 15px; color: var(--teal); margin-bottom: 12px; }
+    .toc__list { display: flex; flex-direction: column; gap: 6px; }
+    .toc__link { font-size: 14px; color: var(--teal); display: flex; align-items: center; gap: 6px; }
+    .toc__link:hover { color: var(--amber-dark); }
+    .toc__num { font-size: 11px; background: var(--teal); color: var(--white); border-radius: 4px; padding: 1px 6px; font-weight: 600; }
+
+    /* SIDEBAR */
+    .sidebar { position: sticky; top: calc(var(--nav-height) + 20px); }
+    .cta-card { background: var(--teal); border-radius: 18px; padding: 24px; color: var(--white); text-align: center; }
+    .cta-card__title { font-family: var(--font-heading); font-size: 18px; margin-bottom: 10px; }
+    .cta-card__text { font-size: 14px; opacity: 0.85; margin-bottom: 20px; line-height: 1.6; }
+    .cta-card__btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--amber); color: var(--charcoal); border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 700; transition: background 0.2s, transform 0.2s; width: 100%; margin-bottom: 10px; }
+    .cta-card__btn:hover { background: var(--amber-dark); transform: translateY(-2px); }
+    .cta-card__wa { display: flex; align-items: center; justify-content: center; gap: 8px; background: #25D366; color: #fff; border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 600; }
+    .cta-card__wa:hover { background: #1da851; }
+
+    .footer { background: var(--charcoal); color: rgba(255,255,255,0.6); padding: 40px 0; text-align: center; font-size: 14px; }
+    .footer a { color: var(--amber-light); }
+    @media (max-width: 900px) {
+      .article-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .nav__links { display: none; }
+      .nav__mobile-actions { display: flex; align-items: center; gap: 4px; }
+      .nav__hamburger { display: flex; }
+    }
+    @media (max-width: 768px) {
+      .nav__logo img { height: 44px !important; }
+      .nav__logo span { font-size: 18px !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="services.html" class="nav__logo">
+        <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+        <span style="font-family:var(--font-heading);font-size:22px;color:var(--teal);font-weight:700;">מתי טסים</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="tips.html" class="nav__link">טיפים</a></li>
+        <li><a href="destinations.html" class="nav__link" aria-current="page">יעדים</a></li>
+        <li><a href="services.html#services-content" class="nav__link">שירותים</a></li>
+        <li><a href="services.html#about" class="nav__link">אודות</a></li>
+        <li><a href="services.html#final-cta" class="nav__link">צור קשר</a></li>
+      </ul>
+      <a href="services.html#pricing" class="btn btn--primary btn--sm">לחבילות</a>
+      <div class="nav__mobile-actions">
+        <a href="https://wa.me/972546758145" class="nav__whatsapp-mobile" aria-label="וואטסאפ">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__mobile-menu" id="mobileMenu">
+      <a href="tips.html" class="nav__link">טיפים</a>
+      <a href="destinations.html" class="nav__link">יעדים</a>
+      <a href="services.html#services-content" class="nav__link">שירותים</a>
+      <a href="services.html#about" class="nav__link">אודות</a>
+      <a href="services.html#final-cta" class="nav__link">צור קשר</a>
+      <a href="services.html#pricing" class="btn btn--primary">לחבילות</a>
+    </div>
+  </nav>
+
+  <section class="article-hero">
+    <div class="container">
+      <div class="article-hero__inner">
+        <nav class="article-hero__breadcrumb">
+          <a href="services.html">דף הבית</a> › <a href="destinations.html">יעדים</a> › <span>רומניה - טרנסילבניה</span>
+        </nav>
+        <span class="article-hero__flag">🇷🇴</span>
+        <h1 class="article-hero__title">טיול לרומניה עם ילדים - המדריך המלא</h1>
+        <p class="article-hero__subtitle">טירת דרקולה, הרי הקרפטים, Dino Park וטבע מדהים — הפתעה אמיתית לטיול משפחתי שלא שוכחים</p>
+        <div class="article-hero__meta">
+          <span class="article-hero__badge">🟢 קל עם ילדים</span>
+          <span class="article-hero__badge">📅 7 ימים מומלץ</span>
+          <span class="article-hero__badge">🌸 אפריל-מאי</span>
+          <span class="article-hero__badge">🏰 טרנסילבניה</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="article-body">
+    <div class="container">
+      <div class="article-layout">
+        <main class="article-content">
+
+          <div class="toc">
+            <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
+            <div class="toc__list">
+              <a href="#intro"       class="toc__link"><span class="toc__num">1</span> למה רומניה עם ילדים?</a>
+              <a href="#route-map"   class="toc__link"><span class="toc__num">2</span> המסלול על המפה</a>
+              <a href="#itinerary"   class="toc__link"><span class="toc__num">3</span> מסלול יום-יום</a>
+              <a href="#accommodation" class="toc__link"><span class="toc__num">4</span> המלצות לינה</a>
+              <a href="#logistics"   class="toc__link"><span class="toc__num">5</span> טיפים לוגיסטיים</a>
+            </div>
+          </div>
+
+          <div class="article-section" id="intro">
+            <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> למה רומניה עם ילדים?</h2>
+            <p>רומניה היא אחת ההפתעות הגדולות באירופה לטיול משפחתי. טירות אמיתיות מהאגדות, יערות ענקיים, הרים ירוקים ופארקי שעשועים שלא עמוסים תיירים. המחירים נוחים משמעותית מיתר אירופה המערבית.</p>
+            <p>אזור טרנסילבניה — ברשוב, בראן וסינאיה — מציע לילדים חוויה שאי אפשר לקבל בשום מקום אחר: טיפוס על טירת דרקולה האמיתית, Dino Park ענקי, גונדולה אל פסגת ההרים, ו-Green Resort Bran שהוא מקום לינה מושלם למשפחות.</p>
+            <p>אפריל הוא עונה מצוינת — לפני ההמון של הקיץ, הטבע ירוק ופורח, ומזג האוויר נעים.</p>
+          </div>
+
+          <div class="article-section" id="route-map">
+            <h2 class="article-section__title"><span class="article-section__title-icon">🗺️</span> המסלול על המפה</h2>
+            <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות מיקום במפה, או על סמן במפה לפרטי היום.</p>
+            <div id="trip-map" style="height:420px;border-radius:16px;overflow:hidden;border:2px solid var(--sand-dark);box-shadow:0 4px 20px rgba(0,0,0,0.1);"></div>
+            <div id="map-day-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;"></div>
+          </div>
+
+          <div class="article-section" id="itinerary">
+            <h2 class="article-section__title"><span class="article-section__title-icon">🗓️</span> המסלול המלא — 7 ימים</h2>
+            <div class="timeline">
+
+              <!-- DAY 1 -->
+              <div class="tl-item tl-item--arrive">
+                <div class="tl-item__label">יום 1<br><span style="font-size:11px;color:#ccc;">07.04 ראשון</span></div>
+                <div class="tl-item__node"><div class="tl-item__icon">✈️</div><span class="tl-item__day-label">יום 1</span></div>
+                <div class="tl-item__card tl-card open" id="tl1">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">טיסה לבוקרשט + הגעה לבראן</div><div class="tl-card__where">📍 בוקרשט ← Green Resort Bran</div></div></div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity"><span class="tl-activity__time">09:25</span><div><div class="tl-activity__name">המראה מתל אביב ✈️</div><div class="tl-activity__desc">טיסה לבוקרשט — שדה התעופה Henri Coandă. נחיתה בסביבות 12:20.</div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">נסיעה ל-Green Resort Bran</div><div class="tl-activity__desc">כ-2.5 שעות נסיעה מבוקרשט לבראן דרך ההרים — כביש יפהפה. הגעה והתארגנות.</div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">ארוחת ערב ב-Resort + הכרת המקום</div><div class="tl-activity__desc">Green Resort Bran מציע ווילות עם שני חדרי שינה — מושלם למשפחה. ישנו כאן כל השהות.</div></div></div>
+                    <div class="tl-tip"><strong>לינה:</strong> Green Resort Bran — Two-Bedroom Villa</div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl1')"><span>פרטי היום</span><span class="tl-card__chevron">▲</span></button>
+                </div>
+              </div>
+
+              <!-- DAY 2 -->
+              <div class="tl-item tl-item--fun">
+                <div class="tl-item__label">יום 2<br><span style="font-size:11px;color:#ccc;">08.04 שני</span></div>
+                <div class="tl-item__node"><div class="tl-item__icon">🦕</div><span class="tl-item__day-label">יום 2</span></div>
+                <div class="tl-item__card tl-card" id="tl2">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">Dino Park + Rasnov</div><div class="tl-card__where">📍 Dino Park → Rasnov</div></div><span class="tl-card__star tl-card__star--must">⭐ חובה</span></div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity"><span class="tl-activity__time">10:00</span><div><div class="tl-activity__name">Dino Park — פארק דינוזאורים</div><div class="tl-activity__desc">פארק דינוזאורים ענקי ב-15 דקות מ-Green Resort Bran. דמויות בגודל טבעי, הליכה בין הדינוזאורים — הילדים מתים עליו. פתוח 10:00-18:30.</div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">טירת Rasnov</div><div class="tl-activity__desc">טירה מרשימה על גבעה עם נוף מהמם על העמק. ניתן לטייל בתוכה, היסטוריה מרתקת.</div></div></div>
+                    <div class="tl-tip"><strong>לינה:</strong> Green Resort Bran — Two-Bedroom Villa</div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl2')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+                </div>
+              </div>
+
+              <!-- DAY 3 -->
+              <div class="tl-item tl-item--city">
+                <div class="tl-item__label">יום 3<br><span style="font-size:11px;color:#ccc;">09.04 שלישי</span></div>
+                <div class="tl-item__node"><div class="tl-item__icon">🏙️</div><span class="tl-item__day-label">יום 3</span></div>
+                <div class="tl-item__card tl-card" id="tl3">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">ברשוב — העיר העתיקה</div><div class="tl-card__where">📍 Brasov</div></div><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Rope Street + The Black Church</div><div class="tl-activity__desc">רחוב ה-Rope Street — הרחוב הצר ביותר באירופה. הכנסייה השחורה — אחד מסמלי ברשוב.</div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Tampa Cable Car</div><div class="tl-activity__desc">רכבל מרהיב מעיר ברשוב לפסגת הר Tampa — נוף פנורמי על העיר וההרים.</div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">Zoo Brasov</div><div class="tl-activity__desc">גן חיות ברשוב — קטן ונחמד, מומלץ לילדים צעירים.</div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">Season Hill — פארק שעשועים</div><div class="tl-activity__desc">פארק קטן וכיפי לילדים בברשוב.</div></div></div>
+                    <div class="tl-tip"><strong>לינה:</strong> Green Resort Bran — Two-Bedroom Villa</div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl3')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+                </div>
+              </div>
+
+              <!-- DAY 4 -->
+              <div class="tl-item tl-item--castle">
+                <div class="tl-item__label">יום 4<br><span style="font-size:11px;color:#ccc;">10.04 רביעי</span></div>
+                <div class="tl-item__node"><div class="tl-item__icon">🧛</div><span class="tl-item__day-label">יום 4</span></div>
+                <div class="tl-item__card tl-card" id="tl4">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">Pestera Valeacelati + Rasnov יום שני</div><div class="tl-card__where">📍 Pestera Valeacelati</div></div></div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Pestera Valeacelati — מערה</div><div class="tl-activity__desc">מערה מרהיבה עם נטיפים — חוויה גיאולוגית מדהימה לילדים. <a href="https://www.pestera-valeacelati.ro" target="_blank" style="color:var(--teal);">לאתר המערה</a></div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">Rasnov — חקירה נוספת</div><div class="tl-activity__desc">אם נשארה אנרגיה — חזרה לרשנוב לשוק המקומי וצעידה בעיר.</div></div></div>
+                    <div class="tl-tip"><strong>לינה:</strong> Green Resort Bran — Two-Bedroom Villa</div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl4')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+                </div>
+              </div>
+
+              <!-- DAY 5 -->
+              <div class="tl-item tl-item--nature">
+                <div class="tl-item__label">יום 5<br><span style="font-size:11px;color:#ccc;">11.04 חמישי</span></div>
+                <div class="tl-item__node"><div class="tl-item__icon">⛰️</div><span class="tl-item__day-label">יום 5</span></div>
+                <div class="tl-item__card tl-card" id="tl5">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">Sinaia — עיר הפסגות</div><div class="tl-card__where">📍 Sinaia (~1hr מבראן)</div></div><span class="tl-card__star tl-card__star--must">⭐ חובה</span></div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Sinaia Gondola — גונדולה לפסגה</div><div class="tl-activity__desc">גונדולה מרהיבה שעולה לגובה 2000 מטר — נוף על הרי הקרפטים שאי אפשר לשכוח.</div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">טירת Peleș</div><div class="tl-activity__desc">אחת הטירות היפות באירופה — בנויה בסגנון גרמני ציורי בלב ההרים. חובה לבקר!</div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">Park Kalinderu</div><div class="tl-activity__desc">פארק נחמד בסינאיה לנוח ולשחק אחרי הביקור בטירה.</div></div></div>
+                    <div class="tl-tip"><strong>לינה:</strong> Green Resort Bran — Two-Bedroom Villa</div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl5')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+                </div>
+              </div>
+
+              <!-- DAY 6 -->
+              <div class="tl-item tl-item--city">
+                <div class="tl-item__label">יום 6<br><span style="font-size:11px;color:#ccc;">12.04 שישי</span></div>
+                <div class="tl-item__node"><div class="tl-item__icon">🏰</div><span class="tl-item__day-label">יום 6</span></div>
+                <div class="tl-item__card tl-card" id="tl6">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">Coresi Shopping + Aventura Park + בוקרשט</div><div class="tl-card__where">📍 Brasov → Bucuresti</div></div></div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Coresi Shopping Resort</div><div class="tl-activity__desc">קניון גדול בברשוב — קניות אחרונות ומסעדות לפני יציאה לבוקרשט.</div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">Aventura Park — פארק חבלים</div><div class="tl-activity__desc">פארק חבלים ואטרקציות בטבע — מגרש הרפתקאות ענקי לילדים ומבוגרים.</div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">הגעה לבוקרשט</div><div class="tl-activity__desc">מעבר ללינה בבוקרשט לפני הטיסה מחר. Piatra Craiului — פארק לאומי בדרך.</div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">Orașelul Copiilor — עיר הילדים 🎡</div><div class="tl-activity__desc">פארק שעשועים לילדים בבוקרשט — מתקנים, רכבת קטנה ואווירה כיפית.</div></div></div>
+                    <div class="tl-tip"><strong>לינה:</strong> מלון בבוקרשט (לינת גישור לטיסה)</div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl6')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+                </div>
+              </div>
+
+              <!-- DAY 7 -->
+              <div class="tl-item tl-item--farewell">
+                <div class="tl-item__label">יום 7<br><span style="font-size:11px;color:#ccc;">13.04 שבת</span></div>
+                <div class="tl-item__node"><div class="tl-item__icon">🇮🇱</div><span class="tl-item__day-label">יום 7</span></div>
+                <div class="tl-item__card tl-card" id="tl7">
+                  <div class="tl-card__band"></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">טיסה חזרה לישראל 🇮🇱</div><div class="tl-card__where">📍 בוקרשט ✈ ישראל</div></div></div>
+                  <div class="tl-card__body">
+                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Primark בוקרשט 🛍️</div><div class="tl-activity__desc">אם יש זמן לפני הטיסה — Primark בבוקרשט לקניות אחרונות.</div></div></div>
+                    <div class="tl-activity"><span class="tl-activity__time">19:05</span><div><div class="tl-activity__name">טיסה חזרה לישראל ✈️</div><div class="tl-activity__desc">הגעה הביתה עם מלא זיכרונות, תמונות ועייפות מתוקה.</div></div></div>
+                  </div>
+                  <button class="tl-card__toggle" onclick="toggleTl('tl7')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="article-section" id="accommodation">
+            <h2 class="article-section__title"><span class="article-section__title-icon">🏨</span> המלצות לינה</h2>
+            <p>בטיול הזה לנו במקום אחד לאורך כל השהות — נוח, מרווח ומתאים למשפחה עם ילדים.</p>
+            <div class="accom-grid">
+              <div class="accom-card">
+                <span class="accom-card__icon">🏡</span>
+                <div class="accom-card__info">
+                  <div class="accom-card__name">Green Resort Bran — Two-Bedroom Villa</div>
+                  <div class="accom-card__loc">📍 Bran, טרנסילבניה, רומניה</div>
+                  <div class="accom-card__btns">
+                    <a href="https://maps.google.com/?q=Green+Resort+Bran" target="_blank" class="accom-card__btn accom-card__btn--map">📍 מפה</a>
+                    <a href="https://www.greenresortbran.com/en/two-bedroom-villa" target="_blank" class="accom-card__btn accom-card__btn--book">להזמנה ←</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="article-section" id="logistics">
+            <h2 class="article-section__title"><span class="article-section__title-icon">🚗</span> טיפים לוגיסטיים</h2>
+            <div class="tips-list">
+              <div class="tip-item"><span class="tip-item__icon">✈️</span><div class="tip-item__text"><strong>הגעה:</strong> טיסות ישירות מתל אביב לבוקרשט (Henri Coandă). מהשדה — שכירות רכב הכרחית לאזור בראן וסינאיה.</div></div>
+              <div class="tip-item"><span class="tip-item__icon">🚘</span><div class="tip-item__text"><strong>רכב:</strong> חובה לשכור רכב. הנסיעה מבוקרשט לבראן כ-2.5 שעות, לסינאיה כ-1 שעה מבראן. כבישים בסדר, נוף מהמם.</div></div>
+              <div class="tip-item"><span class="tip-item__icon">💶</span><div class="tip-item__text"><strong>כסף:</strong> רומניה לא בגוש האירו — לאו (RON). מחירים זולים משמעותית מאירופה המערבית. כרטיסי אשראי מקובלים בערים.</div></div>
+              <div class="tip-item"><span class="tip-item__icon">🌡️</span><div class="tip-item__text"><strong>מזג אוויר באפריל:</strong> 10-18 מעלות ביום, קריר בלילה. בהרים קצת יותר קר. הביאו מעיל ובגדים בשכבות.</div></div>
+              <div class="tip-item"><span class="tip-item__icon">🎫</span><div class="tip-item__text"><strong>כרטיסים:</strong> Dino Park וטירת Peleș — כדאי להזמין מראש. Sinaia Gondola — בדקו שעות פעילות לפני הנסיעה.</div></div>
+              <div class="tip-item"><span class="tip-item__icon">🛒</span><div class="tip-item__text"><strong>סופר:</strong> Mega Image בבראן — ממש בסביבה, נוח לקניות יומיומיות. רשת סופרמרקטים מצוינת.</div></div>
+              <div class="tip-item"><span class="tip-item__icon">📞</span><div class="tip-item__text"><strong>Green Resort Bran:</strong> 0040 748 120 845 | <a href="mailto:contact@greenresortbran.com" style="color:var(--teal);">contact@greenresortbran.com</a></div></div>
+            </div>
+          </div>
+
+        </main>
+
+        <aside class="sidebar">
+          <div class="cta-card">
+            <div class="cta-card__title">רוצים מסלול מותאם?</div>
+            <div class="cta-card__text">אבנה לכם מסלול מלא לרומניה — יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.</div>
+            <a href="services.html#pricing" class="cta-card__btn">לחבילות תכנון ←</a>
+            <a href="https://wa.me/972546758145?text=אני מתעניין בתכנון טיול לרומניה עם ילדים" class="cta-card__wa" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              שלחו הודעה
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>מתי טסים &copy; 2026 — <a href="services.html">דף הבית</a> | <a href="tips.html">טיפים</a> | <a href="destinations.html">יעדים</a> | <a href="terms.html">תנאי שימוש</a> | <a href="https://wa.me/972546758145">וואטסאפ</a></p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/972546758145" style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;" target="_blank" aria-label="וואטסאפ">
+    <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script>
+  (function() {
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
+    var hamburger = document.getElementById('hamburgerBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', function() {
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen.toString());
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }); });
+
+    var days = [
+      { id:'tl1', day:1, date:'07.04', label:'טיסה + הגעה לבראן',   emoji:'✈️', lat:45.51, lng:25.36, color:'#002B7F', title:'טיסה לבוקרשט → Green Resort Bran' },
+      { id:'tl2', day:2, date:'08.04', label:'Dino Park + Rasnov',   emoji:'🦕', lat:45.59, lng:25.46, color:'#E8A045', title:'Dino Park + טירת Rasnov' },
+      { id:'tl3', day:3, date:'09.04', label:'ברשוב',                emoji:'🏙️', lat:45.65, lng:25.61, color:'#1A6B72', title:'ברשוב — Rope Street, Cable Car, Zoo' },
+      { id:'tl4', day:4, date:'10.04', label:'Pestera + Rasnov',     emoji:'🧛', lat:45.54, lng:25.37, color:'#4a2060', title:'מערת Pestera Valeacelati' },
+      { id:'tl5', day:5, date:'11.04', label:'Sinaia + טירת Peleș',  emoji:'⛰️', lat:45.35, lng:25.55, color:'#4A9B6F', title:'Sinaia Gondola + טירת Peleș' },
+      { id:'tl6', day:6, date:'12.04', label:'ברשוב + בוקרשט',       emoji:'🏰', lat:44.43, lng:26.10, color:'#1A6B72', title:'Coresi + Aventura + בוקרשט' },
+      { id:'tl7', day:7, date:'13.04', label:'טיסה לישראל',          emoji:'🇮🇱', lat:44.57, lng:26.08, color:'#CE1126', title:'טיסה חזרה לישראל' }
+    ];
+
+    window.toggleTl = function(id, fromMap) {
+      var card = document.getElementById(id);
+      var isOpen = card.classList.toggle('open');
+      var chevron = card.querySelector('.tl-card__chevron');
+      if (chevron) chevron.textContent = isOpen ? '▲' : '▼';
+      if (isOpen && !fromMap) {
+        var d = days.find(function(x) { return x.id === id; });
+        if (d) flyTo(d);
+      }
+    };
+
+    var map = L.map('trip-map', { center: [45.2, 25.5], zoom: 8, scrollWheelZoom: false });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap © CARTO', maxZoom: 18 }).addTo(map);
+    L.polyline(days.map(function(d){ return [d.lat, d.lng]; }), { color: '#E8A045', weight: 2.5, dashArray: '6,5', opacity: 0.7 }).addTo(map);
+
+    var markers = {}, activeDay = null;
+
+    function makeIcon(d, active) {
+      var s = active ? 46 : 38;
+      return L.divIcon({ className:'', html:'<div style="width:'+s+'px;height:'+s+'px;border-radius:50%;background:'+(active?d.color:'#fff')+';border:2.5px solid '+(active?'#fff':d.color)+';display:flex;align-items:center;justify-content:center;font-size:'+(active?20:16)+'px;box-shadow:0 3px 12px rgba(0,0,0,0.22);cursor:pointer;">'+d.emoji+'</div>', iconSize:[s,s], iconAnchor:[s/2,s/2], popupAnchor:[0,-(s/2+4)] });
+    }
+    function flyTo(d) {
+      map.flyTo([d.lat, d.lng], 11, { duration: 0.8 });
+      if (markers[d.id]) markers[d.id].openPopup();
+      setActive(d.id);
+    }
+    function setActive(id) {
+      if (activeDay === id) return;
+      activeDay = id;
+      days.forEach(function(d) { if (markers[d.id]) markers[d.id].setIcon(makeIcon(d, d.id===id)); });
+      document.querySelectorAll('.map-pill').forEach(function(p) {
+        p.style.background = p.dataset.id===id ? 'var(--teal)' : 'var(--white)';
+        p.style.color = p.dataset.id===id ? '#fff' : 'var(--charcoal)';
+        p.style.borderColor = p.dataset.id===id ? 'var(--teal)' : 'var(--sand-dark)';
+      });
+    }
+    days.forEach(function(d) {
+      var m = L.marker([d.lat, d.lng], { icon: makeIcon(d, false) }).addTo(map)
+        .bindPopup('<div dir="rtl" style="font-family:Rubik,sans-serif;min-width:160px;padding:4px 2px;"><div style="font-size:11px;color:#aaa;margin-bottom:2px;">יום '+d.day+' · '+d.date+'</div><div style="font-size:15px;font-weight:600;color:'+d.color+';margin-bottom:4px;">'+d.emoji+' '+d.label+'</div><div style="font-size:13px;color:#555;margin-bottom:8px;">'+d.title+'</div><button onclick="goToDay(\''+d.id+'\')" style="width:100%;background:'+d.color+';color:#fff;border:none;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:600;cursor:pointer;font-family:Rubik,sans-serif;">לפרטי היום ↓</button></div>');
+      m.on('click', function() { setActive(d.id); });
+      markers[d.id] = m;
+    });
+    window.goToDay = function(id) {
+      map.closePopup();
+      var card = document.getElementById(id);
+      if (card && !card.classList.contains('open')) toggleTl(id, true);
+      card.scrollIntoView({ behavior:'smooth', block:'center' });
+    };
+    var pillsContainer = document.getElementById('map-day-pills');
+    days.forEach(function(d) {
+      var btn = document.createElement('button');
+      btn.className = 'map-pill'; btn.dataset.id = d.id;
+      btn.innerHTML = '<span>'+d.emoji+'</span><span style="font-size:12px;">יום '+d.day+'</span>';
+      btn.style.cssText = 'display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;border:1.5px solid var(--sand-dark);background:var(--white);cursor:pointer;font-family:Rubik,sans-serif;font-size:13px;transition:all 0.2s;';
+      btn.addEventListener('click', function() { flyTo(d); });
+      pillsContainer.appendChild(btn);
+    });
+    days.forEach(function(d) {
+      var item = document.getElementById(d.id);
+      if (!item) return;
+      var header = item.querySelector('.tl-card__header');
+      if (header) { header.style.cursor='pointer'; header.addEventListener('click', function() { flyTo(d); }); }
+    });
+  })();
+  </script>
+</body>
+</html>
