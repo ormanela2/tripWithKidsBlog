@@ -155,6 +155,40 @@
       .nav__logo img { height: 44px !important; }
       .nav__logo span { font-size: 18px !important; }
     }
+
+    .photo-gallery { margin-bottom: 52px; }
+    .photo-gallery__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .photo-gallery__item {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+    }
+    .photo-gallery__item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+    .photo-gallery__item:hover img { transform: scale(1.05); }
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.9); z-index: 9999;
+      align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; }
+    .lightbox__close { position: absolute; top: 20px; left: 24px; color: #fff; font-size: 32px; cursor: pointer; }
+    .lightbox__prev, .lightbox__next { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; font-size: 36px; cursor: pointer; background: rgba(255,255,255,0.1); border-radius: 50%; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; }
+    .lightbox__prev:hover, .lightbox__next:hover { background: rgba(255,255,255,0.25); }
+    .lightbox__prev { right: 20px; }
+    .lightbox__next { left: 20px; }
+    @media (max-width: 680px) { .photo-gallery__grid { grid-template-columns: repeat(2, 1fr); } }
   </style>
 </head>
 <body>
@@ -210,7 +244,13 @@
     </div>
   </section>
 
-  <section class="article-body">
+    <!-- PHOTO STRIP -->
+  <div style="height:340px;overflow:hidden;position:relative;">
+    <img src="warsaw6.jpg" alt="משפחה בפארק חבלים" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;">
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.4) 0%,transparent 60%);"></div>
+  </div>
+
+<section class="article-body">
     <div class="container">
       <div class="article-layout">
         <main class="article-content">
@@ -233,6 +273,7 @@
             <p>אוקטובר הוא עונה מצוינת - פחות תיירים, מחירים נוחים, ואוויר סתווי נעים. הילדים ייהנו מהעלים הצהובים בפארקים לא פחות מהאטרקציות עצמן.</p>
           </div>
 
+
           <div class="article-section" id="route-map">
             <h2 class="article-section__title"><span class="article-section__title-icon">🗺️</span> המסלול על המפה</h2>
             <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות את המיקום במפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
@@ -240,6 +281,9 @@
             <div id="map-day-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;"></div>
           </div>
 
+          <div style="border-radius:14px;overflow:hidden;height:260px;margin-bottom:20px;">
+            <img src="warsaw2.jpg" alt="מוזיאון הדינוזאורים" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+          </div>
           <div class="article-section" id="itinerary">
             <h2 class="article-section__title"><span class="article-section__title-icon">🗓️</span> המסלול המלא - 9 ימים</h2>
             <div class="timeline">
@@ -397,6 +441,9 @@
             </div>
           </div>
 
+          <div style="border-radius:14px;overflow:hidden;height:260px;margin-bottom:20px;">
+            <img src="warsaw8.jpg" alt="חוות הדלועות" style="width:100%;height:100%;object-fit:cover;object-position:center 50%;">
+          </div>
           <div class="article-section" id="accommodation">
             <h2 class="article-section__title"><span class="article-section__title-icon">🏨</span> המלצות לינה</h2>
             <p>בטיול הזה לנו במקום אחד לאורך כל השהות - נוח, מרווח ומתאים למשפחה עם ילדים. קרוב למסעדות טעימות, בתי קפה וסופרים.</p>
@@ -427,6 +474,29 @@
             </div>
           </div>
 
+
+          <!-- GALLERY -->
+          <div class="photo-gallery" id="gallery">
+            <h2 class="article-section__title" style="margin-bottom:16px;"><span class="article-section__title-icon">📸</span> גלריית תמונות</h2>
+            <div class="photo-gallery__grid">
+              <div class="photo-gallery__item" onclick="openLightbox(0)"><img src="warsaw2.jpg" alt="מוזיאון דינוזאורים"></div>
+              <div class="photo-gallery__item" onclick="openLightbox(1)"><img src="warsaw3.jpg" alt="פארק חבלים ביער"></div>
+              <div class="photo-gallery__item" onclick="openLightbox(2)"><img src="warsaw5.jpg" alt="מרכז קופרניקוס"></div>
+              <div class="photo-gallery__item" onclick="openLightbox(3)"><img src="warsaw1.jpg" alt="ייצור סוכריות"></div>
+              <div class="photo-gallery__item" onclick="openLightbox(4)"><img src="warsaw4.jpg" alt="ילד עם סנאי בפארק"></div>
+              <div class="photo-gallery__item" onclick="openLightbox(5)"><img src="warsaw7.jpg" alt="תפוח ענק"></div>
+              <div class="photo-gallery__item" onclick="openLightbox(6)"><img src="warsaw8.jpg" alt="חוות הדלועות"></div>
+            </div>
+          </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox__close" onclick="closeLightbox()">✕</span>
+    <span class="lightbox__prev" onclick="changeLightbox(-1)">›</span>
+    <img id="lightbox-img" src="" alt="">
+    <span class="lightbox__next" onclick="changeLightbox(1)">‹</span>
+  </div>
+
         </main>
 
         <aside class="sidebar">
@@ -454,7 +524,34 @@
     <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js">
+    // LIGHTBOX
+    var galleryImages = ['warsaw2.jpg','warsaw3.jpg','warsaw5.jpg','warsaw1.jpg','warsaw4.jpg','warsaw7.jpg','warsaw8.jpg'];
+    var currentLightbox = 0;
+    window.openLightbox = function(idx) {
+      currentLightbox = idx;
+      document.getElementById('lightbox-img').src = galleryImages[idx];
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    window.closeLightbox = function() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    };
+    window.changeLightbox = function(dir) {
+      currentLightbox = (currentLightbox + dir + galleryImages.length) % galleryImages.length;
+      document.getElementById('lightbox-img').src = galleryImages[currentLightbox];
+    };
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'ArrowRight') changeLightbox(-1);
+      if (e.key === 'ArrowLeft') changeLightbox(1);
+      if (e.key === 'Escape') closeLightbox();
+    });
+</script>
   <script>
   (function() {
     var nav = document.getElementById('nav');
