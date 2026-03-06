@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>שאלון טיול משפחתי | מתי טסים</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Secular+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal:#1A6B72; --amber:#E8A045; --sand:#F5EDD8;
+    --sand-dark:#e8ddc4; --charcoal:#2C2C2C; --light:#f9f6f0;
+    --gray:#888; --white:#fff;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Rubik',sans-serif; direction:rtl;
+    background:#fff; color:var(--charcoal);
+    max-width:210mm; margin:0 auto; padding:0;
+    font-size:11pt;
+  }
+
+  /* HEADER */
+  .header {
+    background:var(--teal); color:white;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 20px;
+  }
+  .header__title { font-family:'Secular One',sans-serif; font-size:22pt; }
+  .header__sub { font-size:9pt; opacity:0.8; text-align:left; line-height:1.6; }
+
+  .amber-strip {
+    background:var(--amber); color:var(--charcoal);
+    padding:7px 20px; font-size:9.5pt; font-weight:600; text-align:center;
+  }
+
+  .body { padding:14px 20px 20px; }
+
+  /* SECTION */
+  .section { margin-bottom:14px; }
+  .section-title {
+    background:var(--teal); color:white;
+    font-family:'Secular One',sans-serif; font-size:12pt;
+    padding:7px 12px; margin-bottom:8px;
+    display:flex; align-items:center; gap:8px;
+  }
+
+  /* QUESTION ROW */
+  .q { margin-bottom:7px; }
+  .q-label {
+    font-size:10pt; font-weight:600; margin-bottom:3px;
+    display:flex; gap:6px; align-items:baseline;
+  }
+  .q-num {
+    color:var(--teal); font-weight:700; font-size:11pt;
+    min-width:18px;
+  }
+  .line {
+    border:none; border-bottom:1px solid var(--sand-dark);
+    width:100%; height:22px; background:var(--white); display:block;
+    margin-bottom:3px;
+  }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
+
+  /* CHECKBOXES */
+  .cb-grid { display:grid; gap:4px; }
+  .cb-grid.cols-3 { grid-template-columns:1fr 1fr 1fr; }
+  .cb-grid.cols-4 { grid-template-columns:1fr 1fr 1fr 1fr; }
+  .cb-item {
+    background:var(--light); padding:6px 10px;
+    font-size:10pt; display:flex; align-items:center; gap:6px;
+    border:1px solid var(--sand-dark); border-radius:4px;
+  }
+  .cb-item .box {
+    width:14px; height:14px; border:1.5px solid #aaa;
+    border-radius:2px; flex-shrink:0; display:inline-block;
+  }
+
+  /* KIDS TABLE */
+  .kids-table { width:100%; border-collapse:collapse; font-size:10pt; }
+  .kids-table th {
+    background:var(--teal); color:white; padding:7px 10px;
+    text-align:right; font-weight:600; font-size:10pt;
+  }
+  .kids-table td {
+    border:1px solid var(--sand-dark); padding:0; height:28px;
+    background:white;
+  }
+  .kids-table tr:nth-child(even) td { background:var(--light); }
+
+  /* FOOTER */
+  .footer {
+    border-top:1px solid var(--sand-dark); padding:8px 20px;
+    display:flex; justify-content:space-between;
+    font-size:9pt; color:var(--gray); margin-top:4px;
+  }
+  .footer a { color:var(--teal); }
+
+  /* PRINT */
+  @media print {
+    body { max-width:100%; padding:0; }
+    @page { size:A4; margin:1cm; }
+    .no-print { display:none; }
+  }
+
+  .print-btn {
+    position:fixed; bottom:20px; left:20px;
+    background:var(--teal); color:white;
+    border:none; border-radius:24px; padding:12px 24px;
+    font-size:14px; font-family:'Rubik',sans-serif;
+    cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.2);
+    z-index:999;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header__title" style="display:flex;align-items:center;gap:10px;">
+    <img src="logo.png" style="height:42px;width:42px;object-fit:contain;border-radius:50%;background:white;padding:2px;" alt="לוגו">
+    מתי טסים
+  </div>
+  <div class="header__sub">mataytasim.co.il<br>054-675-8145</div>
+</div>
+<div class="amber-strip">
+  אנא מלאו טופס זה לפני השיחה הראשונה — זה עוזר לי לבנות את הטיול המושלם עבורכם
+</div>
+
+<div class="body">
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-title">✈ 1. פרטי הטיול</div>
+    <div class="q">
+      <div class="q-label"><span class="q-num">1.</span> שם מלא ומספר וואטסאפ:</div>
+      <span class="line"></span>
+    </div>
+    <div class="q">
+      <div class="q-label"><span class="q-num">2.</span> יעד הטיול (או אפשרויות שאתם שוקלים):</div>
+      <span class="line"></span>
+    </div>
+    <div class="two-col">
+      <div class="q">
+        <div class="q-label"><span class="q-num">3.</span> עונה / תאריכים:</div>
+        <span class="line"></span>
+      </div>
+      <div class="q">
+        <div class="q-label"><span class="q-num">4.</span> כמה ימים?</div>
+        <span class="line"></span>
+      </div>
+    </div>
+    <div class="q">
+      <div class="q-label"><span class="q-num">5.</span> כמה מבוגרים נוסעים?  &nbsp;&nbsp; (הקיפו):
+        &nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp; 2 &nbsp;&nbsp;&nbsp; 3 &nbsp;&nbsp;&nbsp; 4+
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-title">👦 2. הילדים</div>
+    <table class="kids-table">
+      <tr>
+        <th style="width:40px;">#</th>
+        <th style="width:60px;">בן / בת</th>
+        <th style="width:50px;">גיל</th>
+        <th>תחומי עניין / הערות</th>
+      </tr>
+      <tr><td style="text-align:center;color:#aaa;">1</td><td></td><td></td><td></td></tr>
+      <tr><td style="text-align:center;color:#aaa;">2</td><td></td><td></td><td></td></tr>
+      <tr><td style="text-align:center;color:#aaa;">3</td><td></td><td></td><td></td></tr>
+      <tr><td style="text-align:center;color:#aaa;">4</td><td></td><td></td><td></td></tr>
+    </table>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-title">❤ 3. מה אתם אוהבים?</div>
+    <div style="font-size:9pt;color:var(--gray);margin-bottom:6px;">סמנו כל מה שרלוונטי:</div>
+    <div class="cb-grid cols-3">
+      <div class="cb-item"><span class="box"></span>טירות והיסטוריה</div>
+      <div class="cb-item"><span class="box"></span>פארקי מים</div>
+      <div class="cb-item"><span class="box"></span>טבע והרים</div>
+      <div class="cb-item"><span class="box"></span>פארקי שעשועים</div>
+      <div class="cb-item"><span class="box"></span>גני חיות ובעלי חיים</div>
+      <div class="cb-item"><span class="box"></span>מוזיאוני מדע</div>
+      <div class="cb-item"><span class="box"></span>רכיבה ופעילות גופנית</div>
+      <div class="cb-item"><span class="box"></span>אוכל מקומי</div>
+      <div class="cb-item"><span class="box"></span>רכבלים וגונדולות</div>
+      <div class="cb-item"><span class="box"></span>אגמים וחופים</div>
+      <div class="cb-item"><span class="box"></span>יצירה ואמנות</div>
+      <div class="cb-item"><span class="box"></span>שווקים ואטמוספרה</div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="section-title">🚫 4. מה עדיף להימנע?</div>
+    <div class="cb-grid cols-3">
+      <div class="cb-item"><span class="box"></span>ביקורים ארוכים במוזיאונים</div>
+      <div class="cb-item"><span class="box"></span>נסיעות ארוכות ברכב (3ש'+)</div>
+      <div class="cb-item"><span class="box"></span>גבהים / טיפוס</div>
+      <div class="cb-item"><span class="box"></span>אתרים עמוסי תיירים</div>
+      <div class="cb-item"><span class="box"></span>מסעדות פורמליות</div>
+      <div class="cb-item"><span class="box"></span>יציאות מוקדמות מאוד</div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <div class="section-title">🚗 5. לוגיסטיקה</div>
+    <div style="font-size:10pt;font-weight:600;margin-bottom:5px;">העדפת לינה:</div>
+    <div class="cb-grid cols-4" style="margin-bottom:10px;">
+      <div class="cb-item"><span class="box"></span>מלון</div>
+      <div class="cb-item"><span class="box"></span>דירה / Airbnb</div>
+      <div class="cb-item"><span class="box"></span>אתר נופש משפחתי</div>
+      <div class="cb-item"><span class="box"></span>אין העדפה</div>
+    </div>
+    <div style="font-size:10pt;font-weight:600;margin-bottom:5px;">תקציב יומי (לא כולל טיסות):</div>
+    <div class="cb-grid cols-3" style="margin-bottom:10px;">
+      <div class="cb-item"><span class="box"></span>חסכוני (50–80$ ליום)</div>
+      <div class="cb-item"><span class="box"></span>בינוני (80–150$ ליום)</div>
+      <div class="cb-item"><span class="box"></span>נוח ואיכותי (150$+)</div>
+    </div>
+    <div style="font-size:10pt;font-weight:600;margin-bottom:5px;">האם תשכירו רכב?</div>
+    <div class="cb-grid cols-4">
+      <div class="cb-item"><span class="box"></span>כן</div>
+      <div class="cb-item"><span class="box"></span>לא</div>
+      <div class="cb-item"><span class="box"></span>עדיין לא יודעים</div>
+      <div class="cb-item" style="background:transparent;border-color:transparent;"></div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="section">
+    <div class="section-title">📝 6. עוד משהו?</div>
+    <div class="q">
+      <div class="q-label"><span class="q-num">6.</span> צרכים מיוחדים, אלרגיות, או דברים חשובים שכדאי שאדע:</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="q">
+      <div class="q-label"><span class="q-num">7.</span> רגע החלום מהטיול — מה יגרום לו להיות מושלם?</div>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <span>054-675-8145 :WhatsApp</span>
+  <span>mataytasim.co.il ✈</span>
+</div>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ הדפסה / שמור כ-PDF</button>
+
+</body>
+</html>
