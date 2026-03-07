@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שאלון טיול משפחתי | מתי טסים</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Secular+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal:#1A6B72; --teal-dark:#134f55; --amber:#E8A045;
+    --sand:#F5EDD8; --sand-dark:#e8ddc4; --charcoal:#2C2C2C;
+    --cream:#FAF7F2; --white:#fff; --green:#2a9d5c;
+    --font-heading:'Secular One',sans-serif;
+    --font-body:'Rubik',sans-serif;
+    --radius:12px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:var(--font-body); direction:rtl; background:var(--cream); color:var(--charcoal); }
+
+  /* NAV */
+  .nav {
+    background:var(--cream); border-bottom:1px solid var(--sand-dark);
+    height:72px; position:sticky; top:0; z-index:100;
+  }
+  .nav__inner {
+    max-width:1140px; margin:0 auto; padding:0 24px;
+    height:72px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; }
+  .nav__logo img { height:70px; width:auto; mix-blend-mode:multiply; }
+  .nav__logo span { font-family:var(--font-heading); font-size:22px; color:var(--teal); }
+  .nav__links { display:flex; gap:4px; list-style:none; }
+  .nav__link {
+    padding:8px 16px; border-radius:8px; font-size:15px; font-weight:500;
+    color:var(--charcoal); text-decoration:none; transition:all 0.2s;
+  }
+  .nav__link:hover { background:var(--sand); color:var(--teal); }
+  .nav__link.active { background:var(--teal); color:white; }
+  @media(max-width:680px) { .nav__links { display:none; } }
+
+  /* PAGE HEADER */
+  .page-header {
+    background:linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    padding:48px 24px 56px; text-align:center;
+  }
+  .page-header__badge {
+    display:inline-block; background:var(--amber); color:var(--charcoal);
+    padding:5px 18px; border-radius:20px; font-size:13px; font-weight:700;
+    margin-bottom:16px;
+  }
+  .page-header__title {
+    font-family:var(--font-heading); font-size:clamp(26px,4vw,40px);
+    color:white; margin-bottom:10px;
+  }
+  .page-header__sub { font-size:16px; color:rgba(255,255,255,0.8); max-width:500px; margin:0 auto; line-height:1.7; }
+
+  /* FORM WRAPPER */
+  .form-wrap { max-width:760px; margin:0 auto; padding:40px 24px 80px; }
+
+  /* SECTION BLOCK */
+  .form-section {
+    background:white; border-radius:var(--radius);
+    border:1px solid var(--sand-dark); margin-bottom:24px;
+    overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  }
+  .form-section__head {
+    background:var(--teal); color:white; padding:14px 20px;
+    font-family:var(--font-heading); font-size:16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .form-section__body { padding:24px 20px; display:flex; flex-direction:column; gap:18px; }
+
+  /* FIELD */
+  .field { display:flex; flex-direction:column; gap:6px; }
+  .field--row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .field--row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+  label { font-size:14px; font-weight:600; color:var(--charcoal); }
+  label span { font-weight:400; color:#999; font-size:13px; }
+  input[type=text], input[type=email], input[type=tel], select, textarea {
+    width:100%; padding:11px 14px; border:1.5px solid var(--sand-dark);
+    border-radius:8px; font-size:15px; font-family:var(--font-body);
+    color:var(--charcoal); background:var(--cream); direction:rtl;
+    transition:border-color 0.2s, box-shadow 0.2s;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline:none; border-color:var(--teal);
+    box-shadow:0 0 0 3px rgba(26,107,114,0.1);
+  }
+  textarea { resize:vertical; min-height:80px; }
+
+  /* CHECKBOXES */
+  .cb-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .cb-grid.cols2 { grid-template-columns:repeat(2,1fr); }
+  .cb-label {
+    display:flex; align-items:center; gap:8px;
+    background:var(--cream); border:1.5px solid var(--sand-dark);
+    border-radius:8px; padding:9px 12px; cursor:pointer;
+    font-size:14px; transition:all 0.15s; user-select:none;
+  }
+  .cb-label:hover { border-color:var(--teal); background:var(--sand); }
+  .cb-label input { width:16px; height:16px; accent-color:var(--teal); cursor:pointer; flex-shrink:0; }
+  .cb-label input:checked + span { color:var(--teal); font-weight:600; }
+  .cb-label:has(input:checked) { border-color:var(--teal); background:#edf6f7; }
+
+  /* RADIO PILLS */
+  .radio-pills { display:flex; flex-wrap:wrap; gap:8px; }
+  .radio-pill {
+    display:flex; align-items:center; gap:7px;
+    border:1.5px solid var(--sand-dark); border-radius:24px;
+    padding:8px 16px; cursor:pointer; font-size:14px;
+    transition:all 0.15s; background:var(--cream);
+  }
+  .radio-pill:hover { border-color:var(--teal); }
+  .radio-pill input { accent-color:var(--teal); }
+  .radio-pill:has(input:checked) { border-color:var(--teal); background:#edf6f7; color:var(--teal); font-weight:600; }
+
+  /* KIDS TABLE */
+  .kids-grid { display:flex; flex-direction:column; gap:10px; }
+  .kid-row {
+    display:grid; grid-template-columns:auto 1fr 1fr 2fr;
+    gap:10px; align-items:center;
+  }
+  .kid-num {
+    width:28px; height:28px; background:var(--teal); color:white;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; flex-shrink:0;
+  }
+  .kid-label { font-size:13px; color:#888; margin-bottom:3px; }
+
+  /* SUBMIT */
+  .submit-area { text-align:center; margin-top:8px; }
+  .btn-submit {
+    background:var(--teal); color:white; border:none;
+    padding:16px 48px; border-radius:40px; font-size:17px;
+    font-family:var(--font-body); font-weight:700; cursor:pointer;
+    transition:all 0.2s; box-shadow:0 4px 16px rgba(26,107,114,0.3);
+    display:inline-flex; align-items:center; gap:10px;
+  }
+  .btn-submit:hover { background:var(--teal-dark); transform:translateY(-2px); box-shadow:0 6px 24px rgba(26,107,114,0.4); }
+  .submit-note { font-size:13px; color:#aaa; margin-top:10px; }
+
+  /* SUCCESS */
+  .success-box {
+    display:none; background:#edf6f7; border:2px solid var(--teal);
+    border-radius:var(--radius); padding:40px 24px; text-align:center; margin-top:24px;
+  }
+  .success-box.show { display:block; }
+  .success-box h3 { font-family:var(--font-heading); font-size:24px; color:var(--teal); margin-bottom:10px; }
+  .success-box p { color:#555; font-size:15px; line-height:1.7; margin-bottom:20px; }
+  .btn-wa {
+    display:inline-flex; align-items:center; gap:8px;
+    background:#25D366; color:white; padding:12px 28px;
+    border-radius:40px; font-size:15px; font-weight:700;
+    text-decoration:none; font-family:var(--font-body);
+  }
+
+  /* REQUIRED */
+  .req { color:#e55; font-size:13px; }
+
+  @media(max-width:600px) {
+    .field--row, .field--row3 { grid-template-columns:1fr; }
+    .cb-grid { grid-template-columns:repeat(2,1fr); }
+    .kid-row { grid-template-columns:auto 1fr 1fr; }
+    .kid-row .field:last-child { grid-column:1/-1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav__inner">
+    <a href="services.html" class="nav__logo">
+      <img src="logo.png" alt="מתי טסים">
+      <span>מתי טסים</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="tips.html" class="nav__link">טיפים</a></li>
+      <li><a href="destinations.html" class="nav__link">יעדים</a></li>
+      <li><a href="services.html" class="nav__link">שירותים</a></li>
+      <li><a href="packages.html" class="nav__link">חבילות</a></li>
+      <li><a href="questionnaire_form.html" class="nav__link active">שאלון</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="page-header__badge">📋 שאלון תכנון טיול</div>
+  <h1 class="page-header__title">ספרו לי על הטיול שלכם</h1>
+  <p class="page-header__sub">מלאו את השאלון ואחזור אליכם תוך 24 שעות עם הצעה מותאמת</p>
+</div>
+
+<!-- FORM -->
+<div class="form-wrap">
+
+  <!-- ⚠️ הוראות: החליפו YOUR_FORM_ID באייד מ-formspree.io -->
+  <form id="tripForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+
+    <!-- 1. פרטים אישיים -->
+    <div class="form-section">
+      <div class="form-section__head">✈ 1. פרטים אישיים</div>
+      <div class="form-section__body">
+        <div class="field--row">
+          <div class="field">
+            <label>שם מלא <span class="req">*</span></label>
+            <input type="text" name="שם מלא" required placeholder="ישראל ישראלי">
+          </div>
+          <div class="field">
+            <label>מספר וואטסאפ <span class="req">*</span></label>
+            <input type="tel" name="וואטסאפ" required placeholder="05X-XXXXXXX">
+          </div>
+        </div>
+        <div class="field">
+          <label>מייל <span>(אופציונלי)</span></label>
+          <input type="email" name="מייל" placeholder="your@email.com">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. פרטי הטיול -->
+    <div class="form-section">
+      <div class="form-section__head">🗺 2. פרטי הטיול</div>
+      <div class="form-section__body">
+        <div class="field">
+          <label>יעד הטיול <span class="req">*</span></label>
+          <input type="text" name="יעד" required placeholder="למשל: סלובקיה, פולין, רומניה...">
+        </div>
+        <div class="field--row">
+          <div class="field">
+            <label>תקופה / עונה <span class="req">*</span></label>
+            <select name="עונה" required>
+              <option value="">בחרו עונה</option>
+              <option>פסח</option>
+              <option>קיץ</option>
+              <option>סוכות</option>
+              <option>חנוכה</option>
+              <option>תאריך ספציפי</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>כמה ימים?</label>
+            <input type="text" name="מספר ימים" placeholder="למשל: 7 ימים">
+          </div>
+        </div>
+        <div class="field">
+          <label>תאריכים ספציפיים <span>(אם יש)</span></label>
+          <input type="text" name="תאריכים" placeholder="למשל: 13-20 אפריל 2025">
+        </div>
+        <div class="field">
+          <label>כמה מבוגרים נוסעים?</label>
+          <div class="radio-pills">
+            <label class="radio-pill"><input type="radio" name="מבוגרים" value="1"><span>1</span></label>
+            <label class="radio-pill"><input type="radio" name="מבוגרים" value="2" checked><span>2</span></label>
+            <label class="radio-pill"><input type="radio" name="מבוגרים" value="3"><span>3</span></label>
+            <label class="radio-pill"><input type="radio" name="מבוגרים" value="4+"><span>4+</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. הילדים -->
+    <div class="form-section">
+      <div class="form-section__head">👦 3. הילדים</div>
+      <div class="form-section__body">
+        <div class="kids-grid" id="kidsGrid">
+          <div class="kid-row">
+            <div class="kid-num">1</div>
+            <div class="field">
+              <div class="kid-label">גיל</div>
+              <input type="text" name="ילד 1 גיל" placeholder="גיל">
+            </div>
+            <div class="field">
+              <div class="kid-label">בן/בת</div>
+              <select name="ילד 1 מין">
+                <option>בן</option>
+                <option>בת</option>
+              </select>
+            </div>
+            <div class="field">
+              <div class="kid-label">הערות</div>
+              <input type="text" name="ילד 1 הערות" placeholder="תחומי עניין, אלרגיות...">
+            </div>
+          </div>
+          <div class="kid-row">
+            <div class="kid-num">2</div>
+            <div class="field">
+              <div class="kid-label">גיל</div>
+              <input type="text" name="ילד 2 גיל" placeholder="גיל">
+            </div>
+            <div class="field">
+              <div class="kid-label">בן/בת</div>
+              <select name="ילד 2 מין">
+                <option>בן</option>
+                <option>בת</option>
+              </select>
+            </div>
+            <div class="field">
+              <div class="kid-label">הערות</div>
+              <input type="text" name="ילד 2 הערות" placeholder="תחומי עניין, אלרגיות...">
+            </div>
+          </div>
+          <div class="kid-row">
+            <div class="kid-num">3</div>
+            <div class="field">
+              <div class="kid-label">גיל</div>
+              <input type="text" name="ילד 3 גיל" placeholder="גיל">
+            </div>
+            <div class="field">
+              <div class="kid-label">בן/בת</div>
+              <select name="ילד 3 מין">
+                <option>בן</option>
+                <option>בת</option>
+              </select>
+            </div>
+            <div class="field">
+              <div class="kid-label">הערות</div>
+              <input type="text" name="ילד 3 הערות" placeholder="תחומי עניין, אלרגיות...">
+            </div>
+          </div>
+          <div class="kid-row">
+            <div class="kid-num">4</div>
+            <div class="field">
+              <div class="kid-label">גיל</div>
+              <input type="text" name="ילד 4 גיל" placeholder="גיל">
+            </div>
+            <div class="field">
+              <div class="kid-label">בן/בת</div>
+              <select name="ילד 4 מין">
+                <option>בן</option>
+                <option>בת</option>
+              </select>
+            </div>
+            <div class="field">
+              <div class="kid-label">הערות</div>
+              <input type="text" name="ילד 4 הערות" placeholder="תחומי עניין, אלרגיות...">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. העדפות -->
+    <div class="form-section">
+      <div class="form-section__head">❤ 4. מה אתם אוהבים?</div>
+      <div class="form-section__body">
+        <div class="field">
+          <label>סמנו כל מה שרלוונטי:</label>
+          <div class="cb-grid">
+            <label class="cb-label"><input type="checkbox" name="העדפות" value="טירות והיסטוריה"><span>🏰 טירות והיסטוריה</span></label>
+            <label class="cb-label"><input type="checkbox" name="העדפות" value="פארקי מים"><span>💦 פארקי מים</span></label>
+            <label class="cb-label"><input type="checkbox" name="העדפות" value="טבע והרים"><span>🏔 טבע והרים</span></label>
+            <label class="cb-label"><input type="checkbox" name="העדפות" value="פארקי שעשועים"><span>🎡 פארקי שעשועים</span></label>
+            <label class="cb-label"><input type="checkbox" name="העדפות" value="גני חיות"><span>🦁 גני חיות</span></label>
+            <label class="cb-label"><input type="checkbox" name="העדפות" value="מוזיאוני מדע"><span>🔬 מוזיאוני מדע</span></label>
+            <label class="cb-label"><input type="checkbox" name="העדפות" value="רכיבה ופעילות"><span>🚴 רכיבה ופעילות</span></label>
+            <label class="cb-label"><input type="checkbox" name="העדפות" value="אוכל מקומי"><span>🍽 אוכל מקומי</span></label>
+            <label class="cb-label"><input type="checkbox" name="העדפות" value="אגמים וחופים"><span>🏊 אגמים וחופים</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. להימנע -->
+    <div class="form-section">
+      <div class="form-section__head">🚫 5. מה עדיף להימנע?</div>
+      <div class="form-section__body">
+        <div class="cb-grid cols2">
+          <label class="cb-label"><input type="checkbox" name="להימנע" value="ביקורים ארוכים במוזיאונים"><span>ביקורים ארוכים במוזיאונים</span></label>
+          <label class="cb-label"><input type="checkbox" name="להימנע" value="נסיעות ארוכות ברכב"><span>נסיעות ארוכות ברכב (3ש׳+)</span></label>
+          <label class="cb-label"><input type="checkbox" name="להימנע" value="גבהים וטיפוס"><span>גבהים / טיפוס</span></label>
+          <label class="cb-label"><input type="checkbox" name="להימנע" value="אתרים עמוסי תיירים"><span>אתרים עמוסי תיירים</span></label>
+          <label class="cb-label"><input type="checkbox" name="להימנע" value="מסעדות פורמליות"><span>מסעדות פורמליות</span></label>
+          <label class="cb-label"><input type="checkbox" name="להימנע" value="יציאות מוקדמות מאוד"><span>יציאות מוקדמות מאוד</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. לוגיסטיקה -->
+    <div class="form-section">
+      <div class="form-section__head">🚗 6. לוגיסטיקה</div>
+      <div class="form-section__body">
+        <div class="field">
+          <label>העדפת לינה:</label>
+          <div class="radio-pills">
+            <label class="radio-pill"><input type="radio" name="לינה" value="מלון"><span>🏨 מלון</span></label>
+            <label class="radio-pill"><input type="radio" name="לינה" value="דירה/Airbnb"><span>🏠 דירה / Airbnb</span></label>
+            <label class="radio-pill"><input type="radio" name="לינה" value="אתר נופש"><span>🏖 אתר נופש</span></label>
+            <label class="radio-pill"><input type="radio" name="לינה" value="אין העדפה"><span>אין העדפה</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>תקציב יומי (לא כולל טיסות):</label>
+          <div class="radio-pills">
+            <label class="radio-pill"><input type="radio" name="תקציב" value="חסכוני 50-80$"><span>💰 חסכוני (50-80$)</span></label>
+            <label class="radio-pill"><input type="radio" name="תקציב" value="בינוני 80-150$"><span>💳 בינוני (80-150$)</span></label>
+            <label class="radio-pill"><input type="radio" name="תקציב" value="נוח ואיכותי 150$+"><span>✨ נוח ואיכותי (150$+)</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label>האם תשכירו רכב?</label>
+          <div class="radio-pills">
+            <label class="radio-pill"><input type="radio" name="רכב" value="כן"><span>כן</span></label>
+            <label class="radio-pill"><input type="radio" name="רכב" value="לא"><span>לא</span></label>
+            <label class="radio-pill"><input type="radio" name="רכב" value="עדיין לא יודעים"><span>עדיין לא יודעים</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. הערות -->
+    <div class="form-section">
+      <div class="form-section__head">📝 7. עוד משהו?</div>
+      <div class="form-section__body">
+        <div class="field">
+          <label>צרכים מיוחדים, אלרגיות, או דברים חשובים שכדאי שאדע:</label>
+          <textarea name="צרכים מיוחדים" placeholder="כתבו כאן..."></textarea>
+        </div>
+        <div class="field">
+          <label>רגע החלום מהטיול — מה יגרום לו להיות מושלם?</label>
+          <textarea name="רגע חלום" placeholder="כתבו כאן..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-area">
+      <button type="submit" class="btn-submit">
+        <span>שלחו את השאלון</span> 🚀
+      </button>
+      <p class="submit-note">אחזור אליכם בוואטסאפ תוך 24 שעות</p>
+    </div>
+
+  </form>
+
+  <!-- SUCCESS MESSAGE -->
+  <div class="success-box" id="successBox">
+    <div style="font-size:48px;margin-bottom:12px;">🎉</div>
+    <h3>השאלון נשלח בהצלחה!</h3>
+    <p>תודה! קיבלתי את הפרטים ואחזור אליכם בוואטסאפ תוך 24 שעות עם הצעה מותאמת לטיול שלכם.</p>
+    <a href="https://wa.me/972546758145?text=היי אור! מילאתי את השאלון באתר, מחכה לתשובה 😊" target="_blank" class="btn-wa">
+      📱 שלחו לי גם בוואטסאפ
+    </a>
+  </div>
+
+</div>
+
+<script>
+  const form = document.getElementById('tripForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Basic validation
+    const required = form.querySelectorAll('[required]');
+    let valid = true;
+    required.forEach(f => {
+      f.style.borderColor = f.value.trim() ? '' : '#e55';
+      if (!f.value.trim()) valid = false;
+    });
+    if (!valid) { alert('אנא מלאו את כל השדות המסומנים'); return; }
+
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = '⏳ שולח...';
+    btn.disabled = true;
+
+    try {
+      const data = new FormData(form);
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('successBox').classList.add('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        throw new Error('שגיאה');
+      }
+    } catch {
+      btn.textContent = 'שלחו את השאלון 🚀';
+      btn.disabled = false;
+      alert('אירעה שגיאה בשליחה. אנא נסו שוב או פנו אלינו ישירות בוואטסאפ.');
+    }
+  });
+</script>
+
+</body>
+</html>
