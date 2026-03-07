@@ -6,35 +6,78 @@
 <title>חבילות תכנון | מתי טסים</title>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;900&family=Secular+One&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --teal:#1A6B72; --teal-dark:#134f55; --amber:#E8A045; --amber-dark:#c4842a;
-    --sand:#F5EDD8; --sand-dark:#e8ddc4; --charcoal:#2C2C2C; --cream:#FAF7F2;
-    --white:#fff; --green:#2a9d5c; --shadow-sm:0 2px 8px rgba(0,0,0,0.07);
-    --shadow-lg:0 12px 40px rgba(0,0,0,0.13); --shadow-xl:0 24px 60px rgba(0,0,0,0.18);
-    --radius:16px;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Rubik',sans-serif; direction:rtl; background:var(--cream); color:var(--charcoal); }
 
-  /* NAV */
-  nav {
-    background:var(--teal); padding:14px 24px;
-    display:flex; align-items:center; justify-content:space-between;
-    position:sticky; top:0; z-index:100;
-    box-shadow:0 2px 12px rgba(0,0,0,0.15);
-  }
-  .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
-  .nav-logo img { height:36px; width:36px; border-radius:50%; background:white; padding:2px; object-fit:contain; }
-  .nav-logo span { color:white; font-family:'Secular One',sans-serif; font-size:20px; }
-  .nav-links { display:flex; gap:8px; }
-  .nav-link {
-    color:rgba(255,255,255,0.8); text-decoration:none; font-size:14px;
-    padding:7px 14px; border-radius:20px; transition:all 0.2s;
-  }
-  .nav-link:hover, .nav-link.active {
-    background:rgba(255,255,255,0.15); color:white;
-  }
-  .nav-link.active { background:var(--amber); color:var(--charcoal); font-weight:600; }
+    :root {
+      --teal:#1A6B72; --teal-dark:#134f55; --amber:#E8A045; --amber-dark:#c4842a;
+      --sand:#F5EDD8; --sand-dark:#e8ddc4; --charcoal:#2C2C2C; --cream:#FAF7F2;
+      --white:#fff; --green:#2a9d5c;
+      --font-heading:'Secular One',sans-serif;
+      --font-body:'Rubik',sans-serif;
+      --nav-height:72px;
+      --shadow-sm:0 2px 8px rgba(0,0,0,0.07);
+      --shadow-lg:0 12px 40px rgba(0,0,0,0.13);
+      --shadow-xl:0 24px 60px rgba(0,0,0,0.18);
+      --radius:16px;
+    }
+    .container { max-width:1140px; margin:0 auto; padding:0 24px; }
+    .nav {
+      position:sticky; top:0; z-index:200;
+      background:var(--cream);
+      border-bottom:1px solid var(--sand-dark);
+      height:var(--nav-height);
+      transition:box-shadow 0.3s;
+    }
+    .nav.scrolled { box-shadow:0 2px 20px rgba(0,0,0,0.1); }
+    .nav__inner {
+      height:var(--nav-height);
+      display:flex; align-items:center;
+      justify-content:space-between; gap:24px;
+    }
+    .nav__logo {
+      display:flex; align-items:center; gap:8px;
+      text-decoration:none; flex-shrink:0;
+    }
+    .nav__links {
+      display:flex; align-items:center; gap:4px;
+      list-style:none; margin:0 auto;
+    }
+    .nav__link {
+      padding:8px 14px; border-radius:8px;
+      font-size:15px; font-weight:500; color:#555;
+      text-decoration:none; transition:all 0.2s;
+    }
+    .nav__link:hover { background:var(--sand); color:var(--charcoal); }
+    .nav__link[aria-current="page"] {
+      background:var(--teal); color:white; font-weight:600;
+    }
+    .btn { display:inline-flex; align-items:center; justify-content:center;
+      gap:8px; padding:12px 24px; border-radius:40px; font-size:15px;
+      font-weight:700; font-family:var(--font-body); cursor:pointer;
+      text-decoration:none; border:none; transition:all 0.2s; }
+    .btn--primary { background:var(--teal); color:white; }
+    .btn--primary:hover { background:var(--teal-dark); transform:translateY(-1px); }
+    .btn--sm { padding:8px 18px; font-size:14px; }
+    .desktop-only { display:flex; }
+    .nav__mobile-actions { display:none; align-items:center; gap:12px; }
+    .nav__hamburger {
+      background:none; border:none; cursor:pointer; padding:8px;
+      display:flex; flex-direction:column; gap:5px;
+    }
+    .nav__hamburger span {
+      display:block; width:24px; height:2px;
+      background:var(--charcoal); border-radius:2px; transition:all 0.3s;
+    }
+    .nav__mobile-menu {
+      display:none; flex-direction:column; gap:4px;
+      padding:16px 24px; background:white;
+      border-bottom:1px solid var(--sand-dark);
+    }
+    .nav__mobile-menu.open { display:flex; }
+    @media(max-width:768px) {
+      .desktop-only { display:none !important; }
+      .nav__links { display:none; }
+      .nav__mobile-actions { display:flex; }
+    }
 
   /* HERO */
   .hero {
@@ -223,19 +266,40 @@
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo">
-    <img src="logo.png" alt="לוגו">
-    <span>מתי טסים</span>
-  </a>
-  <div class="nav-links">
-    <a href="index.html" class="nav-link">בית</a>
-    <a href="services.html" class="nav-link">שירותים</a>
-    <a href="packages.html" class="nav-link active">חבילות</a>
-    <a href="destinations.html" class="nav-link">יעדים</a>
-  </div>
-</nav>
+<!-- NAV (same as services) -->
+  <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
+    <div class="container nav__inner">
+      <a href="services.html" class="nav__logo" aria-label="מתי טסים - דף הבית">
+        <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;"><span style="font-family:var(--font-heading);font-size:22px;color:var(--teal);font-weight:700;">מתי טסים</span>
+      </a>
+
+      <ul class="nav__links" role="menubar">
+        <li role="none"><a href="tips.html" class="nav__link" role="menuitem">טיפים</a></li>
+        <li role="none"><a href="destinations.html" class="nav__link" role="menuitem">יעדים</a></li>
+        <li role="none"><a href="services.html" class="nav__link" role="menuitem">שירותים</a></li>
+        <li role="none"><a href="packages.html" class="nav__link" role="menuitem" aria-current="page">חבילות</a></li>
+        <li role="none"><a href="services.html#about" class="nav__link" role="menuitem">אודות</a></li>
+        <li role="none"><a href="services.html#final-cta" class="nav__link" role="menuitem">צור קשר</a></li>
+      </ul>
+
+      <a href="https://wa.me/972546758145" target="_blank" class="btn btn--primary btn--sm nav__cta desktop-only">📱 וואטסאפ</a>
+
+      <div class="nav__mobile-actions">
+        <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
+      <a href="tips.html" class="nav__link" role="menuitem">טיפים</a>
+      <a href="destinations.html" class="nav__link" role="menuitem">יעדים</a>
+      <a href="services.html" class="nav__link" role="menuitem">שירותים</a>
+      <a href="packages.html" class="nav__link" role="menuitem" aria-current="page">חבילות</a>
+      <a href="services.html#about" class="nav__link" role="menuitem">אודות</a>
+      <a href="services.html#final-cta" class="nav__link" role="menuitem">צור קשר</a>
+    </div>
+  </nav>
 
 <!-- HERO -->
 <div class="hero">
@@ -423,6 +487,20 @@ function toggleFaq(btn) {
     ans.style.maxHeight = ans.scrollHeight + 'px';
   }
 }
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !open);
+      mobileMenu.classList.toggle('open');
+    });
+  }
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav')?.classList.toggle('scrolled', window.scrollY > 10);
+  });
 </script>
 </body>
 </html>
