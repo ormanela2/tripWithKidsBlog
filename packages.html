@@ -32,6 +32,7 @@
       height:var(--nav-height);
       display:flex; align-items:center;
       justify-content:space-between; gap:24px;
+      position:relative;
     }
     .nav__logo {
       display:flex; align-items:center; gap:8px;
@@ -39,12 +40,14 @@
     }
     .nav__links {
       display:flex; align-items:center; gap:4px;
-      list-style:none; margin:0 auto;
+      list-style:none;
+      position:absolute; left:50%; transform:translateX(-50%);
     }
     .nav__link {
-      padding:8px 14px; border-radius:8px;
+      padding:8px 16px; border-radius:8px;
       font-size:15px; font-weight:500; color:#555;
       text-decoration:none; transition:all 0.2s;
+      min-height:44px; display:flex; align-items:center;
     }
     .nav__link:hover { background:var(--sand); color:var(--charcoal); }
     .nav__link[aria-current="page"] {
@@ -54,25 +57,31 @@
       gap:8px; padding:12px 24px; border-radius:40px; font-size:15px;
       font-weight:700; font-family:var(--font-body); cursor:pointer;
       text-decoration:none; border:none; transition:all 0.2s; }
-    .btn--primary { background:var(--teal); color:white; }
-    .btn--primary:hover { background:var(--teal-dark); transform:translateY(-1px); }
-    .btn--sm { padding:8px 18px; font-size:14px; }
+    .btn--primary { background:var(--amber); color:var(--charcoal); box-shadow:0 4px 14px rgba(232,160,69,0.35); }
+    .btn--primary:hover { background:var(--amber-dark); transform:translateY(-1px); }
+    .btn--sm { padding:10px 24px; font-size:15px; min-height:44px; }
     .desktop-only { display:flex; }
     .nav__mobile-actions { display:none; align-items:center; gap:12px; }
     .nav__hamburger {
       background:none; border:none; cursor:pointer; padding:8px;
       display:flex; flex-direction:column; gap:5px;
+      width:44px; height:44px; align-items:center; justify-content:center;
     }
     .nav__hamburger span {
       display:block; width:24px; height:2px;
       background:var(--charcoal); border-radius:2px; transition:all 0.3s;
     }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
     .nav__mobile-menu {
       display:none; flex-direction:column; gap:4px;
-      padding:16px 24px; background:white;
+      padding:16px 24px; background:var(--cream);
       border-bottom:1px solid var(--sand-dark);
     }
     .nav__mobile-menu.open { display:flex; }
+    .nav__mobile-menu .nav__link { font-size:20px; padding:16px; }
+    .nav__mobile-menu .btn { margin-top:16px; justify-content:center; }
     @media(max-width:768px) {
       .desktop-only { display:none !important; }
       .nav__links { display:none; }
@@ -242,12 +251,6 @@
   .cta-strip h2 { font-family:'Secular One',sans-serif; font-size:clamp(24px,3.5vw,38px); margin-bottom:12px; }
   .cta-strip p { font-size:17px; color:rgba(44,44,44,0.8); margin-bottom:32px; }
   .cta-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
-  .btn-wa {
-    background:#25D366; color:white; padding:14px 32px; border-radius:40px;
-    font-size:16px; font-weight:700; text-decoration:none; font-family:'Rubik',sans-serif;
-    display:inline-flex; align-items:center; gap:8px; transition:all 0.2s;
-  }
-  .btn-wa:hover { background:#1da851; transform:translateY(-2px); }
   .btn-dl {
     background:var(--teal); color:white; padding:14px 32px; border-radius:40px;
     font-size:16px; font-weight:700; text-decoration:none; font-family:'Rubik',sans-serif;
@@ -259,47 +262,43 @@
     .cards-grid { grid-template-columns:1fr; }
     .card--star { transform:none; }
     .hero__stats { gap:24px; }
-    nav { flex-direction:column; gap:10px; }
-    .nav-links { flex-wrap:wrap; justify-content:center; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV (same as services) -->
-  <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
-    <div class="container nav__inner">
-      <a href="services.html" class="nav__logo" aria-label="מתי טסים - דף הבית">
-        <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;"><span style="font-family:var(--font-heading);font-size:22px;color:var(--teal);font-weight:700;">מתי טסים</span>
-      </a>
+<!-- NAV -->
+<nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
+  <div class="container nav__inner">
+    <a href="services.html" class="nav__logo" aria-label="מתי טסים - דף הבית">
+      <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+      <span style="font-family:var(--font-heading);font-size:22px;color:var(--teal);font-weight:700;">מתי טסים</span>
+    </a>
 
-      <ul class="nav__links" role="menubar">
-        <li role="none"><a href="tips.html" class="nav__link" role="menuitem">טיפים</a></li>
-        <li role="none"><a href="destinations.html" class="nav__link" role="menuitem">יעדים</a></li>
-        <li role="none"><a href="services.html" class="nav__link" role="menuitem">שירותים</a></li>
-        <li role="none"><a href="packages.html" class="nav__link" role="menuitem" aria-current="page">חבילות</a></li>
-        <li role="none"><a href="services.html#about" class="nav__link" role="menuitem">אודות</a></li>
-        <li role="none"><a href="services.html#final-cta" class="nav__link" role="menuitem">צור קשר</a></li>
-      </ul>
+    <ul class="nav__links" role="menubar">
+      <li role="none"><a href="tips.html" class="nav__link" role="menuitem">טיפים</a></li>
+      <li role="none"><a href="destinations.html" class="nav__link" role="menuitem">יעדים</a></li>
+      <li role="none"><a href="services.html#services-content" class="nav__link" role="menuitem">שירותים</a></li>
+      <li role="none"><a href="services.html#about" class="nav__link" role="menuitem">אודות</a></li>
+      <li role="none"><a href="services.html#final-cta" class="nav__link" role="menuitem" aria-current="page">צור קשר</a></li>
+    </ul>
 
-      <a href="https://wa.me/972546758145" target="_blank" class="btn btn--primary btn--sm nav__cta desktop-only">📱 וואטסאפ</a>
-
-      <div class="nav__mobile-actions">
-        <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false" aria-controls="mobileMenu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+    <div class="nav__mobile-actions">
+      <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </div>
 
-    <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
-      <a href="tips.html" class="nav__link" role="menuitem">טיפים</a>
-      <a href="destinations.html" class="nav__link" role="menuitem">יעדים</a>
-      <a href="services.html" class="nav__link" role="menuitem">שירותים</a>
-      <a href="packages.html" class="nav__link" role="menuitem" aria-current="page">חבילות</a>
-      <a href="services.html#about" class="nav__link" role="menuitem">אודות</a>
-      <a href="services.html#final-cta" class="nav__link" role="menuitem">צור קשר</a>
-    </div>
-  </nav>
+  <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
+    <a href="tips.html" class="nav__link" role="menuitem">טיפים</a>
+    <a href="destinations.html" class="nav__link" role="menuitem">יעדים</a>
+    <a href="services.html#services-content" class="nav__link" role="menuitem">שירותים</a>
+    <a href="services.html#about" class="nav__link" role="menuitem">אודות</a>
+    <a href="services.html#final-cta" class="nav__link" role="menuitem">צור קשר</a>
+    <a href="packages.html" class="btn btn--primary">לחבילות</a>
+  </div>
+</nav>
 
 <!-- HERO -->
 <div class="hero">
@@ -342,7 +341,7 @@
           <div class="feature feature--dim"><span class="check">✗</span><span>שיחת וידאו לפני הטיול</span></div>
           <div class="feature feature--dim"><span class="check">✗</span><span>ליווי וואטסאפ בטיול</span></div>
         </div>
-        <button class="btn-pkg">אני רוצה מצפן</button>
+        <button class="btn-pkg" onclick="openContactModalWithPackage('מצפן')">אני רוצה מצפן</button>
         <p class="delivery">📅 מוכן תוך 4 ימי עסקים</p>
       </div>
     </div>
@@ -371,7 +370,7 @@
           <div class="feature"><span class="check">✓</span><span>רשימת ציוד מלאה</span></div>
           <div class="feature"><span class="check">✓</span><span><strong>שיחת וידאו</strong> לפני הטיול (30 דק׳)</span></div>
         </div>
-        <button class="btn-pkg btn-pkg--amber">אני רוצה הרפתקה 🔥</button>
+        <button class="btn-pkg btn-pkg--amber" onclick="openContactModalWithPackage('הרפתקה')">אני רוצה הרפתקה 🔥</button>
         <p class="delivery">⚡ מוכן תוך 3 ימי עסקים</p>
       </div>
     </div>
@@ -395,7 +394,10 @@
           <div class="feature"><span class="check">✓</span><span><strong>ליווי וואטסאפ</strong> בזמן הטיול</span></div>
           <div class="feature"><span class="check">✓</span><span>עדכונים בזמן אמת (מזג אוויר, שינויים)</span></div>
         </div>
-        <button class="btn-pkg" style="border-color:var(--teal);color:var(--teal);" onmouseover="this.style.background='var(--teal)';this.style.color='white'" onmouseout="this.style.background='';this.style.color='var(--teal)'">אני רוצה אודיסיאה 🚀</button>
+        <button class="btn-pkg" style="border-color:var(--teal);color:var(--teal);"
+          onmouseover="this.style.background='var(--teal)';this.style.color='white'"
+          onmouseout="this.style.background='';this.style.color='var(--teal)'"
+          onclick="openContactModalWithPackage('אודיסיאה')">אני רוצה אודיסיאה 🚀</button>
         <p class="delivery">⚡ מוכן תוך 3 ימי עסקים</p>
       </div>
     </div>
@@ -472,6 +474,92 @@
   </div>
 </div>
 
+<!-- CONTACT MODAL (same as services.html) -->
+<style>
+  .modal-overlay {
+    position:fixed; inset:0; z-index:2000;
+    background:rgba(0,0,0,0.5); backdrop-filter:blur(4px);
+    display:flex; align-items:center; justify-content:center; padding:24px;
+    opacity:0; visibility:hidden; transition:opacity 0.3s, visibility 0.3s;
+  }
+  .modal-overlay.active { opacity:1; visibility:visible; }
+  .modal {
+    background:white; border-radius:20px; padding:40px 32px;
+    width:100%; max-width:480px; position:relative;
+    box-shadow:0 16px 48px rgba(0,0,0,0.18);
+    transform:translateY(20px) scale(0.97);
+    transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+    max-height:90vh; overflow-y:auto;
+  }
+  .modal-overlay.active .modal { transform:translateY(0) scale(1); }
+  .modal__close {
+    position:absolute; top:16px; left:16px;
+    width:36px; height:36px; border-radius:50%;
+    background:var(--sand); display:flex; align-items:center; justify-content:center;
+    font-size:22px; color:var(--charcoal); cursor:pointer; border:none;
+    transition:background 0.2s;
+  }
+  .modal__close:hover { background:var(--sand-dark); }
+  .modal__title { font-family:var(--font-heading); font-size:28px; color:var(--charcoal); margin-bottom:8px; }
+  .modal__subtitle { font-size:15px; color:#666; margin-bottom:28px; }
+  .modal__field { margin-bottom:18px; }
+  .modal__field label { display:block; font-size:14px; font-weight:600; color:var(--charcoal); margin-bottom:6px; }
+  .modal__field input, .modal__field textarea {
+    width:100%; padding:12px 16px; border:2px solid var(--sand-dark);
+    border-radius:8px; font-family:var(--font-body); font-size:16px;
+    color:var(--charcoal); background:var(--cream);
+    transition:border-color 0.2s, box-shadow 0.2s; outline:none;
+  }
+  .modal__field input:focus, .modal__field textarea:focus {
+    border-color:var(--teal); box-shadow:0 0 0 3px rgba(26,107,114,0.12);
+  }
+  .modal__field textarea { resize:vertical; min-height:100px; }
+  .modal__field input.error, .modal__field textarea.error {
+    border-color:#F07060; box-shadow:0 0 0 3px rgba(240,112,96,0.12);
+  }
+  .modal__success { text-align:center; padding:20px 0; }
+  .modal__success-icon {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:64px; height:64px; border-radius:50%; background:var(--green);
+    color:white; font-size:32px; margin-bottom:16px;
+  }
+  .modal__success-text { font-size:17px; font-weight:500; color:var(--charcoal); }
+  .btn-submit {
+    width:100%; padding:14px; border-radius:40px; font-size:15px;
+    font-family:var(--font-body); font-weight:700; cursor:pointer;
+    background:var(--amber); border:none; color:var(--charcoal);
+    transition:all 0.2s;
+  }
+  .btn-submit:hover { background:var(--amber-dark); }
+</style>
+
+<div class="modal-overlay" id="contactModal" aria-hidden="true">
+  <div class="modal">
+    <button class="modal__close" id="closeContactModal" aria-label="סגור">&times;</button>
+    <h3 class="modal__title" id="modalTitle">שלח לי פנייה</h3>
+    <p class="modal__subtitle" id="modalSubtitle">מלא את הפרטים ואחזור אליך תוך יום עסקים</p>
+    <div id="contactForm">
+      <div class="modal__field">
+        <label for="contactName">שם מלא</label>
+        <input type="text" id="contactName" placeholder="השם שלך" required>
+      </div>
+      <div class="modal__field">
+        <label for="contactEmail">אימייל</label>
+        <input type="email" id="contactEmail" placeholder="your@email.com" dir="ltr" required>
+      </div>
+      <div class="modal__field">
+        <label for="contactMessage">תוכן הפנייה</label>
+        <textarea id="contactMessage" rows="4" placeholder="ספר לי על הטיול שאתה מתכנן..." required></textarea>
+      </div>
+      <button class="btn-submit" id="submitContact">שלח פנייה</button>
+    </div>
+    <div class="modal__success" id="modalSuccess" style="display:none;">
+      <span class="modal__success-icon">✓</span>
+      <p class="modal__success-text">הפנייה נשלחה בהצלחה! אחזור אליך בהקדם.</p>
+    </div>
+  </div>
+</div>
+
 <script>
 function toggleFaq(btn) {
   const item = btn.parentElement;
@@ -487,19 +575,96 @@ function toggleFaq(btn) {
   }
 }
 
-  // Hamburger
-  const hamburger = document.getElementById('hamburgerBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  if (hamburger) {
-    hamburger.addEventListener('click', () => {
-      const open = hamburger.getAttribute('aria-expanded') === 'true';
-      hamburger.setAttribute('aria-expanded', !open);
-      mobileMenu.classList.toggle('open');
-    });
-  }
-  window.addEventListener('scroll', () => {
-    document.getElementById('nav')?.classList.toggle('scrolled', window.scrollY > 10);
+// Hamburger
+const hamburger = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', String(!open));
+    mobileMenu.classList.toggle('open');
   });
+}
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav')?.classList.toggle('scrolled', window.scrollY > 10);
+});
+
+// Contact Modal
+const contactModal = document.getElementById('contactModal');
+const closeBtn = document.getElementById('closeContactModal');
+const submitBtn = document.getElementById('submitContact');
+const contactForm = document.getElementById('contactForm');
+const modalSuccess = document.getElementById('modalSuccess');
+
+function openModal() {
+  contactModal.classList.add('active');
+  contactModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function openContactModalWithPackage(packageName) {
+  openModal();
+  setTimeout(() => {
+    document.getElementById('contactMessage').value = 'אני מתעניין בחבילת ' + packageName;
+  }, 320);
+}
+
+function closeModal() {
+  contactModal.classList.remove('active');
+  contactModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    contactForm.style.display = '';
+    modalSuccess.style.display = 'none';
+    document.getElementById('contactName').value = '';
+    document.getElementById('contactEmail').value = '';
+    document.getElementById('contactMessage').value = '';
+  }, 300);
+}
+
+closeBtn.addEventListener('click', closeModal);
+contactModal.addEventListener('click', e => { if (e.target === contactModal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+submitBtn.addEventListener('click', () => {
+  const name = document.getElementById('contactName');
+  const email = document.getElementById('contactEmail');
+  const message = document.getElementById('contactMessage');
+  let valid = true;
+  [name, email, message].forEach(f => f.classList.remove('error'));
+  if (!name.value.trim()) { name.classList.add('error'); valid = false; }
+  if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { email.classList.add('error'); valid = false; }
+  if (!message.value.trim()) { message.classList.add('error'); valid = false; }
+  if (!valid) return;
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'שולח...';
+
+  const formData = new FormData();
+  formData.append('name', name.value.trim());
+  formData.append('email', email.value.trim());
+  formData.append('message', message.value.trim());
+  formData.append('_subject', 'פנייה חדשה מאתר מתי טסים');
+  formData.append('_template', 'table');
+
+  fetch('https://formsubmit.co/ajax/ormanela@gmail.com', { method:'POST', body:formData })
+    .then(r => r.json())
+    .then(() => {
+      contactForm.style.display = 'none';
+      modalSuccess.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'שלח פנייה';
+    })
+    .catch(() => {
+      const subject = encodeURIComponent('פנייה מאתר מתי טסים - ' + name.value.trim());
+      const body = encodeURIComponent('שם: ' + name.value.trim() + '\nאימייל: ' + email.value.trim() + '\n\n' + message.value.trim());
+      window.location.href = 'mailto:ormanela@gmail.com?subject=' + subject + '&body=' + body;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'שלח פנייה';
+      closeModal();
+    });
+});
 </script>
 </body>
 </html>
