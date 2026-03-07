@@ -443,8 +443,6 @@
       background: rgba(10, 40, 45, 0.62);
     }
 
-
-
     .page-hero__content {
       position: relative;
       z-index: 1;
@@ -492,8 +490,6 @@
       margin-left: auto;
       margin-right: auto;
     }
-
-
 
     .page-hero__about-title {
       font-size: clamp(24px, 3vw, 36px);
@@ -979,12 +975,6 @@
     }
 
     /* ========================================
-       7. TESTIMONIALS
-       ======================================== */
-    /* ========================================
-       ABOUT US SECTION
-       ======================================== */
-    /* ========================================
        8. FINAL CTA
        ======================================== */
     .final-cta {
@@ -1200,9 +1190,6 @@
       100% { transform: scale(1); opacity: 0; }
     }
 
-    /* ========================================
-       SVG Icons (inline)
-       ======================================== */
     .icon-wa {
       display: inline-block;
       width: 1em;
@@ -1368,8 +1355,6 @@
     /* ========================================
        RESPONSIVE
        ======================================== */
-
-    /* Tablet */
     @media (max-width: 1024px) {
       .value-prop__grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1404,7 +1389,6 @@
       }
     }
 
-    /* Mobile */
     .testimonials-grid { grid-template-columns: repeat(3,1fr) !important; }
     .mabiya-grid { grid-template-columns: 1fr 1fr !important; }
     @media (max-width: 768px) {
@@ -1679,7 +1663,7 @@
       <div style="max-width:600px;margin:0 auto;">
         <div style="font-size:36px;margin-bottom:12px;">📋</div>
         <h3 style="font-family:var(--font-heading);font-size:clamp(20px,2.5vw,26px);color:white;margin-bottom:10px;">מתחילים עם שאלון קצר</h3>
-        <p style="font-size:15px;color:rgba(255,255,255,0.85);margin-bottom:24px;line-height:1.7;">לפני שנדבר - תמלאו את השאלון, מלאו אותו ושלחו לי.<br>ככה אני מגיע לשיחה הראשונה כבר מוכן עם רעיונות בשבילכם.</p>
+        <p style="font-size:15px;color:rgba(255,255,255,0.85);margin-bottom:24px;line-height:1.7;">לפני שנדבר – תמלאו את השאלון ושלחו לי.<br>ככה אני מגיע לשיחה הראשונה כבר מוכן עם רעיונות בשבילכם.</p>
         <a href="questionnaire_form.html" style="display:inline-flex;align-items:center;gap:10px;background:var(--amber);color:var(--charcoal);border-radius:28px;padding:14px 32px;font-family:var(--font-heading);font-size:16px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
           📋 תמלאו את השאלון
         </a>
@@ -1702,7 +1686,7 @@
     </div>
   </section>
 
-    <!-- ============ HOW IT WORKS (Process) ============ -->
+  <!-- ============ HOW IT WORKS (Process) ============ -->
   <section class="process" id="process" aria-labelledby="process-title">
     <div class="container">
       <div class="section-header">
@@ -1830,7 +1814,6 @@
     </div>
   </section>
 
-  <!-- ============ TESTIMONIALS ============ -->
   <!-- ============ FINAL CTA ============ -->
   <section class="final-cta" id="final-cta" aria-labelledby="cta-title">
     <div class="container final-cta__content">
@@ -1843,7 +1826,6 @@
           דבר איתי בוואטסאפ
         </a>
       </div>
-
     </div>
   </section>
 
@@ -1856,7 +1838,6 @@
             <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;"><span style="font-family:var(--font-heading);font-size:22px;color:var(--teal);font-weight:700;">מתי טסים</span>
           </a>
           <p class="footer__tagline">טיולים שמתחילים בשיחה אחת, ומסתיימים בזכרון שהילדים שלך יספרו לנכדים שלך.</p>
-
         </div>
         <div class="footer__col">
           <h3 class="footer__col-title">ניווט</h3>
@@ -1930,7 +1911,6 @@
     (function () {
       'use strict';
 
-      // ---- Mobile Menu Toggle ----
       var hamburger = document.getElementById('hamburgerBtn');
       var mobileMenu = document.getElementById('mobileMenu');
 
@@ -1951,7 +1931,6 @@
         });
       });
 
-      // ---- Sticky Nav Shadow ----
       var nav = document.getElementById('nav');
       var scrollThreshold = 10;
 
@@ -1966,7 +1945,6 @@
       window.addEventListener('scroll', updateNavShadow, { passive: true });
       updateNavShadow();
 
-      // ---- Scroll Reveal (IntersectionObserver) ----
       var reveals = document.querySelectorAll('.reveal');
 
       if ('IntersectionObserver' in window) {
@@ -1991,7 +1969,6 @@
         });
       }
 
-      // ---- FAQ Accordion ----
       var faqItems = document.querySelectorAll('.faq__item');
 
       faqItems.forEach(function (item) {
@@ -2001,7 +1978,6 @@
         questionBtn.addEventListener('click', function () {
           var isOpen = item.getAttribute('data-open') === 'true';
 
-          // Close all others first
           faqItems.forEach(function (otherItem) {
             if (otherItem !== item) {
               otherItem.setAttribute('data-open', 'false');
@@ -2010,7 +1986,6 @@
             }
           });
 
-          // Toggle current
           if (isOpen) {
             item.setAttribute('data-open', 'false');
             questionBtn.setAttribute('aria-expanded', 'false');
@@ -2023,7 +1998,6 @@
         });
       });
 
-      // ---- Keyboard: close menu on Escape ----
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
           mobileMenu.classList.remove('open');
@@ -2034,7 +2008,6 @@
         }
       });
 
-      // ---- Contact Modal ----
       var contactModal = document.getElementById('contactModal');
       var openBtn = document.getElementById('openContactModal');
       var closeBtn = document.getElementById('closeContactModal');
@@ -2063,7 +2036,6 @@
         contactModal.classList.remove('active');
         contactModal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
-        // Reset form after closing
         setTimeout(function() {
           contactForm.style.display = '';
           modalSuccess.style.display = 'none';
@@ -2128,7 +2100,6 @@
           submitBtn.textContent = 'שלח פנייה';
         })
         .catch(function() {
-          // Fallback - open mailto
           var subject = encodeURIComponent('פנייה מאתר מתי טסים - ' + name.value.trim());
           var body = encodeURIComponent('שם: ' + name.value.trim() + '\nאימייל: ' + email.value.trim() + '\n\n' + message.value.trim());
           window.location.href = 'mailto:ormanela@gmail.com?subject=' + subject + '&body=' + body;
