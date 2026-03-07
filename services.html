@@ -1510,7 +1510,7 @@
         <li role="none"><a href="#final-cta" class="nav__link" role="menuitem">צור קשר</a></li>
       </ul>
 
-      <a href="#pricing" class="btn btn--primary btn--sm nav__cta desktop-only">לחבילות</a>
+      <a href="packages.html" class="btn btn--primary btn--sm nav__cta desktop-only">לחבילות</a>
 
       <div class="nav__mobile-actions">
         <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="שלח הודעת וואטסאפ">
@@ -1530,7 +1530,7 @@
       <a href="services.html#services-content" class="nav__link" role="menuitem" aria-current="page">שירותים</a>
       <a href="#about" class="nav__link" role="menuitem">אודות</a>
       <a href="#final-cta" class="nav__link" role="menuitem">צור קשר</a>
-      <a href="#pricing" class="btn btn--primary">לחבילות</a>
+      <a href="packages.html" class="btn btn--primary">לחבילות</a>
     </div>
   </nav>
 
@@ -1693,158 +1693,21 @@
     </div>
   </section>
 
-  <!-- ============ PRICING CARDS ============ -->
-  <section class="pricing" id="pricing" aria-labelledby="pricing-title">
+  <!-- ============ PACKAGES CTA ============ -->
+  <section style="padding:60px 0;background:var(--cream);">
     <div class="container">
-      <div class="section-header" style="text-align: center;">
-        <h2 class="section-header__title" id="pricing-title">כמה זה עולה?</h2>
-        <p class="section-header__subtitle">תכנון טיול עם ילדים לוקח שעות רבות - אני חוסך לכם את הזמן, כאב הראש והחיפוש האינסופי</p>
+      <div style="text-align:center;max-width:640px;margin:0 auto;">
+        <div style="font-size:48px;margin-bottom:16px;">✈</div>
+        <h2 style="font-family:var(--font-heading);font-size:clamp(24px,3vw,36px);color:var(--charcoal);margin-bottom:12px;">כמה זה עולה?</h2>
+        <p style="font-size:16px;color:#666;line-height:1.8;margin-bottom:32px;">יש לי 3 חבילות תכנון — מצפן, הרפתקה ואודיסיאה.<br>כל אחת מותאמת לסוג שונה של משפחה וצורך.</p>
+        <a href="packages.html" style="display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:white;border-radius:28px;padding:16px 36px;font-family:var(--font-heading);font-size:17px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='var(--teal-dark)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--teal)';this.style.transform=''">
+          לעמוד החבילות ←
+        </a>
       </div>
-
-
-
-      <div class="pricing__grid">
-
-        <!-- Card 1 - מצפן -->
-        <div class="pricing-card reveal">
-          <div class="pricing-card__header">
-            <span class="pricing-card__icon" aria-hidden="true">✨</span>
-            <h3 class="pricing-card__name">מצפן</h3>
-            <p class="pricing-card__tagline">מסלול מוכן, מסודר ומותאם לילדים שלכם.</p>
-          </div>
-          <div class="pricing-card__body">
-            <div class="pricing-card__price-row">
-              <div class="pricing-card__price">&#8362;490</div>
-              <p class="pricing-card__for">לטיול עד 7 ימים</p>
-            </div>
-            <div class="pricing-card__features">
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>המלצות למסלולים</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>המלצות לינה לפי תקציב</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>אטרקציות לפי גיל הילדים</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
-              </div>
-            </div>
-            <button type="button" class="btn btn--outline-dark btn--block" onclick="openContactModalWithPackage('מצפן')">אני רוצה מצפן</button>
-            <p class="pricing-card__delivery">&#128197; מוכן תוך 4 ימי עסקים</p>
-          </div>
-        </div>
-
-        <!-- Card 2 - הרפתקה (HIGHLIGHTED) -->
-        <div class="pricing-card pricing-card--highlighted reveal reveal-delay-1">
-          <span class="pricing-card__badge">🔥 הכי שווה</span>
-          <div class="pricing-card__header">
-            <span class="pricing-card__icon" aria-hidden="true">&#127758;</span>
-            <h3 class="pricing-card__name">הרפתקה</h3>
-            <p class="pricing-card__tagline">הכל מתוכנן. הכל מסודר. רק ליהנות.</p>
-          </div>
-          <div class="pricing-card__body">
-            <div class="pricing-card__price-row">
-              <div class="pricing-card__price">&#8362;890</div>
-              <p class="pricing-card__for">לטיול עד 7 ימים • הכי נבחר</p>
-            </div>
-            <div class="pricing-card__features">
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>המלצות למסלולים</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>המלצות לינה לפי תקציב</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>אטרקציות לפי גיל הילדים</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>המלצות מסעדות ידידותיות לילדים</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span><strong>התאמות אישיות</strong> עד 3 סבבי עריכה</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>גיליון Excel מסודר לכל יום</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>רשימת ציוד מלאה</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span><strong>שיחת וידאו</strong> לפני הטיול (30 דק׳)</span>
-              </div>
-            </div>
-            <button type="button" class="btn btn--primary btn--block" onclick="openContactModalWithPackage('הרפתקה')">אני רוצה הרפתקה 🔥</button>
-            <p class="pricing-card__delivery">&#9889; מוכן תוך 3 ימי עסקים</p>
-          </div>
-        </div>
-
-        <!-- Card 3 - אודיסיאה -->
-        <div class="pricing-card reveal reveal-delay-2">
-          <div class="pricing-card__header">
-            <span class="pricing-card__icon" aria-hidden="true">&#128640;</span>
-            <h3 class="pricing-card__name">אודיסיאה</h3>
-            <p class="pricing-card__tagline">ראש שקט מלא - מהרגע הראשון ועד הנחיתה.</p>
-          </div>
-          <div class="pricing-card__body">
-            <div class="pricing-card__price-row">
-              <div class="pricing-card__price">&#8362;1,390</div>
-              <p class="pricing-card__for">לטיול עד 14 ימים + ליווי שוטף</p>
-            </div>
-            <div class="pricing-card__features">
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>כל מה שב"הרפתקה" +</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>מסלול עד <strong>14 ימים</strong></span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>התאמות ללא הגבלה</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span><strong>ליווי וואטסאפ</strong> בזמן הטיול</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>עדכונים בזמן אמת (מזג אוויר, שינויים)</span>
-              </div>
-              <div class="pricing-card__feature pricing-card__feature--included">
-                <span class="pricing-card__check">✓</span>
-                <span>תכנית חלופית למקרה חירום</span>
-              </div>
-            </div>
-            <button type="button" class="btn btn--outline-dark btn--block" onclick="openContactModalWithPackage('אודיסיאה')">אני רוצה אודיסיאה</button>
-            <p class="pricing-card__delivery">&#9889; מוכן תוך 3 ימי עסקים</p>
-          </div>
-        </div>
-
-      </div>
-
     </div>
   </section>
 
-  <!-- ============ HOW IT WORKS (Process) ============ -->
+    <!-- ============ HOW IT WORKS (Process) ============ -->
   <section class="process" id="process" aria-labelledby="process-title">
     <div class="container">
       <div class="section-header">
