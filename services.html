@@ -250,6 +250,7 @@
       align-items: center;
       justify-content: space-between;
       height: 100%;
+      position: relative;
     }
 
     .nav__logo {
@@ -276,6 +277,9 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .nav__link {
@@ -1489,12 +1493,12 @@
       <ul class="nav__links" role="menubar">
         <li role="none"><a href="tips.html" class="nav__link" role="menuitem">טיפים</a></li>
         <li role="none"><a href="destinations.html" class="nav__link" role="menuitem">יעדים</a></li>
-        <li role="none"><a href="services.html#services-content" class="nav__link" role="menuitem" aria-current="page">שירותים</a></li>
+        <li role="none"><a href="packages.html" class="nav__link" role="menuitem" aria-current="page">שירותים</a></li>
         <li role="none"><a href="#about" class="nav__link" role="menuitem">אודות</a></li>
         <li role="none"><a href="#final-cta" class="nav__link" role="menuitem">צור קשר</a></li>
       </ul>
 
-      <a href="packages.html" class="btn btn--primary btn--sm nav__cta desktop-only">לחבילות</a>
+      
 
       <div class="nav__mobile-actions">
         <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="שלח הודעת וואטסאפ">
@@ -1511,10 +1515,10 @@
     <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
       <a href="tips.html" class="nav__link" role="menuitem">טיפים</a>
       <a href="destinations.html" class="nav__link" role="menuitem">יעדים</a>
-      <a href="services.html#services-content" class="nav__link" role="menuitem" aria-current="page">שירותים</a>
+      <a href="packages.html" class="nav__link" role="menuitem">שירותים</a>
       <a href="#about" class="nav__link" role="menuitem">אודות</a>
       <a href="#final-cta" class="nav__link" role="menuitem">צור קשר</a>
-      <a href="packages.html" class="btn btn--primary">לחבילות</a>
+      
     </div>
   </nav>
 
