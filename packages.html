@@ -112,8 +112,8 @@
     display:flex; gap:40px; justify-content:center; flex-wrap:wrap;
   }
   .stat { text-align:center; }
-  .stat__num { font-family:'Secular One',sans-serif; font-size:32px; color:var(--amber); display:block; }
-  .stat__label { font-size:13px; color:rgba(255,255,255,0.7); }
+  .stat__num { font-family:'Rubik',sans-serif; font-size:32px; font-weight:800; color:var(--amber); display:block; }
+  .stat__label { font-family:'Rubik',sans-serif; font-size:13px; color:rgba(255,255,255,0.7); }
 
   /* WAVE */
   .wave { background:var(--teal); line-height:0; }
@@ -213,7 +213,7 @@
     border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); }
   th {
     padding:16px 20px; background:var(--teal); color:white;
-    font-family:'Secular One',sans-serif; font-size:15px; text-align:center;
+    font-family:'Rubik',sans-serif; font-size:15px; font-weight:600; text-align:center;
   }
   th:first-child { text-align:right; background:var(--teal-dark); }
   td {
@@ -304,10 +304,10 @@
 <div class="hero">
   <span class="hero__badge">✈ תכנון טיולים משפחתיים</span>
   <h1 class="hero__title">בחרו את החבילה שמתאימה לכם</h1>
-  <p class="hero__sub">תכנון טיול עם ילדים לוקח שעות רבות — אני חוסך לכם את הזמן, כאב הראש והחיפוש האינסופי</p>
+  <p class="hero__sub">תכנון טיול עם ילדים לוקח שעות רבות - אני חוסך לכם את הזמן, כאב הראש והחיפוש האינסופי</p>
   <div class="hero__stats">
-    <div class="stat"><span class="stat__num">+50</span><span class="stat__label">משפחות מרוצות</span></div>
-    <div class="stat"><span class="stat__num">12</span><span class="stat__label">יעדים באירופה</span></div>
+    <div class="stat"><span class="stat__num">30+</span><span class="stat__label">משפחות מרוצות</span></div>
+    <div class="stat"><span class="stat__num">20+</span><span class="stat__label">יעדים בעולם</span></div>
     <div class="stat"><span class="stat__num">100%</span><span class="stat__label">מותאם אישית</span></div>
   </div>
 </div>
@@ -316,7 +316,7 @@
 <!-- PACKAGES -->
 <section class="packages">
   <h2 class="section-title">החבילות שלנו</h2>
-  <p class="section-sub">כל חבילה בנויה להוריד מכם את ההתלבטות — ולהביא לכם שקט אמיתי</p>
+  <p class="section-sub">כל חבילה בנויה להוריד מכם את ההתלבטות - ולהביא לכם שקט אמיתי</p>
 
   <div class="cards-grid">
 
@@ -337,9 +337,7 @@
           <div class="feature"><span class="check">✓</span><span>המלצות לינה לפי תקציב</span></div>
           <div class="feature"><span class="check">✓</span><span>אטרקציות לפי גיל הילדים</span></div>
           <div class="feature"><span class="check">✓</span><span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span></div>
-          <div class="feature feature--dim"><span class="check">✗</span><span>התאמות אישיות</span></div>
-          <div class="feature feature--dim"><span class="check">✗</span><span>שיחת וידאו לפני הטיול</span></div>
-          <div class="feature feature--dim"><span class="check">✗</span><span>ליווי וואטסאפ בטיול</span></div>
+          
         </div>
         <button class="btn-pkg" onclick="openContactModalWithPackage('מצפן')">אני רוצה מצפן</button>
         <p class="delivery">📅 מוכן תוך 4 ימי עסקים</p>
@@ -440,28 +438,28 @@
       <span>איך מתחילים?</span>
       <span class="faq-icon">+</span>
     </button>
-    <div class="faq-a"><div class="faq-a-inner">ממלאים את השאלון, שולחים לי בוואטסאפ — ואני חוזר תוך 24 שעות עם הצעה מותאמת לכם.</div></div>
+    <div class="faq-a"><div class="faq-a-inner">ממלאים את השאלון, שולחים לי בוואטסאפ - ואני חוזר תוך 24 שעות עם הצעה מותאמת לכם.</div></div>
   </div>
   <div class="faq-item">
     <button class="faq-q" onclick="toggleFaq(this)">
       <span>כמה זמן לפני הטיול כדאי לפנות?</span>
       <span class="faq-icon">+</span>
     </button>
-    <div class="faq-a"><div class="faq-a-inner">מינימום חודש לפני — אבל ככל שמוקדם יותר, כך יש יותר זמן להתאים ולשפר.</div></div>
+    <div class="faq-a"><div class="faq-a-inner">מינימום חודש לפני - אבל ככל שמוקדם יותר, כך יש יותר זמן להתאים ולשפר.</div></div>
   </div>
   <div class="faq-item">
     <button class="faq-q" onclick="toggleFaq(this)">
       <span>האם ניתן לשדרג חבילה?</span>
       <span class="faq-icon">+</span>
     </button>
-    <div class="faq-a"><div class="faq-a-inner">כן! בכל שלב ניתן לשדרג לחבילה הבאה — משלמים רק את ההפרש.</div></div>
+    <div class="faq-a"><div class="faq-a-inner">כן! בכל שלב ניתן לשדרג לחבילה הבאה - משלמים רק את ההפרש.</div></div>
   </div>
   <div class="faq-item">
     <button class="faq-q" onclick="toggleFaq(this)">
       <span>מה אם לא אהבנו את המסלול?</span>
       <span class="faq-icon">+</span>
     </button>
-    <div class="faq-a"><div class="faq-a-inner">בחבילת הרפתקה ואודיסיאה יש סבבי עריכה — עד שמגיעים למסלול שאתם אוהבים.</div></div>
+    <div class="faq-a"><div class="faq-a-inner">בחבילת הרפתקה ואודיסיאה יש סבבי עריכה - עד שמגיעים למסלול שאתם אוהבים.</div></div>
   </div>
 </section>
 
