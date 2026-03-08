@@ -355,12 +355,13 @@
 
   <div class="tab-nav">
     <div class="container tab-nav__inner">
-      <button class="tab-btn active" data-tab="before">לפני הטיסה</button>
+      <button class="tab-btn active" data-tab="planning">שלב התכנון</button>
+      <button class="tab-btn" data-tab="before">לפני הטיסה</button>
       <button class="tab-btn" data-tab="during">בזמן השהייה</button>
     </div>
   </div>
 
-  <section class="tips-section active" id="tab-before">
+  <section class="tips-section" id="tab-before">
     <div class="container">
       <div class="section-intro reveal">
         <span class="section-intro__icon">🧳</span>
@@ -520,6 +521,92 @@
             <li>לזכור למה יצאתם - להיות יחד ולהנות</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tips-section active" id="tab-planning">
+    <div class="container" style="max-width:900px;padding-top:48px;padding-bottom:80px;">
+      <div class="section-intro" style="text-align:center;margin-bottom:40px;">
+        <div style="font-size:40px;margin-bottom:12px;">🗺️</div>
+        <h2 class="section-intro__title">שלב התכנון</h2>
+        <p class="section-intro__subtitle">הטיפים שיעזרו לכם לתכנן טיול חלק ומוצלח עם ילדים - לפני שמתחילים בכלל לחפש</p>
+      </div>
+
+      <style>
+        .plan-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+        .plan-card { background: white; border-radius: 20px; padding: 28px 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
+        .plan-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.11); }
+        .plan-card__icon { width: 56px; height: 56px; border-radius: 16px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; }
+        .plan-card h3 { font-family: var(--font-heading); font-size: 16px; color: #2C2C2C; margin-bottom: 8px; }
+        .plan-card p { font-size: 13px; color: #666; line-height: 1.7; }
+        .plan-card--cta { grid-column: 1/-1; background: linear-gradient(135deg,#E8A045,#d4903c); text-align: right; display: flex; gap: 20px; align-items: center; padding: 28px 32px; box-shadow: 0 4px 18px rgba(232,160,69,0.35); }
+        .plan-card--cta h3 { color: white; font-size: 20px; margin-bottom: 6px; }
+        .plan-card--cta p { color: rgba(255,255,255,0.92); font-size: 14px; }
+        .plan-card--cta .plan-card__icon { margin: 0; flex-shrink: 0; background: rgba(255,255,255,0.2); }
+        @media(max-width:640px){ .plan-grid { grid-template-columns: 1fr; } .plan-card--cta { flex-direction: column; text-align: center; } }
+      </style>
+
+      <div class="plan-grid">
+
+        <div class="plan-card">
+          <div class="plan-card__icon" style="background:#e8f4f8;">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#1A6B72" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>טיסת בוקר / צהריים בלבד</h3>
+          <p>הבנתי מההתחלה שאין מה לעשות - טיסה עם ילדים קטנים מחייבת אותנו להשקיע עוד כמה דולרים. טיסת ערב / לילה? הילדים לא ישרדו את היום ושני הצדדים מפסידים.</p>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-card__icon" style="background:#fdf3e3;">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#E8A045" stroke-width="1.8"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" transform="scale(-1,1) translate(-24,0)"/></svg>
+          </div>
+          <h3>חזרה - חמישי או שישי</h3>
+          <p>לגבי חזרה - לא באמת משנה :) כולנו מבואסים לחזור, אבל תמיד עדיף לחזור בחמישי או שישי שיהיה קצת זמן לנוח מהחופשה בבית.</p>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-card__icon" style="background:#eaf4ed;">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#2d7550" stroke-width="1.8"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3>הגעה ליעד - יום ראשון בקצב</h3>
+          <p>עברתם את נתב"ג, הטיסה עברה והגעתם ליעד - אני לא ממליץ לקחת רכב ביום הראשון. תתארגנו על לינה ליד שדה התעופה ותתחילו את היום השני רעננים ומלאי אנרגיה לנסיעות.</p>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-card__icon" style="background:#fce8e8;">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#c0392b" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+          </div>
+          <h3>בית מלון או דירה?</h3>
+          <p>הוויכוח האולטימטיבי - כל יעד שווה שיקול לפי הצרכים. אני לא אוהב מקומות שמגישים ארוחת בוקר - הילדים אוכלים שטויות. מתארגנים על כמה קניות בסופר מקומי לבוקר וכולם אוכלים מה שצריך ומה שאוהבים. מבחינת עלות - המחירים נמוכים מאוד בהשוואה לארץ.</p>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-card__icon" style="background:#e8f4f8;">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#1A6B72" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3>מסלול טיול - טיול כוכב</h3>
+          <p>תמיד לחשב מסלולים עד שעה נסיעה ולחזור לאותו מקום לינה. בטיול של 7 ימים ומעלה אין בעיה להחליף מקום לינה ואז בהתאם משתנה המיקום כוכב. לא יותר משתי אטרקציות ביום - זה די והותר וצריך גם מנוחה באמצע.</p>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-card__icon" style="background:#fdf3e3;">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#E8A045" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <h3>תקציב לטיול - פלוס 20%</h3>
+          <p>אני תמיד עושה חישוב של 20% יותר ממה שחשבתי - תמיד יש הפתעות בדרך מבחינת אטרקציות, מתנות ואולי עוד סתם גלידה שרציתם.</p>
+        </div>
+
+        <div class="plan-card plan-card--cta">
+          <div class="plan-card__icon">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div>
+            <h3>מחקר מעמיק</h3>
+            <p>פה אני נכנס לתמונה ובשביל זה האתר מתי טסים נכנס לתמונה - אני אעשה את המחקר ומה צריך להזמין מראש ומה צריך לתכנן. יאללה אז מתי טסים :)</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
