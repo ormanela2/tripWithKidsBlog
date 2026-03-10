@@ -318,466 +318,79 @@
       0%, 100% { opacity: 0.4; box-shadow: 0 0 3px #4ade80; }
       50%       { opacity: 1;   box-shadow: 0 0 10px #4ade80, 0 0 20px #4ade8088; }
     }
+  
+    /* ── NAV ─────────────────────────────── */
+    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
+    .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+    .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
+    .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
+    .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
+    .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
+    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Rubik',sans-serif; font-weight:600; font-size:15px; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
+    .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
+    .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
+    .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
+    .nav__mobile-actions { display:none; align-items:center; gap:4px; }
+    .nav__hamburger { display:flex; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; }
+    .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+    .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
+    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:32px 24px; flex-direction:column; gap:8px; z-index:999; overflow-y:auto; }
+    .nav__mobile-menu.open { display:flex; }
+    .nav__mobile-menu .nav__link { font-size:20px; padding:16px; justify-content:flex-start; }
+    .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:600; font-size:15px; border-radius:22px; padding:8px 16px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); animation:communityPulse 2.8s ease-in-out infinite; }
+    .nav__link--community:hover, .nav__link--community:focus-visible { background:#d4903c !important; color:#2C2C2C !important; transform:translateY(-2px); box-shadow:0 4px 16px rgba(232,160,69,0.55); animation:none; }
+    .nav__link--community::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; margin-left:7px; box-shadow:0 0 6px #4ade80; animation:dotBlink 1.4s ease-in-out infinite; }
+    .nav__mobile-menu .nav__link--community { font-size:15px; padding:8px 18px; width:fit-content; min-height:44px; }
+    @keyframes communityPulse { 0%,100%{box-shadow:0 2px 10px rgba(232,160,69,0.4);} 50%{box-shadow:0 2px 18px rgba(232,160,69,0.75),0 0 0 4px rgba(232,160,69,0.15);} }
+    @keyframes dotBlink { 0%,100%{opacity:0.4;box-shadow:0 0 3px #4ade80;} 50%{opacity:1;box-shadow:0 0 10px #4ade80,0 0 20px #4ade8088;} }
+    @media(max-width:900px) {
+      .nav__links { display:none; }
+      .nav__mobile-actions { display:flex; }
+      .nav__logo img { height:44px !important; }
+      .nav__logo-text { font-size:18px !important; }
+    }
+    /* ── END NAV ─────────────────────────── */
   </style>
 </head>
 <body>
 
   <nav class="nav" id="nav">
-    <div class="container nav__inner">
-      <a href="services.html" class="nav__logo">
-        <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
-        <span style="font-family:Rubik,sans-serif;font-size:28px;color:var(--teal);font-weight:700;">מתי טסים</span>
-      </a>
-      <ul class="nav__links">
-        <li><a href="tips.html" class="nav__link">טיפים</a></li>
-        <li><a href="destinations.html" class="nav__link" aria-current="page">יעדים</a></li>
-        <li><a href="packages.html" class="nav__link">שירותים</a></li>
-        <li><a href="about.html" class="nav__link">אודות</a></li>
-        <li><a href="services.html#final-cta" class="nav__link">צור קשר</a></li>
-        <li role="none"><a href="services.html#newsletter" class="nav__link nav__link--community" role="menuitem">מצטרפים לקהילה</a></li>
-      </ul>
-      <div class="nav__mobile-actions">
-        <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </a>
-        <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+  <div class="nav__inner">
+    <a href="services.html" class="nav__logo">
+      <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+      <span class="nav__logo-text">מתי טסים</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="tips.html" class="nav__link">טיפים</a></li>
+      <li><a href="destinations.html" class="nav__link" aria-current="page">יעדים</a></li>
+      <li><a href="weather.html" class="nav__link">מזג אוויר</a></li>
+      <li><a href="packages.html" class="nav__link">שירותים</a></li>
+      <li><a href="about.html" class="nav__link">אודות</a></li>
+      <li><a href="services.html#final-cta" class="nav__link">צור קשר</a></li>
+      <li><a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a></li>
+    </ul>
+    <div class="nav__mobile-actions">
+      <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-label="פתח תפריט">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <div class="nav__mobile-menu" id="mobileMenu">
-      <a href="tips.html" class="nav__link">טיפים</a>
-      <a href="destinations.html" class="nav__link">יעדים</a>
-      <a href="packages.html" class="nav__link">שירותים</a>
-      <a href="about.html" class="nav__link">אודות</a>
-      <a href="services.html#final-cta" class="nav__link">צור קשר</a>
-      <a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a>
-    </div>
-  </nav>
+  </div>
+  <div class="nav__mobile-menu" id="mobileMenu">
+    <a href="tips.html" class="nav__link">טיפים</a>
+    <a href="destinations.html" class="nav__link" aria-current="page">יעדים</a>
+    <a href="weather.html" class="nav__link">מזג אוויר</a>
+    <a href="packages.html" class="nav__link">שירותים</a>
+    <a href="about.html" class="nav__link">אודות</a>
+    <a href="services.html#final-cta" class="nav__link">צור קשר</a>
+    <a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a>
+  </div>
+</nav>
 
   <section class="article-hero">
     <div class="container">
       <div class="article-hero__inner">
-        <nav class="article-hero__breadcrumb">
-          <a href="services.html">דף הבית</a> › <a href="destinations.html">יעדים</a> › <span>פולין - וורשה</span>
-        </nav>
-        <span class="article-hero__flag">🇵🇱</span>
-        <h1 class="article-hero__title">טיול לוורשה עם ילדים - המדריך המלא</h1>
-        <p class="article-hero__subtitle">עיר שמחברת היסטוריה עמוקה עם כיף אמיתי לילדים - מוזיאוני מדע, פארקי שעשועים, גנים מרהיבים ואוכל טעים בכל פינה</p>
-        <div class="article-hero__meta">
-          <span class="article-hero__badge">🟢 קל עם ילדים</span>
-          <span class="article-hero__badge">📅 7-9 ימים מומלץ</span>
-          <span class="article-hero__badge">🍂 ספטמבר-אוקטובר</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div style="height:clamp(200px,35vw,320px);overflow:hidden;position:relative;">
-    <img src="warsaw8.jpg" alt="ילד בחוות הדלועות" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;">
-    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.35) 0%,transparent 60%);"></div>
-  </div>
-
-<section class="article-body">
-    <div class="container">
-      <div class="article-layout">
-        <main class="article-content">
-
-          <div class="toc">
-            <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
-            <div class="toc__list">
-              <a href="#intro" class="toc__link"><span class="toc__num">1</span> למה וורשה עם ילדים?</a>
-              <a href="#route-map" class="toc__link"><span class="toc__num">2</span> המסלול על המפה</a>
-              <a href="#itinerary" class="toc__link"><span class="toc__num">3</span> מסלול יום-יום מומלץ</a>
-              <a href="#accommodation" class="toc__link"><span class="toc__num">4</span> המלצות לינה</a>
-              <a href="#logistics" class="toc__link"><span class="toc__num">5</span> טיפים לוגיסטיים</a>
-            </div>
-          </div>
-
-          <div class="article-section" id="intro">
-            <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> למה וורשה עם ילדים?</h2>
-            <p>וורשה מפתיעה כל פעם מחדש. מצד אחד עיר עם היסטוריה כבדה ומרגשת, מצד שני - מלאה באנרגיה, פארקים ירוקים ואינסוף פעילויות לילדים. מרכז המדע קופרניקוס הוא אחד המקומות הכי טובים שביקרנו בו עם ילדים בכל אירופה.</p>
-            <p>אתם אולי תופתעו אבל יש הרבה מה לעשות מחוץ לוורשה, פארקים ירוקים, טיולי טבע ביערות, נחלים זורמים, אפילו מצאנו פארק חבלים בתוך היער.</p>
-            <p>אוקטובר הוא עונה מצוינת - פחות תיירים, מחירים נוחים, ואוויר סתווי נעים. הילדים ייהנו מהעלים הצהובים בפארקים לא פחות מהאטרקציות עצמן.</p>
-            <p>לא הייתי מוותר על נסיעה ללודז׳ - הפארק שעשועים שם באמת אחד היפים שהיינו, והילדים עד היום זוכרים את המתקנים. יש גם את גן החיות המפורסם, אבל לשם לא הגענו.</p>
-          </div>
-
-          <div class="article-section" id="route-map">
-            <h2 class="article-section__title"><span class="article-section__title-icon">🗺️</span> המסלול על המפה</h2>
-            <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות את המיקום במפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
-            <div id="trip-map" style="height:420px;border-radius:16px;overflow:hidden;border:2px solid var(--sand-dark);box-shadow:0 4px 20px rgba(0,0,0,0.1);"></div>
-            <div id="map-day-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;"></div>
-          </div>
-
-          <div style="border-radius:14px;overflow:hidden;height:clamp(160px,30vw,240px);margin-bottom:20px;">
-            <img src="warsaw7.jpg" alt="ילדה עם תפוח ענק" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;">
-          </div>
-          <div class="article-section" id="itinerary">
-            <h2 class="article-section__title"><span class="article-section__title-icon">🗓️</span> המסלול המלא - 9 ימים</h2>
-            <div class="timeline">
-
-              <div class="tl-item tl-item--arrive">
-                <div class="tl-item__label">יום 1<br><span style="font-size:11px;color:#ccc;">30.09 שלישי</span></div>
-                <div class="tl-item__node"><div class="tl-item__icon">✈️</div><span class="tl-item__day-label">יום 1</span></div>
-                <div class="tl-item__card tl-card open" id="tl1">
-                  <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">טיסה לוורשה + הגעה</div><div class="tl-card__where">📍 וורשה</div></div></div>
-                  <div class="tl-card__body">
-                    <div class="tl-activity"><span class="tl-activity__time">11:50</span><div><div class="tl-activity__name">נחיתה בוורשה ✈️</div><div class="tl-activity__desc">נחיתה בשדה התעופה וורשה צ'ופין, נסיעה למלון והתארגנות.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">Copernicus Science Centre</div><div class="tl-activity__desc">מרכז מדע אינטראקטיבי מדהים - אחד הטובים באירופה לילדים. תכנו לפחות 3 שעות.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">Łazienki Park</div><div class="tl-activity__desc">פארק מלכותי יפהפה לטיול ערב - אגם, טווסים ואווירה ציורית.</div></div></div>
-                  <div class="tl-tip"><strong>לינה:</strong> Royal Wilanów 2-bedroom Apartment</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleTl('tl1')"><span>פרטי היום</span><span class="tl-card__chevron">▲</span></button>
-                </div>
-              </div>
-
-              <div class="tl-item tl-item--fun">
-                <div class="tl-item__label">יום 2<br><span style="font-size:11px;color:#ccc;">01.10 רביעי</span></div>
-                <div class="tl-item__node"><div class="tl-item__icon">🎪</div><span class="tl-item__day-label">יום 2</span></div>
-                <div class="tl-item__card tl-card" id="tl2">
-                  <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">טרמפולינות + גבעה Szczęśliwice</div><div class="tl-card__where">📍 Park Szczęśliwice</div></div></div>
-                  <div class="tl-card__body">
-                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Park Szczęśliwice + Górka</div><div class="tl-activity__desc">פארק עירוני גדול עם גבעה מלאכותית לגלישה - ילדים מתים עליו. חינמי וכיפי.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">Park Rozrywki #KochamSkakac Trampoliny</div><div class="tl-activity__desc">פארק טרמפולינות ענק - שעות של כיף לכל הגילאים.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">Palace of Culture and Science</div><div class="tl-activity__desc">בניין האייקון של וורשה - מרשים מבחוץ, כדאי לראות בלילה עם התאורה.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">סדנת הכנת סוכריות</div><div class="tl-activity__desc">סדנת הכנת סוכרות מסורתיות - כיפי ומיוחד לילדים.</div></div></div>
-                  <div class="tl-tip"><strong>לינה:</strong> Royal Wilanów 2-bedroom Apartment</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleTl('tl2')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
-                </div>
-              </div>
-
-              <div class="tl-item tl-item--city">
-                <div class="tl-item__label">יום 3<br><span style="font-size:11px;color:#ccc;">02.10 חמישי</span></div>
-                <div class="tl-item__node"><div class="tl-item__icon">🎬</div><span class="tl-item__day-label">יום 3</span></div>
-                <div class="tl-item__card tl-card" id="tl3">
-                  <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">Nasza Tłocznia + Dzielnica Filmowa</div><div class="tl-card__where">📍 וורשה</div></div></div>
-                  <div class="tl-card__body">
-                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Nasza Tłocznia</div><div class="tl-activity__desc">מקום ייצור מיצים טבעיים עם סיור וטעימות - חוויה ייחודית לילדים.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">מטע עצי תפוחים</div><div class="tl-activity__desc">מטע של עצי תפוחים שאפשר ללכת לאיבוד בו עם הילדים - יש טעימות ומיצים טבעיים. חוויה ייחודית לילדים.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">Dzielnica Filmowa</div><div class="tl-activity__desc">רחוב קולנוע ובידור - שילוב של אוכל, חנויות ואווירה מיוחדת.</div></div></div>
-                    <div class="tl-tip"><strong>טיפ:</strong> Tourist Trail "Bunker in Konewka" - ביקור בבונקר היסטורי ייחודי ליד לודז', שווה אם יש זמן.</div>
-                  <div class="tl-tip"><strong>לינה:</strong> Royal Wilanów 2-bedroom Apartment</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleTl('tl3')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
-                </div>
-              </div>
-
-              <div class="tl-item tl-item--fun">
-                <div class="tl-item__label">יום 4<br><span style="font-size:11px;color:#ccc;">03.10 שישי</span></div>
-                <div class="tl-item__node"><div class="tl-item__icon">🌊</div><span class="tl-item__day-label">יום 4</span></div>
-                <div class="tl-item__card tl-card" id="tl4">
-                  <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">Suntago פארק מים + פונטנה</div><div class="tl-card__where">📍 Suntago Wodny Świat</div></div><span class="tl-card__star tl-card__star--must">⭐ חובה</span></div>
-                  <div class="tl-card__body">
-                    <div class="tl-activity"><span class="tl-activity__time">10:00</span><div><div class="tl-activity__name">Suntago - פארק מים מקורה ענקי</div><div class="tl-activity__desc">אחד מפארקי המים הגדולים באירופה - מגלשות, גלים, בריכות תרמיות. פתוח עד 21:00. תכנו יום שלם.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">Multimedialny Park Fontann</div><div class="tl-activity__desc">מופע מים ואורות מרהיב - מתחיל ב-20:30. בחינם ומומלץ מאוד.</div></div></div>
-                  <div class="tl-tip"><strong>לינה:</strong> Royal Wilanów 2-bedroom Apartment</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleTl('tl4')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
-                </div>
-              </div>
-
-              <div class="tl-item tl-item--science">
-                <div class="tl-item__label">יום 5<br><span style="font-size:11px;color:#ccc;">04.10 שבת</span></div>
-                <div class="tl-item__node"><div class="tl-item__icon">🌿</div><span class="tl-item__day-label">יום 5</span></div>
-                <div class="tl-item__card tl-card" id="tl5">
-                  <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">Park Mandoria + Łazienki Królewskie</div><div class="tl-card__where">📍 לודז׳ → וורשה</div></div><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div>
-                  <div class="tl-card__body">
-                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Park Mandoria</div><div class="tl-activity__desc">פארק עצום לילדים שווה נסיעה ללודז׳ - אפשר לבלות בו כמה שעות טובות ולילדים לא נמאס.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">Łazienki Królewskie - פארק מלכותי</div><div class="tl-activity__desc">הפארק הכי יפה בוורשה - ארמון על המים, טווסים, אגמים. הילדים נהנים מהטיול החופשי.</div></div></div>
-                  <div class="tl-tip"><strong>לינה:</strong> Royal Wilanów 2-bedroom Apartment</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleTl('tl5')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
-                </div>
-              </div>
-
-              <div class="tl-item tl-item--park">
-                <div class="tl-item__label">יום 6<br><span style="font-size:11px;color:#ccc;">05.10 ראשון</span></div>
-                <div class="tl-item__node"><div class="tl-item__icon">🏎️</div><span class="tl-item__day-label">יום 6</span></div>
-                <div class="tl-item__card tl-card" id="tl6">
-                  <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">Racing Center + מבוך + Kampinos</div><div class="tl-card__where">📍 Racing Center Sp. o.o → Kampinos</div></div></div>
-                  <div class="tl-card__body">
-                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Racing Center Sp. o.o - קארטינג</div><div class="tl-activity__desc">מסלול קארטינג מקצועי - הילדים מתים על זה. מתאים מגיל 8+.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Labirynt pod Warszawą - מבוך תת-קרקעי</div><div class="tl-activity__desc">מבוך מתחת לאדמה - חוויה ייחודית ומסתורית. מתאים לילדים מגיל 6.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">Kampinos National Park</div><div class="tl-activity__desc">פארק לאומי עם יערות חול ייחודיים - טיול טבע נהדר, שקט ורחוק מהעיר.</div></div></div>
-                  <div class="tl-tip"><strong>לינה:</strong> Royal Wilanów 2-bedroom Apartment</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleTl('tl6')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
-                </div>
-              </div>
-
-              <div class="tl-item tl-item--fun">
-                <div class="tl-item__label">יום 7<br><span style="font-size:11px;color:#ccc;">06.10 שני</span></div>
-                <div class="tl-item__node"><div class="tl-item__icon">🎡</div><span class="tl-item__day-label">יום 7</span></div>
-                <div class="tl-item__card tl-card" id="tl7">
-                  <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">Majaland Warsaw - פארק שעשועים</div><div class="tl-card__where">📍 Majaland Warsaw</div></div><span class="tl-card__star tl-card__star--must">⭐ חובה</span></div>
-                  <div class="tl-card__body">
-                    <div class="tl-activity"><span class="tl-activity__time">יום שלם</span><div><div class="tl-activity__name">Majaland Warsaw</div><div class="tl-activity__desc">פארק שעשועים לילדים עם עשרות מתקנים, רכבות הרים קטנות, מופעים ואטרקציות. מושלם ליום שלם.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">ערב חופשי באזור</div><div class="tl-activity__desc">להסתובב באזור ליד הדירה ולתפוס מסעדה נחמדה.</div></div></div>
-                  <div class="tl-tip"><strong>לינה:</strong> Royal Wilanów 2-bedroom Apartment</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleTl('tl7')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
-                </div>
-              </div>
-
-              <div class="tl-item tl-item--city">
-                <div class="tl-item__label">יום 8<br><span style="font-size:11px;color:#ccc;">07.10 שלישי</span></div>
-                <div class="tl-item__node"><div class="tl-item__icon">🏰</div><span class="tl-item__day-label">יום 8</span></div>
-                <div class="tl-item__card tl-card" id="tl8">
-                  <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">Castle in Czersk + יום חופשי</div><div class="tl-card__where">📍 Czersk → וורשה</div></div></div>
-                  <div class="tl-card__body">
-                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Castle in Czersk - טירה עתיקה</div><div class="tl-activity__desc">טירה מימי הביניים כ-45 דקות מוורשה - מגדלים שאפשר לטפס עליהם, נוף מהמם ואווירה היסטורית. מתאים מאוד לילדים.</div></div></div>
-                    <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">חזרה לוורשה + זמן חופשי</div><div class="tl-activity__desc">קניות, גלידה, עיר העתיקה - סיום נינוח לפני יום האחרון.</div></div></div>
-                  <div class="tl-tip"><strong>לינה:</strong> Royal Wilanów 2-bedroom Apartment</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleTl('tl8')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
-                </div>
-              </div>
-
-              <div class="tl-item tl-item--farewell">
-                <div class="tl-item__label">יום 9<br><span style="font-size:11px;color:#ccc;">08.10 רביעי</span></div>
-                <div class="tl-item__node"><div class="tl-item__icon">🇮🇱</div><span class="tl-item__day-label">יום 9</span></div>
-                <div class="tl-item__card tl-card" id="tl9">
-                  <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">טיסה חזרה לישראל 🇮🇱</div><div class="tl-card__where">📍 וורשה ✈ ישראל</div></div></div>
-                  <div class="tl-card__body">
-                    <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">טיסה חזרה לישראל</div><div class="tl-activity__desc">מגיעים הביתה עם מלא זיכרונות, תמונות ועייפות מתוקה.</div></div></div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleTl('tl9')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div style="border-radius:14px;overflow:hidden;height:clamp(160px,30vw,240px);margin-bottom:20px;">
-            <img src="warsaw3.jpg" alt="פארק חבלים" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;">
-          </div>
-          <div class="article-section" id="accommodation">
-            <h2 class="article-section__title"><span class="article-section__title-icon">🏨</span> המלצות לינה</h2>
-            <p>בטיול הזה לנו במקום אחד לאורך כל השהות - נוח, מרווח ומתאים למשפחה עם ילדים. קרוב למסעדות טעימות, בתי קפה וסופרים.</p>
-            <div style="display:grid;grid-template-columns:1fr;gap:12px;">
-              <div style="background:var(--white);border:1.5px solid var(--sand-dark);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;">
-                <span style="font-size:22px;">🏙️</span>
-                <div style="flex:1;min-width:0;">
-                  <div style="font-weight:700;font-size:14px;">Royal Wilanów 2-bedroom Apartment</div>
-                  <div style="font-size:12px;color:#888;margin:2px 0 8px;">Warsaw, פולין</div>
-                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                    <a href="https://maps.google.com/?q=Royal+Wilanow+Warsaw" target="_blank" style="font-size:12px;color:var(--teal);border:1px solid var(--teal);border-radius:14px;padding:3px 10px;text-decoration:none;font-weight:600;">📍 מפה</a>
-                    <a href="#" style="font-size:12px;color:white;background:var(--teal);border-radius:14px;padding:3px 10px;text-decoration:none;font-weight:600;">להזמנה ←</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="article-section" id="logistics">
-            <h2 class="article-section__title"><span class="article-section__title-icon">🚗</span> טיפים לוגיסטיים</h2>
-            <div class="tips-list">
-              <div class="tip-item"><span class="tip-item__icon">✈️</span><div class="tip-item__text"><strong>הגעה:</strong> טיסות ישירות מתל אביב לוורשה - שדה התעופה Chopin קרוב למרכז העיר, כ-20 דקות ברכבת.</div></div>
-              <div class="tip-item"><span class="tip-item__icon">🚘</span><div class="tip-item__text"><strong>רכב:</strong> בתוך העיר אין צורך ברכב - תחבורה ציבורית מצוינת. לטיולים מחוץ לעיר (Czersk, Kampinos, Suntago) - כדאי לשכור.</div></div>
-              <div class="tip-item"><span class="tip-item__icon">💶</span><div class="tip-item__text"><strong>כסף:</strong> פולין לא חברה בגוש האירו - המטבע הוא זלוטי (PLN). כרטיסי אשראי מקובלים בכל מקום, אך כדאי לשאת מעט מזומן.</div></div>
-              <div class="tip-item"><span class="tip-item__icon">🌡️</span><div class="tip-item__text"><strong>מזג אוויר:</strong> אוקטובר בוורשה - 8-16 מעלות. כדאי להביא מעיל ובגדים בשכבות. גשם אפשרי, הביאו מטריות.</div></div>
-              <div class="tip-item"><span class="tip-item__icon">🎫</span><div class="tip-item__text"><strong>כרטיסים:</strong> Copernicus ו-Suntago - הזמינו מראש אונליין, במיוחד בסופי שבוע. Majaland - אפשר לקנות בכניסה אבל מומלץ להזמין.</div></div>
-              <div class="tip-item"><span class="tip-item__icon">🗣️</span><div class="tip-item__text"><strong>שפה:</strong> פולנית - באתרי תיירות ובמסעדות מדברים אנגלית בלי בעיה. Google Translate מועיל בשווקים.</div></div>
-            </div>
-          </div>
-
-          <!-- GALLERY -->
-          <div class="photo-gallery" id="gallery">
-            <h2 class="article-section__title" style="margin-bottom:16px;"><span class="article-section__title-icon">📸</span> גלריית תמונות</h2>
-            <div class="photo-gallery__grid">
-              <div class="photo-gallery__item" onclick="openLightbox(0)"><img src="warsaw2.jpg" alt="מוזיאון דינוזאורים"></div>
-              <div class="photo-gallery__item" onclick="openLightbox(1)"><img src="warsaw3.jpg" alt="פארק חבלים ביער"></div>
-              <div class="photo-gallery__item" onclick="openLightbox(2)"><img src="warsaw5.jpg" alt="מרכז קופרניקוס"></div>
-              <div class="photo-gallery__item" onclick="openLightbox(3)"><img src="warsaw1.jpg" alt="ייצור סוכריות"></div>
-              <div class="photo-gallery__item" onclick="openLightbox(4)"><img src="warsaw4.jpg" alt="ילד עם סנאי בפארק"></div>
-              <div class="photo-gallery__item" onclick="openLightbox(5)"><img src="warsaw7.jpg" alt="תפוח ענק"></div>
-              <div class="photo-gallery__item" onclick="openLightbox(6)"><img src="warsaw8.jpg" alt="חוות הדלועות"></div>
-            </div>
-          </div>
-
-          <!-- LIGHTBOX -->
-          <div class="lightbox" id="lightbox">
-            <span class="lightbox__close" onclick="closeLightbox()">✕</span>
-            <span class="lightbox__prev" onclick="changeLightbox(-1)">›</span>
-            <img id="lightbox-img" src="" alt="">
-            <span class="lightbox__next" onclick="changeLightbox(1)">‹</span>
-          </div>
-
-        </main>
-
-        <aside class="sidebar">
-          <div class="cta-card">
-            <div class="cta-card__title">רוצים מסלול מותאם?</div>
-            <div class="cta-card__text">אבנה לכם מסלול מלא לוורשה - יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.</div>
-            <a href="services.html#pricing" class="cta-card__btn">לחבילות תכנון ←</a>
-            <a href="https://wa.me/972546758145?text=אני מתעניין בתכנון טיול לוורשה עם ילדים" class="cta-card__wa" target="_blank">
-              <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              שלחו הודעה
-            </a>
-          </div>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <p>מתי טסים &copy; 2026 - <a href="services.html">דף הבית</a> | <a href="tips.html">טיפים</a> | <a href="destinations.html">יעדים</a> | <a href="terms.html">תנאי שימוש</a> | <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21">וואטסאפ</a></p>
-    </div>
-  </footer>
-
-  <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;" target="_blank" aria-label="וואטסאפ">
-    <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
-
-  <!-- Leaflet JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-
-  <!-- LIGHTBOX SCRIPT - separate from Leaflet -->
-  <script>
-    var galleryImages = ['warsaw2.jpg','warsaw3.jpg','warsaw5.jpg','warsaw1.jpg','warsaw4.jpg','warsaw7.jpg','warsaw8.jpg'];
-    var currentLightbox = 0;
-
-    window.openLightbox = function(idx) {
-      currentLightbox = idx;
-      document.getElementById('lightbox-img').src = galleryImages[idx];
-      document.getElementById('lightbox').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    };
-    window.closeLightbox = function() {
-      document.getElementById('lightbox').classList.remove('open');
-      document.body.style.overflow = '';
-    };
-    window.changeLightbox = function(dir) {
-      currentLightbox = (currentLightbox + dir + galleryImages.length) % galleryImages.length;
-      document.getElementById('lightbox-img').src = galleryImages[currentLightbox];
-    };
-    document.getElementById('lightbox').addEventListener('click', function(e) {
-      if (e.target === this) closeLightbox();
-    });
-    document.addEventListener('keydown', function(e) {
-      if (!document.getElementById('lightbox').classList.contains('open')) return;
-      if (e.key === 'ArrowRight') changeLightbox(-1);
-      if (e.key === 'ArrowLeft') changeLightbox(1);
-      if (e.key === 'Escape') closeLightbox();
-    });
-  </script>
-
-  <script>
-  (function() {
-    var nav = document.getElementById('nav');
-    window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
-    var hamburger = document.getElementById('hamburgerBtn');
-    var mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', function() {
-      var isOpen = mobileMenu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen.toString());
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-    mobileMenu.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }); });
-
-    var days = [
-      { id: 'tl1', day: 1, date: '30.09', label: 'נחיתה + קופרניקוס', emoji: '✈️', lat: 52.2393, lng: 21.0362, color: '#C0392B', title: 'Copernicus Science Centre + Łazienki Park' },
-      { id: 'tl2', day: 2, date: '01.10', label: 'Park Szczęśliwice + טרמפולינות', emoji: '🎪', lat: 52.2080, lng: 20.9620, color: '#E8A045', title: 'גבעת שחצ\'ליביצה + פארק טרמפולינות' },
-      { id: 'tl3', day: 3, date: '02.10', label: 'Nasza Tłocznia + Filmowa', emoji: '🎬', lat: 52.2297, lng: 21.0122, color: '#1A6B72', title: 'Nasza Tłocznia + Dzielnica Filmowa' },
-      { id: 'tl4', day: 4, date: '03.10', label: 'Suntago + פונטנה', emoji: '🌊', lat: 52.0500, lng: 20.6500, color: '#E8A045', title: 'Suntago פארק מים + מופע פונטנה' },
-      { id: 'tl5', day: 5, date: '04.10', label: 'Park Mandoria + Łazienki', emoji: '🌿', lat: 52.2154, lng: 21.0357, color: '#4A9B6F', title: 'Park Mandoria + Łazienki Królewskie' },
-      { id: 'tl6', day: 6, date: '05.10', label: 'קארטינג + מבוך + Kampinos', emoji: '🏎️', lat: 52.3247, lng: 20.8450, color: '#6b4aa0', title: 'Racing Center + Labirynt + Kampinos' },
-      { id: 'tl7', day: 7, date: '06.10', label: 'Majaland Warsaw', emoji: '🎡', lat: 52.4082, lng: 20.9670, color: '#E8A045', title: 'Majaland Warsaw - פארק שעשועים' },
-      { id: 'tl8', day: 8, date: '07.10', label: 'Castle in Czersk', emoji: '🏰', lat: 51.8088, lng: 21.1375, color: '#1A6B72', title: 'טירת Czersk + חזרה לוורשה' },
-      { id: 'tl9', day: 9, date: '08.10', label: 'טיסה לישראל', emoji: '🇮🇱', lat: 52.1672, lng: 20.9679, color: '#C0392B', title: 'טיסה חזרה לישראל' }
-    ];
-
-    window.toggleTl = function(id, fromMap) {
-      var card = document.getElementById(id);
-      var isOpen = card.classList.toggle('open');
-      var chevron = card.querySelector('.tl-card__chevron');
-      if (chevron) chevron.textContent = isOpen ? '▲' : '▼';
-      if (isOpen && !fromMap) {
-        var d = days.find(function(x) { return x.id === id; });
-        if (d) flyTo(d);
-      }
-    };
-
-    var map = L.map('trip-map', { center: [52.15, 20.9], zoom: 9, scrollWheelZoom: false });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap © CARTO', maxZoom: 18 }).addTo(map);
-    var latlngs = days.map(function(d) { return [d.lat, d.lng]; });
-    L.polyline(latlngs, { color: '#E8A045', weight: 2.5, dashArray: '6,5', opacity: 0.7 }).addTo(map);
-
-    var markers = {};
-    var activeDay = null;
-
-    function makeIcon(d, active) {
-      var size = active ? 46 : 38;
-      var bg = active ? d.color : '#fff';
-      var border = active ? '#fff' : d.color;
-      return L.divIcon({
-        className: '',
-        html: '<div style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:' + bg + ';border:2.5px solid ' + border + ';display:flex;align-items:center;justify-content:center;font-size:' + (active?20:16) + 'px;box-shadow:0 3px 12px rgba(0,0,0,0.22);cursor:pointer;"><span style="line-height:1;">' + d.emoji + '</span></div>',
-        iconSize: [size, size], iconAnchor: [size/2, size/2], popupAnchor: [0, -(size/2+4)]
-      });
-    }
-
-    function flyTo(d) {
-      map.flyTo([d.lat, d.lng], 12, { duration: 0.8 });
-      if (markers[d.id]) markers[d.id].openPopup();
-      setActive(d.id);
-    }
-
-    function setActive(id) {
-      if (activeDay === id) return;
-      activeDay = id;
-      days.forEach(function(d) { if (markers[d.id]) markers[d.id].setIcon(makeIcon(d, d.id === id)); });
-      document.querySelectorAll('.map-pill').forEach(function(p) {
-        p.style.background = p.dataset.id === id ? 'var(--teal)' : 'var(--white)';
-        p.style.color = p.dataset.id === id ? '#fff' : 'var(--charcoal)';
-        p.style.borderColor = p.dataset.id === id ? 'var(--teal)' : 'var(--sand-dark)';
-      });
-    }
-
-    days.forEach(function(d) {
-      var m = L.marker([d.lat, d.lng], { icon: makeIcon(d, false) }).addTo(map)
-        .bindPopup('<div dir="rtl" style="font-family:Rubik,sans-serif;min-width:160px;padding:4px 2px;"><div style="font-size:11px;color:#aaa;margin-bottom:2px;">יום ' + d.day + ' · ' + d.date + '</div><div style="font-size:15px;font-weight:600;color:' + d.color + ';margin-bottom:4px;">' + d.emoji + ' ' + d.label + '</div><div style="font-size:13px;color:#555;margin-bottom:8px;">' + d.title + '</div><button onclick="goToDay(\'' + d.id + '\')" style="width:100%;background:' + d.color + ';color:#fff;border:none;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:600;cursor:pointer;font-family:Rubik,sans-serif;">לפרטי היום ↓</button></div>');
-      m.on('click', function() { setActive(d.id); });
-      markers[d.id] = m;
-    });
-
-    window.goToDay = function(id) {
-      map.closePopup();
-      var card = document.getElementById(id);
-      if (card && !card.classList.contains('open')) toggleTl(id, true);
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    };
-
-    var pillsContainer = document.getElementById('map-day-pills');
-    days.forEach(function(d) {
-      var btn = document.createElement('button');
-      btn.className = 'map-pill';
-      btn.dataset.id = d.id;
-      btn.innerHTML = '<span>' + d.emoji + '</span><span style="font-size:12px;">יום ' + d.day + '</span>';
-      btn.style.cssText = 'display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;border:1.5px solid var(--sand-dark);background:var(--white);cursor:pointer;font-family:Rubik,sans-serif;font-size:13px;transition:all 0.2s;';
-      btn.addEventListener('click', function() { flyTo(d); });
-      pillsContainer.appendChild(btn);
-    });
-
-    days.forEach(function(d) {
-      var item = document.getElementById(d.id);
-      if (!item) return;
-      var header = item.querySelector('.tl-card__header');
-      if (header) { header.style.cursor = 'pointer'; header.addEventListener('click', function() { flyTo(d); }); }
-    });
-
-  })();
-  </script>
-</body>
-</html>
+        

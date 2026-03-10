@@ -269,491 +269,80 @@
       0%, 100% { opacity: 0.4; box-shadow: 0 0 3px #4ade80; }
       50%       { opacity: 1;   box-shadow: 0 0 10px #4ade80, 0 0 20px #4ade8088; }
     }
+  
+    /* ── NAV ─────────────────────────────── */
+    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
+    .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+    .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
+    .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
+    .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
+    .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
+    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Rubik',sans-serif; font-weight:600; font-size:15px; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
+    .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
+    .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
+    .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
+    .nav__mobile-actions { display:none; align-items:center; gap:4px; }
+    .nav__hamburger { display:flex; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; }
+    .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+    .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
+    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:32px 24px; flex-direction:column; gap:8px; z-index:999; overflow-y:auto; }
+    .nav__mobile-menu.open { display:flex; }
+    .nav__mobile-menu .nav__link { font-size:20px; padding:16px; justify-content:flex-start; }
+    .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:600; font-size:15px; border-radius:22px; padding:8px 16px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); animation:communityPulse 2.8s ease-in-out infinite; }
+    .nav__link--community:hover, .nav__link--community:focus-visible { background:#d4903c !important; color:#2C2C2C !important; transform:translateY(-2px); box-shadow:0 4px 16px rgba(232,160,69,0.55); animation:none; }
+    .nav__link--community::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; margin-left:7px; box-shadow:0 0 6px #4ade80; animation:dotBlink 1.4s ease-in-out infinite; }
+    .nav__mobile-menu .nav__link--community { font-size:15px; padding:8px 18px; width:fit-content; min-height:44px; }
+    @keyframes communityPulse { 0%,100%{box-shadow:0 2px 10px rgba(232,160,69,0.4);} 50%{box-shadow:0 2px 18px rgba(232,160,69,0.75),0 0 0 4px rgba(232,160,69,0.15);} }
+    @keyframes dotBlink { 0%,100%{opacity:0.4;box-shadow:0 0 3px #4ade80;} 50%{opacity:1;box-shadow:0 0 10px #4ade80,0 0 20px #4ade8088;} }
+    @media(max-width:900px) {
+      .nav__links { display:none; }
+      .nav__mobile-actions { display:flex; }
+      .nav__logo img { height:44px !important; }
+      .nav__logo-text { font-size:18px !important; }
+    }
+    /* ── END NAV ─────────────────────────── */
   </style>
 </head>
 <body>
 
   <nav class="nav" id="nav">
-    <div class="container nav__inner">
-      <a href="services.html" class="nav__logo">
-        <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
-        <span style="font-family:Rubik,sans-serif;font-size:28px;color:var(--teal);font-weight:700;">מתי טסים</span>
-      </a>
-      <ul class="nav__links">
-        <li><a href="tips.html" class="nav__link">טיפים</a></li>
-        <li><a href="destinations.html" class="nav__link" aria-current="page">יעדים</a></li>
-        <li><a href="packages.html" class="nav__link">שירותים</a></li>
-        <li><a href="about.html" class="nav__link">אודות</a></li>
-        <li><a href="services.html#final-cta" class="nav__link">צור קשר</a></li>
-        <li role="none"><a href="services.html#newsletter" class="nav__link nav__link--community" role="menuitem">מצטרפים לקהילה</a></li>
-      </ul>
-      <div class="nav__mobile-actions">
-        <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </a>
-        <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+  <div class="nav__inner">
+    <a href="services.html" class="nav__logo">
+      <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+      <span class="nav__logo-text">מתי טסים</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="tips.html" class="nav__link">טיפים</a></li>
+      <li><a href="destinations.html" class="nav__link" aria-current="page">יעדים</a></li>
+      <li><a href="weather.html" class="nav__link">מזג אוויר</a></li>
+      <li><a href="packages.html" class="nav__link">שירותים</a></li>
+      <li><a href="about.html" class="nav__link">אודות</a></li>
+      <li><a href="services.html#final-cta" class="nav__link">צור קשר</a></li>
+      <li><a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a></li>
+    </ul>
+    <div class="nav__mobile-actions">
+      <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-label="פתח תפריט">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <div class="nav__mobile-menu" id="mobileMenu">
-      <a href="tips.html" class="nav__link">טיפים</a>
-      <a href="destinations.html" class="nav__link">יעדים</a>
-      <a href="packages.html" class="nav__link">שירותים</a>
-      <a href="about.html" class="nav__link">אודות</a>
-      <a href="services.html#final-cta" class="nav__link">צור קשר</a>
-    </div>
-  </nav>
+  </div>
+  <div class="nav__mobile-menu" id="mobileMenu">
+    <a href="tips.html" class="nav__link">טיפים</a>
+    <a href="destinations.html" class="nav__link" aria-current="page">יעדים</a>
+    <a href="weather.html" class="nav__link">מזג אוויר</a>
+    <a href="packages.html" class="nav__link">שירותים</a>
+    <a href="about.html" class="nav__link">אודות</a>
+    <a href="services.html#final-cta" class="nav__link">צור קשר</a>
+    <a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a>
+  </div>
+</nav>
 
   <!-- HERO -->
   <section class="article-hero">
     <div class="container">
       <div class="article-hero__inner">
-        <nav class="article-hero__breadcrumb">
-          <a href="services.html">דף הבית</a> › <a href="destinations.html">יעדים</a> › <span>יוון - אתונה</span>
-        </nav>
-        <span class="article-hero__flag">🇬🇷</span>
-        <h1 class="article-hero__title">טיול לאתונה עם ילדים</h1>
-        <p class="article-hero__subtitle">5 ימים של אטרקציות, היסטוריה ואי אגינה - מסלול מלא מהניסיון האישי שלנו עם 3 ילדים.</p>
-        <div class="article-hero__meta">
-          <span class="article-hero__badge">📅 29/4 - 3/5/2025</span>
-          <span class="article-hero__badge">👨‍👩‍👧‍👦 5 ימים</span>
-          <span class="article-hero__badge">🏨 Athens Ikon</span>
-          <span class="article-hero__badge">✈️ טיסה ישירה</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BODY -->
-  <section class="article-body">
-    <div class="container">
-      <div class="article-layout">
-
-        <!-- CONTENT -->
-        <div class="article-content">
-
-          <!-- TOC -->
-          <div class="toc">
-            <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
-            <div class="toc__list">
-              <a href="#intro" class="toc__link"><span class="toc__num">1</span> למה אתונה עם ילדים?</a>
-              <a href="#route-map" class="toc__link"><span class="toc__num">2</span> המסלול על המפה</a>
-              <a href="#itinerary" class="toc__link"><span class="toc__num">3</span> מסלול יום-יום</a>
-              <a href="#accommodation" class="toc__link"><span class="toc__num">4</span> המלצות לינה</a>
-              <a href="#tips" class="toc__link"><span class="toc__num">5</span> טיפים חשובים</a>
-            </div>
-          </div>
-
-          <!-- INTRO -->
-          <div class="article-section" id="intro">
-            <h2 class="article-section__title"><span>💡</span> למה אתונה עם ילדים?</h2>
-            <p>אתונה היא אחת הערים שהכי הפתיעו אותי. ציפיתי לעיר היסטורית שהילדים ישתעממו בה אחרי שעה - וקיבלתי עיר שהייתה מלאה בהפתעות לכל הגילאים.</p>
-            <p>מה שמייחד את אתונה למשפחות זה השילוב המטורף שלה: אתה יכול לבלות בוקר שלם ב-Allou! Fun Park עם קרוסלות ואטרקציות, ובצהריים לעמוד ממש ליד ה-Ancient Agora ולהסביר לילדים שכאן הלכו אנשים לפני 2,500 שנה. תיאטרון דיוניסוס, האמפיתיאטרון הקדום ביותר בעולם - הילדים שלי עמדו שם ורק שאלו "אבל איפה המסך?". ההיסטוריה כאן מוחשית בצורה שפשוט אי אפשר לפספס.</p>
-            <p>ה-Museum of Illusions היה הפתעה גדולה - תמונות מטורפות, חדרים שהופכים את המוח, ושעה שכל אחד בקבוצה פשוט צוחק כל הזמן. גבעת ליקאבטוס עם הרכבל בשקיעה? סצנה שהילדים עוד מדברים עליה. ואגינה - האי שמגיעים אליו במעבורת של 40 דקות מנמל פיראוס - נתן לנו את הרגע הכי רגוע של כל הטיול.</p>
-            <p>מה שעוזר גם זה שמונסטירקי, שם התגוררנו ב-Athens Ikon, הוא שכונה שחיה בלילה - מסעדות, שווקים, אנשים. ילדים נרדמים שם מרוב עייפות, לא מרוב שעמום.</p>
-          </div>
-
-          <!-- MAP -->
-          <div class="article-section" id="route-map">
-            <h2 class="article-section__title"><span>🗺️</span> המסלול על המפה</h2>
-            <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות את המיקום במפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
-            <div id="trip-map" style="height:420px;border-radius:16px;overflow:hidden;border:2px solid var(--sand-dark);box-shadow:0 4px 20px rgba(0,0,0,0.1);"></div>
-            <div id="map-day-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;"></div>
-          </div>
-
-          <!-- ITINERARY -->
-          <div class="article-section" id="itinerary">
-            <h2 class="article-section__title"><span>🗓️</span> מסלול יום-יום</h2>
-
-            <div class="timeline">
-
-              <!-- DAY 1 - Tuesday 29/4 -->
-              <div class="tl-item tl-item--arrive">
-                <div class="tl-item__label">יום 1</div>
-                <div class="tl-item__node">
-                  <div class="tl-item__icon">✈️</div>
-                  <span class="tl-item__day-label">יום 1</span>
-                </div>
-                <div class="tl-item__card tl-card" id="card1">
-                  <div class="tl-card__band" style="background:linear-gradient(90deg,var(--athens),var(--athens-dark))"></div>
-                  <div class="tl-card__header">
-                    <div class="tl-card__title">יום 1 - הגעה לאתונה</div>
-                    <div class="tl-card__date">שלישי, 29/4</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleCard('card1')">
-                    פירוט היום <span class="tl-card__chevron">▾</span>
-                  </button>
-                  <div class="tl-card__body">
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">12:55</div>
-                      <div>
-                        <div class="tl-activity__name">טיסה לאתונה</div>
-                        <div class="tl-activity__desc">המראה מישראל - יום ראשון בדרך!</div>
-                      </div>
-                    </div>
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">אחה"צ</div>
-                      <div>
-                        <div class="tl-activity__name">הגעה למלון Athens Ikon</div>
-                        <div class="tl-activity__desc">מיקום מעולה ב-Mitropoleos 21, מונסטירקי - לב ההיסטוריה של אתונה. מסעדה Little Kook ממש בקרבת מקום.</div>
-                      </div>
-                    </div>
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">19:00</div>
-                      <div>
-                        <div class="tl-activity__name">Ovio - ארוחת ערב</div>
-                        <div class="tl-activity__desc">ארוחת ערב ראשונה באתונה. מקום מומלץ לפתיחת הטיול.</div>
-                      </div>
-                    </div>
-                    <div class="tl-tip"><strong>💡 טיפ:</strong> מונסטירקי הוא אחד האזורים הכי כיפיים לטיול ערב עם ילדים - שוק, מסעדות ואווירה.</div>
-                    <div class="tl-tip"><strong>לינה:</strong> Athens Ikon - Mitropoleos 21, מונסטירקי</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- DAY 2 - Wednesday 30/4 -->
-              <div class="tl-item tl-item--allou">
-                <div class="tl-item__label">יום 2</div>
-                <div class="tl-item__node">
-                  <div class="tl-item__icon">🎢</div>
-                  <span class="tl-item__day-label">יום 2</span>
-                </div>
-                <div class="tl-item__card tl-card" id="card2">
-                  <div class="tl-card__band" style="background:linear-gradient(90deg,#e91e63,#c2185b)"></div>
-                  <div class="tl-card__header">
-                    <div class="tl-card__title">יום 2 - Allou! Fun Park + Kidom</div>
-                    <div class="tl-card__date">רביעי, 30/4</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleCard('card2')">
-                    פירוט היום <span class="tl-card__chevron">▾</span>
-                  </button>
-                  <div class="tl-card__body">
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">בוקר</div>
-                      <div>
-                        <div class="tl-activity__name">ארוחת בוקר - The Makers Athens</div>
-                        <div class="tl-activity__desc">בית קפה מומלץ לפתיחת היום לפני היציאה לפארק.</div>
-                      </div>
-                    </div>
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">יום שלם</div>
-                      <div>
-                        <div class="tl-activity__name">🎡 Allou! Fun Park + Kidom</div>
-                        <div class="tl-activity__desc">פארק שעשועים גדול עם אטרקציות לכל הגילאים. Kidom הוא האזור המיוחד לילדים קטנים יותר. מומלץ להגיע מוקדם!</div>
-                      </div>
-                    </div>
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">ערב</div>
-                      <div>
-                        <div class="tl-activity__name">גבעת ליקאבטוס</div>
-                        <div class="tl-activity__desc">נוף פנורמי מרהיב על אתונה בשקיעה. אפשר לעלות ברכבל.</div>
-                      </div>
-                    </div>
-                    <div class="tl-tip"><strong>💡 טיפ:</strong> Allou! Fun Park פתוח מאוחר, תכננו לבלות שם רוב היום ולעלות לליקאבטוס בסיום.</div>
-                    <div class="tl-tip"><strong>לינה:</strong> Athens Ikon - Mitropoleos 21, מונסטירקי</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- DAY 3 - Thursday 1/5 -->
-              <div class="tl-item tl-item--xplore">
-                <div class="tl-item__label">יום 3</div>
-                <div class="tl-item__node">
-                  <div class="tl-item__icon">🎮</div>
-                  <span class="tl-item__day-label">יום 3</span>
-                </div>
-                <div class="tl-item__card tl-card" id="card3">
-                  <div class="tl-card__band" style="background:linear-gradient(90deg,#9c27b0,#6a1b9a)"></div>
-                  <div class="tl-card__header">
-                    <div class="tl-card__title">יום 3 - XPLORE + מוזיאון אשליות</div>
-                    <div class="tl-card__date">חמישי, 1/5</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleCard('card3')">
-                    פירוט היום <span class="tl-card__chevron">▾</span>
-                  </button>
-                  <div class="tl-card__body">
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">בוקר</div>
-                      <div>
-                        <div class="tl-activity__name">ארוחת בוקר - Brunchers</div>
-                        <div class="tl-activity__desc">מסעדת בראנץ' מומלצת באתונה לפתיחת יום אנרגטי.</div>
-                      </div>
-                    </div>
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">בוקר</div>
-                      <div>
-                        <div class="tl-activity__name">אצטדיון אולימפי של אתונה</div>
-                        <div class="tl-activity__desc">האצטדיון האולימפי המפורסם - מרשים גם מבחוץ, כניסה בתשלום למגרש.</div>
-                      </div>
-                    </div>
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">אחה"צ</div>
-                      <div>
-                        <div class="tl-activity__name">🎮 XPLORE Entertainment Center</div>
-                        <div class="tl-activity__desc">מרכז בידור מעולה עם אטרקציות אינטראקטיביות, בריחה מחדרים ומשחקי מציאות מדומה. ילדים מת'.</div>
-                      </div>
-                    </div>
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">ערב</div>
-                      <div>
-                        <div class="tl-activity__name">Museum of Illusions Athens</div>
-                        <div class="tl-activity__desc">מוזיאון האשליות - אטרקציה אהובה במיוחד על ילדים. תמונות מטורפות ואשליות אופטיות.</div>
-                      </div>
-                    </div>
-                    <div class="tl-tip"><strong>💡 טיפ:</strong> Museum of Illusions כדאי לאחר שעה 17:00 כשקצת פחות עמוס.</div>
-                    <div class="tl-tip"><strong>לינה:</strong> Athens Ikon - Mitropoleos 21, מונסטירקי</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- DAY 4 - Friday 2/5 -->
-              <div class="tl-item tl-item--aegina">
-                <div class="tl-item__label">יום 4</div>
-                <div class="tl-item__node">
-                  <div class="tl-item__icon">⛵</div>
-                  <span class="tl-item__day-label">יום 4</span>
-                </div>
-                <div class="tl-item__card tl-card" id="card4">
-                  <div class="tl-card__band" style="background:linear-gradient(90deg,#00897b,#00695c)"></div>
-                  <div class="tl-card__header">
-                    <div class="tl-card__title">יום 4 - האי אגינה</div>
-                    <div class="tl-card__date">שישי, 2/5</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleCard('card4')">
-                    פירוט היום <span class="tl-card__chevron">▾</span>
-                  </button>
-                  <div class="tl-card__body">
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">בוקר</div>
-                      <div>
-                        <div class="tl-activity__name">האי אגינה 🏝️</div>
-                        <div class="tl-activity__desc">מעבורת מנמל פיראוס (כ-40 דקות). האי הכי קרוב לאתונה - כפרי, שקט ומושלם לטיול יום עם ילדים.</div>
-                      </div>
-                    </div>
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">יום</div>
-                      <div>
-                        <div class="tl-activity__name">Ancient Agora of Athens</div>
-                        <div class="tl-activity__desc">בדרך חזרה - האגורה העתיקה, לב אתונה ההיסטורית. מרשים ונגיש עם ילדים.</div>
-                      </div>
-                    </div>
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">אחה"צ</div>
-                      <div>
-                        <div class="tl-activity__name">Theatre of Dionysus Eleuthereus</div>
-                        <div class="tl-activity__desc">תיאטרון דיוניסוס - האמפיתיאטרון הקדום ביותר בעולם, מרגש לראות עם ילדים.</div>
-                      </div>
-                    </div>
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">ערב</div>
-                      <div>
-                        <div class="tl-activity__name">🍽️ Dinner - Mani Mani</div>
-                        <div class="tl-activity__desc">מסעדה מומלצת מאוד לארוחת ערב - מטבח יווני מסורתי ברמה גבוהה.</div>
-                      </div>
-                    </div>
-                    <div class="tl-tip"><strong>💡 טיפ:</strong> מעבורת לאגינה - כדאי להזמין כרטיסים מראש דרך האתר Hellenic Seaways. הגיעו לנמל 30 דקות לפחות לפני.</div>
-                    <div class="tl-tip"><strong>לינה:</strong> Athens Ikon - Mitropoleos 21, מונסטירקי</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- DAY 5 - Saturday 3/5 -->
-              <div class="tl-item tl-item--depart">
-                <div class="tl-item__label">יום 5</div>
-                <div class="tl-item__node">
-                  <div class="tl-item__icon">🇮🇱</div>
-                  <span class="tl-item__day-label">יום 5</span>
-                </div>
-                <div class="tl-item__card tl-card" id="card5">
-                  <div class="tl-card__band" style="background:linear-gradient(90deg,var(--amber),var(--amber-dark))"></div>
-                  <div class="tl-card__header">
-                    <div class="tl-card__title">יום 5 - יום אחרון וטיסה הביתה</div>
-                    <div class="tl-card__date">שבת, 3/5</div>
-                  </div>
-                  <button class="tl-card__toggle" onclick="toggleCard('card5')">
-                    פירוט היום <span class="tl-card__chevron">▾</span>
-                  </button>
-                  <div class="tl-card__body">
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">בוקר</div>
-                      <div>
-                        <div class="tl-activity__name">בוקר פנוי</div>
-                        <div class="tl-activity__desc">קפה, קניות אחרונות במונסטירקי, Little Kook לארוחת בוקר כיפית לילדים.</div>
-                      </div>
-                    </div>
-                    <div class="tl-activity">
-                      <div class="tl-activity__time">10:00</div>
-                      <div>
-                        <div class="tl-activity__name">טיסה חזרה לתל אביב ✈️</div>
-                        <div class="tl-activity__desc">יציאה לשדה התעופה - כדאי לצאת שעתיים לפחות לפני הטיסה.</div>
-                      </div>
-                    </div>
-                    <div class="tl-tip"><strong>💡 טיפ:</strong> Little Kook היא מסעדה/בית קפה מרהיבה עם עיצוב שמשגע ילדים - תורים ארוכים בסופי שבוע, הגיעו מוקדם!</div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- TIPS -->
-          <!-- ACCOMMODATION -->
-          <div class="article-section" id="accommodation">
-            <h2 class="article-section__title"><span>🏨</span> המלצות לינה</h2>
-            <p style="color:#444;font-size:15px;margin-bottom:20px;">אתונה מציעה מגוון רחב של אפשרויות לינה - ממלונות בוטיק יפים דרך צימרים משפחתיים ועד פנסיונים כפריים.</p>
-            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;">
-              <div style="background:white;border-radius:16px;border:2px solid var(--sand-dark);padding:20px;">
-                <div style="font-weight:700;font-size:16px;margin-bottom:4px;">Athens Ikon</div>
-                <div style="font-size:13px;color:#888;margin-bottom:16px;">📍 Mitropoleos 21, מונסטירקי</div>
-                <div style="display:flex;gap:8px;">
-                  <a href="#" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:8px 16px;font-size:13px;font-weight:600;font-family:var(--font-body);opacity:0.5;cursor:default;">להזמנה ←</a>
-                  <a href="https://maps.google.com/?q=Athens+Ikon+Mitropoleos+21+Athens" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--sand);color:var(--charcoal);border-radius:20px;padding:8px 16px;font-size:13px;font-weight:600;font-family:var(--font-body);">📍 מפה</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- TIPS -->
-          <div class="article-section" id="tips">
-            <h2 class="article-section__title"><span>💡</span> טיפים חשובים</h2>
-            <div class="tips-list">
-              <div class="tip-item"><span class="tip-item__icon">🚇</span><span>המטרו באתונה זול ונוח - כרטיס יומי עדיף על כרטיסים בודדים.</span></div>
-              <div class="tip-item"><span class="tip-item__icon">☀️</span><span>מאי חם ויבש - בגדים קלים, כובעים וקרם הגנה הם חובה.</span></div>
-              <div class="tip-item"><span class="tip-item__icon">💧</span><span>שתיית מים - קחו בקבוקים מהסופר, הרבה יותר זול מהמסעדות.</span></div>
-              <div class="tip-item"><span class="tip-item__icon">⛵</span><span>מעבורת לאגינה - צאו מנמל פיראוס, זמין לאורך כל היום.</span></div>
-              <div class="tip-item"><span class="tip-item__icon">🍦</span><span>גלידה יוונית (παγωτό) - בכל פינה ובמחיר מצוין, הילדים יאהבו.</span></div>
-              <div class="tip-item"><span class="tip-item__icon">🏛️</span><span>האקרופוליס - שמרו לתחילת הבוקר לפני שהחום ועומס התיירים מגיעים.</span></div>
-            </div>
-          </div>
-
-          <!-- CTA -->
-        </div>
-
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-          <div class="cta-card">
-            <div class="cta-card__title">רוצים מסלול מותאם?</div>
-            <div class="cta-card__text">אבנה לכם מסלול מלא לאתונה - יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.</div>
-            <a href="packages.html" class="cta-card__btn">לחבילות תכנון ←</a>
-            <a href="https://wa.me/972546758145?text=היי אור, אני מעוניין לשמוע על תכנון טיול לאתונה!" class="cta-card__wa" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              שלחו הודעה
-            </a>
-          </div>
-        </aside>
-
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <p>מתי טסים &copy; 2026 - <a href="services.html">דף הבית</a> | <a href="destinations.html">יעדים</a> | <a href="packages.html">שירותים</a> | <a href="services.html#final-cta">צור קשר</a></p>
-    </div>
-  </footer>
-
-  <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21"
-     style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;" target="_blank" aria-label="וואטסאפ">
-    <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
-
-  <script>
-    var nav = document.getElementById('nav');
-    window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
-    var hamburger = document.getElementById('hamburgerBtn');
-    var mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', function() {
-      var isOpen = mobileMenu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen.toString());
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-    mobileMenu.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }); });
-    function toggleCard(id) {
-      var card = document.getElementById(id);
-      card.classList.toggle('open');
-    }
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-  <script>
-  (function() {
-    var days = [
-      { id: 'card1', day: 1, date: '29.4', label: 'הגעה לאתונה', emoji: '✈️', lat: 37.9755, lng: 23.7348, color: '#1565C0', title: 'Athens Ikon - מונסטירקי' },
-      { id: 'card2', day: 2, date: '30.4', label: 'Allou! Fun Park + ליקאבטוס', emoji: '🎢', lat: 37.9932, lng: 23.6785, color: '#e91e63', title: 'Allou! Fun Park + Kidom + גבעת ליקאבטוס' },
-      { id: 'card3', day: 3, date: '1.5',  label: 'XPLORE + מוזיאון אשליות', emoji: '🎮', lat: 37.9742, lng: 23.7285, color: '#9c27b0', title: 'XPLORE Entertainment + Museum of Illusions' },
-      { id: 'card4', day: 4, date: '2.5',  label: 'האי אגינה', emoji: '⛵', lat: 37.7480, lng: 23.4270, color: '#00897b', title: 'אגינה + Ancient Agora + Mani Mani' },
-      { id: 'card5', day: 5, date: '3.5',  label: 'טיסה הביתה', emoji: '🇮🇱', lat: 37.9364, lng: 23.9445, color: '#E8A045', title: 'שדה התעופה אתונה' }
-    ];
-
-    var map = L.map('trip-map', { center: [37.97, 23.73], zoom: 10, scrollWheelZoom: false });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap © CARTO', maxZoom: 18 }).addTo(map);
-    var latlngs = days.map(function(d) { return [d.lat, d.lng]; });
-    L.polyline(latlngs, { color: '#E8A045', weight: 2.5, dashArray: '6,5', opacity: 0.7 }).addTo(map);
-
-    var markers = {};
-    var activeDay = null;
-
-    function makeIcon(d, active) {
-      var size = active ? 46 : 38;
-      var bg = active ? d.color : '#fff';
-      var border = active ? '#fff' : d.color;
-      return L.divIcon({
-        className: '',
-        html: '<div style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:' + bg + ';border:2.5px solid ' + border + ';display:flex;align-items:center;justify-content:center;font-size:' + (active?20:16) + 'px;box-shadow:0 3px 12px rgba(0,0,0,0.22);cursor:pointer;"><span style="line-height:1;">' + d.emoji + '</span></div>',
-        iconSize: [size, size], iconAnchor: [size/2, size/2], popupAnchor: [0, -(size/2+4)]
-      });
-    }
-
-    function flyTo(d) {
-      map.flyTo([d.lat, d.lng], 12, { duration: 0.8 });
-      if (markers[d.id]) markers[d.id].openPopup();
-      setActive(d.id);
-    }
-
-    function setActive(id) {
-      if (activeDay === id) return;
-      activeDay = id;
-      days.forEach(function(d) { if (markers[d.id]) markers[d.id].setIcon(makeIcon(d, d.id === id)); });
-      document.querySelectorAll('.map-pill').forEach(function(p) {
-        p.style.background = p.dataset.id === id ? 'var(--teal)' : 'var(--white)';
-        p.style.color = p.dataset.id === id ? '#fff' : 'var(--charcoal)';
-        p.style.borderColor = p.dataset.id === id ? 'var(--teal)' : 'var(--sand-dark)';
-      });
-    }
-
-    days.forEach(function(d) {
-      var m = L.marker([d.lat, d.lng], { icon: makeIcon(d, false) }).addTo(map)
-        .bindPopup('<div dir="rtl" style="font-family:Rubik,sans-serif;min-width:160px;padding:4px 2px;"><div style="font-size:11px;color:#aaa;margin-bottom:2px;">יום ' + d.day + ' · ' + d.date + '</div><div style="font-size:15px;font-weight:600;color:' + d.color + ';margin-bottom:4px;">' + d.emoji + ' ' + d.label + '</div><div style="font-size:13px;color:#555;margin-bottom:8px;">' + d.title + '</div><button onclick="goToDay(\'' + d.id + '\')" style="width:100%;background:' + d.color + ';color:#fff;border:none;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:600;cursor:pointer;font-family:Rubik,sans-serif;">לפרטי היום ↓</button></div>');
-      m.on('click', function() { setActive(d.id); });
-      markers[d.id] = m;
-    });
-
-    window.goToDay = function(id) {
-      map.closePopup();
-      var card = document.getElementById(id);
-      if (card && !card.classList.contains('open')) toggleCard(id);
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    };
-
-    var pillsContainer = document.getElementById('map-day-pills');
-    days.forEach(function(d) {
-      var btn = document.createElement('button');
-      btn.className = 'map-pill';
-      btn.dataset.id = d.id;
-      btn.innerHTML = '<span>' + d.emoji + '</span><span style="font-size:12px;">יום ' + d.day + '</span>';
-      btn.style.cssText = 'display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;border:1.5px solid var(--sand-dark);background:var(--white);cursor:pointer;font-family:Rubik,sans-serif;font-size:13px;transition:all 0.2s;';
-      btn.addEventListener('click', function() { flyTo(d); });
-      pillsContainer.appendChild(btn);
-    });
-
-    days.forEach(function(d) {
-      var item = document.getElementById(d.id);
-      if (!item) return;
-      var header = item.querySelector('.tl-card__header');
-      if (header) { header.style.cursor = 'pointer'; header.addEventListener('click', function() { flyTo(d); }); }
-    });
-  })();
-  </script>
-
-</body>
-</html>
+        
