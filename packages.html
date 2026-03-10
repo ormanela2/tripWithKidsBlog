@@ -87,6 +87,7 @@
       .desktop-only { display: none !important; }
       .nav__links { display: none; }
       .nav__mobile-actions { display: flex; }
+      .nav__hamburger { display: flex; }
       .nav__logo { position: static; left: auto; transform: none; font-size: 20px; }
       .nav__logo img { height: 44px !important; }
       .nav__logo-text { font-size: 18px !important; }
@@ -118,8 +119,6 @@
   @media(max-width:700px){
     .hero-b__compare { grid-template-columns: 1fr; }
     .hero-b__arrow { transform: none; padding: 8px 0; }
-    .arrow-mobile { display: inline; }
-    .arrow-desktop { display: none; }
   }
 
   /* PACKAGES GRID - Option A */
@@ -273,9 +272,15 @@
       .nav__logo-text { font-size:18px !important; }
     }
     /* ── END NAV ─────────────────────────── */
-  
+
   .arrow-mobile { display: none; }
   .arrow-desktop { display: inline; }
+  @media (max-width: 768px) {
+    .arrow-mobile { display: inline; }
+    .arrow-desktop { display: none; }
+    .hero-b__arrow { transform: none !important; }
+  }
+
 </style>
 </head>
 <body>
