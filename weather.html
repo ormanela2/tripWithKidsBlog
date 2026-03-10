@@ -29,7 +29,7 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
 .nav__link:hover{background:var(--sand);color:var(--teal);}
 .nav__link.active{background:var(--teal);color:white;}
 .nav__mobile-actions{display:none;align-items:center;gap:4px;}
-.nav__hamburger{display:none;width:44px;height:44px;align-items:center;justify-content:center;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+.nav__hamburger{display:none;width:44px;height:44px;align-items:center;justify-content:center;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;position:relative;z-index:1001;}
 .nav__hamburger span{display:block;width:24px;height:2px;background:var(--charcoal);border-radius:2px;transition:all 0.3s;}
 .nav__hamburger[aria-expanded="true"] span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
 .nav__hamburger[aria-expanded="true"] span:nth-child(2){opacity:0;}
@@ -156,7 +156,7 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
     .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
     .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
     .nav__mobile-actions { display:none; align-items:center; gap:4px; }
-    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; }
+    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
     .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
     .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
     .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
