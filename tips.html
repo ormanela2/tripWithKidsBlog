@@ -861,6 +861,24 @@
         hamburger.focus();
       }
     });
+
+    // Tabs
+    var tabBtns = document.querySelectorAll('.tab-btn');
+    var tabSections = document.querySelectorAll('.tips-section');
+
+    tabBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var target = btn.getAttribute('data-tab');
+
+        tabBtns.forEach(function(b) { b.classList.remove('active'); });
+        tabSections.forEach(function(s) { s.classList.remove('active'); });
+
+        btn.classList.add('active');
+        var section = document.getElementById('tab-' + target);
+        if (section) section.classList.add('active');
+      });
+    });
+
   })();
 </script>
 </body>
