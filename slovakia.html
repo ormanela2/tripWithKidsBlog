@@ -388,14 +388,15 @@
   <section class="article-hero">
     <div class="container">
       <div class="article-hero__inner">
-        
+
 <script>
   (function () {
     'use strict';
-
     var nav = document.getElementById('nav');
     var hamburger = document.getElementById('hamburgerBtn');
     var mobileMenu = document.getElementById('mobileMenu');
+
+    if (!hamburger || !mobileMenu) return;
 
     hamburger.addEventListener('click', function () {
       var isOpen = mobileMenu.classList.toggle('open');
@@ -404,8 +405,7 @@
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
-    var mobileLinks = mobileMenu.querySelectorAll('a');
-    mobileLinks.forEach(function (link) {
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mobileMenu.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
@@ -414,9 +414,11 @@
       });
     });
 
-    window.addEventListener('scroll', function () {
-      nav.classList.toggle('scrolled', window.scrollY > 10);
-    }, { passive: true });
+    if (nav) {
+      window.addEventListener('scroll', function () {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+      }, { passive: true });
+    }
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
@@ -427,7 +429,6 @@
         hamburger.focus();
       }
     });
-
   })();
 </script>
 </body>
