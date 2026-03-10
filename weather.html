@@ -21,10 +21,10 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
 /* NAV */
 .nav{position:fixed;top:0;right:0;left:0;z-index:1000;background:var(--cream);border-bottom:1px solid var(--sand-dark);height:var(--nav-height);transition:box-shadow 0.3s;}
 .nav.scrolled{box-shadow:0 4px 16px rgba(0,0,0,0.1);}
-.nav__inner{max-width:1140px;margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between;position:relative;}
+.nav__inner{max-width:1140px;margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;gap:32px;justify-content:space-between;position:relative;}
 .nav__logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0;}
 .nav__logo-text{font-family:var(--font-heading);font-size:28px;color:var(--teal);font-weight:700;}
-.nav__links{display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0;position:absolute;left:55%;transform:translateX(-50%);}
+.nav__links{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0;flex:1;justify-content:center;}
 .nav__link{white-space:nowrap;padding:8px 16px;border-radius:8px;font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--charcoal);text-decoration:none;transition:background 0.2s,color 0.2s;min-height:44px;display:flex;align-items:center;}
 .nav__link:hover{background:var(--sand);color:var(--teal);}
 .nav__link.active{background:var(--teal);color:white;}
@@ -149,7 +149,7 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
 <nav class="nav" id="nav">
   <div class="nav__inner">
     <a href="services.html" class="nav__logo">
-      <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+      <img src="logo.png" alt="מתי טסים" style="height:44px;width:auto;mix-blend-mode:multiply;">
       <span class="nav__logo-text">מתי טסים</span>
     </a>
     <ul class="nav__links">
