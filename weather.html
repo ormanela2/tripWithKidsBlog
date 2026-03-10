@@ -52,7 +52,8 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
 }
 
 /* HERO */
-.hero{background:linear-gradient(150deg,var(--teal-dark),var(--teal));padding:52px 24px 80px;text-align:center;margin-top:var(--nav-height);position:relative;overflow:hidden;}
+.hero{background:linear-gradient(150deg,var(--teal-dark),var(--teal));padding:52px 24px 120px;text-align:center;margin-top:var(--nav-height);position:relative;}
+
 .hero__badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;padding:6px 18px;border-radius:24px;font-size:13px;font-weight:500;margin-bottom:18px;}
 .hero__title{font-family:var(--font-heading);font-size:clamp(26px,4vw,44px);color:white;margin-bottom:8px;}
 .hero__sub{font-size:15px;color:rgba(255,255,255,0.7);margin-bottom:32px;}
@@ -183,10 +184,10 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
 <div class="hero">
   <div class="hero__badge">🌍 תחזית לטיול שלכם</div>
   <h1 class="hero__title">מה מזג האוויר ביעד שלכם?</h1>
-  <p class="hero__sub">הכניסו שם עיר ותקבלו תחזית מקצועית ל-5 ימים הקרובים</p>
+  <p class="hero__sub">ניתן לחפש בעברית או באנגלית — תקבלו תחזית מקצועית ל-5 ימים הקרובים</p>
   <div class="search-wrap">
     <div class="search-box">
-      <input class="search-input" id="cityInput" type="text" placeholder="למשל: Berlin, Rome, Athens..." autocomplete="off">
+      <input class="search-input" id="cityInput" type="text" placeholder="למשל: ברלין, Rome, אתונה..." autocomplete="off">
       <button class="search-btn" onclick="fetchWeather()">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         חפש
@@ -351,7 +352,7 @@ document.getElementById('hamburgerBtn').addEventListener('click', () => {
   const open = document.getElementById('mobileMenu').classList.toggle('open');
   document.getElementById('hamburgerBtn').setAttribute('aria-expanded', open);
 });
-window.onload = () => { cityInputEl.value = 'Berlin'; fetchWeather(); };
+window.onload = () => { cityInputEl.value = ''; };
 </script>
 </body>
 </html>
