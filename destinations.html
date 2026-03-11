@@ -408,14 +408,7 @@
   (function() {
     var nav = document.getElementById('nav');
     window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
-    var btn = document.getElementById('hamburgerBtn');
-    var menu = document.getElementById('mobileMenu');
-    btn.addEventListener('click', function() {
-      var open = menu.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-    menu.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { menu.classList.remove('open'); document.body.style.overflow = ''; }); });
+    // hamburger handled by dedicated script below
 
     var destinations = [
       { id: 'slovakia', lat: 48.7,  lng: 19.5,  flag: '🇸🇰', name: 'סלובקיה',        days: '7-10 ימים', url: 'slovakia.html' },
