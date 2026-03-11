@@ -352,11 +352,9 @@
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   (function () {
     'use strict';
-
     var nav = document.getElementById('nav');
     var hamburger = document.getElementById('hamburgerBtn');
     var mobileMenu = document.getElementById('mobileMenu');
-
     if (!hamburger || !mobileMenu) return;
     hamburger.addEventListener('click', function () {
       var isOpen = mobileMenu.classList.toggle('open');
@@ -364,9 +362,7 @@
       hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-
-    var mobileLinks = mobileMenu.querySelectorAll('a');
-    mobileLinks.forEach(function (link) {
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mobileMenu.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
@@ -374,13 +370,19 @@
         document.body.style.overflow = '';
       });
     });
-
-    window.addEventListener('scroll', function () {
+    if (nav) window.addEventListener('scroll', function () {
       nav.classList.toggle('scrolled', window.scrollY > 10);
     }, { passive: true });
-
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
         mobileMenu.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.setAttribute('aria-l
+        hamburger.setAttribute('aria-label', 'פתח תפריט');
+        document.body.style.overflow = '';
+        hamburger.focus();
+      }
+    });
+  })();
+</script>
+</body>
+</html>
