@@ -27,251 +27,42 @@
     ul { list-style: none; }
     .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     .container--narrow { max-width: 780px; }
-    .nav { position: fixed; top: 0; right: 0; left: 0; z-index: 1000; height: var(--nav-height); background: var(--cream); border-bottom: 1px solid var(--sand-dark); transition: box-shadow 0.3s ease; }
-    .nav.scrolled { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-    .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
-    .nav__logo { font-family: var(--font-heading); font-size: 24px; color: var(--teal); display: flex; align-items: center; gap: 8px; }
-    .nav__links { display: flex; align-items: center; gap: 8px; }
-    .nav__link { padding: 8px 16px; border-radius: 8px; font-weight: 500; font-size: 15px; transition: background 0.2s, color 0.2s; min-height: 44px; display: flex; align-items: center; }
-    .nav__link:hover { background: var(--sand); color: var(--teal); }
-    .nav__link[aria-current="page"] { background: var(--teal); color: var(--white); }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 28px; font-size: 16px; font-weight: 600; min-height: 48px; transition: all 0.3s ease; white-space: nowrap; }
-    .btn--primary { background: var(--amber); color: var(--charcoal); box-shadow: 0 4px 14px rgba(232,160,69,0.35); }
-    .btn--primary:hover { background: var(--amber-dark); transform: translateY(-2px); }
-    .btn--sm { padding: 10px 24px; font-size: 15px; min-height: 44px; }
-    .nav__mobile-actions { display: none; }
-    .nav__hamburger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; flex-direction: column; gap: 5px; padding: 8px; }
-    .nav__hamburger span { display: block; width: 24px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: all 0.3s ease; }
-    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-    .nav__whatsapp-mobile { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: var(--green); }
-    .nav__mobile-menu { display: none; position: fixed; top: var(--nav-height); right: 0; left: 0; bottom: 0; background: var(--cream); padding: 32px 24px; flex-direction: column; gap: 8px; z-index: 999; overflow-y: auto; }
-    .nav__mobile-menu.open { display: flex; }
-    .nav__mobile-menu .nav__link { font-size: 20px; padding: 16px; }
-    .nav__mobile-menu .btn { margin-top: 16px; justify-content: center; }
-    .article-hero { background: linear-gradient(155deg, #2a5a3a 0%, #4a8a5a 50%, #3a7a8a 100%); padding-top: calc(var(--nav-height) + 56px); padding-bottom: 70px; color: var(--white); position: relative; overflow: hidden; }
-    .article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(232,160,69,0.1) 0%, transparent 60%); }
-    .article-hero::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 70px; background: linear-gradient(to top, var(--cream), transparent); }
-    .article-hero__inner { position: relative; max-width: 780px; }
-    .article-hero__breadcrumb { font-size: 13px; opacity: 0.7; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-    .article-hero__breadcrumb a { opacity: 0.8; transition: opacity 0.2s; }
-    .article-hero__flag { font-size: 56px; margin-bottom: 16px; display: block; }
-    .article-hero__title { font-size: clamp(28px, 4.5vw, 50px); margin-bottom: 18px; }
-    .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.88; margin-bottom: 32px; max-width: 600px; line-height: 1.7; }
-    .article-hero__meta { display: flex; flex-wrap: wrap; gap: 12px; }
-    .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
-    .article-body { padding: 60px 0 80px; }
-    .article-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
-    .article-content { min-width: 0; }
-    .article-section { margin-bottom: 52px; }
-    .article-section__title { font-size: clamp(20px, 2.5vw, 26px); color: var(--teal); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--sand-dark); display: flex; align-items: center; gap: 10px; }
-    .article-section__title-icon { font-size: 24px; }
-    .article-content p { margin-bottom: 16px; color: #444; line-height: 1.85; }
-    .article-content p:last-child { margin-bottom: 0; }
-    #map { height: 340px; width: 100%; }
-    .timeline { position: relative; padding: 8px 0 0; }
-    .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; right: 50%; width: 3px; background: linear-gradient(to bottom, var(--teal), var(--amber), var(--teal-dark)); transform: translateX(50%); border-radius: 3px; }
-    .tl-item { display: grid; grid-template-columns: 1fr 56px 1fr; gap: 0 0; margin-bottom: 48px; position: relative; align-items: start; }
-    .tl-item__label { font-family: var(--font-heading); font-size: 13px; color: #aaa; letter-spacing: 0.5px; padding-top: 18px; }
-    .tl-item:nth-child(odd)  .tl-item__label { text-align: left;  padding-right: 28px; }
-    .tl-item:nth-child(even) .tl-item__label { text-align: right; padding-left: 28px; order: 3; }
-    .tl-item__node { display: flex; flex-direction: column; align-items: center; gap: 0; position: relative; z-index: 2; padding-top: 12px; }
-    .tl-item__icon { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 4px solid var(--cream); box-shadow: 0 2px 12px rgba(0,0,0,0.15); flex-shrink: 0; }
-    .tl-item__day-label { margin-top: 6px; font-family: var(--font-heading); font-size: 11px; color: #aaa; letter-spacing: 0.5px; }
-    .tl-item__card { background: var(--white); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 2px solid var(--sand-dark); transition: transform 0.35s ease, box-shadow 0.35s ease; cursor: pointer; }
-    .tl-item__card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.13); }
-    .tl-item:nth-child(odd)  .tl-item__card { margin-left: 24px; }
-    .tl-item:nth-child(even) .tl-item__card { margin-right: 24px; order: -1; }
-    .tl-card__band { height: 6px; width: 100%; }
-    .tl-card__header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-    .tl-card__title { font-family: var(--font-heading); font-size: 16px; color: var(--charcoal); line-height: 1.35; }
-    .tl-card__where { font-size: 12px; color: #aaa; margin-top: 4px; display: flex; align-items: center; gap: 3px; }
-    .tl-card__star { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
-    .tl-card__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px 14px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-size: 13px; color: var(--teal); font-weight: 600; border-top: 1px solid var(--sand); }
-    .tl-card__toggle:hover { background: var(--sand); }
-    .tl-card__chevron { transition: transform 0.3s; font-style: normal; }
-    .tl-card.open .tl-card__chevron { transform: rotate(180deg); }
-    .tl-card__body { display: none; padding: 0 20px 18px; }
-    .tl-card.open .tl-card__body { display: block; }
-    .tl-activity { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--sand-dark); }
-    .tl-activity:last-of-type { border-bottom: none; }
-    .tl-activity__time { font-size: 11px; font-weight: 700; color: var(--teal); min-width: 46px; padding-top: 2px; letter-spacing: 0.3px; }
-    .tl-activity__name { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
-    .tl-activity__desc { font-size: 13px; color: #666; line-height: 1.55; }
-    .tl-tip { margin-top: 12px; background: rgba(232,160,69,0.1); border-right: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 9px 13px; font-size: 13px; color: #666; }
-    .tl-tip strong { color: var(--amber-dark); }
-    .tl-item--bratislava .tl-item__icon { background: linear-gradient(135deg, #1A6B72, #238a93); color: #fff; }
-    .tl-item--bratislava .tl-card__band { background: linear-gradient(90deg, #1A6B72, #238a93); }
-    .tl-item--tatry .tl-item__icon { background: linear-gradient(135deg, #4A9B6F, #2d7550); color: #fff; }
-    .tl-item--tatry .tl-card__band { background: linear-gradient(90deg, #4A9B6F, #2d7550); }
-    .tl-item--caves .tl-item__icon { background: linear-gradient(135deg, #6b4aa0, #8a60c0); color: #fff; }
-    .tl-item--caves .tl-card__band { background: linear-gradient(90deg, #6b4aa0, #8a60c0); }
-    .tl-item--castle .tl-item__icon { background: linear-gradient(135deg, #E8A045, #c4872e); color: #fff; }
-    .tl-item--castle .tl-card__band { background: linear-gradient(90deg, #E8A045, #c4872e); }
-    .tl-item--kosice .tl-item__icon { background: linear-gradient(135deg, #c0504a, #a03530); color: #fff; }
-    .tl-item--kosice .tl-card__band { background: linear-gradient(90deg, #c0504a, #a03530); }
-    .tl-item--farewell .tl-item__icon { background: linear-gradient(135deg, #1A6B72, #E8A045); color: #fff; }
-    .tl-item--farewell .tl-card__band { background: linear-gradient(90deg, #1A6B72, #E8A045); }
-    .tl-card__star--tatry { background: rgba(74,155,111,0.12); color: #2d7550; }
-    .tl-card__star--castle { background: rgba(232,160,69,0.15); color: #b07020; }
-    @media (max-width: 680px) {
-      .timeline::before { right: 28px; transform: none; }
-      .tl-item { grid-template-columns: 56px 1fr; grid-template-rows: auto auto; }
-      .tl-item__label { display: none; }
-      .tl-item__node { padding-top: 10px; }
-      .tl-item:nth-child(odd)  .tl-item__card { margin-left: 12px; }
-      .tl-item:nth-child(even) .tl-item__card { margin-right: 0; margin-left: 12px; order: unset; }
-      .tl-item:nth-child(even) .tl-item__label { order: unset; }
+    /* ── NAV ─────────────────────────────── */
+    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
+    .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+    .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
+    .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
+    .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
+    .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
+    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Rubik',sans-serif; font-weight:600; font-size:15px; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
+    .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
+    .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
+    .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
+    .nav__mobile-actions { display:none; align-items:center; gap:4px; }
+    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
+    .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+    .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
+    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:32px 24px; flex-direction:column; gap:8px; z-index:999; overflow-y:auto; }
+    .nav__mobile-menu.open { display:flex; }
+    .nav__mobile-menu .nav__link { font-size:20px; padding:16px; justify-content:flex-start; }
+    .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:600; font-size:15px; border-radius:22px; padding:8px 16px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); animation:communityPulse 2.8s ease-in-out infinite; }
+    .nav__link--community:hover, .nav__link--community:focus-visible { background:#d4903c !important; color:#2C2C2C !important; transform:translateY(-2px); box-shadow:0 4px 16px rgba(232,160,69,0.55); animation:none; }
+    .nav__link--community::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; margin-left:7px; box-shadow:0 0 6px #4ade80; animation:dotBlink 1.4s ease-in-out infinite; }
+    .nav__mobile-menu .nav__link--community { font-size:15px; padding:8px 18px; width:fit-content; min-height:44px; }
+    @keyframes communityPulse { 0%,100%{box-shadow:0 2px 10px rgba(232,160,69,0.4);} 50%{box-shadow:0 2px 18px rgba(232,160,69,0.75),0 0 0 4px rgba(232,160,69,0.15);} }
+    @keyframes dotBlink { 0%,100%{opacity:0.4;box-shadow:0 0 3px #4ade80;} 50%{opacity:1;box-shadow:0 0 10px #4ade80,0 0 20px #4ade8088;} }
+    @media(max-width:900px) {
+      .nav__links { display:none; }
+      .nav__mobile-actions { display:flex; }
+      .nav__hamburger { display:flex; }
+      .nav__logo img { height:44px !important; }
+      .nav__logo-text { font-size:18px !important; }
     }
-    .attraction-card__age { display: none; }
-    .tips-list { display: flex; flex-direction: column; gap: 10px; }
-    .tip-item { background: var(--white); border-radius: 12px; border: 2px solid var(--sand-dark); padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
-    .tip-item__icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-    .tip-item__text { color: #555; line-height: 1.65; }
-    .tip-item__text strong { color: var(--charcoal); }
-    .sidebar { position: sticky; top: calc(var(--nav-height) + 20px); }
-    .cta-card { background: var(--teal); border-radius: 18px; padding: 24px; color: var(--white); text-align: center; }
-    .cta-card__title { font-family: var(--font-heading); font-size: 18px; margin-bottom: 10px; }
-    .cta-card__text { font-size: 14px; opacity: 0.85; margin-bottom: 20px; line-height: 1.6; }
-    .cta-card__btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--amber); color: var(--charcoal); border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 700; transition: background 0.2s, transform 0.2s; width: 100%; }
-    .cta-card__btn:hover { background: var(--amber-dark); transform: translateY(-2px); }
-    .cta-card__wa { display: flex; align-items: center; justify-content: center; gap: 8px; background: #25D366; color: var(--white); border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 600; transition: background 0.2s; margin-top: 10px; }
-    .cta-card__wa:hover { background: #1da851; }
-    .toc { background: var(--sand); border-radius: 14px; padding: 20px; margin-bottom: 36px; }
-    .toc__title { font-family: var(--font-heading); font-size: 15px; color: var(--teal); margin-bottom: 12px; }
-    .toc__list { display: flex; flex-direction: column; gap: 6px; }
-    .toc__link { font-size: 14px; color: var(--teal); display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
-    .toc__link:hover { color: var(--amber-dark); }
-    .toc__num { font-size: 11px; background: var(--teal); color: var(--white); border-radius: 4px; padding: 1px 6px; font-weight: 600; }
+    /* ── END NAV ─────────────────────────── */
 
-    /* PHOTO STRIPS */
-    .photo-strip {
-      width: 100%;
-      height: 420px;
-      position: relative;
-      overflow: hidden;
-      margin: 0 0 52px;
-    }
-    .photo-strip img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
-    .photo-strip__overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.35) 100%);
-    }
-    .photo-strip__caption {
-      position: absolute;
-      bottom: 24px;
-      right: 28px;
-      color: rgba(255,255,255,0.85);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
-    }
-
-    /* PHOTO GALLERY */
-    .photo-gallery {
-      margin-bottom: 52px;
-    }
-    .photo-gallery__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    .photo-gallery__item {
-      aspect-ratio: 4/3;
-      overflow: hidden;
-      border-radius: 12px;
-      position: relative;
-      cursor: pointer;
-    }
-    .photo-gallery__item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-      display: block;
-    }
-    .photo-gallery__item:hover img { transform: scale(1.05); }
-
-    /* LIGHTBOX */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.9);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-    }
-    .lightbox.open { display: flex; }
-    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; }
-    .lightbox__close { position: absolute; top: 20px; left: 24px; color: #fff; font-size: 32px; cursor: pointer; line-height: 1; }
-    .lightbox__prev, .lightbox__next { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; font-size: 36px; cursor: pointer; background: rgba(255,255,255,0.1); border-radius: 50%; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-    .lightbox__prev:hover, .lightbox__next:hover { background: rgba(255,255,255,0.25); }
-    .lightbox__prev { right: 20px; }
-    .lightbox__next { left: 20px; }
-
-    @media (max-width: 680px) {
-      .photo-strip { height: 260px; }
-      .photo-gallery__grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .footer { background: var(--charcoal); color: rgba(255,255,255,0.6); padding: 40px 0; text-align: center; font-size: 14px; }
-    .footer a { color: var(--amber-light); }
-    @media (max-width: 900px) {
-      .article-layout { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-      .nav__links { display: none; }
-      .nav__mobile-actions { display: flex; align-items: center; gap: 4px; }
-      .nav__hamburger { display: flex; }
-    }
-    @media (max-width: 768px) {
-      .nav__logo img { height: 44px !important; }
-      .nav__logo span { font-size: 18px !important; }
-    }
-    .nav__link--community {
-      background: var(--amber);
-      color: #2C2C2C !important;
-      font-weight: 600;
-      font-size: 15px;
-      border-radius: 22px;
-      padding: 8px 18px;
-      min-height: 44px;
-      box-shadow: 0 2px 10px rgba(232,160,69,0.45);
-      animation: communityPulse 2.8s ease-in-out infinite;
-    }
-    .nav__link--community:hover,
-    .nav__link--community:focus-visible {
-      background: #d4903c !important;
-      color: #2C2C2C !important;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(232,160,69,0.55);
-      animation: none;
-    }
-    .nav__link--community::before {
-      content: '';
-      width: 8px; height: 8px;
-      background: #4ade80;
-      border-radius: 50%;
-      display: inline-block;
-      margin-left: 7px;
-      box-shadow: 0 0 6px #4ade80;
-      animation: dotBlink 1.4s ease-in-out infinite;
-    }
-    .nav__mobile-menu .nav__link--community {
-      font-size: 15px;
-      padding: 8px 18px;
-      width: fit-content;
-      min-height: 44px;
-    }
     @keyframes communityPulse {
       0%, 100% { box-shadow: 0 2px 10px rgba(232,160,69,0.4); }
       50%       { box-shadow: 0 2px 18px rgba(232,160,69,0.75), 0 0 0 4px rgba(232,160,69,0.15); }
@@ -286,44 +77,73 @@
 <body>
 
   <nav class="nav" id="nav">
-    <div class="container nav__inner">
-      <a href="services.html" class="nav__logo">
-        <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
-        <span style="font-family:var(--font-heading);font-size:22px;color:var(--teal);font-weight:700;">מתי טסים</span>
-      </a>
-      <ul class="nav__links">
-        <li><a href="tips.html" class="nav__link">טיפים</a></li>
-        <li><a href="destinations.html" class="nav__link" aria-current="page">יעדים</a></li>
-        <li><a href="services.html#services-content" class="nav__link">שירותים</a></li>
-        <li><a href="services.html#about" class="nav__link">אודות</a></li>
-        <li><a href="services.html#final-cta" class="nav__link">צור קשר</a></li>
-        <li><a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a></li>
-      </ul>
-      <div class="nav__mobile-actions">
-        <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </a>
-        <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+  <div class="nav__inner">
+    <a href="services.html" class="nav__logo">
+      <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+      <span class="nav__logo-text">מתי טסים</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="tips.html" class="nav__link">טיפים</a></li>
+      <li><a href="destinations.html" class="nav__link" aria-current="page">יעדים</a></li>
+      <li><a href="weather.html" class="nav__link">מזג אוויר</a></li>
+      <li><a href="packages.html" class="nav__link">שירותים</a></li>
+      <li><a href="about.html" class="nav__link">אודות</a></li>
+      <li><a href="services.html#final-cta" class="nav__link">צור קשר</a></li>
+      <li><a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a></li>
+    </ul>
+    <div class="nav__mobile-actions">
+      <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-label="פתח תפריט">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <div class="nav__mobile-menu" id="mobileMenu">
-      <a href="tips.html" class="nav__link">טיפים</a>
-      <a href="destinations.html" class="nav__link">יעדים</a>
-      <a href="services.html#services-content" class="nav__link">שירותים</a>
-      <a href="services.html#about" class="nav__link">אודות</a>
-      <a href="services.html#final-cta" class="nav__link">צור קשר</a>
-      <a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a>
-    </div>
-  </nav>
+  </div>
+  <div class="nav__mobile-menu" id="mobileMenu">
+    <a href="tips.html" class="nav__link">טיפים</a>
+    <a href="destinations.html" class="nav__link" aria-current="page">יעדים</a>
+    <a href="weather.html" class="nav__link">מזג אוויר</a>
+    <a href="packages.html" class="nav__link">שירותים</a>
+    <a href="about.html" class="nav__link">אודות</a>
+    <a href="services.html#final-cta" class="nav__link">צור קשר</a>
+    <a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a>
+  </div>
+</nav>
 
   <section class="article-hero">
     <div class="container">
       <div class="article-hero__inner">
-        <nav class="article-hero__breadcrumb">
-          <a href="services.html">דף הבית</a> › <a href="destinations.html">יעדים</a> › <span>סלובקיה</span>
-        </nav>
+        <nav class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="services.html" class="nav__logo">
+      <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+      <span class="nav__logo-text">מתי טסים</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="tips.html" class="nav__link">טיפים</a></li>
+      <li><a href="destinations.html" class="nav__link" aria-current="page">יעדים</a></li>
+      <li><a href="weather.html" class="nav__link">מזג אוויר</a></li>
+      <li><a href="packages.html" class="nav__link">שירותים</a></li>
+      <li><a href="about.html" class="nav__link">אודות</a></li>
+      <li><a href="services.html#final-cta" class="nav__link">צור קשר</a></li>
+      <li><a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a></li>
+    </ul>
+    <div class="nav__mobile-actions">
+      <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-label="פתח תפריט">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav__mobile-menu" id="mobileMenu">
+    <a href="tips.html" class="nav__link">טיפים</a>
+    <a href="destinations.html" class="nav__link" aria-current="page">יעדים</a>
+    <a href="weather.html" class="nav__link">מזג אוויר</a>
+    <a href="packages.html" class="nav__link">שירותים</a>
+    <a href="about.html" class="nav__link">אודות</a>
+    <a href="services.html#final-cta" class="nav__link">צור קשר</a>
+    <a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a>
+  </div>
+</nav>
         <span class="article-hero__flag">🇸🇰</span>
         <h1 class="article-hero__title">טיול לסלובקיה עם ילדים - המדריך המלא</h1>
         <p class="article-hero__subtitle">טירות מהאגדות, הרי הטטרה, נהר הדנובה ובירה ציורית - סלובקיה היא אחת ההפתעות הכי טובות של אירופה לטיול משפחתי</p>
@@ -808,5 +628,40 @@
 
   })();
   </script>
+<script>
+  (function () {
+    'use strict';
+    var nav = document.getElementById('nav');
+    var hamburger = document.getElementById('hamburgerBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (!hamburger || !mobileMenu) return;
+    hamburger.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen.toString());
+      hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'פתח תפריט');
+        document.body.style.overflow = '';
+      });
+    });
+    if (nav) window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'פתח תפריט');
+        document.body.style.overflow = '';
+        hamburger.focus();
+      }
+    });
+  })();
+</script>
 </body>
 </html>

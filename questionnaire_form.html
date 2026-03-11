@@ -181,7 +181,7 @@
     .kid-row .field:last-child { grid-column:1/-1; }
   }
 
-    /* ── NAV ─────────────────────────────── */
+        /* ── NAV ─────────────────────────────── */
     .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
     .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
     .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
@@ -211,6 +211,7 @@
     @media(max-width:900px) {
       .nav__links { display:none; }
       .nav__mobile-actions { display:flex; }
+      .nav__hamburger { display:flex; }
       .nav__logo img { height:44px !important; }
       .nav__logo-text { font-size:18px !important; }
     }
@@ -557,6 +558,7 @@
 
 
 
+
 <script>
   (function () {
     'use strict';
@@ -574,6 +576,7 @@
       link.addEventListener('click', function () {
         mobileMenu.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'פתח תפריט');
         document.body.style.overflow = '';
       });
     });
@@ -584,6 +587,7 @@
       if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
         mobileMenu.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'פתח תפריט');
         document.body.style.overflow = '';
         hamburger.focus();
       }
