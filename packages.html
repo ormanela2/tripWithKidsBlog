@@ -504,21 +504,6 @@ function toggleFaq(btn) {
   }
 }
 
-// Hamburger
-const hamburger = document.getElementById('hamburgerBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-if (hamburger) {
-  hamburger.addEventListener('click', () => {
-    const open = hamburger.getAttribute('aria-expanded') === 'true';
-    hamburger.setAttribute('aria-expanded', String(!open));
-    mobileMenu.classList.toggle('open');
-  });
-}
-
-window.addEventListener('scroll', () => {
-  document.getElementById('nav')?.classList.toggle('scrolled', window.scrollY > 10);
-});
-
 // Contact Modal
 const contactModal = document.getElementById('contactModal');
 const closeBtn = document.getElementById('closeContactModal');
