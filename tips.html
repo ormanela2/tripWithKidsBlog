@@ -298,6 +298,12 @@
     }
     /* ── END NAV ─────────────────────────── */
   </style>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
 </head>
 <body>
 
@@ -802,6 +808,34 @@
         hamburger.focus();
       }
     });
+
+    // Reveal helper — activates .reveal elements inside a section
+    function activateReveals(section) {
+      section.querySelectorAll('.reveal').forEach(function(el) {
+        el.classList.add('visible');
+      });
+    }
+
+    // Tab switching
+    var tabBtns = document.querySelectorAll('.tab-btn');
+    var tabSections = document.querySelectorAll('.tips-section');
+    tabBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var target = btn.getAttribute('data-tab');
+        tabBtns.forEach(function(b) { b.classList.remove('active'); });
+        tabSections.forEach(function(s) { s.classList.remove('active'); });
+        btn.classList.add('active');
+        var section = document.getElementById('tab-' + target);
+        if (section) {
+          section.classList.add('active');
+          activateReveals(section);
+        }
+      });
+    });
+
+    // Activate reveals in the initially visible section on page load
+    var activeSection = document.querySelector('.tips-section.active');
+    if (activeSection) activateReveals(activeSection);
 
     // Reveal helper — activates .reveal elements inside a section
     function activateReveals(section) {
