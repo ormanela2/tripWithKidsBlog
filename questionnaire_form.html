@@ -19,43 +19,7 @@
 
   /* NAV */
   --nav-height: 72px;
-  .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:72px; transition:box-shadow 0.3s ease; }
-  .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
-  .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
-  .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
-  .nav__logo img { height:70px; width:auto; mix-blend-mode:multiply; }
-  .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
-  .nav__links { display:flex; align-items:center; gap:8px; list-style:none; margin:0; padding:0; position:absolute; left:40%; transform:translateX(-50%); }
-  .nav__link { white-space:nowrap; padding:8px 16px; border-radius:8px; font-family:'Rubik',sans-serif; font-weight:600; font-size:15px; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
-  .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
-  .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:white; }
-  .nav__link.active:hover { background:var(--teal-dark); color:white; }
-  .nav__mobile-actions { display:none; align-items:center; gap:4px; }
-  .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
-  .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
-  .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
-  .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
-  .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
-  .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
-  .nav__mobile-menu { display:none; position:fixed; top:72px; right:0; left:0; bottom:0; background:var(--cream); padding:32px 24px; flex-direction:column; gap:8px; z-index:999; overflow-y:auto; }
-  .nav__mobile-menu.open { display:flex; }
-  .nav__mobile-menu .nav__link { font-size:20px; padding:16px; justify-content:flex-start; }
-  .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:600; font-size:15px; border-radius:22px; padding:8px 18px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); animation:communityPulse 2.8s ease-in-out infinite; }
-  .nav__link--community:hover { background:#d4903c !important; transform:translateY(-2px); animation:none; }
-  .nav__link--community::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; margin-left:7px; box-shadow:0 0 6px #4ade80; animation:dotBlink 1.4s ease-in-out infinite; }
-  .nav__mobile-menu .nav__link--community { font-size:15px; padding:8px 18px; width:fit-content; min-height:44px; }
-  @keyframes communityPulse { 0%,100%{box-shadow:0 2px 10px rgba(232,160,69,0.4);} 50%{box-shadow:0 2px 18px rgba(232,160,69,0.75),0 0 0 4px rgba(232,160,69,0.15);} }
-  @keyframes dotBlink { 0%,100%{opacity:0.4;box-shadow:0 0 3px #4ade80;} 50%{opacity:1;box-shadow:0 0 10px #4ade80,0 0 20px #4ade8088;} }
-  @media(max-width:900px) {
-    .nav__links { display:none; }
-    .nav__mobile-actions { display:flex; }
-    .nav__logo { position:static; left:auto; transform:none; }
-    .nav__logo img { height:44px !important; }
-    .nav__logo-text { font-size:18px !important; }
-  }
-
-  /* PAGE HEADER */
-  .page-header {
+    .page-header {
     background:linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
     padding:48px 24px 56px; text-align:center;
     margin-top:72px;
