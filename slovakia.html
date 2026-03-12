@@ -10,6 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
   <style>
+    /* Inline flag SVG - no CDN dependency */
+    .flag-sk { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23fff'/%3E%3Crect y='200' width='900' height='200' fill='%230b4ea2'/%3E%3Crect y='400' width='900' height='200' fill='%23ee1c25'/%3E%3Cpath fill='%23fff' d='M270 60v160c0 100-90 160-90 160S90 320 90 220V60z'/%3E%3Cpath fill='%230b4ea2' d='M260 70v150c0 93-80 150-80 150s-80-57-80-150V70z'/%3E%3Crect fill='%23fff' x='130' y='220' width='100' height='50'/%3E%3Crect fill='%23fff' x='155' y='200' width='50' height='90'/%3E%3C/svg%3E"); }
+    .flag-icon { display: inline-block; background-size: cover; background-repeat: no-repeat; border-radius: 4px; }
+    .flag-icon-hero { width: 56px; height: 38px; }
+  </style>
+  <style>
     :root {
       --amber: #E8A045; --amber-light: #f0b868; --amber-dark: #c4872e;
       --teal: #1A6B72; --teal-dark: #124d52;
@@ -324,7 +330,7 @@
     <div class="container">
       <div class="article-hero__inner">
         
-        <span class="article-hero__flag">🇸🇰</span>
+        <span class="article-hero__flag"><span class="flag-icon flag-sk flag-icon-hero"></span></span>
         <h1 class="article-hero__title">טיול לסלובקיה עם ילדים - המדריך המלא</h1>
         <p class="article-hero__subtitle">טירות מהאגדות, הרי הטטרה, נהר הדנובה ובירה ציורית - סלובקיה היא אחת ההפתעות הכי טובות של אירופה לטיול משפחתי</p>
         <div class="article-hero__meta">
