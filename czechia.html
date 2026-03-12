@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="מדריך טיול לדרום צ'כיה עם ילדים - אגם ליפנו, צ'סקי קרומלוב, מערות ואטרקציות לכל המשפחה. מתי טסים.">
+  <title>טיול לדרום צ'כיה עם ילדים - מדריך מלא | מתי טסים</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <style>
+    /* Inline Czech flag SVG - no CDN dependency */
+    .flag-cz { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='300' fill='%23fff'/%3E%3Crect y='300' width='900' height='300' fill='%23d7141a'/%3E%3Cpath fill='%2311457e' d='M0 0 L450 300 L0 600 Z'/%3E%3C/svg%3E"); }
+    .flag-icon { display: inline-block; background-size: cover; background-repeat: no-repeat; border-radius: 4px; }
+    .flag-icon-hero { width: 56px; height: 38px; }
+  </style>
+  <style>
+    :root {
+      --amber: #E8A045; --amber-light: #f0b868; --amber-dark: #c4872e;
+      --teal: #1A6B72; --teal-dark: #124d52;
+      --cream: #FDF8F2; --charcoal: #2C2C2C; --sand: #F5EDD8; --sand-dark: #e8ddc4;
+      --green: #4A9B6F; --white: #FFFFFF;
+      --font-heading: 'Secular One', sans-serif; --font-body: 'Rubik', sans-serif;
+      --nav-height: 72px;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); font-size: 17px; line-height: 1.8; color: var(--charcoal); background: var(--cream); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 400; line-height: 1.3; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; }
+    .container--narrow { max-width: 780px; }
+
+    /* ── NAV ─────────────────────────────── */
+    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
+    .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+    .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
+    .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
+    .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
+    .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
+    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Rubik',sans-serif; font-weight:600; font-size:15px; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
+    .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
+    .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
+    .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
+    .nav__mobile-actions { display:none; align-items:center; gap:4px; }
+    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
+    .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+    .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
+    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:32px 24px; flex-direction:column; gap:8px; z-index:999; overflow-y:auto; }
+    .nav__mobile-menu.open { display:flex; }
+    .nav__mobile-menu .nav__link { font-size:20px; padding:16px; justify-content:flex-start; }
+    .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:600; font-size:15px; border-radius:22px; padding:8px 16px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); animation:communityPulse 2.8s ease-in-out infinite; }
+    .nav__link--community:hover, .nav__link--community:focus-visible { background:#d4903c !important; color:#2C2C2C !important; transform:translateY(-2px); box-shadow:0 4px 16px rgba(232,160,69,0.55); animation:none; }
+    .nav__link--community::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; margin-left:7px; box-shadow:0 0 6px #4ade80; animation:dotBlink 1.4s ease-in-out infinite; }
+    .nav__mobile-menu .nav__link--community { font-size:15px; padding:8px 18px; width:fit-content; min-height:44px; }
+    @keyframes communityPulse { 0%,100%{box-shadow:0 2px 10px rgba(232,160,69,0.4);} 50%{box-shadow:0 2px 18px rgba(232,160,69,0.75),0 0 0 4px rgba(232,160,69,0.15);} }
+    @keyframes dotBlink { 0%,100%{opacity:0.4;box-shadow:0 0 3px #4ade80;} 50%{opacity:1;box-shadow:0 0 10px #4ade80,0 0 20px #4ade8088;} }
+    @media(max-width:900px) {
+      .nav__links { display:none; }
+      .nav__mobile-actions { display:flex; }
+      .nav__hamburger { display:flex; }
+      .nav__logo img { height:44px !important; }
+      .nav__logo-text { font-size:18px !important; }
+    }
+    /* ── END NAV ─────────────────────────── */
+
+    /* ── HERO ── */
+    .article-hero { background: linear-gradient(155deg, #11457e 0%, #1a5c9a 50%, #1A6B72 100%); padding-top: calc(var(--nav-height) + 56px); padding-bottom: 70px; color: var(--white); position: relative; overflow: hidden; }
+    .article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(232,160,69,0.1) 0%, transparent 60%); }
+    .article-hero::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 70px; background: linear-gradient(to top, var(--cream), transparent); }
+    .article-hero__inner { position: relative; max-width: 780px; }
+    .article-hero__breadcrumb { font-size: 13px; opacity: 0.7; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .article-hero__breadcrumb a { opacity: 0.8; transition: opacity 0.2s; }
+    .article-hero__flag { font-size: 56px; margin-bottom: 16px; display: block; }
+    .article-hero__title { font-size: clamp(28px, 4.5vw, 50px); margin-bottom: 18px; }
+    .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.88; margin-bottom: 32px; max-width: 600px; line-height: 1.7; }
+    .article-hero__meta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
+
+    /* ── BODY ── */
+    .article-body { padding: 60px 0 80px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
+    .article-content { min-width: 0; }
+    .article-section { margin-bottom: 52px; }
+    .article-section__title { font-size: clamp(20px, 2.5vw, 26px); color: var(--teal); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--sand-dark); display: flex; align-items: center; gap: 10px; }
+    .article-section__title-icon { font-size: 24px; }
+    .article-content p { margin-bottom: 16px; color: #444; line-height: 1.85; }
+    .article-content p:last-child { margin-bottom: 0; }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding: 8px 0 0; }
+    .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; right: 50%; width: 3px; background: linear-gradient(to bottom, var(--teal), var(--amber), var(--teal-dark)); transform: translateX(50%); border-radius: 3px; }
+    .tl-item { display: grid; grid-template-columns: 1fr 56px 1fr; gap: 0 0; margin-bottom: 48px; position: relative; align-items: start; }
+    .tl-item__label { font-family: var(--font-heading); font-size: 13px; color: #aaa; letter-spacing: 0.5px; padding-top: 18px; }
+    .tl-item:nth-child(odd)  .tl-item__label { text-align: left;  padding-right: 28px; }
+    .tl-item:nth-child(even) .tl-item__label { text-align: right; padding-left: 28px; order: 3; }
+    .tl-item__node { display: flex; flex-direction: column; align-items: center; gap: 0; position: relative; z-index: 2; padding-top: 12px; }
+    .tl-item__icon { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 4px solid var(--cream); box-shadow: 0 2px 12px rgba(0,0,0,0.15); flex-shrink: 0; }
+    .tl-item__day-label { margin-top: 6px; font-family: var(--font-heading); font-size: 11px; color: #aaa; letter-spacing: 0.5px; }
+    .tl-item__card { background: var(--white); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 2px solid var(--sand-dark); transition: transform 0.35s ease, box-shadow 0.35s ease; cursor: pointer; }
+    .tl-item__card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.13); }
+    .tl-item:nth-child(odd)  .tl-item__card { margin-left: 24px; }
+    .tl-item:nth-child(even) .tl-item__card { margin-right: 24px; order: -1; }
+    .tl-card__band { height: 6px; width: 100%; }
+    .tl-card__header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .tl-card__title { font-family: var(--font-heading); font-size: 16px; color: var(--charcoal); line-height: 1.35; }
+    .tl-card__where { font-size: 12px; color: #aaa; margin-top: 4px; display: flex; align-items: center; gap: 3px; }
+    .tl-card__star { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+    .tl-card__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px 14px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-size: 13px; color: var(--teal); font-weight: 600; border-top: 1px solid var(--sand); }
+    .tl-card__toggle:hover { background: var(--sand); }
+    .tl-card__chevron { transition: transform 0.3s; font-style: normal; }
+    .tl-card.open .tl-card__chevron { transform: rotate(180deg); }
+    .tl-card__body { display: none; padding: 0 20px 18px; }
+    .tl-card.open .tl-card__body { display: block; }
+    .tl-activity { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--sand-dark); }
+    .tl-activity:last-of-type { border-bottom: none; }
+    .tl-activity__time { font-size: 11px; font-weight: 700; color: var(--teal); min-width: 46px; padding-top: 2px; letter-spacing: 0.3px; }
+    .tl-activity__name { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+    .tl-activity__desc { font-size: 13px; color: #666; line-height: 1.55; }
+    .tl-tip { margin-top: 12px; background: rgba(232,160,69,0.1); border-right: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 9px 13px; font-size: 13px; color: #666; }
+    .tl-tip strong { color: var(--amber-dark); }
+
+    /* Timeline item color themes */
+    .tl-item--flight .tl-item__icon { background: linear-gradient(135deg, #1A6B72, #238a93); color: #fff; }
+    .tl-item--flight .tl-card__band { background: linear-gradient(90deg, #1A6B72, #238a93); }
+    .tl-item--lipno .tl-item__icon { background: linear-gradient(135deg, #4A9B6F, #2d7550); color: #fff; }
+    .tl-item--lipno .tl-card__band { background: linear-gradient(90deg, #4A9B6F, #2d7550); }
+    .tl-item--krumlov .tl-item__icon { background: linear-gradient(135deg, #E8A045, #c4872e); color: #fff; }
+    .tl-item--krumlov .tl-card__band { background: linear-gradient(90deg, #E8A045, #c4872e); }
+    .tl-item--caves .tl-item__icon { background: linear-gradient(135deg, #6b4aa0, #8a60c0); color: #fff; }
+    .tl-item--caves .tl-card__band { background: linear-gradient(90deg, #6b4aa0, #8a60c0); }
+    .tl-item--prague .tl-item__icon { background: linear-gradient(135deg, #11457e, #1a5c9a); color: #fff; }
+    .tl-item--prague .tl-card__band { background: linear-gradient(90deg, #11457e, #1a5c9a); }
+    .tl-item--austria .tl-item__icon { background: linear-gradient(135deg, #c0504a, #a03530); color: #fff; }
+    .tl-item--austria .tl-card__band { background: linear-gradient(90deg, #c0504a, #a03530); }
+    .tl-card__star--highlight { background: rgba(74,155,111,0.12); color: #2d7550; }
+    .tl-card__star--castle { background: rgba(232,160,69,0.15); color: #b07020; }
+
+    @media (max-width: 680px) {
+      .timeline::before { right: 28px; transform: none; }
+      .tl-item { grid-template-columns: 56px 1fr; grid-template-rows: auto auto; }
+      .tl-item__label { display: none; }
+      .tl-item__node { padding-top: 10px; }
+      .tl-item:nth-child(odd)  .tl-item__card { margin-left: 12px; }
+      .tl-item:nth-child(even) .tl-item__card { margin-right: 0; margin-left: 12px; order: unset; }
+      .tl-item:nth-child(even) .tl-item__label { order: unset; }
+    }
+
+    /* ── MAP ── */
+    #trip-map { height: 420px; border-radius: 16px; overflow: hidden; border: 2px solid var(--sand-dark); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    #map-day-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+
+    /* ── TIPS ── */
+    .tips-list { display: flex; flex-direction: column; gap: 10px; }
+    .tip-item { background: var(--white); border-radius: 12px; border: 2px solid var(--sand-dark); padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
+    .tip-item__icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .tip-item__text { color: #555; line-height: 1.65; }
+    .tip-item__text strong { color: var(--charcoal); }
+
+    /* ── ATTRACTIONS GRID ── */
+    .attractions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .attraction-card { background: var(--white); border-radius: 14px; border: 2px solid var(--sand-dark); padding: 16px 18px; transition: transform 0.25s, box-shadow 0.25s; }
+    .attraction-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .attraction-card__icon { font-size: 28px; margin-bottom: 8px; display: block; }
+    .attraction-card__name { font-family: var(--font-heading); font-size: 15px; margin-bottom: 6px; color: var(--teal); }
+    .attraction-card__desc { font-size: 13px; color: #666; line-height: 1.6; }
+    @media (max-width: 500px) { .attractions-grid { grid-template-columns: 1fr; } }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: calc(var(--nav-height) + 20px); }
+    .cta-card { background: var(--teal); border-radius: 18px; padding: 24px; color: var(--white); text-align: center; }
+    .cta-card__title { font-family: var(--font-heading); font-size: 18px; margin-bottom: 10px; }
+    .cta-card__text { font-size: 14px; opacity: 0.85; margin-bottom: 20px; line-height: 1.6; }
+    .cta-card__btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--amber); color: var(--charcoal); border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 700; transition: background 0.2s, transform 0.2s; width: 100%; }
+    .cta-card__btn:hover { background: var(--amber-dark); transform: translateY(-2px); }
+    .cta-card__wa { display: flex; align-items: center; justify-content: center; gap: 8px; background: #25D366; color: var(--white); border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 600; transition: background 0.2s; margin-top: 10px; }
+    .cta-card__wa:hover { background: #1da851; }
+
+    /* ── TOC ── */
+    .toc { background: var(--sand); border-radius: 14px; padding: 20px; margin-bottom: 36px; }
+    .toc__title { font-family: var(--font-heading); font-size: 15px; color: var(--teal); margin-bottom: 12px; }
+    .toc__list { display: flex; flex-direction: column; gap: 6px; }
+    .toc__link { font-size: 14px; color: var(--teal); display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .toc__link:hover { color: var(--amber-dark); }
+    .toc__num { font-size: 11px; background: var(--teal); color: var(--white); border-radius: 4px; padding: 1px 6px; font-weight: 600; }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--charcoal); color: rgba(255,255,255,0.6); padding: 40px 0; text-align: center; font-size: 14px; }
+    .footer a { color: var(--amber-light); }
+
+    @media (max-width: 900px) {
+      .article-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+    @media (max-width: 768px) {
+      .nav__logo img { height: 44px !important; }
+      .nav__logo span { font-size: 18px !important; }
+    }
+  </style>
+  <link rel="icon" type="image/png" href="logo.png">
+  <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="services.html" class="nav__logo">
+      <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+      <span class="nav__logo-text">מתי טסים</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="tips.html" class="nav__link">טיפים</a></li>
+      <li><a href="destinations.html" class="nav__link" aria-current="page">יעדים</a></li>
+      <li><a href="weather.html" class="nav__link">מזג אוויר</a></li>
+      <li><a href="packages.html" class="nav__link">שירותים</a></li>
+      <li><a href="about.html" class="nav__link">אודות</a></li>
+      <li><a href="services.html#final-cta" class="nav__link">צור קשר</a></li>
+      <li><a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a></li>
+    </ul>
+    <div class="nav__mobile-actions">
+      <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-label="פתח תפריט">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav__mobile-menu" id="mobileMenu">
+    <a href="tips.html" class="nav__link">טיפים</a>
+    <a href="destinations.html" class="nav__link" aria-current="page">יעדים</a>
+    <a href="weather.html" class="nav__link">מזג אוויר</a>
+    <a href="packages.html" class="nav__link">שירותים</a>
+    <a href="about.html" class="nav__link">אודות</a>
+    <a href="services.html#final-cta" class="nav__link">צור קשר</a>
+    <a href="services.html#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="article-hero">
+  <div class="container">
+    <div class="article-hero__inner">
+      <nav class="article-hero__breadcrumb" aria-label="breadcrumb">
+        <a href="destinations.html">יעדים</a>
+        <span>›</span>
+        <span>דרום צ'כיה</span>
+      </nav>
+      <span class="article-hero__flag"><span class="flag-icon flag-cz flag-icon-hero"></span></span>
+      <h1 class="article-hero__title">טיול לדרום צ'כיה עם ילדים - המדריך המלא</h1>
+      <p class="article-hero__subtitle">מסלול הצמרות של ליפנו שממנו רואים את כל האגם, ראפטינג של 45 דקות בנהר ולטאבה בין עצים ירוקים, עיירת טירות שנראית כמו מתוך ספר אגדות, בובסלד שהילדים מבקשים לחזור שוב ושוב - ופראג שמחכה לכם בסוף כבונוס שאי אפשר לפספס. צ'כיה היא אחת ההפתעות הכי טובות שנתקלנו בהן - גם יפה, זולה וגם טיסה לא ארוכה מדי, אזור מדהים שילדים פשוט מתים לחזור שוב ושוב.</p>
+      <div class="article-hero__meta">
+        <span class="article-hero__badge">🟢 קל עם ילדים</span>
+        <span class="article-hero__badge">📅 10-14 ימים מומלץ</span>
+        <span class="article-hero__badge">☀️ אוגוסט מומלץ</span>
+        <span class="article-hero__badge">✈️ טיסה לפראג</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<section class="article-body">
+  <div class="container">
+    <div class="article-layout">
+
+      <!-- MAIN CONTENT -->
+      <main class="article-content">
+
+        <!-- TOC -->
+        <div class="toc">
+          <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
+          <div class="toc__list">
+            <a href="#intro" class="toc__link"><span class="toc__num">1</span> למה דרום צ'כיה עם ילדים?</a>
+            <a href="#route-map" class="toc__link"><span class="toc__num">2</span> המסלול על המפה</a>
+            <a href="#itinerary" class="toc__link"><span class="toc__num">3</span> מסלול יום-יום מומלץ</a>
+            <a href="#lipno" class="toc__link"><span class="toc__num">4</span> אטרקציות אגם ליפנו</a>
+            <a href="#tips" class="toc__link"><span class="toc__num">5</span> טיפים חשובים</a>
+          </div>
+        </div>
+
+        <!-- 1. INTRO -->
+        <div class="article-section" id="intro">
+          <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> למה דרום צ'כיה עם ילדים?</h2>
+          <p>לפני שטסנו לא ממש ידענו מה לצפות - צ'כיה לא הייתה על הרדאר שלנו כיעד משפחתי "קלאסי". אחרי שחזרנו, אנחנו מספרים עליה לכולם. הטיול הזה שבר לנו את כל הציפיות.</p>
+          <p><strong>אגם ליפנו</strong> הוא הלב של הטיול. זה לא סתם אגם - זה כפר נופש שלם סביב אגם ענק ויפהפה בהרים. בבוקר עלינו למסלול הצמרות ורואים משם את כל האגם והיער מסביב, בצהריים ירדנו לפארק המים Aquaworld, ובערב עשינו כמה ריצות בובסלד שהבנות פשוט לא הסכימו להפסיק. ויש עוד - אדרנלין פארק עם מסלולי חבלים ביער, Hopsarium לילדים קטנים יותר, ושיט בסירה לפרימבורק. אפשר לבלות שם שבוע שלם בלי לשעמם.</p>
+          <p><strong>צ'סקי קרומלוב</strong> - בילינו שם חצי יום ויצאנו עם תחושה שצריך עוד יום. עיירה שנראית כאילו הוצאת אותה מסרט אנימציה - טירה ענקית, סמטאות אבן, נהר שעוטף את כל העיר. הלכנו במסלול מעגלי, קנינו כרטיס משולב למבוך מראות ולמוזיאון שעווה, ובאחרית היום עשינו ראפטינג של 45 דקות בנהר ולטאבה - צפות בין עצי ערבה ירוקים ברמה שכל אחד יכול, כולל ילדים קטנים. אחת החוויות הכי טובות של הטיול.</p>
+          <p><strong>פראג</strong> מחכה בסוף כבונוס. אחרי שבוע בטבע, העיר מקבלת אתכם בגן החיות האירופאי הטוב ביותר, טירת פראג, מוזיאון LEGO שרק 6 דקות הליכה מהמלון, ועוד מוזיאון אשליות ומבוך מראות שממש ליד. פראג היא עיר שעובדת מצוין עם ילדים - לא רק לסיורים תרבותיים, אלא לשעשועים אמיתיים.</p>
+          <p>היתרון הכלכלי גם לא עובר בשתיקה: מחירי האוכל, הכרטיסים והלינה נמוכים משמעותית מגרמניה, אוסטריה או צרפת - ואפשר לשלב בקלות טיול יום לאוסטריה עם ה-Grottenbahn האגדי ומרכז Ars Electronica הטכנולוגי.</p>
+        </div>
+
+        <!-- 2. MAP -->
+        <div class="article-section" id="route-map">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🗺️</span> המסלול על המפה</h2>
+          <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות את המיקום במפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
+          <div id="trip-map"></div>
+          <div id="map-day-pills"></div>
+        </div>
+
+        <!-- 3. ITINERARY -->
+        <div class="article-section" id="itinerary">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🗓️</span> המסלול המלא</h2>
+          <div class="timeline">
+
+            <!-- יום 1 -->
+            <div class="tl-item tl-item--flight" id="tl1">
+              <div class="tl-item__label">יום 1<br><span style="font-size:11px;color:#ccc;">11.08 שבת</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">✈️</div>
+                <span class="tl-item__day-label">יום 1</span>
+              </div>
+              <div class="tl-item__card tl-card open">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">טיסה לפראג + הגעה לאגם ליפנו</div>
+                    <div class="tl-card__where">📍 תל אביב → פראג → Hotel Element ליפנו</div>
+                  </div>
+                  <span class="tl-card__star tl-card__star--highlight">יום הגעה</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">07:00</span>
+                    <div>
+                      <div class="tl-activity__name">טיסה לפראג ✈️</div>
+                      <div class="tl-activity__desc">טיסה מנתב"ג. משך הטיסה כ-4 שעות. מומלץ לקנות כרטיס סים ב-T-Mobile בשדה התעופה מיד עם הנחיתה (יש גם ב-RELAY).</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">נחיתה</span>
+                    <div>
+                      <div class="tl-activity__name">השכרת רכב - Alamo Rent a Car</div>
+                      <div class="tl-activity__desc">מספר אישור: 1978942682. חשוב: לציין בקבלה שתעברו את הגבול לאוסטריה.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בדרך</span>
+                    <div>
+                      <div class="tl-activity__name">עצירה במערת צ'ינובסקה 🦇</div>
+                      <div class="tl-activity__desc">מערת נטיפים ועמודות טף מרהיבות בדרך לליפנו - כ-40 דקות מהאוטוסטרדה. שווה מאוד לעצור!</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hotel Element ליפנו - <a href="https://www.hotelelement.cz/en/" target="_blank" style="color:var(--teal);">hotelelement.cz</a></div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl1')"><span>פרטי היום</span><span class="tl-card__chevron">▲</span></button>
+              </div>
+            </div>
+
+            <!-- יום 2 -->
+            <div class="tl-item tl-item--lipno" id="tl2">
+              <div class="tl-item__label">יום 2<br><span style="font-size:11px;color:#ccc;">12.08 ראשון</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🌊</div>
+                <span class="tl-item__day-label">יום 2</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">Aquaworld Lipno + מסלול הצמרות</div>
+                    <div class="tl-card__where">📍 אגם ליפנו</div>
+                  </div>
+                  <span class="tl-card__star tl-card__star--highlight">❤️ הכי שווה</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Lipno Treetop Walkway 🌲</div>
+                      <div class="tl-activity__desc">מסלול עצים מוגבה עם נוף פנורמי מרהיב על האגם והיער. מתאים לכל הגילאים, כ-1.5 שעות.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">Aquaworld Lipno 🏊</div>
+                      <div class="tl-activity__desc">פארק מים עם מגלשות, בריכות ואזורי משחק. מתאים במיוחד לילדים. ממוקם ממש ליד האגם.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">Hopsarium Lipno 🎪</div>
+                      <div class="tl-activity__desc">מרכז שעשועים מקורה עם מתנפחים, מגלשות וטרמפולינות - מושלם לאחר הצהריים.</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl2')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 3 -->
+            <div class="tl-item tl-item--krumlov" id="tl3">
+              <div class="tl-item__label">יום 3<br><span style="font-size:11px;color:#ccc;">13.08 שני</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🏰</div>
+                <span class="tl-item__day-label">יום 3</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">צ'סקי קרומלוב - עיירת הטירה</div>
+                    <div class="tl-card__where">📍 Český Krumlov - 35 דקות מליפנו</div>
+                  </div>
+                  <span class="tl-card__star tl-card__star--castle">⭐ חובה</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">חניון P1 + סיור רגלי 🗺️</div>
+                      <div class="tl-activity__desc">לחנות בחניון P1 ממש מתחת לטירה. ללכת במסלול מעגלי - יש שלט עם מפה בכל האטרקציות ומקרא באנגלית. כדאי לצלם את השלט.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">מבוך מראות + מוזיאון שעווה 🪞</div>
+                      <div class="tl-activity__desc">כרטיס משולב - הבנות נהנו מאוד! קצר ולעניין. מבוך המראות כיפי במיוחד לילדים צעירים.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">ראפטינג בנהר ולטאבה 🚣</div>
+                      <div class="tl-activity__desc">ראפטינג של 45 דקות - חוויה מדהימה לכל המשפחה! הזמנה מראש: <a href="https://www.ckvltava.cz" target="_blank" style="color:var(--teal);">ckvltava.cz</a></div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>טיפ:</strong> מגיעים חצי יום - מספיק בכיף. העיירה קטנה וניתן ללכת בכל הרגלית בקלות.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl3')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 4 -->
+            <div class="tl-item tl-item--lipno" id="tl4">
+              <div class="tl-item__label">יום 4<br><span style="font-size:11px;color:#ccc;">14.08 שלישי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🎢</div>
+                <span class="tl-item__day-label">יום 4</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">אדרנלין פארק + בובסלד + אגם ליפנו</div>
+                    <div class="tl-card__where">📍 ליפנו</div>
+                  </div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Adrenaline Park Lipno 🧗</div>
+                      <div class="tl-activity__desc">פארק הרפתקות עם מסלולי חבלים, זיפלייני וקירות טיפוס ביער. אחד הדברים הכי שווים באזור לילדים גדולים יותר.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">מסלול בובסלד ⛷️</div>
+                      <div class="tl-activity__desc">מגלשת בובסלד - הילדים פשוט מתים על זה. מספר ריצות ביום אחד הוא לא כלום.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">חוף האגם של ליפנו 🏖️</div>
+                      <div class="tl-activity__desc">חוף חולי על שפת האגם. ילדים יכולים לשחות, לבנות טירות חול ולהנות מהשקט הגדול.</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl4')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 5 -->
+            <div class="tl-item tl-item--austria" id="tl5">
+              <div class="tl-item__label">יום 5<br><span style="font-size:11px;color:#ccc;">15.08 רביעי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🇦🇹</div>
+                <span class="tl-item__day-label">יום 5</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">טיול יום לאוסטריה - לינץ</div>
+                    <div class="tl-card__where">📍 Linz, Austria - כ-2 שעות נסיעה</div>
+                  </div>
+                  <span class="tl-card__star" style="background:rgba(17,69,126,0.1);color:#11457e;">יום טיול</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Grottenbahn - רכבת המערה 🚂</div>
+                      <div class="tl-activity__desc">רכבת מיניאטורית קסומה בתוך מערה מלאכותית עם פסלים ואורות. ילדים קטנים פשוט אוהבים את זה.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">Ars Electronica Center 🖥️</div>
+                      <div class="tl-activity__desc">מוזיאון אינטראקטיבי מרתק לטכנולוגיה, רובוטיקה ועתיד. מתאים לילדים מגיל 6 ומעלה. ניתן לבלות שם שעתיים-שלוש בקלות.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">ערב</span>
+                    <div>
+                      <div class="tl-activity__name">חזרה לליפנו</div>
+                      <div class="tl-activity__desc">כ-2 שעות נסיעה בחזרה. ניתן לעצור בדרך בפנטסיאנה ארלבניספארק בשטרסוולכן (כ-40 דקות מלינץ).</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>חשוב:</strong> לציין בקבלת הרכב שעוברים גבול לאוסטריה. בדקו לגבי מדבקת מעבר גבול.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl5')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 6 -->
+            <div class="tl-item tl-item--lipno" id="tl6">
+              <div class="tl-item__label">יום 6<br><span style="font-size:11px;color:#ccc;">16.08 חמישי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🚤</div>
+                <span class="tl-item__day-label">יום 6</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">סירה לפרימבורק + מלכות היער</div>
+                    <div class="tl-card__where">📍 אגם ליפנו</div>
+                  </div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">סירה לפרימבורק 🚤</div>
+                      <div class="tl-activity__desc">שיט לעיירה פרימבורק עם העולם התת-ימי ופארק מים. חוויה שקטה ויפה על האגם.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">Království Lesa Lipno 🌳</div>
+                      <div class="tl-activity__desc">פארק חינוכי אינטראקטיבי על טבע ויערות. ילדים לומדים על המערכת האקולוגית בצורה כיפית ומשעשעת.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">ערב</span>
+                    <div>
+                      <div class="tl-activity__name">Children's Paradise + מיני גולף ⛳</div>
+                      <div class="tl-activity__desc">גן שעשועים ייעודי לילדים ליד המרינה - מגרשי חול, טרמפולינות ומיני גולף. ערב נינוח לסיום.</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl6')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 7 -->
+            <div class="tl-item tl-item--caves" id="tl7">
+              <div class="tl-item__label">יום 7<br><span style="font-size:11px;color:#ccc;">17.08 שישי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🏰</div>
+                <span class="tl-item__day-label">יום 7</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">טירת הלובוקה + גן חיות הלובוקה</div>
+                    <div class="tl-card__where">📍 Hluboká nad Vltavou - כ-45 דקות מליפנו</div>
+                  </div>
+                  <span class="tl-card__star tl-card__star--castle">טירה</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">The State Chateau of Hluboká 🏰</div>
+                      <div class="tl-activity__desc">אחת הטירות היפות ביותר בצ'כיה - לבנה ודרמטית. ניתן להיכנס ולסייר בחדרים ההיסטוריים.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">Zoo Hluboká 🦁</div>
+                      <div class="tl-activity__desc">גן חיות נעים ולא עמוס, ממש ליד הטירה. אידיאלי לאחרי הסיור בטירה.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">פארק לאומי שומבה 🌲</div>
+                      <div class="tl-activity__desc">בדרך חזרה - עצירה קצרה בפארק הלאומי שומבה לסיור קל ביער.</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl7')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 8 -->
+            <div class="tl-item tl-item--prague" id="tl8">
+              <div class="tl-item__label">יום 8<br><span style="font-size:11px;color:#ccc;">18.08 שבת</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🏙️</div>
+                <span class="tl-item__day-label">יום 8</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">נסיעה לפראג - הגעה ואטרקציות</div>
+                    <div class="tl-card__where">📍 פראג - Hotel Leon D'Oro</div>
+                  </div>
+                  <span class="tl-card__star tl-card__star--highlight">פראג</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">עצירה בטירת בלטנה 🏰</div>
+                      <div class="tl-activity__desc">בדרך לפראג - טירת בלטנה (Blatná) ציורית עם חפיר מים. תוספת כיפית לנסיעה.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">הגעה לפראג + לינה</div>
+                      <div class="tl-activity__desc">Hotel Leon D'Oro - מיקום מרכזי מעולה. מהלינה אפשר ללכת רגלית לרוב האטרקציות.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">ערב</span>
+                    <div>
+                      <div class="tl-activity__name">טיול ראשון בעיר 🌆</div>
+                      <div class="tl-activity__desc">גשר קרל, שכונת מלה סטרנה, כיכר העיר הישנה - טבילה ראשונה בקסם של פראג.</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl8')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 9 -->
+            <div class="tl-item tl-item--prague" id="tl9">
+              <div class="tl-item__label">יום 9<br><span style="font-size:11px;color:#ccc;">19.08 ראשון</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🦁</div>
+                <span class="tl-item__day-label">יום 9</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">פראג - גן חיות + טירה + LEGO</div>
+                    <div class="tl-card__where">📍 פראג</div>
+                  </div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Prague Zoo 🦁</div>
+                      <div class="tl-activity__desc">אחד מגני החיות הטובים באירופה עם מעל 4,000 בעלי חיים. מתאים לכל יום שלם.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">Prague Castle 🏰</div>
+                      <div class="tl-activity__desc">אחד הטירות הגדולות בעולם עם חצרות שקטות, גנים ומוזיאונים. ילדים אוהבים לחקור את השטח.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">ערב</span>
+                    <div>
+                      <div class="tl-activity__name">LEGO Museum 🧱</div>
+                      <div class="tl-activity__desc">מוזיאון עם מעל 2,500 דגמים מלגו - 6 דקות הליכה מהמלון. ילדים יכולים לבלות שם שעה שלמה בקלות.</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl9')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 10 -->
+            <div class="tl-item tl-item--prague" id="tl10">
+              <div class="tl-item__label">יום 10<br><span style="font-size:11px;color:#ccc;">20.08 שני</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🎭</div>
+                <span class="tl-item__day-label">יום 10</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">פראג - מוזיאונים וחוויות אינטראקטיביות</div>
+                    <div class="tl-card__where">📍 פראג מרכז</div>
+                  </div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Museum of Senses 🌀</div>
+                      <div class="tl-activity__desc">מוזיאון אינטראקטיבי שמאתגר את החושים - 8 דקות הליכה מהמלון. כיפי לכל גיל.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">Illusion Art Museum Prague 🎨</div>
+                      <div class="tl-activity__desc">מוזיאון אמנות אשליות - דקה הליכה מהמלון! תמונות ואינסטלציות שמרמות את העין. פוטוגני להפליא.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">שייט על נהר ולטאבה 🚤</div>
+                      <div class="tl-activity__desc">סיור בסירה על הנהר - אחת הדרכים הכי יפות לראות את פראג. מומלץ לשעת שקיעה.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">ערב</span>
+                    <div>
+                      <div class="tl-activity__name">מבוך מראות + Madame Tussauds 🪞</div>
+                      <div class="tl-activity__desc">מבוך המראות של פראג + מוזיאון שעווה בשכנות - 2 דקות מהמלון.</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl10')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 11 -->
+            <div class="tl-item tl-item--flight" id="tl11">
+              <div class="tl-item__label">יום 11<br><span style="font-size:11px;color:#ccc;">21.08 שלישי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">✈️</div>
+                <span class="tl-item__day-label">יום 11</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">טיסה חזרה לתל אביב</div>
+                    <div class="tl-card__where">📍 פראג → נתב"ג</div>
+                  </div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Chocolate Museum 🍫</div>
+                      <div class="tl-activity__desc">בבוקר לפני הטיסה - מוזיאון שוקולד מרתק, 2 דקות מהמלון. מוזיאון ייחודי על היסטוריית השוקולד.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">11:05</span>
+                    <div>
+                      <div class="tl-activity__name">טיסה לתל אביב ✈️</div>
+                      <div class="tl-activity__desc">החזרת הרכב בשדה התעופה. טיסה חזרה לנתב"ג. סוף לטיול מושלם!</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>טיפ:</strong> לצאת מהמלון בשעה 8:00 לפחות - החזרת הרכב בשדה התעופה לוקחת זמן.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl11')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 4. LIPNO ATTRACTIONS -->
+        <div class="article-section" id="lipno">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🌊</span> אטרקציות אגם ליפנו - הכל במקום אחד</h2>
+          <p style="margin-bottom:20px;color:#555;font-size:15px;">ליפנו הוא הלב של הטיול - אגם מלאכותי ענק עם עושר של אטרקציות לילדים ולמבוגרים כאחד:</p>
+          <div class="attractions-grid">
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🌲</span>
+              <div class="attraction-card__name">Lipno Treetop Walkway</div>
+              <div class="attraction-card__desc">מסלול עצים מוגבה עם נוף פנורמי על האגם והיער. מתאים לכל הגילאים.</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🏊</span>
+              <div class="attraction-card__name">Aquaworld Lipno</div>
+              <div class="attraction-card__desc">פארק מים עם מגלשות, בריכות ואזורי משחק - יום שלם של כיף.</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🎪</span>
+              <div class="attraction-card__name">Hopsarium Lipno</div>
+              <div class="attraction-card__desc">מרכז שעשועים מקורה עם מתנפחים, מגלשות וטרמפולינות לילדים.</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🧗</span>
+              <div class="attraction-card__name">Adrenaline Park</div>
+              <div class="attraction-card__desc">מסלולי חבלים, זיפליין וקירות טיפוס ביער - לילדים גדולים יותר.</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">⛷️</span>
+              <div class="attraction-card__name">Bobsled Track</div>
+              <div class="attraction-card__desc">מגלשת בובסלד - אחת האהובות על הילדים. כמה ריצות ביום זה לא כלום.</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🏖️</span>
+              <div class="attraction-card__name">חוף האגם</div>
+              <div class="attraction-card__desc">חוף חולי על שפת האגם לשחייה ומשחקי חול - ערבים שקטים ויפים.</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🌳</span>
+              <div class="attraction-card__name">Království Lesa</div>
+              <div class="attraction-card__desc">פארק חינוכי אינטראקטיבי על טבע ויערות לילדים.</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🚤</span>
+              <div class="attraction-card__name">סירה לפרימבורק</div>
+              <div class="attraction-card__desc">שיט לעיירה פרימבורק עם העולם התת-ימי ופארק מים.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. TIPS -->
+        <div class="article-section" id="tips">
+          <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> טיפים חשובים לטיול</h2>
+          <div class="tips-list">
+            <div class="tip-item">
+              <span class="tip-item__icon">📱</span>
+              <div class="tip-item__text"><strong>כרטיס סים:</strong> קנו כרטיס T-Mobile מיד עם הנחיתה בפראג - יש בשדה התעופה ובחנות RELAY. חיוני לניווט ועדכונים בזמן אמת.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🚗</span>
+              <div class="tip-item__text"><strong>השכרת רכב:</strong> הכרחי לטיול הזה - המרחקים בין ליפנו לאטרקציות השונות לא מאפשרים תחבורה ציבורית. Alamo בשדה התעופה עבד מצוין.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🌍</span>
+              <div class="tip-item__text"><strong>מעבר גבול לאוסטריה:</strong> לציין בקבלת הרכב שתעברו את הגבול. בדקו לגבי מדבקת מעבר גבול הנדרשת בצ'כיה.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">💰</span>
+              <div class="tip-item__text"><strong>מטבע:</strong> צ'כיה משתמשת בקורונה (CZK) ולא ביורו - כדאי להמיר מראש. אוסטריה ביורו. כרטיס אשראי מתקבל ברוב המקומות.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🗓️</span>
+              <div class="tip-item__text"><strong>עונת הקיץ:</strong> אוגוסט הוא עונת שיא - מומלץ להזמין לינה ואטרקציות מראש. פארקי המים עמוסים בסופ"ש.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🅿️</span>
+              <div class="tip-item__text"><strong>חניה בצ'סקי קרומלוב:</strong> חנו בחניון P1 ממש מתחת לטירה - הכי קרוב ונוח לכל האטרקציות.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🧥</span>
+              <div class="tip-item__text"><strong>מערת צ'ינובסקה:</strong> הטמפרטורה בפנים כ-10 מעלות - להביא לבוש חם גם בקיץ. מקבלים ביגוד מיוחד בכניסה.</div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="cta-card">
+          <div class="cta-card__title">מתכננים טיול לצ'כיה? 🇨🇿</div>
+          <div class="cta-card__text">אעזור לכם לבנות מסלול מותאם אישית עם כל הפרטים - לינה, אטרקציות וטיפים מניסיון אמיתי.</div>
+          <a href="questionnaire_form.html" class="cta-card__btn">📋 מלאו שאלון תכנון</a>
+          <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לצ'כיה עם ילדים" target="_blank" class="cta-card__wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            וואטסאפ
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>מתי טסים &copy; 2026 · <a href="services.html">דף הבית</a> · <a href="destinations.html">יעדים</a> · <a href="https://wa.me/972546758145">וואטסאפ</a></p>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;" target="_blank" aria-label="וואטסאפ">
+  <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  (function() {
+    // Timeline toggle
+    function toggleTl(id) {
+      var card = document.getElementById(id);
+      if (!card) return;
+      var tlCard = card.querySelector('.tl-card');
+      if (!tlCard) return;
+      var isOpen = tlCard.classList.toggle('open');
+      var chevron = tlCard.querySelector('.tl-card__chevron');
+      if (chevron) chevron.textContent = isOpen ? '▲' : '▾';
+    }
+    window.toggleTl = toggleTl;
+
+    // Map
+    var days = [
+      { id:'tl1',  day:1,  date:'11.08', label:'טיסה + הגעה',          emoji:'✈️',  lat:48.614, lng:14.223, color:'#1A6B72', title:'Hotel Element - ליפנו' },
+      { id:'tl2',  day:2,  date:'12.08', label:'Aquaworld + צמרות',     emoji:'🌊',  lat:48.614, lng:14.223, color:'#4A9B6F', title:'אגם ליפנו - פארק מים ומסלול צמרות' },
+      { id:'tl3',  day:3,  date:'13.08', label:'צ\'סקי קרומלוב',        emoji:'🏰',  lat:48.813, lng:14.315, color:'#E8A045', title:'Český Krumlov - העיירה הציורית' },
+      { id:'tl4',  day:4,  date:'14.08', label:'אדרנלין + בובסלד',      emoji:'🎢',  lat:48.614, lng:14.223, color:'#4A9B6F', title:'אגם ליפנו - אדרנלין פארק ובובסלד' },
+      { id:'tl5',  day:5,  date:'15.08', label:'לינץ, אוסטריה',         emoji:'🇦🇹', lat:48.306, lng:14.286, color:'#c0504a', title:'Linz, Austria - Grottenbahn & Ars Electronica' },
+      { id:'tl6',  day:6,  date:'16.08', label:'סירה + מלכות היער',     emoji:'🚤',  lat:48.614, lng:14.223, color:'#4A9B6F', title:'אגם ליפנו - שיט לפרימבורק' },
+      { id:'tl7',  day:7,  date:'17.08', label:'טירת הלובוקה',          emoji:'🏰',  lat:49.051, lng:14.175, color:'#6b4aa0', title:'Hluboká nad Vltavou - טירה וגן חיות' },
+      { id:'tl8',  day:8,  date:'18.08', label:'נסיעה לפראג',           emoji:'🏙️', lat:50.087, lng:14.421, color:'#11457e', title:'פראג - Hotel Leon D\'Oro' },
+      { id:'tl9',  day:9,  date:'19.08', label:'גן חיות + טירת פראג',  emoji:'🦁',  lat:50.116, lng:14.406, color:'#11457e', title:'פראג - Zoo + Prague Castle + LEGO' },
+      { id:'tl10', day:10, date:'20.08', label:'מוזיאונים + שייט',      emoji:'🎭',  lat:50.087, lng:14.421, color:'#11457e', title:'פראג - Museum of Senses + שייט על ולטאבה' },
+      { id:'tl11', day:11, date:'21.08', label:'טיסה לתל אביב',         emoji:'✈️',  lat:50.108, lng:14.264, color:'#1A6B72', title:'פראג - שדה התעופה ← נתב"ג' },
+    ];
+
+    var map = L.map('trip-map', { center: [49.2, 14.3], zoom: 7, scrollWheelZoom: false });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 18
+    }).addTo(map);
+
+    var markers = {};
+    var activeId = null;
+
+    function makeIcon(d, active) {
+      var s = active ? 48 : 40;
+      return L.divIcon({
+        className: '',
+        html: '<div style="width:'+s+'px;height:'+s+'px;border-radius:50%;background:'+(active?d.color:'#fff')+';border:2.5px solid '+(active?'#fff':d.color)+';display:flex;align-items:center;justify-content:center;font-size:'+(active?20:16)+'px;box-shadow:0 3px 12px rgba(0,0,0,0.22);cursor:pointer;transition:all 0.2s;">'+d.emoji+'</div>',
+        iconSize:[s,s], iconAnchor:[s/2,s/2], popupAnchor:[0,-(s/2+4)]
+      });
+    }
+
+    function setActive(id) {
+      days.forEach(function(d) {
+        if (markers[d.id]) markers[d.id].setIcon(makeIcon(d, d.id === id));
+      });
+      document.querySelectorAll('.map-pill').forEach(function(p) {
+        p.style.background = p.dataset.id === id ? 'var(--teal)' : 'var(--white)';
+        p.style.color = p.dataset.id === id ? '#fff' : 'var(--charcoal)';
+        p.style.borderColor = p.dataset.id === id ? 'var(--teal)' : 'var(--sand-dark)';
+      });
+      activeId = id;
+    }
+
+    function flyTo(d) {
+      map.flyTo([d.lat, d.lng], 10, { duration: 1 });
+      setActive(d.id);
+    }
+
+    window.goToDay = function(id) {
+      map.closePopup();
+      var card = document.getElementById(id);
+      if (card) {
+        var tl = card.querySelector('.tl-card');
+        if (tl && !tl.classList.contains('open')) toggleTl(id);
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    };
+
+    days.forEach(function(d) {
+      var m = L.marker([d.lat, d.lng], { icon: makeIcon(d, false) })
+        .addTo(map)
+        .bindPopup(
+          '<div dir="rtl" style="font-family:Rubik,sans-serif;min-width:160px;padding:4px 2px;">' +
+          '<div style="font-size:11px;color:#aaa;margin-bottom:2px;">יום '+d.day+' · '+d.date+'</div>' +
+          '<div style="font-size:15px;font-weight:600;color:'+d.color+';margin-bottom:4px;">'+d.emoji+' '+d.label+'</div>' +
+          '<div style="font-size:13px;color:#555;margin-bottom:8px;">'+d.title+'</div>' +
+          '<button onclick="goToDay(\''+d.id+'\')" style="width:100%;background:'+d.color+';color:#fff;border:none;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:600;cursor:pointer;font-family:Rubik,sans-serif;">לפרטי היום ↓</button>' +
+          '</div>'
+        );
+      m.on('click', function() { setActive(d.id); });
+      markers[d.id] = m;
+    });
+
+    var pillsContainer = document.getElementById('map-day-pills');
+    days.forEach(function(d) {
+      var btn = document.createElement('button');
+      btn.className = 'map-pill';
+      btn.dataset.id = d.id;
+      btn.innerHTML = '<span>'+d.emoji+'</span><span style="font-size:12px;">יום '+d.day+'</span>';
+      btn.style.cssText = 'display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;border:1.5px solid var(--sand-dark);background:var(--white);cursor:pointer;font-family:Rubik,sans-serif;font-size:13px;transition:all 0.2s;';
+      btn.addEventListener('click', function() { flyTo(d); });
+      pillsContainer.appendChild(btn);
+    });
+
+    days.forEach(function(d) {
+      var item = document.getElementById(d.id);
+      if (!item) return;
+      var header = item.querySelector('.tl-card__header');
+      if (header) {
+        header.style.cursor = 'pointer';
+        header.addEventListener('click', function() { flyTo(d); });
+      }
+    });
+
+  })();
+</script>
+
+<script>
+  (function () {
+    'use strict';
+    var nav = document.getElementById('nav');
+    var hamburger = document.getElementById('hamburgerBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (!hamburger || !mobileMenu) return;
+    hamburger.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen.toString());
+      hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'פתח תפריט');
+        document.body.style.overflow = '';
+      });
+    });
+    if (nav) window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'פתח תפריט');
+        document.body.style.overflow = '';
+        hamburger.focus();
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
