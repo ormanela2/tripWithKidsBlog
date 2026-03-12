@@ -536,14 +536,6 @@
   (function() {
     var nav = document.getElementById('nav');
     window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
-    var hamburger = document.getElementById('hamburgerBtn');
-    var mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', function() {
-      var isOpen = mobileMenu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen.toString());
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-    mobileMenu.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }); });
 
     var days = [
       { id:'tl1', day:1, date:'07.04', label:'טיסה + הגעה לברן',         emoji:'✈️', lat:44.57, lng:26.08, color:'#002B7F', title:'בוקרשט - Green Resort Bran' },

@@ -629,14 +629,6 @@
   (function() {
     var nav = document.getElementById('nav');
     window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
-    var hamburger = document.getElementById('hamburgerBtn');
-    var mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', function() {
-      var isOpen = mobileMenu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen.toString());
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-    mobileMenu.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }); });
 
     var days = [
       { id: 'tl1', day: 1, date: '30.09', label: 'נחיתה + קופרניקוס', emoji: '✈️', lat: 52.2393, lng: 21.0362, color: '#C0392B', title: 'Copernicus Science Centre + Łazienki Park' },

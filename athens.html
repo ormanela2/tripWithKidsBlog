@@ -679,14 +679,6 @@
   <script>
     var nav = document.getElementById('nav');
     window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
-    var hamburger = document.getElementById('hamburgerBtn');
-    var mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', function() {
-      var isOpen = mobileMenu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen.toString());
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-    mobileMenu.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }); });
     function toggleCard(id) {
       var card = document.getElementById(id);
       card.classList.toggle('open');

@@ -682,14 +682,6 @@
   (function() {
     var nav = document.getElementById('nav');
     window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
-    var hamburger = document.getElementById('hamburgerBtn');
-    var mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', function() {
-      var isOpen = mobileMenu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen.toString());
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-    mobileMenu.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }); });
 
     var days = [
       { id: 'tl1',  day: 1,  date: '14.08', label: 'בודפשט ← Visegrad', emoji: '✈️',  lat: 47.788, lng: 18.982, color: '#1A6B72', title: 'טיסה לבודפשט + Visegrad Bobsled' },
