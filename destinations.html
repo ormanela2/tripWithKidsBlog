@@ -9,7 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
   <link rel="icon" type="image/png" href="logo.png">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/twemoji.min.js" crossorigin="anonymous"></script>
+  <style>
+    /* Inline flag SVGs as data URIs - zero CDN dependency */
+    .flag-sk { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23fff'/%3E%3Crect y='200' width='900' height='200' fill='%230b4ea2'/%3E%3Crect y='400' width='900' height='200' fill='%23ee1c25'/%3E%3Cpath fill='%23fff' d='M270 60v160c0 100-90 160-90 160S90 320 90 220V60z'/%3E%3Cpath fill='%230b4ea2' d='M260 70v150c0 93-80 150-80 150s-80-57-80-150V70z'/%3E%3Crect fill='%23fff' x='130' y='220' width='100' height='50'/%3E%3Crect fill='%23fff' x='155' y='200' width='50' height='90'/%3E%3C/svg%3E"); }
+    .flag-pl { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='250' fill='%23fff'/%3E%3Crect y='250' width='800' height='250' fill='%23dc143c'/%3E%3C/svg%3E"); }
+    .flag-ro { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='300' height='600' fill='%23002B7F'/%3E%3Crect x='300' width='300' height='600' fill='%23FCD116'/%3E%3Crect x='600' width='300' height='600' fill='%23CE1126'/%3E%3C/svg%3E"); }
+    .flag-gr { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 18'%3E%3Crect width='27' height='18' fill='%230d5eaf'/%3E%3Crect y='2' width='27' height='2' fill='%23fff'/%3E%3Crect y='6' width='27' height='2' fill='%23fff'/%3E%3Crect y='10' width='27' height='2' fill='%23fff'/%3E%3Crect y='14' width='27' height='2' fill='%23fff'/%3E%3Crect width='10' height='10' fill='%230d5eaf'/%3E%3Crect x='4' width='2' height='10' fill='%23fff'/%3E%3Crect y='4' width='10' height='2' fill='%23fff'/%3E%3C/svg%3E"); }
+    .flag-icon { display: inline-block; background-size: cover; background-repeat: no-repeat; border-radius: 3px; }
+    .flag-icon-sm   { width: 34px; height: 23px; }
+    .flag-icon-lg   { width: 110px; height: 73px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); border-radius: 6px; }
+    .flag-icon-map  { width: 22px; height: 15px; border-radius: 2px; vertical-align: middle; }
+    .flag-icon-popup{ width: 28px; height: 19px; border-radius: 2px; display: block; margin-bottom: 6px; }
+  </style>
   <style>
     :root {
       --amber: #E8A045; --amber-dark: #c4872e;
@@ -180,10 +191,6 @@
       .nav__logo-text { font-size:18px !important; }
     }
     /* ── END NAV ─────────────────────────── */
-    .map-popup__flag img.emoji { width: 26px; height: 26px; vertical-align: middle; }
-    .dest-card__flag img.emoji { width: 32px; height: 32px; vertical-align: middle; }
-    .dest-card__visual img.emoji { width: 100px; height: 100px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
-    img.emoji { display: inline-block; }
   </style>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
@@ -242,7 +249,7 @@
 
           <div class="dest-card active" id="card-slovakia" data-id="slovakia">
             <div class="dest-card__top">
-              <div class="dest-card__flag">🇸🇰</div>
+              <div class="dest-card__flag"><span class="flag-icon flag-sk flag-icon-sm"></span></div>
               <div class="dest-card__info">
                 <div class="dest-card__name">סלובקיה</div>
                 <div class="dest-card__hint">לחצו למדריך המלא</div>
@@ -251,7 +258,7 @@
             </div>
             <div class="dest-card__visual">
               <div class="dest-card__visual-overlay"></div>
-              <span style="position:relative;z-index:1;font-size:100px;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4));">🇸🇰</span>
+              <span style="position:relative;z-index:1;"><span class="flag-icon flag-sk flag-icon-lg"></span></span>
               <span class="dest-card__visual-name">סלובקיה</span>
             </div>
             <div class="dest-card__body">
@@ -279,7 +286,7 @@
 
           <div class="dest-card" id="card-warsaw" data-id="warsaw">
             <div class="dest-card__top">
-              <div class="dest-card__flag">🇵🇱</div>
+              <div class="dest-card__flag"><span class="flag-icon flag-pl flag-icon-sm"></span></div>
               <div class="dest-card__info">
                 <div class="dest-card__name">סובב וורשה</div>
                 <div class="dest-card__hint">לחצו למדריך המלא</div>
@@ -288,7 +295,7 @@
             </div>
             <div class="dest-card__visual">
               <div class="dest-card__visual-overlay"></div>
-              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);font-size:100px;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4));">🇵🇱</span>
+              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);"><span class="flag-icon flag-pl flag-icon-lg"></span></span>
               <span class="dest-card__visual-name">וורשה</span>
             </div>
             <div class="dest-card__body">
@@ -316,7 +323,7 @@
 
           <div class="dest-card" id="card-romania" data-id="romania">
             <div class="dest-card__top">
-              <div class="dest-card__flag">🇷🇴</div>
+              <div class="dest-card__flag"><span class="flag-icon flag-ro flag-icon-sm"></span></div>
               <div class="dest-card__info">
                 <div class="dest-card__name">רומניה - טרנסילבניה</div>
                 <div class="dest-card__hint">לחצו למדריך המלא</div>
@@ -325,7 +332,7 @@
             </div>
             <div class="dest-card__visual">
               <div class="dest-card__visual-overlay"></div>
-              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);font-size:100px;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4));">🇷🇴</span>
+              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);"><span class="flag-icon flag-ro flag-icon-lg"></span></span>
               <span class="dest-card__visual-name">רומניה</span>
             </div>
             <div class="dest-card__body">
@@ -353,7 +360,7 @@
 
           <div class="dest-card" id="card-athens" data-id="athens">
             <div class="dest-card__top">
-              <div class="dest-card__flag">🇬🇷</div>
+              <div class="dest-card__flag"><span class="flag-icon flag-gr flag-icon-sm"></span></div>
               <div class="dest-card__info">
                 <div class="dest-card__name">אתונה עם ילדים</div>
                 <div class="dest-card__hint">לחצו למדריך המלא</div>
@@ -362,7 +369,7 @@
             </div>
             <div class="dest-card__visual">
               <div class="dest-card__visual-overlay"></div>
-              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);font-size:100px;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4));">🇬🇷</span>
+              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);"><span class="flag-icon flag-gr flag-icon-lg"></span></span>
               <span class="dest-card__visual-name">אתונה</span>
             </div>
             <div class="dest-card__body">
@@ -421,16 +428,15 @@
     window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
     // hamburger handled by dedicated script below
 
-    // Flag SVG images from Twemoji CDN (no runtime dependency)
-    function flagSvg(url) {
-      return '<img src="' + url + '" style="width:22px;height:22px;" alt="">';
+    function flagSvg(code) {
+      return '<span class="flag-icon flag-' + code + ' flag-icon-map"></span>';
     }
 
     var destinations = [
-      { id: 'slovakia', lat: 48.7,  lng: 19.5,  flag: flagSvg('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f1f8-1f1f0.svg'), name: 'סלובקיה',        days: '7-10 ימים', url: 'slovakia.html' },
-      { id: 'warsaw',   lat: 52.23, lng: 21.01, flag: flagSvg('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f1f5-1f1f1.svg'), name: 'וורשה',          days: '7-9 ימים',  url: 'warsaw.html' },
-      { id: 'romania',  lat: 45.51, lng: 25.37, flag: flagSvg('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f1f7-1f1f4.svg'), name: 'רומניה',         days: '7 ימים',    url: 'romania.html' },
-      { id: 'athens',   lat: 37.97, lng: 23.73, flag: flagSvg('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f1ec-1f1f7.svg'), name: 'אתונה עם ילדים', days: '5 ימים',    url: 'athens.html' }
+      { id: 'slovakia', lat: 48.7,  lng: 19.5,  flag: flagSvg('sk'), name: 'סלובקיה',        days: '7-10 ימים', url: 'slovakia.html' },
+      { id: 'warsaw',   lat: 52.23, lng: 21.01, flag: flagSvg('pl'), name: 'וורשה',          days: '7-9 ימים',  url: 'warsaw.html' },
+      { id: 'romania',  lat: 45.51, lng: 25.37, flag: flagSvg('ro'), name: 'רומניה',         days: '7 ימים',    url: 'romania.html' },
+      { id: 'athens',   lat: 37.97, lng: 23.73, flag: flagSvg('gr'), name: 'אתונה עם ילדים', days: '5 ימים',    url: 'athens.html' }
     ];
 
     var map = L.map('map', { center: [46, 17], zoom: 5, scrollWheelZoom: false });
@@ -461,7 +467,7 @@
       var m = L.marker([d.lat, d.lng], { icon: markerIcon(d.flag, d.id === 'slovakia') })
         .addTo(map)
         .bindPopup(
-          '<div class="map-popup" dir="rtl"><span class="map-popup__flag" style="display:block;font-size:26px;line-height:1;">' + d.flag + '</span>' +
+          '<div class="map-popup" dir="rtl"><span class="map-popup__flag" style="display:block;line-height:1;margin-bottom:6px;">' + d.flag + '</span>' +
           '<div class="map-popup__name">' + d.name + '</div>' +
           '<div class="map-popup__days">📅 ' + d.days + '</div>' +
           '<a href="' + (d.url || 'destinations.html') + '" class="map-popup__btn" style="display:block;text-align:center;">לפרטים ↓</a></div>'
@@ -524,27 +530,6 @@
     });
   })();
 </script>
-  <script>
-    // Replace emoji text nodes directly without touching innerHTML (preserves event listeners)
-    (function parseTwemojiSafe(root) {
-      var opts = { folder: 'svg', ext: '.svg' };
-      var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
-      var nodes = [];
-      var node;
-      while ((node = walker.nextNode())) {
-        if (node.parentNode && node.parentNode.nodeName !== 'SCRIPT' && node.parentNode.nodeName !== 'STYLE' && node.nodeValue.trim()) {
-          nodes.push(node);
-        }
-      }
-      nodes.forEach(function(textNode) {
-        var parsed = twemoji.parse(textNode.nodeValue, opts);
-        if (parsed !== textNode.nodeValue) {
-          var span = document.createElement('span');
-          span.innerHTML = parsed;
-          textNode.parentNode.replaceChild(span, textNode);
-        }
-      });
-    })(document.body);
-  </script>
+
 </body>
 </html>
