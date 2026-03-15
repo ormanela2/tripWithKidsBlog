@@ -115,56 +115,50 @@
     .col-a--mid { border-bottom:none; }
     .hero__stats { gap:24px; }
   }
-      50%       { opacity: 1;   transform: scale(1.3); }
+    /* ── EMAIL POPUP ─────────────────────────────── */
+    .email-popup-overlay {
+      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5);
+      z-index:2000; align-items:center; justify-content:center; padding:24px;
     }
-      50%       { opacity: 1;   transform: scale(1.3); }
+    .email-popup-overlay.open { display:flex; }
+    .email-popup {
+      background:var(--cream); border-radius:20px; padding:40px 32px;
+      max-width:420px; width:100%; text-align:center; position:relative;
+      box-shadow:0 16px 48px rgba(0,0,0,0.2); animation:popupIn 0.3s ease;
+      box-sizing:border-box;
     }
-  
-    /* ── Community CTA button ── */
-    .nav__link--community {
-      background: var(--amber);
-      color: #2C2C2C !important;
-      font-weight: 300;
-      font-size: 15px;
-      border-radius: 22px;
-      padding: 8px 18px;
-      min-height: 44px;
-      box-shadow: 0 2px 10px rgba(232,160,69,0.45);
-      animation: communityPulse 2.8s ease-in-out infinite;
+    @keyframes popupIn {
+      from { transform:translateY(20px); opacity:0; }
+      to   { transform:translateY(0);    opacity:1; }
     }
-    .nav__link--community:hover,
-    .nav__link--community:focus-visible {
-      background: #d4903c !important;
-      color: #2C2C2C !important;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(232,160,69,0.55);
-      animation: none;
+    .email-popup__close {
+      position:absolute; top:14px; left:16px; font-size:22px; cursor:pointer;
+      color:#aaa; background:none; border:none; line-height:1;
     }
-    .nav__link--community::before {
-      content: '';
-      width: 8px; height: 8px;
-      background: #4ade80;
-      border-radius: 50%;
-      display: inline-block;
-      margin-left: 7px;
-      box-shadow: 0 0 6px #4ade80;
-      animation: dotBlink 1.4s ease-in-out infinite;
+    .email-popup__close:hover { color:var(--charcoal); }
+    .email-popup__icon { font-size:40px; margin-bottom:12px; }
+    .email-popup__title { font-family:var(--font-heading); font-size:22px; color:var(--teal); margin-bottom:8px; }
+    .email-popup__subtitle { font-size:14px; color:#666; line-height:1.6; margin-bottom:24px; }
+    .email-popup__form { display:flex; flex-direction:column; gap:12px; }
+    .email-popup__input {
+      padding:13px 18px; border:2px solid var(--sand-dark); border-radius:40px;
+      font-family:var(--font-body); font-size:15px; background:white;
+      color:var(--charcoal); outline:none; text-align:right; width:100%;
+      box-sizing:border-box;
     }
-    .nav__mobile-menu .nav__link--community {
-      font-size: 15px;
-      padding: 8px 18px;
-      width: fit-content;
-      min-height: 44px;
+    .email-popup__input:focus { border-color:var(--teal); }
+    .email-popup__btn {
+      background:var(--teal); color:white; border:none; border-radius:40px;
+      padding:13px 28px; font-family:var(--font-body); font-size:15px;
+      font-weight:600; cursor:pointer; transition:background 0.2s;
     }
-    @keyframes communityPulse {
-      0%, 100% { box-shadow: 0 2px 10px rgba(232,160,69,0.4); }
-      50%       { box-shadow: 0 2px 18px rgba(232,160,69,0.75), 0 0 0 4px rgba(232,160,69,0.15); }
+    .email-popup__btn:hover { background:var(--teal-dark); }
+    .email-popup__skip {
+      font-size:13px; color:#aaa; cursor:pointer; margin-top:4px;
+      background:none; border:none; text-decoration:underline;
     }
-    @keyframes dotBlink {
-      0%, 100% { opacity: 0.4; box-shadow: 0 0 3px #4ade80; }
-      50%       { opacity: 1;   box-shadow: 0 0 10px #4ade80, 0 0 20px #4ade8088; }
-    }
-  
+    .email-popup__skip:hover { color:var(--charcoal); }
+
        /* ── NAV ─────────────────────────────── */
     .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
     .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
@@ -172,7 +166,7 @@
     .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
     .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
     .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
-    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.02em; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
+    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.02em; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; box-sizing:border-box; }
     .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
     .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
     .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
@@ -186,7 +180,7 @@
     .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:32px 24px; flex-direction:column; gap:8px; z-index:999; overflow-y:auto; }
     .nav__mobile-menu.open { display:flex; }
     .nav__mobile-menu .nav__link { font-size:20px; padding:16px; justify-content:flex-start; }
-    .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:300; font-size:15px; border-radius:22px; padding:8px 16px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); animation:communityPulse 2.8s ease-in-out infinite; }
+    .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:300; font-size:15px; border-radius:22px; padding:8px 16px; min-height:44px; box-sizing:border-box; box-shadow:0 2px 10px rgba(232,160,69,0.45); animation:communityPulse 2.8s ease-in-out infinite; }
     .nav__link--community:hover, .nav__link--community:focus-visible { background:#d4903c !important; color:#2C2C2C !important; transform:translateY(-2px); box-shadow:0 4px 16px rgba(232,160,69,0.55); animation:none; }
     .nav__link--community::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; margin-left:7px; box-shadow:0 0 6px #4ade80; animation:dotBlink 1.4s ease-in-out infinite; }
     .nav__mobile-menu .nav__link--community { font-size:15px; padding:8px 18px; width:fit-content; min-height:44px; }
@@ -619,6 +613,67 @@ submitBtn.addEventListener('click', () => {
       }
     });
   })();
+</script>
+
+<!-- Email Popup -->
+<div class="email-popup-overlay" id="emailPopupOverlay">
+  <div class="email-popup">
+    <button class="email-popup__close" id="emailPopupClose">×</button>
+    <div class="email-popup__icon">✈️</div>
+    <h2 class="email-popup__title">רוצים לקבל עדכונים?</h2>
+    <p class="email-popup__subtitle">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
+    <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm">
+      <input type="hidden" name="_subject" value="הרשמה מחבילות - מתי טסים">
+      <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/packages.html">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input">
+      <button type="submit" class="email-popup__btn">אני רוצה לקבל עדכונים ✈️</button>
+      <button type="button" class="email-popup__skip" id="emailPopupSkip">דלג, קח אותי לחבילות</button>
+    </form>
+  </div>
+</div>
+
+<script>
+(function () {
+  var overlay = document.getElementById('emailPopupOverlay');
+  var closeBtn = document.getElementById('emailPopupClose');
+  var skipBtn = document.getElementById('emailPopupSkip');
+
+  function openPopup() {
+    if (localStorage.getItem('mtEmailSubmitted')) return;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePopup() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      openPopup();
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closePopup);
+  if (skipBtn) skipBtn.addEventListener('click', closePopup);
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closePopup();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePopup();
+  });
+
+  var form = document.getElementById('emailPopupForm');
+  if (form) {
+    form.addEventListener('submit', function() {
+      localStorage.setItem('mtEmailSubmitted', '1');
+    });
+  }
+})();
 </script>
 </body>
 </html>
