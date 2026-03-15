@@ -7,7 +7,7 @@
   <title>מתי טסים</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     /* ========================================
        CSS Custom Properties
@@ -286,8 +286,11 @@
       white-space: nowrap;
       padding: 8px 13px;
       border-radius: var(--radius-sm);
-      font-weight: 600;
+      font-family: 'Assistant', sans-serif;
+      font-weight: 300;
       font-size: 15px;
+      line-height: 1.8;
+      letter-spacing: 0.02em;
       transition: background 0.2s ease, color 0.2s ease;
       min-height: 44px;
       display: flex;
@@ -1553,7 +1556,7 @@
   <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
     <div class="container nav__inner">
       <a href="services.html" class="nav__logo" aria-label="מתי טסים - דף הבית">
-        <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;"><span style="font-family:Rubik,sans-serif;font-size:28px;color:var(--teal);font-weight:700;">מתי טסים</span>
+        <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
       </a>
 
       <ul class="nav__links" role="menubar">
@@ -1562,7 +1565,6 @@
         <li role="none"><a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a></li>
         <li role="none"><a href="packages.html" class="nav__link" role="menuitem" aria-current="page">שירותים</a></li>
         <li role="none"><a href="about.html" class="nav__link" role="menuitem">אודות</a></li>
-        <li role="none"><a href="#final-cta" class="nav__link" role="menuitem">צור קשר</a></li>
         <li role="none"><a href="#newsletter" class="nav__link nav__link--community" role="menuitem">מצטרפים לקהילה</a></li>
       </ul>
 
@@ -1586,7 +1588,6 @@
       <a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a>
       <a href="packages.html" class="nav__link" role="menuitem">שירותים</a>
       <a href="about.html" class="nav__link" role="menuitem">אודות</a>
-      <a href="#final-cta" class="nav__link" role="menuitem">צור קשר</a>
       <a href="#newsletter" class="nav__link nav__link--community" role="menuitem">מצטרפים לקהילה</a>
       
     </div>
@@ -1924,7 +1925,7 @@
       <div class="footer__inner">
         <div class="footer__brand">
           <a href="services.html" class="nav__logo" aria-label="מתי טסים - דף הבית">
-            <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;"><span style="font-family:Rubik,sans-serif;font-size:28px;color:var(--teal);font-weight:700;">מתי טסים</span>
+            <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
           </a>
           <p class="footer__tagline">טיולים שמתחילים בשיחה אחת, ומסתיימים בזכרון שהילדים שלך יספרו לנכדים שלך.</p>
         </div>
