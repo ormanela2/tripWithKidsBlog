@@ -158,6 +158,48 @@
       50%       { opacity: 1;   box-shadow: 0 0 10px #4ade80, 0 0 20px #4ade8088; }
     }
   
+    /* ── EMAIL POPUP ─────────────────────────────── */
+    .email-popup-overlay {
+      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5);
+      z-index:2000; align-items:center; justify-content:center; padding:24px;
+    }
+    .email-popup-overlay.open { display:flex; }
+    .email-popup {
+      background:var(--cream); border-radius:20px; padding:40px 32px;
+      max-width:420px; width:100%; text-align:center; position:relative;
+      box-shadow:0 16px 48px rgba(0,0,0,0.2); animation:popupIn 0.3s ease;
+    }
+    @keyframes popupIn {
+      from { transform:translateY(20px); opacity:0; }
+      to   { transform:translateY(0);    opacity:1; }
+    }
+    .email-popup__close {
+      position:absolute; top:14px; left:16px; font-size:22px; cursor:pointer;
+      color:#aaa; background:none; border:none; line-height:1;
+    }
+    .email-popup__close:hover { color:var(--charcoal); }
+    .email-popup__icon { font-size:40px; margin-bottom:12px; }
+    .email-popup__title { font-family:var(--font-heading); font-size:22px; color:var(--teal); margin-bottom:8px; }
+    .email-popup__subtitle { font-size:14px; color:#666; line-height:1.6; margin-bottom:24px; }
+    .email-popup__form { display:flex; flex-direction:column; gap:12px; }
+    .email-popup__input {
+      padding:13px 18px; border:2px solid var(--sand-dark); border-radius:40px;
+      font-family:var(--font-body); font-size:15px; background:white;
+      color:var(--charcoal); outline:none; text-align:right; width:100%;
+    }
+    .email-popup__input:focus { border-color:var(--teal); }
+    .email-popup__btn {
+      background:var(--teal); color:white; border:none; border-radius:40px;
+      padding:13px 28px; font-family:var(--font-body); font-size:15px;
+      font-weight:600; cursor:pointer; transition:background 0.2s;
+    }
+    .email-popup__btn:hover { background:var(--teal-dark); }
+    .email-popup__skip {
+      font-size:13px; color:#aaa; cursor:pointer; margin-top:4px;
+      background:none; border:none; text-decoration:underline;
+    }
+    .email-popup__skip:hover { color:var(--charcoal); }
+
         /* ── NAV ─────────────────────────────── */
     .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
     .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
@@ -569,5 +611,55 @@
   })();
 </script>
 
+  <!-- EMAIL POPUP -->
+  <div class="email-popup-overlay" id="emailPopupOverlay">
+    <div class="email-popup">
+      <button class="email-popup__close" id="emailPopupClose" aria-label="סגור">×</button>
+      <div class="email-popup__icon">✈️</div>
+      <h2 class="email-popup__title">רוצים לקבל עדכונים?</h2>
+      <p class="email-popup__subtitle">השאירו מייל וקבלו טיפים, יעדים חדשים ופינות נסתרות ישירות לתיבה שלכם.</p>
+      <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm">
+        <input type="hidden" name="_subject" value="הרשמה מיעדים - מתי טסים">
+        <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/destinations.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input">
+        <button type="submit" class="email-popup__btn">אני רוצה לקבל עדכונים ✈️</button>
+        <button type="button" class="email-popup__skip" id="emailPopupSkip">דלג, קח אותי ליעד</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var overlay = document.getElementById('emailPopupOverlay');
+      var closeBtn = document.getElementById('emailPopupClose');
+      var skipBtn = document.getElementById('emailPopupSkip');
+
+      function closePopup() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      closeBtn.addEventListener('click', closePopup);
+      skipBtn.addEventListener('click', closePopup);
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closePopup();
+      });
+
+      document.getElementById('emailPopupForm').addEventListener('submit', function() {
+        localStorage.setItem('mtEmailSubmitted', '1');
+        setTimeout(closePopup, 300);
+      });
+
+      // Intercept מצטרפים לקהילה clicks on this page
+      document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          overlay.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
