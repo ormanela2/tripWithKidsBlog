@@ -168,29 +168,27 @@
   @media(max-width:600px) {
     .field--row, .field--row3 { grid-template-columns:1fr; }
     .cb-grid { grid-template-columns:repeat(2,1fr); }
-    .kid-row {
-      grid-template-columns: auto 1fr 1fr;
-      grid-template-rows: auto auto;
-      align-items: start;
-    }
+    .kid-row,
     .kid-row.removable {
-      grid-template-columns: auto 1fr 1fr auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 8px;
     }
     .kid-row .kid-num {
-      grid-row: 1 / 2;
-      align-self: center;
+      flex-shrink: 0;
       margin-top: 20px;
     }
-    .kid-row .field:last-child {
-      grid-column: 2 / -1;
+    .kid-row > .field {
+      flex: 1;
+      min-width: 70px;
     }
-    .kid-row.removable .field:last-child {
-      grid-column: 2 / 4;
+    .kid-row > .field:nth-child(4) {
+      flex-basis: 100%;
+      margin-right: 36px;
     }
-    .kid-row.removable .btn-remove-kid {
-      grid-column: 4;
-      grid-row: 1 / 2;
-      align-self: center;
+    .btn-remove-kid {
+      flex-shrink: 0;
       margin-top: 20px;
     }
     .btn-add-kid {
