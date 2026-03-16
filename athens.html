@@ -100,15 +100,15 @@
     .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; right: 50%; width: 3px; background: linear-gradient(to bottom, var(--teal), var(--amber), var(--teal-dark)); transform: translateX(50%); border-radius: 3px; }
     .tl-item { display: grid; grid-template-columns: 1fr 56px 1fr; gap: 0 0; margin-bottom: 48px; position: relative; align-items: start; }
     .tl-item__label { font-family: var(--font-heading); font-size: 13px; color: #aaa; letter-spacing: 0.5px; padding-top: 18px; }
-    .tl-item:nth-child(odd)  .tl-item__label { text-align: left;  padding-right: 28px; }
-    .tl-item:nth-child(even) .tl-item__label { text-align: right; padding-left: 28px; order: 3; }
+    .tl-odd  .tl-item__label { text-align: left;  padding-right: 28px; }
+    .tl-even .tl-item__label { text-align: right; padding-left: 28px; order: 3; }
     .tl-item__node { display: flex; flex-direction: column; align-items: center; gap: 0; position: relative; z-index: 2; padding-top: 12px; }
     .tl-item__icon { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 4px solid var(--cream); box-shadow: 0 2px 12px rgba(0,0,0,0.15); flex-shrink: 0; }
     .tl-item__day-label { margin-top: 6px; font-family: var(--font-heading); font-size: 11px; color: #aaa; letter-spacing: 0.5px; }
     .tl-item__card { background: var(--white); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 2px solid var(--sand-dark); transition: transform 0.35s ease, box-shadow 0.35s ease; cursor: pointer; }
     .tl-item__card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.13); }
-    .tl-item:nth-child(odd)  .tl-item__card { margin-left: 24px; }
-    .tl-item:nth-child(even) .tl-item__card { margin-right: 24px; order: -1; }
+    .tl-odd  .tl-item__card { margin-left: 24px; }
+    .tl-even .tl-item__card { margin-right: 24px; order: -1; }
     .tl-card__band { height: 6px; width: 100%; }
     .tl-card__header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
     .tl-card__title { font-family: var(--font-heading); font-size: 16px; color: var(--charcoal); line-height: 1.35; }
@@ -263,17 +263,6 @@
       .nav__logo img { height: 44px !important; }
       .nav__logo span { font-size: 18px !important; }
     }
-    .article-layout { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-      .timeline::before { right: 27px; transform: none; }
-      .tl-item { grid-template-columns: 56px 1fr; }
-      .tl-item__label { display: none; }
-      .tl-item:nth-child(odd)  .tl-item__card { margin-left: 0; margin-right: 0; }
-      .tl-item:nth-child(even) .tl-item__card { margin-right: 0; order: unset; }
-      .tl-item:nth-child(even) .tl-item__label { order: unset; }
-      .tl-item__node { padding-top: 12px; }
-      .photo-gallery__grid { grid-template-columns: repeat(2, 1fr); }
-    }
 
     .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:300; font-size:15px; border-radius:22px; padding:8px 16px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); animation:communityPulse 2.8s ease-in-out infinite; }
     .nav__link--community:hover, .nav__link--community:focus-visible { background:#d4903c !important; color:#2C2C2C !important; transform:translateY(-2px); box-shadow:0 4px 16px rgba(232,160,69,0.55); animation:none; }
@@ -290,14 +279,17 @@
     }
     /* ── END NAV ─────────────────────────── */
 
+    @media (max-width: 900px) {
       .article-layout { grid-template-columns: 1fr; }
       .sidebar { position: static; }
+    }
+    @media (max-width: 680px) {
       .timeline::before { right: 27px; transform: none; }
       .tl-item { grid-template-columns: 56px 1fr; }
       .tl-item__label { display: none; }
-      .tl-item:nth-child(odd)  .tl-item__card { margin-left: 0; margin-right: 0; }
-      .tl-item:nth-child(even) .tl-item__card { margin-right: 0; order: unset; }
-      .tl-item:nth-child(even) .tl-item__label { order: unset; }
+      .tl-odd  .tl-item__card { margin-left: 12px; margin-right: 0; }
+      .tl-even .tl-item__card { margin-right: 0; margin-left: 12px; order: unset; }
+      .tl-even .tl-item__label { order: unset; }
       .tl-item__node { padding-top: 12px; }
       .photo-gallery__grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -401,8 +393,8 @@
             <div class="timeline">
 
               <!-- DAY 1 - Tuesday 29/4 -->
-              <div class="tl-item tl-item--arrive">
-                <div class="tl-item__label">יום 1</div>
+              <div class="tl-item tl-item--arrive tl-odd">
+                <div class="tl-item__label">יום 1<br><span style="font-size:11px;color:#ccc;">29.04 שלישי</span></div>
                 <div class="tl-item__node">
                   <div class="tl-item__icon">✈️</div>
                   <span class="tl-item__day-label">יום 1</span>
@@ -410,12 +402,12 @@
                 <div class="tl-item__card tl-card" id="card1">
                   <div class="tl-card__band" style="background:linear-gradient(90deg,var(--athens),var(--athens-dark))"></div>
                   <div class="tl-card__header">
-                    <div class="tl-card__title">יום 1 - הגעה לאתונה</div>
-                    <div class="tl-card__date">שלישי, 29/4</div>
+                    <div>
+                      <div class="tl-card__title">הגעה לאתונה</div>
+                      <div class="tl-card__where">📍 Athens Ikon, מונסטירקי</div>
+                    </div>
+                    <span class="tl-card__star" style="background:rgba(21,101,192,0.12);color:#0D47A1;">יום הגעה</span>
                   </div>
-                  <button class="tl-card__toggle" onclick="toggleCard('card1')">
-                    פירוט היום <span class="tl-card__chevron">▾</span>
-                  </button>
                   <div class="tl-card__body">
                     <div class="tl-activity">
                       <div class="tl-activity__time">12:55</div>
@@ -441,12 +433,13 @@
                     <div class="tl-tip"><strong>💡 טיפ:</strong> מונסטירקי הוא אחד האזורים הכי כיפיים לטיול ערב עם ילדים - שוק, מסעדות ואווירה.</div>
                     <div class="tl-tip"><strong>לינה:</strong> Athens Ikon - Mitropoleos 21, מונסטירקי</div>
                   </div>
+                  <button class="tl-card__toggle" onclick="toggleCard('card1')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
                 </div>
               </div>
 
               <!-- DAY 2 - Wednesday 30/4 -->
-              <div class="tl-item tl-item--allou">
-                <div class="tl-item__label">יום 2</div>
+              <div class="tl-item tl-item--allou tl-even">
+                <div class="tl-item__label">יום 2<br><span style="font-size:11px;color:#ccc;">30.04 רביעי</span></div>
                 <div class="tl-item__node">
                   <div class="tl-item__icon">🎢</div>
                   <span class="tl-item__day-label">יום 2</span>
@@ -454,12 +447,12 @@
                 <div class="tl-item__card tl-card" id="card2">
                   <div class="tl-card__band" style="background:linear-gradient(90deg,#e91e63,#c2185b)"></div>
                   <div class="tl-card__header">
-                    <div class="tl-card__title">יום 2 - Allou! Fun Park + Kidom</div>
-                    <div class="tl-card__date">רביעי, 30/4</div>
+                    <div>
+                      <div class="tl-card__title">Allou! Fun Park + גבעת ליקאבטוס</div>
+                      <div class="tl-card__where">📍 אתונה</div>
+                    </div>
+                    <span class="tl-card__star" style="background:rgba(233,30,99,0.12);color:#c2185b;">❤️ הכי שווה</span>
                   </div>
-                  <button class="tl-card__toggle" onclick="toggleCard('card2')">
-                    פירוט היום <span class="tl-card__chevron">▾</span>
-                  </button>
                   <div class="tl-card__body">
                     <div class="tl-activity">
                       <div class="tl-activity__time">בוקר</div>
@@ -485,12 +478,13 @@
                     <div class="tl-tip"><strong>💡 טיפ:</strong> Allou! Fun Park פתוח מאוחר, תכננו לבלות שם רוב היום ולעלות לליקאבטוס בסיום.</div>
                     <div class="tl-tip"><strong>לינה:</strong> Athens Ikon - Mitropoleos 21, מונסטירקי</div>
                   </div>
+                  <button class="tl-card__toggle" onclick="toggleCard('card2')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
                 </div>
               </div>
 
               <!-- DAY 3 - Thursday 1/5 -->
-              <div class="tl-item tl-item--xplore">
-                <div class="tl-item__label">יום 3</div>
+              <div class="tl-item tl-item--xplore tl-odd">
+                <div class="tl-item__label">יום 3<br><span style="font-size:11px;color:#ccc;">01.05 חמישי</span></div>
                 <div class="tl-item__node">
                   <div class="tl-item__icon">🎮</div>
                   <span class="tl-item__day-label">יום 3</span>
@@ -498,12 +492,12 @@
                 <div class="tl-item__card tl-card" id="card3">
                   <div class="tl-card__band" style="background:linear-gradient(90deg,#9c27b0,#6a1b9a)"></div>
                   <div class="tl-card__header">
-                    <div class="tl-card__title">יום 3 - XPLORE + מוזיאון אשליות</div>
-                    <div class="tl-card__date">חמישי, 1/5</div>
+                    <div>
+                      <div class="tl-card__title">XPLORE + מוזיאון אשליות</div>
+                      <div class="tl-card__where">📍 אתונה</div>
+                    </div>
+                    <span class="tl-card__star" style="background:rgba(156,39,176,0.12);color:#6a1b9a;">⭐ חובה</span>
                   </div>
-                  <button class="tl-card__toggle" onclick="toggleCard('card3')">
-                    פירוט היום <span class="tl-card__chevron">▾</span>
-                  </button>
                   <div class="tl-card__body">
                     <div class="tl-activity">
                       <div class="tl-activity__time">בוקר</div>
@@ -536,12 +530,13 @@
                     <div class="tl-tip"><strong>💡 טיפ:</strong> Museum of Illusions כדאי לאחר שעה 17:00 כשקצת פחות עמוס.</div>
                     <div class="tl-tip"><strong>לינה:</strong> Athens Ikon - Mitropoleos 21, מונסטירקי</div>
                   </div>
+                  <button class="tl-card__toggle" onclick="toggleCard('card3')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
                 </div>
               </div>
 
               <!-- DAY 4 - Friday 2/5 -->
-              <div class="tl-item tl-item--aegina">
-                <div class="tl-item__label">יום 4</div>
+              <div class="tl-item tl-item--aegina tl-even">
+                <div class="tl-item__label">יום 4<br><span style="font-size:11px;color:#ccc;">02.05 שישי</span></div>
                 <div class="tl-item__node">
                   <div class="tl-item__icon">⛵</div>
                   <span class="tl-item__day-label">יום 4</span>
@@ -549,12 +544,12 @@
                 <div class="tl-item__card tl-card" id="card4">
                   <div class="tl-card__band" style="background:linear-gradient(90deg,#00897b,#00695c)"></div>
                   <div class="tl-card__header">
-                    <div class="tl-card__title">יום 4 - האי אגינה</div>
-                    <div class="tl-card__date">שישי, 2/5</div>
+                    <div>
+                      <div class="tl-card__title">האי אגינה + Ancient Agora</div>
+                      <div class="tl-card__where">📍 פיראוס → אגינה → אתונה</div>
+                    </div>
+                    <span class="tl-card__star" style="background:rgba(0,137,123,0.12);color:#00695c;">❤️ הכי שווה</span>
                   </div>
-                  <button class="tl-card__toggle" onclick="toggleCard('card4')">
-                    פירוט היום <span class="tl-card__chevron">▾</span>
-                  </button>
                   <div class="tl-card__body">
                     <div class="tl-activity">
                       <div class="tl-activity__time">בוקר</div>
@@ -587,12 +582,13 @@
                     <div class="tl-tip"><strong>💡 טיפ:</strong> מעבורת לאגינה - כדאי להזמין כרטיסים מראש דרך האתר Hellenic Seaways. הגיעו לנמל 30 דקות לפחות לפני.</div>
                     <div class="tl-tip"><strong>לינה:</strong> Athens Ikon - Mitropoleos 21, מונסטירקי</div>
                   </div>
+                  <button class="tl-card__toggle" onclick="toggleCard('card4')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
                 </div>
               </div>
 
               <!-- DAY 5 - Saturday 3/5 -->
-              <div class="tl-item tl-item--depart">
-                <div class="tl-item__label">יום 5</div>
+              <div class="tl-item tl-item--depart tl-odd">
+                <div class="tl-item__label">יום 5<br><span style="font-size:11px;color:#ccc;">03.05 שבת</span></div>
                 <div class="tl-item__node">
                   <div class="tl-item__icon">🇮🇱</div>
                   <span class="tl-item__day-label">יום 5</span>
@@ -600,12 +596,12 @@
                 <div class="tl-item__card tl-card" id="card5">
                   <div class="tl-card__band" style="background:linear-gradient(90deg,var(--amber),var(--amber-dark))"></div>
                   <div class="tl-card__header">
-                    <div class="tl-card__title">יום 5 - יום אחרון וטיסה הביתה</div>
-                    <div class="tl-card__date">שבת, 3/5</div>
+                    <div>
+                      <div class="tl-card__title">יום אחרון וטיסה הביתה</div>
+                      <div class="tl-card__where">📍 אתונה → נתב"ג</div>
+                    </div>
+                    <span class="tl-card__star" style="background:rgba(232,160,69,0.15);color:#b07020;">יום חזרה</span>
                   </div>
-                  <button class="tl-card__toggle" onclick="toggleCard('card5')">
-                    פירוט היום <span class="tl-card__chevron">▾</span>
-                  </button>
                   <div class="tl-card__body">
                     <div class="tl-activity">
                       <div class="tl-activity__time">בוקר</div>
@@ -623,6 +619,7 @@
                     </div>
                     <div class="tl-tip"><strong>💡 טיפ:</strong> Little Kook היא מסעדה/בית קפה מרהיבה עם עיצוב שמשגע ילדים - תורים ארוכים בסופי שבוע, הגיעו מוקדם!</div>
                   </div>
+                  <button class="tl-card__toggle" onclick="toggleCard('card5')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
                 </div>
               </div>
 
@@ -665,11 +662,12 @@
         <!-- SIDEBAR -->
         <aside class="sidebar">
           <div class="cta-card">
-            <div class="cta-card__title">רוצים מסלול מותאם?</div>
+            <div class="cta-card__title">רוצים מסלול מותאם? 🇬🇷</div>
             <div class="cta-card__text">אבנה לכם מסלול מלא לאתונה - יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.</div>
             <a href="packages.html" class="cta-card__btn">לחבילות תכנון ←</a>
-            <a href="https://wa.me/972546758145?text=היי אור, אני מעוניין לשמוע על תכנון טיול לאתונה!" class="cta-card__wa" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              שלחו הודעה
+            <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לאתונה עם ילדים" target="_blank" class="cta-card__wa">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              וואטסאפ
             </a>
           </div>
         </aside>
@@ -694,7 +692,10 @@
     window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
     function toggleCard(id) {
       var card = document.getElementById(id);
-      card.classList.toggle('open');
+      if (!card) return;
+      var isOpen = card.classList.toggle('open');
+      var chevron = card.querySelector('.tl-card__chevron');
+      if (chevron) chevron.textContent = isOpen ? '▲' : '▾';
     }
   </script>
 
