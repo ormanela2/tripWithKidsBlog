@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="מדריך טיול לאוסטריה עם ילדים - זלצבורג, וינה, פארקי מים, טירות ואטרקציות לכל המשפחה. מתי טסים.">
+  <title>טיול לאוסטריה עם ילדים - מדריך מלא | מתי טסים</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <style>
+    /* Inline Austria flag SVG */
+    .flag-at { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23ed2939'/%3E%3Crect y='200' width='900' height='200' fill='%23fff'/%3E%3Crect y='400' width='900' height='200' fill='%23ed2939'/%3E%3C/svg%3E"); }
+    .flag-icon { display: inline-block; background-size: cover; background-repeat: no-repeat; border-radius: 4px; }
+    .flag-icon-hero { width: 56px; height: 38px; }
+  </style>
+  <style>
+    :root {
+      --amber: #E8A045; --amber-light: #f0b868; --amber-dark: #c4872e;
+      --teal: #1A6B72; --teal-dark: #124d52;
+      --cream: #FDF8F2; --charcoal: #2C2C2C; --sand: #F5EDD8; --sand-dark: #e8ddc4;
+      --green: #4A9B6F; --white: #FFFFFF;
+      --red: #c0392b; --red-dark: #922b21;
+      --font-heading: 'Secular One', sans-serif; --font-body: 'Rubik', sans-serif;
+      --nav-height: 72px;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); font-size: 17px; line-height: 1.8; color: var(--charcoal); background: var(--cream); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 400; line-height: 1.3; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; }
+    .container--narrow { max-width: 780px; }
+
+    /* ── EMAIL POPUP ─────────────────────────────── */
+    .email-popup-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; padding:24px; }
+    .email-popup-overlay.open { display:flex; }
+    .email-popup { background:var(--cream); border-radius:20px; padding:40px 32px; max-width:420px; width:100%; text-align:center; position:relative; box-shadow:0 16px 48px rgba(0,0,0,0.2); animation:popupIn 0.3s ease; box-sizing:border-box; }
+    @keyframes popupIn { from { transform:translateY(20px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+    .email-popup__close { position:absolute; top:14px; left:16px; font-size:22px; cursor:pointer; color:#aaa; background:none; border:none; line-height:1; }
+    .email-popup__close:hover { color:var(--charcoal); }
+    .email-popup__icon { font-size:40px; margin-bottom:12px; }
+    .email-popup__title { font-family:var(--font-heading); font-size:22px; color:var(--teal); margin-bottom:8px; }
+    .email-popup__subtitle { font-size:14px; color:#666; line-height:1.6; margin-bottom:24px; }
+    .email-popup__form { display:flex; flex-direction:column; gap:12px; }
+    .email-popup__input { padding:13px 18px; border:2px solid var(--sand-dark); border-radius:40px; font-family:var(--font-body); font-size:15px; background:white; color:var(--charcoal); outline:none; text-align:right; width:100%; box-sizing:border-box; }
+    .email-popup__input:focus { border-color:var(--teal); }
+    .email-popup__btn { background:var(--teal); color:white; border:none; border-radius:40px; padding:13px 28px; font-family:var(--font-body); font-size:15px; font-weight:600; cursor:pointer; transition:background 0.2s; }
+    .email-popup__btn:hover { background:var(--teal-dark); }
+    .email-popup__skip { font-size:13px; color:#aaa; cursor:pointer; margin-top:4px; background:none; border:none; text-decoration:underline; }
+    .email-popup__skip:hover { color:var(--charcoal); }
+
+    /* ── NAV ─────────────────────────────── */
+    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
+    .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+    .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
+    .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
+    .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
+    .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
+    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.02em; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
+    .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
+    .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
+    .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
+    .nav__mobile-actions { display:none; align-items:center; gap:4px; }
+    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
+    .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+    .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
+    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:32px 24px; flex-direction:column; gap:8px; z-index:999; overflow-y:auto; }
+    .nav__mobile-menu.open { display:flex; }
+    .nav__mobile-menu .nav__link { font-size:20px; padding:16px; justify-content:flex-start; }
+    .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:300; font-size:15px; border-radius:22px; padding:8px 16px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); animation:communityPulse 2.8s ease-in-out infinite; }
+    .nav__link--community:hover, .nav__link--community:focus-visible { background:#d4903c !important; color:#2C2C2C !important; transform:translateY(-2px); box-shadow:0 4px 16px rgba(232,160,69,0.55); animation:none; }
+    .nav__link--community::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; margin-left:7px; box-shadow:0 0 6px #4ade80; animation:dotBlink 1.4s ease-in-out infinite; }
+    .nav__mobile-menu .nav__link--community { font-size:15px; padding:8px 18px; width:fit-content; min-height:44px; }
+    @keyframes communityPulse { 0%,100%{box-shadow:0 2px 10px rgba(232,160,69,0.4);} 50%{box-shadow:0 2px 18px rgba(232,160,69,0.75),0 0 0 4px rgba(232,160,69,0.15);} }
+    @keyframes dotBlink { 0%,100%{opacity:0.4;box-shadow:0 0 3px #4ade80;} 50%{opacity:1;box-shadow:0 0 10px #4ade80,0 0 20px #4ade8088;} }
+    @media(max-width:900px) {
+      .nav__links { display:none; }
+      .nav__mobile-actions { display:flex; }
+      .nav__hamburger { display:flex; }
+      .nav__logo img { height:44px !important; }
+      .nav__logo-text { font-size:18px !important; }
+    }
+    /* ── END NAV ─────────────────────────── */
+
+    /* ── HERO ── */
+    .article-hero { background: linear-gradient(155deg, #8b1a1a 0%, #c0392b 50%, #922b21 100%); padding-top: calc(var(--nav-height) + 56px); padding-bottom: 70px; color: var(--white); position: relative; overflow: hidden; }
+    .article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(232,160,69,0.12) 0%, transparent 60%); }
+    .article-hero::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 70px; background: linear-gradient(to top, var(--cream), transparent); }
+    .article-hero__inner { position: relative; max-width: 780px; }
+    .article-hero__breadcrumb { font-size: 13px; opacity: 0.7; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .article-hero__breadcrumb a { opacity: 0.8; transition: opacity 0.2s; }
+    .article-hero__flag { font-size: 56px; margin-bottom: 16px; display: block; }
+    .article-hero__title { font-size: clamp(28px, 4.5vw, 50px); margin-bottom: 18px; }
+    .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.88; margin-bottom: 32px; max-width: 600px; line-height: 1.7; }
+    .article-hero__meta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
+
+    /* ── BODY ── */
+    .article-body { padding: 60px 0 80px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
+    .article-content { min-width: 0; }
+    .article-section { margin-bottom: 52px; }
+    .article-section__title { font-size: clamp(20px, 2.5vw, 26px); color: var(--teal); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--sand-dark); display: flex; align-items: center; gap: 10px; }
+    .article-section__title-icon { font-size: 24px; }
+    .article-content p { margin-bottom: 16px; color: #444; line-height: 1.85; }
+    .article-content p:last-child { margin-bottom: 0; }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding: 8px 0 0; }
+    .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; right: 50%; width: 3px; background: linear-gradient(to bottom, var(--red), var(--amber), var(--teal)); transform: translateX(50%); border-radius: 3px; }
+    .tl-item { display: grid; grid-template-columns: 1fr 56px 1fr; gap: 0 0; margin-bottom: 48px; position: relative; align-items: start; }
+    .tl-item__label { font-family: var(--font-heading); font-size: 13px; color: #aaa; letter-spacing: 0.5px; padding-top: 18px; }
+    .tl-item:nth-child(odd)  .tl-item__label { text-align: left;  padding-right: 28px; }
+    .tl-item:nth-child(even) .tl-item__label { text-align: right; padding-left: 28px; order: 3; }
+    .tl-item__node { display: flex; flex-direction: column; align-items: center; gap: 0; position: relative; z-index: 2; padding-top: 12px; }
+    .tl-item__icon { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 4px solid var(--cream); box-shadow: 0 2px 12px rgba(0,0,0,0.15); flex-shrink: 0; }
+    .tl-item__day-label { margin-top: 6px; font-family: var(--font-heading); font-size: 11px; color: #aaa; letter-spacing: 0.5px; }
+    .tl-item__card { background: var(--white); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 2px solid var(--sand-dark); transition: transform 0.35s ease, box-shadow 0.35s ease; cursor: pointer; }
+    .tl-item__card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.13); }
+    .tl-item:nth-child(odd)  .tl-item__card { margin-left: 24px; }
+    .tl-item:nth-child(even) .tl-item__card { margin-right: 24px; order: -1; }
+    .tl-card__band { height: 6px; width: 100%; }
+    .tl-card__header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .tl-card__title { font-family: var(--font-heading); font-size: 16px; color: var(--charcoal); line-height: 1.35; }
+    .tl-card__where { font-size: 12px; color: #aaa; margin-top: 4px; display: flex; align-items: center; gap: 3px; }
+    .tl-card__star { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+    .tl-card__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px 14px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-size: 13px; color: var(--teal); font-weight: 600; border-top: 1px solid var(--sand); }
+    .tl-card__toggle:hover { background: var(--sand); }
+    .tl-card__chevron { transition: transform 0.3s; font-style: normal; }
+    .tl-card.open .tl-card__chevron { transform: rotate(180deg); }
+    .tl-card__body { display: none; padding: 0 20px 18px; }
+    .tl-card.open .tl-card__body { display: block; }
+    .tl-activity { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--sand-dark); }
+    .tl-activity:last-of-type { border-bottom: none; }
+    .tl-activity__time { font-size: 11px; font-weight: 700; color: var(--teal); min-width: 46px; padding-top: 2px; letter-spacing: 0.3px; }
+    .tl-activity__name { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+    .tl-activity__desc { font-size: 13px; color: #666; line-height: 1.55; }
+    .tl-tip { margin-top: 12px; background: rgba(232,160,69,0.1); border-right: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 9px 13px; font-size: 13px; color: #666; }
+    .tl-tip strong { color: var(--amber-dark); }
+
+    /* Timeline item color themes */
+    .tl-item--flight .tl-item__icon { background: linear-gradient(135deg, #1A6B72, #238a93); color: #fff; }
+    .tl-item--flight .tl-card__band { background: linear-gradient(90deg, #1A6B72, #238a93); }
+    .tl-item--salzburg .tl-item__icon { background: linear-gradient(135deg, #c0392b, #922b21); color: #fff; }
+    .tl-item--salzburg .tl-card__band { background: linear-gradient(90deg, #c0392b, #922b21); }
+    .tl-item--mountain .tl-item__icon { background: linear-gradient(135deg, #4A9B6F, #2d7550); color: #fff; }
+    .tl-item--mountain .tl-card__band { background: linear-gradient(90deg, #4A9B6F, #2d7550); }
+    .tl-item--castle .tl-item__icon { background: linear-gradient(135deg, #E8A045, #c4872e); color: #fff; }
+    .tl-item--castle .tl-card__band { background: linear-gradient(90deg, #E8A045, #c4872e); }
+    .tl-item--mine .tl-item__icon { background: linear-gradient(135deg, #7f5a0d, #a07010); color: #fff; }
+    .tl-item--mine .tl-card__band { background: linear-gradient(90deg, #7f5a0d, #a07010); }
+    .tl-item--waterpark .tl-item__icon { background: linear-gradient(135deg, #1565c0, #1976d2); color: #fff; }
+    .tl-item--waterpark .tl-card__band { background: linear-gradient(90deg, #1565c0, #1976d2); }
+    .tl-item--adventure .tl-item__icon { background: linear-gradient(135deg, #6b4aa0, #8a60c0); color: #fff; }
+    .tl-item--adventure .tl-card__band { background: linear-gradient(90deg, #6b4aa0, #8a60c0); }
+    .tl-item--vienna .tl-item__icon { background: linear-gradient(135deg, #880e4f, #ad1457); color: #fff; }
+    .tl-item--vienna .tl-card__band { background: linear-gradient(90deg, #880e4f, #ad1457); }
+    .tl-card__star--arrival { background: rgba(26,107,114,0.12); color: #124d52; }
+    .tl-card__star--highlight { background: rgba(74,155,111,0.12); color: #2d7550; }
+    .tl-card__star--castle { background: rgba(232,160,69,0.15); color: #b07020; }
+    .tl-card__star--best { background: rgba(192,57,43,0.12); color: #922b21; }
+
+    @media (max-width: 680px) {
+      .timeline::before { right: 28px; transform: none; }
+      .tl-item { grid-template-columns: 56px 1fr; grid-template-rows: auto auto; }
+      .tl-item__label { display: none; }
+      .tl-item__node { padding-top: 10px; }
+      .tl-item:nth-child(odd)  .tl-item__card { margin-left: 12px; }
+      .tl-item:nth-child(even) .tl-item__card { margin-right: 0; margin-left: 12px; order: unset; }
+      .tl-item:nth-child(even) .tl-item__label { order: unset; }
+    }
+
+    /* ── MAP ── */
+    #trip-map { height: 420px; border-radius: 16px; overflow: hidden; border: 2px solid var(--sand-dark); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    #map-day-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+
+    /* ── TIPS ── */
+    .tips-list { display: flex; flex-direction: column; gap: 10px; }
+    .tip-item { background: var(--white); border-radius: 12px; border: 2px solid var(--sand-dark); padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
+    .tip-item__icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .tip-item__text { color: #555; line-height: 1.65; }
+    .tip-item__text strong { color: var(--charcoal); }
+
+    /* ── ATTRACTIONS GRID ── */
+    .attractions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .attraction-card { background: var(--white); border-radius: 14px; border: 2px solid var(--sand-dark); padding: 16px 18px; transition: transform 0.25s, box-shadow 0.25s; }
+    .attraction-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .attraction-card__icon { font-size: 28px; margin-bottom: 8px; display: block; }
+    .attraction-card__name { font-family: var(--font-heading); font-size: 15px; margin-bottom: 6px; color: var(--teal); }
+    .attraction-card__desc { font-size: 13px; color: #666; line-height: 1.6; }
+    @media (max-width: 500px) { .attractions-grid { grid-template-columns: 1fr; } }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: calc(var(--nav-height) + 20px); }
+    .cta-card { background: var(--teal); border-radius: 18px; padding: 24px; color: var(--white); text-align: center; }
+    .cta-card__title { font-family: var(--font-heading); font-size: 18px; margin-bottom: 10px; }
+    .cta-card__text { font-size: 14px; opacity: 0.85; margin-bottom: 20px; line-height: 1.6; }
+    .cta-card__btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--amber); color: var(--charcoal); border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 700; transition: background 0.2s, transform 0.2s; width: 100%; }
+    .cta-card__btn:hover { background: var(--amber-dark); transform: translateY(-2px); }
+    .cta-card__wa { display: flex; align-items: center; justify-content: center; gap: 8px; background: #25D366; color: var(--white); border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 600; transition: background 0.2s; margin-top: 10px; }
+    .cta-card__wa:hover { background: #1da851; }
+
+    /* ── TOC ── */
+    .toc { background: var(--sand); border-radius: 14px; padding: 20px; margin-bottom: 36px; }
+    .toc__title { font-family: var(--font-heading); font-size: 15px; color: var(--teal); margin-bottom: 12px; }
+    .toc__list { display: flex; flex-direction: column; gap: 6px; }
+    .toc__link { font-size: 14px; color: var(--teal); display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .toc__link:hover { color: var(--amber-dark); }
+    .toc__num { font-size: 11px; background: var(--teal); color: var(--white); border-radius: 4px; padding: 1px 6px; font-weight: 600; }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--charcoal); color: rgba(255,255,255,0.6); padding: 40px 0; text-align: center; font-size: 14px; }
+    .footer a { color: var(--amber-light); }
+
+    @media (max-width: 900px) {
+      .article-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+    @media (max-width: 768px) {
+      .nav__logo img { height: 44px !important; }
+      .nav__logo span { font-size: 18px !important; }
+    }
+  </style>
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="services.html" class="nav__logo">
+      <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+    </a>
+    <ul class="nav__links">
+      <li><a href="tips.html" class="nav__link">טיפים</a></li>
+      <li><a href="destinations.html" class="nav__link" aria-current="page">יעדים</a></li>
+      <li><a href="weather.html" class="nav__link">מזג אוויר</a></li>
+      <li><a href="packages.html" class="nav__link">שירותים</a></li>
+      <li><a href="about.html" class="nav__link">אודות</a></li>
+    </ul>
+    <div class="nav__mobile-actions">
+      <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-label="פתח תפריט">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav__mobile-menu" id="mobileMenu">
+    <a href="tips.html" class="nav__link">טיפים</a>
+    <a href="destinations.html" class="nav__link" aria-current="page">יעדים</a>
+    <a href="weather.html" class="nav__link">מזג אוויר</a>
+    <a href="packages.html" class="nav__link">שירותים</a>
+    <a href="about.html" class="nav__link">אודות</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="article-hero">
+  <div class="container">
+    <div class="article-hero__inner">
+      <nav class="article-hero__breadcrumb" aria-label="breadcrumb">
+        <a href="destinations.html">יעדים</a>
+        <span>›</span>
+        <span>אוסטריה</span>
+      </nav>
+      <span class="article-hero__flag"><span class="flag-icon flag-at flag-icon-hero"></span></span>
+      <h1 class="article-hero__title">טיול לאוסטריה עם ילדים - המדריך המלא</h1>
+      <p class="article-hero__subtitle">פסגת הדאכשטיין עם ה-Skywalk שממנה רואים את כל האלפים, מכרה המלח של ברכטסגאדן שהילדים גולשים בו בשקיות, פארק המים של וואגריין עם מגלשות אינסופיות, טירה עם מופע נשרים בלייב, מקומות שממש לקוחים מגלויות - ווינה שמחכה לכם בסוף עם שטרודל אפל ומוזיאונים שילדים אוהבים. אוסטריה היא יעד שמפתיע בכל פינה.</p>
+      <div class="article-hero__meta">
+        <span class="article-hero__badge">🟢 קל עם ילדים</span>
+        <span class="article-hero__badge">📅 7-10 ימים מומלץ</span>
+        <span class="article-hero__badge">☀️ אוגוסט מומלץ</span>
+        <span class="article-hero__badge">✈️ טיסה לווינה</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<section class="article-body">
+  <div class="container">
+    <div class="article-layout">
+
+      <!-- MAIN CONTENT -->
+      <main class="article-content">
+
+        <!-- TOC -->
+        <div class="toc">
+          <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
+          <div class="toc__list">
+            <a href="#intro" class="toc__link"><span class="toc__num">1</span> למה אוסטריה עם ילדים?</a>
+            <a href="#route-map" class="toc__link"><span class="toc__num">2</span> המסלול על המפה</a>
+            <a href="#itinerary" class="toc__link"><span class="toc__num">3</span> מסלול יום-יום מומלץ</a>
+            <a href="#salzburg-attractions" class="toc__link"><span class="toc__num">4</span> אטרקציות באזור זלצבורג</a>
+            <a href="#vienna-attractions" class="toc__link"><span class="toc__num">5</span> מה לעשות עם ילדים בווינה</a>
+            <a href="#accommodation" class="toc__link"><span class="toc__num">6</span> המלצות לינה</a>
+            <a href="#tips" class="toc__link"><span class="toc__num">7</span> טיפים חשובים</a>
+          </div>
+        </div>
+
+        <!-- 1. INTRO -->
+        <div class="article-section" id="intro">
+          <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> למה אוסטריה עם ילדים?</h2>
+          <p>אוסטריה הייתה בשבילנו הפתעה ענקית. אנחנו ידענו שיהיה יפה - אבל לא ידענו כמה הילדים יתאהבו ביעד הזה. השילוב בין הרים מדהימים, אטרקציות ייחודיות ואנשים ידידותיים עבד בצורה מושלמת.</p>
+          <p><strong>אזור זלצבורגר לנד</strong> הוא הלב של הטיול. בסיס מעולה בעיירה Altenmarkt-Wagrain מאפשר להגיע בקלות לכל האטרקציות.</p>
+          <p><strong>Festung Hohenwerfen</strong> - טירת וורפן היא אחת הטירות הדרמטיות ביותר שראינו, ממש על קרן סלע מעל העמק. מופע הנשרים הלייב בשעה 11:15 הוא חובה - הנשרים טסים מעל הראשים של הקהל בצורה מרהיבה. הילדים לא יכלו להפסיק לדבר על זה.</p>
+          <p><strong>Salzbergwerk Berchtesgaden</strong> (מכרה מלח) - אחת החוויות הכי ייחודיות של הטיול. לובשים חליפה אפורה וגולשים על מגלשות עץ לתוך המכרה. ילדים פשוט מתים על זה, ומבוגרים גם כן.</p>
+          <p><strong>פארק המים Wagrainis Grafenberg</strong> - ראינו צילום ולא האמנו עד שהגענו. פארק מים תלוי על ההר עם נוף לכל העמק. הילדים לא הסכימו לצאת. מגיעים עד 9:30 בבוקר כדי לתפוס מקומות טובים.</p>
+          <p><strong>ווינה</strong> ממתינה בסוף הטיול - עיר מלכותית עם מופע שטרודל בשונברון, פארק פארטר, מוזיאון הטבע והמדע, ו-LEOPARK שהילדים נוגעים בחיות. סיום מושלם לטיול.</p>
+        </div>
+
+        <!-- 2. MAP -->
+        <div class="article-section" id="route-map">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🗺️</span> המסלול על המפה</h2>
+          <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות את המיקום במפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
+          <div id="trip-map"></div>
+          <div id="map-day-pills"></div>
+        </div>
+
+        <!-- 3. ITINERARY -->
+        <div class="article-section" id="itinerary">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🗓️</span> המסלול המלא</h2>
+          <div class="timeline">
+
+            <!-- יום 1 -->
+            <div class="tl-item tl-item--flight" id="tl1">
+              <div class="tl-item__label">יום 1<br><span style="font-size:11px;color:#ccc;">16.08 שישי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">✈️</div>
+                <span class="tl-item__day-label">יום 1</span>
+              </div>
+              <div class="tl-item__card tl-card open">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">טיסה לווינה + הגעה לזלצבורגר לנד</div>
+                    <div class="tl-card__where">📍 תל אביב → ווינה → Hornergut, Altenmarkt</div>
+                  </div>
+                  <span class="tl-card__star tl-card__star--arrival">יום הגעה</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">15:20</span>
+                    <div>
+                      <div class="tl-activity__name">המראה מתל אביב ✈️</div>
+                      <div class="tl-activity__desc">טיסה TLV - Vienna. נחיתה בשעה 18:05. זמן טיסה כ-3:45 שעות.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">18:30</span>
+                    <div>
+                      <div class="tl-activity__name">קבלת רכבים 🚗</div>
+                      <div class="tl-activity__desc">קבלת שני רכבים מהאוטו בשדה התעופה של ווינה. נסיעה של כ-3.5 שעות לאזור זלצבורגר לנד. מומלץ להזמין אוכל מראש לדרך.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">לילה</span>
+                    <div>
+                      <div class="tl-activity__name">הגעה לאלטנמרקט 🏡</div>
+                      <div class="tl-activity__desc">הגעה לבית הנופש Hornergut in Altenmarkt - בית פרטי יפהפה עם גינה, נוף להרים ואווירה אוסטרית אמיתית.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt - בית נופש משפחתי באמצע הטבע.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl1')"><span>פרטי היום</span><span class="tl-card__chevron">▲</span></button>
+              </div>
+            </div>
+
+            <!-- יום 2 -->
+            <div class="tl-item tl-item--mountain" id="tl2">
+              <div class="tl-item__label">יום 2<br><span style="font-size:11px;color:#ccc;">17.08 שבת</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🐾</div>
+                <span class="tl-item__day-label">יום 2</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">Der Wild Berg - פארק חיות הבר</div>
+                    <div class="tl-card__where">📍 Wild Berg, Mauterndorf</div>
+                  </div>
+                  <span class="tl-card__star tl-card__star--highlight">❤️ ממליצים</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Der Wild Berg 🦌</div>
+                      <div class="tl-activity__desc">פארק חיות בר מרהיב שבו הולכים בין האיילים, החזירי הבר בטבע החופשי. חיות לא בכלובים - ממש בטבע. חוויה לגמרי שונה מגן חיות רגיל.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">ארוחה בהר 🏔️</div>
+                      <div class="tl-activity__desc">יש מסעדה בתוך הפארק עם נוף נפלא להרים. אוכל ביתי אוסטרי - שניצל וספגטי.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl2')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 3 -->
+            <div class="tl-item tl-item--mountain" id="tl3">
+              <div class="tl-item__label">יום 3<br><span style="font-size:11px;color:#ccc;">18.08 ראשון</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🏔️</div>
+                <span class="tl-item__day-label">יום 3</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">פסגת דאכשטיין - Skywalk + ארמון הקרח</div>
+                    <div class="tl-card__where">📍 Dachstein, Ramsau</div>
+                  </div>
+                  <span class="tl-card__star tl-card__star--best">⭐ חובה</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Skywalk Dachstein 🌅</div>
+                      <div class="tl-activity__desc">גשר זכוכית תלוי בחלל שממנו נשקפים כל האלפים האוסטריים. אחד הדברים הכי מרהיבים שראינו בחיים. לקחת מעיל - קר שם גם בקיץ.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Skyline Walk + "המדרגות לשום מקום" 🪜</div>
+                      <div class="tl-activity__desc">מסלול הליכה על שפת ההר עם גשרים ומצפורים, והאטרקציה המיוחדת - מדרגות שיורדות ישר אל האוויר מעל העמק. פוטוגני ואחד הדברים הכי ייחודיים.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">ארמון הקרח 🧊</div>
+                      <div class="tl-activity__desc">מערת קרח ענקית בתוך הגלאצ'ר עם פסלים עשויי קרח ותאורה מרהיבה. כ-10 מעלות בפנים - להביא לבוש חם.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">מגלשת ההרים של רמסאו ⛷️</div>
+                      <div class="tl-activity__desc">בדרך חזרה - מגלשת הרים קצרה ומהנה בכפר רמסאו. מושלמת לאחרי יום ארוך בפסגה.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>חשוב:</strong> להזמין כרטיסים מראש לדאכשטיין - ובמיוחד לארמון הקרח שמתמלא מהר.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl3')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 4 -->
+            <div class="tl-item tl-item--castle" id="tl4">
+              <div class="tl-item__label">יום 4<br><span style="font-size:11px;color:#ccc;">19.08 שני</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🦅</div>
+                <span class="tl-item__day-label">יום 4</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">טירת וורפן + נקיק ליכטנשטיין</div>
+                    <div class="tl-card__where">📍 Festung Hohenwerfen + Liechtensteinklamm</div>
+                  </div>
+                  <span class="tl-card__star tl-card__star--castle">🏰 טירה</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">11:15</span>
+                    <div>
+                      <div class="tl-activity__name">מופע הנשרים בטירת וורפן 🦅</div>
+                      <div class="tl-activity__desc">טירה מרשימה על קרן סלע. מופע הנשרים הלייב - נשרים, עיטים ובזים טסים מעל הקהל. יש מופע גם ב-15:15. להגיע מוקדם לתפוס מקום.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">Liechtensteinklamm - נקיק מרהיב 🏞️</div>
+                      <div class="tl-activity__desc">נקיק סלעים מרהיב עם שבילים ומשולבות. כ-30 דקות נסיעה מהטירה. מרשים במיוחד. ניתן לשלב גם עם Lammerklam.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>טיפ:</strong> כרטיסי הטירה כוללים גם את מופע הנשרים - לא לשלם פעמיים.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl4')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 5 -->
+            <div class="tl-item tl-item--mine" id="tl5">
+              <div class="tl-item__label">יום 5<br><span style="font-size:11px;color:#ccc;">20.08 שלישי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">⛏️</div>
+                <span class="tl-item__day-label">יום 5</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">מכרה מלח ברכטסגאדן + מפל גולינגר</div>
+                    <div class="tl-card__where">📍 Salzbergwerk Berchtesgaden, גרמניה (30 דקות)</div>
+                  </div>
+                  <span class="tl-card__star tl-card__star--highlight">❤️ הכי ייחודי</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Salzbergwerk Berchtesgaden ⛏️</div>
+                      <div class="tl-activity__desc">לובשים חליפה אפורה של כורים וגולשים על מגלשות עץ לתוך המכרה. רכבת מיניאטורית, אגמי מלח ותאורה מיוחדת. חוויה לכל הגילאים - ילדים שוב ושוב מבקשים לגלוש שוב.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">מפל גולינגר 💧</div>
+                      <div class="tl-activity__desc">מפל מרהיב בדרך חזרה לאלטנמרקט. מסלול הליכה קצר ונוח לכל המשפחה. מרענן ביום חם.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">Lucky Flitzer 🎢</div>
+                      <div class="tl-activity__desc">מקום מעולה לתת לילדים להשתולל בסוף היום - הרבה מתקנים נחמדים, מגלשת אדרנלין מהירה ומשוגעת, וגם יש מקומות לאכול שם.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>חשוב:</strong> מכרה ברכטסגאדן נמצא בגרמניה - לא לשכוח תעודות זהות. להזמין מראש!</div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl5')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 6 -->
+            <div class="tl-item tl-item--waterpark" id="tl6">
+              <div class="tl-item__label">יום 6<br><span style="font-size:11px;color:#ccc;">21.08 רביעי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🌊</div>
+                <span class="tl-item__day-label">יום 6</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">פארק המים Wagrainis Grafenberg</div>
+                    <div class="tl-card__where">📍 Wagrain-Kleinarl</div>
+                  </div>
+                  <span class="tl-card__star tl-card__star--best">⭐ חובה</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">09:30</span>
+                    <div>
+                      <div class="tl-activity__name">Wagrainis Grafenberg Water Park 💦</div>
+                      <div class="tl-activity__desc">פארק מים שתלוי על ההר עם נוף לכל העמק הירוק. מגלשות מים, בריכות, מיני גולף, כדורגל גולף ועוד. להגיע עד 9:30 בבוקר לתפוס מקום. הילדים לא הסכימו לצאת.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">Soccerpark Wagrain-Kleinarl ⚽</div>
+                      <div class="tl-activity__desc">כדורגל גולף - שילוב מגניב בין כדורגל למיני גולף. מושלם לאחרי הפארק כשהילדים עדיין פעילים.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>המלצה חמה:</strong> Freizeitpark Ruhpolding שווה יום שלם - אל תנסו לדחוס אליו חצי יום. בואו בבוקר, תאכלו שם צהריים עם נוף להרים, ותצאו רק כשהילדים מתחילים ליפול מרגל עייפות.</div>
+                  <div class="tl-tip"><strong>מסעדות:</strong> Berggasthof Sattelbauer, Paularei, ו-Restaurant Tauernblick - כולן עם נוף הרים מדהים.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl6')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 7 -->
+            <div class="tl-item tl-item--adventure" id="tl7">
+              <div class="tl-item__label">יום 7<br><span style="font-size:11px;color:#ccc;">22.08 חמישי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🛷</div>
+                <span class="tl-item__day-label">יום 7</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">מגלשת הרים אבנטאו + אגם גוסאו</div>
+                    <div class="tl-card__where">📍 Abtenau + Gosausee</div>
+                  </div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">מגלשת הרים אבנטאו 🛷</div>
+                      <div class="tl-activity__desc">מגלשת הרים ארוכה ומרהיבה בכפר אבנטאו. ניתן לרכוש ריצות מרובות - הילדים לא מפסיקים. לוקח בסביבות 20 דקות לכל ריצה.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">אגם גוסאו + שיט 🚤</div>
+                      <div class="tl-activity__desc">אחד האגמים היפים ביותר באוסטריה עם מראה של גלויה ברקע. שיט קצר על האגם הצלול - חוויה שקטה ומרגיעה אחרי יום פעיל.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl7')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 8 -->
+            <div class="tl-item tl-item--vienna" id="tl8">
+              <div class="tl-item__label">יום 8<br><span style="font-size:11px;color:#ccc;">23.08 שישי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🏙️</div>
+                <span class="tl-item__day-label">יום 8</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">נסיעה לווינה - LEOPARK + מפל</div>
+                    <div class="tl-card__where">📍 Vienna - ARCOTEL Wimberger</div>
+                  </div>
+                  <span class="tl-card__star" style="background:rgba(136,14,79,0.12);color:#880e4f;">ווינה</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">מפל מים קטן בדרך 💧</div>
+                      <div class="tl-activity__desc">Parkplatz Salza-Wasserfall - עצירה קצרה ומרעננת בדרך לווינה. מפל יפה עם אזור פיקניק נוח.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">LEOPARK GmbH 🐾</div>
+                      <div class="tl-activity__desc">פארק חיות ייחודי שבו נוגעים בבעלי חיים - כבשים, עיזים, ארנבים. ילדים קטנים פשוט מגיבים בשמחה עצומה. מרחק כשעה מווינה.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">ערב</span>
+                    <div>
+                      <div class="tl-activity__name">הגעה לווינה + טיול ראשון 🌆</div>
+                      <div class="tl-activity__desc">הגעה למלון ARCOTEL Wimberger Wien. טיול קצר ברינגשטראסה וציון ראשון עם האווירה של הבירה.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>לינה:</strong> ARCOTEL Wimberger Wien - מיקום מרכזי מצוין.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl8')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 9 -->
+            <div class="tl-item tl-item--vienna" id="tl9">
+              <div class="tl-item__label">יום 9<br><span style="font-size:11px;color:#ccc;">24.08 שבת</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🎂</div>
+                <span class="tl-item__day-label">יום 9</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">שונברון + פארק פארטר + מוזיאון מדע</div>
+                    <div class="tl-card__where">📍 ווינה</div>
+                  </div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">מופע השטרודל האפל של ווינה 🥐</div>
+                      <div class="tl-activity__desc">הקפה של ארמון שונברון מציג הדגמה חיה של הכנת שטרודל אפל אוסטרי מסורתי. כל ילד מקבל לטעום. חייבים להזמין מראש - מתמלא מהר.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">Prater + Riesenrad 🎡</div>
+                      <div class="tl-activity__desc">פארק הענק של ווינה עם גלגל הפנורמה המפורסם Riesenrad מ-1897. הרכיבה על הגלגל נותנת נוף מרהיב לווינה. הפארק עצמו כיפי לכל הגילאים.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">מוזיאון הטבע והמדע 🔬</div>
+                      <div class="tl-activity__desc">אחד ממוזיאוני הטבע הגדולים באירופה - דינוזאורים, מטאוריטים, אנושות קדומה. ילדים יכולים לבלות שם שעות.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">ערב</span>
+                    <div>
+                      <div class="tl-activity__name">מעלית הזמן - Zeittunnel ⏰</div>
+                      <div class="tl-activity__desc">מוזיאון אינטראקטיבי על היסטוריית ווינה. חוויה מיוחדת לאחרי יום ארוך.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>לינה:</strong> ARCOTEL Wimberger Wien.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl9')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            <!-- יום 10 -->
+            <div class="tl-item tl-item--flight" id="tl10">
+              <div class="tl-item__label">יום 10<br><span style="font-size:11px;color:#ccc;">25.08 ראשון</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">✈️</div>
+                <span class="tl-item__day-label">יום 10</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">טיסה חזרה לתל אביב</div>
+                    <div class="tl-card__where">📍 Vienna International Airport → נתב"ג</div>
+                  </div>
+                  <span class="tl-card__star tl-card__star--arrival">יום חזרה</span>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">בוקר חופשי בווינה ☕</div>
+                      <div class="tl-activity__desc">ארוחת בוקר בבית קפה וינאי, קצת קניות בנמל התעופה, ריכוז זיכרונות מהטיול.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">10:00</span>
+                    <div>
+                      <div class="tl-activity__name">טיסה Vienna - TLV ✈️</div>
+                      <div class="tl-activity__desc">המראה בחזרה לישראל. נחיתה בשעות אחר הצהריים בנתב"ג.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>המלצה אחרונה:</strong> לקנות שוקולד Mozartkugeln מנמל התעופה - מזכרת אוסטרית קלאסית.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl10')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+          </div><!-- end timeline -->
+        </div>
+
+        <!-- 4. SALZBURG ATTRACTIONS -->
+        <div class="article-section" id="salzburg-attractions">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🏔️</span> אטרקציות באזור זלצבורגר לנד</h2>
+          <div class="attractions-grid">
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🌅</span>
+              <div class="attraction-card__name">Skywalk Dachstein</div>
+              <div class="attraction-card__desc">גשר הזכוכית הנפלא. נוף של 360 מעלות על האלפים האוסטריים. אחד הדברים הכי מרהיבים בארץ.</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🧊</span>
+              <div class="attraction-card__name">ארמון הקרח - Dachstein</div>
+              <div class="attraction-card__desc">מערת קרח ענקית עם פסלי קרח ותאורה קסומה. להביא מעיל!</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🦅</span>
+              <div class="attraction-card__name">Festung Hohenwerfen</div>
+              <div class="attraction-card__desc">טירת וורפן עם מופע נשרים בלייב. נשרים טסים ישר מעל הראש. חובה!</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">⛏️</span>
+              <div class="attraction-card__name">מכרה מלח Berchtesgaden</div>
+              <div class="attraction-card__desc">גלישה על מגלשות עץ לתוך המכרה בחליפת כורים. חוויה ייחודית ומרתקת.</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">💦</span>
+              <div class="attraction-card__name">Wagrainis Grafenberg</div>
+              <div class="attraction-card__desc">פארק מים על ההר עם נוף לעמק. מגלשות מים, בריכות וכדורגל גולף.</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🚤</span>
+              <div class="attraction-card__name">אגם גוסאו</div>
+              <div class="attraction-card__desc">אגם צלול עם נוף לגלאצ'ר. שיט שקט ורגוע - אחת הנקודות הכי יפות.</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🦌</span>
+              <div class="attraction-card__name">Der Wild Berg</div>
+              <div class="attraction-card__desc">פארק חיות בר שבו הולכים בין האיילים ועיזי הסלע בטבע חופשי.</div>
+            </div>
+            <div class="attraction-card">
+              <span class="attraction-card__icon">🛷</span>
+              <div class="attraction-card__name">מגלשות ההרים</div>
+              <div class="attraction-card__desc">מגלשת הרים באבנטאו ו-Lucky Flitzer - שעות של כיף לכל הגילאים.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. VIENNA ATTRACTIONS -->
+        <div class="article-section" id="vienna-attractions">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🏛️</span> מה לעשות עם ילדים בווינה</h2>
+          <div class="tips-list">
+            <div class="tip-item">
+              <span class="tip-item__icon">🥐</span>
+              <div class="tip-item__text"><strong>מופע השטרודל האפל בשונברון</strong> - הדגמת הכנת שטרודל מסורתי עם טעימה. הזמינו מראש - מתמלא מהר מאוד.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🎡</span>
+              <div class="tip-item__text"><strong>Prater + Riesenrad</strong> - הגלגל הפנורמי ההיסטורי מ-1897. פארק ענק עם אטרקציות לכל גיל.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🦁</span>
+              <div class="tip-item__text"><strong>LEOPARK GmbH</strong> - פארק חיות שנוגעים בבעלי חיים. מרוחק כשעה מווינה אבל שווה את הנסיעה.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🔬</span>
+              <div class="tip-item__text"><strong>מוזיאון הטבע והמדע</strong> - אחד הגדולים באירופה. דינוזאורים, אבנים חן, אנושות קדומה. ילדים מתחרטים שיצאו.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">⏰</span>
+              <div class="tip-item__text"><strong>מעלית הזמן (Zeittunnel)</strong> - מוזיאון אינטראקטיבי על ווינה ההיסטורית. חוויה מיוחדת לכל הגילאים.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🏰</span>
+              <div class="tip-item__text"><strong>ארמון שונברון</strong> - ארמון המלוכה האוסטרי. גנים מהממים וחדרים היסטוריים מרשימים.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. ACCOMMODATION -->
+        <div class="article-section" id="accommodation">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🏨</span> המלצות לינה</h2>
+          <p style="color:#555;margin-bottom:20px;">אוסטריה מציעה מגוון רחב של אפשרויות לינה - מבתי נופש משפחתיים בטבע ועד מלונות מרכזיים בווינה.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+
+            <div style="background:var(--white);border-radius:14px;border:2px solid var(--sand-dark);padding:18px 20px;">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;">
+                <div>
+                  <div style="font-family:var(--font-heading);font-size:16px;margin-bottom:4px;">Hornergut in Altenmarkt</div>
+                  <div style="font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;">🏡 Altenmarkt-Wagrain, אוסטריה</div>
+                </div>
+                <span style="font-size:28px;">🏡</span>
+              </div>
+              <p style="font-size:13px;color:#666;line-height:1.6;margin-bottom:14px;">בית נופש פרטי וחמים עם גינה ונוף ישיר להרים. מרגיש כמו בית שני - אווירה אוסטרית אמיתית, מרחק נגיעה מכל האטרקציות באזור.</p>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <a href="https://www.booking.com/search.html?ss=Hornergut+Altenmarkt" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:10px;padding:9px 18px;font-size:13px;font-weight:600;font-family:var(--font-body);">להזמנה ←</a>
+                <a href="https://maps.google.com/?q=Altenmarkt-Wagrain+Austria" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--white);color:var(--teal);border:2px solid var(--teal);border-radius:10px;padding:9px 18px;font-size:13px;font-weight:600;font-family:var(--font-body);">מפה 📍</a>
+              </div>
+            </div>
+
+            <div style="background:var(--white);border-radius:14px;border:2px solid var(--sand-dark);padding:18px 20px;">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;">
+                <div>
+                  <div style="font-family:var(--font-heading);font-size:16px;margin-bottom:4px;">ARCOTEL Wimberger Wien</div>
+                  <div style="font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;">🏙️ Vienna, אוסטריה</div>
+                </div>
+                <span style="font-size:28px;">🏨</span>
+              </div>
+              <p style="font-size:13px;color:#666;line-height:1.6;margin-bottom:14px;">מלון מרכזי ומצוין בווינה - מיקום מושלם להגיע לכל האטרקציות ברגל או בתחבורה ציבורית. נוח, נקי ומתאים למשפחות.</p>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <a href="https://www.booking.com/hotel/at/arcotel-wimberger.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:10px;padding:9px 18px;font-size:13px;font-weight:600;font-family:var(--font-body);">להזמנה ←</a>
+                <a href="https://maps.google.com/?q=ARCOTEL+Wimberger+Wien" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--white);color:var(--teal);border:2px solid var(--teal);border-radius:10px;padding:9px 18px;font-size:13px;font-weight:600;font-family:var(--font-body);">מפה 📍</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 7. TIPS -->
+        <div class="article-section" id="tips">
+          <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> טיפים חשובים לטיול</h2>
+          <div class="tips-list">
+            <div class="tip-item">
+              <span class="tip-item__icon">🚗</span>
+              <div class="tip-item__text"><strong>השכרת רכבים:</strong> הכרחי - ולמשפחה גדולה מומלץ שני רכבים. משדה התעופה ישר לאלטנמרקט נסיעה של כ-3.5 שעות.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🌍</span>
+              <div class="tip-item__text"><strong>מכרה ברכטסגאדן:</strong> נמצא בגרמניה. לא לשכוח תעודות זהות. להזמין כרטיסים מראש - זה מתמלא מהר!</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🧥</span>
+              <div class="tip-item__text"><strong>לבוש:</strong> גם באוגוסט - להביא מעיל לפסגות. ארמון הקרח ~5 מעלות, Skywalk קר וסוחף. ילדים מתקפאים מהר.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">⏰</span>
+              <div class="tip-item__text"><strong>פארק המים Wagrainis:</strong> להגיע עד 9:30 בבוקר - אחרי זה מלא ומחכים בתור. מהאחד הכי שווה בטיול.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🦅</span>
+              <div class="tip-item__text"><strong>מופע הנשרים בטירת וורפן:</strong> מופע ב-11:15 וב-15:15. כדאי לתכנן את היום סביב אחד מהם. ספטקולרי!</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">💰</span>
+              <div class="tip-item__text"><strong>מטבע:</strong> אוסטריה משתמשת ביורו. כרטיסי אשראי מתקבלים בכל מקום. כספומטים נפוצים.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">📅</span>
+              <div class="tip-item__text"><strong>הזמנות מראש:</strong> דאכשטיין, ארמון הקרח, מכרה מלח - לכולם מומלץ להזמין לפחות שבוע מראש בקיץ.</div>
+            </div>
+            <div class="tip-item">
+              <span class="tip-item__icon">🏡</span>
+              <div class="tip-item__text"><strong>לינה:</strong> Hornergut in Altenmarkt - בית פרטי עם גינה. מרגיש כמו בית שני. מומלץ מאוד לשבוע הראשון.</div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="cta-card">
+          <div class="cta-card__title">מתכננים טיול לאוסטריה? 🇦🇹</div>
+          <div class="cta-card__text">אעזור לכם לבנות מסלול מותאם אישית עם כל הפרטים - לינה, אטרקציות וטיפים מניסיון אמיתי.</div>
+          <a href="packages.html" class="cta-card__btn">לחבילות תכנון ←</a>
+          <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לאוסטריה עם ילדים" target="_blank" class="cta-card__wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            וואטסאפ
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>מתי טסים &copy; 2026 · <a href="services.html">דף הבית</a> · <a href="destinations.html">יעדים</a> · <a href="https://wa.me/972546758145">וואטסאפ</a></p>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;" target="_blank" aria-label="וואטסאפ">
+  <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  (function() {
+    // Timeline toggle
+    function toggleTl(id) {
+      var card = document.getElementById(id);
+      if (!card) return;
+      var tlCard = card.querySelector('.tl-card');
+      if (!tlCard) return;
+      var isOpen = tlCard.classList.toggle('open');
+      var chevron = tlCard.querySelector('.tl-card__chevron');
+      if (chevron) chevron.textContent = isOpen ? '▲' : '▾';
+    }
+    window.toggleTl = toggleTl;
+
+    // Map
+    var days = [
+      { id:'tl1',  day:1,  date:'16.08', label:'טיסה + הגעה',          emoji:'✈️',  lat:47.383, lng:13.433, color:'#1A6B72', title:'Hornergut - Altenmarkt-Wagrain' },
+      { id:'tl2',  day:2,  date:'17.08', label:'Der Wild Berg',         emoji:'🐾',  lat:47.092, lng:13.691, color:'#4A9B6F', title:'Der Wild Berg - Mauterndorf' },
+      { id:'tl3',  day:3,  date:'18.08', label:'דאכשטיין',              emoji:'🏔️', lat:47.478, lng:13.605, color:'#c0392b', title:'Dachstein - Skywalk + ארמון הקרח' },
+      { id:'tl4',  day:4,  date:'19.08', label:'טירת וורפן',            emoji:'🦅',  lat:47.484, lng:13.199, color:'#E8A045', title:'Festung Hohenwerfen + Liechtensteinklamm' },
+      { id:'tl5',  day:5,  date:'20.08', label:'מכרה מלח',              emoji:'⛏️', lat:47.631, lng:13.001, color:'#7f5a0d', title:'Salzbergwerk Berchtesgaden, Germany' },
+      { id:'tl6',  day:6,  date:'21.08', label:'פארק מים Wagrainis',    emoji:'🌊',  lat:47.336, lng:13.302, color:'#1565c0', title:'Wagrainis Grafenberg Water Park' },
+      { id:'tl7',  day:7,  date:'22.08', label:'מגלשת הרים + גוסאו',   emoji:'🛷',  lat:47.603, lng:13.503, color:'#6b4aa0', title:'אבנטאו + אגם גוסאו' },
+      { id:'tl8',  day:8,  date:'23.08', label:'נסיעה לווינה',          emoji:'🏙️', lat:48.200, lng:16.370, color:'#880e4f', title:'Vienna - LEOPARK + ARCOTEL Wimberger' },
+      { id:'tl9',  day:9,  date:'24.08', label:'שונברון + פארק פארטר', emoji:'🎡',  lat:48.200, lng:16.370, color:'#880e4f', title:'Vienna - Schönbrunn + Prater + מוזיאון' },
+      { id:'tl10', day:10, date:'25.08', label:'טיסה חזרה',             emoji:'✈️',  lat:48.121, lng:16.563, color:'#1A6B72', title:'Vienna International Airport → נתב"ג' },
+    ];
+
+    var map = L.map('trip-map', { center: [47.8, 14.5], zoom: 7, scrollWheelZoom: false });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 18
+    }).addTo(map);
+
+    var markers = {};
+    var activeId = null;
+
+    function makeIcon(d, active) {
+      var s = active ? 48 : 40;
+      return L.divIcon({
+        className: '',
+        html: '<div style="width:'+s+'px;height:'+s+'px;border-radius:50%;background:'+(active?d.color:'#fff')+';border:2.5px solid '+(active?'#fff':d.color)+';display:flex;align-items:center;justify-content:center;font-size:'+(active?20:16)+'px;box-shadow:0 3px 12px rgba(0,0,0,0.22);cursor:pointer;transition:all 0.2s;">'+d.emoji+'</div>',
+        iconSize:[s,s], iconAnchor:[s/2,s/2], popupAnchor:[0,-(s/2+4)]
+      });
+    }
+
+    function setActive(id) {
+      days.forEach(function(d) {
+        if (markers[d.id]) markers[d.id].setIcon(makeIcon(d, d.id === id));
+      });
+      document.querySelectorAll('.map-pill').forEach(function(p) {
+        p.style.background = p.dataset.id === id ? 'var(--teal)' : 'var(--white)';
+        p.style.color = p.dataset.id === id ? '#fff' : 'var(--charcoal)';
+        p.style.borderColor = p.dataset.id === id ? 'var(--teal)' : 'var(--sand-dark)';
+      });
+      activeId = id;
+    }
+
+    function flyTo(d) {
+      map.flyTo([d.lat, d.lng], 10, { duration: 1 });
+      setActive(d.id);
+    }
+
+    window.goToDay = function(id) {
+      map.closePopup();
+      var card = document.getElementById(id);
+      if (card) {
+        var tl = card.querySelector('.tl-card');
+        if (tl && !tl.classList.contains('open')) toggleTl(id);
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    };
+
+    days.forEach(function(d) {
+      var m = L.marker([d.lat, d.lng], { icon: makeIcon(d, false) })
+        .addTo(map)
+        .bindPopup(
+          '<div dir="rtl" style="font-family:Rubik,sans-serif;min-width:160px;padding:4px 2px;">' +
+          '<div style="font-size:11px;color:#aaa;margin-bottom:2px;">יום '+d.day+' · '+d.date+'</div>' +
+          '<div style="font-size:15px;font-weight:600;color:'+d.color+';margin-bottom:4px;">'+d.emoji+' '+d.label+'</div>' +
+          '<div style="font-size:13px;color:#555;margin-bottom:8px;">'+d.title+'</div>' +
+          '<button onclick="goToDay(\''+d.id+'\')" style="width:100%;background:'+d.color+';color:#fff;border:none;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:600;cursor:pointer;font-family:Rubik,sans-serif;">לפרטי היום ↓</button>' +
+          '</div>'
+        );
+      m.on('click', function() { setActive(d.id); });
+      markers[d.id] = m;
+    });
+
+    var pillsContainer = document.getElementById('map-day-pills');
+    days.forEach(function(d) {
+      var btn = document.createElement('button');
+      btn.className = 'map-pill';
+      btn.dataset.id = d.id;
+      btn.innerHTML = '<span>'+d.emoji+'</span><span style="font-size:12px;">יום '+d.day+'</span>';
+      btn.style.cssText = 'display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;border:1.5px solid var(--sand-dark);background:var(--white);cursor:pointer;font-family:Rubik,sans-serif;font-size:13px;transition:all 0.2s;';
+      btn.addEventListener('click', function() { flyTo(d); });
+      pillsContainer.appendChild(btn);
+    });
+
+    days.forEach(function(d) {
+      var item = document.getElementById(d.id);
+      if (!item) return;
+      var header = item.querySelector('.tl-card__header');
+      if (header) {
+        header.style.cursor = 'pointer';
+        header.addEventListener('click', function() { flyTo(d); });
+      }
+    });
+
+  })();
+</script>
+
+<script>
+  (function () {
+    'use strict';
+    var nav = document.getElementById('nav');
+    var hamburger = document.getElementById('hamburgerBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (!hamburger || !mobileMenu) return;
+    hamburger.addEventListener('click', function () {
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen.toString());
+      hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'פתח תפריט');
+        document.body.style.overflow = '';
+      });
+    });
+    if (nav) window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'פתח תפריט');
+        document.body.style.overflow = '';
+        hamburger.focus();
+      }
+    });
+  })();
+</script>
+
+<!-- Email Popup -->
+<div class="email-popup-overlay" id="emailPopupOverlay">
+  <div class="email-popup">
+    <button class="email-popup__close" id="emailPopupClose">×</button>
+    <div class="email-popup__icon">✈️</div>
+    <h2 class="email-popup__title">רוצים לקבל עדכונים?</h2>
+    <p class="email-popup__subtitle">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
+    <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm">
+      <input type="hidden" name="_subject" value="הרשמה מאוסטריה - מתי טסים">
+      <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/austria.html">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input">
+      <button type="submit" class="email-popup__btn">אני רוצה לקבל עדכונים ✈️</button>
+      <button type="button" class="email-popup__skip" id="emailPopupSkip">דלג</button>
+    </form>
+  </div>
+</div>
+<script>
+(function () {
+  var overlay = document.getElementById('emailPopupOverlay');
+  var closeBtn = document.getElementById('emailPopupClose');
+  var skipBtn = document.getElementById('emailPopupSkip');
+  function openPopup() { if (localStorage.getItem('mtEmailSubmitted')) return; overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closePopup() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) { link.addEventListener('click', function(e) { e.preventDefault(); openPopup(); }); });
+  if (closeBtn) closeBtn.addEventListener('click', closePopup);
+  if (skipBtn) skipBtn.addEventListener('click', closePopup);
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) closePopup(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePopup(); });
+  var form = document.getElementById('emailPopupForm');
+  if (form) form.addEventListener('submit', function() { localStorage.setItem('mtEmailSubmitted', '1'); });
+})();
+</script>
+
+</body>
+</html>
