@@ -360,6 +360,7 @@
       <button class="tab-btn active" data-tab="planning">שלב התכנון</button>
       <button class="tab-btn" data-tab="before">לפני הטיסה</button>
       <button class="tab-btn" data-tab="during">בזמן השהייה</button>
+      <button class="tab-btn" data-tab="recommend">המלצות</button>
     </div>
   </div>
 
@@ -770,6 +771,51 @@
     </div>
   </section>
 
+  <section class="tips-section" id="tab-recommend">
+    <div class="container" style="max-width:900px;padding-top:20px;padding-bottom:80px;">
+      <div class="section-intro" style="text-align:center;margin-bottom:20px;">
+        <div style="font-size:32px;margin-bottom:8px;">🔍</div>
+        <h2 class="section-intro__title">המלצות לפי יעד</h2>
+        <p class="section-intro__subtitle">הכניסו יעד וקבלו המלצות מסעדות, אטרקציות ומקומות שכדאי לבקר - מבוסס AI</p>
+      </div>
+
+      <!-- API KEY -->
+      <div id="geminiNotice" style="background:#fdf3e3;border:2px solid var(--amber);border-radius:16px;padding:20px 24px;margin-bottom:28px;display:flex;gap:14px;align-items:flex-start;">
+        <div style="font-size:24px;flex-shrink:0;">🔑</div>
+        <div style="flex:1;">
+          <div style="font-family:var(--font-heading);font-size:15px;color:var(--amber-dark);margin-bottom:4px;">נדרש מפתח Gemini API - חינמי לחלוטין!</div>
+          <div style="font-size:13px;color:#666;line-height:1.6;margin-bottom:10px;">קבלו מפתח ב-<a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--teal);">Google AI Studio</a> - ללא כרטיס אשראי. עד 1,500 בקשות ביום חינם.</div>
+          <input type="text" id="geminiKeyInput" placeholder="הדביקו את המפתח: AIzaSy..." dir="ltr" style="width:100%;padding:10px 14px;border:2px solid var(--sand-dark);border-radius:10px;font-family:var(--font-body);font-size:14px;outline:none;margin-bottom:8px;">
+          <button onclick="saveGeminiKey()" style="background:var(--teal);color:#fff;border:none;border-radius:20px;padding:8px 20px;font-family:var(--font-body);font-size:13px;font-weight:600;cursor:pointer;">שמור מפתח ←</button>
+        </div>
+      </div>
+
+      <!-- SEARCH -->
+      <div style="background:var(--white);border-radius:16px;border:2px solid var(--sand-dark);padding:24px;margin-bottom:28px;box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px;">
+          <input type="text" id="recLocationInput" placeholder="לדוגמה: זקופנה, ווינה, פראג..." style="flex:1;min-width:200px;padding:12px 16px;border:2px solid var(--sand-dark);border-radius:40px;font-family:var(--font-body);font-size:15px;outline:none;" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='var(--sand-dark)'">
+          <button onclick="startRecommendSearch()" id="recSearchBtn" style="background:var(--amber);color:var(--charcoal);border:none;border-radius:40px;padding:12px 24px;font-family:var(--font-body);font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background 0.2s;">חפש ✦</button>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="rec-filter active" data-type="tourist_attraction" onclick="setRecFilter(this)">🏛️ אטרקציות</button>
+          <button class="rec-filter" data-type="restaurant" onclick="setRecFilter(this)">🍽️ מסעדות</button>
+          <button class="rec-filter" data-type="cafe" onclick="setRecFilter(this)">☕ בתי קפה</button>
+          <button class="rec-filter" data-type="park" onclick="setRecFilter(this)">🌳 פארקים</button>
+          <button class="rec-filter" data-type="museum" onclick="setRecFilter(this)">🏛️ מוזיאונים</button>
+          <button class="rec-filter" data-type="amusement_park" onclick="setRecFilter(this)">🎢 פארקי שעשועים</button>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div id="recResults">
+        <div style="text-align:center;padding:40px 20px;color:#bbb;">
+          <div style="font-size:48px;margin-bottom:12px;">🗺️</div>
+          <div style="font-family:var(--font-heading);font-size:18px;color:var(--teal);margin-bottom:8px;">לאן טסים?</div>
+          <div style="font-size:14px;">הכניסו שם עיר ובחרו קטגוריה</div>
+        </div>
+      </div>
+    </div>
+  </section>
   <section id="newsletter" style="background:var(--sand);padding:56px 24px;text-align:center;border-top:2px solid var(--sand-dark);">
     <div style="max-width:520px;margin:0 auto;">
       <div style="font-size:32px;margin-bottom:12px;">📬</div>
@@ -791,6 +837,172 @@
       </form>
     </div>
   </section>
+
+  <style>
+    .rec-filter { background:var(--sand); border:1.5px solid var(--sand-dark); border-radius:20px; padding:6px 14px; font-size:13px; color:var(--charcoal); cursor:pointer; transition:all 0.2s; font-family:var(--font-body); }
+    .rec-filter:hover, .rec-filter.active { background:var(--teal); border-color:var(--teal); color:#fff; font-weight:600; }
+    .rec-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px; }
+    .rec-card { background:var(--white); border-radius:14px; border:2px solid var(--sand-dark); overflow:hidden; transition:transform 0.25s, box-shadow 0.25s, border-color 0.25s; }
+    .rec-card:hover { transform:translateY(-4px); box-shadow:0 10px 28px rgba(0,0,0,0.1); border-color:var(--amber); }
+    .rec-card__img { width:100%; height:140px; display:flex; align-items:center; justify-content:center; font-size:48px; background:linear-gradient(135deg, var(--sand), var(--sand-dark)); }
+    .rec-card__body { padding:14px 16px; }
+    .rec-card__name { font-family:var(--font-heading); font-size:15px; margin-bottom:4px; }
+    .rec-card__address { font-size:12px; color:#aaa; margin-bottom:8px; }
+    .rec-card__kids { font-size:12px; color:#555; background:var(--sand); border-radius:8px; padding:5px 10px; margin-bottom:10px; }
+    .rec-card__footer { display:flex; gap:8px; padding:0 16px 14px; }
+    .rec-card__btn { flex:1; padding:8px; border-radius:10px; font-family:var(--font-body); font-size:12px; font-weight:600; cursor:pointer; border:none; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+    .rec-card__btn--maps { background:var(--teal); color:#fff; }
+    .rec-card__btn--maps:hover { background:var(--teal-dark); }
+    .rec-card__btn--more { background:var(--sand); color:var(--charcoal); }
+    .rec-card__btn--more:hover { background:var(--sand-dark); }
+    .rec-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; padding:20px; }
+    .rec-modal-overlay.open { display:flex; }
+    .rec-modal { background:var(--white); border-radius:20px; max-width:460px; width:100%; padding:28px; position:relative; box-shadow:0 16px 48px rgba(0,0,0,0.2); max-height:80vh; overflow-y:auto; }
+    .rec-skeleton { background:linear-gradient(90deg,var(--sand) 25%,var(--sand-dark) 50%,var(--sand) 75%); background-size:200% 100%; animation:recShimmer 1.5s infinite; border-radius:8px; }
+    @keyframes recShimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  </style>
+
+  <!-- MODAL -->
+  <div class="rec-modal-overlay" id="recModal">
+    <div class="rec-modal">
+      <button onclick="closeRecModal()" style="position:absolute;top:14px;left:16px;font-size:22px;cursor:pointer;color:#aaa;background:none;border:none;">×</button>
+      <div id="recModalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    var GEMINI_KEY = localStorage.getItem('geminiKey') || '';
+    var recCurrentFilter = 'tourist_attraction';
+    var recPlaces = [];
+
+    if (GEMINI_KEY) document.getElementById('geminiNotice').style.display = 'none';
+
+    function saveGeminiKey() {
+      var k = document.getElementById('geminiKeyInput').value.trim();
+      if (!k) return alert('אנא הכניסו מפתח תקין');
+      GEMINI_KEY = k;
+      localStorage.setItem('geminiKey', k);
+      document.getElementById('geminiNotice').style.display = 'none';
+      alert('✅ המפתח נשמר!');
+    }
+
+    function setRecFilter(el) {
+      document.querySelectorAll('.rec-filter').forEach(function(b) { b.classList.remove('active'); });
+      el.classList.add('active');
+      recCurrentFilter = el.dataset.type;
+    }
+
+    document.getElementById('recLocationInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') startRecommendSearch();
+    });
+
+    var recFilterLabels = { 'tourist_attraction':'אטרקציות','restaurant':'מסעדות','cafe':'בתי קפה','park':'פארקים','museum':'מוזיאונים','amusement_park':'פארקי שעשועים' };
+    var recFilterEmojis = { 'tourist_attraction':'🏛️','restaurant':'🍽️','cafe':'☕','park':'🌳','museum':'🏛️','amusement_park':'🎢' };
+
+    function startRecommendSearch() {
+      var loc = document.getElementById('recLocationInput').value.trim();
+      if (!loc) { document.getElementById('recLocationInput').focus(); return; }
+      if (!GEMINI_KEY) { document.getElementById('geminiKeyInput').focus(); alert('אנא הכניסו מפתח Gemini תחילה'); return; }
+      searchGeminiRec(loc, recCurrentFilter);
+    }
+
+    function showRecSkeletons() {
+      var html = '<div class="rec-grid">';
+      for (var i = 0; i < 6; i++) {
+        html += '<div style="background:var(--white);border-radius:14px;border:2px solid var(--sand-dark);overflow:hidden;">' +
+          '<div class="rec-skeleton" style="height:140px;"></div>' +
+          '<div style="padding:14px 16px;">' +
+          '<div class="rec-skeleton" style="height:14px;margin-bottom:8px;border-radius:6px;width:80%;"></div>' +
+          '<div class="rec-skeleton" style="height:12px;border-radius:6px;width:55%;"></div>' +
+          '</div></div>';
+      }
+      document.getElementById('recResults').innerHTML = html + '</div>';
+    }
+
+    function searchGeminiRec(location, type) {
+      showRecSkeletons();
+      var label = recFilterLabels[type] || type;
+      var prompt = 'אתה מדריך טיולים מומחה. תן לי רשימה של 9 המקומות הכי מומלצים מקטגוריה "' + label + '" ב' + location + ' למשפחות עם ילדים.\n\nהחזר JSON בלבד ללא backticks:\n{"places":[{"name":"שם","description":"תיאור 2-3 משפטים","address":"כתובת","rating":4.5,"why_kids":"למה מתאים לילדים","tip":"טיפ אחד","price_range":"חינם/זול/בינוני/יקר","maps_query":"שאילתת חיפוש","type":"' + type + '"}]}';
+
+      fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + GEMINI_KEY, {
+        method: 'POST', mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 3000 } })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.error) { showRecError(data.error.message); return; }
+        var text = data.candidates[0].content.parts[0].text.trim().replace(/```json/g,'').replace(/```/g,'').trim();
+        recPlaces = JSON.parse(text).places || [];
+        renderRecResults(recPlaces, location, label);
+      })
+      .catch(function(err) {
+        var isLocal = window.location.protocol === 'file:';
+        showRecError(isLocal ? 'בדיקה מקובץ מקומי לא נתמכת. העלו לגיטהאב Pages ✅' : 'שגיאה: ' + err.message);
+      });
+    }
+
+    function renderRecResults(places, location, label) {
+      if (!places.length) { document.getElementById('recResults').innerHTML = '<div style="text-align:center;padding:40px;color:#aaa;">לא נמצאו תוצאות. נסו יעד אחר.</div>'; return; }
+      var priceColors = { 'חינם':'#4A9B6F','זול':'#4A9B6F','בינוני':'#E8A045','יקר':'#c0392b' };
+      var html = '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">' +
+        '<div style="font-family:var(--font-heading);font-size:18px;color:var(--teal);">' + label + ' ב' + location + '</div>' +
+        '<div style="font-size:13px;color:#aaa;background:var(--sand);padding:4px 12px;border-radius:20px;">' + places.length + ' המלצות</div></div>' +
+        '<div class="rec-grid">';
+      places.forEach(function(p, i) {
+        var emoji = recFilterEmojis[p.type] || '📍';
+        var pc = priceColors[p.price_range] || '#aaa';
+        html += '<div class="rec-card">' +
+          '<div class="rec-card__img">' + emoji + '</div>' +
+          '<div class="rec-card__body">' +
+          '<div class="rec-card__name">' + p.name + '</div>' +
+          '<div class="rec-card__address">📍 ' + (p.address || '') + '</div>' +
+          (p.why_kids ? '<div class="rec-card__kids">👨‍👩‍👧 ' + p.why_kids + '</div>' : '') +
+          '<div style="display:flex;align-items:center;justify-content:space-between;">' +
+          (p.rating ? '<span style="color:var(--amber);font-size:13px;">' + '★'.repeat(Math.floor(p.rating)) + '</span><strong style="font-size:13px;margin-right:4px;">' + p.rating.toFixed(1) + '</strong>' : '') +
+          '<span style="font-size:12px;font-weight:600;color:' + pc + ';">' + (p.price_range || '') + '</span>' +
+          '</div></div>' +
+          '<div class="rec-card__footer">' +
+          '<a href="https://maps.google.com/?q=' + encodeURIComponent(p.maps_query || p.name) + '" target="_blank" class="rec-card__btn rec-card__btn--maps">🗺️ מפה</a>' +
+          '<button class="rec-card__btn rec-card__btn--more" onclick="openRecModal(' + i + ')">פרטים ←</button>' +
+          '</div></div>';
+      });
+      document.getElementById('recResults').innerHTML = html + '</div>';
+    }
+
+    function showRecError(msg) {
+      document.getElementById('recResults').innerHTML = '<div style="text-align:center;padding:40px;"><div style="font-size:36px;margin-bottom:12px;">⚠️</div><div style="font-family:var(--font-heading);color:var(--teal);margin-bottom:8px;">אופס</div><div style="font-size:14px;color:#666;">' + msg + '</div></div>';
+    }
+
+    function openRecModal(i) {
+      var p = recPlaces[i]; if (!p) return;
+      var emoji = recFilterEmojis[p.type] || '📍';
+      var pc = { 'חינם':'#4A9B6F','זול':'#4A9B6F','בינוני':'#E8A045','יקר':'#c0392b' }[p.price_range] || '#aaa';
+      document.getElementById('recModalContent').innerHTML =
+        '<div style="font-size:56px;text-align:center;margin-bottom:12px;">' + emoji + '</div>' +
+        '<h3 style="font-family:var(--font-heading);font-size:20px;margin-bottom:6px;">' + p.name + '</h3>' +
+        '<div style="font-size:13px;color:#aaa;margin-bottom:12px;">📍 ' + (p.address || '') + '</div>' +
+        '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">' +
+        (p.rating ? '<span style="color:var(--amber);">' + '★'.repeat(Math.floor(p.rating)) + '</span><strong>' + p.rating.toFixed(1) + '</strong>' : '') +
+        '<span style="font-weight:600;color:' + pc + ';">' + (p.price_range || '') + '</span>' +
+        '</div>' +
+        (p.description ? '<p style="font-size:14px;color:#555;line-height:1.7;margin-bottom:14px;">' + p.description + '</p>' : '') +
+        (p.why_kids ? '<div style="background:var(--sand);border-radius:10px;padding:12px 14px;margin-bottom:10px;font-size:13px;"><strong style="color:var(--teal);">👨‍👩‍👧 למה מתאים לילדים</strong><br>' + p.why_kids + '</div>' : '') +
+        (p.tip ? '<div style="background:#fdf3e3;border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:13px;"><strong style="color:var(--amber-dark);">💡 טיפ</strong><br>' + p.tip + '</div>' : '') +
+        '<div style="display:flex;gap:10px;">' +
+        '<a href="https://maps.google.com/?q=' + encodeURIComponent(p.maps_query || p.name) + '" target="_blank" style="flex:1;background:var(--teal);color:#fff;border-radius:12px;padding:12px;text-align:center;font-weight:600;font-size:14px;text-decoration:none;">🗺️ Google Maps</a>' +
+        '</div>';
+      document.getElementById('recModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeRecModal() {
+      document.getElementById('recModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('recModal').addEventListener('click', function(e) { if (e.target === this) closeRecModal(); });
+  </script>
 
   <footer class="footer">
     <div class="container">
