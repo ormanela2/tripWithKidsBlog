@@ -898,17 +898,17 @@
     function searchGeminiRec(location, type) {
       showRecSkeletons();
       var label = recFilterLabels[type] || type;
-      var prompt = 'אתה מדריך טיולים מומחה. תן לי רשימה של 9 המקומות הכי מומלצים מקטגוריה "' + label + '" ב' + location + ' למשפחות עם ילדים.\n\nהחזר JSON בלבד ללא backticks:\n{"places":[{"name":"שם","description":"תיאור 2-3 משפטים","address":"כתובת","rating":4.5,"why_kids":"למה מתאים לילדים","tip":"טיפ אחד","price_range":"חינם/זול/בינוני/יקר","maps_query":"שאילתת חיפוש","type":"' + type + '"}]}';
+      var prompt = 'אתה מדריך טיולים מומחה. תן לי רשימה של 5 המקומות הכי מומלצים מקטגוריה "' + label + '" ב' + location + ' למשפחות עם ילדים.\n\nהחזר JSON בלבד ללא backticks:\n{"places":[{"name":"שם","description":"תיאור 2-3 משפטים","address":"כתובת","rating":4.5,"why_kids":"למה מתאים לילדים","tip":"טיפ אחד","price_range":"חינם/זול/בינוני/יקר","maps_query":"שאילתת חיפוש","type":"' + type + '"}]}';
 
       fetch('https://trip-blog-ai.vercel.app/api/gemini', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 3000 } })
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 4000 }, thinkingConfig: { thinkingBudget: 0 } })
       })
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (data.error) { showRecError(data.error.message); return; }
-        var text = data.candidates[0].content.parts[0].text.trim().replace(/```json/g,'').replace(/```/g,'').trim();
+        var text = data.candidates[0].content.parts[data.candidates[0].content.parts.length - 1].text.trim().replace(/```json/g,'').replace(/```/g,'').trim();
         recPlaces = JSON.parse(text).places || [];
         renderRecResults(recPlaces, location, label);
       })
