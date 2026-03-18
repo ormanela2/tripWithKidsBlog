@@ -903,12 +903,21 @@
       fetch('https://trip-blog-ai.vercel.app/api/gemini', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 3000 } })
+        body: JSON.stringify({
+          location: location,
+          type: type,
+          payload: {
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { temperature: 0.7, maxOutputTokens: 8192 }
+          }
+        })
       })
       .then(function(r) { return r.json(); })
       .then(function(data) {
+        if (!data.candidates || !data.candidates[0]) { showRecError('לא התקבלה תשובה, נסו שוב'); return; }
         if (data.error) { showRecError(data.error.message); return; }
-        var text = data.candidates[0].content.parts[0].text.trim().replace(/```json/g,'').replace(/```/g,'').trim();
+        var parts = data.candidates[0].content.parts;
+        var text = parts[parts.length - 1].text.trim().replace(/```json/g,'').replace(/```/g,'').trim();
         recPlaces = JSON.parse(text).places || [];
         renderRecResults(recPlaces, location, label);
       })
