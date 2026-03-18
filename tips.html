@@ -903,7 +903,7 @@
       fetch('https://trip-blog-ai.vercel.app/api/gemini', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 4000 } })
+        body: JSON.stringify({ location: location, type: type, payload: { contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 4000 } } })
       })
       .then(function(r) { return r.json(); })
       .then(function(data) {
