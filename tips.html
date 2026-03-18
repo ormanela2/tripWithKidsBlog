@@ -207,9 +207,7 @@
       .nav__hamburger { display: flex; }
       .tips-grid { grid-template-columns: 1fr; }
       .tip-card--full { grid-column: 1; }
-      .tab-btn { padding: 10px 8px; font-size: 11px; }
-      .tab-nav__inner { justify-content: space-between; overflow-x: auto; }
-
+      .tab-btn { padding: 14px 20px; font-size: 15px; }
       .nav__logo { position: static; left: auto; transform: none; font-size: 20px; }
       .nav__logo img { height: 44px !important; }
       .nav__logo-text { font-size: 18px !important; }
@@ -900,18 +898,17 @@
     function searchGeminiRec(location, type) {
       showRecSkeletons();
       var label = recFilterLabels[type] || type;
-      var prompt = 'אתה מדריך טיולים מומחה. תן לי רשימה של 5 המקומות הכי מומלצים מקטגוריה "' + label + '" ב' + location + ' למשפחות עם ילדים.\n\nהחזר JSON בלבד ללא backticks:\n{"places":[{"name":"שם","description":"תיאור 2-3 משפטים","address":"כתובת","rating":4.5,"why_kids":"למה מתאים לילדים","tip":"טיפ אחד","price_range":"חינם/זול/בינוני/יקר","maps_query":"שאילתת חיפוש","type":"' + type + '"}]}';
+      var prompt = 'אתה מדריך טיולים מומחה. תן לי רשימה של 9 המקומות הכי מומלצים מקטגוריה "' + label + '" ב' + location + ' למשפחות עם ילדים.\n\nהחזר JSON בלבד ללא backticks:\n{"places":[{"name":"שם","description":"תיאור 2-3 משפטים","address":"כתובת","rating":4.5,"why_kids":"למה מתאים לילדים","tip":"טיפ אחד","price_range":"חינם/זול/בינוני/יקר","maps_query":"שאילתת חיפוש","type":"' + type + '"}]}';
 
       fetch('https://trip-blog-ai.vercel.app/api/gemini', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ location: location, type: type, payload: { contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 8192 } } })
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 3000 } })
       })
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (data.error) { showRecError(data.error.message); return; }
-        if (!data.candidates || !data.candidates[0]) { showRecError('לא התקבלה תשובה, נסו שוב'); return; }
-        var text = data.candidates[0].content.parts[data.candidates[0].content.parts.length - 1].text.trim().replace(/```json/g,'').replace(/```/g,'').trim();
+        var text = data.candidates[0].content.parts[0].text.trim().replace(/```json/g,'').replace(/```/g,'').trim();
         recPlaces = JSON.parse(text).places || [];
         renderRecResults(recPlaces, location, label);
       })
@@ -1083,6 +1080,16 @@
     // Activate reveals in the initially visible section on page load
     var activeSection = document.querySelector('.tips-section.active');
     if (activeSection) activateReveals(activeSection);
+
+    // Auto-activate tab from URL hash (e.g. tips.html#tab-recommend)
+    function activateTabFromHash() {
+      var hash = window.location.hash; // e.g. "#tab-recommend"
+      if (!hash) return;
+      var tabName = hash.replace('#tab-', ''); // e.g. "recommend"
+      var btn = document.querySelector('.tab-btn[data-tab="' + tabName + '"]');
+      if (btn) btn.click();
+    }
+    activateTabFromHash();
   })();
 </script>
 </body>
