@@ -908,6 +908,7 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (data.error) { showRecError(data.error.message); return; }
+        if (!data.candidates || !data.candidates[0]) { showRecError('לא התקבלה תשובה, נסו שוב'); return; }
         var text = data.candidates[0].content.parts[data.candidates[0].content.parts.length - 1].text.trim().replace(/```json/g,'').replace(/```/g,'').trim();
         recPlaces = JSON.parse(text).places || [];
         renderRecResults(recPlaces, location, label);
