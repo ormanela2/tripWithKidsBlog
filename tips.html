@@ -922,8 +922,11 @@
         var parts = data.candidates[0].content.parts;
         var text = parts[parts.length - 1].text.trim()
           .replace(/```json/g,'').replace(/```/g,'').trim()
-          .replace(/[\u0000-\u001F\u007F]/g, ' ')  // remove control chars
-          .replace(/,\s*}/g, '}').replace(/,\s*]/g, ']'); // fix trailing commas
+          .replace(/[\u0000-\u001F\u007F]/g, ' ')
+          .replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
+        console.log('GEMINI RAW:', text.substring(0, 500));
+        console.log('GEMINI LENGTH:', text.length);
+        console.log('FINISH REASON:', data.candidates[0].finishReason);
         try {
           recPlaces = JSON.parse(text).places || [];
         } catch(e) {
