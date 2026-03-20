@@ -901,7 +901,7 @@
     function searchGeminiRec(location, type) {
       showRecSkeletons();
       var label = recFilterLabels[type] || type;
-      var prompt = 'אתה מדריך טיולים מומחה. תן לי רשימה של 5 המקומות הכי מומלצים מקטגוריה "' + label + '" ב' + location + ' למשפחות עם ילדים.\n\nהחזר JSON בלבד ללא backticks:\n{"places":[{"name":"שם","description":"תיאור 2-3 משפטים","address":"כתובת","rating":4.5,"why_kids":"למה מתאים לילדים","tip":"טיפ אחד","price_range":"חינם/זול/בינוני/יקר","maps_query":"שאילתת חיפוש","type":"' + type + '"}]}';
+      var prompt = 'אתה מדריך טיולים מומחה. תן לי רשימה של 5 המקומות הכי מומלצים מקטגוריה "' + label + '" ב' + location + ' למשפחות עם ילדים.\n\nהחזר JSON בלבד ללא backticks:\n{"places":[{"name":"שם","description":"תיאור קצר במשפט אחד בלבד","address":"כתובת","rating":4.5,"why_kids":"משפט אחד קצר","tip":"טיפ אחד קצר","price_range":"חינם/זול/בינוני/יקר","maps_query":"שאילתת חיפוש","type":"' + type + '"}]}';
 
       fetch('https://trip-blog-ai.vercel.app/api/gemini', {
         method: 'POST',
