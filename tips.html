@@ -920,8 +920,26 @@
         if (!data.candidates || !data.candidates[0]) { showRecError('לא התקבלה תשובה, נסו שוב'); return; }
         if (data.error) { showRecError(data.error.message); return; }
         var parts = data.candidates[0].content.parts;
-        var text = parts[parts.length - 1].text.trim().replace(/```json/g,'').replace(/```/g,'').trim();
-        recPlaces = JSON.parse(text).places || [];
+        var text = parts[parts.length - 1].text.trim()
+          .replace(/```json/g,'').replace(/```/g,'').trim()
+          .replace(/[\u0000-\u001F\u007F]/g, ' ')  // remove control chars
+          .replace(/,\s*}/g, '}').replace(/,\s*]/g, ']'); // fix trailing commas
+        try {
+          recPlaces = JSON.parse(text).places || [];
+        } catch(e) {
+          // Try to extract partial JSON
+          var match = text.match(/\{[\s\S]*"places"\s*:\s*\[[\s\S]*?\]/);
+          if (match) {
+            try {
+              var partial = match[0] + '}';
+              recPlaces = JSON.parse(partial).places || [];
+            } catch(e2) {
+              showRecError('שגיאה בעיבוד התגובה, נסו שוב'); return;
+            }
+          } else {
+            showRecError('שגיאה בעיבוד התגובה, נסו שוב'); return;
+          }
+        }
         renderRecResults(recPlaces, location, label);
       })
       .catch(function(err) {
