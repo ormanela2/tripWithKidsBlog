@@ -594,6 +594,7 @@ submitBtn.addEventListener('click', () => {
     });
     mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
+        if (link.getAttribute('href') === '#newsletter') return;
         mobileMenu.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
         hamburger.setAttribute('aria-label', 'פתח תפריט');
@@ -652,7 +653,14 @@ submitBtn.addEventListener('click', () => {
   document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      openPopup();
+      var mob = document.getElementById('mobileMenu');
+      var ham = document.getElementById('hamburgerBtn');
+      if (mob && mob.classList.contains('open')) {
+        mob.classList.remove('open');
+        if (ham) { ham.setAttribute('aria-expanded', 'false'); ham.setAttribute('aria-label', 'פתח תפריט'); }
+        document.body.style.overflow = '';
+      }
+      setTimeout(openPopup, 50);
     });
   });
 
