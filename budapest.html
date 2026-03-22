@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="מדריך טיול לבודפשט עם ילדים - מסלול יום יום, אטרקציות, לינה, אוכל וטיפים מניסיון אישי. מתי טסים.">
+  <title>טיול לבודפשט עם ילדים - מדריך מלא | מתי טסים</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <style>
+    .flag-hu { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23ce2939'/%3E%3Crect y='200' width='900' height='200' fill='%23fff'/%3E%3Crect y='400' width='900' height='200' fill='%23477050'/%3E%3C/svg%3E"); }
+    .flag-icon { display: inline-block; background-size: cover; background-repeat: no-repeat; border-radius: 4px; }
+    .flag-icon-hero { width: 56px; height: 38px; }
+  </style>
+  <style>
+    :root {
+      --amber: #E8A045; --amber-light: #f0b868; --amber-dark: #c4872e;
+      --teal: #1A6B72; --teal-dark: #124d52;
+      --cream: #FDF8F2; --charcoal: #2C2C2C; --sand: #F5EDD8; --sand-dark: #e8ddc4;
+      --green: #4A9B6F; --white: #FFFFFF;
+      --font-heading: 'Secular One', sans-serif; --font-body: 'Rubik', sans-serif;
+      --nav-height: 72px;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); font-size: 17px; line-height: 1.8; color: var(--charcoal); background: var(--cream); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 400; line-height: 1.3; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; }
+    .container--narrow { max-width: 780px; }
+
+    /* ── EMAIL POPUP ─────────────────────────────── */
+    .email-popup-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; padding:24px; }
+    .email-popup-overlay.open { display:flex; }
+    .email-popup { background:var(--cream); border-radius:20px; padding:40px 32px; max-width:420px; width:100%; text-align:center; position:relative; box-shadow:0 16px 48px rgba(0,0,0,0.2); animation:popupIn 0.3s ease; box-sizing:border-box; }
+    @keyframes popupIn { from { transform:translateY(20px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+    .email-popup__close { position:absolute; top:14px; left:16px; font-size:22px; cursor:pointer; color:#aaa; background:none; border:none; line-height:1; }
+    .email-popup__close:hover { color:var(--charcoal); }
+    .email-popup__icon { font-size:40px; margin-bottom:12px; }
+    .email-popup__title { font-family:var(--font-heading); font-size:22px; color:var(--teal); margin-bottom:8px; }
+    .email-popup__subtitle { font-size:14px; color:#666; line-height:1.6; margin-bottom:24px; }
+    .email-popup__form { display:flex; flex-direction:column; gap:12px; }
+    .email-popup__input { padding:13px 18px; border:2px solid var(--sand-dark); border-radius:40px; font-family:var(--font-body); font-size:15px; background:white; color:var(--charcoal); outline:none; text-align:right; width:100%; box-sizing:border-box; }
+    .email-popup__input:focus { border-color:var(--teal); }
+    .email-popup__btn { background:var(--teal); color:white; border:none; border-radius:40px; padding:13px 28px; font-family:var(--font-body); font-size:15px; font-weight:600; cursor:pointer; transition:background 0.2s; }
+    .email-popup__btn:hover { background:var(--teal-dark); }
+    .email-popup__skip { font-size:13px; color:#aaa; cursor:pointer; margin-top:4px; background:none; border:none; text-decoration:underline; }
+    .email-popup__skip:hover { color:var(--charcoal); }
+
+    /* ── NAV ─────────────────────────────── */
+    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
+    .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+    .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
+    .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
+    .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
+    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.3px; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease,color 0.2s ease; min-height:44px; display:flex; align-items:center; }
+    .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
+    .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
+    .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
+    .nav__mobile-actions { display:none; align-items:center; gap:4px; }
+    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
+    .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+    .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
+    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:32px 24px; flex-direction:column; gap:8px; z-index:999; overflow-y:auto; }
+    .nav__mobile-menu.open { display:flex; }
+    .nav__mobile-menu .nav__link { font-size:20px; padding:16px; justify-content:flex-start; }
+    .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:300; font-size:15px; line-height:1; border-radius:22px; padding:8px 16px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); position:relative; }
+    .nav__link--community:hover, .nav__link--community:focus-visible { background:#d4903c !important; color:#2C2C2C !important; transform:translateY(-2px); box-shadow:0 4px 16px rgba(232,160,69,0.55); }
+    .nav__link--community::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; margin-left:7px; box-shadow:0 0 6px #4ade80; animation:dotBlink 1.4s ease-in-out infinite; }
+    .nav__mobile-menu .nav__link--community { font-size:15px; padding:8px 18px; width:fit-content; min-height:44px; }
+    @keyframes dotBlink { 0%,100%{opacity:0.4;box-shadow:0 0 3px #4ade80;} 50%{opacity:1;box-shadow:0 0 10px #4ade80,0 0 20px #4ade8088;} }
+    @media(max-width:900px) {
+      .nav__links { display:none; }
+      .nav__mobile-actions { display:flex; }
+      .nav__hamburger { display:flex; }
+      .nav__logo img { height:44px !important; }
+    }
+
+    /* ── Page CSS ── */
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 28px; font-size: 16px; font-weight: 600; min-height: 48px; transition: all 0.3s ease; white-space: nowrap; }
+    .btn--primary { background: var(--amber); color: var(--charcoal); box-shadow: 0 4px 14px rgba(232,160,69,0.35); }
+    .btn--primary:hover { background: var(--amber-dark); transform: translateY(-2px); }
+    .btn--sm { padding: 10px 24px; font-size: 15px; min-height: 44px; }
+
+    /* HERO - Budapest colors */
+    .article-hero { background: linear-gradient(155deg, #8b1a1a 0%, #ce2939 40%, #477050 100%); padding-top: calc(var(--nav-height) + 56px); padding-bottom: 70px; color: var(--white); position: relative; overflow: hidden; }
+    .article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(232,160,69,0.1) 0%, transparent 60%); }
+    .article-hero::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 70px; background: linear-gradient(to top, var(--cream), transparent); }
+    .article-hero__inner { position: relative; max-width: 780px; }
+    .article-hero__breadcrumb { font-size: 13px; opacity: 0.7; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .article-hero__breadcrumb a { opacity: 0.8; transition: opacity 0.2s; }
+    .article-hero__flag { font-size: 56px; margin-bottom: 16px; display: block; }
+    .article-hero__title { font-size: clamp(28px, 4.5vw, 50px); margin-bottom: 18px; }
+    .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.88; margin-bottom: 32px; max-width: 600px; line-height: 1.7; }
+    .article-hero__meta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
+
+    .article-body { padding: 60px 0 80px; }
+    .article-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
+    .article-content { min-width: 0; }
+    .article-section { margin-bottom: 52px; }
+    .article-section__title { font-size: clamp(20px, 2.5vw, 26px); color: var(--teal); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--sand-dark); display: flex; align-items: center; gap: 10px; }
+    .article-section__title-icon { font-size: 24px; }
+    .article-content p { margin-bottom: 16px; color: #444; line-height: 1.85; }
+    .article-content p:last-child { margin-bottom: 0; }
+
+    /* MAP */
+    #trip-map { height: 420px; width: 100%; }
+
+    /* TIMELINE - Slovakia style */
+    .timeline { position: relative; padding: 8px 0 0; }
+    .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; right: 50%; width: 3px; background: linear-gradient(to bottom, var(--teal), var(--amber), var(--teal-dark)); transform: translateX(50%); border-radius: 3px; }
+    .tl-item { display: grid; grid-template-columns: 1fr 56px 1fr; gap: 0 0; margin-bottom: 48px; position: relative; align-items: start; }
+    .tl-item__label { font-family: var(--font-heading); font-size: 13px; color: #aaa; letter-spacing: 0.5px; padding-top: 18px; }
+    .tl-item:nth-child(odd)  .tl-item__label { text-align: left;  padding-right: 28px; }
+    .tl-item:nth-child(even) .tl-item__label { text-align: right; padding-left: 28px; order: 3; }
+    .tl-item__node { display: flex; flex-direction: column; align-items: center; gap: 0; position: relative; z-index: 2; padding-top: 12px; }
+    .tl-item__icon { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 4px solid var(--cream); box-shadow: 0 2px 12px rgba(0,0,0,0.15); flex-shrink: 0; }
+    .tl-item__day-label { margin-top: 6px; font-family: var(--font-heading); font-size: 11px; color: #aaa; letter-spacing: 0.5px; }
+    .tl-item__card { background: var(--white); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 2px solid var(--sand-dark); transition: transform 0.35s ease, box-shadow 0.35s ease; cursor: pointer; }
+    .tl-item__card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.13); }
+    .tl-item:nth-child(odd)  .tl-item__card { margin-left: 24px; }
+    .tl-item:nth-child(even) .tl-item__card { margin-right: 24px; order: -1; }
+    .tl-card__band { height: 6px; width: 100%; }
+    .tl-card__header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .tl-card__title { font-family: var(--font-heading); font-size: 16px; color: var(--charcoal); line-height: 1.35; }
+    .tl-card__where { font-size: 12px; color: #aaa; margin-top: 4px; display: flex; align-items: center; gap: 3px; }
+    .tl-card__star { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+    .tl-card__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px 14px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-size: 13px; color: var(--teal); font-weight: 600; border-top: 1px solid var(--sand); }
+    .tl-card__toggle:hover { background: var(--sand); }
+    .tl-card__chevron { transition: transform 0.3s; font-style: normal; }
+    .tl-card.open .tl-card__chevron { transform: rotate(180deg); }
+    .tl-card__body { display: none; padding: 0 20px 18px; }
+    .tl-card.open .tl-card__body { display: block; }
+    .tl-activity { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--sand-dark); }
+    .tl-activity:last-of-type { border-bottom: none; }
+    .tl-activity__time { font-size: 11px; font-weight: 700; color: var(--teal); min-width: 46px; padding-top: 2px; letter-spacing: 0.3px; }
+    .tl-activity__name { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+    .tl-activity__desc { font-size: 13px; color: #666; line-height: 1.55; }
+    .tl-tip { margin-top: 12px; background: rgba(232,160,69,0.1); border-right: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 9px 13px; font-size: 13px; color: #666; }
+    .tl-tip strong { color: var(--amber-dark); }
+
+    /* Budapest-specific day color themes */
+    .tl-item--visegrad .tl-item__icon { background: linear-gradient(135deg, #1A6B72, #238a93); color: #fff; }
+    .tl-item--visegrad .tl-card__band { background: linear-gradient(90deg, #1A6B72, #238a93); }
+    .tl-item--buda .tl-item__icon { background: linear-gradient(135deg, #6b4aa0, #8a60c0); color: #fff; }
+    .tl-item--buda .tl-card__band { background: linear-gradient(90deg, #6b4aa0, #8a60c0); }
+    .tl-item--heroes .tl-item__icon { background: linear-gradient(135deg, #4A9B6F, #2d7550); color: #fff; }
+    .tl-item--heroes .tl-card__band { background: linear-gradient(90deg, #4A9B6F, #2d7550); }
+    .tl-item--parliament .tl-item__icon { background: linear-gradient(135deg, #E8A045, #c4872e); color: #fff; }
+    .tl-item--parliament .tl-card__band { background: linear-gradient(90deg, #E8A045, #c4872e); }
+    .tl-item--aqua .tl-item__icon { background: linear-gradient(135deg, #ce2939, #a01f2b); color: #fff; }
+    .tl-item--aqua .tl-card__band { background: linear-gradient(90deg, #ce2939, #a01f2b); }
+    .tl-card__star--must { background: rgba(232,160,69,0.15); color: #b07020; }
+    .tl-card__star--rec { background: rgba(74,155,111,0.12); color: #2d7550; }
+
+    @media (max-width: 680px) {
+      .timeline::before { right: 28px; transform: none; }
+      .tl-item { grid-template-columns: 56px 1fr; grid-template-rows: auto auto; }
+      .tl-item__label { display: none; }
+      .tl-item__node { padding-top: 10px; }
+      .tl-item:nth-child(odd)  .tl-item__card { margin-left: 12px; }
+      .tl-item:nth-child(even) .tl-item__card { margin-right: 0; margin-left: 12px; order: unset; }
+      .tl-item:nth-child(even) .tl-item__label { order: unset; }
+    }
+
+    /* TIPS */
+    .tips-list { display: flex; flex-direction: column; gap: 10px; }
+    .tip-item { background: var(--white); border-radius: 12px; border: 2px solid var(--sand-dark); padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
+    .tip-item__icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .tip-item__text { color: #555; line-height: 1.65; }
+    .tip-item__text strong { color: var(--charcoal); }
+
+    /* SIDEBAR */
+    .sidebar { position: sticky; top: calc(var(--nav-height) + 20px); }
+    .cta-card { background: var(--teal); border-radius: 18px; padding: 24px; color: var(--white); text-align: center; }
+    .cta-card__title { font-family: var(--font-heading); font-size: 18px; margin-bottom: 10px; }
+    .cta-card__text { font-size: 14px; opacity: 0.85; margin-bottom: 20px; line-height: 1.6; }
+    .cta-card__btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--amber); color: var(--charcoal); border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 700; transition: background 0.2s, transform 0.2s; width: 100%; }
+    .cta-card__btn:hover { background: var(--amber-dark); transform: translateY(-2px); }
+    .cta-card__wa { display: flex; align-items: center; justify-content: center; gap: 8px; background: #25D366; color: var(--white); border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 600; transition: background 0.2s; margin-top: 10px; }
+    .cta-card__wa:hover { background: #1da851; }
+
+    /* TOC */
+    .toc { background: var(--sand); border-radius: 14px; padding: 20px; margin-bottom: 36px; }
+    .toc__title { font-family: var(--font-heading); font-size: 15px; color: var(--teal); margin-bottom: 12px; }
+    .toc__list { display: flex; flex-direction: column; gap: 6px; }
+    .toc__link { font-size: 14px; color: var(--teal); display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .toc__link:hover { color: var(--amber-dark); }
+    .toc__num { font-size: 11px; background: var(--teal); color: var(--white); border-radius: 4px; padding: 1px 6px; font-weight: 600; }
+
+    .footer { background: var(--charcoal); color: rgba(255,255,255,0.6); padding: 40px 0; text-align: center; font-size: 14px; }
+    .footer a { color: var(--amber-light); }
+
+    @media(max-width:900px) {
+      .article-layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+  </style>
+  <link rel="icon" type="image/png" href="logo.png">
+  <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</head>
+<body>
+
+<nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
+  <div class="container nav__inner">
+    <a href="services.html" class="nav__logo" aria-label="מתי טסים - דף הבית">
+      <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+    </a>
+    <ul class="nav__links" role="menubar">
+      <li role="none"><a href="tips.html" class="nav__link" role="menuitem">טיפים</a></li>
+      <li role="none"><a href="destinations.html" class="nav__link" role="menuitem" aria-current="page">יעדים</a></li>
+      <li role="none"><a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a></li>
+      <li role="none"><a href="packages.html" class="nav__link" role="menuitem">חבילות</a></li>
+      <li role="none"><a href="about.html" class="nav__link" role="menuitem">אודות</a></li>
+    </ul>
+    <div class="nav__mobile-actions">
+      <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="שלח הודעת וואטסאפ">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
+    <a href="tips.html" class="nav__link" role="menuitem">טיפים</a>
+    <a href="destinations.html" class="nav__link" role="menuitem" aria-current="page">יעדים</a>
+    <a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a>
+    <a href="packages.html" class="nav__link" role="menuitem">חבילות</a>
+    <a href="about.html" class="nav__link" role="menuitem">אודות</a>
+  </div>
+</nav>
+
+<section class="article-hero">
+  <div class="container">
+    <div class="article-hero__inner">
+      <div class="article-hero__breadcrumb">
+        <a href="services.html">בית</a> ›
+        <a href="destinations.html">יעדים</a> ›
+        <span>בודפשט</span>
+      </div>
+      <span class="article-hero__flag"><span class="flag-icon flag-hu flag-icon-hero"></span></span>
+      <h1 class="article-hero__title">טיול לבודפשט עם ילדים - המדריך המלא</h1>
+      <p class="article-hero__subtitle">עיר מלאת קסם על גדות הדנובה - רחובות מלאי חיים, מסעדות טעימות, פארק מים מטורף ואטרקציות לכל גיל</p>
+      <div class="article-hero__meta">
+        <span class="article-hero__badge">🟢 קל עם ילדים</span>
+        <span class="article-hero__badge">📅 6 ימים</span>
+        <span class="article-hero__badge">✈️ טיסה ישירה</span>
+        <span class="article-hero__badge">🇭🇺 הונגריה</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article-body">
+  <div class="container">
+    <div class="article-layout">
+      <main class="article-content">
+
+        <!-- TOC -->
+        <div class="toc">
+          <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
+          <div class="toc__list">
+            <a href="#intro" class="toc__link"><span class="toc__num">1</span> למה בודפשט עם ילדים?</a>
+            <a href="#route-map" class="toc__link"><span class="toc__num">2</span> המסלול על המפה</a>
+            <a href="#itinerary" class="toc__link"><span class="toc__num">3</span> מסלול יום-יום מומלץ</a>
+            <a href="#attractions" class="toc__link"><span class="toc__num">4</span> אטרקציות מומלצות</a>
+            <a href="#accommodation" class="toc__link"><span class="toc__num">5</span> המלצות לינה</a>
+            <a href="#logistics" class="toc__link"><span class="toc__num">6</span> טיפים לוגיסטיים</a>
+          </div>
+        </div>
+
+        <!-- INTRO -->
+        <div class="article-section" id="intro">
+          <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> למה בודפשט עם ילדים?</h2>
+          <p>בודפשט היא אחת מהערים היפות של אירופה ויעד מצוין לטיול משפחתי עם ילדים. רחובות נקיים, מסעדות טעימות ומזמינות, אטרקציות כיפיות, שהות זולה ואנשים נחמדים - קיבלנו הכל במקום אחד.</p>
+          <p>פארק מים ענק שעובד בכל עונה, מגלשות על הרים ירוקים ושייט על הדנובה - בודפשט בהחלט עונה לקטגוריות שיש להציע לכל גיל.</p>
+          <p>מה שמייחד את בודפשט הוא הצפיפות המדהימה של אטרקציות: הפרלמנט, טירת בודה, מגדל הדייגים, כיכר הגיבורים, האי מרגיט - כולן נמצאות במרחק קצר זו מזו, מה שחוסך נסיעות ארוכות ומייגעות עם ילדים. כמו כן, מחירים נוחים משמעותית ממערב אירופה מאפשרים חופשה מפנקת בלי לרוקן את הארנק.</p>
+        </div>
+
+        <!-- MAP -->
+        <div class="article-section" id="route-map">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🗺️</span> המסלול על המפה</h2>
+          <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות את המיקום במפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
+          <div id="trip-map" style="height:420px;border-radius:16px;overflow:hidden;border:2px solid var(--sand-dark);box-shadow:0 4px 20px rgba(0,0,0,0.1);"></div>
+          <div id="map-day-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;"></div>
+        </div>
+
+        <!-- ITINERARY -->
+        <div class="article-section" id="itinerary">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🗓️</span> המסלול המלא - 6 ימים</h2>
+          <div class="timeline">
+
+            <!-- יום 1 -->
+            <div class="tl-item tl-item--visegrad">
+              <div class="tl-item__label">יום 1<br><span style="font-size:11px;color:#ccc;">הגעה + Visegrad</span></div>
+              <div class="tl-item__node"><div class="tl-item__icon">✈️</div><span class="tl-item__day-label">יום 1</span></div>
+              <div class="tl-item__card tl-card open" id="tl1">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">הגעה לבודפשט + Visegrad Bobsled</div><div class="tl-card__where">📍 שדה התעופה ← Visegrad</div></div><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div>
+                <div class="tl-card__body">
+                  <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">נחיתה בבודפשט ✈️</div><div class="tl-activity__desc">נחיתה בשדה התעופה Budapest Ferenc Liszt - כ-20 דקות מהמרכז. איסוף רכב ועזיבה לכיוון Visegrad.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">מגלשת הבוב Visegrad Bobsled 🛷</div><div class="tl-activity__desc">עיירה קטנה על גדות הדנובה, 45 דקות מהעיר. מגלשת מתכת ענקית על הגבעה - מהירה, כיפית, מתאים מגיל 4+. הילדים ביקשו לחזור פעמיים.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">האי מרגיט 🌿</div><div class="tl-activity__desc">טיול נינוח באי מרגיט - מזרקות מנגנות, שבילים ירוקים וילדים שפשוט נהנים מכל רגע.</div></div></div>
+                  <div class="tl-tip"><strong>לינה:</strong> NEW &amp; Central - Fresh Design</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl1')"><span>פרטי היום</span><span class="tl-card__chevron">▲</span></button>
+              </div>
+            </div>
+
+            <!-- יום 2 -->
+            <div class="tl-item tl-item--buda">
+              <div class="tl-item__label">יום 2<br><span style="font-size:11px;color:#ccc;">טירת בודה</span></div>
+              <div class="tl-item__node"><div class="tl-item__icon">🏰</div><span class="tl-item__day-label">יום 2</span></div>
+              <div class="tl-item__card tl-card" id="tl2">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">טירת בודה + מגדל הדייגים + גשר השרשרות</div><div class="tl-card__where">📍 בודה ← פשט</div></div><span class="tl-card__star tl-card__star--must">⭐ חובה</span></div>
+                <div class="tl-card__body">
+                  <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">טירת בודה + פוניקולר 🏰</div><div class="tl-activity__desc">הגיעו מוקדם לפני ההמונים. עלייה בפוניקולר ההיסטורי - הילדים מתים עליו. נוף מדהים על פשט מלמעלה. חומות, גנים ותצפיות.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">צהריים</span><div><div class="tl-activity__name">מגדל הדייגים (Halászbástya) 🗼</div><div class="tl-activity__desc">ממש ליד הטירה - ארכיטקטורה פנטסטית, פסגות מגדלים ותמונות מעולות. אחת הנקודות היפות בבודפשט.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">גשר השרשרות + שוק מרכזי</div><div class="tl-activity__desc">ירידה לרגל לגשר האייקוני ומעבר לצד פשט. ביקור בשוק המרכזי (Nagy Vásárcsarnok) - שוק קומות מרשים עם פריקי ומזכרות.</div></div></div>
+                  <div class="tl-tip"><strong>טיפ:</strong> הגיעו לטירה לפני 9:00 - אחרי כן מגיעות קבוצות ענק.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> NEW &amp; Central - Fresh Design</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl2')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+              </div>
+            </div>
+
+            <!-- יום 3 -->
+            <div class="tl-item tl-item--heroes">
+              <div class="tl-item__label">יום 3<br><span style="font-size:11px;color:#ccc;">כיכר הגיבורים + שצ'ני</span></div>
+              <div class="tl-item__node"><div class="tl-item__icon">♨️</div><span class="tl-item__day-label">יום 3</span></div>
+              <div class="tl-item__card tl-card" id="tl3">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">כיכר הגיבורים + פארק העיר + מרחצאות שצ'ני</div><div class="tl-card__where">📍 Heroes' Square ← Széchenyi Baths</div></div><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div>
+                <div class="tl-card__body">
+                  <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">כיכר הגיבורים + פארק העיר 🏛️</div><div class="tl-activity__desc">כיכר מרשימה עם פסלים ועמוד ניצחון. פארק העיר הצמוד - אגם מלאכותי שבקיץ הופך לבריכה, נחמד לילדים.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">מרחצאות שצ'ני (Széchenyi) ♨️</div><div class="tl-activity__desc">חווית חיים! בניין מפואר מהמאה ה-19, בריכות חמות בפנים ובחוץ. לילדים יש בריכה רדודה ומגלשות מים קטנות. להביא בגד ים ומגבת.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">רחוב Váci + קניות</div><div class="tl-activity__desc">הרחוב המסחרי הצבעוני של בודפשט - מסעדות, קפה ומזכרות.</div></div></div>
+                  <div class="tl-tip"><strong>טיפ:</strong> מרחצאות שצ'ני - מומלץ להזמין מראש. כניסה ב-10 בבוקר הכי נוחה.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> NEW &amp; Central - Fresh Design</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl3')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+              </div>
+            </div>
+
+            <!-- יום 4 -->
+            <div class="tl-item tl-item--parliament">
+              <div class="tl-item__label">יום 4<br><span style="font-size:11px;color:#ccc;">הפרלמנט + שיט</span></div>
+              <div class="tl-item__node"><div class="tl-item__icon">🏛️</div><span class="tl-item__day-label">יום 4</span></div>
+              <div class="tl-item__card tl-card" id="tl4">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">הפרלמנט + שיט בדנובה + רובע יהודי</div><div class="tl-card__where">📍 Parliament ← Danube Cruise ← Jewish Quarter</div></div><span class="tl-card__star tl-card__star--must">⭐ חובה</span></div>
+                <div class="tl-card__body">
+                  <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">הפרלמנט ההונגרי 🏛️</div><div class="tl-activity__desc">אחד הבניינים היפים בעולם - מבחוץ מרהיב, מבפנים עוד יותר. טיול מודרך של כשעה מסביר על ההיסטוריה ההונגרית. חובה להזמין כרטיסים מראש!</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">שיט בדנובה בשעת שקיעה ⛵</div><div class="tl-activity__desc">הנוף על הפרלמנט, טירת בודה וגשרי הדנובה מהמים - לא יישכח. שיטות קצרות של שעה מספיקות בדיוק.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">רובע יהודי + Ruin Bars 🕍</div><div class="tl-activity__desc">ערב בבתי המרזח הייחודיים של הרובע היהודי - אדריכלות מיוחדת, אוכל טוב ואווירה מטורפת.</div></div></div>
+                  <div class="tl-tip"><strong>טיפ:</strong> כרטיסי הפרלמנט נגמרים מהר - הזמינו שבוע מראש באתר הרשמי.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> NEW &amp; Central - Fresh Design</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl4')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+              </div>
+            </div>
+
+            <!-- יום 5 -->
+            <div class="tl-item tl-item--aqua">
+              <div class="tl-item__label">יום 5<br><span style="font-size:11px;color:#ccc;">Aquaworld</span></div>
+              <div class="tl-item__node"><div class="tl-item__icon">🌊</div><span class="tl-item__day-label">יום 5</span></div>
+              <div class="tl-item__card tl-card" id="tl5">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">כל היום ב-Aquaworld</div><div class="tl-card__where">📍 Aquaworld Budapest</div></div><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div>
+                <div class="tl-card__body">
+                  <div class="tl-activity"><span class="tl-activity__time">כל היום</span><div><div class="tl-activity__name">Aquaworld 🌊</div><div class="tl-activity__desc">פארק המים הגדול ביותר בהונגריה - פנימי לחלוטין, עובד בכל עונה. מגלשות ענק, גלים, בריכות לכל גיל. הגיעו ב-9 בבוקר לפני ההמונים.</div></div></div>
+                  <div class="tl-tip"><strong>טיפ:</strong> Aquaworld כדאי להזמין מראש. חנייה בחינם בשטח.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> NEW &amp; Central - Fresh Design</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl5')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+              </div>
+            </div>
+
+            <!-- יום 6 -->
+            <div class="tl-item tl-item--visegrad">
+              <div class="tl-item__label">יום 6<br><span style="font-size:11px;color:#ccc;">טיסה חזרה</span></div>
+              <div class="tl-item__node"><div class="tl-item__icon">✈️</div><span class="tl-item__day-label">יום 6</span></div>
+              <div class="tl-item__card tl-card" id="tl6">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">ארוחת בוקר + קניות + טיסה חזרה</div><div class="tl-card__where">📍 בודפשט ← נתב"ג</div></div></div>
+                <div class="tl-card__body">
+                  <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">ארוחת בוקר טעימה ☕</div><div class="tl-activity__desc">ארוחת בוקר אחרונה בעיר - קפה, מאפים הונגריים ואווירה נינוחה לפני הדרך.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">לפני טיסה</span><div><div class="tl-activity__name">סיבוב קניות בסופר המקומי 🛒</div><div class="tl-activity__desc">עצירה בסופר לקנות דברים טעימים הביתה - שוקולדים הונגריים, פאפריקה, ממרחים ועוד. המקומיים יודעים מה טוב!</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">צהריים</span><div><div class="tl-activity__name">טיסה חזרה לישראל ✈️</div><div class="tl-activity__desc">שדה התעופה Budapest Ferenc Liszt - כ-20 דקות מהמרכז. מסלול מושלם לסיום חופשה מוצלחת.</div></div></div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl6')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+              </div>
+            </div>
+
+          </div><!-- /timeline -->
+        </div>
+
+        <!-- ATTRACTIONS -->
+        <div class="article-section" id="attractions">
+          <h2 class="article-section__title"><span class="article-section__title-icon">⭐</span> אטרקציות מומלצות</h2>
+          <div class="tips-list">
+            <div class="tip-item"><span class="tip-item__icon">🏰</span><div class="tip-item__text"><strong>טירת בודה ומגדל הדייגים:</strong> הפנינה של בודה. עלייה בפוניקולר, נוף מושלם ואדריכלות מהפנטת. להגיע מוקדם בבוקר לפני הצפיפות.</div></div>
+            <div class="tip-item"><span class="tip-item__icon">🏛️</span><div class="tip-item__text"><strong>הפרלמנט ההונגרי:</strong> אחד הבניינים היפים בעולם. כרטיסים חובה להזמין מראש באתר הרשמי. הטיול המודרך אורך כשעה ומרתק לכל הגילאים.</div></div>
+            <div class="tip-item"><span class="tip-item__icon">♨️</span><div class="tip-item__text"><strong>מרחצאות שצ'ני:</strong> חוויה תרבותית-היסטורית ייחודית. מתאים גם לילדים - יש בריכה רדודה ומגלשות קטנות. להביא בגד ים ומגבת.</div></div>
+            <div class="tip-item"><span class="tip-item__icon">🛷</span><div class="tip-item__text"><strong>Visegrad Bobsled:</strong> כ-45 דקות מהעיר - שווה כל דקה! מגלשת בוב על גבעה עם נוף לדנובה. מתאים מגיל 4+, ילדים מתים עליה.</div></div>
+            <div class="tip-item"><span class="tip-item__icon">🌊</span><div class="tip-item__text"><strong>Aquaworld:</strong> פארק מים פנימי ענק - עובד בכל מזג אוויר. מושלם ליום אחרון לפני הטיסה. כניסה מומלצת ב-9 בבוקר לפני ההמונים.</div></div>
+            <div class="tip-item"><span class="tip-item__icon">⛵</span><div class="tip-item__text"><strong>שיט בדנובה:</strong> שיט בשעת שקיעה הוא חוויה בלתי נשכחת. הנוף על הפרלמנט וטירת בודה מהמים - אחד הרגעים הכי יפים בטיול.</div></div>
+            <div class="tip-item"><span class="tip-item__icon">🏰</span><div class="tip-item__text"><strong>מבצר Visegrad:</strong> ממש ליד הבוב - מבצר רנסנסי עם נוף פנורמי על נהר הדנובה. כניסה בתשלום סמלי, שווה לעצור.</div></div>
+          </div>
+
+          <!-- DISCOVER BANNER -->
+          <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:16px;padding:18px 24px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="font-size:22px;">🔍</div>
+              <div>
+                <div style="font-family:var(--font-heading);font-size:15px;color:var(--charcoal);margin-bottom:2px;">רוצים לגלות עוד מקומות?</div>
+                <div style="font-size:13px;color:#888;">חפשו מסעדות, אטרקציות ומקומות מוסתרים לפי מיקום - מבוסס AI</div>
+              </div>
+            </div>
+            <a href="tips.html#tab-recommend" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:20px;padding:9px 20px;font-family:var(--font-body);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">חפש מקומות</a>
+          </div>
+
+        </div>
+
+        <!-- ACCOMMODATION -->
+        <div class="article-section" id="accommodation">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🏨</span> המלצות לינה</h2>
+          <div style="display:grid;grid-template-columns:1fr;gap:12px;max-width:360px;">
+            <div style="background:var(--white);border:1.5px solid var(--sand-dark);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;">
+              <span style="font-size:22px;">🏙️</span>
+              <div style="flex:1;min-width:0;">
+                <div style="font-weight:700;font-size:14px;">NEW &amp; Central - Fresh Design</div>
+                <div style="font-size:12px;color:#888;margin:2px 0 8px;">Budapest, הונגריה</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                  <a href="https://maps.google.com/?q=NEW+Central+Fresh+Design+Budapest" target="_blank" style="font-size:12px;color:var(--teal);border:1px solid var(--teal);border-radius:14px;padding:3px 10px;text-decoration:none;font-weight:600;">📍 מפה</a>
+                  <a href="https://www.airbnb.com/rooms/779716297747954074?guests=1&c=.pi129.pkpast_trip_share_virality&s=67&unique_share_id=f5f768f9-2b24-4575-aa99-21e1b013f731" target="_blank" style="font-size:12px;color:white;background:var(--teal);border-radius:14px;padding:3px 10px;text-decoration:none;font-weight:600;">להזמנה</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LOGISTICS -->
+        <div class="article-section" id="logistics">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🚗</span> טיפים לוגיסטיים</h2>
+          <div class="tips-list">
+            <div class="tip-item"><span class="tip-item__icon">✈️</span><div class="tip-item__text"><strong>הגעה:</strong> טיסות ישירות מתל אביב לבודפשט - שדה התעופה Budapest Ferenc Liszt. זמן טיסה כשלוש שעות. השדה נמצא כ-20 דקות מהמרכז.</div></div>
+            <div class="tip-item"><span class="tip-item__icon">🚘</span><div class="tip-item__text"><strong>רכב:</strong> בתוך העיר אין צורך - תחבורה ציבורית מצוינת. לטיולים מחוץ לעיר (Visegrad, Aquaworld) - כדאי לשכור. Alamo ו-Europcar בשדה התעופה.</div></div>
+            <div class="tip-item"><span class="tip-item__icon">💶</span><div class="tip-item__text"><strong>כסף:</strong> הונגריה לא בגוש האירו - פורינט הונגרי (HUF). כרטיסי אשראי מקובלים בכל מקום, אך כדאי להמיר מעט מזומן לשווקים ולכניסות.</div></div>
+            <div class="tip-item"><span class="tip-item__icon">🌡️</span><div class="tip-item__text"><strong>מזג אוויר:</strong> קיץ נעים (24-32 מעלות), אביב וסתיו מתונים. בחורף קר מאוד - 0 עד 5 מעלות. Aquaworld מצוין גם בחורף - פנימי לחלוטין.</div></div>
+            <div class="tip-item"><span class="tip-item__icon">🗣️</span><div class="tip-item__text"><strong>שפה:</strong> הונגרית - שפה מורכבת שאין קשר לאף שפה אירופאית אחרת. אנגלית מדוברת היטב בכל אזורי התיירות.</div></div>
+            <div class="tip-item"><span class="tip-item__icon">🎫</span><div class="tip-item__text"><strong>הזמנות מראש:</strong> הפרלמנט וה-Aquaworld - חובה להזמין מראש. מרחצאות שצ'ני - מומלץ. הפוניקולר - שווה לרכוש מראש בפיק.</div></div>
+            <div class="tip-item"><span class="tip-item__icon">📱</span><div class="tip-item__text"><strong>כרטיס SIM / eSIM:</strong> eSIM נוח ופשוט - הורידו לפני הטיסה והתחברו מיד עם הנחיתה. Airalo מומלץ.</div></div>
+          </div>
+
+          <!-- Airalo CTA -->
+          <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:16px;padding:18px 24px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:36px;height:36px;flex-shrink:0;"><img src="https://www.google.com/s2/favicons?domain=airalo.com&sz=64" alt="Airalo" style="width:36px;height:36px;object-fit:contain;" onerror="this.style.display='none'"></div>
+              <div>
+                <div style="font-family:var(--font-heading);font-size:15px;color:var(--charcoal);margin-bottom:2px;">Airalo eSIM - אינטרנט בחו"ל בלי כרטיס פיזי</div>
+                <div style="font-size:13px;color:#888;">הורידו את ה-eSIM לפני הטיסה והתחברו מיד עם הנחיתה. חוסך זמן וכסף לעומת רומינג.</div>
+              </div>
+            </div>
+            <a href="https://airalo.tpk.mx/jjDTppVR" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:20px;padding:9px 20px;font-family:var(--font-body);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">
+              לרכישה
+            </a>
+          </div>
+        </div>
+
+
+      </main>
+
+      <aside class="sidebar">
+        <div class="cta-card">
+          <div class="cta-card__title">רוצים מסלול מותאם? 🇭🇺</div>
+          <div class="cta-card__text">אבנה לכם מסלול מלא לבודפשט - יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.</div>
+          <a href="packages.html" class="cta-card__btn">לחבילות תכנון</a>
+          <a href="https://wa.me/972546758145?text=אני מתעניין בתכנון טיול לבודפשט עם ילדים" class="cta-card__wa" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            שלחו הודעה
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>מתי טסים &copy; 2026 - <a href="services.html">דף הבית</a> | <a href="tips.html">טיפים</a> | <a href="destinations.html">יעדים</a> | <a href="terms.html">תנאי שימוש</a> | <a href="https://wa.me/972546758145">וואטסאפ</a></p>
+    <p style="margin-top:12px;font-size:12px;opacity:0.6;">* חלק מהקישורים באתר הם קישורי שותפים. אם תזמינו דרכם, אקבל עמלה קטנה - ללא עלות נוספת עבורכם. ההמלצות תמיד מבוססות על ניסיון אישי בלבד.</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;" target="_blank" aria-label="וואטסאפ">
+  <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  /* ── MAP DATA ── */
+  var days = [
+    { id: 'tl1', day: 1, label: 'Visegrad Bobsled', emoji: '✈️', lat: 47.788, lng: 18.982, color: '#1A6B72', title: 'הגעה לבודפשט + Visegrad Bobsled' },
+    { id: 'tl2', day: 2, label: 'טירת בודה + מגדל הדייגים', emoji: '🏰', lat: 47.496, lng: 19.039, color: '#6b4aa0', title: 'טירת בודה + פוניקולר + גשר השרשרות' },
+    { id: 'tl3', day: 3, label: 'כיכר הגיבורים + שצ\'ני', emoji: '♨️', lat: 47.518, lng: 19.082, color: '#4A9B6F', title: 'כיכר הגיבורים + פארק העיר + מרחצאות שצ\'ני' },
+    { id: 'tl4', day: 4, label: 'הפרלמנט + שיט בדנובה', emoji: '🏛️', lat: 47.507, lng: 19.045, color: '#E8A045', title: 'פרלמנט + שיט + רובע יהודי' },
+    { id: 'tl5', day: 5, label: 'כל היום Aquaworld', emoji: '🌊', lat: 47.519, lng: 19.080, color: '#ce2939', title: 'כל היום ב-Aquaworld' },
+    { id: 'tl6', day: 6, label: 'ארוחת בוקר + קניות + טיסה', emoji: '✈️', lat: 47.437, lng: 19.255, color: '#1A6B72', title: 'ארוחת בוקר + קניות + טיסה חזרה לישראל' }
+  ];
+
+  /* ── TIMELINE TOGGLE ── */
+  window.toggleTl = function(id, fromMap) {
+    var card = document.getElementById(id);
+    if (!card) return;
+    var isOpen = card.classList.toggle('open');
+    var chevron = card.querySelector('.tl-card__chevron');
+    if (chevron) chevron.textContent = isOpen ? '▲' : '▼';
+    if (isOpen && !fromMap) {
+      var d = days.find(function(x) { return x.id === id; });
+      if (d) flyTo(d);
+    }
+  };
+
+  /* ── MAP INIT ── */
+  var map = L.map('trip-map', { center: [47.56, 19.02], zoom: 10, scrollWheelZoom: false });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap © CARTO', maxZoom: 18 }).addTo(map);
+  var latlngs = days.map(function(d) { return [d.lat, d.lng]; });
+  L.polyline(latlngs, { color: '#E8A045', weight: 2.5, dashArray: '6,5', opacity: 0.7 }).addTo(map);
+
+  var markers = {};
+  var activeDay = null;
+
+  function makeIcon(d, active) {
+    var size = active ? 46 : 38;
+    var bg = active ? d.color : '#fff';
+    var border = active ? '#fff' : d.color;
+    return L.divIcon({
+      className: '',
+      html: '<div style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:' + bg + ';border:2.5px solid ' + border + ';display:flex;align-items:center;justify-content:center;font-size:' + (active?20:16) + 'px;box-shadow:0 3px 12px rgba(0,0,0,0.22);cursor:pointer;"><span style="line-height:1;">' + d.emoji + '</span></div>',
+      iconSize: [size, size], iconAnchor: [size/2, size/2], popupAnchor: [0, -(size/2+4)]
+    });
+  }
+
+  function flyTo(d) {
+    map.flyTo([d.lat, d.lng], 12, { duration: 0.8 });
+    if (markers[d.id]) markers[d.id].openPopup();
+    setActive(d.id);
+  }
+
+  function setActive(id) {
+    if (activeDay === id) return;
+    activeDay = id;
+    days.forEach(function(d) { if (markers[d.id]) markers[d.id].setIcon(makeIcon(d, d.id === id)); });
+    document.querySelectorAll('.map-pill').forEach(function(p) {
+      p.style.background = p.dataset.id === id ? 'var(--teal)' : 'var(--white)';
+      p.style.color = p.dataset.id === id ? '#fff' : 'var(--charcoal)';
+      p.style.borderColor = p.dataset.id === id ? 'var(--teal)' : 'var(--sand-dark)';
+    });
+  }
+
+  days.forEach(function(d) {
+    var m = L.marker([d.lat, d.lng], { icon: makeIcon(d, false) }).addTo(map)
+      .bindPopup('<div dir="rtl" style="font-family:Rubik,sans-serif;min-width:160px;padding:4px 2px;"><div style="font-size:11px;color:#aaa;margin-bottom:2px;">יום ' + d.day + '</div><div style="font-size:15px;font-weight:600;color:' + d.color + ';margin-bottom:4px;">' + d.emoji + ' ' + d.label + '</div><div style="font-size:13px;color:#555;margin-bottom:8px;">' + d.title + '</div><button onclick="goToDay(\'' + d.id + '\')" style="width:100%;background:' + d.color + ';color:#fff;border:none;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:600;cursor:pointer;font-family:Rubik,sans-serif;">לפרטי היום ↓</button></div>');
+    m.on('click', function() { setActive(d.id); });
+    markers[d.id] = m;
+  });
+
+  window.goToDay = function(id) {
+    map.closePopup();
+    var card = document.getElementById(id);
+    if (card && !card.classList.contains('open')) toggleTl(id, true);
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+  /* ── DAY PILLS under map ── */
+  var pillsContainer = document.getElementById('map-day-pills');
+  days.forEach(function(d) {
+    var btn = document.createElement('button');
+    btn.className = 'map-pill';
+    btn.dataset.id = d.id;
+    btn.innerHTML = '<span>' + d.emoji + '</span><span style="font-size:12px;">יום ' + d.day + '</span>';
+    btn.style.cssText = 'display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;border:1.5px solid var(--sand-dark);background:var(--white);cursor:pointer;font-family:Rubik,sans-serif;font-size:13px;transition:all 0.2s;';
+    btn.addEventListener('click', function() { flyTo(d); });
+    pillsContainer.appendChild(btn);
+  });
+
+  days.forEach(function(d) {
+    var item = document.getElementById(d.id);
+    if (!item) return;
+    var header = item.querySelector('.tl-card__header');
+    if (header) { header.style.cursor = 'pointer'; header.addEventListener('click', function() { flyTo(d); }); }
+  });
+
+})();
+</script>
+
+<script>
+(function() {
+  /* ── NAV ── */
+  var nav = document.getElementById('nav');
+  if (nav) window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function() {
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen.toString());
+      hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'פתח תפריט');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('open')) {
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'פתח תפריט');
+      document.body.style.overflow = '';
+      hamburger.focus();
+    }
+  });
+})();
+</script>
+
+<!-- Email Popup -->
+<div class="email-popup-overlay" id="emailPopupOverlay">
+  <div class="email-popup">
+    <button class="email-popup__close" id="emailPopupClose">×</button>
+    <div class="email-popup__icon">✈️</div>
+    <h2 class="email-popup__title">רוצים לקבל עדכונים?</h2>
+    <p class="email-popup__subtitle">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
+    <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm">
+      <input type="hidden" name="_subject" value="הרשמה מבודפשט - מתי טסים">
+      <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/budapest.html">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input">
+      <button type="submit" class="email-popup__btn">אני רוצה לקבל עדכונים ✈️</button>
+      <button type="button" class="email-popup__skip" id="emailPopupSkip">דלג</button>
+    </form>
+  </div>
+</div>
+<script>
+(function () {
+  var overlay = document.getElementById('emailPopupOverlay');
+  var closeBtn = document.getElementById('emailPopupClose');
+  var skipBtn = document.getElementById('emailPopupSkip');
+  function openPopup() { if (localStorage.getItem('mtEmailSubmitted')) return; overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closePopup() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) { link.addEventListener('click', function(e) { e.preventDefault(); openPopup(); }); });
+  if (closeBtn) closeBtn.addEventListener('click', closePopup);
+  if (skipBtn) skipBtn.addEventListener('click', closePopup);
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) closePopup(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePopup(); });
+  var form = document.getElementById('emailPopupForm');
+  if (form) form.addEventListener('submit', function() { localStorage.setItem('mtEmailSubmitted', '1'); });
+})();
+</script>
+</body>
+</html>

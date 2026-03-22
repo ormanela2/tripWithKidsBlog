@@ -10,245 +10,201 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
   <link rel="icon" type="image/png" href="logo.png">
   <style>
-    /* Inline flag SVGs as data URIs - zero CDN dependency */
-    .flag-sk { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23fff'/%3E%3Crect y='200' width='900' height='200' fill='%230b4ea2'/%3E%3Crect y='400' width='900' height='200' fill='%23ee1c25'/%3E%3Cpath fill='%23fff' d='M270 60v160c0 100-90 160-90 160S90 320 90 220V60z'/%3E%3Cpath fill='%230b4ea2' d='M260 70v150c0 93-80 150-80 150s-80-57-80-150V70z'/%3E%3Crect fill='%23fff' x='130' y='220' width='100' height='50'/%3E%3Crect fill='%23fff' x='155' y='200' width='50' height='90'/%3E%3C/svg%3E"); }
-    .flag-pl { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='250' fill='%23fff'/%3E%3Crect y='250' width='800' height='250' fill='%23dc143c'/%3E%3C/svg%3E"); }
-    .flag-ro { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='300' height='600' fill='%23002B7F'/%3E%3Crect x='300' width='300' height='600' fill='%23FCD116'/%3E%3Crect x='600' width='300' height='600' fill='%23CE1126'/%3E%3C/svg%3E"); }
-    .flag-gr { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 18'%3E%3Crect width='27' height='18' fill='%230d5eaf'/%3E%3Crect y='2' width='27' height='2' fill='%23fff'/%3E%3Crect y='6' width='27' height='2' fill='%23fff'/%3E%3Crect y='10' width='27' height='2' fill='%23fff'/%3E%3Crect y='14' width='27' height='2' fill='%23fff'/%3E%3Crect width='10' height='10' fill='%230d5eaf'/%3E%3Crect x='4' width='2' height='10' fill='%23fff'/%3E%3Crect y='4' width='10' height='2' fill='%23fff'/%3E%3C/svg%3E"); }
-    .flag-at { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23ed2939'/%3E%3Crect y='200' width='900' height='200' fill='%23fff'/%3E%3Crect y='400' width='900' height='200' fill='%23ed2939'/%3E%3C/svg%3E"); }
-    .flag-cz { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='300' fill='%23fff'/%3E%3Crect y='300' width='900' height='300' fill='%23d7141a'/%3E%3Cpath fill='%2311457e' d='M0 0 L450 300 L0 600 Z'/%3E%3C/svg%3E"); }
-    .flag-icon { display: inline-block; background-size: cover; background-repeat: no-repeat; border-radius: 3px; }
-    .flag-icon-sm   { width: 34px; height: 23px; }
-    .flag-icon-lg   { width: 110px; height: 73px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); border-radius: 6px; }
-    .flag-icon-map  { width: 22px; height: 15px; border-radius: 2px; vertical-align: middle; }
-    .flag-icon-popup{ width: 28px; height: 19px; border-radius: 2px; display: block; margin-bottom: 6px; }
-  </style>
-  <style>
-    :root {
-      --amber: #E8A045; --amber-dark: #c4872e;
-      --teal: #1A6B72; --teal-dark: #124d52;
-      --cream: #FDF8F2; --charcoal: #2C2C2C;
-      --sand: #F5EDD8; --sand-dark: #e8ddc4;
-      --green: #4A9B6F; --white: #FFFFFF;
-      --font-heading: 'Secular One', sans-serif;
-      --font-body: 'Rubik', sans-serif;
-      --nav-height: 72px;
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-body); font-size: 16px; line-height: 1.7; color: var(--charcoal); background: var(--cream); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-    h1,h2,h3 { font-family: var(--font-heading); font-weight: 400; line-height: 1.3; }
-    a { color: inherit; text-decoration: none; }
-    button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
-    .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-        .page-hero { background: linear-gradient(160deg, var(--teal-dark) 0%, var(--teal) 100%); padding-top: calc(var(--nav-height) + 40px); padding-bottom: 48px; color: var(--white); text-align: center; position: relative; }
-    .page-hero::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 60px; background: linear-gradient(to top, var(--cream), transparent); }
-    .page-hero__label { display: inline-block; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 6px 18px; font-size: 13px; margin-bottom: 16px; }
-    .page-hero__title { font-size: clamp(26px, 4vw, 42px); margin-bottom: 12px; }
-    .page-hero__subtitle { font-size: clamp(14px, 1.6vw, 17px); font-weight: 300; opacity: 0.88; max-width: 480px; margin: 0 auto; }
-    .main-section { padding: 36px 0 80px; }
-    .main-layout { display: grid; grid-template-columns: 400px 1fr; gap: 28px; align-items: start; }
-    .dest-list { display: flex; flex-direction: column; gap: 14px; }
-    .dest-card { background: var(--white); border-radius: 16px; border: 2px solid var(--sand-dark); overflow: hidden; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; cursor: pointer; }
-    .dest-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.09); }
-    .dest-card.active { border-color: var(--amber); box-shadow: 0 0 0 2px var(--amber), 0 8px 24px rgba(232,160,69,0.15); }
-    .dest-card__top { display: flex; align-items: center; gap: 14px; padding: 16px 18px; }
-    .dest-card__flag { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; background: var(--sand); }
-    .dest-card__info { flex: 1; }
-    .dest-card__name { font-family: var(--font-heading); font-size: 18px; }
-    .dest-card__hint { font-size: 12px; color: #bbb; margin-top: 1px; }
-    .dest-card__arrow { color: #ddd; font-size: 18px; transition: transform 0.3s, color 0.3s; flex-shrink: 0; }
-    .dest-card.active .dest-card__arrow { transform: rotate(90deg); color: var(--amber); }
-    .dest-card__visual { width: 100%; height: 170px; display: none; align-items: center; justify-content: center; position: relative; font-size: 68px; }
-    .dest-card.active .dest-card__visual { display: flex; }
-    .dest-card[data-id="slovakia"] .dest-card__visual { background: linear-gradient(135deg,#8ac46a 0%,#2d7550 100%); }
-    .dest-card[data-id="warsaw"]   .dest-card__visual { background: linear-gradient(135deg,#C0392B 0%,#8B1A1A 100%); }
-    .dest-card[data-id="romania"]  .dest-card__visual { background: linear-gradient(135deg,#002B7F 0%,#CE1126 100%); }
-    .dest-card[data-id="athens"]   .dest-card__visual { background: linear-gradient(135deg,#1565C0 0%,#0D47A1 100%); }
-    .dest-card[data-id="czechia"]  .dest-card__visual { background: linear-gradient(135deg,#11457e 0%,#d7141a 100%); }
-    .dest-card[data-id="austria"]  .dest-card__visual { background: linear-gradient(135deg,#c0392b 0%,#8b1a1a 100%); }
-    .dest-card[data-id="poland-south"] .dest-card__visual { background: linear-gradient(135deg,#dc143c 0%,#7B1010 100%); }
-    .dest-card__visual-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.35)); }
-    .dest-card__visual-name { position: absolute; bottom: 12px; right: 16px; color: var(--white); font-family: var(--font-heading); font-size: 22px; text-shadow: 0 2px 8px rgba(0,0,0,0.4); z-index: 1; }
-    .dest-card__body { padding: 0 18px 18px; display: none; }
-    .dest-card.active .dest-card__body { display: block; }
-    .dest-card__desc { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 14px; padding-top: 14px; }
-    .dest-card__meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-    .dest-card__badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 500; padding: 5px 11px; border-radius: 20px; }
-    .dest-card__badge--easy { background: rgba(74,155,111,0.1); color: #3a8a5a; }
-    .dest-card__badge--days { background: var(--sand); color: #666; }
-    .dest-card__badge--season { background: rgba(26,107,114,0.08); color: var(--teal); }
-    .dest-card__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .dest-card__tag { font-size: 12px; background: rgba(26,107,114,0.07); color: var(--teal); border-radius: 6px; padding: 3px 10px; }
-    .dest-card__cta { display: flex; gap: 8px; }
-    .dest-card__btn-article { flex: 1; display: flex; align-items: center; justify-content: center; background: var(--teal); color: var(--white); border-radius: 10px; padding: 11px; font-size: 13px; font-weight: 600; transition: background 0.2s; }
-    .dest-card__btn-article:hover { background: var(--teal-dark); }
-    .dest-card__btn-wa { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; background: #25D366; color: var(--white); border-radius: 10px; padding: 11px; font-size: 13px; font-weight: 600; transition: background 0.2s; }
-    .dest-card__btn-wa:hover { background: #1da851; }
-    .dest-coming { background: var(--white); border-radius: 16px; border: 2px dashed var(--sand-dark); padding: 22px; text-align: center; color: #bbb; font-size: 14px; }
-    .dest-coming__icon { font-size: 28px; margin-bottom: 8px; display: block; }
-    .map-wrapper { position: sticky; top: calc(var(--nav-height) + 20px); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.12); border: 2px solid var(--sand-dark); }
-    #map { height: 620px; width: 100%; }
-    .leaflet-popup-content-wrapper { border-radius: 14px !important; font-family: var(--font-body) !important; padding: 0 !important; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important; }
-    .leaflet-popup-content { margin: 0 !important; width: 210px !important; }
-    .map-popup { padding: 16px 16px 14px; direction: rtl; }
-    .map-popup__flag { font-size: 26px; margin-bottom: 6px; display: block; }
-    .map-popup__name { font-family: var(--font-heading); font-size: 17px; color: var(--teal); margin-bottom: 3px; }
-    .map-popup__days { font-size: 12px; color: #999; margin-bottom: 10px; }
-    .map-popup__btn { display: block; text-align: center; background: var(--teal); color: var(--white); border-radius: 8px; padding: 8px 12px; font-size: 13px; font-weight: 600; border: none; width: 100%; transition: background 0.2s; font-family: var(--font-body); cursor: pointer; }
-    .map-popup__btn:hover { background: var(--teal-dark); }
-    .footer { background: var(--charcoal); color: rgba(255,255,255,0.6); padding: 40px 0; text-align: center; font-size: 14px; }
-    .footer a { color: #f0b868; }
-    @media (max-width: 960px) {
-      .main-layout { grid-template-columns: 1fr; }
-      .map-wrapper { position: static; }
-      #map { height: 380px; }
-      .nav__links { display: none; }
-      .nav__mobile-actions { display: flex; align-items: center; gap: 4px; }
-      .nav__hamburger { display: flex; }
-    }
-    @media (max-width: 768px) {
-      .nav__logo img { height: 44px !important; }
-      .nav__logo span { font-size: 18px !important; }
-    }
-      50%       { opacity: 1;   transform: scale(1.3); }
-    }
-      50%       { opacity: 1;   transform: scale(1.3); }
-    }
-  
-    /* ── Community CTA button ── */
-    .nav__link--community {
-      background: var(--amber);
-      color: #2C2C2C !important;
-      font-weight: 300;
-      font-size: 15px;
-      border-radius: 22px;
-      padding: 8px 18px;
-      min-height: 44px;
-      box-shadow: 0 2px 10px rgba(232,160,69,0.45);
-      animation: communityPulse 2.8s ease-in-out infinite;
-    }
-    .nav__link--community:hover,
-    .nav__link--community:focus-visible {
-      background: #d4903c !important;
-      color: #2C2C2C !important;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(232,160,69,0.55);
-      animation: none;
-    }
-    .nav__link--community::before {
-      content: '';
-      width: 8px; height: 8px;
-      background: #4ade80;
-      border-radius: 50%;
-      display: inline-block;
-      margin-left: 7px;
-      box-shadow: 0 0 6px #4ade80;
-      animation: dotBlink 1.4s ease-in-out infinite;
-    }
-    .nav__mobile-menu .nav__link--community {
-      font-size: 15px;
-      padding: 8px 18px;
-      width: fit-content;
-      min-height: 44px;
-    }
-    @keyframes communityPulse {
-      0%, 100% { box-shadow: 0 2px 10px rgba(232,160,69,0.4); }
-      50%       { box-shadow: 0 2px 18px rgba(232,160,69,0.75), 0 0 0 4px rgba(232,160,69,0.15); }
-    }
-    @keyframes dotBlink {
-      0%, 100% { opacity: 0.4; box-shadow: 0 0 3px #4ade80; }
-      50%       { opacity: 1;   box-shadow: 0 0 10px #4ade80, 0 0 20px #4ade8088; }
-    }
-  
-    /* ── EMAIL POPUP ─────────────────────────────── */
-    .email-popup-overlay {
-      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5);
-      z-index:2000; align-items:center; justify-content:center; padding:24px;
-    }
-    .email-popup-overlay.open { display:flex; }
-    .email-popup {
-      background:var(--cream); border-radius:20px; padding:40px 32px;
-      max-width:420px; width:100%; text-align:center; position:relative;
-      box-shadow:0 16px 48px rgba(0,0,0,0.2); animation:popupIn 0.3s ease;
-    }
-    @keyframes popupIn {
-      from { transform:translateY(20px); opacity:0; }
-      to   { transform:translateY(0);    opacity:1; }
-    }
-    .email-popup__close {
-      position:absolute; top:14px; left:16px; font-size:22px; cursor:pointer;
-      color:#aaa; background:none; border:none; line-height:1;
-    }
-    .email-popup__close:hover { color:var(--charcoal); }
-    .email-popup__icon { font-size:40px; margin-bottom:12px; }
-    .email-popup__title { font-family:var(--font-heading); font-size:22px; color:var(--teal); margin-bottom:8px; }
-    .email-popup__subtitle { font-size:14px; color:#666; line-height:1.6; margin-bottom:24px; }
-    .email-popup__form { display:flex; flex-direction:column; gap:12px; }
-    .email-popup__input {
-      padding:13px 18px; border:2px solid var(--sand-dark); border-radius:40px;
-      font-family:var(--font-body); font-size:15px; background:white;
-      color:var(--charcoal); outline:none; text-align:right; width:100%;
-    }
-    .email-popup__input:focus { border-color:var(--teal); }
-    .email-popup__btn {
-      background:var(--teal); color:white; border:none; border-radius:40px;
-      padding:13px 28px; font-family:var(--font-body); font-size:15px;
-      font-weight:600; cursor:pointer; transition:background 0.2s;
-    }
-    .email-popup__btn:hover { background:var(--teal-dark); }
-    .email-popup__skip {
-      font-size:13px; color:#aaa; cursor:pointer; margin-top:4px;
-      background:none; border:none; text-decoration:underline;
-    }
-    .email-popup__skip:hover { color:var(--charcoal); }
+    .flag-sk{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23fff'/%3E%3Crect y='200' width='900' height='200' fill='%230b4ea2'/%3E%3Crect y='400' width='900' height='200' fill='%23ee1c25'/%3E%3Cpath fill='%23fff' d='M270 60v160c0 100-90 160-90 160S90 320 90 220V60z'/%3E%3Cpath fill='%230b4ea2' d='M260 70v150c0 93-80 150-80 150s-80-57-80-150V70z'/%3E%3Crect fill='%23fff' x='130' y='220' width='100' height='50'/%3E%3Crect fill='%23fff' x='155' y='200' width='50' height='90'/%3E%3C/svg%3E")}
+    .flag-pl{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='250' fill='%23fff'/%3E%3Crect y='250' width='800' height='250' fill='%23dc143c'/%3E%3C/svg%3E")}
+    .flag-ro{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='300' height='600' fill='%23002B7F'/%3E%3Crect x='300' width='300' height='600' fill='%23FCD116'/%3E%3Crect x='600' width='300' height='600' fill='%23CE1126'/%3E%3C/svg%3E")}
+    .flag-gr{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 18'%3E%3Crect width='27' height='18' fill='%230d5eaf'/%3E%3Crect y='2' width='27' height='2' fill='%23fff'/%3E%3Crect y='6' width='27' height='2' fill='%23fff'/%3E%3Crect y='10' width='27' height='2' fill='%23fff'/%3E%3Crect y='14' width='27' height='2' fill='%23fff'/%3E%3Crect width='10' height='10' fill='%230d5eaf'/%3E%3Crect x='4' width='2' height='10' fill='%23fff'/%3E%3Crect y='4' width='10' height='2' fill='%23fff'/%3E%3C/svg%3E")}
+    .flag-at{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23ed2939'/%3E%3Crect y='200' width='900' height='200' fill='%23fff'/%3E%3Crect y='400' width='900' height='200' fill='%23ed2939'/%3E%3C/svg%3E")}
+    .flag-cz{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='300' fill='%23fff'/%3E%3Crect y='300' width='900' height='300' fill='%23d7141a'/%3E%3Cpath fill='%2311457e' d='M0 0 L450 300 L0 600 Z'/%3E%3C/svg%3E")}
+    .flag-hu{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23ce2939'/%3E%3Crect y='200' width='900' height='200' fill='%23fff'/%3E%3Crect y='400' width='900' height='200' fill='%23477050'/%3E%3C/svg%3E")}
+    .flag-icon{display:inline-block;background-size:cover;background-repeat:no-repeat;border-radius:3px}
+    .flag-chip{width:20px;height:14px;border-radius:2px;vertical-align:middle;flex-shrink:0}
 
-        /* ── NAV ─────────────────────────────── */
-    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
-    .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
-    .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
-    .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
-    .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
-    .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
-    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.02em; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
-    .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
-    .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
-    .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
-    .nav__mobile-actions { display:none; align-items:center; gap:4px; }
-    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
-    .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
-    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
-    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
-    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
-    .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
-    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:32px 24px; flex-direction:column; gap:8px; z-index:999; overflow-y:auto; }
-    .nav__mobile-menu.open { display:flex; }
-    .nav__mobile-menu .nav__link { font-size:20px; padding:16px; justify-content:flex-start; }
-    .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:300; font-size:15px; border-radius:22px; padding:8px 16px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); animation:communityPulse 2.8s ease-in-out infinite; }
-    .nav__link--community:hover, .nav__link--community:focus-visible { background:#d4903c !important; color:#2C2C2C !important; transform:translateY(-2px); box-shadow:0 4px 16px rgba(232,160,69,0.55); animation:none; }
-    .nav__link--community::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; margin-left:7px; box-shadow:0 0 6px #4ade80; animation:dotBlink 1.4s ease-in-out infinite; }
-    .nav__mobile-menu .nav__link--community { font-size:15px; padding:8px 18px; width:fit-content; min-height:44px; }
-    @keyframes communityPulse { 0%,100%{box-shadow:0 2px 10px rgba(232,160,69,0.4);} 50%{box-shadow:0 2px 18px rgba(232,160,69,0.75),0 0 0 4px rgba(232,160,69,0.15);} }
-    @keyframes dotBlink { 0%,100%{opacity:0.4;box-shadow:0 0 3px #4ade80;} 50%{opacity:1;box-shadow:0 0 10px #4ade80,0 0 20px #4ade8088;} }
-    @media (max-width: 900px) {
-      .nav__links { display:none; }
-      .nav__mobile-actions { display:flex; }
-      .nav__hamburger { display:flex; }
-      .nav__logo img { height:44px !important; }
-      .nav__logo-text { font-size:18px !important; }
+    :root {
+      --amber:#E8A045;--amber-dark:#c4872e;--amber-light:#f0b868;
+      --teal:#1A6B72;--teal-dark:#124d52;
+      --cream:#FDF8F2;--white:#FFFFFF;
+      --charcoal:#1e2328;--gray-mid:#6b7280;--gray-light:#f3f4f6;
+      --sand:#F5EDD8;--sand-dark:#e8ddc4;
+      --border:rgba(0,0,0,0.08);
+      --font-heading:'Secular One',sans-serif;
+      --font-body:'Rubik',sans-serif;
+      --nav-height:72px;
+      --drawer-w:400px;
+      --r-sm:8px;--r-md:14px;--r-lg:20px;
+      --ease:0.22s cubic-bezier(0.4,0,0.2,1);
     }
-    /* ── END NAV ─────────────────────────── */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);font-size:16px;line-height:1.7;color:var(--charcoal);background:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    h1,h2,h3{font-family:var(--font-heading);font-weight:400;line-height:1.3}
+    a{color:inherit;text-decoration:none}
+    button{font-family:var(--font-body);cursor:pointer;border:none;background:none}
+    ul{list-style:none}
+    .container{width:100%;max-width:1280px;margin:0 auto;padding:0 24px}
+
+    /* NAV */
+    .nav{position:fixed;top:0;right:0;left:0;z-index:1200;background:rgba(253,248,242,0.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:var(--nav-height);transition:box-shadow var(--ease)}
+    .nav__mobile-menu .nav__link{font-size:20px;padding:16px;justify-content:flex-start}
+    .nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.08)}
+    .nav__inner{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:100%;position:relative}
+    .nav__logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+    .nav__links{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0;position:absolute;left:50%;transform:translateX(-50%)}
+    .nav__link{white-space:nowrap;padding:8px 13px;border-radius:8px;font-family:'Assistant',sans-serif;font-weight:300;font-size:15px;letter-spacing:.02em;color:var(--charcoal);text-decoration:none;transition:background var(--ease),color var(--ease);min-height:44px;display:flex;align-items:center}
+    .nav__link:hover{background:var(--sand);color:var(--teal)}
+    .nav__link[aria-current="page"]{background:var(--teal);color:#fff}
+    .nav__mobile-actions{display:none;align-items:center;gap:4px}
+    .nav__hamburger{display:none;width:44px;height:44px;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:8px;position:relative;z-index:1200}
+    .nav__hamburger span{display:block;width:24px;height:2px;background:var(--charcoal);border-radius:2px;transition:all .3s ease}
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2){opacity:0}
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    .nav__whatsapp-mobile{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#25D366}
+    .nav__mobile-menu{display:none;position:fixed;top:var(--nav-height);right:0;left:0;bottom:0;background:var(--cream);padding:32px 24px;flex-direction:column;gap:8px;z-index:1200;overflow-y:auto}
+    .nav__mobile-menu.open{display:flex}
+    .nav__link--community{background:var(--amber);color:#2C2C2C!important;font-weight:300;font-size:15px;border-radius:22px;padding:8px 16px;min-height:44px;box-shadow:0 2px 10px rgba(232,160,69,.45);position:relative}
+    .nav__link--community::before{content:'';width:8px;height:8px;background:#4ade80;border-radius:50%;display:inline-block;margin-left:7px;box-shadow:0 0 6px #4ade80;animation:dotBlink 1.4s ease-in-out infinite}
+    @keyframes dotBlink{0%,100%{opacity:.4}50%{opacity:1;box-shadow:0 0 10px #4ade80}}
+    @media(max-width:900px){.nav__links{display:none}.nav__mobile-actions{display:flex}.nav__hamburger{display:flex}.nav__logo img{height:44px!important}}
+
+    /* HERO */
+    .page-hero{background:linear-gradient(155deg,var(--teal-dark) 0%,var(--teal) 60%,#1a8a72 100%);padding-top:calc(var(--nav-height) + 48px);padding-bottom:52px;color:#fff;text-align:center;position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(232,160,69,.08) 0%,transparent 60%)}
+    .page-hero::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:56px;background:linear-gradient(to top,var(--cream),transparent)}
+    .page-hero__label{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:6px 18px;font-size:13px;font-weight:500;margin-bottom:18px;letter-spacing:.05em}
+    .page-hero__title{font-size:clamp(28px,4.5vw,46px);margin-bottom:12px;letter-spacing:-.5px}
+    .page-hero__subtitle{font-size:clamp(14px,1.5vw,17px);font-weight:300;opacity:.82;max-width:460px;margin:0 auto}
+    .hero-count{display:inline-flex;align-items:center;gap:6px;margin-top:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:500;opacity:.9}
+
+    /* MAIN */
+    .main-section{padding:36px 0 60px}
+
+    /* CHIP BAR */
+    .chip-bar-outer{margin-bottom:20px}
+    .chip-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:30px;border:1.5px solid var(--border);background:var(--white);cursor:pointer;transition:all var(--ease);white-space:nowrap;font-size:13px;font-weight:500;color:var(--charcoal);box-shadow:0 1px 4px rgba(0,0,0,.06);flex-shrink:0;position:relative}
+    .chip:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px);box-shadow:0 4px 14px rgba(26,107,114,.12)}
+    .chip.active{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 4px 16px rgba(26,107,114,.30);transform:translateY(-2px)}
+    .chip-coming{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:30px;border:1.5px dashed var(--sand-dark);background:transparent;color:#bbb;font-size:13px;white-space:nowrap;flex-shrink:0;font-style:italic}
+
+    /* MAP */
+    .map-container{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.09)}
+    #map{height:560px;width:100%}
+    @media(max-width:768px){#map{height:360px}}
+
+    /* LEAFLET */
+    .leaflet-popup-content-wrapper{border-radius:14px!important;font-family:var(--font-body)!important;padding:0!important;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.16)!important;border:1px solid var(--border)!important}
+    .leaflet-popup-content{margin:0!important;width:210px!important}
+    .map-popup{padding:16px 16px 14px;direction:rtl}
+    .map-popup__flag{width:28px;height:19px;border-radius:3px;display:block;margin-bottom:8px}
+    .map-popup__name{font-family:var(--font-heading);font-size:16px;color:var(--teal);margin-bottom:2px}
+    .map-popup__sub{font-size:12px;color:var(--gray-mid);margin-bottom:3px}
+    .map-popup__days{font-size:12px;color:#aaa;margin-bottom:10px}
+    .map-popup__btn{display:block;text-align:center;background:var(--teal);color:#fff;border-radius:8px;padding:9px 12px;font-size:13px;font-weight:600;width:100%;border:none;cursor:pointer;font-family:var(--font-body);transition:background var(--ease)}
+    .map-popup__btn:hover{background:var(--teal-dark)}
+
+    /* DRAWER */
+    .drawer{position:fixed;top:var(--nav-height);left:0;width:var(--drawer-w);max-width:420px;height:calc(100vh - var(--nav-height));background:var(--white);z-index:1001;transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:8px 0 40px rgba(0,0,0,.12)}
+    .drawer-overlay{position:fixed;top:var(--nav-height);left:0;right:0;bottom:0;background:transparent;z-index:1000;pointer-events:none;transition:background .3s ease}
+    .drawer-overlay.open{background:rgba(0,0,0,.30);pointer-events:all}
+    .drawer.open{transform:translateX(0)}
+
+    /* MOBILE: bottom sheet */
+    @media(max-width:768px){
+      .drawer{top:auto;bottom:0;left:0;right:0;width:100%;max-width:100%;height:82vh;transform:translateY(100%);border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.18)}
+      .drawer.open{transform:translateY(0)}
+      .drawer-strip{border-radius:20px 20px 0 0}
+    }
+
+    .drawer-strip{height:5px;width:100%;flex-shrink:0;transition:background .25s ease}
+    /* mobile drag handle */
+    .drawer-handle{display:none;justify-content:center;padding:10px 0 4px;flex-shrink:0}
+    .drawer-handle-bar{width:36px;height:4px;background:rgba(0,0,0,0.12);border-radius:2px}
+    @media(max-width:768px){
+      .drawer-handle{display:flex}
+      .drawer-strip{display:none}
+      .drawer-header{padding:14px 18px 12px}
+      .drawer-body{padding:16px 18px 32px}
+      .drawer-name{font-size:18px}
+      .drawer-flag-box{width:44px;height:44px;border-radius:12px}
+      .drawer-stats{margin-bottom:16px}
+      .stat-box{padding:10px 12px}
+      .drawer-desc{font-size:14px;margin-bottom:16px}
+      .drawer-tags{margin-bottom:18px}
+      .btn-main,.btn-wa{padding:12px 18px;font-size:14px}
+    }
+
+    /* drawer header */
+    .drawer-header{padding:22px 22px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-shrink:0;border-bottom:1px solid var(--border)}
+    .drawer-flag-wrap{display:flex;align-items:center;gap:14px}
+    .drawer-flag-box{width:54px;height:54px;border-radius:15px;overflow:hidden;flex-shrink:0;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:var(--gray-light)}
+    .drawer-flag-box .flag-icon{width:100%;height:100%;display:block;background-size:cover}
+    .drawer-title-block{}
+    .drawer-name{font-family:var(--font-heading);font-size:21px;color:var(--charcoal);line-height:1.2;margin-bottom:3px}
+    .drawer-sub{font-size:13px;color:var(--gray-mid);display:flex;align-items:center;gap:5px}
+    .drawer-close{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray-mid);font-size:16px;transition:all var(--ease);background:var(--white);flex-shrink:0;margin-top:2px}
+    .drawer-close:hover{background:var(--gray-light);color:var(--charcoal)}
+
+    /* drawer body */
+    .drawer-body{padding:22px 22px 36px;overflow-y:auto;flex:1}
+    .drawer-desc{font-size:15px;color:#444;line-height:1.82;margin-bottom:22px}
+
+    /* stats row */
+    .drawer-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+    .stat-box{background:var(--gray-light);border-radius:10px;padding:12px 14px;border:1px solid var(--border)}
+    .stat-lbl{font-size:10px;font-weight:600;color:var(--gray-mid);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+    .stat-val{font-size:14px;font-weight:600;color:var(--charcoal)}
+
+    /* badges */
+    .drawer-badges{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+    .dbadge{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px}
+    .dbadge--easy{background:rgba(74,155,111,.1);color:#2d7a50}
+    .dbadge--days{background:var(--sand);color:#7a6030}
+    .dbadge--season{background:rgba(26,107,114,.08);color:var(--teal)}
+
+    /* tags */
+    .drawer-section-label{font-size:11px;font-weight:600;color:var(--gray-mid);letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px}
+    .drawer-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+    .dtag{font-size:12px;background:var(--gray-light);color:var(--charcoal);border-radius:6px;padding:5px 12px;border:1px solid var(--border);transition:all var(--ease)}
+    .dtag:hover{border-color:var(--teal);color:var(--teal);background:rgba(26,107,114,.05)}
+
+    /* divider */
+    .drawer-divider{height:1px;background:var(--border);margin:20px 0}
+
+    /* CTA */
+    .drawer-cta{display:flex;flex-direction:column;gap:10px}
+    .btn-main{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--teal);color:#fff;border-radius:10px;padding:14px 20px;font-size:15px;font-weight:600;transition:all var(--ease);width:100%;letter-spacing:.01em}
+    .btn-main:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,107,114,.28)}
+    .btn-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;border-radius:10px;padding:13px 20px;font-size:14px;font-weight:600;transition:all var(--ease);width:100%}
+    .btn-wa:hover{background:#1da851;transform:translateY(-1px)}
+
+    /* FOOTER */
+    .footer{background:var(--charcoal);color:rgba(255,255,255,.6);padding:40px 0;text-align:center;font-size:14px}
+    .footer a{color:var(--amber-light)}
+
+    /* EMAIL POPUP */
+    .email-popup-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;align-items:center;justify-content:center;padding:24px}
+    .email-popup-overlay.open{display:flex}
+    .email-popup{background:var(--cream);border-radius:20px;padding:40px 32px;max-width:420px;width:100%;text-align:center;position:relative;box-shadow:0 16px 48px rgba(0,0,0,.2);animation:popIn .3s ease;box-sizing:border-box}
+    @keyframes popIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+    .email-popup__close{position:absolute;top:14px;left:16px;font-size:22px;cursor:pointer;color:#aaa;background:none;border:none;line-height:1}
+    .email-popup__icon{font-size:40px;margin-bottom:12px}
+    .email-popup__title{font-family:var(--font-heading);font-size:22px;color:var(--teal);margin-bottom:8px}
+    .email-popup__subtitle{font-size:14px;color:#666;line-height:1.6;margin-bottom:24px}
+    .email-popup__form{display:flex;flex-direction:column;gap:12px}
+    .email-popup__input{padding:13px 18px;border:2px solid var(--sand-dark);border-radius:40px;font-family:var(--font-body);font-size:15px;background:white;color:var(--charcoal);outline:none;text-align:right;width:100%}
+    .email-popup__input:focus{border-color:var(--teal)}
+    .email-popup__btn{background:var(--teal);color:white;border:none;border-radius:40px;padding:13px 28px;font-family:var(--font-body);font-size:15px;font-weight:600;cursor:pointer}
+    .email-popup__skip{font-size:13px;color:#aaa;cursor:pointer;background:none;border:none;text-decoration:underline}
+
+    /* WA FLOAT */
+    .wa-float{position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:997;transition:transform var(--ease)}
+    .wa-float:hover{transform:scale(1.08)}
   </style>
-  <!-- Privacy-friendly analytics by Plausible -->
-  <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
-  <script>
-    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-    plausible.init()
-  </script>
 </head>
 <body>
 
-  <nav class="nav" id="nav">
+<nav class="nav" id="nav">
   <div class="nav__inner">
     <a href="services.html" class="nav__logo">
       <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
@@ -263,9 +219,7 @@
     </ul>
     <div class="nav__mobile-actions">
       <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-      <button class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-label="פתח תפריט">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-label="פתח תפריט"><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="nav__mobile-menu" id="mobileMenu">
@@ -278,470 +232,277 @@
   </div>
 </nav>
 
-  <section class="page-hero">
-    <div class="container">
-      <span class="page-hero__label">🗺️ יעדים מומלצים</span>
-      <h1 class="page-hero__title">לאן טסים הפעם?</h1>
-      <p class="page-hero__subtitle">לחצו על יעד במפה או ברשימה וגלו כל מה שצריך לדעת</p>
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero__label">🗺️ יעדים מומלצים</div>
+    <h1 class="page-hero__title">לאן טסים הפעם?</h1>
+    <p class="page-hero__subtitle">בחרו יעד מהמפה או מהרשימה - כל מה שצריך לדעת לפני הטיסה</p>
+    <div class="hero-count">✈️ 8 יעדים שביקרתי בהם</div>
+  </div>
+</section>
+
+<section class="main-section">
+  <div class="container">
+    <div class="chip-bar-outer">
+      <div class="chip-bar" id="chipBar"></div>
     </div>
-  </section>
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+  </div>
+</section>
 
-  <section class="main-section">
-    <div class="container">
-      <div class="main-layout">
-        <div class="dest-list">
-
-          <div class="dest-card active" id="card-slovakia" data-id="slovakia">
-            <div class="dest-card__top">
-              <div class="dest-card__flag"><span class="flag-icon flag-sk flag-icon-sm"></span></div>
-              <div class="dest-card__info">
-                <div class="dest-card__name">סלובקיה עם ילדים</div>
-                <div class="dest-card__hint">לחצו למדריך המלא</div>
-              </div>
-              <span class="dest-card__arrow">›</span>
-            </div>
-            <div class="dest-card__visual">
-              <div class="dest-card__visual-overlay"></div>
-              <span style="position:relative;z-index:1;"><span class="flag-icon flag-sk flag-icon-lg"></span></span>
-              <span class="dest-card__visual-name">סלובקיה</span>
-            </div>
-            <div class="dest-card__body">
-              <p class="dest-card__desc">טירות מהאגדות, הרי הטטרה ובירה ציורית. אחת ההפתעות הכי טובות באירופה לטיול משפחתי - זולה, נוחה ולא עמוסה בתיירים.</p>
-              <div class="dest-card__meta">
-                <span class="dest-card__badge dest-card__badge--easy">🟢 קל עם ילדים</span>
-                <span class="dest-card__badge dest-card__badge--days">📅 7-10 ימים</span>
-                <span class="dest-card__badge dest-card__badge--season">☀️ מאי-ספטמבר</span>
-              </div>
-              <div class="dest-card__tags">
-                <span class="dest-card__tag">טירת ספיש</span>
-                <span class="dest-card__tag">הרי הטטרה</span>
-                <span class="dest-card__tag">מערות דומיצה</span>
-                <span class="dest-card__tag">פארק מים</span>
-              </div>
-              <div class="dest-card__cta">
-                <a href="slovakia.html" class="dest-card__btn-article">למדריך המלא ←</a>
-                <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לסלובקיה עם ילדים" class="dest-card__btn-wa" target="_blank">
-                  <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  וואטסאפ
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="dest-card" id="card-warsaw" data-id="warsaw">
-            <div class="dest-card__top">
-              <div class="dest-card__flag"><span class="flag-icon flag-pl flag-icon-sm"></span></div>
-              <div class="dest-card__info">
-                <div class="dest-card__name">סובב וורשה עם ילדים</div>
-                <div class="dest-card__hint">לחצו למדריך המלא</div>
-              </div>
-              <span class="dest-card__arrow">›</span>
-            </div>
-            <div class="dest-card__visual">
-              <div class="dest-card__visual-overlay"></div>
-              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);"><span class="flag-icon flag-pl flag-icon-lg"></span></span>
-              <span class="dest-card__visual-name">וורשה</span>
-            </div>
-            <div class="dest-card__body">
-              <p class="dest-card__desc">עיר שמחברת היסטוריה עמוקה עם כיף אמיתי לילדים - מרכז מדע קופרניקוס, Suntago, Majaland ואינסוף אטרקציות לכל גיל.</p>
-              <div class="dest-card__meta">
-                <span class="dest-card__badge dest-card__badge--easy">🟢 קל עם ילדים</span>
-                <span class="dest-card__badge dest-card__badge--days">📅 7-9 ימים</span>
-                <span class="dest-card__badge dest-card__badge--season">🍂 ספטמבר-אוקטובר</span>
-              </div>
-              <div class="dest-card__tags">
-                <span class="dest-card__tag">קופרניקוס</span>
-                <span class="dest-card__tag">Suntago</span>
-                <span class="dest-card__tag">Majaland</span>
-                <span class="dest-card__tag">Łazienki Park</span>
-              </div>
-              <div class="dest-card__cta">
-                <a href="warsaw.html" class="dest-card__btn-article">למדריך המלא ←</a>
-                <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לוורשה עם ילדים" class="dest-card__btn-wa" target="_blank">
-                  <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  וואטסאפ
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="dest-card" id="card-romania" data-id="romania">
-            <div class="dest-card__top">
-              <div class="dest-card__flag"><span class="flag-icon flag-ro flag-icon-sm"></span></div>
-              <div class="dest-card__info">
-                <div class="dest-card__name">רומניה עם ילדים</div>
-                <div class="dest-card__hint">לחצו למדריך המלא</div>
-              </div>
-              <span class="dest-card__arrow">›</span>
-            </div>
-            <div class="dest-card__visual">
-              <div class="dest-card__visual-overlay"></div>
-              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);"><span class="flag-icon flag-ro flag-icon-lg"></span></span>
-              <span class="dest-card__visual-name">רומניה</span>
-            </div>
-            <div class="dest-card__body">
-              <p class="dest-card__desc">טירת דרקולה, הרי הקרפטים, פארקי הרפתקות ביער ופסח בטבע. רומניה מפתיעה - ועדיין לא גילו אותה כולם.</p>
-              <div class="dest-card__meta">
-                <span class="dest-card__badge dest-card__badge--easy">🟢 קל עם ילדים</span>
-                <span class="dest-card__badge dest-card__badge--days">📅 7 ימים</span>
-                <span class="dest-card__badge dest-card__badge--season">🌸 אפריל - פסח</span>
-              </div>
-              <div class="dest-card__tags">
-                <span class="dest-card__tag">טירת ברן</span>
-                <span class="dest-card__tag">Dino Park</span>
-                <span class="dest-card__tag">Peleș</span>
-                <span class="dest-card__tag">Aventura Park</span>
-              </div>
-              <div class="dest-card__cta">
-                <a href="romania.html" class="dest-card__btn-article">למדריך המלא ←</a>
-                <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לרומניה עם ילדים" class="dest-card__btn-wa" target="_blank">
-                  <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  וואטסאפ
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="dest-card" id="card-athens" data-id="athens">
-            <div class="dest-card__top">
-              <div class="dest-card__flag"><span class="flag-icon flag-gr flag-icon-sm"></span></div>
-              <div class="dest-card__info">
-                <div class="dest-card__name">אתונה עם ילדים</div>
-                <div class="dest-card__hint">לחצו למדריך המלא</div>
-              </div>
-              <span class="dest-card__arrow">›</span>
-            </div>
-            <div class="dest-card__visual">
-              <div class="dest-card__visual-overlay"></div>
-              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);"><span class="flag-icon flag-gr flag-icon-lg"></span></span>
-              <span class="dest-card__visual-name">אתונה</span>
-            </div>
-            <div class="dest-card__body">
-              <p class="dest-card__desc">Allou! Fun Park, האי אגינה, מוזיאון אשליות וגבעת ליקאבטוס - אתונה מפתיעה עם ילדים. עיר שחיה בלילה ומלאה בהיסטוריה שאפשר לגעת בה.</p>
-              <div class="dest-card__meta">
-                <span class="dest-card__badge dest-card__badge--easy">🟢 קל עם ילדים</span>
-                <span class="dest-card__badge dest-card__badge--days">📅 5 ימים</span>
-                <span class="dest-card__badge dest-card__badge--season">☀️ מאי-ספטמבר</span>
-              </div>
-              <div class="dest-card__tags">
-                <span class="dest-card__tag">Allou! Fun Park</span>
-                <span class="dest-card__tag">האי אגינה</span>
-                <span class="dest-card__tag">XPLORE</span>
-                <span class="dest-card__tag">מונסטירקי</span>
-                <span class="dest-card__tag">ליקאבטוס</span>
-              </div>
-              <div class="dest-card__cta">
-                <a href="athens.html" class="dest-card__btn-article">למדריך המלא ←</a>
-                <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לאתונה עם ילדים" class="dest-card__btn-wa" target="_blank">
-                  <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  וואטסאפ
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="dest-card" id="card-czechia" data-id="czechia">
-            <div class="dest-card__top">
-              <div class="dest-card__flag"><span class="flag-icon flag-cz flag-icon-sm"></span></div>
-              <div class="dest-card__info">
-                <div class="dest-card__name">דרום צ'כיה עם ילדים</div>
-                <div class="dest-card__hint">לחצו למדריך המלא</div>
-              </div>
-              <span class="dest-card__arrow">›</span>
-            </div>
-            <div class="dest-card__visual">
-              <div class="dest-card__visual-overlay"></div>
-              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);"><span class="flag-icon flag-cz flag-icon-lg"></span></span>
-              <span class="dest-card__visual-name">דרום צ'כיה</span>
-            </div>
-            <div class="dest-card__body">
-              <p class="dest-card__desc">אגם ליפנו עם בובסלד ופארק מים, צ'סקי קרומלוב הציורית, ראפטינג בנהר ולטאבה ופראג בסוף - צ'כיה היא אחת ההפתעות הכי טובות לטיול משפחתי. זולה, יפה, וטיסה לא ארוכה מדי.</p>
-              <div class="dest-card__meta">
-                <span class="dest-card__badge dest-card__badge--easy">🟢 קל עם ילדים</span>
-                <span class="dest-card__badge dest-card__badge--days">📅 10-14 ימים</span>
-                <span class="dest-card__badge dest-card__badge--season">☀️ אוגוסט מומלץ</span>
-              </div>
-              <div class="dest-card__tags">
-                <span class="dest-card__tag">אגם ליפנו</span>
-                <span class="dest-card__tag">צ'סקי קרומלוב</span>
-                <span class="dest-card__tag">ראפטינג</span>
-                <span class="dest-card__tag">בובסלד</span>
-                <span class="dest-card__tag">פראג</span>
-              </div>
-              <div class="dest-card__cta">
-                <a href="czechia.html" class="dest-card__btn-article">למדריך המלא ←</a>
-                <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לדרום צ'כיה עם ילדים" class="dest-card__btn-wa" target="_blank">
-                  <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  וואטסאפ
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="dest-card" id="card-austria" data-id="austria">
-            <div class="dest-card__top">
-              <div class="dest-card__flag"><span class="flag-icon flag-at flag-icon-sm"></span></div>
-              <div class="dest-card__info">
-                <div class="dest-card__name">אוסטריה עם ילדים</div>
-                <div class="dest-card__hint">לחצו למדריך המלא</div>
-              </div>
-              <span class="dest-card__arrow">›</span>
-            </div>
-            <div class="dest-card__visual">
-              <div class="dest-card__visual-overlay"></div>
-              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);"><span class="flag-icon flag-at flag-icon-lg"></span></span>
-              <span class="dest-card__visual-name">אוסטריה</span>
-            </div>
-            <div class="dest-card__body">
-              <p class="dest-card__desc">פסגת דאכשטיין עם Skywalk מעל האלפים, מכרה מלח שגולשים בו בשקיות, פארק מים על ההר, טירה עם מופע נשרים בלייב - ווינה מחכה בסוף. אוסטריה מפתיעה בכל פינה.</p>
-              <div class="dest-card__meta">
-                <span class="dest-card__badge dest-card__badge--easy">🟢 קל עם ילדים</span>
-                <span class="dest-card__badge dest-card__badge--days">📅 7-10 ימים</span>
-                <span class="dest-card__badge dest-card__badge--season">☀️ אוגוסט מומלץ</span>
-              </div>
-              <div class="dest-card__tags">
-                <span class="dest-card__tag">דאכשטיין</span>
-                <span class="dest-card__tag">מכרה מלח</span>
-                <span class="dest-card__tag">Wagrainis</span>
-                <span class="dest-card__tag">טירת וורפן</span>
-                <span class="dest-card__tag">ווינה</span>
-              </div>
-              <div class="dest-card__cta">
-                <a href="austria.html" class="dest-card__btn-article">למדריך המלא ←</a>
-                <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לאוסטריה עם ילדים" class="dest-card__btn-wa" target="_blank">
-                  <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  וואטסאפ
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="dest-card" id="card-poland-south" data-id="poland-south">
-            <div class="dest-card__top">
-              <div class="dest-card__flag"><span class="flag-icon flag-pl flag-icon-sm"></span></div>
-              <div class="dest-card__info">
-                <div class="dest-card__name">דרום פולין - זקופנה עם ילדים</div>
-                <div class="dest-card__hint">לחצו למדריך המלא</div>
-              </div>
-              <span class="dest-card__arrow">›</span>
-            </div>
-            <div class="dest-card__visual">
-              <div class="dest-card__visual-overlay"></div>
-              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);"><span class="flag-icon flag-pl flag-icon-lg"></span></span>
-              <span class="dest-card__visual-name">זקופנה</span>
-            </div>
-            <div class="dest-card__body">
-              <p class="dest-card__desc">זקופנה שמוקפת בהרי הטטרה, עמק קושיליסקה לטיולים סביב הנהר, פארק מים תרמי, מכרה מלח שגולשים בו במגלשות עץ - דרום פולין הפתיעה אותנו ממש לטובה.</p>
-              <div class="dest-card__meta">
-                <span class="dest-card__badge dest-card__badge--easy">🟢 קל עם ילדים</span>
-                <span class="dest-card__badge dest-card__badge--days">📅 7-8 ימים</span>
-                <span class="dest-card__badge dest-card__badge--season">☀️ קיץ מומלץ</span>
-              </div>
-              <div class="dest-card__tags">
-                <span class="dest-card__tag">זקופנה</span>
-                <span class="dest-card__tag">הרי הטטרה</span>
-                <span class="dest-card__tag">מכרה מלח</span>
-                <span class="dest-card__tag">Terma Bania</span>
-                <span class="dest-card__tag">Energylandia</span>
-              </div>
-              <div class="dest-card__cta">
-                <a href="poland-south.html" class="dest-card__btn-article">למדריך המלא ←</a>
-                <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לדרום פולין עם ילדים" class="dest-card__btn-wa" target="_blank">
-                  <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  וואטסאפ
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="dest-coming">
-            <span class="dest-coming__icon">✈️</span>
-            <div style="font-family:var(--font-heading);font-size:14px;color:#bbb;margin-bottom:4px;">יעדים נוספים בקרוב</div>
-            <div>רוצים יעד ספציפי? שלחו הודעה</div>
-            <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" target="_blank" style="display:inline-block;margin-top:10px;font-size:13px;color:var(--teal);font-weight:600;">דברו איתי ←</a>
-          </div>
-        </div>
-
-        <div class="map-wrapper">
-          <div id="map"></div>
-        </div>
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="פרטי יעד">
+  <div class="drawer-handle"><div class="drawer-handle-bar"></div></div>
+  <div class="drawer-strip" id="drawerStrip"></div>
+  <div class="drawer-header">
+    <div class="drawer-flag-wrap">
+      <div class="drawer-flag-box" id="drawerFlagBox">
+        <span class="flag-icon" id="drawerFlag" style="width:100%;height:100%;display:block;background-size:cover;"></span>
+      </div>
+      <div class="drawer-title-block">
+        <div class="drawer-name" id="drawerName"></div>
+        <div class="drawer-sub" id="drawerSub"></div>
       </div>
     </div>
-  </section>
+    <button class="drawer-close" id="drawerClose" aria-label="סגור">✕</button>
+  </div>
+  <div class="drawer-body">
+    <div class="drawer-stats" id="drawerStats"></div>
+    <p class="drawer-desc" id="drawerDesc"></p>
+    <div class="drawer-section-label">מה עושים שם</div>
+    <div class="drawer-tags" id="drawerTags"></div>
+    <div class="drawer-divider"></div>
+    <div class="drawer-cta" id="drawerCta"></div>
+  </div>
+</div>
 
-  <footer class="footer">
-    <div class="container">
-      <p>מתי טסים &copy; 2026 · <a href="services.html">דף הבית</a> · <a href="tips.html">טיפים</a> · <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21">וואטסאפ</a></p>
-    </div>
-  </footer>
+<footer class="footer">
+  <div class="container">
+    <p>מתי טסים &copy; 2026 · <a href="services.html">דף הבית</a> · <a href="tips.html">טיפים</a> · <a href="terms.html">תנאי שימוש</a> · <a href="https://wa.me/972546758145">וואטסאפ</a></p>
+    <p style="margin-top:10px;font-size:12px;opacity:.5;">* חלק מהקישורים באתר הם קישורי שותפים. ההמלצות תמיד מבוססות על ניסיון אישי בלבד.</p>
+  </div>
+</footer>
 
-  <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;" target="_blank" aria-label="וואטסאפ">
-    <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
+<a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="wa-float" target="_blank" aria-label="וואטסאפ">
+  <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-  <script>
-  (function() {
-    var nav = document.getElementById('nav');
-    window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
-    // hamburger handled by dedicated script below
+<div class="email-popup-overlay" id="emailPopupOverlay">
+  <div class="email-popup">
+    <button class="email-popup__close" id="emailPopupClose">×</button>
+    <div class="email-popup__icon">✈️</div>
+    <h2 class="email-popup__title">רוצים לקבל עדכונים?</h2>
+    <p class="email-popup__subtitle">השאירו מייל וקבלו טיפים, יעדים חדשים ופינות נסתרות ישירות לתיבה שלכם.</p>
+    <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm">
+      <input type="hidden" name="_subject" value="הרשמה מיעדים - מתי טסים">
+      <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/destinations.html">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input">
+      <button type="submit" class="email-popup__btn">אני רוצה לקבל עדכונים ✈️</button>
+      <button type="button" class="email-popup__skip" id="emailPopupSkip">דלג, קח אותי ליעד</button>
+    </form>
+  </div>
+</div>
 
-    function flagSvg(code) {
-      return '<span class="flag-icon flag-' + code + ' flag-icon-map"></span>';
-    }
-
-    var destinations = [
-      { id: 'slovakia', lat: 48.7,  lng: 19.5,  flag: flagSvg('sk'), name: 'סלובקיה',        days: '7-10 ימים', url: 'slovakia.html' },
-      { id: 'warsaw',   lat: 52.23, lng: 21.01, flag: flagSvg('pl'), name: 'וורשה',          days: '7-9 ימים',  url: 'warsaw.html' },
-      { id: 'romania',  lat: 45.51, lng: 25.37, flag: flagSvg('ro'), name: 'רומניה',         days: '7 ימים',    url: 'romania.html' },
-      { id: 'athens',   lat: 37.97, lng: 23.73, flag: flagSvg('gr'), name: 'אתונה עם ילדים', days: '5 ימים',    url: 'athens.html' },
-      { id: 'czechia',  lat: 48.60, lng: 14.22, flag: flagSvg('cz'), name: 'דרום צ\'כיה',    days: '10-14 ימים', url: 'czechia.html' },
-      { id: 'austria',  lat: 47.80, lng: 13.00, flag: flagSvg('at'), name: 'אוסטריה',         days: '7-10 ימים',  url: 'austria.html' },
-      { id: 'poland-south', lat: 49.30, lng: 19.95, flag: flagSvg('pl'), name: 'דרום פולין - זקופנה', days: '7-8 ימים', url: 'poland-south.html' }
-    ];
-
-    var map = L.map('map', { center: [46, 17], zoom: 5, scrollWheelZoom: false });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 18
-    }).addTo(map);
-
-    var markers = {};
-
-    function markerIcon(flag, active) {
-      return L.divIcon({
-        className: '',
-        html: '<div style="width:44px;height:44px;border-radius:50%;background:' + (active ? '#E8A045' : '#1A6B72') + ';border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 14px rgba(0,0,0,0.28);cursor:pointer;transform:' + (active ? 'scale(1.18)' : 'scale(1)') + ';transition:all 0.2s;">' + flag + '</div>',
-        iconSize: [44, 44], iconAnchor: [22, 22], popupAnchor: [0, -26]
-      });
-    }
-
-    function activate(id) {
-      document.querySelectorAll('.dest-card[data-id]').forEach(function(c) { c.classList.remove('active'); });
-      var card = document.getElementById('card-' + id);
-      if (card) { card.classList.add('active'); card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
-      destinations.forEach(function(d) { if (markers[d.id]) markers[d.id].setIcon(markerIcon(d.flag, d.id === id)); });
-    }
-
-    window.activateDest = function(id) { map.closePopup(); activate(id); };
-
-    destinations.forEach(function(d) {
-      var m = L.marker([d.lat, d.lng], { icon: markerIcon(d.flag, d.id === 'slovakia') })
-        .addTo(map)
-        .bindPopup(
-          '<div class="map-popup" dir="rtl"><span class="map-popup__flag" style="display:block;line-height:1;margin-bottom:6px;">' + d.flag + '</span>' +
-          '<div class="map-popup__name">' + d.name + '</div>' +
-          '<div class="map-popup__days">📅 ' + d.days + '</div>' +
-          '<a href="' + (d.url || 'destinations.html') + '" class="map-popup__btn" style="display:block;text-align:center;">לפרטים ↓</a></div>'
-        );
-      m.on('click', function() { activate(d.id); });
-      markers[d.id] = m;
-    });
-
-    document.querySelectorAll('.dest-card[data-id]').forEach(function(card) {
-      card.addEventListener('click', function(e) {
-        if (e.target.closest('a, button')) return;
-        var id = card.dataset.id;
-        if (e.target.closest('.dest-card__arrow') && card.classList.contains('active')) {
-          card.classList.remove('active');
-          destinations.forEach(function(d) { if (markers[d.id]) markers[d.id].setIcon(markerIcon(d.flag, false)); });
-          return;
-        }
-        activate(id);
-        var dest = destinations.find(function(d) { return d.id === id; });
-        if (dest) map.flyTo([dest.lat, dest.lng], 7, { duration: 1 });
-      });
-    });
-
-    setTimeout(function() { map.flyTo([48.7, 19.5], 6, { duration: 1 }); }, 400);
-  })();
-  </script>
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-  (function () {
-    'use strict';
-    var nav = document.getElementById('nav');
-    var hamburger = document.getElementById('hamburgerBtn');
-    var mobileMenu = document.getElementById('mobileMenu');
-    if (!hamburger || !mobileMenu) return;
-    hamburger.addEventListener('click', function () {
+(function() {
+  'use strict';
+
+  var WA_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+
+  /* ─── DESTINATION DATA ─── */
+  var dests = [
+    { id:'slovakia',     flag:'flag-sk', name:'סלובקיה',       sub:'מרכז אירופה',   lat:48.70, lng:19.50, color:'#1A6B72', days:'7-10 ימים', season:'☀️ מאי-ספטמבר', url:'slovakia.html',     wa:'סלובקיה',        desc:'טירות מהאגדות, הרי הטטרה ובירה ציורית. אחת ההפתעות הכי טובות באירופה לטיול משפחתי - זולה, נוחה ולא עמוסה בתיירים.', tags:['טירת ספיש','הרי הטטרה','מערות דומיצה','פארק מים','רפטינג'] },
+    { id:'warsaw',       flag:'flag-pl', name:'סובב וורשה',    sub:'פולין',          lat:52.23, lng:21.01, color:'#C0392B', days:'7-9 ימים',  season:'🍂 ספטמבר-אוקטובר', url:'warsaw.html',    wa:'וורשה',          desc:'עיר שמחברת היסטוריה עמוקה עם כיף אמיתי לילדים - מרכז מדע קופרניקוס, Suntago, Majaland ואינסוף אטרקציות לכל גיל.', tags:['קופרניקוס','Suntago','Majaland','Łazienki Park'] },
+    { id:'romania',      flag:'flag-ro', name:'רומניה',         sub:'מזרח אירופה',   lat:45.51, lng:25.37, color:'#002B7F', days:'7 ימים',    season:'🌸 אפריל - פסח', url:'romania.html',      wa:'רומניה',         desc:'טירת דרקולה, הרי הקרפטים, פארקי הרפתקות ביער ופסח בטבע. רומניה מפתיעה - ועדיין לא גילו אותה כולם.', tags:['טירת ברן','Dino Park','Peleș','Aventura Park'] },
+    { id:'athens',       flag:'flag-gr', name:'אתונה',          sub:'יוון',           lat:37.97, lng:23.73, color:'#0d5eaf', days:'5 ימים',    season:'☀️ מאי-ספטמבר', url:'athens.html',       wa:'אתונה',          desc:'Allou! Fun Park, האי אגינה, מוזיאון אשליות וגבעת ליקאבטוס - אתונה מפתיעה עם ילדים. עיר שחיה בלילה ומלאה בהיסטוריה.', tags:['Allou! Fun Park','האי אגינה','XPLORE','מונסטירקי','ליקאבטוס'] },
+    { id:'czechia',      flag:'flag-cz', name:"דרום צ'כיה",    sub:"צ'כיה",          lat:48.60, lng:14.22, color:'#11457e', days:'10-14 ימים', season:'☀️ אוגוסט מומלץ', url:'czechia.html',    wa:"דרום צ'כיה",     desc:"אגם ליפנו עם בובסלד ופארק מים, צ'סקי קרומלוב הציורית, ראפטינג בנהר ולטאבה ופראג בסוף - אחת ההפתעות הכי טובות.", tags:['אגם ליפנו','צ\'סקי קרומלוב','ראפטינג','בובסלד','פראג'] },
+    { id:'austria',      flag:'flag-at', name:'אוסטריה',        sub:'מרכז אירופה',   lat:47.80, lng:13.00, color:'#ed2939', days:'7-10 ימים', season:'☀️ אוגוסט מומלץ', url:'austria.html',    wa:'אוסטריה',        desc:'פסגת דאכשטיין עם Skywalk מעל האלפים, מכרה מלח שגולשים בו בשקיות, פארק מים על ההר וטירה עם מופע נשרים - ווינה מחכה בסוף.', tags:['דאכשטיין','מכרה מלח','Wagrainis','טירת וורפן','ווינה'] },
+    { id:'poland-south', flag:'flag-pl', name:'זקופנה',          sub:'דרום פולין',    lat:49.30, lng:19.95, color:'#7B1010', days:'7-8 ימים',  season:'☀️ קיץ מומלץ', url:'poland-south.html', wa:'דרום פולין',     desc:'זקופנה שמוקפת בהרי הטטרה, עמק קושיליסקה לטיולים סביב הנהר, פארק מים תרמי, מכרה מלח שגולשים בו במגלשות עץ.', tags:['זקופנה','הרי הטטרה','מכרה מלח','Terma Bania','Energylandia'] },
+    { id:'budapest',     flag:'flag-hu', name:'בודפשט',          sub:'הונגריה',        lat:47.50, lng:19.04, color:'#ce2939', days:'5-6 ימים',  season:'☀️ כל השנה',    url:'budapest.html',    wa:'בודפשט',         desc:'עיר הקסמים על גדות הדנובה - פרלמנט מרהיב, מרחצאות היסטוריים, פארק מים ענק, מגלשות בוב ואטרקציות לכל גיל.', tags:['טירת בודה','Aquaworld','Visegrad Bobsled','שצ\'ני','הפרלמנט'] }
+  ];
+
+  /* ─── DRAWER ─── */
+  var drawer    = document.getElementById('drawer');
+  var overlay   = document.getElementById('drawerOverlay');
+  var closeBtn  = document.getElementById('drawerClose');
+  var activeId  = null;
+
+  function openDrawer(id) {
+    var d = dests.find(function(x){ return x.id === id; });
+    if (!d) return;
+    activeId = id;
+
+    /* chips */
+    document.querySelectorAll('.chip[data-id]').forEach(function(c){
+      c.classList.toggle('active', c.dataset.id === id);
+    });
+
+    /* header */
+    var flagEl = document.getElementById('drawerFlag');
+    flagEl.className = 'flag-icon ' + d.flag;
+    flagEl.style.cssText = 'width:100%;height:100%;display:block;background-size:cover;border-radius:0';
+
+    document.getElementById('drawerName').textContent = d.name;
+    document.getElementById('drawerSub').textContent  = '📍 ' + d.sub;
+    document.getElementById('drawerStrip').style.background = 'linear-gradient(90deg,' + d.color + ',' + d.color + '88)';
+
+    /* stats */
+    document.getElementById('drawerStats').innerHTML =
+      '<div class="stat-box"><div class="stat-lbl">משך טיול</div><div class="stat-val">📅 ' + d.days + '</div></div>' +
+      '<div class="stat-box"><div class="stat-lbl">עונה מומלצת</div><div class="stat-val">' + d.season + '</div></div>';
+
+    /* desc */
+    document.getElementById('drawerDesc').textContent = d.desc;
+
+    /* tags */
+    document.getElementById('drawerTags').innerHTML = d.tags.map(function(t){
+      return '<span class="dtag">' + t + '</span>';
+    }).join('');
+
+    /* CTA */
+    var waUrl = 'https://wa.me/972546758145?text=' + encodeURIComponent('היי, אני מתעניין בטיול ל' + d.wa + ' עם ילדים');
+    document.getElementById('drawerCta').innerHTML =
+      '<a href="' + d.url + '" class="btn-main">למדריך המלא ←</a>' +
+      '<a href="' + waUrl + '" class="btn-wa" target="_blank">' + WA_ICON + ' שאלה? כתבו לי בוואטסאפ</a>';
+
+    /* open */
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    /* map */
+    if (window._map) window._map.flyTo([d.lat, d.lng], 7, { duration: 0.85 });
+    updateMarkers(id);
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    document.querySelectorAll('.chip[data-id]').forEach(function(c){ c.classList.remove('active'); });
+    updateMarkers(null);
+    activeId = null;
+  }
+
+  closeBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeDrawer(); });
+
+  /* ─── CHIPS ─── */
+  var chipBar = document.getElementById('chipBar');
+  dests.forEach(function(d) {
+    var btn = document.createElement('button');
+    btn.className = 'chip';
+    btn.dataset.id = d.id;
+    btn.innerHTML = '<span class="flag-icon flag-chip ' + d.flag + '"></span>' + d.name;
+    btn.addEventListener('click', function() {
+      if (activeId === d.id) { closeDrawer(); } else { openDrawer(d.id); }
+    });
+    chipBar.appendChild(btn);
+  });
+  var comingChip = document.createElement('div');
+  comingChip.className = 'chip-coming';
+  comingChip.textContent = '✦ עוד יעדים בקרוב';
+  chipBar.appendChild(comingChip);
+
+  /* ─── MAP ─── */
+  function makeIcon(d, active) {
+    var sz   = active ? 46 : 38;
+    var bg   = active ? d.color : '#1A6B72';
+    var shad = active ? '0 6px 20px rgba(0,0,0,.32)' : '0 2px 8px rgba(0,0,0,.22)';
+    var sc   = active ? 'scale(1.12)' : 'scale(1)';
+    return L.divIcon({
+      className: '',
+      html: '<div style="width:' + sz + 'px;height:' + sz + 'px;border-radius:50%;background:' + bg + ';border:3px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:' + shad + ';cursor:pointer;transform:' + sc + ';transition:all .2s;">' +
+            '<span class="flag-icon flag-chip ' + d.flag + '" style="width:18px;height:12px;border-radius:2px;"></span>' +
+            '</div>',
+      iconSize: [sz, sz], iconAnchor: [sz/2, sz/2], popupAnchor: [0, -(sz/2 + 8)]
+    });
+  }
+
+  function updateMarkers(activeDestId) {
+    dests.forEach(function(d) {
+      if (window._markers && window._markers[d.id]) {
+        window._markers[d.id].setIcon(makeIcon(d, d.id === activeDestId));
+      }
+    });
+  }
+
+  var map = L.map('map', { center: [46.8, 17.0], zoom: 5, scrollWheelZoom: false, zoomControl: true });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 18
+  }).addTo(map);
+  window._map = map;
+  window._markers = {};
+
+  dests.forEach(function(d) {
+    var m = L.marker([d.lat, d.lng], { icon: makeIcon(d, false) }).addTo(map);
+    m.bindPopup(
+      '<div class="map-popup" dir="rtl">' +
+      '<span class="flag-icon map-popup__flag ' + d.flag + '"></span>' +
+      '<div class="map-popup__name">' + d.name + '</div>' +
+      '<div class="map-popup__sub">' + d.sub + '</div>' +
+      '<div class="map-popup__days">📅 ' + d.days + '</div>' +
+      '<button class="map-popup__btn" onclick="window._activate(\'' + d.id + '\')">פרטים ומדריך מלא ←</button>' +
+      '</div>'
+    );
+    m.on('click', function() { openDrawer(d.id); map.closePopup(); });
+    window._markers[d.id] = m;
+  });
+
+  window._activate = function(id) { map.closePopup(); openDrawer(id); };
+
+  /* ─── NAV ─── */
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
+
+  var hamburger  = document.getElementById('hamburgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function(e){
+      e.stopPropagation();
+      /* סגור drawer אם פתוח */
+      if (drawer.classList.contains('open')) closeDrawer();
       var isOpen = mobileMenu.classList.toggle('open');
       hamburger.setAttribute('aria-expanded', isOpen.toString());
       hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-    mobileMenu.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
+    mobileMenu.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
         mobileMenu.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.setAttribute('aria-label', 'פתח תפריט');
         document.body.style.overflow = '';
       });
     });
-    if (nav) window.addEventListener('scroll', function () {
-      nav.classList.toggle('scrolled', window.scrollY > 10);
-    }, { passive: true });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.setAttribute('aria-label', 'פתח תפריט');
-        document.body.style.overflow = '';
-        hamburger.focus();
+  }
+
+  /* ─── EMAIL POPUP ─── */
+  var epOverlay = document.getElementById('emailPopupOverlay');
+  var epClose   = document.getElementById('emailPopupClose');
+  var epSkip    = document.getElementById('emailPopupSkip');
+  function closeEP() { epOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+  if (epClose) epClose.addEventListener('click', closeEP);
+  if (epSkip)  epSkip.addEventListener('click', closeEP);
+  epOverlay.addEventListener('click', function(e){ if (e.target === epOverlay) closeEP(); });
+  document.querySelectorAll('a[href="#newsletter"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      if (!localStorage.getItem('mtEmailSubmitted')) {
+        epOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
       }
     });
-  })();
+  });
+  var epForm = document.getElementById('emailPopupForm');
+  if (epForm) epForm.addEventListener('submit', function(){ localStorage.setItem('mtEmailSubmitted','1'); setTimeout(closeEP, 300); });
+
+})();
 </script>
-
-  <!-- EMAIL POPUP -->
-  <div class="email-popup-overlay" id="emailPopupOverlay">
-    <div class="email-popup">
-      <button class="email-popup__close" id="emailPopupClose" aria-label="סגור">×</button>
-      <div class="email-popup__icon">✈️</div>
-      <h2 class="email-popup__title">רוצים לקבל עדכונים?</h2>
-      <p class="email-popup__subtitle">השאירו מייל וקבלו טיפים, יעדים חדשים ופינות נסתרות ישירות לתיבה שלכם.</p>
-      <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm">
-        <input type="hidden" name="_subject" value="הרשמה מיעדים - מתי טסים">
-        <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/destinations.html">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input">
-        <button type="submit" class="email-popup__btn">אני רוצה לקבל עדכונים ✈️</button>
-        <button type="button" class="email-popup__skip" id="emailPopupSkip">דלג, קח אותי ליעד</button>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    (function() {
-      var overlay = document.getElementById('emailPopupOverlay');
-      var closeBtn = document.getElementById('emailPopupClose');
-      var skipBtn = document.getElementById('emailPopupSkip');
-
-      function closePopup() {
-        overlay.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-
-      closeBtn.addEventListener('click', closePopup);
-      skipBtn.addEventListener('click', closePopup);
-      overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) closePopup();
-      });
-
-      document.getElementById('emailPopupForm').addEventListener('submit', function() {
-        localStorage.setItem('mtEmailSubmitted', '1');
-        setTimeout(closePopup, 300);
-      });
-
-      // Intercept מצטרפים לקהילה clicks on this page
-      document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          overlay.classList.add('open');
-          document.body.style.overflow = 'hidden';
-        });
-      });
-    })();
-  </script>
 </body>
 </html>
