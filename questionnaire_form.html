@@ -12,256 +12,127 @@
     --cream:#FAF7F2; --white:#fff; --green:#2a9d5c;
     --font-heading:'Secular One',sans-serif;
     --font-body:'Rubik',sans-serif;
-    --radius:12px;
-    --nav-height: 72px;
+    --radius:14px; --nav-height:72px;
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:var(--font-body); direction:rtl; background:var(--cream); color:var(--charcoal); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--font-body);direction:rtl;background:var(--cream);color:var(--charcoal)}
 
   /* NAV */
-  .page-header {
-    background:linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
-    padding:48px 24px 56px; text-align:center;
-    margin-top:72px;
-  }
-  .page-header__badge {
-    display:inline-block; background:var(--amber); color:var(--charcoal);
-    padding:5px 18px; border-radius:20px; font-size:13px; font-weight:700;
-    margin-bottom:16px;
-  }
-  .page-header__title {
-    font-family:var(--font-heading); font-size:clamp(26px,4vw,40px);
-    color:white; margin-bottom:10px;
-  }
-  .page-header__sub { font-size:16px; color:rgba(255,255,255,0.8); max-width:500px; margin:0 auto; line-height:1.7; }
+  .nav{position:fixed;top:0;right:0;left:0;z-index:1000;background:var(--cream);border-bottom:1px solid var(--sand-dark);height:var(--nav-height);transition:box-shadow 0.3s ease}
+  .nav.scrolled{box-shadow:0 4px 16px rgba(0,0,0,0.1)}
+  .nav__inner{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:100%;position:relative}
+  .nav__logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+  .nav__links{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0;position:absolute;left:50%;transform:translateX(-50%)}
+  .nav__link{white-space:nowrap;padding:8px 13px;border-radius:8px;font-family:'Assistant',sans-serif;font-weight:300;font-size:15px;color:var(--charcoal);text-decoration:none;transition:background 0.2s,color 0.2s;min-height:44px;display:flex;align-items:center}
+  .nav__link:hover{background:var(--sand);color:var(--teal)}
+  .nav__link[aria-current="page"]{background:var(--teal);color:#fff}
+  .nav__mobile-actions{display:none;align-items:center;gap:4px}
+  .nav__hamburger{display:none;width:44px;height:44px;align-items:center;justify-content:center;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;position:relative;z-index:1001}
+  .nav__hamburger span{display:block;width:24px;height:2px;background:var(--charcoal);border-radius:2px;transition:all 0.3s ease}
+  .nav__hamburger[aria-expanded="true"] span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+  .nav__hamburger[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .nav__hamburger[aria-expanded="true"] span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+  .nav__whatsapp-mobile{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#25D366}
+  .nav__mobile-menu{display:none;position:fixed;top:var(--nav-height);right:0;left:0;bottom:0;background:var(--cream);padding:32px 24px;flex-direction:column;gap:8px;z-index:999;overflow-y:auto}
+  .nav__mobile-menu.open{display:flex}
+  .nav__mobile-menu .nav__link{font-size:20px;padding:16px;justify-content:flex-start}
+  .nav__link--community{background:var(--amber);color:#2C2C2C!important;font-weight:300;font-size:15px;border-radius:22px;padding:8px 16px;min-height:44px;box-shadow:0 2px 10px rgba(232,160,69,0.45)}
+  .nav__link--community::before{content:'';width:8px;height:8px;background:#4ade80;border-radius:50%;display:inline-block;margin-left:7px;box-shadow:0 0 6px #4ade80;animation:dotBlink 1.4s ease-in-out infinite}
+  @keyframes dotBlink{0%,100%{opacity:0.4}50%{opacity:1;box-shadow:0 0 10px #4ade80}}
+  @media(max-width:900px){.nav__links{display:none}.nav__mobile-actions{display:flex}.nav__hamburger{display:flex}.nav__logo img{height:44px!important}}
 
-  /* FORM WRAPPER */
-  .form-wrap { max-width:760px; margin:0 auto; padding:40px 24px 80px; }
+  /* HERO */
+  .page-header{background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);padding:56px 24px 64px;text-align:center;margin-top:var(--nav-height);position:relative;overflow:hidden}
+  .page-header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:48px;background:linear-gradient(to top,var(--cream),transparent)}
+  .page-header__badge{display:inline-block;background:var(--amber);color:var(--charcoal);padding:5px 18px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:16px}
+  .page-header__title{font-family:var(--font-heading);font-size:clamp(26px,4vw,42px);color:white;margin-bottom:10px}
+  .page-header__sub{font-size:16px;color:rgba(255,255,255,0.85);max-width:480px;margin:0 auto;line-height:1.7}
 
-  /* SECTION BLOCK */
-  .form-section {
-    background:white; border-radius:var(--radius);
-    border:1px solid var(--sand-dark); margin-bottom:24px;
-    overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.05);
-  }
-  .form-section__head {
-    background:var(--teal); color:white; padding:14px 20px;
-    font-family:var(--font-heading); font-size:16px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .form-section__body { padding:24px 20px; display:flex; flex-direction:column; gap:18px; }
+  /* progress bar */
+  .progress-wrap{max-width:560px;margin:0 auto;padding:32px 24px 0}
+  .progress-bar{height:4px;background:var(--sand-dark);border-radius:2px;overflow:hidden;margin-bottom:8px}
+  .progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width 0.4s ease;width:33%}
+  .progress-label{font-size:13px;color:#888;text-align:center}
 
-  /* FIELD */
-  .field { display:flex; flex-direction:column; gap:6px; }
-  .field--row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  .field--row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
-  label { font-size:14px; font-weight:600; color:var(--charcoal); }
-  label span { font-weight:400; color:#999; font-size:13px; }
-  input[type=text], input[type=email], input[type=tel], select, textarea {
-    width:100%; padding:11px 14px; border:1.5px solid var(--sand-dark);
-    border-radius:8px; font-size:15px; font-family:var(--font-body);
-    color:var(--charcoal); background:var(--cream); direction:rtl;
-    transition:border-color 0.2s, box-shadow 0.2s;
-  }
-  input:focus, select:focus, textarea:focus {
-    outline:none; border-color:var(--teal);
-    box-shadow:0 0 0 3px rgba(26,107,114,0.1);
-  }
-  textarea { resize:vertical; min-height:80px; }
+  /* FORM */
+  .form-wrap{max-width:560px;margin:0 auto;padding:24px 24px 80px}
 
-  /* CHECKBOXES */
-  .cb-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
-  .cb-grid.cols2 { grid-template-columns:repeat(2,1fr); }
-  .cb-label {
-    display:flex; align-items:center; gap:8px;
-    background:var(--cream); border:1.5px solid var(--sand-dark);
-    border-radius:8px; padding:9px 12px; cursor:pointer;
-    font-size:14px; transition:all 0.15s; user-select:none;
-  }
-  .cb-label:hover { border-color:var(--teal); background:var(--sand); }
-  .cb-label input { width:16px; height:16px; accent-color:var(--teal); cursor:pointer; flex-shrink:0; }
-  .cb-label input:checked + span { color:var(--teal); font-weight:600; }
-  .cb-label:has(input:checked) { border-color:var(--teal); background:#edf6f7; }
+  /* STEP */
+  .step{display:none;animation:stepIn 0.3s ease}
+  .step.active{display:block}
+  @keyframes stepIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-  /* RADIO PILLS */
-  .radio-pills { display:flex; flex-wrap:wrap; gap:8px; }
-  .radio-pill {
-    display:flex; align-items:center; gap:7px;
-    border:1.5px solid var(--sand-dark); border-radius:24px;
-    padding:8px 16px; cursor:pointer; font-size:14px;
-    transition:all 0.15s; background:var(--cream);
-  }
-  .radio-pill:hover { border-color:var(--teal); }
-  .radio-pill input { accent-color:var(--teal); }
-  .radio-pill:has(input:checked) { border-color:var(--teal); background:#edf6f7; color:var(--teal); font-weight:600; }
+  .step-card{background:white;border-radius:var(--radius);border:1px solid var(--sand-dark);padding:28px 24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);margin-bottom:20px}
+  .step-icon{font-size:32px;margin-bottom:8px;display:block}
+  .step-title{font-family:var(--font-heading);font-size:20px;color:var(--teal);margin-bottom:4px}
+  .step-subtitle{font-size:14px;color:#888;margin-bottom:22px}
 
-  /* KIDS TABLE */
-  .kids-grid { display:flex; flex-direction:column; gap:10px; }
-  .kid-row {
-    display:grid; grid-template-columns:auto 1fr 1fr 2fr;
-    gap:10px; align-items:center;
-  }
-  .kid-row.removable {
-    grid-template-columns:auto 1fr 1fr 2fr auto;
-  }
-  .kid-num {
-    width:28px; height:28px; background:var(--teal); color:white;
-    border-radius:50%; display:flex; align-items:center; justify-content:center;
-    font-size:13px; font-weight:700; flex-shrink:0;
-  }
-  .kid-label { font-size:13px; color:#888; margin-bottom:3px; }
-  .btn-add-kid {
-    display:flex; align-items:center; justify-content:center;
-    width:36px; height:36px; border-radius:50%;
-    background:var(--teal); color:white; border:none;
-    font-size:22px; cursor:pointer; margin-top:6px;
-    transition:background 0.2s, transform 0.2s;
-    box-shadow:0 2px 8px rgba(26,107,114,0.25);
-  }
-  .btn-add-kid:hover { background:var(--teal-dark); transform:scale(1.1); }
-  .btn-remove-kid {
-    width:28px; height:28px; border-radius:50%;
-    background:#e55; color:white; border:none;
-    font-size:18px; cursor:pointer; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
-    transition:background 0.2s, transform 0.2s;
-    box-shadow:0 2px 6px rgba(229,85,85,0.3);
-    line-height:1;
-  }
-  .btn-remove-kid:hover { background:#c33; transform:scale(1.1); }
-  .kid-row { position:relative; }
-  .kid-row-inner {
-    display:grid; grid-template-columns:auto 1fr 1fr 2fr auto;
-    gap:10px; align-items:center;
-  }
+  /* FIELDS */
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+  .field:last-child{margin-bottom:0}
+  .field--row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  label{font-size:14px;font-weight:600;color:var(--charcoal)}
+  label span{font-weight:400;color:#999;font-size:13px}
+  input[type=text],input[type=tel],select{width:100%;padding:12px 14px;border:1.5px solid var(--sand-dark);border-radius:10px;font-size:15px;font-family:var(--font-body);color:var(--charcoal);background:var(--cream);direction:rtl;transition:border-color 0.2s,box-shadow 0.2s}
+  input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,107,114,0.1)}
+  .req{color:#e55;font-size:13px}
 
-  /* SUBMIT */
-  .submit-area { text-align:center; margin-top:8px; }
-  .btn-submit {
-    background:var(--teal); color:white; border:none;
-    padding:16px 48px; border-radius:40px; font-size:17px;
-    font-family:var(--font-body); font-weight:700; cursor:pointer;
-    transition:all 0.2s; box-shadow:0 4px 16px rgba(26,107,114,0.3);
-    display:inline-flex; align-items:center; gap:10px;
-  }
-  .btn-submit:hover { background:var(--teal-dark); transform:translateY(-2px); box-shadow:0 6px 24px rgba(26,107,114,0.4); }
-  .submit-note { font-size:13px; color:#aaa; margin-top:10px; }
+  /* PILLS */
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .pill{display:flex;align-items:center;gap:6px;border:1.5px solid var(--sand-dark);border-radius:24px;padding:8px 16px;cursor:pointer;font-size:14px;transition:all 0.15s;background:var(--cream);user-select:none}
+  .pill:hover{border-color:var(--teal)}
+  .pill input{accent-color:var(--teal);cursor:pointer}
+  .pill:has(input:checked){border-color:var(--teal);background:#edf6f7;color:var(--teal);font-weight:600}
+
+  /* INTERESTS */
+  .interests{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
+  .interest{display:flex;flex-direction:column;align-items:center;gap:4px;border:1.5px solid var(--sand-dark);border-radius:12px;padding:12px 6px;cursor:pointer;font-size:12px;text-align:center;transition:all 0.15s;background:var(--cream);user-select:none;line-height:1.3}
+  .interest input{display:none}
+  .interest-icon{font-size:22px}
+  .interest:hover{border-color:var(--teal)}
+  .interest:has(input:checked){border-color:var(--teal);background:#edf6f7;color:var(--teal);font-weight:600}
+
+  /* KIDS */
+  .kids-simple{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+  .kid-row-simple{display:flex;align-items:center;gap:10px}
+  .kid-badge{width:26px;height:26px;background:var(--teal);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+  .kid-row-simple input{flex:1;padding:10px 12px;border:1.5px solid var(--sand-dark);border-radius:8px;font-size:14px;font-family:var(--font-body);background:var(--cream);direction:rtl}
+  .kid-row-simple input:focus{outline:none;border-color:var(--teal)}
+  .btn-remove{width:28px;height:28px;border-radius:50%;background:#fee;border:1px solid #fcc;color:#c33;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s}
+  .btn-remove:hover{background:#fcc}
+  .btn-add{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:8px 16px;border:1.5px dashed var(--teal);border-radius:20px;background:transparent;color:var(--teal);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all 0.15s}
+  .btn-add:hover{background:#edf6f7}
+
+  /* NAVIGATION */
+  .step-nav{display:flex;gap:12px;margin-top:8px}
+  .btn-next{flex:1;background:var(--teal);color:white;border:none;padding:15px 24px;border-radius:40px;font-size:16px;font-family:var(--font-body);font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(26,107,114,0.28);display:flex;align-items:center;justify-content:center;gap:8px}
+  .btn-next:hover{background:var(--teal-dark);transform:translateY(-1px)}
+  .btn-back{background:transparent;color:var(--charcoal);border:1.5px solid var(--sand-dark);padding:15px 20px;border-radius:40px;font-size:15px;font-family:var(--font-body);cursor:pointer;transition:all 0.2s}
+  .btn-back:hover{border-color:var(--charcoal)}
+  .btn-submit{flex:1;background:var(--teal);color:white;border:none;padding:15px 24px;border-radius:40px;font-size:16px;font-family:var(--font-body);font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 14px rgba(26,107,114,0.28)}
+  .btn-submit:hover{background:var(--teal-dark);transform:translateY(-1px)}
+  .submit-note{font-size:13px;color:#aaa;text-align:center;margin-top:10px}
 
   /* SUCCESS */
-  .success-box {
-    display:none; background:#edf6f7; border:2px solid var(--teal);
-    border-radius:var(--radius); padding:40px 24px; text-align:center; margin-top:24px;
+  .success-box{display:none;background:#edf6f7;border:2px solid var(--teal);border-radius:var(--radius);padding:48px 24px;text-align:center}
+  .success-box.show{display:block}
+  .success-box h3{font-family:var(--font-heading);font-size:26px;color:var(--teal);margin-bottom:10px}
+  .success-box p{color:#555;font-size:15px;line-height:1.7;margin-bottom:24px}
+  .btn-wa{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:white;padding:13px 28px;border-radius:40px;font-size:15px;font-weight:700;text-decoration:none;font-family:var(--font-body)}
+
+  @media(max-width:500px){
+    .interests{grid-template-columns:repeat(2,1fr)}
+    .field--row{grid-template-columns:1fr}
   }
-  .success-box.show { display:block; }
-  .success-box h3 { font-family:var(--font-heading); font-size:24px; color:var(--teal); margin-bottom:10px; }
-  .success-box p { color:#555; font-size:15px; line-height:1.7; margin-bottom:20px; }
-  .btn-wa {
-    display:inline-flex; align-items:center; gap:8px;
-    background:#25D366; color:white; padding:12px 28px;
-    border-radius:40px; font-size:15px; font-weight:700;
-    text-decoration:none; font-family:var(--font-body);
-  }
-
-  /* REQUIRED */
-  .req { color:#e55; font-size:13px; }
-
-  @media(max-width:600px) {
-    .field--row, .field--row3 { grid-template-columns:1fr; }
-    .cb-grid { grid-template-columns:repeat(2,1fr); }
-    .kid-row,
-    .kid-row.removable {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .kid-row .kid-num {
-      flex-shrink: 0;
-      margin-top: 20px;
-    }
-    .kid-row > .field {
-      flex: 1;
-      min-width: 70px;
-    }
-    .kid-row > .field:nth-child(4) {
-      flex-basis: 100%;
-      margin-right: 36px;
-    }
-    .btn-remove-kid {
-      flex-shrink: 0;
-      margin-top: 20px;
-    }
-    .btn-add-kid {
-      width: 44px;
-      height: 44px;
-      font-size: 26px;
-    }
-  }
-
-    /* ── EMAIL POPUP ─────────────────────────────── */
-    .email-popup-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; padding:24px; }
-    .email-popup-overlay.open { display:flex; }
-    .email-popup { background:var(--cream); border-radius:20px; padding:40px 32px; max-width:420px; width:100%; text-align:center; position:relative; box-shadow:0 16px 48px rgba(0,0,0,0.2); animation:popupIn 0.3s ease; box-sizing:border-box; }
-    @keyframes popupIn { from { transform:translateY(20px); opacity:0; } to { transform:translateY(0); opacity:1; } }
-    .email-popup__close { position:absolute; top:14px; left:16px; font-size:22px; cursor:pointer; color:#aaa; background:none; border:none; line-height:1; }
-    .email-popup__close:hover { color:var(--charcoal); }
-    .email-popup__icon { font-size:40px; margin-bottom:12px; }
-    .email-popup__title { font-family:var(--font-heading); font-size:22px; color:var(--teal); margin-bottom:8px; }
-    .email-popup__subtitle { font-size:14px; color:#666; line-height:1.6; margin-bottom:24px; }
-    .email-popup__form { display:flex; flex-direction:column; gap:12px; }
-    .email-popup__input { padding:13px 18px; border:2px solid var(--sand-dark); border-radius:40px; font-family:var(--font-body); font-size:15px; background:white; color:var(--charcoal); outline:none; text-align:right; width:100%; box-sizing:border-box; }
-    .email-popup__input:focus { border-color:var(--teal); }
-    .email-popup__btn { background:var(--teal); color:white; border:none; border-radius:40px; padding:13px 28px; font-family:var(--font-body); font-size:15px; font-weight:600; cursor:pointer; transition:background 0.2s; }
-    .email-popup__btn:hover { background:var(--teal-dark); }
-    .email-popup__skip { font-size:13px; color:#aaa; cursor:pointer; margin-top:4px; background:none; border:none; text-decoration:underline; }
-    .email-popup__skip:hover { color:var(--charcoal); }
-
-        /* ── NAV ─────────────────────────────── */
-    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
-    .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
-    .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
-    .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
-    .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
-    .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
-    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.02em; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
-    .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
-    .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
-    .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
-    .nav__mobile-actions { display:none; align-items:center; gap:4px; }
-    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
-    .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
-    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
-    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
-    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
-    .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
-    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:32px 24px; flex-direction:column; gap:8px; z-index:999; overflow-y:auto; }
-    .nav__mobile-menu.open { display:flex; }
-    .nav__mobile-menu .nav__link { font-size:20px; padding:16px; justify-content:flex-start; }
-    .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:300; font-size:15px; border-radius:22px; padding:8px 16px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); animation:communityPulse 2.8s ease-in-out infinite; }
-    .nav__link--community:hover, .nav__link--community:focus-visible { background:#d4903c !important; color:#2C2C2C !important; transform:translateY(-2px); box-shadow:0 4px 16px rgba(232,160,69,0.55); animation:none; }
-    .nav__link--community::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; margin-left:7px; box-shadow:0 0 6px #4ade80; animation:dotBlink 1.4s ease-in-out infinite; }
-    .nav__mobile-menu .nav__link--community { font-size:15px; padding:8px 18px; width:fit-content; min-height:44px; }
-    @keyframes communityPulse { 0%,100%{box-shadow:0 2px 10px rgba(232,160,69,0.4);} 50%{box-shadow:0 2px 18px rgba(232,160,69,0.75),0 0 0 4px rgba(232,160,69,0.15);} }
-    @keyframes dotBlink { 0%,100%{opacity:0.4;box-shadow:0 0 3px #4ade80;} 50%{opacity:1;box-shadow:0 0 10px #4ade80,0 0 20px #4ade8088;} }
-    @media(max-width:900px) {
-      .nav__links { display:none; }
-      .nav__mobile-actions { display:flex; }
-      .nav__hamburger { display:flex; }
-      .nav__logo img { height:44px !important; }
-      .nav__logo-text { font-size:18px !important; }
-    }
-    /* ── END NAV ─────────────────────────── */
-  </style>
-  <!-- Privacy-friendly analytics by Plausible -->
-  <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
-  <script>
-    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-    plausible.init()
-  </script>
+</style>
+<script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav__inner">
     <a href="services.html" class="nav__logo">
@@ -277,405 +148,273 @@
     </ul>
     <div class="nav__mobile-actions">
       <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-      <button class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-label="פתח תפריט">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-label="פתח תפריט"><span></span><span></span><span></span></button>
     </div>
-  </div>
-  <div class="nav__mobile-menu" id="mobileMenu">
-    <a href="tips.html" class="nav__link">טיפים</a>
-    <a href="destinations.html" class="nav__link">יעדים</a>
-    <a href="weather.html" class="nav__link">מזג אוויר</a>
-    <a href="packages.html" class="nav__link">חבילות</a>
-    <a href="about.html" class="nav__link">אודות</a>
-    <a href="#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a>
   </div>
 </nav>
 
-<!-- HEADER -->
-<div class="page-header">
-  <div class="page-header__badge">📋 שאלון תכנון טיול</div>
-  <h1 class="page-header__title">ספרו לי על הטיול שלכם</h1>
-  <p class="page-header__sub">מלאו את השאלון ואחזור אליכם תוך 24 שעות עם הצעה מותאמת</p>
+<div class="nav__mobile-menu" id="mobileMenu">
+  <a href="tips.html" class="nav__link">טיפים</a>
+  <a href="destinations.html" class="nav__link">יעדים</a>
+  <a href="weather.html" class="nav__link">מזג אוויר</a>
+  <a href="packages.html" class="nav__link">חבילות</a>
+  <a href="about.html" class="nav__link">אודות</a>
+  <a href="#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a>
 </div>
 
-<!-- FORM -->
-<div class="form-wrap">
+<div class="page-header">
+  <div class="page-header__badge">⏱️ 2 דקות בלבד</div>
+  <h1 class="page-header__title">ספרו לי על הטיול שלכם</h1>
+  <p class="page-header__sub">3 שאלות קצרות ואחזור אליכם עד 24 שעות</p>
+</div>
 
-  <!-- ⚠️ הוראות: החליפו YOUR_FORM_ID באייד מ-formspree.io -->
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">שלב 1 מתוך 3</div>
+</div>
+
+<div class="form-wrap">
   <form id="tripForm" action="https://formspree.io/f/mwvrkdon" method="POST" novalidate>
 
-    <!-- 1. פרטים אישיים -->
-    <div class="form-section">
-      <div class="form-section__head">✈ 1. פרטים אישיים</div>
-      <div class="form-section__body">
+    <!-- STEP 1: מי אתם -->
+    <div class="step active" id="step1">
+      <div class="step-card">
+        <span class="step-icon">👋</span>
+        <div class="step-title">קצת עליכם</div>
+        <div class="step-subtitle">רק הבסיס - כדי שאוכל לחזור אליכם</div>
+
         <div class="field--row">
           <div class="field">
-            <label>שם מלא <span class="req">*</span></label>
-            <input type="text" name="שם מלא" required placeholder="ישראל ישראלי">
+            <label>שם <span class="req">*</span></label>
+            <input type="text" name="שם" id="f_name" required placeholder="ישראל">
           </div>
           <div class="field">
-            <label>מספר וואטסאפ <span class="req">*</span></label>
-            <input type="tel" name="וואטסאפ" required placeholder="05X-XXXXXXX">
+            <label>וואטסאפ <span class="req">*</span></label>
+            <input type="tel" name="וואטסאפ" id="f_wa" required placeholder="05X-XXXXXXX">
           </div>
         </div>
+
         <div class="field">
-          <label>מייל <span>(אופציונלי)</span></label>
-          <input type="email" name="מייל" placeholder="your@email.com">
+          <label>כמה ילדים נוסעים?</label>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="כמה ילדים" value="1"><span>1 ילד</span></label>
+            <label class="pill"><input type="radio" name="כמה ילדים" value="2" checked><span>2 ילדים</span></label>
+            <label class="pill"><input type="radio" name="כמה ילדים" value="3"><span>3 ילדים</span></label>
+            <label class="pill"><input type="radio" name="כמה ילדים" value="4+"><span>4+</span></label>
+          </div>
         </div>
+
+        <div class="field" style="margin-top:16px">
+          <label>גילאי הילדים <span>(בקירוב)</span></label>
+          <div class="kids-simple" id="kidsSimple">
+            <div class="kid-row-simple">
+              <div class="kid-badge">1</div>
+              <input type="text" name="ילד 1 גיל" placeholder="למשל: 7">
+            </div>
+          </div>
+          <button type="button" class="btn-add" id="addKidSimple">+ הוסיפו ילד</button>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-next" onclick="goStep(2)">הבא ←</button>
       </div>
     </div>
 
-    <!-- 2. פרטי הטיול -->
-    <div class="form-section">
-      <div class="form-section__head">🗺 2. פרטי הטיול</div>
-      <div class="form-section__body">
+    <!-- STEP 2: הטיול -->
+    <div class="step" id="step2">
+      <div class="step-card">
+        <span class="step-icon">🗺️</span>
+        <div class="step-title">לאן ומתי?</div>
+        <div class="step-subtitle">גם אם אין לכם יעד מוחלט - תכתבו מה מסקרן אתכם</div>
+
         <div class="field">
-          <label>יעד הטיול <span class="req">*</span></label>
-          <input type="text" name="יעד" required placeholder="למשל: סלובקיה, פולין, רומניה...">
+          <label>יעד מועדף <span class="req">*</span></label>
+          <input type="text" name="יעד" id="f_dest" required placeholder="סלובקיה, פולין, אירופה בכלל...">
         </div>
+
         <div class="field--row">
           <div class="field">
-            <label>תקופה / עונה</label>
-            <select name="עונה">
-              <option value="">בחרו עונה</option>
-              <option>פסח</option>
-              <option>קיץ</option>
-              <option>סוכות</option>
-              <option>חנוכה</option>
-              <option>תאריך ספציפי</option>
-            </select>
+            <label>עונה / תאריכים</label>
+            <input type="text" name="עונה" placeholder="קיץ 2026 / 15-22 אפריל...">
           </div>
           <div class="field">
             <label>כמה ימים?</label>
-            <input type="text" name="מספר ימים" placeholder="למשל: 7 ימים">
-          </div>
-        </div>
-        <div class="field">
-          <label>תאריכים ספציפיים <span>(אם יש)</span></label>
-          <input type="text" name="תאריכים" placeholder="למשל: 13-20 אפריל 2025">
-        </div>
-        <div class="field">
-          <label>כמה מבוגרים נוסעים?</label>
-          <div class="radio-pills">
-            <label class="radio-pill"><input type="radio" name="מבוגרים" value="1"><span>1</span></label>
-            <label class="radio-pill"><input type="radio" name="מבוגרים" value="2" checked><span>2</span></label>
-            <label class="radio-pill"><input type="radio" name="מבוגרים" value="3"><span>3</span></label>
-            <label class="radio-pill"><input type="radio" name="מבוגרים" value="4+"><span>4+</span></label>
+            <select name="משך">
+              <option value="">בחרו</option>
+              <option>עד 5 ימים</option>
+              <option>5-7 ימים</option>
+              <option>7-10 ימים</option>
+              <option>10+ ימים</option>
+            </select>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- 3. הילדים -->
-    <div class="form-section">
-      <div class="form-section__head">👦 3. הילדים</div>
-      <div class="form-section__body">
-        <div class="kids-grid" id="kidsGrid">
-          <div class="kid-row">
-            <div class="kid-num">1</div>
-            <div class="field">
-              <div class="kid-label">גיל</div>
-              <input type="text" name="ילד 1 גיל" placeholder="גיל">
-            </div>
-            <div class="field">
-              <div class="kid-label">בן/בת</div>
-              <select name="ילד 1 מין">
-                <option>בן</option>
-                <option>בת</option>
-              </select>
-            </div>
-            <div class="field">
-              <div class="kid-label">הערות</div>
-              <input type="text" name="ילד 1 הערות" placeholder="תחומי עניין, אלרגיות...">
-            </div>
-          </div>
-        </div>
-        <button type="button" class="btn-add-kid" id="addKidBtn" aria-label="הוסף ילד">+</button>
+      <div class="step-nav">
+        <button type="button" class="btn-back" onclick="goStep(1)">→ חזרה</button>
+        <button type="button" class="btn-next" onclick="goStep(3)">הבא ←</button>
       </div>
     </div>
 
-    <!-- 4. העדפות -->
-    <div class="form-section">
-      <div class="form-section__head">❤ 4. מה אתם אוהבים?</div>
-      <div class="form-section__body">
-        <div class="field">
-          <label>סמנו כל מה שרלוונטי:</label>
-          <div class="cb-grid">
-            <label class="cb-label"><input type="checkbox" name="העדפות" value="טירות והיסטוריה"><span>🏰 טירות והיסטוריה</span></label>
-            <label class="cb-label"><input type="checkbox" name="העדפות" value="פארקי מים"><span>💦 פארקי מים</span></label>
-            <label class="cb-label"><input type="checkbox" name="העדפות" value="טבע והרים"><span>🏔 טבע והרים</span></label>
-            <label class="cb-label"><input type="checkbox" name="העדפות" value="פארקי שעשועים"><span>🎡 פארקי שעשועים</span></label>
-            <label class="cb-label"><input type="checkbox" name="העדפות" value="גני חיות"><span>🦁 גני חיות</span></label>
-            <label class="cb-label"><input type="checkbox" name="העדפות" value="מוזיאוני מדע"><span>🔬 מוזיאוני מדע</span></label>
-            <label class="cb-label"><input type="checkbox" name="העדפות" value="רכיבה ופעילות"><span>🚴 רכיבה ופעילות</span></label>
-            <label class="cb-label"><input type="checkbox" name="העדפות" value="אוכל מקומי"><span>🍽 אוכל מקומי</span></label>
-            <label class="cb-label"><input type="checkbox" name="העדפות" value="אגמים וחופים"><span>🏊 אגמים וחופים</span></label>
-          </div>
+    <!-- STEP 3: מה אוהבים -->
+    <div class="step" id="step3">
+      <div class="step-card">
+        <span class="step-icon">❤️</span>
+        <div class="step-title">מה מהנה לכם?</div>
+        <div class="step-subtitle">סמנו כל מה שנשמע כיף - אפשר הרבה</div>
+
+        <div class="interests" id="interestsGrid">
+          <label class="interest"><input type="checkbox" name="העדפות" value="טירות והיסטוריה"><span class="interest-icon">🏰</span>טירות והיסטוריה</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="פארקי מים"><span class="interest-icon">💦</span>פארקי מים</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="טבע והרים"><span class="interest-icon">🏔️</span>טבע והרים</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="פארקי שעשועים"><span class="interest-icon">🎢</span>פארקי שעשועים</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="גני חיות"><span class="interest-icon">🦁</span>גני חיות</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="מוזיאוני מדע"><span class="interest-icon">🔬</span>מוזיאוני מדע</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="אגמים וחופים"><span class="interest-icon">🏊</span>אגמים וחופים</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="רכיבה ופעילות"><span class="interest-icon">🚴</span>פעילות גופנית</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="אוכל מקומי"><span class="interest-icon">🍽️</span>אוכל מקומי</label>
         </div>
       </div>
-    </div>
 
-    <!-- 5. להימנע -->
-    <div class="form-section">
-      <div class="form-section__head">🚫 5. מה עדיף להימנע?</div>
-      <div class="form-section__body">
-        <div class="cb-grid cols2">
-          <label class="cb-label"><input type="checkbox" name="להימנע" value="ביקורים ארוכים במוזיאונים"><span>ביקורים ארוכים במוזיאונים</span></label>
-          <label class="cb-label"><input type="checkbox" name="להימנע" value="נסיעות ארוכות ברכב"><span>נסיעות ארוכות ברכב (3ש׳+)</span></label>
-          <label class="cb-label"><input type="checkbox" name="להימנע" value="גבהים וטיפוס"><span>גבהים / טיפוס</span></label>
-          <label class="cb-label"><input type="checkbox" name="להימנע" value="אתרים עמוסי תיירים"><span>אתרים עמוסי תיירים</span></label>
-          <label class="cb-label"><input type="checkbox" name="להימנע" value="מסעדות פורמליות"><span>מסעדות פורמליות</span></label>
-          <label class="cb-label"><input type="checkbox" name="להימנע" value="יציאות מוקדמות מאוד"><span>יציאות מוקדמות מאוד</span></label>
-        </div>
+      <div class="step-nav">
+        <button type="button" class="btn-back" onclick="goStep(2)">→ חזרה</button>
+        <button type="submit" class="btn-submit">שלחו 🚀</button>
       </div>
-    </div>
-
-    <!-- 6. לוגיסטיקה -->
-    <div class="form-section">
-      <div class="form-section__head">🚗 6. לוגיסטיקה</div>
-      <div class="form-section__body">
-        <div class="field">
-          <label>העדפת לינה:</label>
-          <div class="radio-pills">
-            <label class="radio-pill"><input type="radio" name="לינה" value="מלון"><span>🏨 מלון</span></label>
-            <label class="radio-pill"><input type="radio" name="לינה" value="דירה/Airbnb"><span>🏠 דירה / Airbnb</span></label>
-            <label class="radio-pill"><input type="radio" name="לינה" value="אתר נופש"><span>🏖 אתר נופש</span></label>
-            <label class="radio-pill"><input type="radio" name="לינה" value="אין העדפה"><span>אין העדפה</span></label>
-          </div>
-        </div>
-        <div class="field">
-          <label>תקציב יומי (לא כולל טיסות):</label>
-          <div class="radio-pills">
-            <label class="radio-pill"><input type="radio" name="תקציב" value="חסכוני 50-80$"><span>💰 חסכוני (50-80$)</span></label>
-            <label class="radio-pill"><input type="radio" name="תקציב" value="בינוני 80-150$"><span>💳 בינוני (80-150$)</span></label>
-            <label class="radio-pill"><input type="radio" name="תקציב" value="נוח ואיכותי 150$+"><span>✨ נוח ואיכותי (150$+)</span></label>
-          </div>
-        </div>
-        <div class="field">
-          <label>האם תשכירו רכב?</label>
-          <div class="radio-pills">
-            <label class="radio-pill"><input type="radio" name="רכב" value="כן"><span>כן</span></label>
-            <label class="radio-pill"><input type="radio" name="רכב" value="לא"><span>לא</span></label>
-            <label class="radio-pill"><input type="radio" name="רכב" value="עדיין לא יודעים"><span>עדיין לא יודעים</span></label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 7. הערות -->
-    <div class="form-section">
-      <div class="form-section__head">📝 7. עוד משהו?</div>
-      <div class="form-section__body">
-        <div class="field">
-          <label>צרכים מיוחדים, אלרגיות, או דברים חשובים שכדאי שאדע:</label>
-          <textarea name="צרכים מיוחדים" placeholder="כתבו כאן..."></textarea>
-        </div>
-        <div class="field">
-          <label>רגע החלום מהטיול — מה יגרום לו להיות מושלם?</label>
-          <textarea name="רגע חלום" placeholder="כתבו כאן..."></textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- SUBMIT -->
-    <div class="submit-area">
-      <button type="submit" class="btn-submit">
-        <span>שלחו את השאלון</span> 🚀
-      </button>
       <p class="submit-note">אחזור אליכם בוואטסאפ תוך 24 שעות</p>
     </div>
 
   </form>
 
-  <!-- SUCCESS MESSAGE -->
+  <!-- SUCCESS -->
   <div class="success-box" id="successBox">
-    <div style="font-size:48px;margin-bottom:12px;">🎉</div>
-    <h3>השאלון נשלח בהצלחה!</h3>
-    <p>תודה! קיבלתי את הפרטים ואחזור אליכם תוך 24 שעות.</p>
+    <div style="font-size:52px;margin-bottom:16px">🎉</div>
+    <h3>קיבלתי!</h3>
+    <p>תודה, אחזור אליכם בוואטסאפ תוך 24 שעות עם הצעה מותאמת.</p>
+    <a href="https://wa.me/972546758145" class="btn-wa" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      שלחו הודעה ישירות
+    </a>
   </div>
-
 </div>
 
 <script>
-  const form = document.getElementById('tripForm');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+(function() {
+  'use strict';
 
-    // Basic validation
-    const required = form.querySelectorAll('[required]');
-    let valid = true;
-    required.forEach(f => {
-      f.style.borderColor = f.value.trim() ? '' : '#e55';
-      if (!f.value.trim()) valid = false;
+  var currentStep = 1;
+  var totalSteps = 3;
+
+  function goStep(n) {
+    // validate step 1
+    if (currentStep === 1 && n > 1) {
+      var name = document.getElementById('f_name');
+      var wa   = document.getElementById('f_wa');
+      var ok = true;
+      [name, wa].forEach(function(f) {
+        if (!f.value.trim()) { f.style.borderColor = '#e55'; ok = false; }
+        else f.style.borderColor = '';
+      });
+      if (!ok) { name.focus(); return; }
+    }
+    // validate step 2
+    if (currentStep === 2 && n > 2) {
+      var dest = document.getElementById('f_dest');
+      if (!dest.value.trim()) { dest.style.borderColor = '#e55'; dest.focus(); return; }
+      else dest.style.borderColor = '';
+    }
+
+    document.getElementById('step' + currentStep).classList.remove('active');
+    currentStep = n;
+    document.getElementById('step' + currentStep).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    var pct = Math.round((currentStep / totalSteps) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = 'שלב ' + currentStep + ' מתוך ' + totalSteps;
+  }
+  window.goStep = goStep;
+
+  // Kids add/remove
+  var kidCount = 1;
+  document.getElementById('addKidSimple').addEventListener('click', function() {
+    kidCount++;
+    var row = document.createElement('div');
+    row.className = 'kid-row-simple';
+    var badge = document.createElement('div');
+    badge.className = 'kid-badge';
+    badge.textContent = kidCount;
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.name = 'ילד ' + kidCount + ' גיל';
+    inp.placeholder = 'למשל: ' + (kidCount + 4);
+    var rem = document.createElement('button');
+    rem.type = 'button';
+    rem.className = 'btn-remove';
+    rem.textContent = '−';
+    rem.addEventListener('click', function() {
+      row.remove();
+      renumber();
     });
-    if (!valid) { alert('אנא מלאו את כל השדות המסומנים'); return; }
+    row.appendChild(badge);
+    row.appendChild(inp);
+    row.appendChild(rem);
+    document.getElementById('kidsSimple').appendChild(row);
+  });
 
-    const btn = form.querySelector('.btn-submit');
+  function renumber() {
+    document.querySelectorAll('#kidsSimple .kid-row-simple').forEach(function(r, i) {
+      r.querySelector('.kid-badge').textContent = i + 1;
+      r.querySelector('input').name = 'ילד ' + (i + 1) + ' גיל';
+    });
+    kidCount = document.querySelectorAll('#kidsSimple .kid-row-simple').length;
+  }
+
+  // Submit
+  document.getElementById('tripForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var btn = this.querySelector('.btn-submit');
     btn.textContent = '⏳ שולח...';
     btn.disabled = true;
-
     try {
-      const data = new FormData(form);
-      const res = await fetch(form.action, {
+      var res = await fetch(this.action, {
         method: 'POST',
-        body: data,
+        body: new FormData(this),
         headers: { 'Accept': 'application/json' }
       });
-
       if (res.ok) {
-        form.style.display = 'none';
+        this.style.display = 'none';
         document.getElementById('successBox').classList.add('show');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        throw new Error('שגיאה');
-      }
+      } else { throw new Error(); }
     } catch {
-      btn.textContent = 'שלחו את השאלון 🚀';
+      btn.textContent = 'שלחו 🚀';
       btn.disabled = false;
-      alert('אירעה שגיאה בשליחה. אנא נסו שוב או פנו אלינו ישירות בוואטסאפ.');
+      alert('אירעה שגיאה. נסו שוב או פנו אלינו ישירות בוואטסאפ.');
     }
   });
-</script>
 
+  // Nav
+  var nav = document.getElementById('nav');
+  if (nav) window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
 
-
-
-<script>
-  (function () {
-    'use strict';
-    var nav = document.getElementById('nav');
-    var hamburger = document.getElementById('hamburgerBtn');
-    var mobileMenu = document.getElementById('mobileMenu');
-    if (!hamburger || !mobileMenu) return;
-    hamburger.addEventListener('click', function () {
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
       var isOpen = mobileMenu.classList.toggle('open');
       hamburger.setAttribute('aria-expanded', isOpen.toString());
       hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-    mobileMenu.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
         mobileMenu.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.setAttribute('aria-label', 'פתח תפריט');
         document.body.style.overflow = '';
       });
-    });
-    if (nav) window.addEventListener('scroll', function () {
-      nav.classList.toggle('scrolled', window.scrollY > 10);
-    }, { passive: true });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.setAttribute('aria-label', 'פתח תפריט');
-        document.body.style.overflow = '';
-        hamburger.focus();
-      }
-    });
-  })();
-</script>
-<script>
-  (function() {
-    var kidCount = 1;
-
-    function renumber() {
-      var rows = document.querySelectorAll('#kidsGrid .kid-row');
-      rows.forEach(function(row, i) {
-        var n = i + 1;
-        row.querySelector('.kid-num').textContent = n;
-        row.querySelectorAll('input, select').forEach(function(el) {
-          var name = el.getAttribute('name') || '';
-          el.setAttribute('name', name.replace(/ילד \d+/, 'ילד ' + n));
-        });
-      });
-      kidCount = rows.length;
-    }
-
-    document.getElementById('addKidBtn').addEventListener('click', function() {
-      kidCount++;
-      var grid = document.getElementById('kidsGrid');
-      var row = document.createElement('div');
-      row.className = 'kid-row removable';
-
-      var removeBtn = document.createElement('button');
-      removeBtn.type = 'button';
-      removeBtn.className = 'btn-remove-kid';
-      removeBtn.setAttribute('aria-label', 'הסר ילד');
-      removeBtn.textContent = '−';
-      removeBtn.addEventListener('click', function() {
-        row.remove();
-        renumber();
-      });
-
-      row.innerHTML =
-        '<div class="kid-num">' + kidCount + '</div>' +
-        '<div class="field"><div class="kid-label">גיל</div><input type="text" name="ילד ' + kidCount + ' גיל" placeholder="גיל"></div>' +
-        '<div class="field"><div class="kid-label">בן/בת</div><select name="ילד ' + kidCount + ' מין"><option>בן</option><option>בת</option></select></div>' +
-        '<div class="field"><div class="kid-label">הערות</div><input type="text" name="ילד ' + kidCount + ' הערות" placeholder="תחומי עניין, אלרגיות..."></div>';
-      row.appendChild(removeBtn);
-      grid.appendChild(row);
-    });
-  })();
-</script>
-
-<!-- Email Popup -->
-<div class="email-popup-overlay" id="emailPopupOverlay">
-  <div class="email-popup">
-    <button class="email-popup__close" id="emailPopupClose">×</button>
-    <div class="email-popup__icon">✈️</div>
-    <h2 class="email-popup__title">רוצים לקבל עדכונים?</h2>
-    <p class="email-popup__subtitle">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
-    <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm">
-      <input type="hidden" name="_subject" value="הרשמה מטופס - מתי טסים">
-      <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/questionnaire_form.html">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input">
-      <button type="submit" class="email-popup__btn">אני רוצה לקבל עדכונים ✈️</button>
-      <button type="button" class="email-popup__skip" id="emailPopupSkip">דלג</button>
-    </form>
-  </div>
-</div>
-
-<script>
-(function () {
-  var overlay = document.getElementById('emailPopupOverlay');
-  var closeBtn = document.getElementById('emailPopupClose');
-  var skipBtn = document.getElementById('emailPopupSkip');
-
-  function openPopup() {
-    if (localStorage.getItem('mtEmailSubmitted')) return;
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closePopup() {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      openPopup();
-    });
-  });
-
-  if (closeBtn) closeBtn.addEventListener('click', closePopup);
-  if (skipBtn) skipBtn.addEventListener('click', closePopup);
-
-  overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) closePopup();
-  });
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closePopup();
-  });
-
-  var form = document.getElementById('emailPopupForm');
-  if (form) {
-    form.addEventListener('submit', function() {
-      localStorage.setItem('mtEmailSubmitted', '1');
     });
   }
 })();
