@@ -485,20 +485,19 @@
   var epClose   = document.getElementById('emailPopupClose');
   var epSkip    = document.getElementById('emailPopupSkip');
   function closeEP() { epOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+  function openEP() { epOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
   if (epClose) epClose.addEventListener('click', closeEP);
   if (epSkip)  epSkip.addEventListener('click', closeEP);
   epOverlay.addEventListener('click', function(e){ if (e.target === epOverlay) closeEP(); });
-  document.querySelectorAll('a[href="#newsletter"]').forEach(function(a){
-    a.addEventListener('click', function(e){
-      e.preventDefault();
-      if (!localStorage.getItem('mtEmailSubmitted')) {
-        epOverlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-    });
+
+  /* event delegation - catches clicks on nav links + mobile menu links */
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href="#newsletter"]');
+    if (link) { e.preventDefault(); openEP(); }
   });
+
   var epForm = document.getElementById('emailPopupForm');
-  if (epForm) epForm.addEventListener('submit', function(){ localStorage.setItem('mtEmailSubmitted','1'); setTimeout(closeEP, 300); });
+  if (epForm) epForm.addEventListener('submit', function(){ setTimeout(closeEP, 300); });
 
 })();
 </script>
