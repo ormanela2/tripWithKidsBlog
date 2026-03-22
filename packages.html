@@ -660,7 +660,10 @@ submitBtn.addEventListener('click', () => {
         if (ham) { ham.setAttribute('aria-expanded', 'false'); ham.setAttribute('aria-label', 'פתח תפריט'); }
         document.body.style.overflow = '';
       }
-      setTimeout(openPopup, 50);
+      setTimeout(function() {
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }, 50);
     });
   });
 
