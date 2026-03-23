@@ -229,6 +229,17 @@
     }
   </style>
   <link rel="icon" type="image/png" href="logo.png">
+  <script>
+  (function (s, t, a, y, twenty, two) {
+    s.Stay22 = s.Stay22 || {};
+    s.Stay22.params = { lmaID: '69c0491c51844e7588a7882e' };
+    twenty = t.createElement(a);
+    two = t.getElementsByTagName(a)[0];
+    twenty.async = 1;
+    twenty.src = y;
+    two.parentNode.insertBefore(twenty, two);
+  })(window, document, 'script', 'https://scripts.stay22.com/letmeallez.js');
+  </script>
 </head>
 <body>
 
@@ -864,39 +875,52 @@
         <div class="article-section" id="accommodation">
           <h2 class="article-section__title"><span class="article-section__title-icon">🏨</span> המלצות לינה</h2>
           <p style="color:#555;margin-bottom:20px;">אוסטריה מציעה מגוון רחב של אפשרויות לינה - מבתי נופש משפחתיים בטבע ועד מלונות מרכזיים בווינה.</p>
-          <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px;">
 
-            <div style="background:var(--white);border-radius:14px;border:2px solid var(--sand-dark);padding:18px 20px;">
-              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;">
-                <div>
-                  <div style="font-family:var(--font-heading);font-size:16px;margin-bottom:4px;">Hornergut in Altenmarkt</div>
-                  <div style="font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;">🏡 Altenmarkt-Wagrain, אוסטריה</div>
+            <!-- Hornergut -->
+            <div style="border-radius:12px;border:2px solid var(--sand-dark);overflow:hidden;background:white;">
+              <div onclick="toggleHotelMap('map-hornergut','chevron-hornergut')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='white'">
+                <div style="display:flex;flex-direction:column;gap:4px;pointer-events:none;">
+                  <div style="font-weight:700;font-size:14px;">🏡 Hornergut in Altenmarkt</div>
+                  <div style="font-size:12px;color:#888;">📍 Altenmarkt-Wagrain, אוסטריה</div>
                 </div>
-                <span style="font-size:28px;">🏡</span>
+                <span id="chevron-hornergut" style="font-size:18px;color:var(--teal);transition:transform 0.3s;pointer-events:none;">▾</span>
               </div>
-              <p style="font-size:13px;color:#666;line-height:1.6;margin-bottom:14px;">בית נופש פרטי וחמים עם גינה ונוף ישיר להרים. מרגיש כמו בית שני - אווירה אוסטרית אמיתית, מרחק נגיעה מכל האטרקציות באזור.</p>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a href="https://www.booking.com/search.html?ss=Hornergut+Altenmarkt" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:10px;padding:9px 18px;font-size:13px;font-weight:600;font-family:var(--font-body);">להזמנה ←</a>
-                <a href="https://maps.google.com/?q=Altenmarkt-Wagrain+Austria" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--white);color:var(--teal);border:2px solid var(--teal);border-radius:10px;padding:9px 18px;font-size:13px;font-weight:600;font-family:var(--font-body);">מפה 📍</a>
+              <div style="padding:10px 16px;border-top:1px solid var(--sand);">
+                <a href="https://booking.stay22.com/mataytasim/vWxYqXyCic" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:600;font-family:var(--font-body);text-decoration:none;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">להזמנה ←</a>
+              </div>
+              <div id="map-hornergut" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;">
+                <iframe width="100%" height="400" src="https://stay22.com/embed/69c172fd51844e7588aa2afd" frameborder="0" style="display:block;"></iframe>
               </div>
             </div>
 
-            <div style="background:var(--white);border-radius:14px;border:2px solid var(--sand-dark);padding:18px 20px;">
-              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;">
-                <div>
-                  <div style="font-family:var(--font-heading);font-size:16px;margin-bottom:4px;">ARCOTEL Wimberger Wien</div>
-                  <div style="font-size:12px;color:#aaa;display:flex;align-items:center;gap:4px;">🏙️ Vienna, אוסטריה</div>
+            <!-- ARCOTEL Wimberger -->
+            <div style="border-radius:12px;border:2px solid var(--sand-dark);overflow:hidden;background:white;">
+              <div onclick="toggleHotelMap('map-arcotel','chevron-arcotel')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='white'">
+                <div style="display:flex;flex-direction:column;gap:4px;pointer-events:none;">
+                  <div style="font-weight:700;font-size:14px;">🏙️ ARCOTEL Wimberger Wien</div>
+                  <div style="font-size:12px;color:#888;">📍 Vienna, אוסטריה</div>
                 </div>
-                <span style="font-size:28px;">🏨</span>
+                <span id="chevron-arcotel" style="font-size:18px;color:var(--teal);transition:transform 0.3s;pointer-events:none;">▾</span>
               </div>
-              <p style="font-size:13px;color:#666;line-height:1.6;margin-bottom:14px;">מלון מרכזי ומצוין בווינה - מיקום מושלם להגיע לכל האטרקציות ברגל או בתחבורה ציבורית. נוח, נקי ומתאים למשפחות.</p>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <a href="https://www.booking.com/hotel/at/arcotel-wimberger.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:10px;padding:9px 18px;font-size:13px;font-weight:600;font-family:var(--font-body);">להזמנה ←</a>
-                <a href="https://maps.google.com/?q=ARCOTEL+Wimberger+Wien" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--white);color:var(--teal);border:2px solid var(--teal);border-radius:10px;padding:9px 18px;font-size:13px;font-weight:600;font-family:var(--font-body);">מפה 📍</a>
+              <div style="padding:10px 16px;border-top:1px solid var(--sand);">
+                <a href="https://booking.stay22.com/mataytasim/switurUU_d" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:600;font-family:var(--font-body);text-decoration:none;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">להזמנה ←</a>
+              </div>
+              <div id="map-arcotel" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;">
+                <iframe width="100%" height="400" src="https://stay22.com/embed/69c1738fe3b92594135cc38d" frameborder="0" style="display:block;"></iframe>
               </div>
             </div>
 
           </div>
+          <script>
+          function toggleHotelMap(mapId, chevronId) {
+            var map = document.getElementById(mapId);
+            var chevron = document.getElementById(chevronId);
+            var isOpen = map.style.maxHeight !== '0px' && map.style.maxHeight !== '';
+            map.style.maxHeight = isOpen ? '0' : '400px';
+            chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+          }
+          </script>
         </div>
 
         <!-- 7. TIPS -->
