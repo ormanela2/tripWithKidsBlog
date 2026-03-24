@@ -144,9 +144,9 @@
 
     /* drawer header */
     .drawer-header{padding:16px 18px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-shrink:0;border-bottom:1px solid var(--border)}
-    .drawer-flag-wrap{display:flex;align-items:center;gap:12px}
+    .drawer-flag-wrap{display:flex;align-items:center;gap:12px;flex:1;min-width:0;}
     .drawer-flag-box{width:64px;height:42px;border-radius:8px;overflow:hidden;flex-shrink:0;border:1px solid var(--border);display:block;background-size:cover;background-repeat:no-repeat;background-position:center}
-    .drawer-title-block{}
+    .drawer-title-block{flex:1;min-width:0;}
     .drawer-name{font-family:var(--font-heading);font-size:19px;color:var(--charcoal);line-height:1.2;margin-bottom:2px}
     .drawer-sub{font-size:12px;color:var(--gray-mid);display:flex;align-items:center;gap:4px}
     .drawer-close{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray-mid);font-size:15px;transition:all var(--ease);background:var(--white);flex-shrink:0}
@@ -167,6 +167,8 @@
     .drawer-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
     .dtag{font-size:12px;background:var(--gray-light);color:var(--charcoal);border-radius:6px;padding:4px 10px;border:1px solid var(--border);transition:all var(--ease)}
     .dtag:hover{border-color:var(--teal);color:var(--teal);background:rgba(26,107,114,.05)}
+    .currency-badge{display:inline-flex;align-items:center;gap:3px;background:rgba(26,107,114,0.1);color:var(--teal);border-radius:10px;padding:2px 7px;font-size:11px;font-weight:600;white-space:nowrap;}
+    .drawer-currency{display:inline-flex;align-items:center;gap:4px;background:rgba(26,107,114,0.1);color:var(--teal);border-radius:12px;padding:3px 10px;font-size:12px;font-weight:600;margin-top:4px;}
 
     /* divider */
     .drawer-divider{height:1px;background:var(--border);margin:14px 0}
@@ -262,7 +264,10 @@
     <div class="drawer-flag-wrap">
       <div class="drawer-flag-box flag-icon" id="drawerFlagBox"></div>
       <div class="drawer-title-block">
-        <div class="drawer-name" id="drawerName"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+          <div class="drawer-name" id="drawerName"></div>
+          <div id="drawerCurrency" dir="ltr" style="display:none;" class="drawer-currency"></div>
+        </div>
         <div class="drawer-sub" id="drawerSub"></div>
       </div>
     </div>
@@ -315,14 +320,14 @@
 
   /* ─── DESTINATION DATA ─── */
   var dests = [
-    { id:'slovakia',     flag:'flag-sk', name:'סלובקיה',       sub:'מרכז אירופה',   lat:48.70, lng:19.50, color:'#1A6B72', days:'7-10 ימים', season:'☀️ מאי-ספטמבר', url:'slovakia.html',     wa:'סלובקיה',        desc:'טירות מהאגדות, הרי הטטרה ובירה ציורית. אחת ההפתעות הכי טובות באירופה לטיול משפחתי - זולה, נוחה ולא עמוסה בתיירים.', tags:['טירת ספיש','הרי הטטרה','מערות דומיצה','פארק מים','רפטינג'] },
-    { id:'warsaw',       flag:'flag-pl', name:'סובב וורשה',    sub:'פולין',          lat:52.23, lng:21.01, color:'#C0392B', days:'7-9 ימים',  season:'🍂 ספטמבר-אוקטובר', url:'warsaw.html',    wa:'וורשה',          desc:'עיר שמחברת היסטוריה עמוקה עם כיף אמיתי לילדים - מרכז מדע קופרניקוס, Suntago, Majaland ואינסוף אטרקציות לכל גיל.', tags:['קופרניקוס','Suntago','Majaland','Łazienki Park'] },
-    { id:'romania',      flag:'flag-ro', name:'רומניה',         sub:'מזרח אירופה',   lat:45.51, lng:25.37, color:'#002B7F', days:'7 ימים',    season:'🌸 אפריל - פסח', url:'romania.html',      wa:'רומניה',         desc:'טירת דרקולה, הרי הקרפטים, פארקי הרפתקות ביער ופסח בטבע. רומניה מפתיעה - ועדיין לא גילו אותה כולם.', tags:['טירת ברן','Dino Park','Peleș','Aventura Park'] },
-    { id:'athens',       flag:'flag-gr', name:'אתונה',          sub:'יוון',           lat:37.97, lng:23.73, color:'#0d5eaf', days:'5 ימים',    season:'☀️ מאי-ספטמבר', url:'athens.html',       wa:'אתונה',          desc:'Allou! Fun Park, האי אגינה, מוזיאון אשליות וגבעת ליקאבטוס - אתונה מפתיעה עם ילדים. עיר שחיה בלילה ומלאה בהיסטוריה.', tags:['Allou! Fun Park','האי אגינה','XPLORE','מונסטירקי','ליקאבטוס'] },
-    { id:'czechia',      flag:'flag-cz', name:"דרום צ'כיה",    sub:"צ'כיה",          lat:48.60, lng:14.22, color:'#11457e', days:'10-14 ימים', season:'☀️ אוגוסט מומלץ', url:'czechia.html',    wa:"דרום צ'כיה",     desc:"אגם ליפנו עם בובסלד ופארק מים, צ'סקי קרומלוב הציורית, ראפטינג בנהר ולטאבה ופראג בסוף - אחת ההפתעות הכי טובות.", tags:['אגם ליפנו','צ\'סקי קרומלוב','ראפטינג','בובסלד','פראג'] },
-    { id:'austria',      flag:'flag-at', name:'אוסטריה',        sub:'מרכז אירופה',   lat:47.80, lng:13.00, color:'#ed2939', days:'7-10 ימים', season:'☀️ אוגוסט מומלץ', url:'austria.html',    wa:'אוסטריה',        desc:'פסגת דאכשטיין עם Skywalk מעל האלפים, מכרה מלח שגולשים בו בשקיות, פארק מים על ההר וטירה עם מופע נשרים - ווינה מחכה בסוף.', tags:['דאכשטיין','מכרה מלח','Wagrainis','טירת וורפן','ווינה'] },
-    { id:'poland-south', flag:'flag-pl', name:'זקופנה',          sub:'דרום פולין',    lat:49.30, lng:19.95, color:'#7B1010', days:'7-8 ימים',  season:'☀️ קיץ מומלץ', url:'poland-south.html', wa:'דרום פולין',     desc:'זקופנה שמוקפת בהרי הטטרה, עמק קושיליסקה לטיולים סביב הנהר, פארק מים תרמי, מכרה מלח שגולשים בו במגלשות עץ.', tags:['זקופנה','הרי הטטרה','מכרה מלח','Terma Bania','Energylandia'] },
-    { id:'budapest',     flag:'flag-hu', name:'בודפשט',          sub:'הונגריה',        lat:47.50, lng:19.04, color:'#ce2939', days:'5-6 ימים',  season:'☀️ כל השנה',    url:'budapest.html',    wa:'בודפשט',         desc:'עיר הקסמים על גדות הדנובה - פרלמנט מרהיב, מרחצאות היסטוריים, פארק מים ענק, מגלשות בוב ואטרקציות לכל גיל.', tags:['טירת בודה','Aquaworld','Visegrad Bobsled','שצ\'ני','הפרלמנט'] }
+    { id:'slovakia',     flag:'flag-sk', name:'סלובקיה',       sub:'מרכז אירופה',   lat:48.70, lng:19.50, color:'#1A6B72', days:'7-10 ימים', season:'☀️ מאי-ספטמבר', url:'slovakia.html',     wa:'סלובקיה',        desc:'טירות מהאגדות, הרי הטטרה ובירה ציורית. אחת ההפתעות הכי טובות באירופה לטיול משפחתי - זולה, נוחה ולא עמוסה בתיירים.', tags:['טירת ספיש','הרי הטטרה','מערות דומיצה','פארק מים','רפטינג'], currency:'EUR', currencySymbol:'€' },
+    { id:'warsaw',       flag:'flag-pl', name:'סובב וורשה',    sub:'פולין',          lat:52.23, lng:21.01, color:'#C0392B', days:'7-9 ימים',  season:'🍂 ספטמבר-אוקטובר', url:'warsaw.html',    wa:'וורשה',          desc:'עיר שמחברת היסטוריה עמוקה עם כיף אמיתי לילדים - מרכז מדע קופרניקוס, Suntago, Majaland ואינסוף אטרקציות לכל גיל.', tags:['קופרניקוס','Suntago','Majaland','Łazienki Park'], currency:'PLN', currencySymbol:'zł' },
+    { id:'romania',      flag:'flag-ro', name:'רומניה',         sub:'מזרח אירופה',   lat:45.51, lng:25.37, color:'#002B7F', days:'7 ימים',    season:'🌸 אפריל - פסח', url:'romania.html',      wa:'רומניה',         desc:'טירת דרקולה, הרי הקרפטים, פארקי הרפתקות ביער ופסח בטבע. רומניה מפתיעה - ועדיין לא גילו אותה כולם.', tags:['טירת ברן','Dino Park','Peleș','Aventura Park'], currency:'RON', currencySymbol:'lei' },
+    { id:'athens',       flag:'flag-gr', name:'אתונה',          sub:'יוון',           lat:37.97, lng:23.73, color:'#0d5eaf', days:'5 ימים',    season:'☀️ מאי-ספטמבר', url:'athens.html',       wa:'אתונה',          desc:'Allou! Fun Park, האי אגינה, מוזיאון אשליות וגבעת ליקאבטוס - אתונה מפתיעה עם ילדים. עיר שחיה בלילה ומלאה בהיסטוריה.', tags:['Allou! Fun Park','האי אגינה','XPLORE','מונסטירקי','ליקאבטוס'], currency:'EUR', currencySymbol:'€' },
+    { id:'czechia',      flag:'flag-cz', name:"דרום צ'כיה",    sub:"צ'כיה",          lat:48.60, lng:14.22, color:'#11457e', days:'10-14 ימים', season:'☀️ אוגוסט מומלץ', url:'czechia.html',    wa:"דרום צ'כיה",     desc:"אגם ליפנו עם בובסלד ופארק מים, צ'סקי קרומלוב הציורית, ראפטינג בנהר ולטאבה ופראג בסוף - אחת ההפתעות הכי טובות.", tags:['אגם ליפנו','צ\'סקי קרומלוב','ראפטינג','בובסלד','פראג'], currency:'CZK', currencySymbol:'Kč' },
+    { id:'austria',      flag:'flag-at', name:'אוסטריה',        sub:'מרכז אירופה',   lat:47.80, lng:13.00, color:'#ed2939', days:'7-10 ימים', season:'☀️ אוגוסט מומלץ', url:'austria.html',    wa:'אוסטריה',        desc:'פסגת דאכשטיין עם Skywalk מעל האלפים, מכרה מלח שגולשים בו בשקיות, פארק מים על ההר וטירה עם מופע נשרים - ווינה מחכה בסוף.', tags:['דאכשטיין','מכרה מלח','Wagrainis','טירת וורפן','ווינה'], currency:'EUR', currencySymbol:'€' },
+    { id:'poland-south', flag:'flag-pl', name:'זקופנה',          sub:'דרום פולין',    lat:49.30, lng:19.95, color:'#7B1010', days:'7-8 ימים',  season:'☀️ קיץ מומלץ', url:'poland-south.html', wa:'דרום פולין',     desc:'זקופנה שמוקפת בהרי הטטרה, עמק קושיליסקה לטיולים סביב הנהר, פארק מים תרמי, מכרה מלח שגולשים בו במגלשות עץ.', tags:['זקופנה','הרי הטטרה','מכרה מלח','Terma Bania','Energylandia'], currency:'PLN', currencySymbol:'zł' },
+    { id:'budapest',     flag:'flag-hu', name:'בודפשט',          sub:'הונגריה',        lat:47.50, lng:19.04, color:'#ce2939', days:'5-6 ימים',  season:'☀️ כל השנה',    url:'budapest.html',    wa:'בודפשט',         desc:'עיר הקסמים על גדות הדנובה - פרלמנט מרהיב, מרחצאות היסטוריים, פארק מים ענק, מגלשות בוב ואטרקציות לכל גיל.', tags:['טירת בודה','Aquaworld','Visegrad Bobsled','שצ\'ני','הפרלמנט'], currency:'HUF', currencySymbol:'Ft' }
   ];
 
   /* ─── DRAWER ─── */
@@ -361,6 +366,17 @@
     document.getElementById('drawerTags').innerHTML = d.tags.map(function(t){
       return '<span class="dtag">' + t + '</span>';
     }).join('');
+
+    /* currency */
+    var currEl = document.getElementById('drawerCurrency');
+    if (currEl) {
+      if (d.currency && cachedRates && cachedRates[d.currency]) {
+        currEl.textContent = '💱 1 ' + d.currencySymbol + ' = ' + cachedRates[d.currency].toFixed(2) + ' ₪';
+        currEl.style.display = 'inline-flex';
+      } else {
+        currEl.style.display = 'none';
+      }
+    }
 
     /* CTA */
     var waUrl = 'https://wa.me/972546758145?text=' + encodeURIComponent('היי, אני מתעניין בטיול ל' + d.wa + ' עם ילדים');
@@ -498,6 +514,52 @@
 
   var epForm = document.getElementById('emailPopupForm');
   if (epForm) epForm.addEventListener('submit', function(){ setTimeout(closeEP, 300); });
+
+  /* ─── CURRENCY RATES ─── */
+  var cachedRates = null;
+
+  function getCurrencyRates(cb) {
+    var CACHE_KEY = 'mtCurrencyRates_v2';
+    var CACHE_TTL = 6 * 60 * 60 * 1000; // 6 hours
+    try {
+      var stored = localStorage.getItem(CACHE_KEY);
+      if (stored) {
+        var obj = JSON.parse(stored);
+        if (Date.now() - obj.ts < CACHE_TTL) { cb(obj.rates); return; }
+      }
+    } catch(e) {}
+    fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        var e = data.eur;
+        var ILS = e.ils;
+        var rates = {
+          EUR: ILS,
+          PLN: ILS / e.pln,
+          RON: ILS / e.ron,
+          CZK: ILS / e.czk,
+          HUF: ILS / e.huf
+        };
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), rates: rates })); } catch(e){}
+        cb(rates);
+      })
+      .catch(function(){ cb(null); });
+  }
+
+// Fetch on load, update drawer if already open
+  getCurrencyRates(function(rates) {
+    if (!rates) return;
+    cachedRates = rates;
+    if (activeId) {
+      var dest = dests.find(function(x){ return x.id === activeId; });
+      var currEl = document.getElementById('drawerCurrency');
+      if (dest && dest.currency && currEl && rates[dest.currency]) {
+        currEl.textContent = '💱 1 ' + dest.currencySymbol + ' = ' + rates[dest.currency].toFixed(2) + ' ₪';
+        currEl.style.display = 'inline-flex';
+      }
+    }
+  });
+
 
 })();
 </script>
