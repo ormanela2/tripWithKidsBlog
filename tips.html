@@ -855,6 +855,8 @@
     .rec-modal { background:var(--white); border-radius:20px; max-width:460px; width:100%; padding:28px; position:relative; box-shadow:0 16px 48px rgba(0,0,0,0.2); max-height:80vh; overflow-y:auto; }
     .rec-skeleton { background:linear-gradient(90deg,var(--sand) 25%,var(--sand-dark) 50%,var(--sand) 75%); background-size:200% 100%; animation:recShimmer 1.5s infinite; border-radius:8px; }
     @keyframes recShimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    @keyframes recProgressBar { 0%{width:0%} 60%{width:75%} 90%{width:90%} 100%{width:90%} }
+    @keyframes recFadeMsg { 0%{opacity:0;transform:translateY(6px)} 20%{opacity:1;transform:translateY(0)} 80%{opacity:1} 100%{opacity:0} }
   </style>
 
   <!-- MODAL -->
@@ -888,23 +890,35 @@
         searchGeminiRec(loc, recCurrentFilter);
     }
 
+    var recLoadingInterval = null;
     function showRecSkeletons() {
-      var html = '<div class="rec-grid">';
-      for (var i = 0; i < 6; i++) {
-        html += '<div style="background:var(--white);border-radius:14px;border:2px solid var(--sand-dark);overflow:hidden;">' +
-          '<div class="rec-skeleton" style="height:140px;"></div>' +
-          '<div style="padding:14px 16px;">' +
-          '<div class="rec-skeleton" style="height:14px;margin-bottom:8px;border-radius:6px;width:80%;"></div>' +
-          '<div class="rec-skeleton" style="height:12px;border-radius:6px;width:55%;"></div>' +
-          '</div></div>';
-      }
-      document.getElementById('recResults').innerHTML = html + '</div>';
+      var messages = ['🔍 מחפש את המקומות הכי שווים...','🤖 שואל את הAI...','🗺️ מנתח את היעד...','⭐ בוחר את ההמלצות הטובות ביותר...','📍 כמעט מוכן...'];
+      var msgIndex = 0;
+      document.getElementById('recResults').innerHTML =
+        '<div style="text-align:center;padding:48px 24px 40px;">' +
+          '<div style="font-size:38px;margin-bottom:20px;">✈️</div>' +
+          '<div style="background:var(--sand);border-radius:20px;height:8px;width:100%;max-width:320px;margin:0 auto 20px;overflow:hidden;">' +
+            '<div id="recProgressFill" style="height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-dark));border-radius:20px;animation:recProgressBar 8s ease-out forwards;"></div>' +
+          '</div>' +
+          '<div id="recLoadingMsg" style="font-size:14px;color:var(--teal);font-weight:600;font-family:var(--font-body);min-height:22px;">' + messages[0] + '</div>' +
+        '</div>';
+      if (recLoadingInterval) clearInterval(recLoadingInterval);
+      recLoadingInterval = setInterval(function() {
+        msgIndex = (msgIndex + 1) % messages.length;
+        var el = document.getElementById('recLoadingMsg');
+        if (el) { el.style.opacity = '0'; setTimeout(function() { if (el) { el.textContent = messages[msgIndex]; el.style.transition = 'opacity 0.4s'; el.style.opacity = '1'; } }, 300); }
+      }, 2000);
+    }
+    function stopRecLoading() {
+      if (recLoadingInterval) { clearInterval(recLoadingInterval); recLoadingInterval = null; }
+      var fill = document.getElementById('recProgressFill');
+      if (fill) { fill.style.animation = 'none'; fill.style.width = '100%'; fill.style.transition = 'width 0.3s ease'; }
     }
 
     function searchGeminiRec(location, type) {
       showRecSkeletons();
       var label = recFilterLabels[type] || type;
-      var prompt = 'אתה מדריך טיולים מומחה. תן לי רשימה של 5 המקומות הכי מומלצים מקטגוריה "' + label + '" ב' + location + ' למשפחות עם ילדים.\n\nהחזר JSON בלבד ללא backticks:\n{"places":[{"name":"שם","description":"תיאור קצר במשפט אחד בלבד","address":"כתובת","rating":4.5,"why_kids":"משפט אחד קצר","tip":"טיפ אחד קצר","price_range":"חינם/זול/בינוני/יקר","maps_query":"שאילתת חיפוש","type":"' + type + '"}]}';
+      var prompt = 'אתה מדריך טיולים מומחה. תן לי רשימה של 5 המקומות הכי מומלצים מקטגוריה "' + label + '" ב' + location + ' למשפחות עם ילדים. חשוב: כל שדה טקסט חייב להיות קצר - עד 8 מילים בלבד!\n\nהחזר JSON בלבד ללא backticks, ללא הסברים:\n{"places":[{"name":"שם","description":"עד 8 מילים","address":"כתובת קצרה","rating":4.5,"why_kids":"עד 6 מילים","tip":"עד 6 מילים","price_range":"חינם/זול/בינוני/יקר","maps_query":"שאילתה","type":"' + type + '"}]}';
 
       fetch('https://trip-blog-ai.vercel.app/api/gemini', {
         method: 'POST',
@@ -914,7 +928,7 @@
           type: type,
           payload: {
             contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { temperature: 0.7, maxOutputTokens: 5000 }
+            generationConfig: { temperature: 0.7, maxOutputTokens: 8000 }
           }
         })
       })
@@ -923,15 +937,55 @@
         if (data.error) { showRecError('שגיאת API: ' + (data.error.message || 'נסו שוב')); return; }
         if (!data.candidates || !data.candidates[0]) { showRecError('לא התקבלה תשובה, נסו שוב'); return; }
         var parts = data.candidates[0].content.parts;
-        var text = parts[parts.length - 1].text.trim()
-          .replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
+        var raw = parts[parts.length - 1].text.trim();
+
+        // Clean the text
+        var text = raw
+          .replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim()
+          .replace(/[\u0000-\u001F\u007F]/g, ' ')
+          .replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
+
+        // Repair unescaped quotes inside JSON string values
+        function repairJson(s) {
+          var result = '';
+          var inString = false;
+          var escaped = false;
+          for (var i = 0; i < s.length; i++) {
+            var c = s[i];
+            if (escaped) { result += c; escaped = false; continue; }
+            if (c === '\\') { result += c; escaped = true; continue; }
+            if (c === '"') {
+              if (!inString) { inString = true; result += c; continue; }
+              // Look ahead to determine if this closes the string
+              var j = i + 1;
+              while (j < s.length && s[j] === ' ') j++;
+              var next = s[j];
+              if (next === ':' || next === ',' || next === '}' || next === ']' || j >= s.length) {
+                inString = false; result += c;
+              } else {
+                result += '\\"'; // escape the unescaped quote
+              }
+              continue;
+            }
+            result += c;
+          }
+          return result;
+        }
 
         // Try multiple extraction strategies
         recPlaces = [];
         var parsed = null;
 
-        // Strategy 1: direct parse
-        try { parsed = JSON.parse(text); } catch(e) {}
+        // Strategy 0: parse raw directly
+        try { parsed = JSON.parse(raw); } catch(e0) {}
+
+        // Strategy 1: parse cleaned text
+        try { if (!parsed) parsed = JSON.parse(text); } catch(e) {}
+
+        // Strategy 2: repair unescaped quotes then parse
+        if (!parsed) {
+          try { parsed = JSON.parse(repairJson(raw)); } catch(e) {}
+        }
 
         // Strategy 2: find first { to last }
         if (!parsed) {
@@ -942,9 +996,9 @@
           }
         }
 
-        // Strategy 3: find "places" array specifically
+        // Strategy 3: find "places" array with greedy match
         if (!parsed) {
-          var m = text.match(/"places"\s*:\s*(\[[\s\S]*?\])\s*[,}]/);
+          var m = text.match(/"places"\s*:\s*(\[[\s\S]*\])/);
           if (m) {
             try { recPlaces = JSON.parse(m[1]); } catch(e) {}
           }
@@ -952,6 +1006,7 @@
 
         if (parsed) recPlaces = parsed.places || parsed || [];
         if (!recPlaces.length) { showRecError('שגיאה בעיבוד התגובה, נסו שוב'); return; }
+        stopRecLoading();
         renderRecResults(recPlaces, location, label);
       })
       .catch(function(err) {
@@ -989,6 +1044,7 @@
     }
 
     function showRecError(msg) {
+      stopRecLoading();
       document.getElementById('recResults').innerHTML = '<div style="text-align:center;padding:40px;"><div style="font-size:36px;margin-bottom:12px;">⚠️</div><div style="font-family:var(--font-heading);color:var(--teal);margin-bottom:8px;">אופס</div><div style="font-size:14px;color:#666;">' + msg + '</div></div>';
     }
 
