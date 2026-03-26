@@ -198,8 +198,8 @@
         <div class="field">
           <label>כמה ילדים נוסעים?</label>
           <div class="pills">
-            <label class="pill"><input type="radio" name="כמה ילדים" value="1"><span>1 ילד</span></label>
-            <label class="pill"><input type="radio" name="כמה ילדים" value="2" checked><span>2 ילדים</span></label>
+            <label class="pill"><input type="radio" name="כמה ילדים" value="1" checked><span>1 ילד</span></label>
+            <label class="pill"><input type="radio" name="כמה ילדים" value="2"><span>2 ילדים</span></label>
             <label class="pill"><input type="radio" name="כמה ילדים" value="3"><span>3 ילדים</span></label>
             <label class="pill"><input type="radio" name="כמה ילדים" value="4+"><span>4+</span></label>
           </div>
@@ -262,7 +262,7 @@
     <div class="step" id="step3">
       <div class="step-card">
         <span class="step-icon">❤️</span>
-        <div class="step-title">מה מהנה לכם?</div>
+        <div class="step-title">מה עושה לכם כיף?</div>
         <div class="step-subtitle">סמנו כל מה שנשמע כיף - אפשר הרבה</div>
 
         <div class="interests" id="interestsGrid">
@@ -334,29 +334,66 @@
 
   // Kids add/remove
   var kidCount = 1;
-  document.getElementById('addKidSimple').addEventListener('click', function() {
-    kidCount++;
+
+  function createKidRow(num, removable) {
     var row = document.createElement('div');
     row.className = 'kid-row-simple';
     var badge = document.createElement('div');
     badge.className = 'kid-badge';
-    badge.textContent = kidCount;
+    badge.textContent = num;
     var inp = document.createElement('input');
     inp.type = 'text';
-    inp.name = 'ילד ' + kidCount + ' גיל';
-    inp.placeholder = 'למשל: ' + (kidCount + 4);
-    var rem = document.createElement('button');
-    rem.type = 'button';
-    rem.className = 'btn-remove';
-    rem.textContent = '−';
-    rem.addEventListener('click', function() {
-      row.remove();
-      renumber();
-    });
+    inp.name = 'ילד ' + num + ' גיל';
+    inp.placeholder = 'למשל: ' + (num + 4);
     row.appendChild(badge);
     row.appendChild(inp);
-    row.appendChild(rem);
-    document.getElementById('kidsSimple').appendChild(row);
+    if (removable) {
+      var rem = document.createElement('button');
+      rem.type = 'button';
+      rem.className = 'btn-remove';
+      rem.textContent = '−';
+      rem.addEventListener('click', function() { row.remove(); renumber(); });
+      row.appendChild(rem);
+    }
+    return row;
+  }
+
+  function setKidRows(target) {
+    var container = document.getElementById('kidsSimple');
+    var current = container.querySelectorAll('.kid-row-simple').length;
+    if (target > current) {
+      for (var i = current + 1; i <= target; i++) {
+        container.appendChild(createKidRow(i, true));
+      }
+    } else if (target < current) {
+      var rows = container.querySelectorAll('.kid-row-simple');
+      for (var j = rows.length - 1; j >= target; j--) {
+        rows[j].remove();
+      }
+    }
+    kidCount = container.querySelectorAll('.kid-row-simple').length;
+    // show/hide manual add button — only for 4+ selection
+    var selected = document.querySelector('input[name="כמה ילדים"]:checked');
+    document.getElementById('addKidSimple').style.display = (selected && selected.value === '4+') ? '' : 'none';
+  }
+
+  // Listen to radio changes
+  document.querySelectorAll('input[name="כמה ילדים"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      var val = this.value;
+      if (val === '1') setKidRows(1);
+      else if (val === '2') setKidRows(2);
+      else if (val === '3') setKidRows(3);
+      else if (val === '4+') setKidRows(4);
+    });
+  });
+
+  // Init: 1 child selected, hide add button
+  setKidRows(1);
+
+  document.getElementById('addKidSimple').addEventListener('click', function() {
+    kidCount++;
+    document.getElementById('kidsSimple').appendChild(createKidRow(kidCount, true));
   });
 
   function renumber() {
