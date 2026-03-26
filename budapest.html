@@ -203,6 +203,30 @@
       .article-layout { grid-template-columns: 1fr; }
       .sidebar { position: static; }
     }
+
+    @keyframes gold-shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .budapest-gold-tip {
+      position: relative;
+      overflow: hidden;
+    }
+    .budapest-gold-tip::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(255,220,80,0.45) 50%,
+        transparent 60%
+      );
+      background-size: 200% 100%;
+      animation: gold-shimmer 3s ease-in-out infinite;
+      border-radius: 12px;
+      pointer-events: none;
+    }
   </style>
   <link rel="icon" type="image/png" href="logo.png">
   <script>
@@ -321,7 +345,7 @@
             <!-- Header -->
             <div style="background:linear-gradient(135deg,#1A6B72 0%,#25919a 100%);padding:20px 24px;display:flex;align-items:center;gap:16px;">
               <div style="width:52px;height:52px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.15);">
-                <img src="https://play-lh.googleusercontent.com/QxNKJBOWNzDgS1BCiTCy0C5bQORJWk2lL3TkKAh5Bq7SMCcJmJFAEnS6s-OikDmEDA=w240-h480-rw" alt="BudapestGO" style="width:48px;height:48px;object-fit:cover;border-radius:12px;" onerror="this.src='https://lh3.googleusercontent.com/zzV5MOl-jSKyQYb7EWIRMIolKLnfNSVU5l1bMnMn3j5m8G_OvHRXzxzP2U1HpKn7IQ=s180-rw';this.onerror=function(){this.parentElement.innerHTML='🚌'}">
+                <img src="budapestGO.png" alt="BudapestGO" style="width:48px;height:48px;object-fit:cover;border-radius:12px;" onerror="this.parentElement.innerHTML='🚌'">
               </div>
               <div>
                 <div style="font-family:var(--font-heading);font-size:19px;color:#fff;font-weight:700;">BudapestGO</div>
@@ -359,7 +383,7 @@
               </div>
 
               <!-- Validation warning -->
-              <div style="background:#fff8e6;border:1.5px solid #f0c060;border-radius:12px;padding:14px 18px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;">
+              <div class="budapest-gold-tip" style="background:#fff8e6;border:1.5px solid #f0c060;border-radius:12px;padding:14px 18px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;">
                 <span style="font-size:22px;flex-shrink:0;">⚠️</span>
                 <div>
                   <div style="font-size:13px;font-weight:700;color:#b07d00;margin-bottom:4px;">שימו לב – חובת תיקוף (Validation)!</div>
