@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>לוח ארועים 2026 | מתי טסים</title>
+  <meta name="description" content="חגים לאומיים, פסטיבלים, שווקים ואטרקציות לילדים באירופה 2026 - כל מה שצריך לדעת לפני שטסים">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --amber: #E8A045; --amber-light: #f0b868; --amber-dark: #c4872e;
+      --teal: #1A6B72; --teal-light: #238a93; --teal-dark: #124d52;
+      --coral: #F07060; --coral-light: #f49185;
+      --cream: #FDF8F2; --charcoal: #2C2C2C; --sand: #F5EDD8; --sand-dark: #e8ddc4;
+      --green: #4A9B6F; --green-dark: #3b7d5a; --white: #FFFFFF;
+      --font-heading: 'Secular One', sans-serif;
+      --font-body: 'Rubik', sans-serif;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+      --shadow-xl: 0 16px 48px rgba(0,0,0,0.15);
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 28px;
+      --nav-height: 72px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--charcoal);
+      background: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1,h2,h3,h4 { font-family: var(--font-heading); font-weight: 400; line-height: 1.3; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+    .container { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    img { display: block; }
+
+    /* ===================== NAV ===================== */
+    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; height:var(--nav-height); background:var(--cream); border-bottom:1px solid var(--sand-dark); transition:box-shadow 0.3s ease; }
+    .nav.scrolled { box-shadow:var(--shadow-md); }
+    .nav__inner { display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
+    .nav__logo { font-family:var(--font-heading); font-size:24px; color:var(--teal); display:flex; align-items:center; gap:8px; }
+    .nav__links { display:flex; align-items:center; gap:4px; position:absolute; left:50%; transform:translateX(-50%); }
+    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:var(--radius-sm); font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.02em; transition:background 0.2s ease,color 0.2s ease; min-height:44px; display:flex; align-items:center; }
+    .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
+    .nav__link:focus-visible { outline:2px solid var(--teal); outline-offset:2px; }
+    .nav__link[aria-current="page"] { background:var(--teal); color:var(--white); }
+    .nav__link[aria-current="page"]:hover, .nav__link[aria-current="page"]:focus-visible { background:var(--teal-dark); color:var(--white); }
+    /* ── Community CTA button ── */
+    .nav__link--community {
+      background: #0f4a50;
+      color: #fff !important;
+      font-weight: 600;
+      font-size: 15px;
+      border-radius: 22px;
+      padding: 8px 18px;
+      min-height: 44px;
+      box-shadow: 0 2px 10px rgba(15,74,80,0.35);
+      animation: communityFloat 3s ease-in-out infinite;
+      will-change: transform;
+    }
+    .nav__link--community:hover,
+    .nav__link--community:focus-visible {
+      background: #1a6a72 !important;
+      color: #fff !important;
+      animation: none;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(15,74,80,0.5);
+    }
+    .nav__link--community::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+      display: inline-block;
+      margin-left: 7px;
+      box-shadow: 0 0 6px #4ade80;
+      animation: dotBlink 1.4s ease-in-out infinite;
+    }
+    .nav__mobile-menu .nav__link--community {
+      font-size: 15px;
+      padding: 8px 18px;
+      width: fit-content;
+      min-height: 44px;
+    }
+    @keyframes communityFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-3px); }
+    }
+    @keyframes dotBlink {
+      0%, 100% { opacity: 0.4; box-shadow: 0 0 3px #4ade80; }
+      50%       { opacity: 1;   box-shadow: 0 0 10px #4ade80, 0 0 20px #4ade8088; }
+    }
+    .nav__mobile-actions { display:none; }
+    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
+    .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+    .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:var(--green); font-size:22px; }
+    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:32px 24px; flex-direction:column; gap:8px; z-index:999; overflow-y:auto; }
+    .nav__mobile-menu.open { display:flex; }
+    .nav__mobile-menu .nav__link { font-size:20px; padding:16px; justify-content:flex-start; }
+    @media(max-width:900px) {
+      .nav__links { display:none; }
+      .nav__mobile-actions { display:flex; }
+      .nav__hamburger { display:flex; }
+      .nav__logo img { height:44px !important; }
+    }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      padding-top: calc(var(--nav-height) + 52px);
+      padding-bottom: 52px;
+      background: linear-gradient(150deg, var(--teal-dark) 0%, var(--teal) 55%, #1e8a94 100%);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      color: var(--white);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero__emoji { font-size: 52px; line-height: 1; margin-bottom: 16px; display: block; }
+    .hero__title {
+      font-size: clamp(28px, 5vw, 52px);
+      font-family: var(--font-heading);
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+    .hero__subtitle {
+      font-size: clamp(15px, 2vw, 19px);
+      color: rgba(255,255,255,0.82);
+      max-width: 660px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ===================== FILTERS BAR ===================== */
+    .filters-wrap {
+      position: sticky;
+      top: var(--nav-height);
+      z-index: 90;
+      background: var(--white);
+      border-bottom: 1px solid var(--sand-dark);
+      box-shadow: var(--shadow-sm);
+    }
+    .filters {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 14px 0;
+      flex-wrap: wrap;
+    }
+    .filters__group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .filters__label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #888;
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-family: 'Assistant', sans-serif;
+      font-weight: 400;
+      cursor: pointer;
+      border: 1.5px solid var(--sand-dark);
+      background: var(--white);
+      color: var(--charcoal);
+      transition: all 0.18s ease;
+      min-height: 36px;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .filter-pill .flag-img {
+      width: 22px;
+      height: 16px;
+      object-fit: cover;
+      border-radius: 3px;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+    .filter-pill:hover { border-color: var(--teal); color: var(--teal); }
+    .filter-pill.active { background: var(--teal); border-color: var(--teal); color: var(--white); }
+    .filter-pill--holiday.active { background: #ef4444; border-color: #ef4444; color: #fff; }
+    .filter-pill--festival.active { background: var(--amber); border-color: var(--amber); color: #fff; }
+    .filter-pill--market.active { background: var(--green); border-color: var(--green); color: #fff; }
+    .filter-pill--kids.active { background: #7c3aed; border-color: #7c3aed; color: #fff; }
+    .filter-pill .count {
+      background: rgba(255,255,255,0.28);
+      border-radius: 10px;
+      padding: 1px 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .filter-pill:not(.active) .count {
+      background: var(--sand);
+      color: #666;
+    }
+    .filters__view-toggle {
+      margin-right: auto;
+      display: flex;
+      gap: 4px;
+    }
+    .view-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-family: 'Assistant', sans-serif;
+      border: 1.5px solid var(--sand-dark);
+      background: var(--white);
+      color: #888;
+      cursor: pointer;
+      transition: all 0.18s;
+      min-height: 36px;
+    }
+    .view-btn.active { background: var(--teal); border-color: var(--teal); color: var(--white); }
+    .view-btn:hover:not(.active) { border-color: var(--teal); color: var(--teal); }
+
+    /* ===================== MONTH NAV ===================== */
+    .month-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0 20px;
+      gap: 12px;
+    }
+    .month-nav__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1.5px solid var(--sand-dark);
+      background: var(--white);
+      color: var(--charcoal);
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.18s;
+      flex-shrink: 0;
+    }
+    .month-nav__btn:hover { background: var(--teal); border-color: var(--teal); color: var(--white); }
+    .month-nav__center { text-align: center; }
+    .month-nav__title {
+      font-family: var(--font-heading);
+      font-size: clamp(22px, 3vw, 32px);
+      color: var(--charcoal);
+    }
+    .month-nav__year { font-size: 14px; color: #888; margin-top: 2px; font-variant-numeric: tabular-nums; }
+    .month-nav__title { font-variant-numeric: tabular-nums; }
+    .month-nav__back-btn {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-xl);
+      background: var(--sand);
+      border: none;
+      font-size: 13px;
+      font-family: 'Assistant', sans-serif;
+      color: var(--teal);
+      cursor: pointer;
+      transition: all 0.18s;
+      min-height: 36px;
+    }
+    .month-nav__back-btn.visible { display: inline-flex; }
+    .month-nav__back-btn:hover { background: var(--teal); color: var(--white); }
+
+    /* ===================== CALENDAR GRID ===================== */
+    .calendar-section { padding-bottom: 8px; }
+    .calendar-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: var(--sand-dark);
+      border: 1px solid var(--sand-dark);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      min-width: 560px;
+    }
+    .calendar-day-header {
+      background: var(--teal);
+      color: var(--white);
+      text-align: center;
+      font-family: 'Assistant', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 4px;
+    }
+    .calendar-cell {
+      background: var(--white);
+      min-height: 110px;
+      padding: 8px 6px 6px;
+      position: relative;
+      transition: background 0.15s;
+    }
+    .calendar-cell--empty { background: var(--cream); opacity: 0.5; }
+    .calendar-cell--today {
+      outline: 2px solid var(--teal);
+      outline-offset: -2px;
+      background: #f0fafa;
+    }
+    .calendar-cell__day {
+      font-size: 13px;
+      font-weight: 500;
+      color: #aaa;
+      text-align: left;
+      margin-bottom: 5px;
+      line-height: 1;
+    }
+    .calendar-cell--today .calendar-cell__day {
+      color: var(--teal);
+      font-weight: 700;
+    }
+    .calendar-cell__events { display: flex; flex-direction: column; gap: 3px; }
+    .event-chip {
+      display: block;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: 'Assistant', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: filter 0.15s, transform 0.1s;
+      border-right: 3px solid transparent;
+      line-height: 1.5;
+    }
+    .event-chip:hover { filter: brightness(0.93); transform: translateX(-1px); }
+    .event-chip--holiday { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+    .event-chip--festival { background: #fef3c7; border-color: var(--amber); color: #92400e; }
+    .event-chip--market { background: #dcfce7; border-color: var(--green); color: #166534; }
+    .event-chip--kids { background: #ede9fe; border-color: #7c3aed; color: #4c1d95; }
+
+    /* ===================== LIST VIEW ===================== */
+    .list-view { display: none; }
+    .list-view.active { display: block; }
+    .calendar-grid-wrap.active { display: block; }
+    .calendar-grid-wrap.hidden { display: none; }
+
+    .list-month-group { margin-bottom: 12px; }
+    .list-events { display: flex; flex-direction: column; gap: 10px; }
+    .list-card {
+      display: flex;
+      gap: 16px;
+      padding: 16px 18px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.15s;
+      border-right: 4px solid transparent;
+    }
+    .list-card:hover { box-shadow: var(--shadow-md); transform: translateX(-2px); }
+    .list-card--holiday { border-color: #ef4444; }
+    .list-card--festival { border-color: var(--amber); }
+    .list-card--market { border-color: var(--green); }
+    .list-card--kids { border-color: #7c3aed; }
+    .list-card__icon { font-size: 28px; line-height: 1; flex-shrink: 0; padding-top: 2px; }
+    .list-card__body { flex: 1; min-width: 0; }
+    .list-card__title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+    }
+    .list-card__meta {
+      font-size: 13px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .list-card__type-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: 'Assistant', sans-serif;
+    }
+    .badge--holiday { background: #fee2e2; color: #991b1b; }
+    .badge--festival { background: #fef3c7; color: #92400e; }
+    .badge--market { background: #dcfce7; color: #166534; }
+    .badge--kids { background: #ede9fe; color: #4c1d95; }
+    .list-card__arrow {
+      display: flex;
+      align-items: center;
+      color: #ccc;
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: color 0.15s;
+    }
+    .list-card:hover .list-card__arrow { color: var(--teal); }
+
+    /* ===================== EMPTY STATE ===================== */
+    .empty-state {
+      display: none;
+      text-align: center;
+      padding: 60px 24px;
+    }
+    .empty-state.visible { display: block; }
+    .empty-state__icon { font-size: 52px; margin-bottom: 16px; }
+    .empty-state__title { font-family: var(--font-heading); font-size: 22px; margin-bottom: 8px; color: var(--charcoal); }
+    .empty-state__text { font-size: 15px; color: #888; }
+
+    /* ===================== WEATHER STRIP ===================== */
+    .weather-strip {
+      background: linear-gradient(135deg, #1a3a3e 0%, var(--teal-dark) 100%);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin: 24px 0 40px;
+      color: var(--white);
+    }
+    .weather-strip__title {
+      font-family: 'Assistant', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 16px;
+    }
+    .weather-strip__grid {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .weather-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.08);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      min-width: 160px;
+      flex: 1;
+      transition: background 0.2s;
+    }
+    .weather-card:hover { background: rgba(255,255,255,0.14); }
+    .weather-card__icon { font-size: 26px; line-height: 1; flex-shrink: 0; }
+    .weather-card__info { min-width: 0; }
+    .weather-card__city { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.9); white-space: nowrap; }
+    .weather-card__details { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+    .weather-card__temp { font-size: 18px; font-weight: 700; color: var(--amber-light); }
+
+    /* ===================== MODAL ===================== */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      max-width: 540px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      animation: modalIn 0.28s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes modalIn { from { opacity:0; transform:scale(0.92) translateY(20px); } to { opacity:1; transform:scale(1) translateY(0); } }
+    .modal__close {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      display: flex;
+      justify-content: flex-end;
+      padding: 12px 16px 0;
+    }
+    .modal__close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--sand);
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--charcoal);
+      transition: background 0.15s;
+    }
+    .modal__close-btn:hover { background: var(--sand-dark); }
+    .modal__body { padding: 4px 28px 28px; }
+    .modal__flag-title {
+      font-family: var(--font-heading);
+      font-size: clamp(20px, 4vw, 26px);
+      color: var(--charcoal);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .modal__badges { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .modal__badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-family: 'Assistant', sans-serif;
+      font-weight: 600;
+    }
+    .modal__meta { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .modal__meta-row {
+      font-size: 14px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal__stores-box {
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+    .modal__stores-box--red { background: #fee2e2; color: #991b1b; border-right: 3px solid #ef4444; }
+    .modal__stores-box--yellow { background: #fef9c3; color: #92400e; border-right: 3px solid #f59e0b; }
+    .modal__desc {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--charcoal);
+      margin-bottom: 14px;
+    }
+    .modal__tip {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border-right: 3px solid var(--green);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #166534;
+      margin-bottom: 20px;
+    }
+    .modal__tip strong { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .modal__actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .modal__action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-family: 'Assistant', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--sand-dark);
+      background: var(--white);
+      color: var(--charcoal);
+      transition: all 0.18s;
+      min-height: 44px;
+      text-decoration: none;
+    }
+    .modal__action-btn:hover { background: var(--teal); border-color: var(--teal); color: var(--white); }
+    .modal__action-btn--primary { background: var(--teal); border-color: var(--teal); color: var(--white); }
+    .modal__action-btn--primary:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
+    .modal__action-btn--wa { background: #25d366; border-color: #25d366; color: var(--white); }
+    .modal__action-btn--wa:hover { background: #128c7e; border-color: #128c7e; }
+
+    /* ===================== GENERAL BUTTONS ===================== */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 28px; border-radius: var(--radius-xl); font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; min-height: 44px; }
+    .btn--primary { background: var(--amber); color: var(--white); }
+    .btn--primary:hover { background: var(--amber-dark); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+    /* ===================== FOOTER ===================== */
+    footer input[type="email"]::placeholder { color: rgba(255,255,255,0.45); }
+    footer input[type="email"]:focus { outline: none; border-color: var(--amber)!important; }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 768px) {
+      .filters { gap: 12px; }
+      .filters__view-toggle { margin-right: 0; width: 100%; justify-content: flex-end; }
+      .filters__group { gap: 6px; }
+      .filter-pill { font-size: 12px; padding: 6px 10px; }
+      .calendar-grid-wrap { display: none; }
+      .calendar-grid-wrap.show-mobile { display: block; }
+      .list-view { display: block; }
+      .weather-strip { padding: 18px 16px; }
+      .weather-strip__grid { gap: 8px; }
+      .weather-card { min-width: 140px; padding: 9px 12px; }
+      .month-nav { padding: 20px 0 14px; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding-top: calc(var(--nav-height) + 36px); padding-bottom: 36px; }
+      .modal-backdrop { padding: 0; align-items: flex-end; }
+      .modal {
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        max-height: 90vh;
+        animation: sheetUp 0.3s cubic-bezier(0.34,1.4,0.64,1);
+      }
+      @keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+      .weather-card { min-width: 120px; }
+      .weather-card__city { font-size: 12px; }
+    }
+  </style>
+  <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
+  <div class="container nav__inner">
+    <a href="services.html" class="nav__logo" aria-label="מתי טסים - דף הבית">
+      <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+    </a>
+    <ul class="nav__links" role="menubar">
+      <li role="none"><a href="tips.html" class="nav__link" role="menuitem">טיפים</a></li>
+      <li role="none"><a href="destinations.html" class="nav__link" role="menuitem">יעדים</a></li>
+      <li role="none"><a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a></li>
+      <li role="none"><a href="packages.html" class="nav__link" role="menuitem">חבילות</a></li>
+      <li role="none"><a href="about.html" class="nav__link" role="menuitem">אודות</a></li>
+      <li role="none"><a href="calendar.html" class="nav__link" role="menuitem" aria-current="page">לוח אירועים</a></li>
+      <li role="none"><a href="#newsletter" class="nav__link nav__link--community" role="menuitem">מצטרפים לקהילה</a></li>
+    </ul>
+    <div class="nav__mobile-actions">
+      <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99" class="nav__whatsapp-mobile" aria-label="שלח הודעת וואטסאפ">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
+    <a href="tips.html" class="nav__link" role="menuitem">טיפים</a>
+    <a href="destinations.html" class="nav__link" role="menuitem">יעדים</a>
+    <a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a>
+    <a href="packages.html" class="nav__link" role="menuitem">חבילות</a>
+    <a href="about.html" class="nav__link" role="menuitem">אודות</a>
+    <a href="calendar.html" class="nav__link" role="menuitem" aria-current="page">לוח אירועים</a>
+    <a href="#newsletter" class="nav__link nav__link--community" role="menuitem">מצטרפים לקהילה</a>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container">
+    <span class="hero__emoji" aria-hidden="true">🗓️</span>
+    <h1 class="hero__title" id="hero-title">לוח ארועים 2026</h1>
+    <p class="hero__subtitle">חגים לאומיים, פסטיבלים, שווקים ואטרקציות לילדים - כל מה שצריך לדעת לפני שטסים</p>
+  </div>
+</section>
+
+<!-- ===================== FILTERS BAR ===================== -->
+<div class="filters-wrap" role="region" aria-label="סינון אירועים">
+  <div class="container">
+    <div class="filters" id="filtersBar">
+      <!-- Country pills -->
+      <div class="filters__group" role="group" aria-label="סינון לפי מדינה">
+        <span class="filters__label">מדינה:</span>
+        <button class="filter-pill active" data-country="all" aria-pressed="true">הכל</button>
+        <button class="filter-pill" data-country="england" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/gb.png" alt="אנגליה"> אנגליה</button>
+        <button class="filter-pill" data-country="hungary" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/hu.png" alt="הונגריה"> הונגריה</button>
+        <button class="filter-pill" data-country="austria" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/at.png" alt="אוסטריה"> אוסטריה</button>
+        <button class="filter-pill" data-country="slovakia" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/sk.png" alt="סלובקיה"> סלובקיה</button>
+        <button class="filter-pill" data-country="greece" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/gr.png" alt="יוון"> יוון</button>
+        <button class="filter-pill" data-country="czechia" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/cz.png" alt="צ'כיה"> צ'כיה</button>
+        <button class="filter-pill" data-country="poland" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/pl.png" alt="פולין"> פולין</button>
+        <button class="filter-pill" data-country="romania" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/ro.png" alt="רומניה"> רומניה</button>
+      </div>
+
+      <!-- Type pills -->
+      <div class="filters__group" role="group" aria-label="סינון לפי סוג">
+        <span class="filters__label">סוג:</span>
+        <button class="filter-pill filter-pill--holiday active" data-type="holiday" aria-pressed="true">🚫 חגים</button>
+        <button class="filter-pill filter-pill--festival active" data-type="festival" aria-pressed="true">🎭 פסטיבלים</button>
+        <button class="filter-pill filter-pill--market active" data-type="market" aria-pressed="true">🛍️ שווקים</button>
+        <button class="filter-pill filter-pill--kids active" data-type="kids" aria-pressed="true">🎡 לילדים</button>
+      </div>
+
+      <!-- View toggle -->
+      <div class="filters__view-toggle" role="group" aria-label="בחירת תצוגה">
+        <button class="view-btn active" id="viewCalendar" aria-pressed="true">📅 לוח חודשי</button>
+        <button class="view-btn" id="viewList" aria-pressed="false">📋 רשימה</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MAIN CONTENT ===================== -->
+<main>
+  <div class="container">
+
+    <!-- Month nav -->
+    <div class="month-nav" role="navigation" aria-label="ניווט חודשים">
+      <button class="month-nav__btn" id="prevMonthBtn" aria-label="חודש קודם">&#8594;</button>
+      <div class="month-nav__center">
+        <div class="month-nav__title" id="monthTitle" aria-live="polite"></div>
+        <div class="month-nav__year" id="monthYear"></div>
+        <button class="month-nav__back-btn" id="backToTodayBtn" aria-label="חזרה לחודש הנוכחי">
+          &#8593; חזרה לחודש הנוכחי
+        </button>
+      </div>
+      <button class="month-nav__btn" id="nextMonthBtn" aria-label="חודש הבא">&#8592;</button>
+    </div>
+
+    <!-- Calendar section -->
+    <section class="calendar-section" aria-label="לוח אירועים">
+
+      <!-- Calendar grid view -->
+      <div class="calendar-grid-wrap" id="calendarGridWrap" aria-label="לוח חודשי">
+        <div class="calendar-grid" id="calendarGrid" role="grid">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+      <!-- List view -->
+      <div class="list-view" id="listView" aria-label="רשימת אירועים">
+        <div class="list-events" id="listEvents">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state" id="emptyState" role="status" aria-live="polite">
+        <div class="empty-state__icon">🔍</div>
+        <h3 class="empty-state__title">לא נמצאו אירועים</h3>
+        <p class="empty-state__text">נסו לשנות את פילטרי הסינון או לנווט לחודש אחר</p>
+      </div>
+
+    </section>
+
+    <!-- Weather strip -->
+    <div class="weather-strip" id="weatherStrip" aria-label="מזג אוויר חודשי">
+      <div class="weather-strip__title">🌤 מזג אוויר ממוצע לחודש זה</div>
+      <div class="weather-strip__grid" id="weatherGrid">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+
+  </div><!-- /container -->
+</main>
+
+  <!-- כפתור הצעת אירוע -->
+  <div style="text-align:center;padding:32px 24px;background:var(--cream);">
+    <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%99%D7%A9%20%D7%90%D7%99%D7%A8%D7%95%D7%A2%20%D7%A9%D7%9B%D7%93%D7%90%D7%99%20%D7%9C%D7%94%D7%95%D7%A1%D7%99%D7%A3%20%D7%9C%D7%9C%D7%95%D7%97%3A" target="_blank"
+       style="display:inline-flex;align-items:center;gap:8px;background:transparent;border:1.5px solid var(--sand-dark);border-radius:30px;padding:10px 22px;font-family:var(--font-body);font-size:14px;color:#888;text-decoration:none;transition:all 0.2s;"
+       onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)';this.style.background='white'"
+       onmouseout="this.style.borderColor='var(--sand-dark)';this.style.color='#888';this.style.background='transparent'">
+      💡 מכירים אירוע שפספסנו? ספרו לנו
+    </a>
+  </div>
+
+<!-- ===================== FOOTER / NEWSLETTER ===================== -->
+  <style>
+    @keyframes nlFloat1 { 0%,100%{transform:translateY(0) rotate(-8deg)} 50%{transform:translateY(-18px) rotate(4deg)} }
+    @keyframes nlFloat2 { 0%,100%{transform:translateY(0) rotate(12deg)} 50%{transform:translateY(-14px) rotate(-6deg)} }
+    @keyframes nlFloat3 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-22px) rotate(10deg)} }
+    @keyframes nlPulseRing { 0%{transform:scale(1);opacity:0.6} 100%{transform:scale(1.5);opacity:0} }
+    @keyframes nlSlideUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+    .nl-visible { animation: nlSlideUp 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
+    .nl-hidden { opacity:0; transform:translateY(40px); }
+  </style>
+
+  <section id="newsletter" style="background:linear-gradient(135deg,#1a6b72 0%,#0f4a50 100%);padding:64px 24px;text-align:center;position:relative;overflow:hidden;">
+
+    <!-- Floating emojis -->
+    <div style="position:absolute;inset:0;pointer-events:none;user-select:none;">
+      <span style="position:absolute;top:12%;right:8%;font-size:28px;opacity:0.18;animation:nlFloat1 5s ease-in-out infinite;">✈️</span>
+      <span style="position:absolute;top:20%;left:10%;font-size:22px;opacity:0.15;animation:nlFloat2 6.5s ease-in-out infinite;">🗺️</span>
+      <span style="position:absolute;bottom:18%;right:14%;font-size:20px;opacity:0.15;animation:nlFloat3 7s ease-in-out infinite;">📍</span>
+      <span style="position:absolute;bottom:25%;left:8%;font-size:24px;opacity:0.13;animation:nlFloat1 8s ease-in-out infinite 1s;">⭐</span>
+      <span style="position:absolute;top:55%;right:5%;font-size:18px;opacity:0.12;animation:nlFloat2 9s ease-in-out infinite 2s;">🏔️</span>
+    </div>
+
+    <div class="nl-hidden" id="nlContent" style="max-width:520px;margin:0 auto;position:relative;z-index:1;">
+
+      <!-- Social proof -->
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:40px;padding:6px 16px;margin-bottom:20px;">
+        <span style="font-size:13px;">👨‍👩‍👧‍👦</span>
+        <span style="font-size:13px;color:rgba(255,255,255,0.9);font-weight:600;">הצטרפו כבר <span id="nlCounter">0</span>+ משפחות</span>
+      </div>
+
+      <div style="font-size:36px;margin-bottom:14px;">📬</div>
+      <h2 style="font-family:var(--font-heading);font-size:28px;color:white;margin-bottom:10px;">מצטרפים לקהילה שלנו</h2>
+      <p style="color:rgba(255,255,255,0.8);font-size:15px;line-height:1.7;margin-bottom:32px;">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם. בחינם, תמיד.</p>
+
+      <form action="https://formsubmit.co/mataytasim@gmail.com" method="POST"
+            style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <input type="hidden" name="_subject" value="הרשמה לניוזלטר - לוח אירועים">
+        <input type="hidden" name="_next" value="https://www.mataytasim.co.il/calendar.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="email" name="email" required placeholder="המייל שלכם"
+               style="flex:1;min-width:220px;max-width:300px;padding:13px 18px;border:2px solid rgba(255,255,255,0.3);border-radius:40px;font-family:var(--font-body);font-size:15px;background:rgba(255,255,255,0.12);color:white;outline:none;text-align:right;transition:border-color 0.2s,background 0.2s;"
+               onfocus="this.style.borderColor='white';this.style.background='rgba(255,255,255,0.2)'"
+               onblur="this.style.borderColor='rgba(255,255,255,0.3)';this.style.background='rgba(255,255,255,0.12)'"
+               placeholder="המייל שלכם">
+
+        <!-- Button with pulse ring -->
+        <div style="position:relative;display:inline-flex;align-items:center;flex-shrink:0;">
+          <div style="position:absolute;inset:0;border-radius:40px;background:rgba(255,255,255,0.4);animation:nlPulseRing 1.8s ease-out infinite;"></div>
+          <button type="submit"
+                  style="position:relative;background:white;color:var(--teal);border:none;border-radius:40px;padding:13px 28px;font-family:var(--font-body);font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px rgba(0,0,0,0.2);"
+                  onmouseover="this.style.transform='scale(1.06)';this.style.boxShadow='0 8px 28px rgba(0,0,0,0.3)'"
+                  onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.2)'">
+            אני מצטרף/ת ✈️
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+  <script>
+  (function() {
+    // Scroll-triggered entrance
+    var nl = document.getElementById('nlContent');
+    if (nl) {
+      var obs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          nl.classList.remove('nl-hidden');
+          nl.classList.add('nl-visible');
+          // Animate counter
+          var el = document.getElementById('nlCounter');
+          var target = 500; var current = 0; var step = Math.ceil(target / 40);
+          var t = setInterval(function() {
+            current = Math.min(current + step, target);
+            if (el) el.textContent = current;
+            if (current >= target) clearInterval(t);
+          }, 40);
+          obs.disconnect();
+        }
+      }, { threshold: 0.3 });
+      obs.observe(nl);
+    }
+  })();
+  </script>
+
+<!-- ===================== MODAL ===================== -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal" id="modal">
+    <div class="modal__close">
+      <button class="modal__close-btn" id="modalCloseBtn" aria-label="סגור">&#x2715;</button>
+    </div>
+    <div class="modal__body" id="modalBody">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ===================== JAVASCRIPT ===================== -->
+<script>
+(function() {
+  'use strict';
+
+  /* ====== DATA ====== */
+  var EVENTS = [
+    { id:1, country:'england', flag:'🇬🇧', city:'לונדון', title:'תערוכת הפרחים של צ\'לסי', type:'festival',
+      startDate:new Date(2026,4,19), endDate:new Date(2026,4,23),
+      description:'תערוכת הגינון היוקרתית ביותר בעולם, שמתקיימת בפארק הרויאל ומושכת מבקרים מכל העולם. מאות גנים מעוצבים ותצוגות צמחים נדירים.',
+      tip:'כרטיסים נמכרים חודשים מראש. יום ה\'עם הכל\' (סוף הפסטיבל) הוא הפחות עמוס ומחירו זול יותר.',
+      stores:null, url:'https://www.rhs.org.uk/shows-events/rhs-chelsea-flower-show' },
+    { id:2, country:'england', flag:'🇬🇧', city:'לונדון', title:'קרנבל נוטינג היל', type:'festival',
+      startDate:new Date(2026,7,29), endDate:new Date(2026,7,30),
+      description:'הקרנבל הגדול באירופה עם מוזיקה, ריקודים קריביים ואוכל רחוב ססגוני. כ-2 מיליון מבקרים מגיעים מדי שנה.',
+      tip:'הגיעו מוקדם בבוקר לפני ההמונים. שמרו היטב על הארנקים ושמרו קרוב על הילדים.',
+      stores:null, url:'' },
+    { id:3, country:'england', flag:'🇬🇧', city:'לונדון', title:'ראש השנה האזרחי', type:'holiday',
+      startDate:new Date(2026,0,1), endDate:new Date(2026,0,1),
+      description:'יום ראשון של השנה - יום בנק הולידי. רוב העסקים ורשתות השיווק סגורים.',
+      tip:'תחבורה ציבורית על לוח זמנים מצומצם. מסעדות רבות פתוחות אך יש להזמין מראש.',
+      stores:'🔴 רוב החנויות סגורות. מסעדות ובתי קפה רבים פתוחים.', url:'' },
+    { id:4, country:'england', flag:'🇬🇧', city:'לונדון', title:'שני חג הפסחא', type:'holiday',
+      startDate:new Date(2026,3,6), endDate:new Date(2026,3,6),
+      description:'בנק הולידי ברית מלוכה. מרבית קניונים פתוחים, בנקים ומשרדים ממשלתיים סגורים.',
+      tip:'עומסים גדולים בפארקי שעשועים ובתיאטרון ווסט אנד. הזמינו כרטיסים מוקדם.',
+      stores:'🟡 קניונים פתוחים. בנקים ומשרדים סגורים.', url:'' },
+    { id:5, country:'england', flag:'🇬🇧', city:'לונדון', title:'בנק הולידי - מאי', type:'holiday',
+      startDate:new Date(2026,4,25), endDate:new Date(2026,4,25),
+      description:'בנק הולידי בסוף מאי. מזג אוויר מצוין לביקורי פארקים וגנים.',
+      tip:'הגנים המלכותיים יהיו מלאים. בואו עם פיקניק וכדור - חינם ומהנה לכל המשפחה.',
+      stores:'🟡 חנויות פתוחות ברוב המקרים, עשויות לסגור מוקדם.', url:'' },
+    { id:6, country:'england', flag:'🇬🇧', city:'לונדון', title:'פסטיבל ילדים - ריג\'נט פארק', type:'kids',
+      startDate:new Date(2026,4,2), endDate:new Date(2026,4,3),
+      description:'פסטיבל ילדים ענק עם להטוטנים, מתנפחים, ציירי פנים ואמנות רחוב בפארק ריג\'נט.',
+      tip:'כניסה חופשית לאירועים רבים. הביאו כסף מזומן לדוכני אוכל.',
+      stores:null, url:'' },
+    { id:7, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'יום הלאום ההונגרי', type:'holiday',
+      startDate:new Date(2026,2,15), endDate:new Date(2026,2,15),
+      description:'יום המהפכה ההונגרית של 1848. מצעדים לאורך הרחובות הראשיים ואירועי תרבות בכל בודפשט.',
+      tip:'הגשרים ומרכז העיר עמוסים מאוד. נסעו ברכבת התחתית ולא ברכב.',
+      stores:'🔴 כל החנויות סגורות. סופרמרקטים סגורים.', url:'' },
+    { id:8, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'פסטיבל האביב של בודפשט', type:'festival',
+      startDate:new Date(2026,3,3), endDate:new Date(2026,3,19),
+      description:'פסטיבל תרבות בינלאומי עם קונצרטים, הצגות ואירועי ילדים ברחבי העיר. אחד מפסטיבלי האביב הגדולים באירופה.',
+      tip:'הופעות ילדים בבניין האופרה מוכרות מהר מאוד. הזמינו לפחות שבועיים מראש.',
+      stores:null, url:'https://bof.hu' },
+    { id:9, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'יום סנט סטפן', type:'holiday',
+      startDate:new Date(2026,7,20), endDate:new Date(2026,7,20),
+      description:'החג הלאומי הגדול ביותר בהונגריה. חגיגות ענק בכל העיר, דוכני אוכל מסורתי לאורך הדנובה, והשיא - מופע זיקוקים מטורף ב-21:00.',
+      tip:'אל תנסו לתפוס מקום על הגשרים ברגע האחרון. הזמינו שולחן במסעדה עם נוף לנהר כבר במאי, או תפסו פינה בגבעת גלרט שעה לפני.',
+      stores:'🔴 סגורות לחלוטין - כולל סופרמרקטים וקניונים.', url:'' },
+    { id:10, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'פסטיבל סיגט', type:'festival',
+      startDate:new Date(2026,7,10), endDate:new Date(2026,7,16),
+      description:'אחד מפסטיבלי המוזיקה הגדולים באירופה, מתקיים על אי גדול בלב הדנובה. שבוע של מוזיקה, אמנות ותרבות.',
+      tip:'מתאים לגילאי 8 ומעלה. קמפינג זמין בתוך הפסטיבל - חוויה בלתי נשכחת לכל המשפחה.',
+      stores:null, url:'https://szigetfestival.com' },
+    { id:11, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'שוק חג המולד - וורושמרטי', type:'market',
+      startDate:new Date(2026,10,27), endDate:new Date(2026,11,31),
+      description:'אחד משווקי חג המולד היפים באירופה, בכיכר וורושמרטי. מאות דוכנים עם מוצרי מסורת, תכשיטים ואוכל הונגרי.',
+      tip:'בואו בבוקר בימי חול - הערב והסוף שבוע עמוסים מאוד. השוקולד החם כאן הוא מהטובים בעולם.',
+      stores:null, url:'' },
+    { id:12, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'יום הרפובליקה ההונגרית', type:'holiday',
+      startDate:new Date(2026,9,23), endDate:new Date(2026,9,23),
+      description:'יום המהפכה ההונגרית של 1956 נגד השלטון הסובייטי. אירועי זיכרון ממלכתיים ומצעדים.',
+      tip:'מרכז העיר ייסגר לתנועה. תכננו ביקורים בצדדי העיר או בגבעת הגלרט.',
+      stores:'🔴 כל החנויות סגורות. סופרמרקטים סגורים.', url:'' },
+    { id:13, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'ילדים בארמון - אסתי מוזיקום', type:'kids',
+      startDate:new Date(2026,5,20), endDate:new Date(2026,5,21),
+      description:'סוף שבוע פעילות לילדים בארמון בודה ההיסטורי. סדנאות אמנות ומדע, חרב-ריקוד ומדריכים מחופשים.',
+      tip:'מושלם לגילאי 5–12. רוב המדריכים מדברים אנגלית. אין תרגום לעברית.',
+      stores:null, url:'' },
+    { id:14, country:'austria', flag:'🇦🇹', city:'וינה', title:'פסטיבל וינה - פסטוואכן', type:'festival',
+      startDate:new Date(2026,4,8), endDate:new Date(2026,5,14),
+      description:'פסטיבל מוזיקה ותיאטרון יוקרתי המתקיים ברחבי וינה שישה שבועות ברצף. מהפסטיבלים הנחשבים בעולם.',
+      tip:'כרטיסים לאירועים מרכזיים נגמרים חודשים מראש. בדקו לוח ב-festwochen.at.',
+      stores:null, url:'https://www.festwochen.at' },
+    { id:15, country:'austria', flag:'🇦🇹', city:'וינה', title:'יום הלאום האוסטרי', type:'holiday',
+      startDate:new Date(2026,9,26), endDate:new Date(2026,9,26),
+      description:'יום ניטרליות אוסטריה. ימי פתוח חינם בבניינים ממשלתיים - הפרלמנט, הארמון הפתרה ועוד.',
+      tip:'הפרלמנט הפתרה פתוחים לציבור בחינם ביום זה בלבד - הזדמנות נדירה.',
+      stores:'🔴 כל החנויות סגורות. מסעדות ובתי קפה פתוחים.', url:'' },
+    { id:16, country:'austria', flag:'🇦🇹', city:'וינה', title:'שוק חג המולד - ראטהאוספלץ', type:'market',
+      startDate:new Date(2026,10,20), endDate:new Date(2026,11,26),
+      description:'שוק החג הוותיק ביותר בוינה, ממול לבניין העירייה ההיסטורי. פאנץ\' חם, מוסיקה חיה ועיצובי חג.',
+      tip:'בואו אחרי 16:00 כשהאורות נדלקים - האווירה קסומה. הפונש החם ממש מומלץ.',
+      stores:null, url:'' },
+    { id:17, country:'austria', flag:'🇦🇹', city:'וינה', title:'פסטיבל ילדים - פראטר', type:'kids',
+      startDate:new Date(2026,3,4), endDate:new Date(2026,3,12),
+      description:'פסטיבל אביב לילדים בפארק הפראטר הקסום. הצגות בובות, סדנאות, ועגלת הענק ההיסטורית.',
+      tip:'גלגל הפראטר הענק שווה ממש - הנוף לוינה מרהיב. הגיעו בבוקר לפני התורים.',
+      stores:null, url:'' },
+    { id:18, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'יום החוקה הסלובקי', type:'holiday',
+      startDate:new Date(2026,8,1), endDate:new Date(2026,8,1),
+      description:'יום החוקה הסלובקית. אירועים ממשלתיים ומצעד בעיר הבירה ברטיסלבה.',
+      tip:'העיר שקטה ביום זה - זמן מושלם לביקור בגנים הרגועים ובמצודת ברטיסלבה.',
+      stores:'🔴 כל החנויות סגורות.', url:'' },
+    { id:19, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'ימי עיר ברטיסלבה', type:'festival',
+      startDate:new Date(2026,5,26), endDate:new Date(2026,5,28),
+      description:'פסטיבל שנתי עם מוזיקה חיה, אוכל מסורתי סלובקי ואטרקציות לאורך הרינה של ברטיסלבה.',
+      tip:'כניסה חינם לכל האירועים. הצגות ילדים מתקיימות לאורך כל שעות היום.',
+      stores:null, url:'' },
+    { id:20, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'יום המרד הלאומי הסלובקי', type:'holiday',
+      startDate:new Date(2026,7,29), endDate:new Date(2026,7,29),
+      description:'יום זכר למרד ב-1944 נגד הנאצים. אירועי זיכרון ותרבות ברחבי המדינה.',
+      tip:'מרכז ברטיסלבה שקט יחסית - ביקור במצודה ובגנים ממש מומלץ.',
+      stores:'🔴 כל החנויות סגורות.', url:'' },
+    { id:21, country:'greece', flag:'🇬🇷', city:'אתונה', title:'יום שני הנקי - קרנבל', type:'holiday',
+      startDate:new Date(2026,1,16), endDate:new Date(2026,1,16),
+      description:'תחילת הצום הגדול היווני. יום חג לאומי עם אפיית לגאנה, עפיפונים ופיקניקים בטבע - חגיגה צבעונית.',
+      tip:'הפארקים מלאים במשפחות יווניות עם עפיפונים. הצטרפו לחוויה - פשוט קנו עפיפון ובואו!',
+      stores:'🟡 מרבית החנויות סגורות. אטרקציות תיירותיות פתוחות.', url:'' },
+    { id:22, country:'greece', flag:'🇬🇷', city:'אתונה', title:'פסחא יווני', type:'holiday',
+      startDate:new Date(2026,3,12), endDate:new Date(2026,3,13),
+      description:'חג הפסחא הגדול ביותר ביוון. חגיגות, מופעי זיקוקים וליל שישי קדוש קסום מול הפרתנון.',
+      tip:'ליל שישי קדוש (11 באפריל): עמדו מול הפרתנון וצפו בנרות הכנסיות - חוויה בלתי נשכחת.',
+      stores:'🔴 כל רשתות השיווק והחנויות סגורות שני ימים רצופים.', url:'' },
+    { id:23, country:'greece', flag:'🇬🇷', city:'אתונה', title:'פסטיבל אפידאורוס-אתונה', type:'festival',
+      startDate:new Date(2026,5,1), endDate:new Date(2026,7,31),
+      description:'הפסטיבל התרבותי הגדול ביוון. הצגות מחזות יווניים קדומים בתיאטרון הרודיאס אטיקוס מתחת לאקרופוליס.',
+      tip:'הצגות בערב עם רקע האקרופוליס - מהחוויות המרהיבות ביותר בעולם. הביאו ז\'קט - קריר בלילות גם בקיץ.',
+      stores:null, url:'https://www.aefestival.gr' },
+    { id:24, country:'greece', flag:'🇬🇷', city:'אתונה', title:'יום אוחי', type:'holiday',
+      startDate:new Date(2026,9,28), endDate:new Date(2026,9,28),
+      description:'יום "לא" - ציון יום הסירוב של יוון לאולטימטום האיטלקי ב-1940. מצעדים צבאיים ואזרחיים.',
+      tip:'המצעד בסלוניקי גדול ומומלץ לצפייה. באתונה יש מצעד ילדים ייחודי - מדליק!',
+      stores:'🔴 כל החנויות סגורות.', url:'' },
+    { id:25, country:'greece', flag:'🇬🇷', city:'אתונה', title:'שוק הפסחא - מונסטיראקי', type:'market',
+      startDate:new Date(2026,3,5), endDate:new Date(2026,3,11),
+      description:'שוק מסורתי לקראת הפסחא היווני בשוק הפשפשים של מונסטיראקי. בובות פסחא, ממתקים ומוצרי מסורת.',
+      tip:'הגיעו ב-10 בבוקר לפני החום ולפני ההמונים. כרית ישיבה - חובה לשוק הפשפשים.',
+      stores:null, url:'' },
+    { id:29, country:'england', flag:'🇬🇧', city:'לונדון', title:'Mundo Pixar', type:'kids',
+      startDate:new Date(2026,0,1), endDate:new Date(2026,6,28),
+      description:'חוויה אימרסיבית ענקית מעולמות פיקסאר - צעצוע של סיפור, קוקו, האינקרדיבלס ועוד. אחת האטרקציות המשפחתיות החמות בלונדון לאורך כל 2026.',
+      tip:'הזמינו כרטיסים מראש - מוכרים מהר. מתאים מאוד לגילאי 4–12. הכניסה כ-20£ לנפש.',
+      stores:null, url:'' },
+    { id:30, country:'austria', flag:'🇦🇹', city:'וינה', title:'אירוויזיון 2026', type:'festival',
+      startDate:new Date(2026,4,12), endDate:new Date(2026,4,16),
+      description:'וינה מארחת את אירוויזיון 2026! חצי גמר ב-12 וב-14 במאי, גמר ב-16. כל העיר חוגגת - כפר אירוויזיון, הקרנות חוץ ענקיות ואירועי פאן-זון.',
+      tip:'כרטיסים לאירנה נגמרו זמן רב מראש, אבל הכפר ובאזור הפאן-זון הם חינמיים ושווים לא פחות! הזמינו מלון מוקדם - העיר מלאה.',
+      stores:null, url:'' },
+    { id:31, country:'czechia', flag:'🇨🇿', city:'פראג', title:'ליל המוזיאונים', type:'kids',
+      startDate:new Date(2026,4,16), endDate:new Date(2026,4,16),
+      description:'כניסה חופשית למוזיאונים ברחבי פראג עם פעילויות לילדים עד השעות הקטנות. עשרות מוסדות תרבות פתוחים בלילה אחד.',
+      tip:'התחילו במוזיאון לאמנויות ויישומיות ועברו למוזיאון הלאומי עם הילדים - בלתי נשכח.',
+      stores:null, url:'' },
+    { id:32, country:'greece', flag:'🇬🇷', city:'אתונה', title:'Athens Street Food Festival', type:'festival',
+      startDate:new Date(2026,4,1), endDate:new Date(2026,4,17),
+      description:'שלושה סופי שבוע של אוכל מכל העולם בלב אתונה. דוכנים מ-20+ מדינות, מוזיקה חיה ואווירה כייפית - מתאים מאוד לילדים שאוהבים לטעום.',
+      tip:'הגיעו ברעב! הביאו מזומן לדוכנים הקטנים. הסוף שבוע הראשון הכי פחות עמוס.',
+      stores:null, url:'' },
+    { id:33, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'פסטיבל הספרים הבינלאומי', type:'festival',
+      startDate:new Date(2026,4,28), endDate:new Date(2026,5,1),
+      description:'Ünnepi Könyvhét - פסטיבל הספרים השנתי הגדול ביותר בהונגריה. דוכנים, הופעות רחוב ואירועים ספרותיים בכיכרות המרכזיות של בודפשט.',
+      tip:'יש הופעות ילדים ומפגשים עם מאיירים. כניסה חינם לרוב האירועים.',
+      stores:null, url:'' },
+
+    { id:34, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'ימי ההכתרה', type:'festival',
+      startDate:new Date(2026,5,19), endDate:new Date(2026,5,21),
+      description:'Coronation Days - שחזור היסטורי מרשים של הכתרת מלכים מימי הביניים, עם אבירים, תלבושות רנסאנס ותהלוכות בעיר העתיקה של ברטיסלבה.',
+      tip:'אחד האירועים היפים ביותר לילדים באירופה. הגיעו בלבוש נושמות ותוכנסו לאווירה.',
+      stores:null, url:'' },
+    { id:35, country:'czechia', flag:'🇨🇿', city:'צ\'סקי קרומלוב', title:'פסטיבל ורד חמשת העליים', type:'festival',
+      startDate:new Date(2026,5,19), endDate:new Date(2026,5,21),
+      description:'הפסטיבל המימי-ביניימי הגדול באזור - טורנירים של אבירים, שוק אוכל תקופתי, מוסיקה ישנה ותלבושות בכל פינה. מתקיים בעיר הוותיקה הקסומה.',
+      tip:'צ\'סקי קרומלוב שווה ביקור גם ללא הפסטיבל - אחת הערים היפות בצ\'כיה. הגיעו יום מוקדם לפני עצם הפסטיבל.',
+      stores:null, url:'' },
+    { id:36, country:'poland', flag:'🇵🇱', city:'ורשה', title:'Sztuka Ulicy - פסטיבל אמנות רחוב', type:'festival',
+      startDate:new Date(2026,5,12), endDate:new Date(2026,5,14),
+      description:'מופעי ליצנות, אקרובטיקה ותיאטרון חוץ ברחבי ורשה. אמנים מכל העולם הופכים את הרחובות לבמה פתוחה.',
+      tip:'כניסה חינם לכל המופעים. אירועי ילדים מתקיימים בפארק ה-Old Town Square.',
+      stores:null, url:'' },
+    { id:37, country:'greece', flag:'🇬🇷', city:'אתונה', title:'SNF Nostos Festival', type:'festival',
+      startDate:new Date(2026,5,26), endDate:new Date(2026,6,5),
+      description:'שבוע של הופעות, ספורט, סדנאות וקולנוע חינמיים במרכז התרבות סטאורוס ניארכוס - אחד המתחמים האדריכליים המרהיבים בעולם.',
+      tip:'האירועים חינמיים אבל דורשים הרשמה מראש. המרחב עצמו שווה ביקור - ים, גנים ואדריכלות מדהימה.',
+      stores:null, url:'' },
+    { id:38, country:'austria', flag:'🇦🇹', city:'וינה', title:'פסטיבל האי דנובה - Donauinselfest', type:'festival',
+      startDate:new Date(2026,5,26), endDate:new Date(2026,5,28),
+      description:'פסטיבל חינמי ענק על האי בלב הדנובה - אחד הפסטיבלים הגדולים בעולם בכניסה חינם! אזורי משחק עצומים לילדים, הופעות חיות ואוכל.',
+      tip:'3 מיליון מבקרים בסוף שבוע - הגיעו מוקדם ברכבת תחתית (קו U1/U2). מתאים לכל הגילאים.',
+      stores:null, url:'' },
+
+    { id:39, country:'england', flag:'🇬🇧', city:'לונדון', title:'Camp Bestival', type:'kids',
+      startDate:new Date(2026,6,23), endDate:new Date(2026,6,26),
+      description:'פסטיבל מוזיקה שתוכנן ספציפית למשפחות עם ילדים - מתנפחים, סדנאות יצירה, קמפינג וגנים קסומים. בטבע ליד לונדון.',
+      tip:'פסטיבל הכי family-friendly באנגליה. ילדים עד גיל 12 בחינם. הביאו אוהל ותנאי מחיה בסיסיים.',
+      stores:null, url:'' },
+    { id:40, country:'slovakia', flag:'🇸🇰', city:'טרנצ\'ין', title:'פסטיבל Pohoda', type:'festival',
+      startDate:new Date(2026,6,8), endDate:new Date(2026,6,11),
+      description:'נחשב לאחד הפסטיבלים הכי family-friendly באירופה. מתקיים בשדה תעופה ישן ליד טרנצ\'ין עם מתחם ייעודי לילדים, קמפינג ומוזיקה מגוונת.',
+      tip:'מתחם הילדים עם פעילויות יצירה ומדע הוא מהטובים שראינו בפסטיבל. ילדים עד 6 - כניסה חינם.',
+      stores:null, url:'' },
+    { id:41, country:'austria', flag:'🇦🇹', city:'ארל (טירול)', title:'פסטיבל טירול - Erl', type:'festival',
+      startDate:new Date(2026,6,11), endDate:new Date(2026,6,26),
+      description:'קונצרטים קלאסיים ואופרה בטבע בין ההרים הפנטסטיים של הטירול. אידיאלי למי שמטייל באזור האגמים וההרים.',
+      tip:'הקומבינציה של מוזיקה קלאסית + טבע האלפים = חוויה בלתי נשכחת. ישנן הצגות לילדים בחלק מהערבים.',
+      stores:null, url:'' },
+    { id:42, country:'poland', flag:'🇵🇱', city:'גדנסק', title:'יריד סנט דומיניק', type:'market',
+      startDate:new Date(2026,6,25), endDate:new Date(2026,7,16),
+      description:'אחד השווקים העתיקים ביותר באירופה, נמשך שלושה שבועות! אלפי דוכנים, הופעות רחוב, אוכל ומתקני שעשועים בעיר העתיקה של גדנסק.',
+      tip:'שווה לבוא גם בימי גשם - עמוס בינואר. הגיעו ברכבת מוורשה (כ-3 שעות).',
+      stores:null, url:'' },
+    { id:43, country:'czechia', flag:'🇨🇿', city:'אוסטרבה', title:'Colours of Ostrava', type:'festival',
+      startDate:new Date(2026,6,15), endDate:new Date(2026,6,18),
+      description:'פסטיבל בתוך מפעל פלדה ישן ענק - לוקיישן תעשייתי מדהים שהפך לכפר פסטיבל עם "עיר ילדים" פנימית מלאה בפעילויות.',
+      tip:'מתאים מגיל 6+. תחבורה ציבורית מהכניסה הראשית. הסיור התעשייתי בתוך המפעל עצמו - חינם ומרתק.',
+      stores:null, url:'' },
+
+    { id:44, country:'slovakia', flag:'🇸🇰', city:'רוסובצה', title:'משחקי רומא - Roman Games', type:'kids',
+      startDate:new Date(2026,7,22), endDate:new Date(2026,7,23),
+      description:'שחזור קרבות גלדיאטורים וחיי מחנה רומאי ב-Rusovce, פרבר של ברטיסלבה. ממש מדהים לילדים - שריוניות, חיילים ומחנה אותנטי.',
+      tip:'הגיעו עם בגד ים - יש מזרקות מים. כניסה סמלית. ילדים עד 12 נכנסים בחינם.',
+      stores:null, url:'' },
+    { id:45, country:'austria', flag:'🇦🇹', city:'וינה', title:'פסטיבל הקולנוע - Rathausplatz', type:'festival',
+      startDate:new Date(2026,6,1), endDate:new Date(2026,8,4),
+      description:'הקרנות חינמיות של הופעות קלאסיות וסרטים על מסך ענק מול בניין העירייה ההיסטורי, עם מתחם אוכל בינלאומי ענק.',
+      tip:'חינם לחלוטין! הגיעו עם שמיכה, קנו אוכל מהדוכנים ותיהנו. הסרטים מתחילים אחרי השקיעה (~21:00).',
+      stores:null, url:'' },
+    { id:46, country:'england', flag:'🇬🇧', city:'לונדון', title:'The Enormous Crocodile - לילדים', type:'kids',
+      startDate:new Date(2026,6,28), endDate:new Date(2026,7,22),
+      description:'הצגה חדשה לפי ספרו הקלאסי של רואלד דאל ב-Lyric Hammersmith. הפקה צבעונית ועליזה שמותאמת לגילאי 3–8.',
+      tip:'תיאטרון Lyric Hammersmith ידוע בהצגות ילדים איכותיות. קנו כרטיסים מוקדם - הצגות הבוקר הכי מתאימות לילדים.',
+      stores:null, url:'' },
+    { id:47, country:'romania', flag:'🇷🇴', city:'קלוז\'', title:'Untold Festival', type:'festival',
+      startDate:new Date(2026,7,6), endDate:new Date(2026,7,9),
+      description:'פסטיבל מוזיקה אלקטרונית ענק בפארק המרכזי של קלוז\'. ביום יש מתחמי פנטזיה ופעילויות משוגעות בפארק - מתאים גם למשפחות.',
+      tip:'בלילה זה פסטיבל מוזיקה מבוגרים, אבל ביום הפארק פתוח לכולם עם פעילויות ייחודיות. שווה לשלב עם ביקור בקלוז\'.',
+      stores:null, url:'' },
+
+    { id:48, country:'romania', flag:'🇷🇴', city:'סיגישוארה', title:'פסטיבל ימי הביניים - סיגישוארה', type:'festival',
+      startDate:new Date(2026,6,24), endDate:new Date(2026,6,26),
+      description:'פסטיבל ימי הביניים המפורסם בעיר העתיקה של סיגישוארה - עיר המורשת של יונסקו. תחפושות, קרבות חרבות, מוזיקה עתיקה ואוכל מסורתי.',
+      tip:'אחד האירועים הויזואליים היפים ביותר ברומניה. מגיעים עם ילדים - הם יאהבו את הלוחמים ואת המלבושים. מחיר כניסה סמלי.',
+      stores:null, url:'' },
+    { id:49, country:'romania', flag:'🇷🇴', city:'בוקרשט', title:'יום הלאום הרומני', type:'holiday',
+      startDate:new Date(2026,11,1), endDate:new Date(2026,11,1),
+      description:'יום הלאום של רומניה עם מצעד צבאי ענק בכיכר הניצחון בבוקרשט. אחד המצעדים המרשימים בדרום-מזרח אירופה.',
+      tip:'הגיעו מוקדם לתפוס מקום ליד הבמה. המצעד מתחיל ב-11:00. קר בדצמבר - לבשו חם.',
+      stores:'🔴 חנויות רבות סגורות. מסעדות פתוחות.', url:'' },
+    { id:50, country:'romania', flag:'🇷🇴', city:'בראן', title:'פסטיבל ליל המסכות - טירת דרקולה', type:'festival',
+      startDate:new Date(2026,9,30), endDate:new Date(2026,9,31),
+      description:'חגיגת הלואין מיוחדת בטירת בראן (טירת דרקולה). תחפושות, סיפורי אימה, סיורי לילה בטירה ואירועי בידור לכל המשפחה.',
+      tip:'כרטיסים לסיור הלילי בטירה נגמרים מהר - הזמינו מראש. גם ביום הטירה פתוחה ויפה מאוד לביקור.',
+      stores:null, url:'' },
+
+    { id:51, country:'poland', flag:'🇵🇱', city:'קרקוב', title:'פסטיבל הדרקון - Smok Wawelski', type:'kids',
+      startDate:new Date(2026,5,5), endDate:new Date(2026,5,7),
+      description:'פסטיבל ייחודי לילדים סביב האגדה של דרקון ואוול. מצעד דרקונים בחוצות קרקוב, סדנאות יצירה, מופעי רחוב ותחרות ציורי דרקונים.',
+      tip:'אחד האירועים המשפחתיים הכי שווים בפולין! ילדים לובשים תחפושות דרקון. הכניסה לרוב הפעילויות חינמית.',
+      stores:null, url:'' },
+    { id:52, country:'poland', flag:'🇵🇱', city:'ורשה', title:'יום הלאום הפולני', type:'holiday',
+      startDate:new Date(2026,10,11), endDate:new Date(2026,10,11),
+      description:'יום העצמאות הפולני עם מצעד לאומי גדול בורשה. אחד הימים הלאומיים המרגשים באירופה.',
+      tip:'מצעד ה-11/11 בורשה הוא אירוע גדול מאוד. מומלץ להגיע מוקדם. קר בנובמבר.',
+      stores:'🔴 חנויות סגורות. מסעדות פתוחות.', url:'' },
+    { id:53, country:'poland', flag:'🇵🇱', city:'קרקוב', title:'שוק חג המולד - כיכר השוק', type:'market',
+      startDate:new Date(2026,10,27), endDate:new Date(2026,11,26),
+      description:'אחד משווקי חג המולד היפים באירופה בכיכר השוק ההיסטורית של קרקוב. גלידת לחם, רמולד, בובקה ומזכרות עם נוף לכנסייה הגותית.',
+      tip:'בואו בערב כשהאורות דולקים - קסום. קרקוב קרה מאוד בנובמבר-דצמבר. ילדים אוהבים את הסוסים והעגלות.',
+      stores:null, url:'' },
+
+    { id:54, country:'czechia', flag:'🇨🇿', city:'פראג', title:'שוק חג המולד - כיכר העיר העתיקה', type:'market',
+      startDate:new Date(2026,10,28), endDate:new Date(2026,11,6),
+      description:'אחד משווקי חג המולד המפורסמים בעולם בכיכר העיר העתיקה של פראג עם עץ חג ענק, דוכני מסורת ואורות קסומים.',
+      tip:'בואו בערב לחוויה הכי יפה. ה-trdelník (לחם קינמון) הוא חובה. כיכר ואצלב - שוק נוסף שווה לא פחות.',
+      stores:null, url:'' },
+    { id:55, country:'czechia', flag:'🇨🇿', city:'פראג', title:'פסטיבל הביר - Czech Beer Festival', type:'festival',
+      startDate:new Date(2026,4,14), endDate:new Date(2026,4,30),
+      description:'פסטיבל הבירה הגדול של פראג עם 70+ סוגי בירה צ\'כית. מתאים למשפחות ביום - יש אוכל מסורתי, מוזיקה חיה ואווירה נהדרת.',
+      tip:'בשעות היום (12:00-17:00) הרבה פחות עמוס. ילדים מוזמנים - יש להם אוכל ומשקאות ללא אלכוהול. כניסה חינמית.',
+      stores:null, url:'' },
+
+    { id:56, country:'england', flag:'🇬🇧', city:'לונדון', title:'Trooping the Colour - יום הולדת המלך', type:'festival',
+      startDate:new Date(2026,5,6), endDate:new Date(2026,5,6),
+      description:'המצעד הצבאי המלכותי הגדול ביותר בבריטניה לכבוד יום הולדת המלך. סוסים, להקות צבאיות ומצעד ססגוני לאורך The Mall עד ארמון בקינגהם.',
+      tip:'הגיעו מוקדם לתפוס מקום ב-The Mall - ראייה חינמית ומרהיבה. הילדים מתלהבים מהסוסים ומהמדים הצבאיים.',
+      stores:null, url:'' },
+    { id:57, country:'england', flag:'🇬🇧', city:'לונדון', title:'West End LIVE - הצגות חינמיות', type:'kids',
+      startDate:new Date(2026,5,20), endDate:new Date(2026,5,21),
+      description:'כוכבי ווסט אנד יורדים לכיכר טרפלגר לסוף שבוע של הופעות חינמיות ממחזמרים מפורסמים - The Lion King, Hamilton, Wicked ועוד.',
+      tip:'הגיעו מוקדם לתפוס מקום טוב. חינמי לחלוטין! אחד האירועים המשפחתיים הכי שווים בלונדון.',
+      stores:null, url:'' },
+    { id:58, country:'england', flag:'🇬🇧', city:'לונדון', title:'BST Hyde Park', type:'festival',
+      startDate:new Date(2026,5,26), endDate:new Date(2026,6,12),
+      description:'פסטיבל מוזיקה ענק בהייד פארק עם אמנים בינלאומיים מובילים. 2026: Mumford & Sons ו-Lewis Capaldi בין ההדליינרים.',
+      tip:'ביום גם בלי כרטיס לאירוע - הפארק עצמו ויפה ואפשר לשבת בשולי הפסטיבל. עם ילדים קטנים - תבדקו תוכנית הצהריים.',
+      stores:null, url:'' },
+    { id:59, country:'england', flag:'🇬🇧', city:'לונדון', title:'RHS Hampton Court Garden Festival', type:'festival',
+      startDate:new Date(2026,6,8), endDate:new Date(2026,6,12),
+      description:'תערוכת גינון מרהיבה ברקע ארמון המפטון קורט. מאות גינות מעוצבות, פעילויות לילדים וסדנאות גינון.',
+      tip:'50 דקות מלונדון מרכז. מתאים מאוד לגילאי 5+ - ילדים אוהבים את הגינות הצבעוניות. כרטיסים מראש זולים יותר.',
+      stores:null, url:'' },
+    { id:60, country:'england', flag:'🇬🇧', city:'לונדון', title:'שנה החדשה הסינית - טרפלגר סקוור', type:'festival',
+      startDate:new Date(2026,1,21), endDate:new Date(2026,1,22),
+      description:'החגיגה הגדולה ביותר של השנה הסינית מחוץ לאסיה. מצעד ענק בצ\'יינה טאון, הופעות, אוכל ועיצובים מרהיבים בטרפלגר סקוור.',
+      tip:'ייחום ביותר! בואו ב-11:00 לפני שמתמלא. הילדים יתלהבו מהדרקונים והאקרובטים. חינמי לחלוטין.',
+      stores:null, url:'' },
+    { id:61, country:'england', flag:'🇬🇧', city:'לונדון', title:'Pride in London', type:'festival',
+      startDate:new Date(2026,5,27), endDate:new Date(2026,5,27),
+      description:'אחד המצעדים הצבעוניים והגדולים ביותר בעולם לאורך רחובות לונדון המרכזית. צבעים, מוזיקה ואנרגיה חיובית.',
+      tip:'מצעד ויזואלי מדהים לצפייה עם ילדים - תעמדו ליד Regent Street לראות הכל. חינמי לצפייה.',
+      stores:null, url:'' },
+    { id:62, country:'england', flag:'🇬🇧', city:'לונדון', title:'Zoo Nights - גן החיות בלילה', type:'kids',
+      startDate:new Date(2026,5,5), endDate:new Date(2026,6,31),
+      description:'גן החיות של לונדון פתוח בלילות שישי ביוני-יולי - חוויה אחרת לגמרי לראות בעלי חיים בשעות הלילה עם תאורה מיוחדת.',
+      tip:'כרטיסים נגמרים מהר - הזמינו מראש. מתאים לגילאי 6+ שיכולים להישאר ערים. אחת הפעילויות הכי ייחודיות בלונדון.',
+      stores:null, url:'' },
+
+    { id:63, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'פריחת עצי הדובדבן', type:'festival',
+      startDate:new Date(2026,2,20), endDate:new Date(2026,3,10),
+      description:'בודפשט מוורדת כשעצי הדובדבן פורחים בפארקים ובגנים ברחבי העיר. אחד הנופים הציוריים ביותר באירופה באביב.',
+      tip:'פארק ראקוצי ופארק ורושמרטי הם הכי יפים. בוקר מוקדם - האור והרוגע כי מתמלא אחרי 10:00. חינמי לחלוטין.',
+      stores:null, url:'' },
+    { id:64, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'יום הילד הלאומי - פארק ורושליגט', type:'kids',
+      startDate:new Date(2026,4,31), endDate:new Date(2026,4,31),
+      description:'יום הילד הלאומי של הונגריה עם מאות פעילויות חינמיות לילדים בפארק העירוני הגדול - הופעות, סדנאות, אטרקציות ועוד.',
+      tip:'אחד הימים הכי טובים להגיע לבודפשט עם ילדים. הכל חינמי! פארק ורושליגט הוא חצי שעה הליכה ממרכז העיר.',
+      stores:null, url:'' },
+    { id:65, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'Nagy Sportágválasztó - 100 ענפי ספורט', type:'kids',
+      startDate:new Date(2026,4,29), endDate:new Date(2026,4,30),
+      description:'אירוע ייחודי שמאפשר לנסות 100+ ענפי ספורט ו-25 כלי נגינה תחת הדרכת אלופים אולימפיים. חינמי - עם הרשמה מראש.',
+      tip:'שבת פתוח לכולם (שישי - רק לבתי ספר). ילדים מצטלמים עם אלופים אולימפיים! אחת הפעילויות הכי מיוחדות בבודפשט.',
+      stores:null, url:'' },
+
+    { id:66, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'Bratislava Cultural Summer', type:'festival',
+      startDate:new Date(2026,5,1), endDate:new Date(2026,8,30),
+      description:'הפסטיבל העירוני הגדול של ברטיסלבה - כל הקיץ מלא הופעות, קולנוע, תיאטרון, מוזיקה ופינות לילדים בכל רחבי העיר. רוב האירועים חינמיים.',
+      tip:'בדקו את לוח האירועים של BKIS לפני הנסיעה. בכיכר הראשית ובפארק יאנקו קראל יש תמיד תוכנית לילדים בסוף שבוע.',
+      stores:null, url:'' },
+    { id:67, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'Uprising Festival - פסטיבל רגאיי', type:'festival',
+      startDate:new Date(2026,7,28), endDate:new Date(2026,7,30),
+      description:'פסטיבל הרגאיי הגדול ביותר במרכז אירופה עם פינה ייחודית לילדים ומשפחות. האירוע מציין את יום המרד הסלובקי.',
+      tip:'יש אזור משפחות מיוחד עם פעילויות לילדים. אווירה מיוחדת ואינקלוסיבית. מומלץ לקנות כרטיסים מראש.',
+      stores:null, url:'' },
+    { id:68, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'פסטיבל מלאכות יד ופולקלור', type:'festival',
+      startDate:new Date(2026,5,20), endDate:new Date(2026,5,22),
+      description:'הפסטיבל הגדול של מלאכות יד מסורתיות בברטיסלבה - ריקודי פולקלור, תלבושות מסורתיות, אוכל אותנטי וסדנאות יצירה לילדים.',
+      tip:'אחת הדרכים הכי יפות להכיר את התרבות הסלובקית. הילדים אוהבים את הריקודים הססגוניים. כניסה חינמית.',
+      stores:null, url:'' },
+
+    { id:69, country:'romania', flag:'🇷🇴', city:'קלוז\'', title:'Wonder Family Fest - פסטיבל משפחות', type:'kids',
+      startDate:new Date(2026,6,31), endDate:new Date(2026,7,2),
+      description:'פסטיבל משפחות ייחודי בקלוז\' המיועד אך ורק למשפחות עם ילדים - הופעות, סדנאות, משחקים ופעילויות לכל הגילאים.',
+      tip:'אחד האירועים המשפחתיים הנדירים שמיועד ספציפית להורים וילדים. מומלץ לשלב עם ביקור בעיר העתיקה של קלוז\'.',
+      stores:null, url:'' },
+    { id:70, country:'romania', flag:'🇷🇴', city:'סיביו', title:'Taste of Transylvania - אוכל טרנסילבני', type:'market',
+      startDate:new Date(2026,7,14), endDate:new Date(2026,7,16),
+      description:'פסטיבל גסטרונומי ייחודי המציג את המטבח של טרנסילבניה עם שפים מובילים, מוצרים מקומיים אותנטיים ותרבות אוכל רומנית.',
+      tip:'סיביו היא אחת הערים היפות ביותר ברומניה. שלבו את הביקור עם טיול ברחבות המרכזיות של העיר.',
+      stores:null, url:'' },
+
+    { id:71, country:'czechia', flag:'🇨🇿', city:'פראג', title:'Prague Spring Music Festival', type:'festival',
+      startDate:new Date(2026,4,12), endDate:new Date(2026,5,4),
+      description:'פסטיבל מוזיקה קלאסית יוקרתי שנפתח מדי שנה ב-12 במאי עם יצירת "המולדתי" של סמטנה. תזמורות ממיטב העולם מופיעות בפראג.',
+      tip:'מתאים לילדים מגיל 10+. כרטיסים לקונצרט הפתיחה נגמרים מהר. כיכר העיר העתיקה מקבלת קישוטים מיוחדים לאורך הפסטיבל.',
+      stores:null, url:'' },
+    { id:72, country:'czechia', flag:'🇨🇿', city:'פראג', title:'Prague Marathon - מרתון פראג', type:'festival',
+      startDate:new Date(2026,4,3), endDate:new Date(2026,4,3),
+      description:'מרתון הפסטיבל של פראג דרך העיר העתיקה - מסלול מרהיב דרך גשר קרלוב וכיכר העיר העתיקה. אלפי רצים מכל העולם.',
+      tip:'גם בלי להשתתף - כיף לצפות! עמדו ליד גשר קרלוב לתמונות מרהיבות. הילדים אוהבים לעודד את הרצים. חינמי לצפות.',
+      stores:null, url:'' },
+
+    { id:73, country:'england', flag:'🇬🇧', city:'לונדון', title:'Early May Bank Holiday', type:'holiday',
+      startDate:new Date(2026,4,4), endDate:new Date(2026,4,4),
+      description:'יום שבתון רשמי בתחילת מאי. רוב העסקים, בנקים וחנויות סגורים.',
+      tip:'מוזיאונים ואטרקציות תיירותיות בד"כ פתוחים. מסעדות פתוחות אך כדאי להזמין מראש.',
+      stores:'🔴 רוב החנויות סגורות. אטרקציות בד"כ פתוחות.', url:'' },
+    { id:74, country:'england', flag:'🇬🇧', city:'לונדון', title:'Spring Bank Holiday', type:'holiday',
+      startDate:new Date(2026,4,25), endDate:new Date(2026,4,25),
+      description:'יום שבתון האביב - אחד מ-3 ה-Bank Holidays הגדולים בקיץ הבריטי. חנויות ובנקים סגורים.',
+      tip:'אחד הסופ"שים העמוסים בשנה בלונדון. פארקים ואטרקציות חוצות פתוחים.',
+      stores:'🔴 רוב החנויות סגורות. מוזיאונים ואטרקציות פתוחים.', url:'' },
+    { id:75, country:'england', flag:'🇬🇧', city:'לונדון', title:'Late Summer Bank Holiday', type:'holiday',
+      startDate:new Date(2026,7,31), endDate:new Date(2026,7,31),
+      description:'יום שבתון הקיץ המאוחר - סוף הקיץ הרשמי בבריטניה. רוב העסקים סגורים.',
+      tip:'יום נהדר לבלות בפארקים. הרבה אירועים ופסטיבלים ביום זה. הזמינו מסעדות מראש.',
+      stores:'🔴 רוב החנויות סגורות. אטרקציות תיירותיות בד"כ פתוחות.', url:'' },
+
+    { id:76, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'יום העבודה', type:'holiday',
+      startDate:new Date(2026,4,1), endDate:new Date(2026,4,1),
+      description:'יום העבודה הבינלאומי - חג רשמי בהונגריה. רוב החנויות והעסקים סגורים.',
+      tip:'מוזיאונים ואטרקציות תיירותיות בד"כ פתוחים. הפארקים הגדולים פעילים מאוד.',
+      stores:'🔴 חנויות סגורות. מסעדות ואטרקציות פתוחות.', url:'' },
+    { id:77, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'Pentecost Monday - שבועות', type:'holiday',
+      startDate:new Date(2026,4,25), endDate:new Date(2026,4,25),
+      description:'שני של חג השבועות - חג רשמי בהונגריה. יום שבתון מלא.',
+      tip:'חנויות סגורות. מומלץ לבלות בפארקים או אטרקציות טבע.',
+      stores:'🔴 חנויות סגורות. מסעדות בד"כ פתוחות.', url:'' },
+
+    { id:78, country:'austria', flag:'🇦🇹', city:'וינה', title:'Easter Monday - שני של פסחא', type:'holiday',
+      startDate:new Date(2026,3,6), endDate:new Date(2026,3,6),
+      description:'שני של פסחא - חג רשמי באוסטריה. חנויות, בנקים ורוב העסקים סגורים לחלוטין.',
+      tip:'בוינה יש אירועי פסחא מיוחדים בפארקים. ילדים אוהבים את ציד הביצים המסורתי.',
+      stores:'🔴 כל החנויות סגורות. מסעדות ומוזיאונים פתוחים.', url:'' },
+    { id:79, country:'austria', flag:'🇦🇹', city:'וינה', title:'יום העבודה', type:'holiday',
+      startDate:new Date(2026,4,1), endDate:new Date(2026,4,1),
+      description:'יום העבודה - חג רשמי באוסטריה. חנויות ובנקים סגורים לחלוטין על פי חוק.',
+      tip:'באוסטריה חנויות חייבות לסגור על פי חוק. מוזיאונים ואטרקציות פתוחים.',
+      stores:'🔴 כל החנויות סגורות על פי חוק.', url:'' },
+    { id:80, country:'austria', flag:'🇦🇹', city:'וינה', title:'Ascension Day - עלייה לשמים', type:'holiday',
+      startDate:new Date(2026,4,14), endDate:new Date(2026,4,14),
+      description:'חג עלייה לשמים - חג רשמי באוסטריה. חנויות ובנקים סגורים.',
+      tip:'יום נהדר לסיור בוינה הישנה ובמוזיאונים הפתוחים.',
+      stores:'🔴 חנויות סגורות. מוזיאונים ואטרקציות פתוחים.', url:'' },
+    { id:81, country:'austria', flag:'🇦🇹', city:'וינה', title:'Corpus Christi - גוף המשיח', type:'holiday',
+      startDate:new Date(2026,5,4), endDate:new Date(2026,5,4),
+      description:'חג קורפוס כריסטי - חג קתולי רשמי באוסטריה. מצעדים דתיים מסורתיים בכל הערים.',
+      tip:'המצעדים ברחובות וינה יפים מאוד לצפייה. חנויות סגורות אבל אווירה חגיגית.',
+      stores:'🔴 חנויות סגורות. מסעדות פתוחות.', url:'' },
+    { id:82, country:'austria', flag:'🇦🇹', city:'וינה', title:'Assumption - הנחת מריה', type:'holiday',
+      startDate:new Date(2026,7,15), endDate:new Date(2026,7,15),
+      description:'חג הנחת מריה - חג קתולי רשמי באוסטריה. חנויות ובנקים סגורים.',
+      tip:'אוגוסט 15 בוינה - שווה לתכנן ביקור במוזיאונים.',
+      stores:'🔴 חנויות סגורות. מוזיאונים פתוחים.', url:'' },
+
+    { id:83, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'Good Friday - שישי הגדול', type:'holiday',
+      startDate:new Date(2026,3,3), endDate:new Date(2026,3,3),
+      description:'שישי הגדול לפני פסחא - חג רשמי בסלובקיה. חנויות ובנקים סגורים.',
+      tip:'אווירה שקטה ומיוחדת. מסעדות פתוחות. מוזיאונים עשויים לסגור מוקדם.',
+      stores:'🔴 רוב החנויות סגורות. מסעדות פתוחות.', url:'' },
+    { id:84, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'Easter Monday - שני של פסחא', type:'holiday',
+      startDate:new Date(2026,3,6), endDate:new Date(2026,3,6),
+      description:'שני של פסחא - חג רשמי בסלובקיה. מסורת ייחודית: גברים שופכים מים על נשים לאות חיבה ומזל.',
+      tip:'מסורת שפיכת המים מרתקת! ילדים נהנים מאוד. חנויות סגורות אבל האווירה חגיגית.',
+      stores:'🔴 חנויות סגורות. מסעדות פתוחות.', url:'' },
+    { id:85, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'יום העבודה', type:'holiday',
+      startDate:new Date(2026,4,1), endDate:new Date(2026,4,1),
+      description:'יום העבודה הבינלאומי - חג רשמי בסלובקיה. חנויות ובנקים סגורים.',
+      tip:'מוזיאונים ואטרקציות פתוחים. יום טוב לטיול בברטיסלבה הישנה.',
+      stores:'🔴 חנויות סגורות. אטרקציות פתוחות.', url:'' },
+    { id:86, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'יום הניצחון על הפשיזם', type:'holiday',
+      startDate:new Date(2026,4,8), endDate:new Date(2026,4,8),
+      description:'יום הניצחון על הפשיזם - חג רשמי בסלובקיה המציין את סיום מלחמת העולם השנייה.',
+      tip:'חנויות סגורות. יום שקט ומיוחד לטיול ברחובות.',
+      stores:'🔴 חנויות סגורות. מסעדות ואטרקציות פתוחות.', url:'' },
+    { id:87, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'יום קיריל ומתודיוס', type:'holiday',
+      startDate:new Date(2026,6,5), endDate:new Date(2026,6,5),
+      description:'חג לכבוד הקדושים קיריל ומתודיוס, ממציאי האלפבית הסלאבי.',
+      tip:'חנויות סגורות. אירועים תרבותיים מיוחדים בברטיסלבה.',
+      stores:'🔴 חנויות סגורות. מסעדות ואטרקציות פתוחות.', url:'' },
+
+    { id:88, country:'greece', flag:'🇬🇷', city:'אתונה', title:'Good Friday אורתודוקסי', type:'holiday',
+      startDate:new Date(2026,3,10), endDate:new Date(2026,3,10),
+      description:'שישי הגדול האורתודוקסי - מצעד האפיטאפיוס בלילה עם אלפי נרות - אחד המחזות היפים ביוון.',
+      tip:'המצעד הלילי עם הנרות מרגש ומרהיב! הגיעו ב-21:00 לאתונה. חנויות סגורות.',
+      stores:'🔴 כמעט הכל סגור. מסעדות מסוימות פתוחות.', url:'' },
+    { id:89, country:'greece', flag:'🇬🇷', city:'אתונה', title:'פסחא אורתודוקסי', type:'holiday',
+      startDate:new Date(2026,3,12), endDate:new Date(2026,3,13),
+      description:'פסחא האורתודוקסי - החג הגדול ביותר ביוון! חצות - ירי זיקוקים ואורות נרות בכל העיר.',
+      tip:'"Christos Anesti!" - ברכה מסורתית. חוויה בלתי נשכחת בחצות!',
+      stores:'🔴 הכל סגור. יום משפחה מוחלט.', url:'' },
+    { id:90, country:'greece', flag:'🇬🇷', city:'אתונה', title:'יום העבודה - Protomagia', type:'holiday',
+      startDate:new Date(2026,4,1), endDate:new Date(2026,4,1),
+      description:'יום העבודה ביוון - מסורת של קליעת זרי פרחים ותלייתם על הדלת. חנויות ובנקים סגורים.',
+      tip:'מסורת קליעת זרי הפרחים נהדרת לעשות עם ילדים! שוקי הפרחים פתוחים בבוקר.',
+      stores:'🔴 חנויות סגורות. מסעדות פתוחות.', url:'' },
+    { id:91, country:'greece', flag:'🇬🇷', city:'אתונה', title:'Pentecost Monday - שני השבועות', type:'holiday',
+      startDate:new Date(2026,5,1), endDate:new Date(2026,5,1),
+      description:'שני של חג השבועות - חג רשמי ביוון. חנויות ובנקים סגורים.',
+      tip:'יום מצוין לטיול בטבע ובחופים מחוץ לאתונה.',
+      stores:'🔴 חנויות סגורות. חופים ואטרקציות טבע פתוחים.', url:'' },
+    { id:92, country:'greece', flag:'🇬🇷', city:'אתונה', title:'Assumption - 15 באוגוסט', type:'holiday',
+      startDate:new Date(2026,7,15), endDate:new Date(2026,7,15),
+      description:'חג הנחת מריה - אחד החגים הגדולים ביוון. האי טינוס - מרכז עלייה לרגל.',
+      tip:'חנויות סגורות. אטרקציות תיירותיות עמוסות במיוחד ביום זה.',
+      stores:'🔴 חנויות סגורות. אטרקציות פתוחות אך עמוסות.', url:'' },
+
+    { id:93, country:'czechia', flag:'🇨🇿', city:'פראג', title:'Good Friday - שישי הגדול', type:'holiday',
+      startDate:new Date(2026,3,3), endDate:new Date(2026,3,3),
+      description:'שישי הגדול - חג רשמי בצ\'כיה. חנויות ובנקים סגורים.',
+      tip:'פראג שקטה ויפה ביום זה. מומלץ לסייר ברובע היהודי ובגשר קרלוב בלי עומסים.',
+      stores:"🔴 חנויות סגורות. מוזיאונים ואטרקציות פתוחים.", url:'' },
+    { id:94, country:'czechia', flag:'🇨🇿', city:'פראג', title:'Easter Monday - שני של פסחא', type:'holiday',
+      startDate:new Date(2026,3,6), endDate:new Date(2026,3,6),
+      description:'שני של פסחא - חג רשמי בצ\'כיה. מסורת ה-pomlázka - גברים ממשיכים נשים עם ענפי ערבה.',
+      tip:'מסורת ה-pomlázka מרתקת! שוקי הפסחא בפראג פעילים ויפים. חנויות סגורות.',
+      stores:"🔴 חנויות סגורות. שוקי הפסחא פתוחים.", url:'' },
+    { id:95, country:'czechia', flag:'🇨🇿', city:'פראג', title:'יום העבודה', type:'holiday',
+      startDate:new Date(2026,4,1), endDate:new Date(2026,4,1),
+      description:'יום העבודה הבינלאומי - חג רשמי בצ\'כיה. חנויות ובנקים סגורים.',
+      tip:'מוזיאונים ואטרקציות פתוחים. יום נעים לטיול בפראג הישנה.',
+      stores:'🔴 חנויות סגורות. אטרקציות פתוחות.', url:'' },
+    { id:96, country:'czechia', flag:'🇨🇿', city:'פראג', title:'יום הניצחון', type:'holiday',
+      startDate:new Date(2026,4,8), endDate:new Date(2026,4,8),
+      description:'יום הניצחון על הנאציזם - חג רשמי בצ\'כיה. אירועי זיכרון ברחבי המדינה.',
+      tip:'חנויות סגורות. יום טוב לביקור במוזיאון ההיסטוריה.',
+      stores:'🔴 חנויות סגורות. מוזיאונים פתוחים.', url:'' },
+    { id:97, country:'czechia', flag:'🇨🇿', city:'פראג', title:'יום קיריל ומתודיוס', type:'holiday',
+      startDate:new Date(2026,6,5), endDate:new Date(2026,6,5),
+      description:'חג לכבוד הקדושים קיריל ומתודיוס - חג תרבותי בצ\'כיה.',
+      tip:'חנויות סגורות. יום טוב לטיול בטבע ומחוץ לעיר.',
+      stores:'🔴 חנויות סגורות. אטרקציות פתוחות.', url:'' },
+    { id:98, country:'czechia', flag:'🇨🇿', city:'פראג', title:'יום יאן הוס', type:'holiday',
+      startDate:new Date(2026,6,6), endDate:new Date(2026,6,6),
+      description:'יום הזיכרון ליאן הוס, מתקן הדת הצ\'כי שנשרף על המוקד ב-1415.',
+      tip:'חנויות סגורות. כיכר העיר העתיקה בפראג מקבלת אופי מיוחד ביום זה.',
+      stores:'🔴 חנויות סגורות. אטרקציות פתוחות.', url:'' },
+
+    { id:99, country:'poland', flag:'🇵🇱', city:'ורשה', title:'Easter Monday - שני של פסחא', type:'holiday',
+      startDate:new Date(2026,3,6), endDate:new Date(2026,3,6),
+      description:'שני של פסחא - חג רשמי בפולין. מסורת ה-Smigus-dyngus - ילדים שופכים מים על כולם!',
+      tip:'מסורת שפיכת המים מאוד מהנה עם ילדים - הכינו בגדים ישנים! אחת המסורות הכי כיפיות באירופה.',
+      stores:'🔴 חנויות סגורות. אטרקציות פתוחות.', url:'' },
+    { id:100, country:'poland', flag:'🇵🇱', city:'ורשה', title:'יום העבודה', type:'holiday',
+      startDate:new Date(2026,4,1), endDate:new Date(2026,4,1),
+      description:'יום העבודה הבינלאומי - חג רשמי בפולין. חנויות ובנקים סגורים.',
+      tip:'חנויות סגורות. אירועים ומצעדים בורשה. אטרקציות תיירותיות פתוחות.',
+      stores:'🔴 חנויות סגורות. אטרקציות פתוחות.', url:'' },
+    { id:101, country:'poland', flag:'🇵🇱', city:'ורשה', title:'יום החוקה הפולנית', type:'holiday',
+      startDate:new Date(2026,4,3), endDate:new Date(2026,4,3),
+      description:'יום החוקה הפולנית (1791) - חג לאומי גדול עם מצעדים ואירועים ברחבי פולין.',
+      tip:'מצעד גדול בורשה. חנויות סגורות אבל אווירה חגיגית. אחד הימים הלאומיים החשובים.',
+      stores:'🔴 חנויות סגורות. אירועים ציבוריים פתוחים.', url:'' },
+    { id:102, country:'poland', flag:'🇵🇱', city:'ורשה', title:'Corpus Christi - גוף המשיח', type:'holiday',
+      startDate:new Date(2026,5,4), endDate:new Date(2026,5,4),
+      description:'חג קורפוס כריסטי - חג קתולי גדול בפולין עם מצעדים דתיים מרשימים.',
+      tip:'המצעדים הדתיים יפים לצפייה - ילדים מפזרים פרחים בדרך. חנויות סגורות.',
+      stores:'🔴 חנויות סגורות. מסעדות פתוחות.', url:'' },
+    { id:103, country:'poland', flag:'🇵🇱', city:'ורשה', title:'Assumption - 15 באוגוסט', type:'holiday',
+      startDate:new Date(2026,7,15), endDate:new Date(2026,7,15),
+      description:'חג הנחת מריה - חג קתולי גדול בפולין. חנויות ובנקים סגורים לחלוטין.',
+      tip:'חנויות סגורות. יום טוב לביקור בפארקים ובמוזיאונים.',
+      stores:'🔴 חנויות סגורות. אטרקציות פתוחות.', url:'' },
+
+    { id:104, country:'romania', flag:'🇷🇴', city:'בוקרשט', title:'פסחא אורתודוקסי', type:'holiday',
+      startDate:new Date(2026,3,12), endDate:new Date(2026,3,13),
+      description:'פסחא האורתודוקסי - החג הגדול ביותר ברומניה! ביצים צבועות, צלייה בחוץ ומצעד נרות בלילה.',
+      tip:'ביצים צבועות אדום הן הסמל. בלילה - מצעד נרות מחוץ לכנסיות. חוויה בלתי נשכחת!',
+      stores:'🔴 הכל סגור. יום משפחה מוחלט.', url:'' },
+    { id:105, country:'romania', flag:'🇷🇴', city:'בוקרשט', title:'יום העבודה', type:'holiday',
+      startDate:new Date(2026,4,1), endDate:new Date(2026,4,1),
+      description:'יום העבודה הבינלאומי - חג רשמי ברומניה. חנויות ובנקים סגורים.',
+      tip:'פארקים ואזורי טבע פתוחים ומומלצים. יום נעים לטיול בטבע הרומני.',
+      stores:'🔴 חנויות סגורות. אטרקציות טבע פתוחות.', url:'' },
+    { id:106, country:'romania', flag:'🇷🇴', city:'בוקרשט', title:'יום הילד הרומני', type:'holiday',
+      startDate:new Date(2026,5,1), endDate:new Date(2026,5,1),
+      description:'יום הילד הרומני - חג רשמי! פעילויות חינמיות לילדים בכל הערים ופארקי שעשועים בחינם.',
+      tip:'יום מושלם לביקור עם ילדים! כניסה חינמית לאטרקציות רבות. אחד הימים הכי כיפיים ברומניה.',
+      stores:'🟢 חנויות רבות פתוחות. אטרקציות לילדים חינמיות!', url:'' },
+    { id:107, country:'romania', flag:'🇷🇴', city:'בוקרשט', title:'Assumption - 15 באוגוסט', type:'holiday',
+      startDate:new Date(2026,7,15), endDate:new Date(2026,7,15),
+      description:'חג הנחת מריה - חג קתולי ואורתודוקסי ברומניה. חנויות ובנקים סגורים.',
+      tip:'עלייה לרגל בכנסיות רבות. יום טוב לטיול בטבע ובכפרים הציוריים של רומניה.',
+      stores:'🔴 חנויות סגורות. אטרקציות טבע פתוחות.', url:'' }
+
+  ];
+
+  var WEATHER_DATA = {
+    england:  { city:'לונדון',   1:{t:6,r:16,l:'נמוך',i:'🌧️'}, 2:{t:7,r:13,l:'נמוך',i:'🌧️'}, 3:{t:9,r:11,l:'בינוני',i:'🌦️'}, 4:{t:12,r:11,l:'בינוני',i:'🌦️'}, 5:{t:16,r:8,l:'בינוני',i:'🌤️'}, 6:{t:19,r:7,l:'גבוה',i:'⛅'}, 7:{t:21,r:6,l:'גבוה מאוד',i:'🌤️'}, 8:{t:21,r:7,l:'גבוה מאוד',i:'🌤️'}, 9:{t:17,r:9,l:'גבוה',i:'🌦️'}, 10:{t:13,r:12,l:'בינוני',i:'🌧️'}, 11:{t:9,r:15,l:'נמוך',i:'🌧️'}, 12:{t:7,r:15,l:'נמוך',i:'🌧️'} },
+    hungary:  { city:'בודפשט',   1:{t:0,r:10,l:'נמוך',i:'❄️'}, 2:{t:2,r:9,l:'נמוך',i:'❄️'}, 3:{t:7,r:9,l:'בינוני',i:'🌦️'}, 4:{t:13,r:10,l:'בינוני',i:'🌤️'}, 5:{t:18,r:11,l:'בינוני',i:'⛅'}, 6:{t:22,r:10,l:'גבוה',i:'⛅'}, 7:{t:25,r:9,l:'גבוה מאוד',i:'☀️'}, 8:{t:24,r:9,l:'גבוה מאוד',i:'☀️'}, 9:{t:19,r:8,l:'גבוה',i:'🌤️'}, 10:{t:13,r:9,l:'בינוני',i:'🌤️'}, 11:{t:6,r:12,l:'נמוך',i:'🌦️'}, 12:{t:2,r:12,l:'נמוך',i:'❄️'} },
+    austria:  { city:'וינה',     1:{t:1,r:11,l:'נמוך',i:'❄️'}, 2:{t:3,r:10,l:'נמוך',i:'❄️'}, 3:{t:8,r:10,l:'בינוני',i:'🌦️'}, 4:{t:12,r:10,l:'בינוני',i:'🌤️'}, 5:{t:17,r:11,l:'בינוני',i:'⛅'}, 6:{t:21,r:11,l:'גבוה',i:'⛅'}, 7:{t:24,r:10,l:'גבוה מאוד',i:'☀️'}, 8:{t:23,r:10,l:'גבוה מאוד',i:'☀️'}, 9:{t:18,r:9,l:'גבוה',i:'🌤️'}, 10:{t:12,r:10,l:'בינוני',i:'🌦️'}, 11:{t:6,r:12,l:'נמוך',i:'🌧️'}, 12:{t:2,r:12,l:'נמוך',i:'❄️'} },
+    slovakia: { city:'ברטיסלבה', 1:{t:0,r:10,l:'נמוך',i:'❄️'}, 2:{t:2,r:9,l:'נמוך',i:'❄️'}, 3:{t:7,r:9,l:'בינוני',i:'🌦️'}, 4:{t:12,r:9,l:'נמוך',i:'🌤️'}, 5:{t:17,r:10,l:'נמוך',i:'⛅'}, 6:{t:21,r:10,l:'בינוני',i:'⛅'}, 7:{t:23,r:9,l:'בינוני',i:'☀️'}, 8:{t:23,r:9,l:'בינוני',i:'☀️'}, 9:{t:18,r:8,l:'בינוני',i:'🌤️'}, 10:{t:12,r:10,l:'נמוך',i:'🌦️'}, 11:{t:5,r:12,l:'נמוך',i:'🌧️'}, 12:{t:1,r:12,l:'נמוך',i:'❄️'} },
+    greece:   { city:'אתונה',    1:{t:9,r:13,l:'נמוך',i:'🌧️'}, 2:{t:11,r:10,l:'נמוך',i:'🌦️'}, 3:{t:14,r:9,l:'נמוך',i:'🌤️'}, 4:{t:19,r:6,l:'בינוני',i:'🌤️'}, 5:{t:24,r:4,l:'גבוה',i:'☀️'}, 6:{t:29,r:1,l:'גבוה מאוד',i:'☀️'}, 7:{t:33,r:0,l:'גבוה מאוד',i:'🌞'}, 8:{t:33,r:1,l:'גבוה מאוד',i:'🌞'}, 9:{t:28,r:2,l:'גבוה',i:'☀️'}, 10:{t:22,r:7,l:'בינוני',i:'🌤️'}, 11:{t:16,r:11,l:'נמוך',i:'🌦️'}, 12:{t:11,r:14,l:'נמוך',i:'🌧️'} },
+    france:   { city:'פריז',     1:{t:5,r:13,l:'נמוך',i:'🌧️'}, 2:{t:6,r:12,l:'נמוך',i:'🌧️'}, 3:{t:9,r:11,l:'נמוך',i:'🌦️'}, 4:{t:13,r:11,l:'בינוני',i:'🌦️'}, 5:{t:17,r:9,l:'בינוני',i:'⛅'}, 6:{t:21,r:7,l:'גבוה',i:'⛅'}, 7:{t:26,r:5,l:'גבוה מאוד',i:'☀️'}, 8:{t:25,r:6,l:'גבוה מאוד',i:'☀️'}, 9:{t:20,r:8,l:'גבוה',i:'🌤️'}, 10:{t:14,r:11,l:'בינוני',i:'🌦️'}, 11:{t:8,r:13,l:'בינוני',i:'🌧️'}, 12:{t:5,r:12,l:'נמוך-בינוני',i:'🌧️'} },
+    czechia:  { city:'פראג',     1:{t:0,r:13,l:'נמוך',i:'❄️'}, 2:{t:1,r:11,l:'נמוך',i:'❄️'}, 3:{t:6,r:10,l:'בינוני',i:'🌦️'}, 4:{t:12,r:10,l:'בינוני',i:'🌤️'}, 5:{t:17,r:10,l:'בינוני',i:'⛅'}, 6:{t:21,r:9,l:'גבוה',i:'⛅'}, 7:{t:23,r:9,l:'גבוה מאוד',i:'☀️'}, 8:{t:23,r:9,l:'גבוה מאוד',i:'☀️'}, 9:{t:18,r:9,l:'גבוה',i:'🌤️'}, 10:{t:12,r:11,l:'בינוני',i:'🌦️'}, 11:{t:5,r:13,l:'נמוך',i:'🌧️'}, 12:{t:1,r:13,l:'נמוך',i:'❄️'} },
+    poland:   { city:'ורשה',     1:{t:-2,r:11,l:'נמוך',i:'❄️'}, 2:{t:-1,r:10,l:'נמוך',i:'❄️'}, 3:{t:4,r:9,l:'נמוך',i:'🌦️'}, 4:{t:10,r:9,l:'בינוני',i:'🌤️'}, 5:{t:16,r:10,l:'בינוני',i:'⛅'}, 6:{t:20,r:10,l:'גבוה',i:'⛅'}, 7:{t:22,r:10,l:'גבוה מאוד',i:'☀️'}, 8:{t:22,r:9,l:'גבוה מאוד',i:'☀️'}, 9:{t:16,r:9,l:'גבוה',i:'🌤️'}, 10:{t:10,r:11,l:'בינוני',i:'🌦️'}, 11:{t:4,r:13,l:'נמוך',i:'🌧️'}, 12:{t:0,r:12,l:'נמוך',i:'❄️'} },
+    romania:  { city:'קלוז\'',   1:{t:-2,r:9,l:'נמוך',i:'❄️'}, 2:{t:0,r:8,l:'נמוך',i:'❄️'}, 3:{t:6,r:9,l:'נמוך',i:'🌦️'}, 4:{t:12,r:9,l:'בינוני',i:'🌤️'}, 5:{t:18,r:10,l:'בינוני',i:'⛅'}, 6:{t:21,r:10,l:'גבוה',i:'⛅'}, 7:{t:24,r:8,l:'גבוה מאוד',i:'☀️'}, 8:{t:24,r:8,l:'גבוה מאוד',i:'☀️'}, 9:{t:18,r:8,l:'גבוה',i:'🌤️'}, 10:{t:12,r:9,l:'בינוני',i:'🌦️'}, 11:{t:5,r:11,l:'נמוך',i:'🌧️'}, 12:{t:0,r:11,l:'נמוך',i:'❄️'} }
+  };
+
+  var COUNTRY_FLAG_CODES = {
+    england: 'gb', hungary: 'hu', austria: 'at',
+    slovakia: 'sk', greece: 'gr', czechia: 'cz',
+    poland: 'pl', romania: 'ro'
+  };
+  function flagImg(country, size) {
+    size = size || 20;
+    var code = COUNTRY_FLAG_CODES[country] || 'un';
+    return '<img src="https://flagcdn.com/w40/' + code + '.png" style="width:' + size + 'px;height:' + Math.round(size*0.75) + 'px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,0.1);vertical-align:middle;flex-shrink:0;" alt="">';
+  }
+
+  var COUNTRY_ORDER = ['england','hungary','austria','slovakia','greece','czechia','poland','romania'];
+
+  var TYPE_LABELS = {
+    holiday: 'חג לאומי',
+    festival: 'פסטיבל',
+    market: 'שוק',
+    kids: 'לילדים'
+  };
+
+  var HEB_MONTHS = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+  var HEB_DAYS   = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+
+  /* ====== STATE ====== */
+  var today      = new Date();
+  var todayMonth = today.getMonth();
+  var todayYear  = today.getFullYear();
+  var curMonth   = todayMonth;
+  var curYear    = todayYear;
+  var activeCountry = 'all';
+  var activeTypes   = { holiday:true, festival:true, market:true, kids:true };
+  var isListView    = window.innerWidth < 768;
+
+  /* ====== HELPERS ====== */
+  function sameDay(a, b) {
+    return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate();
+  }
+  function datesBetween(d, start, end) {
+    var ds = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+    var de = new Date(end.getFullYear(),   end.getMonth(),   end.getDate());
+    var dt = new Date(d.getFullYear(),     d.getMonth(),     d.getDate());
+    return dt >= ds && dt <= de;
+  }
+  function formatDate(d) {
+    return d.getDate() + ' ב' + HEB_MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+  }
+  function formatDateShort(d) {
+    return d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear();
+  }
+  function truncate(str, max) {
+    return str.length > max ? str.slice(0, max) + '…' : str;
+  }
+  function gcalDate(d) {
+    var y = d.getFullYear();
+    var m = String(d.getMonth()+1).padStart(2,'0');
+    var day = String(d.getDate()).padStart(2,'0');
+    return y + '' + m + '' + day;
+  }
+  function gcalEndDate(d) {
+    var next = new Date(d.getTime() + 86400000);
+    return gcalDate(next);
+  }
+
+  function getFilteredEvents() {
+    return EVENTS.filter(function(ev) {
+      var countryOk = activeCountry === 'all' || ev.country === activeCountry;
+      var typeOk    = activeTypes[ev.type];
+      return countryOk && typeOk;
+    });
+  }
+
+  function getEventsForMonth(month, year, filtered) {
+    return filtered.filter(function(ev) {
+      // Check if event overlaps with the given month
+      var monthStart = new Date(year, month, 1);
+      var monthEnd   = new Date(year, month+1, 0);
+      var evStart    = new Date(ev.startDate.getFullYear(), ev.startDate.getMonth(), ev.startDate.getDate());
+      var evEnd      = new Date(ev.endDate.getFullYear(),   ev.endDate.getMonth(),   ev.endDate.getDate());
+      return evStart <= monthEnd && evEnd >= monthStart;
+    });
+  }
+
+  function getEventsForDay(date, filtered) {
+    return filtered.filter(function(ev) {
+      return datesBetween(date, ev.startDate, ev.endDate);
+    });
+  }
+
+  /* ====== COUNT BADGES ====== */
+  function updateCountBadges() {
+    var allFiltered = EVENTS.filter(function(ev) {
+      return activeTypes[ev.type];
+    });
+
+    // Country badges
+    var countryBtns = document.querySelectorAll('[data-country]');
+    countryBtns.forEach(function(btn) {
+      var c = btn.getAttribute('data-country');
+      var countSpan = btn.querySelector('.count');
+      if (c === 'all') {
+        var n = allFiltered.length;
+        if (!countSpan) { countSpan = document.createElement('span'); countSpan.className='count'; btn.appendChild(countSpan); }
+        countSpan.textContent = n;
+        return;
+      }
+      var n = allFiltered.filter(function(ev){ return ev.country === c; }).length;
+      if (!countSpan) { countSpan = document.createElement('span'); countSpan.className='count'; btn.appendChild(countSpan); }
+      countSpan.textContent = n;
+    });
+  }
+
+  /* ====== MONTH TITLE ====== */
+  function updateMonthTitle() {
+    document.getElementById('monthTitle').textContent = HEB_MONTHS[curMonth];
+    document.getElementById('monthYear').textContent = curYear;
+
+    var isCurrentMonth = (curMonth === todayMonth && curYear === todayYear);
+    var backBtn = document.getElementById('backToTodayBtn');
+    backBtn.classList.toggle('visible', !isCurrentMonth);
+  }
+
+  /* ====== CALENDAR GRID ====== */
+  function renderCalendar() {
+    var grid = document.getElementById('calendarGrid');
+    grid.innerHTML = '';
+
+    // Header row
+    HEB_DAYS.forEach(function(d) {
+      var h = document.createElement('div');
+      h.className = 'calendar-day-header';
+      h.textContent = d;
+      h.setAttribute('role','columnheader');
+      grid.appendChild(h);
+    });
+
+    var filtered = getFilteredEvents();
+    var firstDay = new Date(curYear, curMonth, 1).getDay(); // 0=Sun
+    var daysInMonth = new Date(curYear, curMonth+1, 0).getDate();
+
+    // Empty cells before first day
+    for (var i = 0; i < firstDay; i++) {
+      var empty = document.createElement('div');
+      empty.className = 'calendar-cell calendar-cell--empty';
+      empty.setAttribute('role','gridcell');
+      grid.appendChild(empty);
+    }
+
+    // Day cells
+    for (var d = 1; d <= daysInMonth; d++) {
+      var date  = new Date(curYear, curMonth, d);
+      var cell  = document.createElement('div');
+      var isToday = sameDay(date, today);
+      cell.className = 'calendar-cell' + (isToday ? ' calendar-cell--today' : '');
+      cell.setAttribute('role','gridcell');
+      cell.setAttribute('aria-label', d + ' ב' + HEB_MONTHS[curMonth]);
+
+      var dayNum = document.createElement('div');
+      dayNum.className = 'calendar-cell__day';
+      dayNum.textContent = d;
+      cell.appendChild(dayNum);
+
+      var eventsWrap = document.createElement('div');
+      eventsWrap.className = 'calendar-cell__events';
+
+      var dayEvents = getEventsForDay(date, filtered);
+      dayEvents.forEach(function(ev) {
+        var chip = document.createElement('button');
+        chip.className = 'event-chip event-chip--' + ev.type;
+        chip.innerHTML = flagImg(ev.country, 18) + ' ' + truncate(ev.title, 13);
+        chip.setAttribute('aria-label', 'פתח פרטים: ' + ev.title);
+        chip.setAttribute('type','button');
+        chip.addEventListener('click', function(e) {
+          e.stopPropagation();
+          openModal(ev);
+        });
+        eventsWrap.appendChild(chip);
+      });
+
+      cell.appendChild(eventsWrap);
+      grid.appendChild(cell);
+    }
+  }
+
+  /* ====== LIST VIEW ====== */
+  function renderList() {
+    var listEl = document.getElementById('listEvents');
+    listEl.innerHTML = '';
+
+    var filtered = getEventsForMonth(curMonth, curYear, getFilteredEvents());
+    filtered.sort(function(a,b){ return a.startDate - b.startDate; });
+
+    if (filtered.length === 0) return;
+
+    filtered.forEach(function(ev) {
+      var card = document.createElement('div');
+      card.className = 'list-card list-card--' + ev.type;
+      card.setAttribute('role','button');
+      card.setAttribute('tabindex','0');
+      card.setAttribute('aria-label', 'פרטי האירוע: ' + ev.title);
+
+      var dateStr;
+      if (sameDay(ev.startDate, ev.endDate)) {
+        dateStr = formatDate(ev.startDate);
+      } else {
+        dateStr = formatDateShort(ev.startDate) + ' – ' + formatDateShort(ev.endDate);
+      }
+
+      card.innerHTML =
+        '<div class="list-card__icon">' + flagImg(ev.country, 28) + '</div>' +
+        '<div class="list-card__body">' +
+          '<div class="list-card__title">' + ev.title + '</div>' +
+          '<div class="list-card__meta">' +
+            '<span>📍 ' + ev.city + '</span>' +
+            '<span>📅 ' + dateStr + '</span>' +
+            '<span class="list-card__type-badge badge--' + ev.type + '">' + TYPE_LABELS[ev.type] + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="list-card__arrow">&#8592;</div>';
+
+      card.addEventListener('click', function(){ openModal(ev); });
+      card.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openModal(ev); } });
+
+      listEl.appendChild(card);
+    });
+  }
+
+  /* ====== EMPTY STATE ====== */
+  function updateEmptyState() {
+    var filtered = getEventsForMonth(curMonth, curYear, getFilteredEvents());
+    var emptyEl  = document.getElementById('emptyState');
+    emptyEl.classList.toggle('visible', filtered.length === 0);
+  }
+
+  /* ====== WEATHER STRIP ====== */
+  function renderWeather() {
+    var grid  = document.getElementById('weatherGrid');
+    var monthNum = curMonth + 1;
+    grid.innerHTML = '';
+
+    var countries = activeCountry === 'all' ? COUNTRY_ORDER : [activeCountry];
+
+    countries.forEach(function(key) {
+      var data = WEATHER_DATA[key];
+      if (!data) return;
+      var w = data[monthNum];
+      if (!w) return;
+      var card = document.createElement('div');
+      card.className = 'weather-card';
+      card.innerHTML =
+        '<div class="weather-card__icon">' + w.i + '</div>' +
+        '<div class="weather-card__info">' +
+          '<div class="weather-card__city">' + flagImg(key, 18) + ' ' + data.city + '</div>' +
+          '<div class="weather-card__temp">' + w.t + '°C</div>' +
+          '<div class="weather-card__details">' + w.r + ' ימי גשם · עומס: ' + w.l + '</div>' +
+        '</div>';
+      grid.appendChild(card);
+    });
+  }
+
+  /* ====== RENDER ALL ====== */
+  function renderAll() {
+    updateMonthTitle();
+    renderCalendar();
+    renderList();
+    updateEmptyState();
+    renderWeather();
+    updateCountBadges();
+  }
+
+  /* ====== MODAL ====== */
+  function openModal(ev) {
+    var backdrop = document.getElementById('modalBackdrop');
+    var body     = document.getElementById('modalBody');
+
+    var dateStr;
+    if (sameDay(ev.startDate, ev.endDate)) {
+      dateStr = formatDate(ev.startDate);
+    } else {
+      dateStr = formatDate(ev.startDate) + ' – ' + formatDate(ev.endDate);
+    }
+
+    // Google Calendar URL
+    var gcEnd = ev.endDate;
+    var gcUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      '&text=' + encodeURIComponent(ev.title) +
+      '&dates=' + gcalDate(ev.startDate) + '/' + gcalEndDate(ev.endDate) +
+      '&details=' + encodeURIComponent(ev.description) +
+      '&location=' + encodeURIComponent(ev.city);
+
+    // WhatsApp share
+    var waText = '🗓️ ' + ev.title + '\n📍 ' + ev.city + '\n📅 ' + dateStr + '\n\n' + ev.description + '\n\nדרך מתי טסים: https://www.mataytasim.co.il/calendar.html';
+    var waUrl  = 'https://wa.me/?text=' + encodeURIComponent(waText);
+
+    // Stores box color
+    var storesHtml = '';
+    if (ev.stores) {
+      var isRed = ev.stores.indexOf('🔴') !== -1;
+      storesHtml = '<div class="modal__stores-box modal__stores-box--' + (isRed ? 'red' : 'yellow') + '">' + ev.stores + '</div>';
+    }
+
+    // URL button
+    var urlHtml = '';
+    if (ev.url) {
+      urlHtml = '<a href="' + ev.url + '" target="_blank" rel="noopener" class="modal__action-btn">🌐 אתר רשמי</a>';
+    }
+
+    body.innerHTML =
+      '<h2 class="modal__flag-title" id="modalTitle">' + flagImg(ev.country, 24) + ' ' + ev.title + '</h2>' +
+      '<div class="modal__badges">' +
+        '<span class="modal__badge badge--' + ev.type + '">' + TYPE_LABELS[ev.type] + '</span>' +
+      '</div>' +
+      '<div class="modal__meta">' +
+        '<div class="modal__meta-row">📅 ' + dateStr + '</div>' +
+        '<div class="modal__meta-row">📍 ' + ev.city + '</div>' +
+      '</div>' +
+      storesHtml +
+      '<p class="modal__desc">' + ev.description + '</p>' +
+      '<div class="modal__tip"><strong>💡 טיפ של מתי טסים:</strong>' + ev.tip + '</div>' +
+      '<div class="modal__actions">' +
+        '<a href="' + gcUrl + '" target="_blank" rel="noopener" class="modal__action-btn modal__action-btn--primary">📅 הוסף ליומן Google</a>' +
+        '<a href="' + waUrl + '" target="_blank" rel="noopener" class="modal__action-btn modal__action-btn--wa">📲 שתף בוואטסאפ</a>' +
+        urlHtml +
+      '</div>';
+
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('modalCloseBtn').focus();
+  }
+
+  function closeModal() {
+    document.getElementById('modalBackdrop').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* ====== VIEW TOGGLE ====== */
+  function setView(isList) {
+    isListView = isList;
+    var calWrap = document.getElementById('calendarGridWrap');
+    var listEl  = document.getElementById('listView');
+    var calBtn  = document.getElementById('viewCalendar');
+    var listBtn = document.getElementById('viewList');
+
+    if (isList) {
+      calWrap.classList.add('hidden');
+      calWrap.classList.remove('active', 'show-mobile');
+      listEl.classList.add('active');
+      calBtn.classList.remove('active');
+      calBtn.setAttribute('aria-pressed','false');
+      listBtn.classList.add('active');
+      listBtn.setAttribute('aria-pressed','true');
+    } else {
+      calWrap.classList.remove('hidden');
+      calWrap.classList.add('active', 'show-mobile');
+      listEl.classList.remove('active');
+      calBtn.classList.add('active');
+      calBtn.setAttribute('aria-pressed','true');
+      listBtn.classList.remove('active');
+      listBtn.setAttribute('aria-pressed','false');
+    }
+  }
+
+  /* ====== MONTH NAVIGATION ====== */
+  function goToMonth(delta) {
+    curMonth += delta;
+    if (curMonth > 11) { curMonth = 0; curYear++; }
+    if (curMonth < 0)  { curMonth = 11; curYear--; }
+    renderAll();
+  }
+
+  /* ====== EVENT LISTENERS ====== */
+
+  // Nav scroll shadow
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  // Hamburger
+  document.getElementById('hamburgerBtn').addEventListener('click', function() {
+    var menu = document.getElementById('mobileMenu');
+    var expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', String(!expanded));
+    this.setAttribute('aria-label', expanded ? 'פתח תפריט' : 'סגור תפריט');
+    menu.classList.toggle('open', !expanded);
+    document.body.style.overflow = !expanded ? 'hidden' : '';
+  });
+
+  // Month nav buttons
+  document.getElementById('prevMonthBtn').addEventListener('click', function(){ goToMonth(-1); });
+  document.getElementById('nextMonthBtn').addEventListener('click', function(){ goToMonth(1); });
+  document.getElementById('backToTodayBtn').addEventListener('click', function() {
+    curMonth = todayMonth;
+    curYear  = todayYear;
+    renderAll();
+  });
+
+  // View toggle
+  document.getElementById('viewCalendar').addEventListener('click', function(){ setView(false); });
+  document.getElementById('viewList').addEventListener('click', function(){ setView(true); });
+
+  // Country filter
+  document.querySelectorAll('[data-country]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var c = this.getAttribute('data-country');
+      activeCountry = c;
+      document.querySelectorAll('[data-country]').forEach(function(b) {
+        var isActive = b.getAttribute('data-country') === c;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-pressed', String(isActive));
+      });
+      renderAll();
+    });
+  });
+
+  // Type filter (multi-select toggle)
+  document.querySelectorAll('[data-type]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var t = this.getAttribute('data-type');
+      activeTypes[t] = !activeTypes[t];
+      this.classList.toggle('active', activeTypes[t]);
+      this.setAttribute('aria-pressed', String(activeTypes[t]));
+      renderAll();
+    });
+  });
+
+  // Modal close
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  document.getElementById('modalBackdrop').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // Keyboard nav
+  document.addEventListener('keydown', function(e) {
+    var backdrop = document.getElementById('modalBackdrop');
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) {
+      closeModal();
+      return;
+    }
+    if (backdrop.classList.contains('open')) return;
+    if (e.key === 'ArrowRight') goToMonth(-1);
+    if (e.key === 'ArrowLeft')  goToMonth(1);
+  });
+
+  // Responsive: switch to list view on mobile by default
+  function handleResize() {
+    if (window.innerWidth < 768 && !isListView) {
+      // only auto-switch if user hasn't manually toggled
+    }
+  }
+  window.addEventListener('resize', handleResize, { passive: true });
+
+  /* ====== INIT ====== */
+  if (window.innerWidth < 768) {
+    setView(true);
+  } else {
+    setView(false);
+  }
+  renderAll();
+
+})();
+</script>
+  <!-- EMAIL POPUP -->
+  <div id="emailPopupOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:3000;align-items:center;justify-content:center;padding:24px;">
+    <div style="background:#FAF7F2;border-radius:20px;padding:40px 32px;max-width:420px;width:100%;text-align:center;position:relative;box-shadow:0 16px 48px rgba(0,0,0,0.2);box-sizing:border-box;">
+      <button id="emailPopupClose" style="position:absolute;top:14px;left:16px;font-size:22px;cursor:pointer;color:#aaa;background:none;border:none;line-height:1;">×</button>
+      <div style="font-size:40px;margin-bottom:12px;">✈️</div>
+      <h2 style="font-family:'Secular One',sans-serif;font-size:22px;color:#1A6B72;margin-bottom:8px;">רוצים לקבל עדכונים?</h2>
+      <p style="font-size:14px;color:#666;line-height:1.6;margin-bottom:24px;">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
+      <form action="https://formsubmit.co/mataytasim@gmail.com" method="POST" id="emailPopupForm" style="display:flex;flex-direction:column;gap:12px;">
+        <input type="hidden" name="_subject" value="הרשמה לעדכונים - מתי טסים">
+        <input type="hidden" name="_next" value="https://www.mataytasim.co.il/calendar.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="email" name="email" required placeholder="המייל שלכם" style="padding:13px 18px;border:2px solid #e8ddc4;border-radius:40px;font-family:'Rubik',sans-serif;font-size:15px;background:white;color:#2C2C2C;outline:none;text-align:right;width:100%;box-sizing:border-box;">
+        <button type="submit" style="background:#1A6B72;color:white;border:none;border-radius:40px;padding:13px 28px;font-family:'Rubik',sans-serif;font-size:15px;font-weight:600;cursor:pointer;">אני רוצה לקבל עדכונים ✈️</button>
+        <button type="button" id="emailPopupSkip" style="font-size:13px;color:#aaa;cursor:pointer;background:none;border:none;text-decoration:underline;">דלג</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var overlay = document.getElementById('emailPopupOverlay');
+    var closeBtn = document.getElementById('emailPopupClose');
+    var skipBtn = document.getElementById('emailPopupSkip');
+
+    function openPopup() { overlay.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+    function closePopup() { overlay.style.display = 'none'; document.body.style.overflow = ''; }
+
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href="#newsletter"]');
+      if (link) { e.preventDefault(); openPopup(); }
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closePopup);
+    if (skipBtn) skipBtn.addEventListener('click', closePopup);
+    overlay.addEventListener('click', function(e) { if (e.target === overlay) closePopup(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePopup(); });
+
+    var form = document.getElementById('emailPopupForm');
+    if (form) form.addEventListener('submit', function() { setTimeout(closePopup, 300); });
+  })();
+  </script>
+</body>
+</html>
