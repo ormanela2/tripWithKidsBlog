@@ -2115,12 +2115,6 @@
       storesHtml = '<div class="modal__stores-box modal__stores-box--' + (isRed ? 'red' : 'yellow') + '">' + ev.stores + '</div>';
     }
 
-    // URL button
-    var urlHtml = '';
-    if (ev.url) {
-      urlHtml = '<a href="' + ev.url + '" target="_blank" rel="noopener" class="modal__action-btn">🌐 אתר רשמי</a>';
-    }
-
     body.innerHTML =
       '<h2 class="modal__flag-title" id="modalTitle">' + flagImg(ev.country, 24) + ' ' + ev.title + '</h2>' +
       '<div class="modal__badges">' +
@@ -2136,7 +2130,6 @@
       '<div class="modal__actions">' +
         '<a href="' + gcUrl + '" target="_blank" rel="noopener" class="modal__action-btn modal__action-btn--primary">📅 הוסף ליומן Google</a>' +
         '<a href="' + waUrl + '" target="_blank" rel="noopener" class="modal__action-btn modal__action-btn--wa">📲 שתף בוואטסאפ</a>' +
-        urlHtml +
       '</div>';
 
     backdrop.classList.add('open');
