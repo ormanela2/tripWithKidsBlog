@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7105465-fbac-4ca1-9978-7f5906d6ce4a1.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
   <meta name="description" content="המדריך המלא לטיול עם ילדים לחו״ל - מסלולים, יעדים וטיפים לתכנון טיול משפחתי מוצלח. חבילות תכנון מותאמות אישית למשפחות עם ילדים.">
   <title>מתי טסים</title>
 
@@ -400,31 +399,74 @@
       display: none;
       position: fixed;
       top: var(--nav-height);
-      right: 0;
-      left: 0;
-      bottom: 0;
+      right: 0; left: 0; bottom: 0;
       background: var(--cream);
-      padding: 32px 24px;
+      padding: 24px 20px 32px;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
       z-index: 999;
       overflow-y: auto;
     }
+    .nav__mobile-menu.open { display: flex; }
 
-    .nav__mobile-menu.open {
-      display: flex;
+    /* ── Rich mobile menu items ── */
+    .mob-nav-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 13px 14px; border-radius: var(--radius-md);
+      text-decoration: none; color: var(--charcoal);
+      transition: background 0.18s ease; gap: 14px;
+      -webkit-tap-highlight-color: transparent;
     }
-
-    .nav__mobile-menu .nav__link {
-      font-size: 20px;
-      padding: 16px;
-      justify-content: flex-start;
+    .mob-nav-item:active, .mob-nav-item:hover { background: var(--sand); }
+    .mob-nav-item[aria-current="page"] { background: rgba(26,107,114,0.08); }
+    .mob-nav-item__icon {
+      flex-shrink: 0; width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(26,107,114,0.1); display: flex;
+      align-items: center; justify-content: center;
+      color: var(--teal); transition: background 0.18s, color 0.18s;
     }
-
-    .nav__mobile-menu .btn {
-      margin-top: 16px;
-      justify-content: center;
+    .mob-nav-item:hover .mob-nav-item__icon { background: var(--teal); color: #fff; }
+    .mob-nav-item[aria-current="page"] .mob-nav-item__icon { background: var(--teal); color: #fff; }
+    .mob-nav-item__icon svg { width: 20px; height: 20px; }
+    .mob-nav-item__icon--solid { color: var(--teal); }
+    .mob-nav-item__body { flex: 1; min-width: 0; text-align: right; }
+    .mob-nav-item__title {
+      display: block; font-family: 'Assistant', sans-serif;
+      font-size: 17px; font-weight: 400; color: var(--charcoal); line-height: 1.3;
     }
+    .mob-nav-item__sub {
+      display: block; font-family: 'Assistant', sans-serif;
+      font-size: 12px; color: #aaa; margin-top: 2px; line-height: 1.3;
+    }
+    .mob-nav-item--tips:hover .mob-nav-item__icon { background: #fef9c3; color: #ca8a04; }
+    .mob-nav-item--destinations .mob-nav-item__icon { background: rgba(26,107,114,0.14); }
+    .mob-nav-sep { height: 1px; background: var(--sand-dark); margin: 8px 0; flex-shrink: 0; }
+    .mob-nav-calendar {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 13px 18px; background: var(--teal); color: #fff;
+      border-radius: var(--radius-xl); text-decoration: none;
+      font-family: 'Assistant', sans-serif; font-size: 16px; font-weight: 400;
+      box-shadow: 0 4px 14px rgba(26,107,114,0.3);
+      transition: background 0.18s, box-shadow 0.18s;
+      -webkit-tap-highlight-color: transparent; margin-top: 4px;
+    }
+    .mob-nav-calendar:active, .mob-nav-calendar:hover {
+      background: var(--teal-dark); box-shadow: 0 6px 18px rgba(26,107,114,0.4);
+    }
+    .mob-nav-calendar svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .mob-nav-community {
+      display: flex; align-items: center; gap: 14px; padding: 14px 16px;
+      background: var(--amber); color: #fff; border-radius: var(--radius-md);
+      border: none; width: 100%; text-align: right; cursor: pointer;
+      font-family: var(--font-body); text-decoration: none;
+      transition: background 0.18s; -webkit-tap-highlight-color: transparent; margin-top: 6px;
+    }
+    .mob-nav-community:active, .mob-nav-community:hover { background: var(--amber-dark); }
+    .mob-nav-community__icon { flex-shrink: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
+    .mob-nav-community__icon svg { width: 28px; height: 28px; }
+    .mob-nav-community__body { flex: 1; text-align: right; }
+    .mob-nav-community__title { display: block; font-family: 'Assistant', sans-serif; font-size: 16px; font-weight: 600; }
+    .mob-nav-community__sub { display: block; font-family: 'Assistant', sans-serif; font-size: 12px; opacity: 0.85; margin-top: 1px; }
 
     /* ========================================
        Section Header (shared)
@@ -1492,6 +1534,10 @@
         align-items: center;
         gap: 12px;
       }
+
+      .pricing__grid { grid-template-columns: 1fr; }
+      .pricing-card--highlighted { transform: none; box-shadow: var(--shadow-lg), 0 0 0 1px var(--amber); }
+      .pricing-card--highlighted:hover { transform: none; }
     }
 
     @media (max-width: 480px) {
@@ -1511,48 +1557,30 @@
 
     /* ── Community CTA button ── */
     .nav__link--community {
-      background: var(--amber);
-      color: #2C2C2C !important;
-      font-weight: 600;
+      background: transparent;
+      color: #0f4a50 !important;
       font-size: 15px;
       border-radius: 22px;
-      padding: 8px 16px;
+      padding: 8px 18px;
       min-height: 44px;
-      box-shadow: 0 2px 10px rgba(232,160,69,0.45);
-      animation: communityPulse 2.8s ease-in-out infinite;
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
     }
     .nav__link--community:hover,
     .nav__link--community:focus-visible {
-      background: #d4903c !important;
-      color: #2C2C2C !important;
+      background: #0f4a50 !important;
+      color: #fff !important;
       transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(232,160,69,0.55);
-      animation: none;
+      box-shadow: 0 4px 16px rgba(15,74,80,0.5);
     }
     .nav__link--community::before {
       content: '';
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       background: #4ade80;
       border-radius: 50%;
       display: inline-block;
       margin-left: 7px;
       box-shadow: 0 0 6px #4ade80;
-      animation: dotBlink 1.4s ease-in-out infinite;
-    }
-    .nav__mobile-menu .nav__link--community {
-      font-size: 15px;
-      padding: 8px 18px;
-      width: fit-content;
-      min-height: 44px;
-    }
-    @keyframes communityPulse {
-      0%, 100% { box-shadow: 0 2px 10px rgba(232,160,69,0.4); }
-      50%       { box-shadow: 0 2px 18px rgba(232,160,69,0.75), 0 0 0 4px rgba(232,160,69,0.15); }
-    }
-    @keyframes dotBlink {
-      0%, 100% { opacity: 0.4; box-shadow: 0 0 3px #4ade80; }
-      50%       { opacity: 1;   box-shadow: 0 0 10px #4ade80, 0 0 20px #4ade8088; }
     }
     @media(max-width:900px) {
       .nav__links { display:none; }
@@ -1560,6 +1588,329 @@
       .nav__hamburger { display:flex; }
       .nav__logo img { height:44px !important; }
       .nav__logo-text { font-size:18px !important; }
+    }
+
+    /* ========================================
+       EVENTS DRAWER
+       ======================================== */
+
+    /* Floating trigger button */
+    @keyframes fab-pulse {
+      0%   { box-shadow: 0 6px 24px rgba(26,107,114,0.45), 0 0 0 0 rgba(26,107,114,0.35); }
+      70%  { box-shadow: 0 6px 24px rgba(26,107,114,0.45), 0 0 0 12px rgba(26,107,114,0); }
+      100% { box-shadow: 0 6px 24px rgba(26,107,114,0.45), 0 0 0 0 rgba(26,107,114,0); }
+    }
+    .events-fab {
+      position: fixed;
+      left: 20px;
+      bottom: 100px;
+      z-index: 1200;
+      display: none;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #1A6B72 0%, #25919a 100%);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 13px 20px 13px 16px;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(26,107,114,0.45);
+      animation: fab-pulse 2.6s ease-in-out infinite;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      font-family: 'Assistant', sans-serif;
+    }
+    .events-fab:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 12px 36px rgba(26,107,114,0.6);
+      animation: none;
+    }
+    .events-fab__icon { font-size: 20px; line-height: 1; }
+    .events-fab__label { font-size: 14px; font-weight: 700; letter-spacing: 0.4px; white-space: nowrap; }
+
+    /* Overlay */
+    .events-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1300;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .events-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Drawer panel */
+    .events-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 500px;
+      max-width: 95vw;
+      background: var(--cream);
+      z-index: 1400;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: -8px 0 40px rgba(0,0,0,0.15);
+    }
+    .events-drawer.open {
+      transform: translateX(0);
+    }
+
+    /* Drawer header */
+    .events-drawer__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--sand-dark);
+      background: var(--white);
+      flex-shrink: 0;
+    }
+    .events-drawer__title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      color: var(--charcoal);
+    }
+    .events-drawer__close {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--sand);
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      color: var(--charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .events-drawer__close:hover { background: var(--sand-dark); }
+
+    /* Search */
+    .events-search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--white);
+      border-bottom: 1px solid var(--sand-dark);
+      flex-shrink: 0;
+    }
+    .events-search-input {
+      flex: 1;
+      font-family: 'Assistant', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      padding: 9px 14px;
+      border: 1.5px solid var(--sand-dark);
+      border-radius: 24px;
+      background: var(--cream);
+      color: var(--charcoal);
+      outline: none;
+      direction: rtl;
+      transition: border-color 0.2s;
+    }
+    .events-search-input:focus { border-color: var(--teal); }
+    .events-search-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--teal);
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+    .events-search-btn:hover { opacity: 0.85; }
+
+    /* Tabs */
+    .events-tabs {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px 12px 24px;
+      overflow-x: auto;
+      flex-shrink: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--sand-dark);
+      scrollbar-width: none;
+      direction: rtl;
+    }
+    .events-tabs::-webkit-scrollbar { display: none; }
+    .events-tab {
+      font-family: 'Assistant', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1.5px solid var(--sand-dark);
+      background: var(--white);
+      color: var(--charcoal);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .events-tab:hover { border-color: var(--teal); color: var(--teal); }
+    .events-tab.active { background: var(--teal); border-color: var(--teal); color: var(--white); }
+
+    /* Scrollable content */
+    .events-drawer__content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    /* Event cards — GYG-style 2-column grid */
+    .events-grid-gyg {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .event-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .event-card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.13);
+      transform: translateY(-2px);
+    }
+    .event-card__thumb {
+      position: relative;
+      width: 100%;
+      height: 130px;
+      overflow: hidden;
+      background: var(--sand);
+      flex-shrink: 0;
+    }
+    .event-card__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s;
+    }
+    .event-card:hover .event-card__img { transform: scale(1.06); }
+    .event-card__img-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--sand), var(--sand-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+    .event-card__deal-wrap {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .event-card__deal {
+      display: inline-block;
+      font-family: 'Assistant', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 6px;
+      background: var(--amber);
+      color: var(--white);
+    }
+    .event-card__body {
+      padding: 10px 11px 12px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .event-card__location {
+      font-family: 'Assistant', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: #999;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .event-card__name {
+      font-family: 'Assistant', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--charcoal);
+      line-height: 1.35;
+      margin-bottom: 8px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      flex: 1;
+    }
+    .event-card__date {
+      font-family: 'Assistant', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+    .event-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-top: auto;
+    }
+    .event-card__price {
+      font-family: 'Assistant', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+    .event-card__btn {
+      font-family: 'Assistant', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: var(--teal);
+      color: var(--white);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .event-card__btn:hover { opacity: 0.85; }
+    .events-loading {
+      text-align: center;
+      padding: 48px 0;
+      font-family: 'Assistant', sans-serif;
+      font-size: 15px;
+      color: #aaa;
+    }
+    .events-empty {
+      text-align: center;
+      padding: 48px 0;
+      font-family: 'Assistant', sans-serif;
+      font-size: 15px;
+      color: #aaa;
     }
 
   </style>
@@ -1586,6 +1937,7 @@
         <li role="none"><a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a></li>
         <li role="none"><a href="packages.html" class="nav__link" role="menuitem" aria-current="page">חבילות</a></li>
         <li role="none"><a href="about.html" class="nav__link" role="menuitem">אודות</a></li>
+        <li role="none"><a href="calendar.html" class="nav__link" role="menuitem">מתי קורה</a></li>
         <li role="none"><a href="#newsletter" class="nav__link nav__link--community" role="menuitem">מצטרפים לקהילה</a></li>
       </ul>
 
@@ -1604,15 +1956,259 @@
     </div>
 
     <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
-      <a href="tips.html" class="nav__link" role="menuitem">טיפים</a>
-      <a href="destinations.html" class="nav__link" role="menuitem">יעדים</a>
-      <a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a>
-      <a href="packages.html" class="nav__link" role="menuitem">חבילות</a>
-      <a href="about.html" class="nav__link" role="menuitem">אודות</a>
-      <a href="#newsletter" class="nav__link nav__link--community" role="menuitem">מצטרפים לקהילה</a>
-      
+
+      <!-- טיפים -->
+      <a href="tips.html" class="mob-nav-item mob-nav-item--tips" role="menuitem">
+        <div class="mob-nav-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 4 12.74V17H8v-2.26A7 7 0 0 1 12 2z"/>
+          </svg>
+        </div>
+        <div class="mob-nav-item__body">
+          <span class="mob-nav-item__title">טיפים</span>
+          <span class="mob-nav-item__sub">איך לתכנן נכון טיול משפחתי</span>
+        </div>
+      </a>
+
+      <!-- יעדים -->
+      <a href="destinations.html" class="mob-nav-item mob-nav-item--destinations" role="menuitem">
+        <div class="mob-nav-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+        </div>
+        <div class="mob-nav-item__body">
+          <span class="mob-nav-item__title">יעדים</span>
+          <span class="mob-nav-item__sub">לאן טסים הפעם?</span>
+        </div>
+      </a>
+
+      <!-- מזג אוויר -->
+      <a href="weather.html" class="mob-nav-item mob-nav-item--weather" role="menuitem">
+        <div class="mob-nav-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="3"/>
+            <path d="M12 2v1M12 13v1M4.93 4.93l.7.7M18.37 4.93l-.7.7M2 8h1M21 8h-1M6.5 17a4.5 4.5 0 0 1 0-9H8a5 5 0 0 1 9.9 1H18a3.5 3.5 0 0 1 0 7H6.5z"/>
+          </svg>
+        </div>
+        <div class="mob-nav-item__body">
+          <span class="mob-nav-item__title">מזג אוויר</span>
+          <span class="mob-nav-item__sub" id="menuWeatherSnippet">טוען...</span>
+        </div>
+      </a>
+
+      <!-- חבילות -->
+      <a href="packages.html" class="mob-nav-item mob-nav-item--packages" role="menuitem">
+        <div class="mob-nav-item__icon mob-nav-item__icon--solid">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 7h-2.5V5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-9.5-2h7v2h-7V5zm1 11v-2h5v2h-5z"/>
+          </svg>
+        </div>
+        <div class="mob-nav-item__body">
+          <span class="mob-nav-item__title">חבילות</span>
+          <span class="mob-nav-item__sub">עזרה בתכנון מסלול</span>
+        </div>
+      </a>
+
+      <!-- separator -->
+      <div class="mob-nav-sep" role="separator"></div>
+
+      <!-- אודות -->
+      <a href="about.html" class="mob-nav-item mob-nav-item--about" role="menuitem">
+        <div class="mob-nav-item__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+        </div>
+        <div class="mob-nav-item__body">
+          <span class="mob-nav-item__title">אודות</span>
+        </div>
+      </a>
+
+      <!-- מתי קורה — teal pill -->
+      <a href="calendar.html" class="mob-nav-calendar" role="menuitem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        מתי קורה
+      </a>
+
+      <!-- מצטרפים לקהילה — amber banner -->
+      <button type="button" class="mob-nav-community" role="menuitem"
+        onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(); },120);">
+        <div class="mob-nav-community__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div class="mob-nav-community__body">
+          <span class="mob-nav-community__title">מצטרפים לקהילה</span>
+          <span class="mob-nav-community__sub">עדכונים על יעדים חדשים, טיפים מהשטח ופינות נסתרות</span>
+        </div>
+      </button>
+
     </div>
   </nav>
+
+  <!-- ============ NEWS TICKER ============ -->
+  <style>
+    .news-ticker {
+      background: #0f4a50;
+      color: #fff;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      z-index: 1100;
+      margin-top: var(--nav-height);
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+      direction: ltr;
+    }
+    .news-ticker__label {
+      flex-shrink: 0;
+      background: var(--amber);
+      color: var(--charcoal);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 0 14px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      z-index: 1;
+    }
+    .news-ticker__track-wrap {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+      mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+    }
+    .news-ticker__track {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      white-space: nowrap;
+      animation: tickerScroll 35s linear infinite;
+      will-change: transform;
+    }
+    .news-ticker__track:hover { animation-play-state: paused; }
+    @keyframes tickerScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .news-ticker__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 18px;
+      font-size: 12px;
+      white-space: nowrap;
+      font-family: var(--font-body);
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      border-right: 1px solid rgba(255,255,255,0.15);
+      transition: color 0.2s;
+    }
+    .news-ticker__item:hover { color: var(--amber); }
+    .news-ticker__item span.dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--amber); flex-shrink: 0;
+    }
+  </style>
+
+  <div class="news-ticker" id="newsTicker">
+    <div class="news-ticker__label">✈️ חדשות טיולים</div>
+    <div class="news-ticker__track-wrap">
+      <div class="news-ticker__track" id="tickerTrack">
+        <a class="news-ticker__item" href="#"><span class="dot"></span>טוען חדשות...</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var SHOW_TICKER = false; // ← set to true to enable the ticker
+
+    if (!SHOW_TICKER) {
+      var t = document.getElementById('newsTicker');
+      if (t) t.style.display = 'none';
+      return;
+    }
+
+    var PROXY_URL = 'https://mataytasim-news-api.vercel.app/api/news';
+
+    var fallback = [
+      { title: 'פארקי המים באירופה: פתיחות עונתיות לקיץ 2026', url: '#' },
+      { title: 'אטרקציות חדשות לילדים בפארקי לגולנד ברחבי אירופה', url: '#' },
+      { title: 'מוזיאוני מדע חדשים נפתחים השנה בגרמניה ואוסטריה', url: '#' },
+      { title: 'טיולי משפחות: היעדים הכי מומלצים לקיץ 2026 באירופה', url: '#' },
+      { title: 'פארק שעשועים חדש נפתח ליד ברצלונה עם אזור לילדים', url: '#' },
+      { title: 'אקוריום ענק חדש נפתח בהולנד עם אטרקציות לילדים', url: '#' },
+      { title: 'עונת פארקי המים נפתחת מוקדם השנה בסלובקיה והונגריה', url: '#' },
+      { title: 'Zoo Vienna פותח כנף חדשה עם חיות אפריקה לילדים', url: '#' },
+      { title: 'DisneySea Tokyo מרחיבה עם אזור פנטזיה ספרינגס', url: '#' },
+      { title: 'חמשת פארקי המים הטובים ביותר לילדים באירופה 2026', url: '#' },
+      { title: 'מוזיאון הטבע בלונדון פותח תערוכת דינוזאורים חדשה', url: '#' },
+      { title: 'Legoland Deutschland נפתח לעונה מוקדם השנה', url: '#' },
+      { title: 'פארק הרפתקאות חדש נפתח בפולין עם מסלולי ג\'ונגל', url: '#' },
+      { title: 'אוסטריה: כפר שלגים חדש מוכרז לעונת חורף 2027', url: '#' },
+      { title: 'Tatralandia סלובקיה מוסיפה 3 מגלשות מים חדשות לקיץ', url: '#' },
+    ];
+
+    function buildTicker(items) {
+      var track = document.getElementById('tickerTrack');
+      if (!items || !items.length) { items = fallback; }
+      var html = '';
+      [items, items].forEach(function(arr) {
+        arr.forEach(function(item) {
+          html += '<a class="news-ticker__item" href="' + (item.url || '#') + '" target="_blank" rel="noopener noreferrer">'
+                + '<span class="dot"></span>'
+                + item.title
+                + '</a>';
+        });
+      });
+      track.innerHTML = html;
+      track.style.animation = 'none';
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          var totalWidth = track.scrollWidth;
+          var duration = Math.max(15, totalWidth / 200);
+          track.style.animation = 'tickerScroll ' + duration + 's linear infinite';
+        });
+      });
+    }
+
+    var ticker = document.getElementById('newsTicker');
+    ticker.style.opacity = '0';
+
+    fetch(PROXY_URL)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var articles = data.articles || [];
+        if (!articles.length) {
+          ticker.style.display = 'none';
+          return;
+        }
+        buildTicker(articles);
+        ticker.style.transition = 'opacity 0.5s';
+        ticker.style.opacity = '1';
+      })
+      .catch(function() {
+        ticker.style.display = 'none';
+      });
+  })();
+  </script>
 
   <!-- ============ PAGE HERO ============ -->
   <header class="page-hero" id="page-hero">
@@ -1633,6 +2229,17 @@
       <h2 class="value-prop__headline reveal" id="vp-title">לא עוד לילות של תכנון אינסופי</h2>
       <p class="value-prop__subheadline reveal reveal-delay-1">מקבלים תכנית טיול מלאה לטיול עם ילדים - בדיוק לפי הילדים שלך, התקציב שלך, והתאריכים שלך.</p>
 
+      <!-- דגלי יעדים -->
+      <div class="reveal reveal-delay-1" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:32px;">
+        <span style="font-size:32px;">🇸🇰</span>
+        <span style="font-size:32px;">🇭🇺</span>
+        <span style="font-size:32px;">🇷🇴</span>
+        <span style="font-size:32px;">🇵🇱</span>
+        <span style="font-size:32px;">🇦🇹</span>
+        <span style="font-size:32px;">🇬🇷</span>
+        <span style="font-size:32px;">🇨🇿</span>
+      </div>
+
       <div class="reveal reveal-delay-1" style="text-align:center;margin-bottom:48px;">
         <a href="destinations.html" style="
           display:inline-flex;align-items:center;gap:10px;
@@ -1652,7 +2259,122 @@
         </a>
       </div>
 
-      <!-- TESTIMONIALS - moved after מה אני מביא -->
+      <!-- PACKAGES CTA -->
+      <div class="reveal reveal-delay-2" style="margin-top:48px;padding-top:40px;border-top:2px solid var(--sand-dark);">
+
+        <div style="text-align:center;margin-bottom:40px;">
+          <h3 style="font-family:var(--font-heading);font-size:clamp(26px,3vw,34px);color:var(--charcoal);margin-bottom:10px;">איפה אני יכול לעזור לכם?</h3>
+          <p style="font-size:16px;color:#888;max-width:440px;margin:0 auto;line-height:1.6;">3 חבילות תכנון — כל אחת מותאמת לסגנון הטיול שלכם</p>
+        </div>
+
+        <div class="pricing__grid" style="max-width:860px;margin:0 auto;">
+
+          <!-- מצפן -->
+          <a href="packages.html" class="pricing-card" style="text-decoration:none;display:block;">
+            <div class="pricing-card__header">
+              <span class="pricing-card__icon">🧭</span>
+              <div class="pricing-card__name">מצפן</div>
+              <div class="pricing-card__tagline">לטיול הראשון שלכם</div>
+            </div>
+            <div class="pricing-card__body">
+              <ul class="pricing-card__features" style="list-style:none;padding:0;margin:0;">
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>המלצות למסלולים</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>המלצות לינה לפי תקציב</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>אטרקציות לפי גיל הילדים</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
+                </li>
+              </ul>
+            </div>
+          </a>
+
+          <!-- הרפתקה (highlighted) -->
+          <a href="packages.html" class="pricing-card pricing-card--highlighted" style="text-decoration:none;display:block;">
+            <div class="pricing-card__header" style="padding-top:44px;">
+              <div class="pricing-card__badge" style="top:12px;transform:translateX(-50%);">הכי פופולרי ⭐</div>
+              <span class="pricing-card__icon">🗺️</span>
+              <div class="pricing-card__name">הרפתקה</div>
+              <div class="pricing-card__tagline">לרוב המשפחות שלנו</div>
+            </div>
+            <div class="pricing-card__body">
+              <ul class="pricing-card__features" style="list-style:none;padding:0;margin:0;">
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>המלצות למסלולים</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>המלצות לינה לפי תקציב</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>אטרקציות לפי גיל הילדים</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>התאמות אישיות עד 3 סבבי עריכה</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>גיליון Excel מסודר לכל יום</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>רשימת ציוד מלאה</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>שיחת וידאו לפני הטיול (30 דק׳)</span>
+                </li>
+              </ul>
+            </div>
+          </a>
+
+          <!-- אודיסיאה -->
+          <a href="packages.html" class="pricing-card" style="text-decoration:none;display:block;">
+            <div class="pricing-card__header">
+              <span class="pricing-card__icon">🌊</span>
+              <div class="pricing-card__name">אודיסיאה</div>
+              <div class="pricing-card__tagline">חוויה מלאה מקצה לקצה</div>
+            </div>
+            <div class="pricing-card__body">
+              <ul class="pricing-card__features" style="list-style:none;padding:0;margin:0;">
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>כל מה שבהרפתקה +</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>מסלול עד 14 ימים</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>התאמות ללא הגבלה</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>ליווי וואטסאפ בזמן הטיול</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>עדכונים בזמן אמת (מזג אוויר, שינויים)</span>
+                </li>
+              </ul>
+            </div>
+          </a>
+
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1762,20 +2484,6 @@
           </div>
 
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PACKAGES CTA ============ -->
-  <section style="padding:60px 0;background:var(--cream);">
-    <div class="container">
-      <div style="text-align:center;max-width:640px;margin:0 auto;">
-        <div style="font-size:48px;margin-bottom:16px;">✈</div>
-        <h2 style="font-family:var(--font-heading);font-size:clamp(24px,3vw,36px);color:var(--charcoal);margin-bottom:12px;">כמה זה עולה?</h2>
-        <p style="font-size:16px;color:#666;line-height:1.8;margin-bottom:32px;">יש לי 3 חבילות תכנון — מצפן, הרפתקה ואודיסיאה.<br>כל אחת מותאמת לסוג שונה של משפחה וצורך.</p>
-        <a href="packages.html" style="display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:white;border-radius:28px;padding:16px 36px;font-family:var(--font-heading);font-size:17px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.15);transition:all 0.2s;" onmouseover="this.style.background='var(--teal-dark)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--teal)';this.style.transform=''">
-          לעמוד החבילות ←
-        </a>
       </div>
     </div>
   </section>
@@ -1957,7 +2665,7 @@
       <h2 style="font-family:var(--font-heading);font-size:28px;color:white;margin-bottom:10px;">מצטרפים לקהילה שלנו</h2>
       <p style="color:rgba(255,255,255,0.8);font-size:15px;line-height:1.7;margin-bottom:32px;">יעדים חדשים, טיפים מהשטח ופינות נסתרות — ישירות למייל שלכם. בחינם, תמיד.</p>
 
-      <form action="https://formsubmit.co/ormanela@gmail.com" method="POST"
+      <form action="https://formsubmit.co/mataytasim@gmail.com" method="POST"
             style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
         <input type="hidden" name="_subject" value="הרשמה לעדכונים - מתי טסים">
         <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/services.html">
@@ -2095,12 +2803,45 @@
       var hamburger = document.getElementById('hamburgerBtn');
       var mobileMenu = document.getElementById('mobileMenu');
 
+      // Rotating live weather in menu
+      var WEATHER_CITIES = [
+        { name: 'לונדון',    lat: 51.51, lon: -0.12 },
+        { name: 'בודפשט',   lat: 47.50, lon: 19.04 },
+        { name: 'וינה',      lat: 48.21, lon: 16.37 },
+        { name: 'אתונה',     lat: 37.98, lon: 23.73 },
+        { name: 'פראג',      lat: 50.08, lon: 14.44 },
+        { name: 'ורשה',      lat: 52.23, lon: 21.01 },
+        { name: 'ברטיסלבה', lat: 48.15, lon: 17.11 },
+        { name: 'ברצלונה',  lat: 41.39, lon:  2.17 },
+        { name: 'אמסטרדם',  lat: 52.37, lon:  4.90 },
+        { name: 'רומא',      lat: 41.90, lon: 12.49 },
+      ];
+      var weatherCityIndex = Math.floor(Math.random() * WEATHER_CITIES.length);
+
+      function fetchMenuWeather() {
+        var el = document.getElementById('menuWeatherSnippet');
+        if (!el) return;
+        weatherCityIndex = (weatherCityIndex + 1) % WEATHER_CITIES.length;
+        var city = WEATHER_CITIES[weatherCityIndex];
+        el.textContent = city.name + '...';
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=' + city.lat + '&longitude=' + city.lon + '&current_weather=true')
+          .then(function(r) { return r.json(); })
+          .then(function(d) {
+            var t = Math.round(d.current_weather.temperature);
+            var code = d.current_weather.weathercode;
+            var icon = code <= 1 ? '☀️' : code <= 3 ? '⛅' : code <= 67 ? '🌧' : '❄️';
+            el.textContent = city.name + ' עכשיו ' + t + '°C ' + icon;
+          })
+          .catch(function() { el.textContent = 'מזג אוויר באירופה'; });
+      }
+
       if (hamburger && mobileMenu) {
         hamburger.addEventListener('click', function () {
           var isOpen = mobileMenu.classList.toggle('open');
           hamburger.setAttribute('aria-expanded', isOpen.toString());
           hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
           document.body.style.overflow = isOpen ? 'hidden' : '';
+          if (isOpen) fetchMenuWeather();
         });
 
         mobileMenu.querySelectorAll('a').forEach(function (link) {
@@ -2260,7 +3001,7 @@
         formData.append('_subject', 'פנייה חדשה מאתר מתי טסים');
         formData.append('_template', 'table');
 
-        fetch('https://formsubmit.co/ajax/ormanela@gmail.com', {
+        fetch('https://formsubmit.co/ajax/mataytasim@gmail.com', {
           method: 'POST',
           body: formData
         })
@@ -2276,7 +3017,7 @@
         .catch(function() {
           var subject = encodeURIComponent('פנייה מאתר מתי טסים - ' + name.value.trim());
           var body = encodeURIComponent('שם: ' + name.value.trim() + '\nאימייל: ' + email.value.trim() + '\n\n' + message.value.trim());
-          window.location.href = 'mailto:ormanela@gmail.com?subject=' + subject + '&body=' + body;
+          window.location.href = 'mailto:mataytasim@gmail.com?subject=' + subject + '&body=' + body;
           submitBtn.disabled = false;
           submitBtn.textContent = 'שלח פנייה';
           closeModal();
@@ -2293,7 +3034,7 @@
       <div style="font-size:40px;margin-bottom:12px;">✈️</div>
       <h2 style="font-family:'Secular One',sans-serif;font-size:22px;color:#1A6B72;margin-bottom:8px;">רוצים לקבל עדכונים?</h2>
       <p style="font-size:14px;color:#666;line-height:1.6;margin-bottom:24px;">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
-      <form action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm" style="display:flex;flex-direction:column;gap:12px;">
+      <form action="https://formsubmit.co/mataytasim@gmail.com" method="POST" id="emailPopupForm" style="display:flex;flex-direction:column;gap:12px;">
         <input type="hidden" name="_subject" value="הרשמה לעדכונים - מתי טסים">
         <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/services.html">
         <input type="hidden" name="_captcha" value="false">
@@ -2318,6 +3059,7 @@
       overlay.style.display = 'none';
       document.body.style.overflow = '';
     }
+    window.openEmailPopup = openPopup;
 
     document.addEventListener('click', function(e) {
       var link = e.target.closest('a[href="#newsletter"]');
@@ -2333,6 +3075,205 @@
     if (form) form.addEventListener('submit', function() { setTimeout(closePopup, 300); });
   })();
   </script>
-  <!-- impact.com verification -->
-  <span style="display:none;">impact.com</span>
+
+  <!-- ============ EVENTS DRAWER ============ -->
+  <button class="events-fab" id="events-fab-btn" aria-label="פתח אירועים">
+    <span class="events-fab__icon">🎟</span>
+    <span class="events-fab__label">אירועים</span>
+  </button>
+
+  <div class="events-overlay" id="events-overlay"></div>
+
+  <div class="events-drawer" id="events-drawer" role="dialog" aria-modal="true" aria-label="אירועים קרובים">
+    <div class="events-drawer__header">
+      <h2 class="events-drawer__title">אירועים קרובים</h2>
+      <button class="events-drawer__close" id="events-drawer-close" aria-label="סגור">✕</button>
+    </div>
+    <div class="events-search-wrap" id="events-search-wrap">
+      <input type="text" id="events-search-input" class="events-search-input" placeholder="חפשו אמן, הופעה, אירוע..." autocomplete="off">
+      <button class="events-search-btn" id="events-search-btn">🔍</button>
+    </div>
+    <div class="events-tabs" id="events-tabs">
+      <button class="events-tab active" data-category="music">🎵 מוזיקה</button>
+      <button class="events-tab" data-category="arts">🎭 אמנות</button>
+      <button class="events-tab" data-category="family">👨‍👩‍👧 משפחה</button>
+      <button class="events-tab" data-category="comedy">😂 קומדיה</button>
+      <button class="events-tab" data-category="sports">⚽ ספורט</button>
+    </div>
+    <div class="events-drawer__content" id="events-drawer-content">
+      <div class="events-loading">טוען אירועים...</div>
+    </div>
+  </div>
+
+  <!-- ============ EVENTS DRAWER SCRIPT ============ -->
+  <script>
+  (function() {
+    var API_URL    = 'https://mataytasim-ticketmasterm-api-imjw.vercel.app/api/events';
+    var SEARCH_URL = 'https://mataytasim-ticketmasterm-api-imjw.vercel.app/api/search';
+    var eventsData = null;
+    var activeCategory = 'music';
+    var loaded = false;
+    var searchMode = false;
+
+    var CATEGORY_ICONS = {
+      music:   '🎵',
+      arts:    '🎭',
+      family:  '👨‍👩‍👧',
+      comedy:  '😂',
+      sports:  '⚽',
+    };
+    var COUNTRY_FLAGS = {
+      AT: '🇦🇹', CZ: '🇨🇿', GR: '🇬🇷',
+      PL: '🇵🇱', RO: '🇷🇴', SK: '🇸🇰'
+    };
+
+    // Show events FAB only when ?events=true is in the URL
+    if (new URLSearchParams(window.location.search).get('events') === 'true') {
+      document.getElementById('events-fab-btn').style.display = 'flex';
+    }
+
+    var drawer   = document.getElementById('events-drawer');
+    var overlay  = document.getElementById('events-overlay');
+    var fabBtn   = document.getElementById('events-fab-btn');
+    var closeBtn = document.getElementById('events-drawer-close');
+    var content  = document.getElementById('events-drawer-content');
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      if (!loaded) fetchEvents();
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    fabBtn.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeDrawer();
+    });
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      var p = dateStr.split('-');
+      return p[2] + '/' + p[1] + '/' + p[0];
+    }
+
+    function renderCards(category) {
+      var allEvents = (eventsData && eventsData.events[category]) || [];
+      var icon = CATEGORY_ICONS[category] || '🎟';
+
+      // Deduplicate by name (keep first occurrence = earliest date)
+      var seen = {};
+      var events = [];
+      allEvents.forEach(function(e) {
+        var key = e.name.trim().toLowerCase();
+        if (!seen[key]) { seen[key] = true; events.push(e); }
+      });
+
+      if (events.length === 0) {
+        content.innerHTML = '<div class="events-empty">לא נמצאו אירועים בקטגוריה זו כרגע</div>';
+        return;
+      }
+
+      var html = '<div class="events-grid-gyg">';
+      events.forEach(function(e) {
+        var flag = COUNTRY_FLAGS[e.countryCode] || '';
+        var dateStr = formatDate(e.date);
+        var thumbHtml = e.image
+          ? '<img class="event-card__img" src="' + e.image + '" alt="" loading="lazy">'
+          : '<div class="event-card__img-placeholder">' + icon + '</div>';
+
+        var dealBadge = e.deal
+          ? '<div class="event-card__deal-wrap"><span class="event-card__deal">🏷 מבצע</span></div>'
+          : '';
+
+        var priceHtml = e.priceMin != null
+          ? '<span class="event-card__price">מ־' + Math.round(e.priceMin) + ' ' + (e.currency || '') + '</span>'
+          : '<span></span>';
+
+        html += '<a class="event-card" href="' + (e.url || '#') + '" target="_blank" rel="noopener">'
+          + '<div class="event-card__thumb">' + thumbHtml + dealBadge + '</div>'
+          + '<div class="event-card__body">'
+          + '<div class="event-card__location">' + flag + ' ' + (e.city || '') + '</div>'
+          + '<div class="event-card__name">' + e.name + '</div>'
+          + (dateStr ? '<div class="event-card__date">📅 ' + dateStr + '</div>' : '')
+          + '<div class="event-card__footer">'
+          + priceHtml
+          + '<span class="event-card__btn">כרטיסים</span>'
+          + '</div>'
+          + '</div></a>';
+      });
+      html += '</div>';
+      content.innerHTML = html;
+    }
+
+    function setActiveTab(category) {
+      activeCategory = category;
+      document.querySelectorAll('.events-tab').forEach(function(tab) {
+        tab.classList.toggle('active', tab.dataset.category === category);
+      });
+      if (eventsData) renderCards(category);
+    }
+
+    document.getElementById('events-tabs').addEventListener('click', function(e) {
+      if (e.target.classList.contains('events-tab')) {
+        searchMode = false;
+        document.getElementById('events-search-input').value = '';
+        setActiveTab(e.target.dataset.category);
+      }
+    });
+
+    // Search
+    var searchInput = document.getElementById('events-search-input');
+    var searchBtn   = document.getElementById('events-search-btn');
+
+    function doSearch() {
+      var q = searchInput.value.trim();
+      if (!q) return;
+      searchMode = true;
+      content.innerHTML = '<div class="events-loading">מחפש...</div>';
+
+      fetch(SEARCH_URL + '?q=' + encodeURIComponent(q))
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var results = data.results || [];
+          if (results.length === 0) {
+            content.innerHTML = '<div class="events-empty">לא נמצאו תוצאות עבור "' + q + '"</div>';
+            return;
+          }
+          // Reuse renderCards logic with search results
+          eventsData = eventsData || { events: {} };
+          eventsData.events['__search__'] = results;
+          renderCards('__search__');
+        })
+        .catch(function() {
+          content.innerHTML = '<div class="events-empty">שגיאה בחיפוש, נסו שוב</div>';
+        });
+    }
+
+    searchBtn.addEventListener('click', doSearch);
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') doSearch();
+    });
+
+    function fetchEvents() {
+      loaded = true;
+      fetch(API_URL)
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          eventsData = data;
+          renderCards(activeCategory);
+        })
+        .catch(function() {
+          content.innerHTML = '<div class="events-empty">לא ניתן לטעון אירועים כרגע</div>';
+        });
+    }
+  })();
+  </script>
 </body>
