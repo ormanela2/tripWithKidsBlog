@@ -57,22 +57,18 @@
     .nav__link[aria-current="page"]:hover, .nav__link[aria-current="page"]:focus-visible { background:var(--teal-dark); color:var(--white); }
     /* ── Community CTA button ── */
     .nav__link--community {
-      background: #0f4a50;
-      color: #fff !important;
-      font-weight: 600;
+      background: transparent;
+      color: #0f4a50 !important;
       font-size: 15px;
       border-radius: 22px;
       padding: 8px 18px;
       min-height: 44px;
-      box-shadow: 0 2px 10px rgba(15,74,80,0.35);
-      animation: communityFloat 3s ease-in-out infinite;
-      will-change: transform;
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
     }
     .nav__link--community:hover,
     .nav__link--community:focus-visible {
-      background: #1a6a72 !important;
+      background: #0f4a50 !important;
       color: #fff !important;
-      animation: none;
       transform: translateY(-2px);
       box-shadow: 0 4px 16px rgba(15,74,80,0.5);
     }
@@ -85,21 +81,12 @@
       display: inline-block;
       margin-left: 7px;
       box-shadow: 0 0 6px #4ade80;
-      animation: dotBlink 1.4s ease-in-out infinite;
     }
     .nav__mobile-menu .nav__link--community {
       font-size: 15px;
       padding: 8px 18px;
       width: fit-content;
       min-height: 44px;
-    }
-    @keyframes communityFloat {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-3px); }
-    }
-    @keyframes dotBlink {
-      0%, 100% { opacity: 0.4; box-shadow: 0 0 3px #4ade80; }
-      50%       { opacity: 1;   box-shadow: 0 0 10px #4ade80, 0 0 20px #4ade8088; }
     }
     .nav__mobile-actions { display:none; }
     .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
@@ -638,6 +625,152 @@
       .weather-card { min-width: 120px; }
       .weather-card__city { font-size: 12px; }
     }
+
+    /* ===================== MOBILE HYBRID CALENDAR ===================== */
+    .mobile-cal { display: none; }
+
+    @media (max-width: 768px) {
+      /* Override: hybrid takes over from list view */
+      .mobile-cal   { display: block; }
+      .list-view    { display: none !important; }
+      .filters__view-toggle { display: none; }
+
+      /* Grid containers */
+      .mob-full-grid,
+      .mob-week-strip {
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        border: 1px solid var(--sand-dark);
+        background: var(--sand-dark);
+      }
+      .mob-full-grid {
+        transition: opacity 0.22s ease, transform 0.22s ease;
+      }
+      .mob-full-grid.collapsing {
+        opacity: 0;
+        transform: translateY(-6px);
+        pointer-events: none;
+      }
+      .mob-grid,
+      .mob-week-row {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 1px;
+      }
+      .mob-hdr {
+        background: var(--teal);
+        color: #fff;
+        text-align: center;
+        font-family: 'Assistant', sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 7px 2px;
+      }
+      .mob-cell {
+        background: #fff;
+        min-height: 48px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 6px 2px 4px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        transition: background 0.12s;
+      }
+      .mob-cell:active          { background: var(--sand); }
+      .mob-cell--empty          { background: var(--cream); opacity: 0.45; pointer-events: none; }
+      .mob-cell--today .mob-num { color: var(--teal); font-weight: 700; }
+      .mob-cell--selected .mob-num { background: var(--teal); color: #fff; border-radius: 50%; }
+      .mob-num {
+        font-size: 13px;
+        font-weight: 400;
+        color: #555;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-bottom: 3px;
+        transition: background 0.15s, color 0.15s;
+      }
+      .mob-dots { display: flex; gap: 2px; flex-wrap: wrap; justify-content: center; max-width: 24px; }
+      .mob-dot  { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+      .mob-dot--holiday  { background: #ef4444; }
+      .mob-dot--festival { background: var(--amber); }
+      .mob-dot--market   { background: var(--green); }
+      .mob-dot--kids     { background: #7c3aed; }
+
+      /* Week strip */
+      .mob-week-strip {
+        display: none;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity 0.22s ease, transform 0.22s ease;
+      }
+      .mob-week-strip.visible { display: block; }
+
+      /* Day feed */
+      .mob-day-feed {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1);
+      }
+      .mob-day-feed.open {
+        max-height: 60vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .mob-feed-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0 10px;
+      }
+      .mob-feed-title { font-family: var(--font-heading); font-size: 17px; color: var(--charcoal); }
+      .mob-feed-back {
+        font-size: 13px;
+        color: var(--teal);
+        background: var(--sand);
+        border: none;
+        border-radius: 20px;
+        padding: 6px 14px;
+        font-family: 'Assistant', sans-serif;
+        cursor: pointer;
+        min-height: 36px;
+        -webkit-tap-highlight-color: transparent;
+        transition: background 0.15s;
+      }
+      .mob-feed-back:active  { background: var(--sand-dark); }
+      .mob-feed-list { display: flex; flex-direction: column; gap: 8px; padding-bottom: 20px; }
+      .mob-ev-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px;
+        background: #fff;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        cursor: pointer;
+        border-right: 3px solid transparent;
+        -webkit-tap-highlight-color: transparent;
+        transition: transform 0.12s;
+      }
+      .mob-ev-card:active        { transform: scale(0.98); }
+      .mob-ev-card--holiday      { border-color: #ef4444; }
+      .mob-ev-card--festival     { border-color: var(--amber); }
+      .mob-ev-card--market       { border-color: var(--green); }
+      .mob-ev-card--kids         { border-color: #7c3aed; }
+      .mob-ev-icon  { font-size: 22px; line-height: 1; flex-shrink: 0; padding-top: 2px; }
+      .mob-ev-body  { flex: 1; min-width: 0; }
+      .mob-ev-title { font-family: var(--font-heading); font-size: 15px; color: var(--charcoal); margin-bottom: 2px; }
+      .mob-ev-meta  { font-size: 12px; color: #888; line-height: 1.5; }
+      .mob-ev-arr   { color: #ccc; font-size: 16px; align-self: center; flex-shrink: 0; }
+      .mob-feed-empty { text-align: center; padding: 28px 0; font-size: 15px; color: #aaa; }
+
+      /* Month title tappable */
+      .month-nav__title { cursor: pointer; user-select: none; }
+    }
   </style>
   <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
   <script>
@@ -659,7 +792,7 @@
       <li role="none"><a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a></li>
       <li role="none"><a href="packages.html" class="nav__link" role="menuitem">חבילות</a></li>
       <li role="none"><a href="about.html" class="nav__link" role="menuitem">אודות</a></li>
-      <li role="none"><a href="calendar.html" class="nav__link" role="menuitem" aria-current="page">לוח אירועים</a></li>
+      <li role="none"><a href="calendar.html" class="nav__link" role="menuitem" aria-current="page">מתי קורה</a></li>
       <li role="none"><a href="#newsletter" class="nav__link nav__link--community" role="menuitem">מצטרפים לקהילה</a></li>
     </ul>
     <div class="nav__mobile-actions">
@@ -677,7 +810,7 @@
     <a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a>
     <a href="packages.html" class="nav__link" role="menuitem">חבילות</a>
     <a href="about.html" class="nav__link" role="menuitem">אודות</a>
-    <a href="calendar.html" class="nav__link" role="menuitem" aria-current="page">לוח אירועים</a>
+    <a href="calendar.html" class="nav__link" role="menuitem" aria-current="page">מתי קורה</a>
     <a href="#newsletter" class="nav__link nav__link--community" role="menuitem">מצטרפים לקהילה</a>
   </div>
 </nav>
@@ -752,6 +885,13 @@
         <div class="calendar-grid" id="calendarGrid" role="grid">
           <!-- Injected by JS -->
         </div>
+      </div>
+
+      <!-- Mobile Hybrid Calendar -->
+      <div id="mobileCalendar" class="mobile-cal" aria-label="לוח אירועים נייד">
+        <div id="mobFullGrid" class="mob-full-grid"></div>
+        <div id="mobWeekStrip" class="mob-week-strip"></div>
+        <div id="mobDayFeed" class="mob-day-feed"></div>
       </div>
 
       <!-- List view -->
@@ -1480,7 +1620,10 @@
   var curYear    = todayYear;
   var activeCountry = 'all';
   var activeTypes   = { holiday:true, festival:true, market:true, kids:true };
-  var isListView    = window.innerWidth < 768;
+  var isListView      = window.innerWidth < 768;
+  var isMobile        = window.innerWidth <= 768;
+  var mobSelectedDate = null;
+  var MOB_DAYS_SHORT  = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
 
   /* ====== HELPERS ====== */
   function sameDay(a, b) {
@@ -1716,6 +1859,229 @@
     updateEmptyState();
     renderWeather();
     updateCountBadges();
+    if (isMobile) {
+      if (mobSelectedDate) {
+        openMobileFeed(mobSelectedDate); // refresh feed with updated filters
+      } else {
+        renderMobileGrid();
+      }
+    }
+  }
+
+  /* ====== MOBILE HYBRID CALENDAR ====== */
+  function mobBuildCell(dayNum, date, isToday, isSelected) {
+    var cell = document.createElement('div');
+    var cls  = 'mob-cell';
+    if (!date)      cls += ' mob-cell--empty';
+    if (isToday)    cls += ' mob-cell--today';
+    if (isSelected) cls += ' mob-cell--selected';
+    cell.className = cls;
+    if (date) {
+      var num = document.createElement('div');
+      num.className  = 'mob-num';
+      num.textContent = dayNum;
+      cell.appendChild(num);
+      var evs = getEventsForDay(date, getFilteredEvents());
+      if (evs.length > 0) {
+        var dots = document.createElement('div');
+        dots.className = 'mob-dots';
+        var seen = {};
+        evs.forEach(function(ev) {
+          if (!seen[ev.type]) {
+            seen[ev.type] = true;
+            var dot = document.createElement('div');
+            dot.className = 'mob-dot mob-dot--' + ev.type;
+            dots.appendChild(dot);
+          }
+        });
+        cell.appendChild(dots);
+      }
+      cell.setAttribute('data-ts', date.getTime());
+    }
+    return cell;
+  }
+
+  function renderMobileGrid() {
+    var container = document.getElementById('mobFullGrid');
+    if (!container) return;
+    container.innerHTML = '';
+    container.style.display = 'block';
+    container.classList.remove('collapsing');
+
+    var strip = document.getElementById('mobWeekStrip');
+    var feed  = document.getElementById('mobDayFeed');
+    if (strip) { strip.style.display = 'none'; strip.className = 'mob-week-strip'; }
+    if (feed)  { feed.className = 'mob-day-feed'; }
+
+    var grid = document.createElement('div');
+    grid.className = 'mob-grid';
+    MOB_DAYS_SHORT.forEach(function(d) {
+      var h = document.createElement('div');
+      h.className  = 'mob-hdr';
+      h.textContent = d;
+      grid.appendChild(h);
+    });
+
+    var firstDay    = new Date(curYear, curMonth, 1).getDay();
+    var daysInMonth = new Date(curYear, curMonth+1, 0).getDate();
+    for (var i = 0; i < firstDay; i++) {
+      grid.appendChild(mobBuildCell(0, null, false, false));
+    }
+    for (var d = 1; d <= daysInMonth; d++) {
+      var date    = new Date(curYear, curMonth, d);
+      var isT     = sameDay(date, today);
+      var isSel   = !!(mobSelectedDate && sameDay(date, mobSelectedDate));
+      grid.appendChild(mobBuildCell(d, date, isT, isSel));
+    }
+    container.appendChild(grid);
+
+    grid.querySelectorAll('.mob-cell[data-ts]').forEach(function(cell) {
+      cell.addEventListener('click', function() {
+        onMobileDayTap(new Date(parseInt(this.getAttribute('data-ts'))));
+      });
+    });
+  }
+
+  function onMobileDayTap(date) {
+    mobSelectedDate = date;
+    var fullGrid = document.getElementById('mobFullGrid');
+    if (fullGrid) fullGrid.classList.add('collapsing');
+    setTimeout(function() {
+      if (fullGrid) fullGrid.style.display = 'none';
+      renderMobileWeekStrip(date);
+      openMobileFeed(date);
+    }, 200);
+  }
+
+  function renderMobileWeekStrip(selDate) {
+    var strip = document.getElementById('mobWeekStrip');
+    if (!strip) return;
+    strip.innerHTML    = '';
+    strip.style.display    = 'block';
+    strip.style.opacity    = '0';
+    strip.style.transform  = 'translateY(-6px)';
+    strip.style.transition = '';
+
+    var firstDay    = new Date(curYear, curMonth, 1).getDay();
+    var daysInMonth = new Date(curYear, curMonth+1, 0).getDate();
+    var cellIndex   = firstDay + selDate.getDate() - 1;
+    var weekStart   = Math.floor(cellIndex / 7) * 7;
+
+    var hdrRow = document.createElement('div');
+    hdrRow.className = 'mob-week-row';
+    MOB_DAYS_SHORT.forEach(function(d) {
+      var h = document.createElement('div');
+      h.className  = 'mob-hdr';
+      h.textContent = d;
+      hdrRow.appendChild(h);
+    });
+    strip.appendChild(hdrRow);
+
+    var weekRow = document.createElement('div');
+    weekRow.className = 'mob-week-row';
+    for (var col = 0; col < 7; col++) {
+      var dayNum = weekStart + col - firstDay + 1;
+      var date   = (dayNum >= 1 && dayNum <= daysInMonth) ? new Date(curYear, curMonth, dayNum) : null;
+      weekRow.appendChild(mobBuildCell(date ? dayNum : 0, date, date ? sameDay(date, today) : false, date ? sameDay(date, selDate) : false));
+    }
+    strip.appendChild(weekRow);
+
+    // Slide in
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        strip.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+        strip.style.opacity    = '1';
+        strip.style.transform  = 'translateY(0)';
+      });
+    });
+
+    // Tap a different day in the week strip
+    weekRow.querySelectorAll('.mob-cell[data-ts]').forEach(function(cell) {
+      cell.addEventListener('click', function() {
+        var d = new Date(parseInt(this.getAttribute('data-ts')));
+        mobSelectedDate = d;
+        weekRow.querySelectorAll('.mob-cell').forEach(function(c) { c.classList.remove('mob-cell--selected'); });
+        this.classList.add('mob-cell--selected');
+        openMobileFeed(d);
+      });
+    });
+  }
+
+  function openMobileFeed(date) {
+    var feed = document.getElementById('mobDayFeed');
+    if (!feed) return;
+
+    var filtered = getFilteredEvents();
+    var dayEvs   = getEventsForDay(date, filtered);
+    var dayLabel  = date.getDate() + ' ב' + HEB_MONTHS[date.getMonth()];
+
+    var listHtml = '';
+    if (dayEvs.length === 0) {
+      listHtml = '<div class="mob-feed-empty">אין אירועים ביום זה 🏖</div>';
+    } else {
+      dayEvs.forEach(function(ev) {
+        var dateStr = sameDay(ev.startDate, ev.endDate)
+          ? formatDate(ev.startDate)
+          : formatDateShort(ev.startDate) + ' – ' + formatDateShort(ev.endDate);
+        listHtml +=
+          '<div class="mob-ev-card mob-ev-card--' + ev.type + '" data-ev-id="' + ev.id + '">' +
+            '<div class="mob-ev-icon">' + flagImg(ev.country, 22) + '</div>' +
+            '<div class="mob-ev-body">' +
+              '<div class="mob-ev-title">' + ev.title + '</div>' +
+              '<div class="mob-ev-meta">' + dateStr + ' · ' + ev.city + '</div>' +
+            '</div>' +
+            '<div class="mob-ev-arr">‹</div>' +
+          '</div>';
+      });
+    }
+
+    feed.innerHTML =
+      '<div class="mob-feed-header">' +
+        '<div class="mob-feed-title">📅 ' + dayLabel + '</div>' +
+        '<button class="mob-feed-back" id="mobFeedBack">↑ כל החודש</button>' +
+      '</div>' +
+      '<div class="mob-feed-list">' + listHtml + '</div>';
+
+    feed.querySelectorAll('.mob-ev-card[data-ev-id]').forEach(function(card) {
+      var evId = parseInt(card.getAttribute('data-ev-id'));
+      var ev;
+      for (var i = 0; i < EVENTS.length; i++) { if (EVENTS[i].id === evId) { ev = EVENTS[i]; break; } }
+      if (ev) card.addEventListener('click', function() { openModal(ev); });
+    });
+    document.getElementById('mobFeedBack').addEventListener('click', expandMobileToFull);
+
+    feed.className = 'mob-day-feed open';
+
+    // Swipe down to dismiss
+    feed._swipeY = 0;
+    feed.ontouchstart = function(e) { feed._swipeY = e.touches[0].clientY; };
+    feed.ontouchend   = function(e) {
+      if ((e.changedTouches[0].clientY - feed._swipeY) > 70 && feed.scrollTop === 0) {
+        expandMobileToFull();
+      }
+    };
+  }
+
+  function expandMobileToFull() {
+    mobSelectedDate = null;
+    var feed     = document.getElementById('mobDayFeed');
+    var strip    = document.getElementById('mobWeekStrip');
+    var fullGrid = document.getElementById('mobFullGrid');
+
+    if (feed)  feed.className = 'mob-day-feed';
+    if (strip) {
+      strip.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+      strip.style.opacity    = '0';
+      strip.style.transform  = 'translateY(-6px)';
+      setTimeout(function() { if (strip) strip.style.display = 'none'; }, 220);
+    }
+    setTimeout(function() {
+      if (fullGrid) {
+        fullGrid.classList.remove('collapsing');
+        fullGrid.style.display = 'block';
+      }
+      renderMobileGrid();
+    }, 220);
   }
 
   /* ====== MODAL ====== */
@@ -1815,6 +2181,7 @@
     curMonth += delta;
     if (curMonth > 11) { curMonth = 0; curYear++; }
     if (curMonth < 0)  { curMonth = 11; curYear--; }
+    mobSelectedDate = null;
     renderAll();
   }
 
@@ -1901,12 +2268,17 @@
   window.addEventListener('resize', handleResize, { passive: true });
 
   /* ====== INIT ====== */
-  if (window.innerWidth < 768) {
-    setView(true);
-  } else {
+  if (!isMobile) {
     setView(false);
   }
   renderAll();
+  if (isMobile) {
+    // Month/Year title tap → return to full grid
+    var monthTitleEl = document.getElementById('monthTitle');
+    if (monthTitleEl) {
+      monthTitleEl.addEventListener('click', expandMobileToFull);
+    }
+  }
 
 })();
 </script>
