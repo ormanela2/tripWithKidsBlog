@@ -2116,14 +2116,83 @@
       white-space: nowrap;
       font-family: var(--font-body);
       color: rgba(255,255,255,0.9);
-      text-decoration: none;
+      background: none;
+      border: none;
       border-right: 1px solid rgba(255,255,255,0.15);
       transition: color 0.2s;
+      cursor: pointer;
     }
     .news-ticker__item:hover { color: var(--amber); }
     .news-ticker__item span.dot {
       width: 5px; height: 5px; border-radius: 50%;
       background: var(--amber); flex-shrink: 0;
+    }
+
+    /* NEWS DRAWER */
+    .news-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      pointer-events: none;
+    }
+    .news-drawer.is-open { pointer-events: all; }
+    .news-drawer__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      transition: background 0.3s;
+    }
+    .news-drawer.is-open .news-drawer__backdrop { background: rgba(0,0,0,0.55); }
+    .news-drawer__panel {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: #0f4a50;
+      color: #fff;
+      border-radius: 18px 18px 0 0;
+      padding: 20px 24px 36px;
+      direction: rtl;
+      transform: translateY(100%);
+      transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .news-drawer.is-open .news-drawer__panel { transform: translateY(0); }
+    .news-drawer__handle {
+      width: 40px; height: 4px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 2px;
+      margin: 0 auto 20px;
+    }
+    .news-drawer__close {
+      position: absolute;
+      top: 16px; left: 20px;
+      background: none; border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 18px; cursor: pointer;
+      padding: 4px 8px; line-height: 1;
+      transition: color 0.2s;
+    }
+    .news-drawer__close:hover { color: #fff; }
+    .news-drawer__source {
+      font-size: 11px;
+      color: var(--amber);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .news-drawer__title {
+      font-family: var(--font-heading);
+      font-size: clamp(16px, 4vw, 20px);
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+    .news-drawer__desc {
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 24px;
     }
   </style>
 
@@ -2131,8 +2200,20 @@
     <div class="news-ticker__label">✈️ חדשות טיולים</div>
     <div class="news-ticker__track-wrap">
       <div class="news-ticker__track" id="tickerTrack">
-        <a class="news-ticker__item" href="#"><span class="dot"></span>טוען חדשות...</a>
+        <button class="news-ticker__item"><span class="dot"></span>טוען חדשות...</button>
       </div>
+    </div>
+  </div>
+
+  <!-- NEWS DRAWER -->
+  <div class="news-drawer" id="newsDrawer" aria-hidden="true">
+    <div class="news-drawer__backdrop" id="newsDrawerBackdrop"></div>
+    <div class="news-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+      <div class="news-drawer__handle"></div>
+      <button class="news-drawer__close" id="newsDrawerClose" aria-label="סגור">✕</button>
+      <div class="news-drawer__source" id="drawerSource"></div>
+      <div class="news-drawer__title" id="drawerTitle"></div>
+      <div class="news-drawer__desc" id="drawerDesc"></div>
     </div>
   </div>
 
@@ -2166,16 +2247,23 @@
       { title: 'Tatralandia סלובקיה מוסיפה 3 מגלשות מים חדשות לקיץ', url: '#' },
     ];
 
+    function escAttr(s) {
+      return (s || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
     function buildTicker(items) {
       var track = document.getElementById('tickerTrack');
       if (!items || !items.length) { items = fallback; }
       var html = '';
       [items, items].forEach(function(arr) {
         arr.forEach(function(item) {
-          html += '<a class="news-ticker__item" href="' + (item.url || '#') + '" target="_blank" rel="noopener noreferrer">'
+          html += '<button class="news-ticker__item"'
+                + ' data-url="' + escAttr(item.url) + '"'
+                + ' data-desc="' + escAttr(item.description) + '"'
+                + ' data-source="' + escAttr(item.source) + '">'
                 + '<span class="dot"></span>'
-                + item.title
-                + '</a>';
+                + escAttr(item.title)
+                + '</button>';
         });
       });
       track.innerHTML = html;
@@ -2188,6 +2276,44 @@
         });
       });
     }
+
+    // Drawer logic
+    var drawer = document.getElementById('newsDrawer');
+    var track  = document.getElementById('tickerTrack');
+
+    function openDrawer(title, desc, url, source) {
+      document.getElementById('drawerTitle').textContent  = title  || '';
+      document.getElementById('drawerDesc').textContent   = desc   || 'לא נמצא תקציר לכתבה זו.';
+      document.getElementById('drawerSource').textContent = source || '';
+      drawer.classList.add('is-open');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      track.style.animationPlayState = 'paused';
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('is-open');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      track.style.animationPlayState = 'running';
+    }
+
+    document.getElementById('newsDrawerBackdrop').addEventListener('click', closeDrawer);
+    document.getElementById('newsDrawerClose').addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeDrawer();
+    });
+
+    track.addEventListener('click', function(e) {
+      var btn = e.target.closest('.news-ticker__item');
+      if (!btn) return;
+      openDrawer(
+        btn.textContent.trim(),
+        btn.dataset.desc,
+        btn.dataset.url,
+        btn.dataset.source
+      );
+    });
 
     var ticker = document.getElementById('newsTicker');
     ticker.style.opacity = '0';
@@ -2725,6 +2851,10 @@
             <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
           </a>
           <p class="footer__tagline">טיולים שמתחילים בשיחה אחת, ומסתיימים בזכרון שהילדים שלך יספרו לנכדים שלך.</p>
+          <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" aria-label="עמוד הפייסבוק שלנו" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+            עקבו אחרינו
+          </a>
         </div>
         <div class="footer__col">
           <h3 class="footer__col-title">ניווט</h3>
