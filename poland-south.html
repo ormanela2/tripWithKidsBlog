@@ -357,7 +357,7 @@
 
     <!-- מצטרפים לקהילה — amber banner -->
     <button type="button" class="mob-nav-community" role="menuitem"
-      onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(); },120);">
+      onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(true); },120);">
       <div class="mob-nav-community__icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -1112,12 +1112,13 @@
   var overlay = document.getElementById('emailPopupOverlay');
   var closeBtn = document.getElementById('emailPopupClose');
   var skipBtn = document.getElementById('emailPopupSkip');
-  function openPopup() { if (localStorage.getItem('mtEmailSubmitted')) return; overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  var openedAt = 0;
+  function openPopup(force) { if (!force && localStorage.getItem('mtEmailSubmitted')) return; overlay.classList.add('open'); document.body.style.overflow = 'hidden'; openedAt = Date.now(); }
   function closePopup() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
   document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) { link.addEventListener('click', function(e) { e.preventDefault(); openPopup(); }); });
   if (closeBtn) closeBtn.addEventListener('click', closePopup);
   if (skipBtn) skipBtn.addEventListener('click', closePopup);
-  overlay.addEventListener('click', function(e) { if (e.target === overlay) closePopup(); });
+  overlay.addEventListener('click', function(e) { if (e.target === overlay && Date.now() - openedAt > 400) closePopup(); });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePopup(); });
   var form = document.getElementById('emailPopupForm');
   if (form) form.addEventListener('submit', function() { localStorage.setItem('mtEmailSubmitted', '1'); });
