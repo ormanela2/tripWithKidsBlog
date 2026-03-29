@@ -682,10 +682,12 @@ window.onload = () => { cityInputEl.value = ''; };
         setTimeout(closePopup, 300);
       });
 
-      function openPopup() {
-        if (localStorage.getItem('mtEmailSubmitted')) return;
+      var openedAt = 0;
+      function openPopup(force) {
+        if (!force && localStorage.getItem('mtEmailSubmitted')) return;
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
+        openedAt = Date.now();
       }
       window.openEmailPopup = openPopup;
 
