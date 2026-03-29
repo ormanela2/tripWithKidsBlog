@@ -386,7 +386,7 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
 
     <!-- מצטרפים לקהילה — amber banner -->
     <button type="button" class="mob-nav-community" role="menuitem"
-      onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(); },120);">
+      onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(true); },120);">
       <div class="mob-nav-community__icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -674,7 +674,7 @@ window.onload = () => { cityInputEl.value = ''; };
       closeBtn.addEventListener('click', closePopup);
       skipBtn.addEventListener('click', closePopup);
       overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) closePopup();
+        if (e.target === overlay && Date.now() - openedAt > 400) closePopup();
       });
 
       document.getElementById('emailPopupForm').addEventListener('submit', function() {
