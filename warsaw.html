@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="מדריך טיול לוורשה עם ילדים - מסלול יום יום, אטרקציות, לינה וטיפים מניסיון אישי. מתי טסים.">
   <title>טיול לוורשה עם ילדים - מדריך מלא | מתי טסים</title>
   <link rel="icon" type="image/png" href="logo.png">
@@ -324,6 +324,19 @@
     two.parentNode.insertBefore(twenty, two);
   })(window, document, 'script', 'https://scripts.stay22.com/letmeallez.js');
   </script>
+<style>
+  .float-nav { position: fixed; bottom: max(24px, env(safe-area-inset-bottom) + 12px); right: 24px; z-index: 996; display: flex; flex-direction: column; gap: 10px; opacity: 0; transform: translateY(12px); transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
+  .float-nav.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .float-nav__btn { display: flex; align-items: center; justify-content: center; gap: 6px; height: 44px; border-radius: 22px; border: none; cursor: pointer; font-family: var(--font-body); font-size: 14px; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.15); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; white-space: nowrap; }
+  .float-nav__btn:hover { transform: scale(1.06); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+  .float-nav__btn--destinations { background: var(--teal); color: white; padding: 0 18px; }
+  .float-nav__btn--top { background: white; color: var(--teal); border: 2px solid var(--teal); width: 44px; padding: 0; }
+  @media (max-width: 600px) {
+    .float-nav__btn { height: 36px; font-size: 12px; }
+    .float-nav__btn--destinations { padding: 0 12px; gap: 4px; }
+    .float-nav__btn--top { width: 36px; }
+  }
+</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"מתי טסים","item":"https://mataytasim.co.il"},{"@type":"ListItem","position":2,"name":"יעדים","item":"https://mataytasim.co.il/destinations.html"},{"@type":"ListItem","position":3,"name":"וורשה","item":"https://mataytasim.co.il/warsaw.html"}]}
 </script>
@@ -1326,6 +1339,25 @@
       el.style.display = (cat === 'all' || elCat === cat) ? '' : 'none';
     });
   };
+})();
+</script>
+
+<div class="float-nav" id="floatNav">
+  <a href="destinations.html" class="float-nav__btn float-nav__btn--destinations">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    יעדים
+  </a>
+  <button class="float-nav__btn float-nav__btn--top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="חזור למעלה">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+</div>
+<script>
+(function() {
+  var floatNav = document.getElementById('floatNav');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) { floatNav.classList.add('visible'); }
+    else { floatNav.classList.remove('visible'); }
+  }, { passive: true });
 })();
 </script>
 </body>
