@@ -333,6 +333,11 @@
     .float-nav__btn:hover { transform: scale(1.06); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
     .float-nav__btn--destinations { background: var(--teal); color: white; padding: 0 18px; }
     .float-nav__btn--top { background: white; color: var(--teal); border: 2px solid var(--teal); width: 44px; padding: 0; }
+    @media (max-width: 600px) {
+      .float-nav__btn { height: 36px; font-size: 12px; }
+      .float-nav__btn--destinations { padding: 0 12px; gap: 4px; }
+      .float-nav__btn--top { width: 36px; }
+    }
 
   </style>
   <link rel="icon" type="image/png" href="logo.png">
