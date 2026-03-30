@@ -881,12 +881,18 @@
       /* Month title tappable */
       .month-nav__title { cursor: pointer; user-select: none; }
     }
+    .hero__breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; justify-content: flex-start; }
+    .hero__breadcrumb a { color: rgba(255,255,255,0.7); text-decoration: none; transition: opacity 0.2s; }
+    .hero__breadcrumb a:hover { color: white; }
   </style>
   <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
   <script>
     window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
     plausible.init()
   </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"מתי טסים","item":"https://mataytasim.co.il"},{"@type":"ListItem","position":2,"name":"מתי קורה","item":"https://mataytasim.co.il/calendar.html"}]}
+</script>
 </head>
 <body>
 
@@ -997,7 +1003,7 @@
 
     <!-- מצטרפים לקהילה — newsletter popup -->
     <button type="button" class="mob-nav-community" role="menuitem"
-      onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(); },120);">
+      onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(true); },120);">
       <div class="mob-nav-community__icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -1016,6 +1022,11 @@
 <!-- ===================== HERO ===================== -->
 <section class="hero" aria-labelledby="hero-title">
   <div class="container">
+    <nav class="hero__breadcrumb" aria-label="breadcrumb">
+      <a href="services.html">מתי טסים</a>
+      <span>›</span>
+      <span>מתי קורה</span>
+    </nav>
     <span class="hero__emoji" aria-hidden="true">🗓️</span>
     <h1 class="hero__title" id="hero-title">לוח ארועים 2026</h1>
     <p class="hero__subtitle">חגים לאומיים, פסטיבלים, שווקים ואטרקציות לילדים - כל מה שצריך לדעת לפני שטסים</p>
@@ -2541,7 +2552,7 @@
 
     if (closeBtn) closeBtn.addEventListener('click', closePopup);
     if (skipBtn) skipBtn.addEventListener('click', closePopup);
-    overlay.addEventListener('click', function(e) { if (e.target === overlay) closePopup(); });
+    overlay.addEventListener('click', function(e) { if (e.target === overlay && Date.now() - openedAt > 400) closePopup(); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePopup(); });
 
     var form = document.getElementById('emailPopupForm');

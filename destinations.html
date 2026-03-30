@@ -260,7 +260,13 @@
     /* WA FLOAT */
     .wa-float{position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:997;transition:transform var(--ease)}
     .wa-float:hover{transform:scale(1.08)}
+    .page-hero__breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; justify-content: flex-start; position: relative; z-index: 1; }
+    .page-hero__breadcrumb a { color: rgba(255,255,255,0.7); text-decoration: none; transition: opacity 0.2s; }
+    .page-hero__breadcrumb a:hover { color: white; }
   </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"מתי טסים","item":"https://mataytasim.co.il"},{"@type":"ListItem","position":2,"name":"יעדים","item":"https://mataytasim.co.il/destinations.html"}]}
+</script>
 </head>
 <body>
 
@@ -388,6 +394,11 @@
 
 <section class="page-hero">
   <div class="container">
+    <nav class="page-hero__breadcrumb" aria-label="breadcrumb">
+      <a href="services.html">מתי טסים</a>
+      <span>›</span>
+      <span>יעדים</span>
+    </nav>
     <div class="page-hero__label">🗺️ יעדים מומלצים</div>
     <h1 class="page-hero__title">לאן טסים הפעם?</h1>
     <p class="page-hero__subtitle">בחרו יעד מהמפה או מהרשימה - כל מה שצריך לדעת לפני הטיסה</p>

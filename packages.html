@@ -292,6 +292,9 @@
     .arrow-desktop { display: none; }
     .hero-b__arrow { transform: none !important; }
   }
+  .page-breadcrumb { font-size: 13px; color: #999; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .page-breadcrumb a { color: #999; text-decoration: none; transition: color 0.2s; }
+  .page-breadcrumb a:hover { color: var(--teal); }
 
 </style>
   <!-- Privacy-friendly analytics by Plausible -->
@@ -300,6 +303,9 @@
     window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
     plausible.init()
   </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"מתי טסים","item":"https://mataytasim.co.il"},{"@type":"ListItem","position":2,"name":"חבילות","item":"https://mataytasim.co.il/packages.html"}]}
+</script>
 </head>
 <body>
 
@@ -430,7 +436,11 @@
 <!-- WHY ME -->
 <div class="why-me">
   <div class="why-me__inner">
-
+    <nav class="page-breadcrumb" aria-label="breadcrumb">
+      <a href="services.html">מתי טסים</a>
+      <span>›</span>
+      <span>חבילות</span>
+    </nav>
     <div class="why-me__top">
       <span class="why-me__badge">✈ תכנון טיולים משפחתיים</span>
       <h1 class="why-me__title">תכנון טיול עם ילדים זה <span>לא</span> חייב להיות מלחיץ</h1>
