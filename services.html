@@ -2098,6 +2098,11 @@
       white-space: nowrap;
       z-index: 1;
     }
+    .news-ticker__label-text { display: inline; }
+    @media (max-width: 480px) {
+      .news-ticker__label { padding: 0 10px; }
+      .news-ticker__label-text { display: none; }
+    }
     .news-ticker__refresh {
       background: none;
       border: none;
@@ -2211,7 +2216,7 @@
   </style>
 
   <div class="news-ticker" id="newsTicker">
-    <div class="news-ticker__label">✈️ חדשות טיולים<button class="news-ticker__refresh" id="tickerRefresh" title="רענן חדשות">↺</button></div>
+    <div class="news-ticker__label">✈️ <span class="news-ticker__label-text">חדשות טיולים</span><button class="news-ticker__refresh" id="tickerRefresh" title="רענן חדשות">↺</button></div>
     <div class="news-ticker__track-wrap">
       <div class="news-ticker__track" id="tickerTrack">
         <button class="news-ticker__item"><span class="dot"></span>טוען חדשות...</button>
@@ -2369,7 +2374,7 @@
     <div class="page-hero__bg" aria-hidden="true"></div>
     <div class="page-hero__content">
       <h1 class="page-hero__title">היי, אני אור - נשוי לנועה, אבא ל-3 ואני ממש אוהב לתכנן טיולים</h1>
-      <p class="page-hero__subtitle"><span style="display:block;font-family:'Secular One',sans-serif;font-size:clamp(18px,2.5vw,26px);color:#fff;opacity:1;margin-bottom:16px;line-height:1.4;">"אם יוצאים, מגיעים למקומות נפלאים"<span style="display:block;font-family:'Rubik',sans-serif;font-size:13px;opacity:0.7;margin-top:6px;font-weight:300;letter-spacing:1px;">- ד"ר סוס</span></span>עבורי, המקומות הנפלאים באמת נמצאים ברגעים שבין לבין: בחקירה מעוררת סקרנות, בכביש שנפתח לנוף עוצר נשימה ובמקומות הנחבאים שמוצאים רק כשמעזים לסטות מהמסלול המוכר. אלו הרגעים שהופכים טיול רגיל לחוויה של פעם בחיים. את "מתי טסים" הקמתי במטרה אחת: לשתף מהניסיון שלי ולעזור לכם למצוא את אותם רגעים קסומים בטיול המשפחתי הבא שלכם.</p>
+      <p class="page-hero__subtitle"><span style="display:block;font-family:'Secular One',sans-serif;font-size:clamp(18px,2.5vw,26px);color:#fff;opacity:1;margin-bottom:16px;line-height:1.4;">"אם יוצאים, מגיעים למקומות נפלאים"<span style="display:block;font-family:'Rubik',sans-serif;font-size:13px;opacity:0.7;margin-top:6px;font-weight:300;letter-spacing:1px;">- ד"ר סוס</span></span>עבורי, המקומות הנפלאים באמת נמצאים ברגעים שבין לבין: בחקירה מעוררת סקרנות, בכביש שנפתח לנוף עוצר נשימה ובמקומות הנחבאים שמוצאים רק כשמעזים לסטות מהמסלול המוכר. אלו הרגעים שהופכים טיול רגיל לחוויה של פעם בחיים. את "מתי טסים" הקמתי בשביל לרכז את כל המידע למשפחות עם ילדים תחת מטרייה אחת שבו תוכלו לקבל אינפורמציה על מסלולים, יעדים, מזג אוויר, אטרקציות ועוד</p>
 
       <a href="about.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.3);color:white;border-radius:40px;padding:12px 28px;font-family:'Rubik',sans-serif;font-size:15px;font-weight:500;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">קראו עוד עליי ועל &quot;מתי טסים&quot; ↓</a>
 
