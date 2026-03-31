@@ -2098,10 +2098,8 @@
       white-space: nowrap;
       z-index: 1;
     }
-    .news-ticker__label-text { display: inline; }
     @media (max-width: 480px) {
-      .news-ticker__label { padding: 0 10px; }
-      .news-ticker__label-text { display: none; }
+      .news-ticker__label { padding: 0 8px; font-size: 10px; gap: 3px; }
     }
     .news-ticker__refresh {
       background: none;
@@ -2216,7 +2214,7 @@
   </style>
 
   <div class="news-ticker" id="newsTicker">
-    <div class="news-ticker__label">✈️ <span class="news-ticker__label-text">חדשות טיולים</span><button class="news-ticker__refresh" id="tickerRefresh" title="רענן חדשות">↺</button></div>
+    <div class="news-ticker__label">✈️ חדשות טיולים<button class="news-ticker__refresh" id="tickerRefresh" title="רענן חדשות">↺</button></div>
     <div class="news-ticker__track-wrap">
       <div class="news-ticker__track" id="tickerTrack">
         <button class="news-ticker__item"><span class="dot"></span>טוען חדשות...</button>
