@@ -196,7 +196,7 @@
       .drawer-tags{margin-bottom:14px;gap:5px}
       .dtag{font-size:11px;padding:4px 9px}
       .drawer-divider{margin:12px 0}
-      .btn-main,.btn-wa{padding:11px 16px;font-size:13px;border-radius:8px}
+      .btn-main,.btn-wa,.btn-cal{padding:11px 16px;font-size:13px;border-radius:8px}
       .drawer-cta{gap:8px}
     }
 
@@ -237,6 +237,23 @@
     .btn-main:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,107,114,.28)}
     .btn-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;border-radius:10px;padding:11px 20px;font-size:13px;font-weight:600;transition:all var(--ease);width:100%}
     .btn-wa:hover{background:#1da851;transform:translateY(-1px)}
+    .btn-cal{display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:var(--teal);border:1.5px solid var(--teal);border-radius:10px;padding:10px 20px;font-size:13px;font-weight:600;transition:all var(--ease);width:100%;text-decoration:none}
+    .btn-cal:hover{background:var(--teal);color:#fff}
+
+    /* CALENDAR BANNER */
+    .cal-banner{background:var(--sand);border-top:1px solid var(--sand-dark);padding:28px 0}
+    .cal-banner__inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .cal-banner__text{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
+    .cal-banner__emoji{font-size:28px;flex-shrink:0}
+    .cal-banner__text strong{display:block;font-family:var(--font-heading);font-size:17px;font-weight:400;color:var(--charcoal)}
+    .cal-banner__text span{font-size:13px;color:var(--gray-mid)}
+    .cal-banner__btn{flex-shrink:0;background:var(--teal);color:#fff;border-radius:22px;padding:10px 22px;font-family:'Assistant',sans-serif;font-size:14px;font-weight:600;text-decoration:none;transition:background var(--ease);white-space:nowrap}
+    .cal-banner__btn:hover{background:var(--teal-dark)}
+    @media(max-width:600px){
+      .cal-banner{padding:20px 0}
+      .cal-banner__inner{flex-direction:column;align-items:flex-start;gap:14px}
+      .cal-banner__btn{width:100%;text-align:center;display:block}
+    }
 
     /* FOOTER */
     .footer{background:var(--charcoal);color:rgba(255,255,255,.6);padding:40px 0;text-align:center;font-size:14px}
@@ -445,6 +462,21 @@
   </div>
 </div>
 
+<section class="cal-banner">
+  <div class="container">
+    <div class="cal-banner__inner">
+      <div class="cal-banner__text">
+        <span class="cal-banner__emoji">🗓️</span>
+        <div>
+          <strong>מחפשים מתי לטוס?</strong>
+          <span>בלוח האירועים שלנו תמצאו פסטיבלים, ירידים ואירועים מיוחדים לכל יעד</span>
+        </div>
+      </div>
+      <a href="calendar.html" class="cal-banner__btn">ללוח האירועים ←</a>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="container">
     <p>מתי טסים &copy; 2026 · <a href="services.html">דף הבית</a> · <a href="tips.html">טיפים</a> · <a href="terms.html">תנאי שימוש</a> · <a href="https://wa.me/972546758145">וואטסאפ</a></p>
@@ -544,7 +576,8 @@
     var waUrl = 'https://wa.me/972546758145?text=' + encodeURIComponent('היי, אני מתעניין בטיול ל' + d.wa + ' עם ילדים');
     document.getElementById('drawerCta').innerHTML =
       '<a href="' + d.url + '" class="btn-main">למדריך המלא ←</a>' +
-      '<a href="' + waUrl + '" class="btn-wa" target="_blank">' + WA_ICON + ' שאלה? כתבו לי בוואטסאפ</a>';
+      '<a href="' + waUrl + '" class="btn-wa" target="_blank">' + WA_ICON + ' שאלה? כתבו לי בוואטסאפ</a>' +
+      '<a href="calendar.html" class="btn-cal">🗓️ אירועים קרובים ביעד ←</a>';
 
     /* open */
     drawer.classList.add('open');
