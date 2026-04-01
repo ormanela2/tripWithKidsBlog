@@ -894,6 +894,9 @@
           <option value="krakow">קרקוב, פולין 🇵🇱</option>
           <option value="bucharest">בוקרשט, רומניה 🇷🇴</option>
           <option value="dubai">דובאי, איחוד האמירויות 🇦🇪</option>
+          <option value="cyprus">קפריסין 🇨🇾</option>
+          <option value="croatia">קרואטיה 🇭🇷</option>
+          <option value="malta">מלטה 🇲🇹</option>
         </select>
       </div>
 
@@ -969,12 +972,12 @@
       </div>
 
       <div class="form-row">
-        <label class="form-label" for="flight-adult-price">מחיר למבוגר (€)</label>
+        <label class="form-label" for="flight-adult-price">מחיר למבוגר ($)</label>
         <input type="number" class="num-input" id="flight-adult-price" min="0" step="10" aria-label="מחיר טיסה למבוגר">
       </div>
 
       <div class="form-row">
-        <label class="form-label" for="flight-child-price">מחיר לילד (€)</label>
+        <label class="form-label" for="flight-child-price">מחיר לילד ($)</label>
         <input type="number" class="num-input" id="flight-child-price" min="0" step="10" aria-label="מחיר טיסה לילד">
       </div>
 
@@ -1041,7 +1044,7 @@
       </div>
 
       <div class="form-row">
-        <label class="form-label" for="hotel-price">מחיר לחדר ללילה (€)</label>
+        <label class="form-label" for="hotel-price">מחיר לחדר ללילה ($)</label>
         <input type="number" class="num-input" id="hotel-price" min="0" step="5" aria-label="מחיר לינה ללילה">
       </div>
 
@@ -1421,7 +1424,7 @@
           <input type="checkbox" id="breakfast-check" aria-label="ארוחת בוקר במלון">
           <div>
             <div class="extras-item__label">ארוחת בוקר במלון</div>
-            <div class="extras-item__note">€12 לאדם ליום - חל רק בלינה במלון</div>
+            <div class="extras-item__note">$12 לאדם ליום - חל רק בלינה במלון</div>
           </div>
         </div>
         <div class="extras-item__input" id="breakfast-input-wrap">
@@ -1730,6 +1733,45 @@
       transport: { public: 5, taxi: 30, mix: 15 },
       discountCard: null,
     },
+    cyprus: {
+      name: 'קפריסין', isEurope: true,
+      flight: { economy: 200, business: 600 },
+      hotel: { '2star': 40, '3star': 90, '4star': 150, '5star': 280, airbnb: 75, farm: 55, motel: 35 },
+      car: { economy: 25, compact: 32, suv: 55, minivan: 70 },
+      food: { self: 18, mix: 38, restaurant: 65 },
+      activities: { light: 10, medium: 25, heavy: 55 },
+      airport: 35,
+      cityTax: 0,
+      tollsPerDay: 0,
+      transport: { public: 2, taxi: 20, mix: 8 },
+      discountCard: null,
+    },
+    croatia: {
+      name: 'קרואטיה', isEurope: true,
+      flight: { economy: 280, business: 850 },
+      hotel: { '2star': 55, '3star': 110, '4star': 190, '5star': 350, airbnb: 90, farm: 65, motel: 45 },
+      car: { economy: 28, compact: 36, suv: 62, minivan: 80 },
+      food: { self: 20, mix: 45, restaurant: 80 },
+      activities: { light: 12, medium: 30, heavy: 65 },
+      airport: 45,
+      cityTax: 1,
+      tollsPerDay: 5,
+      transport: { public: 4, taxi: 25, mix: 12 },
+      discountCard: null,
+    },
+    malta: {
+      name: 'מלטה', isEurope: true,
+      flight: { economy: 230, business: 700 },
+      hotel: { '2star': 45, '3star': 90, '4star': 160, '5star': 300, airbnb: 80, farm: 60, motel: 40 },
+      car: { economy: 22, compact: 30, suv: 52, minivan: 68 },
+      food: { self: 18, mix: 38, restaurant: 65 },
+      activities: { light: 10, medium: 25, heavy: 55 },
+      airport: 30,
+      cityTax: 0,
+      tollsPerDay: 0,
+      transport: { public: 2, taxi: 18, mix: 8 },
+      discountCard: null,
+    },
   };
 
   /* ─── Season multipliers ─── */
@@ -1802,7 +1844,7 @@
     return sym + Math.round(val).toLocaleString('he-IL');
   }
   function fmtEur(eur) {
-    return '€' + Math.round(eur).toLocaleString('he-IL');
+    return '$' + Math.round(eur).toLocaleString('he-IL');
   }
   function getRadio(name) {
     var el = document.querySelector('input[name="' + name + '"]:checked');
@@ -2283,7 +2325,7 @@
     document.getElementById('flight-total-note').textContent =
       'סה"כ טיסות: ' + fmtEur(flightsEur) + ' = ' + fmt(flightsEur) +
       (luggageEur > 0 ? ' | מזוודות: ' + fmtEur(luggageEur) : '') +
-      (etiasEur > 0   ? ' | ETIAS: €' + etiasEur : '');
+      (etiasEur > 0   ? ' | ETIAS: $' + etiasEur : '');
 
     document.getElementById('hotel-total-note').textContent =
       'סה"כ לינה: ' + fmtEur(hotelEur) + ' = ' + fmt(hotelEur) +
@@ -2518,6 +2560,17 @@
       }, 2500);
     }
   });
+
+  /* ─── Pre-select destination from URL param ─── */
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var dest = params.get('dest');
+    if (dest) {
+      var sel = document.getElementById('country');
+      var opt = sel ? sel.querySelector('option[value="' + dest + '"]') : null;
+      if (opt) sel.value = dest;
+    }
+  })();
 
   /* ─── Init ─── */
   autofill();
