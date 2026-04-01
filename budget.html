@@ -438,6 +438,9 @@
     .results-card__body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
     .results-sticky-wrap.expanded .results-card__body { max-height: 900px; }
     .results-card__inner { padding: 20px; }
+    .drawer-handle { display: none; justify-content: center; padding: 8px 0 4px; background: var(--white); }
+    .drawer-handle__pill { width: 36px; height: 4px; background: var(--grey-mid); border-radius: 2px; }
+    .drawer-close-btn { display: none; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 12px; background: var(--grey-light); border: none; border-top: 1px solid var(--grey-mid); font-size: 14px; font-weight: 600; color: var(--teal-dark); cursor: pointer; }
 
     .breakdown-list { list-style: none; margin-bottom: 16px; }
     .breakdown-item {
@@ -724,6 +727,14 @@
       .results-card__inner { padding: 14px; }
       .results-full__body { padding: 14px 16px 20px; }
       .season-tab { min-width: 80px; }
+      /* Mobile drawer: cap height so toggle stays visible */
+      .results-sticky-wrap.expanded .results-card__body {
+        max-height: calc(62vh - 52px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .drawer-handle { display: flex; }
+      .drawer-close-btn { display: flex; }
     }
 
     @media print {
@@ -1507,6 +1518,7 @@
       <span class="results-card__total-preview" id="sticky-total">₪0</span>
     </div>
     <div class="results-card__body" id="sticky-body">
+      <div class="drawer-handle"><div class="drawer-handle__pill"></div></div>
       <div class="results-card__inner">
         <ul class="breakdown-list" id="breakdown-sticky" aria-label="פירוט הוצאות"></ul>
         <div class="stacked-bar" id="stacked-bar-sticky" aria-hidden="true"></div>
@@ -1519,6 +1531,7 @@
           </div>
         </div>
       </div>
+      <button class="drawer-close-btn" id="drawer-close-btn">✕ סגור פירוט</button>
     </div>
   </div>
 </div>
@@ -1835,6 +1848,13 @@
   stickyToggle.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stickyToggle.click(); }
   });
+  var drawerCloseBtn = document.getElementById('drawer-close-btn');
+  if (drawerCloseBtn) {
+    drawerCloseBtn.addEventListener('click', function() {
+      stickyWrap.classList.remove('expanded');
+      stickyToggle.setAttribute('aria-expanded', 'false');
+    });
+  }
 
   /* ─── Season tabs ─── */
   document.querySelectorAll('.season-tab').forEach(function(tab) {
