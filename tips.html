@@ -250,6 +250,15 @@
     .tip-card--highlight .tip-card__note { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); }
     .tip-card--highlight .tip-card__note strong { color: var(--white); }
 
+    /* ── Smaller cards inside לפני הטיסה ── */
+    #tab-before .tips-grid { gap: 14px; }
+    #tab-before .tip-card { padding: 18px 20px; border-radius: 14px; }
+    #tab-before .tip-card__header { gap: 10px; margin-bottom: 12px; }
+    #tab-before .tip-card__emoji { font-size: 22px; }
+    #tab-before .tip-card__title { font-size: 15px; }
+    #tab-before .tip-card__list li { font-size: 13px; padding: 5px 0; }
+    #tab-before .tip-card__note { margin-top: 10px; padding: 9px 12px; font-size: 12px; }
+
     /* FOOTER */
     .footer { background: var(--charcoal); color: rgba(255,255,255,0.7); padding: 40px 0; text-align: center; font-size: 14px; }
     .footer a { color: var(--amber-light); }
@@ -305,6 +314,7 @@
       .nav__logo-text { font-size:18px !important; }
     }
     /* ── END NAV ─────────────────────────── */
+
   </style>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
@@ -408,6 +418,25 @@
 
       <div class="links-grid">
 
+        <!-- הכלים שלנו -->
+        <div class="link-category">🛠️ &nbsp;הכלים שלנו</div>
+
+        <a href="budget.html" target="_blank" class="link-card" style="border-color:var(--teal,#1a6b72);">
+          <div class="link-card__icon" style="background:rgba(26,107,114,0.1);">
+            <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="#1a6b72" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <div class="link-card__name">מחשבון תקציב</div>
+          <div class="link-card__desc">חשבו את עלות הטיול</div>
+        </a>
+
+        <a href="packing.html" target="_blank" class="link-card" style="border-color:var(--teal,#1a6b72);">
+          <div class="link-card__icon" style="background:rgba(26,107,114,0.1);">
+            <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="#1a6b72" stroke-width="1.8"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+          </div>
+          <div class="link-card__name">רשימת ציוד</div>
+          <div class="link-card__desc">מה לארוז לטיול</div>
+        </a>
+
         <!-- לינה וטיסות -->
         <div class="link-category">✈️ &nbsp;טיסות ולינה</div>
 
@@ -455,21 +484,6 @@
           <div class="link-card__desc">השכרת רכב</div>
         </a>
 
-        <a href="https://www.uber.com/" target="_blank" class="link-card">
-          <div class="link-card__icon" style="background:#f0f0f0;padding:0;overflow:hidden;">
-            <img src="https://www.google.com/s2/favicons?domain=uber.com&sz=64" alt="Uber" style="width:36px;height:36px;object-fit:contain;" onerror="this.style.display='none'">
-          </div>
-          <div class="link-card__name">Uber</div>
-          <div class="link-card__desc">הזמנת נסיעה</div>
-        </a>
-
-        <a href="https://bolt.eu/en/" target="_blank" class="link-card">
-          <div class="link-card__icon" style="background:#e8faf0;padding:0;overflow:hidden;">
-            <img src="https://www.google.com/s2/favicons?domain=bolt.eu&sz=64" alt="Bolt" style="width:36px;height:36px;object-fit:contain;" onerror="this.style.display='none'">
-          </div>
-          <div class="link-card__name">Bolt</div>
-          <div class="link-card__desc">הזמנת נסיעה</div>
-        </a>
 
         <a href="https://airalo.tpk.mx/jjDTppVR" target="_blank" class="link-card">
           <div class="link-card__icon" style="background:#f0f4ff;padding:0;overflow:hidden;">
@@ -490,21 +504,6 @@
           <div class="link-card__desc">עדכוני שדה</div>
         </a>
 
-        <a href="https://www.tripadvisor.com/" target="_blank" class="link-card">
-          <div class="link-card__icon" style="background:#e8faf0;padding:0;overflow:hidden;">
-            <img src="https://www.google.com/s2/favicons?domain=tripadvisor.com&sz=64" alt="TripAdvisor" style="width:36px;height:36px;object-fit:contain;" onerror="this.style.display='none'">
-          </div>
-          <div class="link-card__name">TripAdvisor</div>
-          <div class="link-card__desc">ביקורות ואטרקציות</div>
-        </a>
-
-        <a href="https://www.timeout.com/" target="_blank" class="link-card">
-          <div class="link-card__icon" style="background:#fff1f0;padding:0;overflow:hidden;">
-            <img src="https://www.google.com/s2/favicons?domain=timeout.com&sz=64" alt="Time Out" style="width:36px;height:36px;object-fit:contain;" onerror="this.style.display='none'">
-          </div>
-          <div class="link-card__name">Time Out</div>
-          <div class="link-card__desc">מה לעשות בעיר</div>
-        </a>
 
         <!-- כסף וקניות -->
         <div class="link-category">💶 &nbsp;כסף וקניות</div>
@@ -548,6 +547,7 @@
     </div>
   </section>
 
+
   <section class="tips-section" id="tab-before">
     <div class="container">
       <div class="section-intro reveal">
@@ -556,6 +556,19 @@
         <p class="section-intro__desc">כמה שיותר מוכנים מראש - כך הטיול מתחיל בצורה טובה יותר. הנה הדברים שחשוב לא לשכוח.</p>
       </div>
       <div class="tips-grid">
+        <a href="packing.html" target="_blank" class="tip-card tip-card--packing reveal" style="text-decoration:none;display:block;cursor:pointer;border:2px solid var(--teal);position:relative;overflow:hidden;">
+          <div style="position:absolute;top:12px;left:12px;background:var(--teal);color:#fff;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;font-family:'Assistant',sans-serif;">כלי אינטראקטיבי</div>
+          <div class="tip-card__header">
+            <span class="tip-card__emoji">🎒</span>
+            <h3 class="tip-card__title">רשימת ציוד לטיול משפחתי</h3>
+          </div>
+          <ul class="tip-card__list">
+            <li>רשימה מלאה לפי עונה, סוג טיול וגיל הילדים</li>
+            <li>סמנו פריטים בזמן אריזה ועקבו אחר ההתקדמות</li>
+            <li>ייצוא ל-PDF להדפסה</li>
+          </ul>
+          <div class="tip-card__note" style="color:var(--teal);font-weight:600;">לחצו לפתיחת הרשימה המלאה ←</div>
+        </a>
         <div class="tip-card reveal">
           <div class="tip-card__header">
             <span class="tip-card__emoji">📋</span>
@@ -585,50 +598,6 @@
             <li>מספר הביטוח ופרטי חברת הביטוח נגישים בנייד</li>
           </ul>
           <div class="tip-card__note"><strong>טיפ:</strong> לשמור צילום המרשמים בנייד - שימושי אם צריך לקנות בחו"ל.</div>
-        </div>
-        <div class="tip-card reveal">
-          <div class="tip-card__header">
-            <span class="tip-card__emoji">🎒</span>
-            <h3 class="tip-card__title">ציוד לטיסה עם ילדים</h3>
-          </div>
-          <ul class="tip-card__list">
-            <li>אוזניות לילדים - חיוניות לטיסה ארוכה</li>
-            <li>טאבלט / אייפד עם תוכן מורד מראש (בלי WiFi)</li>
-            <li>חטיפים מהבית - לחם, פירות, חטיפים אהובים</li>
-            <li>שינוי בגדים בתיק ידני לכל ילד</li>
-            <li>שמיכה קטנה ורכה לטיסות לילה</li>
-            <li>משחקים קטנים, קלפים, ספר צביעה</li>
-          </ul>
-        </div>
-        <div class="tip-card reveal reveal-delay-1">
-          <div class="tip-card__header">
-            <span class="tip-card__emoji">📦</span>
-            <h3 class="tip-card__title">ארגון המזוודות</h3>
-          </div>
-          <ul class="tip-card__list">
-            <li>שקיות רשת לסדר ביגוד לפי ימים - חוסך זמן בחו"ל</li>
-            <li>מזוודה נפרדת לילדים עם כל הדברים שלהם</li>
-            <li>זוג נעליים פחות - הילדים לא יניחו לבד</li>
-            <li>להשאיר מקום במזוודה לקניות בחו"ל</li>
-            <li>מטען נייד גדול לסוללות כל הנייד</li>
-            <li>מתאם חשמל לפי היעד</li>
-          </ul>
-          <div class="tip-card__note"><strong>טיפ:</strong> לצלם את תכולת המזוודה לפני הסגירה - שימושי אם המזוודה אובדת.</div>
-        </div>
-        <div class="tip-card tip-card--highlight tip-card--full reveal">
-          <div class="tip-card__header">
-            <span class="tip-card__emoji">🗓️</span>
-            <h3 class="tip-card__title">לפני היציאה - רשימת הכנות</h3>
-          </div>
-          <ul class="tip-card__list">
-            <li>להזמין אטרקציות פופולריות מראש - לא לסמוך על קנייה בכניסה</li>
-            <li>להוריד מפות אופליין (Google Maps) ליעד</li>
-            <li>להגדיר eSIM או לקנות SIM מקומי</li>
-            <li>לתדרך את הילדים - לאן טסים, כמה זמן, מה יהיה</li>
-            <li>לגבות כסף מזומן מקומי - לא תמיד מקבלים כרטיס</li>
-            <li>לשמור כתובת המלון בנייד + נייר - אם מתפצלים</li>
-            <li>לוודא שמגיעים לנמל תעופה עם מספיק זמן - עם ילדים לוקח יותר</li>
-          </ul>
         </div>
       </div>
     </div>
@@ -783,6 +752,16 @@
           <h3>תקציב לטיול - פלוס 20%</h3>
           <p>אני תמיד עושה חישוב של 20% יותר ממה שחשבתי - תמיד יש הפתעות בדרך מבחינת אטרקציות, מתנות ואולי עוד סתם גלידה שרציתם.</p>
         </div>
+
+        <a href="budget.html" target="_blank" class="plan-card" style="text-decoration:none;display:block;border:2px solid var(--teal,#1a6b72);cursor:pointer;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:12px;left:12px;background:#1a6b72;color:#fff;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;font-family:'Assistant',sans-serif;">כלי אינטראקטיבי</div>
+          <div class="plan-card__icon" style="background:rgba(26,107,114,0.1);">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#1a6b72" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <h3 style="color:#1a6b72;">מחשבון תקציב טיול</h3>
+          <p>חשבו את עלות הטיול המלאה - טיסות, לינה, אוכל, אטרקציות ועוד. מותאם לפי יעד ועונה.</p>
+          <div style="margin-top:12px;font-size:12px;color:#1a6b72;font-weight:600;">לחצו לפתיחת המחשבון ←</div>
+        </a>
 
         <div class="plan-card plan-card--cta">
           <div class="plan-card__icon">
@@ -1285,5 +1264,6 @@
     activateTabFromHash();
   })();
 </script>
+
 </body>
 </html>
