@@ -973,12 +973,12 @@
 
       <div class="form-row">
         <label class="form-label" for="flight-adult-price">מחיר למבוגר ($)</label>
-        <input type="number" class="num-input" id="flight-adult-price" min="0" step="10" aria-label="מחיר טיסה למבוגר">
+        <input type="number" class="num-input" id="flight-adult-price" min="0" step="10" placeholder="e.g. 400" aria-label="מחיר טיסה למבוגר">
       </div>
 
-      <div class="form-row">
+      <div class="form-row" id="child-price-row">
         <label class="form-label" for="flight-child-price">מחיר לילד ($)</label>
-        <input type="number" class="num-input" id="flight-child-price" min="0" step="10" aria-label="מחיר טיסה לילד">
+        <input type="number" class="num-input" id="flight-child-price" min="0" step="10" placeholder="e.g. 280" aria-label="מחיר טיסה לילד">
       </div>
 
       <!-- Luggage (Low Cost) -->
@@ -1045,7 +1045,7 @@
 
       <div class="form-row">
         <label class="form-label" for="hotel-price">מחיר לחדר ללילה ($)</label>
-        <input type="number" class="num-input" id="hotel-price" min="0" step="5" aria-label="מחיר לינה ללילה">
+        <input type="number" class="num-input" id="hotel-price" min="0" step="5" placeholder="e.g. 120" aria-label="מחיר לינה ללילה">
       </div>
 
       <!-- City Tax -->
@@ -1406,14 +1406,14 @@
       <!-- Kids entertainment - shown only when children > 0 -->
       <div class="extras-item" id="kids-row">
         <div class="extras-item__left">
-          <input type="checkbox" id="kids-check" aria-label="בידוי ילדים">
+          <input type="checkbox" id="kids-check" aria-label="בידור ילדים">
           <div>
-            <div class="extras-item__label">בידוי ילדים</div>
+            <div class="extras-item__label">בידור ילדים</div>
             <div class="extras-item__note">פעילויות, מתנות, פינוקים - לילד ליום</div>
           </div>
         </div>
         <div class="extras-item__input" id="kids-input-wrap">
-          <input type="number" class="num-input" id="kids-price" value="15" min="0" step="5" aria-label="עלות בידוי ילדים לילד ליום">
+          <input type="number" class="num-input" id="kids-price" value="15" min="0" step="5" aria-label="עלות בידור ילדים לילד ליום">
           <span style="font-size:13px;color:var(--grey-text);">€ / ילד / יום</span>
         </div>
       </div>
@@ -1954,15 +1954,18 @@
     var hotelType = document.getElementById('hotel-type').value;
     var isHotel  = ['2star','3star','4star','5star'].indexOf(hotelType) !== -1;
 
-    var tollsRow = document.getElementById('tolls-row');
-    var kidsRow  = document.getElementById('kids-row');
-    var bfRow    = document.getElementById('breakfast-row');
+    var tollsRow     = document.getElementById('tolls-row');
+    var kidsRow      = document.getElementById('kids-row');
+    var bfRow        = document.getElementById('breakfast-row');
+    var childPriceRow = document.getElementById('child-price-row');
 
     tollsRow.style.display = carOn ? '' : 'none';
     if (!carOn) document.getElementById('tolls-check').checked = false;
 
     kidsRow.style.display = children > 0 ? '' : 'none';
     if (children === 0) document.getElementById('kids-check').checked = false;
+
+    childPriceRow.style.display = children > 0 ? '' : 'none';
 
     bfRow.style.display = isHotel ? '' : 'none';
     if (!isHotel) document.getElementById('breakfast-check').checked = false;
@@ -2303,7 +2306,7 @@
       { key: 'parking',    label: '🅿️ חניה נתב"ג',    cls: 'seg-parking',    eur: parkingEur },
       { key: 'clothing',   label: '👕 ביגוד וציוד',    cls: 'seg-clothing',   eur: clothingEur },
       { key: 'tolls',      label: '🛣️ כבישי אגרה',     cls: 'seg-tolls',      eur: tollsEur },
-      { key: 'kids',       label: '🎠 בידוי ילדים',    cls: 'seg-kids',       eur: kidsEur },
+      { key: 'kids',       label: '🎠 בידור ילדים',    cls: 'seg-kids',       eur: kidsEur },
       { key: 'breakfast',  label: '🍳 ארוחת בוקר',     cls: 'seg-breakfast',  eur: bfEur },
       { key: 'buffer',     label: '📦 חיץ (' + bufSlider.value + '%)', cls: 'seg-buffer', eur: bufferEur },
     ];
@@ -2357,9 +2360,15 @@
     document.getElementById('insurance-total-note').textContent =
       'סה"כ ביטוח: ' + fmtEur(insEur) + ' = ' + fmt(insEur);
 
-    var commsDesc = { sim: 'SIM מקומי - חבילה אחת למשפחה', esim: 'eSIM - לכל נוסע', roaming: 'חבילת תקשורת מהארץ - לאדם ליום' };
-    document.getElementById('comms-cost-note').textContent =
-      (commsDesc[commsType] || '') + ' | עלות: ' + fmtEur(commsEur) + ' = ' + fmt(commsEur);
+    var commsNote;
+    if (commsType === 'sim') {
+      commsNote = 'SIM מקומי - חבילה אחת למשפחה | עלות: ' + fmtEur(commsEur) + ' = ' + fmt(commsEur);
+    } else if (commsType === 'esim') {
+      commsNote = 'eSIM - ' + fmtEur(20) + ' לנוסע × ' + totalPeople + ' | סה"כ: ' + fmtEur(commsEur) + ' = ' + fmt(commsEur);
+    } else {
+      commsNote = 'חבילת תקשורת מהארץ - ' + fmtEur(8) + ' לאדם ליום × ' + totalPeople + ' × ' + days + ' ימים | סה"כ: ' + fmtEur(commsEur) + ' = ' + fmt(commsEur);
+    }
+    document.getElementById('comms-cost-note').textContent = commsNote;
 
     document.getElementById('parking-total-note').textContent =
       'סה"כ חניה: ' + fmt(parkingEur);
