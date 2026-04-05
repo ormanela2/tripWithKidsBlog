@@ -787,19 +787,8 @@
         }
         .drawer__cta a:hover { background: #d4903c; }
 
-        .drawer__drag-handle {
-          display: none;
-          justify-content: center;
-          padding: 10px 0 4px;
-          cursor: grab;
-        }
-        .drawer__drag-handle div {
-          width: 36px; height: 4px;
-          background: #ddd; border-radius: 4px;
-        }
         @media(max-width:600px) {
-          .drawer__drag-handle { display: flex; }
-        
+
           .drawer {
             max-width: 100%;
             top: 10%;
@@ -850,7 +839,7 @@
             <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#c0392b" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
           </div>
           <h3>בית מלון או דירה?</h3>
-          <p>הוויכוח האולטימטיבי - כל יעד שווה שיקול לפי הצרכים. אני לא אוהב מקומות שמגישים ארוחת בוקר - הילדים אוכלים שטויות. מתארגנים על כמה קניות בסופר מקומי לבוקר וכולם אוכלים מה שצריך ומה שאוהבים. מבחינת עלות - המחירים נמוכים מאוד בהשוואה לארץ.</p>
+          <p>הוויכוח האולטימטיבי - כל יעד שווה שיקול לפי הצרכים.. מתארגנים על כמה קניות בסופר מקומי לבוקר וכולם אוכלים מה שצריך ומה שאוהבים. מבחינת עלות - המחירים נמוכים מאוד בהשוואה לארץ.</p>
           <div class="plan-card__readmore">קרא עוד ←</div>
         </div>
 
@@ -1388,7 +1377,6 @@
 <!-- ARTICLE DRAWER -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 <div class="drawer" id="articleDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
-  <div class="drawer__drag-handle" id="drawerDragHandle"><div></div></div>
   <div class="drawer__header">
     <div class="drawer__header-meta">
       <span class="drawer__tag" id="drawerTag">תכנון</span>
@@ -1572,41 +1560,6 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeDrawer();
 });
 
-// Swipe to close drawer on mobile
-(function() {
-  var drawer = document.getElementById('articleDrawer');
-  var handle = document.getElementById('drawerDragHandle');
-  var startY = 0;
-  var isDragging = false;
-
-  function onTouchStart(e) {
-    startY = e.touches[0].clientY;
-    isDragging = true;
-    drawer.style.transition = 'none';
-  }
-  function onTouchMove(e) {
-    if (!isDragging) return;
-    var dy = e.touches[0].clientY - startY;
-    if (dy > 0) {
-      drawer.style.transform = 'translateY(' + dy + 'px)';
-    }
-  }
-  function onTouchEnd(e) {
-    isDragging = false;
-    drawer.style.transition = '';
-    var dy = e.changedTouches[0].clientY - startY;
-    if (dy > 100) {
-      closeDrawer();
-      drawer.style.transform = '';
-    } else {
-      drawer.style.transform = '';
-    }
-  }
-
-  drawer.addEventListener('touchstart', onTouchStart, { passive: true });
-  drawer.addEventListener('touchmove', onTouchMove, { passive: true });
-  drawer.addEventListener('touchend', onTouchEnd, { passive: true });
-})();
 
 </script>
 
