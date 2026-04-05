@@ -701,56 +701,175 @@
         .plan-card--cta p { color: rgba(255,255,255,0.92); font-size: 14px; }
         .plan-card--cta .plan-card__icon { margin: 0; flex-shrink: 0; background: rgba(255,255,255,0.2); }
         @media(max-width:640px){ .plan-grid { grid-template-columns: 1fr; } .plan-card--cta { flex-direction: column; text-align: center; } }
+
+        /* Clickable card */
+        .plan-card--clickable { cursor: pointer; position: relative; }
+        .plan-card--clickable:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.13); border: 1.5px solid var(--teal,#1A6B72); }
+        .plan-card__readmore { margin-top: 14px; font-size: 13px; color: var(--teal,#1A6B72); font-weight: 600; font-family: var(--font-body); }
+
+        /* Drawer overlay */
+        .drawer-overlay {
+          display: none; position: fixed; inset: 0;
+          background: rgba(0,0,0,0.45); z-index: 2000;
+          opacity: 0; transition: opacity 0.3s ease;
+        }
+        .drawer-overlay.open { display: block; opacity: 1; }
+
+        /* Drawer panel */
+        .drawer {
+          position: fixed; top: 0; right: -520px; bottom: 0;
+          width: 100%; max-width: 520px;
+          background: #FDFAF5; z-index: 2001;
+          overflow-y: auto; transition: right 0.35s cubic-bezier(0.25,0.8,0.25,1);
+          box-shadow: -8px 0 40px rgba(0,0,0,0.15);
+          display: flex; flex-direction: column;
+        }
+        .drawer.open { right: 0; }
+
+        /* Drawer header */
+        .drawer__header {
+          position: sticky; top: 0; background: #FDFAF5;
+          border-bottom: 1px solid var(--sand-dark,#e8ddc4);
+          padding: 18px 24px; display: flex;
+          align-items: center; justify-content: space-between;
+          z-index: 1;
+        }
+        .drawer__header-meta { display: flex; align-items: center; gap: 12px; }
+        .drawer__tag {
+          background: var(--sand,#F5EDD8); color: var(--teal,#1A6B72);
+          border-radius: 20px; padding: 4px 12px; font-size: 12px;
+          font-weight: 600; font-family: var(--font-body);
+        }
+        .drawer__time { font-size: 12px; color: #aaa; font-family: var(--font-body); }
+        .drawer__close {
+          width: 36px; height: 36px; border-radius: 50%;
+          background: var(--sand,#F5EDD8); border: none; cursor: pointer;
+          display: flex; align-items: center; justify-content: center;
+          font-size: 18px; color: #666; transition: background 0.2s;
+          flex-shrink: 0;
+        }
+        .drawer__close:hover { background: var(--sand-dark,#e8ddc4); }
+
+        /* Drawer body */
+        .drawer__body { padding: 28px 24px 40px; flex: 1; }
+        .drawer__title {
+          font-family: var(--font-heading); font-size: clamp(20px,3vw,26px);
+          color: var(--charcoal,#2C2C2C); margin-bottom: 20px;
+          line-height: 1.4;
+        }
+        .drawer__text { font-size: 15px; color: #444; line-height: 1.9; margin-bottom: 14px; }
+        .drawer__subtitle {
+          font-family: var(--font-heading); font-size: 16px;
+          color: var(--teal,#1A6B72); margin: 22px 0 10px;
+        }
+        .drawer__list { padding-right: 0; list-style: none; margin-bottom: 16px; }
+        .drawer__list li {
+          font-size: 15px; color: #444; line-height: 1.8;
+          margin-bottom: 10px; padding-right: 20px; position: relative;
+        }
+        .drawer__list li::before {
+          content: ''; position: absolute; right: 0; top: 11px;
+          width: 6px; height: 6px; border-radius: 50%;
+          background: var(--teal,#1A6B72);
+        }
+
+        /* Drawer CTA */
+        .drawer__cta {
+          margin-top: 32px; background: linear-gradient(135deg,#1A6B72,#124d52);
+          border-radius: 16px; padding: 24px; text-align: center;
+        }
+        .drawer__cta p { color: rgba(255,255,255,0.9); font-size: 15px; margin-bottom: 14px; font-family: var(--font-body); }
+        .drawer__cta a {
+          display: inline-block; background: var(--amber,#E8A045);
+          color: #2C2C2C; border-radius: 24px; padding: 11px 28px;
+          font-size: 15px; font-weight: 700; font-family: var(--font-body);
+          text-decoration: none; transition: background 0.2s;
+        }
+        .drawer__cta a:hover { background: #d4903c; }
+
+        .drawer__drag-handle {
+          display: none;
+          justify-content: center;
+          padding: 10px 0 4px;
+          cursor: grab;
+        }
+        .drawer__drag-handle div {
+          width: 36px; height: 4px;
+          background: #ddd; border-radius: 4px;
+        }
+        @media(max-width:600px) {
+          .drawer__drag-handle { display: flex; }
+        
+          .drawer {
+            max-width: 100%;
+            top: 10%;
+            border-radius: 20px 20px 0 0;
+          }
+          .drawer__header { padding: 14px 20px; }
+          .drawer__body { padding: 20px 20px 80px; }
+          .drawer__title { font-size: 20px; }
+          .drawer__text { font-size: 15px; }
+          .drawer__list li { font-size: 15px; }
+          .drawer__cta { padding: 20px; }
+          .drawer__cta p { font-size: 14px; }
+          .drawer__cta a { padding: 13px 28px; font-size: 15px; }
+        }
       </style>
 
       <div class="plan-grid">
 
-        <div class="plan-card">
+        <div class="plan-card plan-card--clickable" onclick="openDrawer('flight')" tabindex="0" role="button" aria-haspopup="dialog">
           <div class="plan-card__icon" style="background:#e8f4f8;">
             <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#1A6B72" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <h3>טיסת בוקר / צהריים בלבד</h3>
           <p>הבנתי מההתחלה שאין מה לעשות - טיסה עם ילדים קטנים מחייבת אותנו להשקיע עוד כמה דולרים. טיסת ערב / לילה? הילדים לא ישרדו את היום ושני הצדדים מפסידים.</p>
+          <div class="plan-card__readmore">קרא עוד ←</div>
         </div>
 
-        <div class="plan-card">
+        <div class="plan-card plan-card--clickable" onclick="openDrawer('return')" tabindex="0" role="button" aria-haspopup="dialog">
           <div class="plan-card__icon" style="background:#fdf3e3;">
             <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#E8A045" stroke-width="1.8"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" transform="scale(-1,1) translate(-24,0)"/></svg>
           </div>
           <h3>חזרה - חמישי או שישי</h3>
           <p>לגבי חזרה - לא באמת משנה :) כולנו מבואסים לחזור, אבל תמיד עדיף לחזור בחמישי או שישי שיהיה קצת זמן לנוח מהחופשה בבית.</p>
+          <div class="plan-card__readmore">קרא עוד ←</div>
         </div>
 
-        <div class="plan-card">
+        <div class="plan-card plan-card--clickable" onclick="openDrawer('arrival')" tabindex="0" role="button" aria-haspopup="dialog">
           <div class="plan-card__icon" style="background:#eaf4ed;">
             <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#2d7550" stroke-width="1.8"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           </div>
           <h3>הגעה ליעד - יום ראשון בקצב</h3>
           <p>עברתם את נתב"ג, הטיסה עברה והגעתם ליעד - אני לא ממליץ לקחת רכב ביום הראשון. תתארגנו על לינה ליד שדה התעופה ותתחילו את היום השני רעננים ומלאי אנרגיה לנסיעות.</p>
+          <div class="plan-card__readmore">קרא עוד ←</div>
         </div>
 
-        <div class="plan-card">
+        <div class="plan-card plan-card--clickable" onclick="openDrawer('hotel')" tabindex="0" role="button" aria-haspopup="dialog">
           <div class="plan-card__icon" style="background:#fce8e8;">
             <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#c0392b" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
           </div>
           <h3>בית מלון או דירה?</h3>
           <p>הוויכוח האולטימטיבי - כל יעד שווה שיקול לפי הצרכים. אני לא אוהב מקומות שמגישים ארוחת בוקר - הילדים אוכלים שטויות. מתארגנים על כמה קניות בסופר מקומי לבוקר וכולם אוכלים מה שצריך ומה שאוהבים. מבחינת עלות - המחירים נמוכים מאוד בהשוואה לארץ.</p>
+          <div class="plan-card__readmore">קרא עוד ←</div>
         </div>
 
-        <div class="plan-card">
+        <div class="plan-card plan-card--clickable" onclick="openDrawer('star')" tabindex="0" role="button" aria-haspopup="dialog">
           <div class="plan-card__icon" style="background:#e8f4f8;">
             <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#1A6B72" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           </div>
           <h3>מסלול טיול - טיול כוכב</h3>
           <p>תמיד לחשב מסלולים עד שעה נסיעה ולחזור לאותו מקום לינה. בטיול של 7 ימים ומעלה אין בעיה להחליף מקום לינה ואז בהתאם משתנה המיקום כוכב. לא יותר משתי אטרקציות ביום - זה די והותר וצריך גם מנוחה באמצע.</p>
+          <div class="plan-card__readmore">קרא עוד ←</div>
         </div>
 
-        <div class="plan-card">
+        <div class="plan-card plan-card--clickable" onclick="openDrawer('budget')" tabindex="0" role="button" aria-haspopup="dialog">
           <div class="plan-card__icon" style="background:#fdf3e3;">
             <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#E8A045" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
           </div>
           <h3>תקציב לטיול - פלוס 20%</h3>
           <p>אני תמיד עושה חישוב של 20% יותר ממה שחשבתי - תמיד יש הפתעות בדרך מבחינת אטרקציות, מתנות ואולי עוד סתם גלידה שרציתם.</p>
+          <div class="plan-card__readmore">קרא עוד ←</div>
         </div>
 
         <a href="budget.html" target="_blank" class="plan-card" style="text-decoration:none;display:block;border:2px solid var(--teal,#1a6b72);cursor:pointer;position:relative;overflow:hidden;">
@@ -1263,6 +1382,232 @@
     }
     activateTabFromHash();
   })();
+</script>
+
+
+<!-- ARTICLE DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="articleDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="drawer__drag-handle" id="drawerDragHandle"><div></div></div>
+  <div class="drawer__header">
+    <div class="drawer__header-meta">
+      <span class="drawer__tag" id="drawerTag">תכנון</span>
+      <span class="drawer__time" id="drawerTime">⏱ 2 דקות קריאה</span>
+    </div>
+    <button class="drawer__close" onclick="closeDrawer()" aria-label="סגור">✕</button>
+  </div>
+  <div class="drawer__body" id="drawerBody"></div>
+</div>
+
+<script>
+var ARTICLES = {
+  flight: {
+    tag: 'תכנון', time: '2 דקות קריאה',
+    body: `
+      <h2 class="drawer__title">המלחמה על השעון: למה הפסקתי לנסות לחסוך על טיסות לילה</h2>
+      <p class="drawer__text">בואו נדבר רגע פתוח - כשמתכננים טיול משפחתי, הפיתוי הכי גדול בעולם זה לראות את המחיר של טיסת הלואו-קוסט שיוצאת ב-22:00 בלילה ולחשוב "וואלה, חסכנו פה מאות דולרים". אבל אחרי כמה טיולים עם שלושה ילדים, למדתי שזה הימור שבדרך כלל נגמר בבכי. ולא רק של הילדים.</p>
+
+      <h3 class="drawer__subtitle">למה טיסת לילה היא מלכודת דבש?</h3>
+      <p class="drawer__text">זה נראה פשוט על הנייר: "הם פשוט ישנו במטוס". המציאות? קצת פחות הוליוודית.</p>
+      <ul class="drawer__list">
+        <li><strong>הילדים לא שורדים את היום:</strong> כל ההתרגשות שלפני, הגרירה בטרמינל והאורות הלבנים בשדה עושים את שלהם. כשהם מגיעים לשעה שבה הם אמורים להיות בפיג'מה, הם הופכים לשילוב נפיץ של עייפות ועצבים.</li>
+        <li><strong>שני הצדדים מפסידים:</strong> כשהילדים "גמורים", גם הסבלנות שלנו ההורים נגמרת מהר. במקום לנחות ולהתחיל ליהנות, אתם נוחתים מרוסקים ומחפשים רק את המיטה הקרובה.</li>
+      </ul>
+
+      <h3 class="drawer__subtitle">אז למה אני מזמין רק בוקר או צהריים?</h3>
+      <ul class="drawer__list">
+        <li><strong>מתחילים באנרגיות הנכונות:</strong> בטיסת בוקר או צהריים הילדים עדיין ב"מוד" עירני וסקרן. האוכל במטוס הוא אטרקציה, המסכים עובדים, והסיכוי למשבר בשער העלייה צונח משמעותית.</li>
+        <li><strong>נחיתה רכה באמת:</strong> כשנוחתים באור יום, הכל זורם יותר טוב. יש זמן לקחת את הרכב בנחת, להגיע למלון, לאכול משהו נורמלי וללכת לישון בשעה הגיונית.</li>
+        <li><strong>היום הראשון הוא אשכרה יום טיול:</strong> במקום לבזבז את כל היום הראשון על התאוששות, אתם קמים בבוקר רעננים ומוכנים לכבוש את היעד.</li>
+      </ul>
+
+      <p class="drawer__text"><strong>השורה התחתונה:</strong> נכון, טיסות בוקר וצהריים עולות קצת יותר. אבל כשמחשבים את "עלות הבאסה" והעייפות של כולם, ההשקעה הזו מחזירה את עצמה בכל רגע של חיוך בטיול.</p>
+
+      <div class="drawer__cta">
+        <p>רוצים שאתכנן לכם את הטיול?</p>
+        <a href="packages.html">לחבילות התכנון ←</a>
+      </div>
+    `
+  },
+  return: {
+    tag: 'תכנון', time: '2 דקות קריאה',
+    body: `
+      <h2 class="drawer__title">הדילמה של סוף החופשה: לחזור בחמישי, בשישי או במוצ"ש?</h2>
+      <p class="drawer__text">בואו נודה על האמת - הרגע הכי קשה בחופשה הוא לא הצ'ק-אאוט מהמלון, אלא הרגע שבו נוחת ה-SMS מחברת התעופה שמזכיר לכם לעשות Check-in לטיסה חזור. כולנו הרי רוצים למשוך עוד רגע אחד של חופש.</p>
+      <p class="drawer__text">אבל אחרי לא מעט טיולים משפחתיים, הגעתי למסקנה מעניינת: <strong>היום שבו נוחתים בארץ משפיע על כל הזיכרון של החופשה.</strong></p>
+
+      <h3 class="drawer__subtitle">למה אני מעדיף לנחות בחמישי או בשישי?</h3>
+      <p class="drawer__text">זה נשמע מפתה לנצל את השבת עד תום ולנחות בראשון ישר לעבודה, אבל יש כמה סיבות למה "לחתוך" יום קודם זה דווקא שדרוג רציני:</p>
+      <ul class="drawer__list">
+        <li><strong>הנחיתה הרכה:</strong> כשחוזרים בחמישי או בשישי, מקבלים את השבת כ"זמן הסתגלות". זה הזמן לפרוק מזוודות בלי לחץ, להפעיל את מכונת הכביסה הראשונה ולמלא את המקרר בנחת.</li>
+        <li><strong>לנוח מהחופשה:</strong> חופשה משפחתית היא לפעמים עבודה קשה. הילדים וגם אנחנו ההורים צריכים רגע אחד של שקט בבית, עם הצעצועים והמיטה המוכרת, לפני שחוזרים למרוץ.</li>
+        <li><strong>הבאסה פחות לוחצת:</strong> כשנוחתים ביום שישי, התחושה היא שלא "נגמר החופש", אלא פשוט עברנו לסוף שבוע רגוע בבית. זה מרכך את המכה של החזרה לשגרה.</li>
+        <li><strong>זמן לסיכומים:</strong> זה הזמן לעבור על התמונות, למיין את הסרטונים ולעכל את כל החוויות שעברתם.</li>
+      </ul>
+
+      <p class="drawer__text"><strong>השורה התחתונה:</strong> בסוף, כולנו קצת מבואסים כשהגלגלים נוגעים במסלול בנתב"ג. אבל אם תשאירו לעצמכם יום או יומיים של "באפר" בבית, תגלו שאתם חוזרים למשרד הרבה יותר טעונים באנרגיות ופחות מותשים.</p>
+
+      <div class="drawer__cta">
+        <p>רוצים שאתכנן לכם את הטיול?</p>
+        <a href="packages.html">לחבילות התכנון ←</a>
+      </div>
+    `
+  },
+  arrival: {
+    tag: 'תכנון', time: '2 דקות קריאה',
+    body: `
+      <h2 class="drawer__title">נחיתה רכה: האם לקחת את הרכב כבר ביום הראשון?</h2>
+      <p class="drawer__text">תדמיינו את הסיטואציה: עברתם את התורים בנתב"ג, הטיסה עברה בשלום, הילדים כבר קצת חסרי סבלנות, נחתתם ואספתם את המזוודות. עכשיו עומדת בפניכם ההחלטה הגדולה - האם לרוץ ישר לדלפק השכרת הרכב, או לקחת רגע נשימה?</p>
+      <p class="drawer__text">אחרי לא מעט טיולים עם שלושה ילדים, למדתי שהשעות הראשונות אחרי הנחיתה הן אלו שקובעות את הטון לכל המשך החופשה.</p>
+
+      <h3 class="drawer__subtitle">הכלל שלי: ביום הראשון - פשוט לא לוקחים רכב</h3>
+      <p class="drawer__text">אני יודע, זה נשמע כאילו אתם "מבזבזים" יום, אבל בפועל אתם מרוויחים את השפיות שלכם. לעמוד בתור להשכרת רכב, לחתום על טפסים, לבדוק שריטות, להעמיס שלוש מזוודות ובוסטרים, ואז לצאת לנסיעה של שעתיים בכבישים זרים כשכולם עייפים - זה מתכון בטוח לפיצוץ משפחתי עוד לפני שהגעתם למלון.</p>
+      <p class="drawer__text">במקום זה, אני ממליץ בחום:</p>
+      <ul class="drawer__list">
+        <li><strong>תתארגנו על לינה ליד שדה התעופה:</strong> קחו שאטל או מונית קצרה למלון קרוב.</li>
+        <li><strong>תנו לילדים להתפרק:</strong> תנו להם לרוץ קצת בחדר, תאכלו ארוחת ערב רגועה ותלכו לישון מוקדם.</li>
+        <li><strong>תתחילו רעננים:</strong> המטרה היא לקום ביום השני מלאי אנרגיה באמת. נהיגה במדינה זרה דורשת ריכוז.</li>
+      </ul>
+
+      <h3 class="drawer__subtitle">מתי בכל זאת הגיוני להשכיר רכב מיד?</h3>
+      <p class="drawer__text">אם בחרתם ביעד קרוב (טיסה של עד 3-4 שעות כמו בודפשט או אתונה) ונחתתם בשעות הצהריים המוקדמות - התמונה משתנה לגמרי. יש לכם עוד שעות אור, הילדים עדיין באנרגיה, ואפשר לנסוע לנחת עם עצירה לפיפי וגלידה בדרך.</p>
+
+      <p class="drawer__text"><strong>הנוסחה שלי:</strong> אם הטיסה הייתה ארוכה או שנחתתם אחרי חמש בערב - עצרו לילה ליד השדה. אם הטיסה קצרה והשמש עוד בשמיים - קחו את הרכב וצאו לדרך.</p>
+
+      <div class="drawer__cta">
+        <p>רוצים שאתכנן לכם את הטיול?</p>
+        <a href="packages.html">לחבילות התכנון ←</a>
+      </div>
+    `
+  },
+  hotel: {
+    tag: 'תכנון', time: '2 דקות קריאה',
+    body: `
+      <h2 class="drawer__title">מלון או דירה? הוויכוח הנצחי</h2>
+      <p class="drawer__text">אם יש שאלה ששורפת את האינטרנט יותר מהכל, זה "מה עדיף - מלון מפנק או דירה ב-AirBnB?". בואו נשים את הקלפים על השולחן: אין פה תשובה אחת שמתאימה לכולם, והכל תלוי ביעד ובצרכים שלכם באותו רגע.</p>
+
+      <h3 class="drawer__subtitle">שיטת הסופר המקומי - גם בריא וגם זול</h3>
+      <p class="drawer__text">לא משנה אם סגרתי דירה עם מטבח או מלון, אני תמיד עוצר בסופר המקומי בערב הראשון. הנה למה זה מנצח:</p>
+      <ul class="drawer__list">
+        <li><strong>אוכלים מה שבאמת אוהבים:</strong> קונים את היוגורט שהם מכירים מהבית, פירות טריים, גבינות נורמליות ולחם שווה. בבוקר כל אחד אוכל בדיוק מה שצריך, בלי הדרמות.</li>
+        <li><strong>המחירים? בדיחה:</strong> המחירים בסופר בהונגריה, סלובקיה או פולין הם פשוט רצפה לעומת הארץ. ב-60 שקל אתם מרימים ארוחת בוקר של מלכים לכל המשפחה לכמה ימים טובים.</li>
+        <li><strong>בוקר בפיג'מה:</strong> במקום להתלבש ולרדת לחדר אוכל הומה אדם, אוכלים בכיף בחדר או בסלון של הדירה, מתארגנים בנחת ויוצאים לדרך כשכולם שבעים ורגועים.</li>
+      </ul>
+
+      <h3 class="drawer__subtitle">אז איך בוחרים?</h3>
+      <p class="drawer__text">אם אתם בטיול כוכב של שבוע - לכו על דירה. המרחב, המקרר והיכולת להכין חביתה בבית זה בונוס אדיר. אם אתם ב"נחיתה רכה" ללילה אחד ליד השדה - מלון סוגר לכם פינה בלי כאבי ראש.</p>
+      <p class="drawer__text"><strong>השורה התחתונה:</strong> תבחרו לפי הנוחות והמיקום, ואת האוכל? תשאירו לסופר המקומי. הילדים שלכם והארנק שלכם יגידו לכם תודה אחר כך.</p>
+
+      <div class="drawer__cta">
+        <p>רוצים שאתכנן לכם את הטיול?</p>
+        <a href="packages.html">לחבילות התכנון ←</a>
+      </div>
+    `
+  },
+  star: {
+    tag: 'תכנון', time: '2 דקות קריאה',
+    body: `
+      <h2 class="drawer__title">טיול כוכב: איך לטייל עם הילדים בלי להרגיש שאתם במילואים</h2>
+      <p class="drawer__text">כשמתחילים לתכנן טיול משפחתי, עולה תמיד השאלה: "לישון כל לילה במקום אחר כדי להספיק הכל, או להתמקם בנקודה אחת?". אחרי כמה סיבובים עם הילדים, התשובה שלי חד משמעית: <strong>שיטת הכוכב היא מצילת חיים.</strong></p>
+
+      <h3 class="drawer__subtitle">1. חוק שעת הנסיעה</h3>
+      <p class="drawer__text">הכלל הכי חשוב שלי הוא "רדיוס השעה". כשאתם בוחרים מקום לינה, ודאו שרוב האטרקציות שסימנתם נמצאות במרחק של עד שעה נסיעה לכל כיוון. למה? כי שעה נסיעה זה הגבול שבו הילדים עדיין סבבה. מעבר לזה - זה מתחיל להרגיש כמו מסע כומתה.</p>
+
+      <h3 class="drawer__subtitle">2. מתי בכל זאת מחליפים מקום לינה?</h3>
+      <p class="drawer__text">אם אתם יוצאים לטיול ארוך (7 ימים ומעלה), אין בעיה להחליף מקום לינה פעם אחת באמצע. פשוט מעבירים את "מרכז הכוכב" למיקום חדש ונהנים מרדיוס אטרקציות אחר לגמרי. זה נותן תחושה של שני טיולים במחיר של אחד, בלי הטרפת של לארוז מזוודות כל בוקר.</p>
+
+      <h3 class="drawer__subtitle">3. חוק ה-2 - פחות זה יותר</h3>
+      <p class="drawer__text">אני יודע, רשימת המקומות שסימנתם ב-Google Maps מפוצצת, אבל תקשיבו לי: <strong>לא יותר משתי אטרקציות ביום.</strong> טיול עם ילדים דורש "זמן נשימה". שתי אטרקציות מאפשרות לכם ליהנות מכל אחת בנחת, לשלב מנוחה טובה באמצע, ואולי אפילו סתם לשבת לקפה בלי להסתכל כל רגע בשעון.</p>
+
+      <p class="drawer__text"><strong>השורה התחתונה:</strong> טיול כוכב נותן לילדים ולנו תחושה של "בית" בתוך החופשה. כשמחשבים מסלולים נכון ולא מעמיסים על הלוז, החופשה הופכת ממרדף אחרי יעדים לזמן איכות אמיתי.</p>
+
+      <div class="drawer__cta">
+        <p>רוצים שאתכנן לכם את הטיול?</p>
+        <a href="packages.html">לחבילות התכנון ←</a>
+      </div>
+    `
+  },
+  budget: {
+    tag: 'תכנון', time: '2 דקות קריאה',
+    body: `
+      <h2 class="drawer__title">תקשיבו לי רגע: חוק ה-20% שיציל לכם את השפיות בטיול</h2>
+      <p class="drawer__text">חברים, בואו נדבר דוגרי על הרגע הזה בטיול שהילד רואה איזה פארק חבלים מטורף בדרך, או שפתאום בא לכם לעצור לארוחת צהריים במסעדה שנראית מדהימה אבל לא הייתה בתוכנית. באותו רגע, המוח שלכם מתחיל להריץ חישובים של "רגע, זה לא היה בתקציב", והחיוך קצת נעלם.</p>
+      <p class="drawer__text">אחרי כמה פעמים שאכלתי את הראש לעצמי עם חישובים כאלה, הגעתי למסקנה אחת פשוטה שמצילה לי כל טיול: <strong>לא משנה כמה חשבתם שהטיול יעלה - תוסיפו לזה עוד 20% מראש.</strong></p>
+
+      <h3 class="drawer__subtitle">למה ה-20% האלה הם "כסף של שקט נפשי"?</h3>
+      <ul class="drawer__list">
+        <li><strong>"אבא, בא לי":</strong> פתאום יש רכבל שלא תכננתם, או שוק מקומי עם מזכרות שחייבים להביא לסבתא. ה-20% האלה מאפשרים לכם להגיד "יאללה, בכיף" במקום לעשות פרצופים של מנהל חשבונות באמצע הרחוב.</li>
+        <li><strong>גלידה היא תרופה:</strong> בטיול עם ילדים, גלידה בשלוש קומות אחה"צ היא לפעמים ההבדל בין המשך טיול כיפי לבין התפרקות כללית מעייפות.</li>
+        <li><strong>הפתעות פחות זורמות:</strong> חניון יקר שלא תכננתם, מונית כי כולם גמורים, או סתם איזה בלת"ם קטן ברכב השכור. כשיש לכם את הגיבוי הזה בראש, לחץ הדם לא עולה מכל הוצאה כזו.</li>
+      </ul>
+
+      <p class="drawer__text"><strong>השורה התחתונה:</strong> תגדירו מראש ש-20% מהתקציב הולכים ל"פינוקים ובלת"מים". ברגע שתשחררו את זה בראש עוד לפני שעליתם למטוס, אתם תראו שאתם מטיילים הרבה יותר משוחררים. בסוף, טסנו כדי לייצר זיכרונות עם הילדים, לא כדי לחסוך עוד כמה פורינטים על חשבון החיוך של כולם.</p>
+
+      <div class="drawer__cta">
+        <p>רוצים שאתכנן לכם את הטיול?</p>
+        <a href="packages.html">לחבילות התכנון ←</a>
+      </div>
+    `
+  }
+};
+
+function openDrawer(id) {
+  var article = ARTICLES[id];
+  if (!article) return;
+  document.getElementById('drawerTag').textContent = article.tag;
+  document.getElementById('drawerTime').textContent = '⏱ ' + article.time;
+  document.getElementById('drawerBody').innerHTML = article.body;
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.getElementById('articleDrawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.getElementById('articleDrawer').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeDrawer();
+});
+
+// Swipe to close drawer on mobile
+(function() {
+  var drawer = document.getElementById('articleDrawer');
+  var handle = document.getElementById('drawerDragHandle');
+  var startY = 0;
+  var isDragging = false;
+
+  function onTouchStart(e) {
+    startY = e.touches[0].clientY;
+    isDragging = true;
+    drawer.style.transition = 'none';
+  }
+  function onTouchMove(e) {
+    if (!isDragging) return;
+    var dy = e.touches[0].clientY - startY;
+    if (dy > 0) {
+      drawer.style.transform = 'translateY(' + dy + 'px)';
+    }
+  }
+  function onTouchEnd(e) {
+    isDragging = false;
+    drawer.style.transition = '';
+    var dy = e.changedTouches[0].clientY - startY;
+    if (dy > 100) {
+      closeDrawer();
+      drawer.style.transform = '';
+    } else {
+      drawer.style.transform = '';
+    }
+  }
+
+  drawer.addEventListener('touchstart', onTouchStart, { passive: true });
+  drawer.addEventListener('touchmove', onTouchMove, { passive: true });
+  drawer.addEventListener('touchend', onTouchEnd, { passive: true });
+})();
+
 </script>
 
 </body>
