@@ -772,9 +772,11 @@ async function fetchWeather() {
     // These can run after — errors here won't break the main results
     try { renderSeasonal(cur); showAnim('seasonalSection', 340); } catch(e) { hide('seasonalSection'); }
     updateWindyMap(cur.coord.lat, cur.coord.lon, cur.timezone, cur.sys.sunrise, cur.sys.sunset);
-    // Scroll to weather card after results appear
+    // Scroll to weather card after results appear — offset for fixed nav
     setTimeout(() => {
-      document.getElementById('weatherCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const card = document.getElementById('weatherCard');
+      const top = card.getBoundingClientRect().top + window.scrollY - 88;
+      window.scrollTo({ top, behavior: 'smooth' });
     }, 120);
   } catch(e) { hide('loading'); show('errorBox'); }
 }
