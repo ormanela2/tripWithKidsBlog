@@ -212,7 +212,7 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
 .seasonal-row-divider{grid-column:1/-1;height:0;}
 .seasonal-best{margin-top:10px;font-size:13px;color:#888;font-family:'Assistant',sans-serif;text-align:center;line-height:1.6;}
 .seasonal-best strong{color:var(--teal);}
-@media(max-width:480px){.seasonal-strip{grid-template-columns:20px repeat(12,1fr);gap:3px;}.temp-cell,.rain-cell{padding:6px 1px;font-size:10px;}.seasonal-row-label{font-size:12px;}}
+@media(max-width:480px){.seasonal-strip{grid-template-columns:20px repeat(12,1fr);gap:3px;}.temp-cell,.rain-cell{padding:6px 1px;font-size:10px;}.seasonal-row-label{font-size:12px;}.temp-cell--now,.rain-cell--now{outline:none;opacity:1;font-weight:900;}}
 
 /* SCROLL-TO-MAP FLOATING BUTTON */
 .scroll-map-btn{display:none;position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--teal);color:white;border:none;border-radius:30px;padding:13px 24px;font-family:'Assistant',sans-serif;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(26,107,114,0.5);z-index:500;align-items:center;gap:8px;white-space:nowrap;transition:opacity 0.3s,transform 0.3s;}
@@ -769,7 +769,6 @@ async function fetchWeather() {
     showAnim('clothingSection', 130);
     showAnim('forecastSection', 200);
     showAnim('travelTip', 270, 'flex');
-    document.getElementById('scrollMapBtn').classList.add('visible');
     // These can run after — errors here won't break the main results
     try { renderSeasonal(cur); showAnim('seasonalSection', 340); } catch(e) { hide('seasonalSection'); }
     updateWindyMap(cur.coord.lat, cur.coord.lon, cur.timezone, cur.sys.sunrise, cur.sys.sunset);
@@ -1063,13 +1062,16 @@ async function updateWindyMap(lat, lon, tzOffset, sunrise, sunset) {
 
 window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY>10));
 // hamburger handled by dedicated script below
-// Hide scroll-to-map btn when Windy section is in view
-const _mapObserver = new IntersectionObserver(([entry]) => {
-  document.getElementById('scrollMapBtn').classList.toggle('visible',
-    !entry.isIntersecting && document.getElementById('weatherCard').style.display !== 'none'
-  );
-}, { threshold: 0.15 });
-_mapObserver.observe(document.getElementById('windySection'));
+// Show scroll btn only after user scrolls past weather card, hide when windy section is in view
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollMapBtn');
+  const card = document.getElementById('weatherCard');
+  const windy = document.getElementById('windySection');
+  if (card.style.display === 'none') return; // no results yet
+  const scrolled = window.scrollY > (card.offsetTop + card.offsetHeight - 100);
+  const windyVisible = windy.getBoundingClientRect().top < window.innerHeight * 0.8;
+  btn.classList.toggle('visible', scrolled && !windyVisible);
+}, { passive: true });
 
 window.onload = () => {
   cityInputEl.value = '';
@@ -1148,7 +1150,7 @@ window.onload = () => {
   })();
 </script>
   <button class="scroll-map-btn" id="scrollMapBtn" onclick="document.getElementById('windySection').scrollIntoView({behavior:'smooth',block:'start'})">
-    🗺️ לצפייה במפה ↓
+    עוד נתונים למטה ↓
   </button>
 
   <!-- EMAIL POPUP -->
