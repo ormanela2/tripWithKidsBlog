@@ -215,9 +215,9 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
 @media(max-width:480px){.seasonal-strip{grid-template-columns:20px repeat(12,1fr);gap:3px;}.temp-cell,.rain-cell{padding:6px 1px;font-size:10px;}.seasonal-row-label{font-size:12px;}.temp-cell--now,.rain-cell--now{outline:none;opacity:1;font-weight:900;}}
 
 /* SCROLL-TO-MAP FLOATING BUTTON */
-.scroll-map-btn{display:none;position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--teal);color:white;border:none;border-radius:30px;padding:13px 24px;font-family:'Assistant',sans-serif;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(26,107,114,0.5);z-index:500;align-items:center;gap:8px;white-space:nowrap;transition:opacity 0.3s,transform 0.3s;}
+.scroll-map-btn{display:none;position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--teal);color:white;border:none;border-radius:30px;padding:13px 24px;font-family:'Assistant',sans-serif;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(26,107,114,0.5);z-index:500;align-items:center;gap:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.4s ease,transform 0.4s ease;}
 .scroll-map-btn:hover{background:var(--teal-dark);}
-@media(max-width:700px){.scroll-map-btn.visible{display:flex;}}
+@media(max-width:700px){.scroll-map-btn{display:flex;}.scroll-map-btn.visible{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}}
 
 @media(max-width:640px){
   .windy-frame iframe{height:280px;}
@@ -772,6 +772,10 @@ async function fetchWeather() {
     // These can run after — errors here won't break the main results
     try { renderSeasonal(cur); showAnim('seasonalSection', 340); } catch(e) { hide('seasonalSection'); }
     updateWindyMap(cur.coord.lat, cur.coord.lon, cur.timezone, cur.sys.sunrise, cur.sys.sunset);
+    // Scroll to weather card after results appear
+    setTimeout(() => {
+      document.getElementById('weatherCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 120);
   } catch(e) { hide('loading'); show('errorBox'); }
 }
 
