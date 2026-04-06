@@ -1031,6 +1031,7 @@
     var isOpen = mobileMenu.classList.toggle('open');
     hamburger.setAttribute('aria-expanded', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
+    if (isOpen && typeof fetchMenuWeather === 'function') fetchMenuWeather();
   });
 
   // Timeline toggle
@@ -1162,6 +1163,37 @@ window.addEventListener('scroll', function() {
     nav.classList.remove('visible');
   }
 });
+</script>
+<script>
+var WEATHER_CITIES = [
+  { name: 'לונדון', lat: 51.51, lon: -0.12 },
+  { name: 'בודפשט', lat: 47.50, lon: 19.04 },
+  { name: 'וינה', lat: 48.21, lon: 16.37 },
+  { name: 'אתונה', lat: 37.98, lon: 23.73 },
+  { name: 'פראג', lat: 50.08, lon: 14.44 },
+  { name: 'ורשה', lat: 52.23, lon: 21.01 },
+  { name: 'ברטיסלבה', lat: 48.15, lon: 17.11 },
+  { name: 'ברצלונה', lat: 41.39, lon: 2.17 },
+  { name: 'אמסטרדם', lat: 52.37, lon: 4.90 },
+  { name: 'רומא', lat: 41.90, lon: 12.49 },
+];
+var weatherCityIndex = Math.floor(Math.random() * WEATHER_CITIES.length);
+function fetchMenuWeather() {
+  var el = document.getElementById('menuWeatherSnippet');
+  if (!el) return;
+  weatherCityIndex = (weatherCityIndex + 1) % WEATHER_CITIES.length;
+  var city = WEATHER_CITIES[weatherCityIndex];
+  el.textContent = city.name + '...';
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=' + city.lat + '&longitude=' + city.lon + '&current_weather=true')
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      var t = Math.round(d.current_weather.temperature);
+      var code = d.current_weather.weathercode;
+      var icon = code <= 1 ? '☀️' : code <= 3 ? '⛅' : code <= 67 ? '🌧' : '❄️';
+      el.textContent = city.name + ' עכשיו ' + t + '°C ' + icon;
+    })
+    .catch(function() { el.textContent = 'מזג אוויר באירופה'; });
+}
 </script>
 </body>
 </html>
