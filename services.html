@@ -883,27 +883,35 @@
        5. HOW IT WORKS (process)
        ======================================== */
     .process {
-      padding: var(--section-padding) 0;
+      padding: 40px 0;
       background: var(--sand);
     }
 
     .process .section-header {
       text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .process .section-header__title {
+      font-size: 20px;
+      margin-bottom: 0;
     }
 
     .process__steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
+      display: flex;
+      justify-content: center;
+      gap: 0;
       position: relative;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .process__steps::before {
       content: '';
       position: absolute;
-      top: 44px;
-      right: 12.5%;
-      left: 12.5%;
+      top: 28px;
+      right: 16%;
+      left: 16%;
       height: 2px;
       background: var(--sand-dark);
     }
@@ -911,52 +919,54 @@
     .process__step {
       text-align: center;
       position: relative;
+      flex: 1;
+      padding: 0 8px;
     }
 
     .process__step-icon {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 16px;
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 10px;
       background: var(--white);
       border: 2px solid var(--sand-dark);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+      font-size: 22px;
       position: relative;
       z-index: 1;
     }
 
     .process__step-number {
       position: absolute;
-      top: -6px;
+      top: -5px;
       left: 50%;
       transform: translateX(-50%);
       background: var(--amber);
       color: var(--charcoal);
-      width: 24px;
-      height: 24px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 700;
       z-index: 2;
     }
 
     .process__step-title {
       font-family: var(--font-heading);
-      font-size: 18px;
+      font-size: 14px;
       color: var(--charcoal);
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     .process__step-desc {
-      font-size: 14px;
+      font-size: 12px;
       color: #666;
-      line-height: 1.7;
+      line-height: 1.5;
     }
 
     /* ========================================
@@ -1449,11 +1459,6 @@
         transform: translateY(-4px);
       }
 
-      .process__steps {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
-      }
-
       .process__steps::before {
         display: none;
       }
@@ -1506,7 +1511,13 @@
       }
 
       .process__steps {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
+        max-width: 320px;
+      }
+
+      .process__step {
+        width: 100%;
       }
 
       .footer__inner {
@@ -2387,14 +2398,14 @@
       <p class="value-prop__subheadline reveal reveal-delay-1">מקבלים תכנית טיול מלאה לטיול עם ילדים - בדיוק לפי הילדים שלך, התקציב שלך, והתאריכים שלך.</p>
 
       <!-- דגלי יעדים -->
-      <div class="reveal reveal-delay-1" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:32px;">
-        <img src="https://flagcdn.com/sk.svg" width="40" height="27" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.2);" alt="סלובקיה">
-        <img src="https://flagcdn.com/hu.svg" width="40" height="27" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.2);" alt="הונגריה">
-        <img src="https://flagcdn.com/ro.svg" width="40" height="27" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.2);" alt="רומניה">
-        <img src="https://flagcdn.com/pl.svg" width="40" height="27" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.2);" alt="פולין">
-        <img src="https://flagcdn.com/at.svg" width="40" height="27" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.2);" alt="אוסטריה">
-        <img src="https://flagcdn.com/gr.svg" width="40" height="27" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.2);" alt="יוון">
-        <img src="https://flagcdn.com/cz.svg" width="40" height="27" style="border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.2);" alt="צ׳כיה">
+      <div class="reveal reveal-delay-1" style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:32px;">
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/sk.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">סלובקיה</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/hu.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">הונגריה</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/ro.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">רומניה</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/pl.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">פולין</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/at.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">אוסטריה</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/gr.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">יוון</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/cz.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">צ׳כיה</span>
       </div>
 
       <div class="reveal reveal-delay-1" style="text-align:center;margin-bottom:48px;">
@@ -2449,7 +2460,7 @@
                 </li>
                 <li class="pricing-card__feature pricing-card__feature--included">
                   <span class="pricing-card__check">✓</span>
-                  <span>טיפים לוגיסטיים (נסיעות, כרטיסים)</span>
+                  <span>טיפים כלליים ליעד</span>
                 </li>
               </ul>
             </div>
@@ -2479,11 +2490,11 @@
                 </li>
                 <li class="pricing-card__feature pricing-card__feature--included">
                   <span class="pricing-card__check">✓</span>
-                  <span>התאמות אישיות עד 3 סבבי עריכה</span>
+                  <span>גיליון מפורט לכל יום</span>
                 </li>
                 <li class="pricing-card__feature pricing-card__feature--included">
                   <span class="pricing-card__check">✓</span>
-                  <span>גיליון Excel מסודר לכל יום</span>
+                  <span>רשימת טיפים להכרת המקום, הרגשה של מקומי ביעד</span>
                 </li>
                 <li class="pricing-card__feature pricing-card__feature--included">
                   <span class="pricing-card__check">✓</span>
@@ -2491,7 +2502,7 @@
                 </li>
                 <li class="pricing-card__feature pricing-card__feature--included">
                   <span class="pricing-card__check">✓</span>
-                  <span>שיחת וידאו לפני הטיול (30 דק׳)</span>
+                  <span>התאמות אישיות עד לפני הטיול</span>
                 </li>
               </ul>
             </div>
@@ -2520,7 +2531,7 @@
                 </li>
                 <li class="pricing-card__feature pricing-card__feature--included">
                   <span class="pricing-card__check">✓</span>
-                  <span>ליווי וואטסאפ בזמן הטיול</span>
+                  <span>עדכונים בזמן אמת על אטרקציות ואירועים</span>
                 </li>
                 <li class="pricing-card__feature pricing-card__feature--included">
                   <span class="pricing-card__check">✓</span>
@@ -2758,7 +2769,6 @@
     <div class="container">
       <div class="section-header">
         <h2 class="section-header__title" id="process-title">איך זה עובד?</h2>
-        <p class="section-header__subtitle">מהרגע שאתה שולח הודעה ועד שאתה עולה על המטוס - 4 שלבים פשוטים</p>
       </div>
 
       <div class="process__steps">
@@ -2767,32 +2777,24 @@
             <span class="process__step-number">1</span>
             <span aria-hidden="true">&#128172;</span>
           </div>
-          <h3 class="process__step-title">צרו איתי קשר</h3>
-          <p class="process__step-desc">מגוון אפשרויות ליצירת קשר - טופס בניית מסלול, וואטסאפ, אימייל</p>
+          <h3 class="process__step-title">צרו קשר</h3>
+          <p class="process__step-desc">וואטסאפ, טופס או אימייל - כל דרך שנוחה לכם.</p>
         </div>
         <div class="process__step reveal reveal-delay-1">
           <div class="process__step-icon">
             <span class="process__step-number">2</span>
             <span aria-hidden="true">&#128203;</span>
           </div>
-          <h3 class="process__step-title">אני בונה</h3>
-          <p class="process__step-desc">מכין מסלול מלא מותאם לך - בתוך הזמן שהובטח. כל יום, כל פרט.</p>
+          <h3 class="process__step-title">שלב התכנון</h3>
+          <p class="process__step-desc">אני בונה מסלול מלא מותאם לכם - כל יום, כל פרט, בזמן שהובטח.</p>
         </div>
         <div class="process__step reveal reveal-delay-2">
           <div class="process__step-icon">
             <span class="process__step-number">3</span>
-            <span aria-hidden="true">&#128260;</span>
-          </div>
-          <h3 class="process__step-title">מתכוננים ביחד</h3>
-          <p class="process__step-desc">סבבי עריכה עד שזה מושלם (לפי חבילה). שינויים, התאמות, שאלות - הכל פתוח.</p>
-        </div>
-        <div class="process__step reveal reveal-delay-3">
-          <div class="process__step-icon">
-            <span class="process__step-number">4</span>
             <span aria-hidden="true">&#9992;&#65039;</span>
           </div>
-          <h3 class="process__step-title">טס בביטחון</h3>
-          <p class="process__step-desc">עם התכנית ביד ואני זמין (בפרימיום - גם בדרך). ראש שקט, ילדים שמחים.</p>
+          <h3 class="process__step-title">טסים בראש שקט</h3>
+          <p class="process__step-desc">התכנית ביד, אני זמין. ילדים שמחים, הורים רגועים.</p>
         </div>
       </div>
     </div>
