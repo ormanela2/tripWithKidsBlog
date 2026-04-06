@@ -464,7 +464,7 @@
         <button class="tab-btn" data-tab="planning">שלב התכנון</button>
         <button class="tab-btn" data-tab="before">לפני הטיסה</button>
         <button class="tab-btn" data-tab="during">בזמן השהייה</button>
-        <button class="tab-btn" data-tab="recommend">המלצות</button>
+        <!-- <button class="tab-btn" data-tab="recommend">המלצות</button> -->
       </div>
     </div>
   </section>
@@ -696,6 +696,174 @@
             chev.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
           }
         </script>
+
+        <!-- תחבורה ציבורית -->
+        <div class="link-category">🚇 &nbsp;תחבורה ציבורית - ילדים ונוער</div>
+
+        <style>
+          .tr-chip { display:inline-flex;align-items:center;border-radius:99px;padding:3px 9px;font-size:11px;font-weight:600;white-space:nowrap; }
+          .tr-free { background:#dcfce7;color:#15803d; }
+          .tr-disc { background:#fef9c3;color:#854d0e; }
+          .tr-new  { background:#dbeafe;color:#1d4ed8; }
+          .tr-app  { background:var(--sand);border:1px solid var(--sand-dark);border-radius:5px;padding:2px 7px;font-size:11px;color:#555;font-family:monospace;display:inline-block;margin:1px 2px;white-space:nowrap; }
+          .tr-warn-icon { display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#fee2e2;color:#b91c1c;font-size:9px;font-weight:700;margin-left:3px;flex-shrink:0;vertical-align:middle; }
+          .tr-region td { background:var(--sand);padding:5px 12px;font-size:10px;font-weight:700;color:#888;letter-spacing:0.1em;text-transform:uppercase;border-bottom:1px solid var(--sand-dark); }
+          .tr-city { display:flex;align-items:center;gap:8px; }
+          .tr-city-name { font-weight:600;font-size:13px;color:#111; }
+          .tr-city-sub { font-size:11px;color:#aaa;margin-top:1px; }
+          .transit-legend { display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:#777;align-items:center;margin-bottom:14px; }
+          .transit-legend span { display:flex;align-items:center;gap:5px; }
+          .tip-cell { font-size:12px;color:#555;line-height:1.6;min-width:180px; }
+          @media(max-width:640px) {
+            .tr-chip { font-size:10px;padding:2px 7px; }
+            .tr-app  { font-size:10px;padding:1px 5px; }
+            .tr-city-name { font-size:12px; }
+            .tip-cell { min-width:160px;font-size:11px; }
+            .transit-legend { gap:7px;font-size:11px; }
+          }
+        </style>
+
+        <div class="toll-card">
+          <div class="toll-card__header" onclick="toggleTollCard('transit-body','chev-transit')">
+            <div class="toll-card__title">🚌 כרטיסי תחבורה לילדים ונוער - לפי עיר</div>
+            <span id="chev-transit" class="toll-card__chevron">▾</span>
+          </div>
+          <div id="transit-body" class="toll-card__body">
+            <div class="toll-card__inner">
+
+              <div class="toll-card__alert">💡 המידע מתייחס לתיירים - חלק מהטבות חינם ניתנות לתושבים בלבד. מומלץ לבדוק לפני הנסיעה.</div>
+
+              <div class="transit-legend">
+                <span><span class="tr-chip tr-free">עד גיל X</span> חינם לתיירים</span>
+                <span><span class="tr-chip tr-disc">הנחה</span> כרטיס מוזל</span>
+                <span><span class="tr-chip tr-new">חדש 2025</span> שינוי השנה</span>
+                <span><span class="tr-warn-icon">!</span> דורש תשומת לב</span>
+              </div>
+
+              <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+                <table class="toll-table" style="min-width:560px;">
+                  <thead>
+                    <tr>
+                      <th style="min-width:110px;">עיר</th>
+                      <th style="min-width:100px;">חינם לתיירים</th>
+                      <th style="min-width:120px;">הנחה</th>
+                      <th style="min-width:110px;">אפליקציה</th>
+                      <th style="min-width:180px;">טיפ לתייר</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr class="tr-region"><td colspan="5">מזרח אירופה</td></tr>
+
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-at" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">וינה</div><div class="tr-city-sub">אוסטריה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 6 תמיד</span><br><span class="tr-chip tr-free" style="margin-top:3px;">עד 15 בחגים</span></td>
+                      <td><span class="tr-chip tr-disc">6–14 כרטיס ילד</span></td>
+                      <td><span class="tr-app">WienMobil</span></td>
+                      <td class="tip-cell"><b>עד 6 חינם תמיד.</b> עד 15 חינם בימי ראשון, חגים וחופשות בית ספר וינאיות. עם Vienna City Card - ילד עד 15 נוסע חינם.</td>
+                    </tr>
+
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-hu" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">בודפשט</div><div class="tr-city-sub">הונגריה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 14</span></td>
+                      <td><span class="tr-chip tr-disc">סטודנטים ISIC</span></td>
+                      <td><span class="tr-app">BudapestGO</span></td>
+                      <td class="tip-cell"><b>עד 14 חינם לכולם - כולל תיירים.</b> אין צורך בכרטיס או מסמכים. מגיל 14 משלמים מחיר מלא.</td>
+                    </tr>
+
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-cz" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">פראג</div><div class="tr-city-sub">צ'כיה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 15 בעיר</span></td>
+                      <td><span class="tr-chip tr-disc">15–18 חצי מחיר</span></td>
+                      <td><span class="tr-app">PID Lítačka</span></td>
+                      <td class="tip-cell">עד 10: ללא מסמכים. <b>10–15: חובה דרכון</b> בביקורת. מחוץ לפראג - 50% הנחה בלבד.</td>
+                    </tr>
+
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-sk" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">ברטיסלבה</div><div class="tr-city-sub">סלובקיה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 6</span></td>
+                      <td><span class="tr-chip tr-disc">6–17 כרטיס מוזל</span></td>
+                      <td><span class="tr-app">IDS BK</span></td>
+                      <td class="tip-cell">עד יום ההולדת השישי חינם. עם Bratislava Card - ילד אחד נוסע חינם עם כל מבוגר.</td>
+                    </tr>
+
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-pl" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">ורשה</div><div class="tr-city-sub">פולין</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 7*</span></td>
+                      <td><span class="tr-chip tr-disc">7–15 חצי מחיר</span></td>
+                      <td><span class="tr-app">Jakdojade</span></td>
+                      <td class="tip-cell"><span class="tr-warn-icon">!</span> חינם עד 30 בספטמבר של שנת יום הולדת ה-7. <b>מגיל 7 חובה כרטיס מוזל</b> + הוכחת גיל. ללא כרטיס - קנס.</td>
+                    </tr>
+
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-pl" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">קרקוב</div><div class="tr-city-sub">פולין</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 7*</span></td>
+                      <td><span class="tr-chip tr-disc">7–16 חצי מחיר</span></td>
+                      <td><span class="tr-app">Jakdojade</span></td>
+                      <td class="tip-cell">אותו כלל כמו ורשה - חינם עד 30 בספטמבר של שנת יום הולדת ה-7. קפדנים יותר מורשה - <b>קחו דרכון.</b></td>
+                    </tr>
+
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-ro" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">בוקרשט</div><div class="tr-city-sub">רומניה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 7</span></td>
+                      <td>-</td>
+                      <td><span class="tr-app">24pay</span></td>
+                      <td class="tip-cell">חינם עד 7 בתחבורה עירונית (STB). מעל 7 - מחיר מלא, אין הנחת תייר. <span class="tr-warn-icon">!</span> אפליקציית 24pay דורשת אינטרנט רציף - QR מתחדש כל 12 שניות.</td>
+                    </tr>
+
+                    <tr class="tr-region"><td colspan="5">מערב אירופה</td></tr>
+
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-gb" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">לונדון</div><div class="tr-city-sub">אנגליה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 5 תמיד</span><br><span class="tr-chip tr-free" style="margin-top:3px;">5–10 עם מבוגר</span></td>
+                      <td><span class="tr-chip tr-disc">11–15 Young Visitor</span></td>
+                      <td><span class="tr-app">Oyster</span></td>
+                      <td class="tip-cell"><b>עד 5 חינם תמיד. עד 4 ילדים עם מבוגר משלם - חינם.</b> לגילאי 11–15: בקשו Young Visitor Discount בכל תחנת מטרו (50% הנחה, אין צורך בהזמנה מראש).</td>
+                    </tr>
+
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-de" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">גרמניה DB</div><div class="tr-city-sub">רכבות</div></div></div></td>
+                      <td><div style="display:flex;flex-direction:column;gap:3px;"><span class="tr-chip tr-free">עד 5 תמיד</span><span class="tr-chip tr-free">עד 14 עם מבוגר</span></div></td>
+                      <td><span class="tr-chip tr-disc">50% אזורי</span></td>
+                      <td><span class="tr-app">DB Navigator</span></td>
+                      <td class="tip-cell"><span class="tr-warn-icon">!</span> <b>חובה לרשום ילדים בעת הרכישה.</b> עד 4 ילדים לכרטיס אחד. Deutschlandticket לא כולל ילדים חינם.</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <div class="tr-city"><span class="fi fi-es" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">מדריד</div><div class="tr-city-sub">ספרד</div></div></div>
+                        <span class="tr-chip tr-new" style="font-size:10px;margin-top:5px;">עדכון 2025</span>
+                      </td>
+                      <td><span class="tr-chip tr-free">עד 4</span></td>
+                      <td><span class="tr-chip tr-disc">15–25 Abono Joven</span></td>
+                      <td><span class="tr-app">Tarjeta Multi</span></td>
+                      <td class="tip-cell"><span class="tr-warn-icon">!</span> חינם 7–14 <b>רק לבעלי כרטיס מנוי חודשי</b> - לא חל על כרטיסים לתיירים. תיירים משלמים מגיל 4. נוער 15–25: Abono Joven <b>10€ לחודש.</b></td>
+                    </tr>
+
+                    <tr class="tr-region"><td colspan="5">דרום אירופה</td></tr>
+
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-gr" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">אתונה</div><div class="tr-city-sub">יוון</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 6</span></td>
+                      <td><span class="tr-chip tr-disc">7–18 כ-64% הנחה</span></td>
+                      <td><span class="tr-app">Ath.ena Card</span></td>
+                      <td class="tip-cell"><span class="tr-warn-icon">!</span> לכרטיס מוזל גילאי 7–18 <b>צריך כרטיס ATH.ENA אישי עם תמונה</b> - לקבל במשרדי OASA ביום ההגעה. ללא כרטיס - מחיר מלא. קנס: 72€.</td>
+                    </tr>
+
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-it" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">רומא</div><div class="tr-city-sub">איטליה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 10 (ATAC)</span></td>
+                      <td><span class="tr-chip tr-disc">4–14 50% ברכבות</span></td>
+                      <td><span class="tr-app">Trenitalia</span></td>
+                      <td class="tip-cell">אוטובוס/מטרו עירוני: <b>עד 10 חינם.</b> רכבות Trenitalia: 50% הנחה לגילאי 4–14. חפשו "FrecciaFAMILY" או "Bimbi Gratis" - חינם לילדים אבל <b>דורש הזמנה מראש.</b></td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- שירותים שימושיים -->
         <div class="link-category">⚡ &nbsp;שירותים שימושיים</div>
@@ -1068,7 +1236,7 @@
     </div>
   </section>
 
-  <section class="tips-section" id="tab-recommend">
+  <section class="tips-section" id="tab-recommend" style="display:none;">
     <div class="container" style="max-width:900px;padding-top:20px;padding-bottom:80px;">
       <div class="section-intro" style="text-align:center;margin-bottom:20px;">
         <div style="font-size:32px;margin-bottom:8px;">🔍</div>
