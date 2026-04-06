@@ -17,6 +17,7 @@
     .flag-at{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23ed2939'/%3E%3Crect y='200' width='900' height='200' fill='%23fff'/%3E%3Crect y='400' width='900' height='200' fill='%23ed2939'/%3E%3C/svg%3E")}
     .flag-cz{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='300' fill='%23fff'/%3E%3Crect y='300' width='900' height='300' fill='%23d7141a'/%3E%3Cpath fill='%2311457e' d='M0 0 L450 300 L0 600 Z'/%3E%3C/svg%3E")}
     .flag-hu{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23ce2939'/%3E%3Crect y='200' width='900' height='200' fill='%23fff'/%3E%3Crect y='400' width='900' height='200' fill='%23477050'/%3E%3C/svg%3E")}
+    .flag-si{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23fff'/%3E%3Crect y='200' width='900' height='200' fill='%23003DA5'/%3E%3Crect y='400' width='900' height='200' fill='%23E32118'/%3E%3C/svg%3E")}
     .flag-icon{display:inline-block;background-size:cover;background-repeat:no-repeat;border-radius:3px}
     .flag-chip{width:20px;height:14px;border-radius:2px;vertical-align:middle;flex-shrink:0}
 
@@ -140,13 +141,12 @@
     /* CHIP BAR */
     .chip-bar-outer{margin-bottom:20px}
     .chip-bar{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    @media(min-width:600px){.chip-bar{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
-    .chip{justify-content:center;width:100%}
-    .chip-coming{grid-column:span 1;justify-content:center;width:100%}
-    .chip{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:30px;border:1.5px solid var(--border);background:var(--white);cursor:pointer;transition:all var(--ease);white-space:nowrap;font-size:13px;font-weight:500;color:var(--charcoal);box-shadow:0 1px 4px rgba(0,0,0,.06);flex-shrink:0;position:relative}
+    @media(min-width:600px){.chip-bar{grid-template-columns:repeat(5,1fr)}}
+    @media(min-width:400px) and (max-width:599px){.chip-bar{grid-template-columns:repeat(3,1fr)}}
+    .chip{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:9px 18px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);cursor:pointer;transition:all var(--ease);font-size:13px;font-weight:500;color:var(--charcoal);box-shadow:0 1px 4px rgba(0,0,0,.06);position:relative}
     .chip:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px);box-shadow:0 4px 14px rgba(26,107,114,.12)}
     .chip.active{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 4px 16px rgba(26,107,114,.30);transform:translateY(-2px)}
-    .chip-coming{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:30px;border:1.5px dashed var(--sand-dark);background:transparent;color:#bbb;font-size:13px;white-space:nowrap;flex-shrink:0;font-style:italic}
+    .chip-coming{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:9px 18px;border-radius:8px;border:1.5px dashed var(--sand-dark);background:transparent;color:#bbb;font-size:13px;font-style:italic}
 
     /* MAP */
     .map-container{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.09)}
@@ -419,7 +419,7 @@
     <div class="page-hero__label">🗺️ יעדים מומלצים</div>
     <h1 class="page-hero__title">לאן טסים הפעם?</h1>
     <p class="page-hero__subtitle">בחרו יעד מהמפה או מהרשימה - כל מה שצריך לדעת לפני הטיסה</p>
-    <div class="hero-count">✈️ 8 יעדים שביקרתי בהם</div>
+    <div class="hero-count">✈️ 9 יעדים שביקרתי בהם</div>
   </div>
 </section>
 
@@ -521,7 +521,8 @@
     { id:'czechia',      flag:'flag-cz', name:"דרום צ'כיה",    sub:"צ'כיה",          lat:48.60, lng:14.22, color:'#11457e', days:'10-14 ימים', season:'☀️ אוגוסט מומלץ', url:'czechia.html',    wa:"דרום צ'כיה",     desc:"אגם ליפנו עם בובסלד ופארק מים, צ'סקי קרומלוב הציורית, ראפטינג בנהר ולטאבה ופראג בסוף - אחת ההפתעות הכי טובות.", tags:['אגם ליפנו','צ\'סקי קרומלוב','ראפטינג','בובסלד','פראג'], currency:'CZK', currencySymbol:'Kč' },
     { id:'austria',      flag:'flag-at', name:'אוסטריה',        sub:'מרכז אירופה',   lat:47.80, lng:13.00, color:'#ed2939', days:'7-10 ימים', season:'☀️ אוגוסט מומלץ', url:'austria.html',    wa:'אוסטריה',        desc:'פסגת דאכשטיין עם Skywalk מעל האלפים, מכרה מלח שגולשים בו בשקיות, פארק מים על ההר וטירה עם מופע נשרים - ווינה מחכה בסוף.', tags:['דאכשטיין','מכרה מלח','Wagrainis','טירת וורפן','ווינה'], currency:'EUR', currencySymbol:'€' },
     { id:'poland-south', flag:'flag-pl', name:'זקופנה',          sub:'דרום פולין',    lat:49.30, lng:19.95, color:'#7B1010', days:'7-8 ימים',  season:'☀️ קיץ מומלץ', url:'poland-south.html', wa:'דרום פולין',     desc:'זקופנה שמוקפת בהרי הטטרה, עמק קושיליסקה לטיולים סביב הנהר, פארק מים תרמי, מכרה מלח שגולשים בו במגלשות עץ.', tags:['זקופנה','הרי הטטרה','מכרה מלח','Terma Bania','Energylandia'], currency:'PLN', currencySymbol:'zł' },
-    { id:'budapest',     flag:'flag-hu', name:'בודפשט',          sub:'הונגריה',        lat:47.50, lng:19.04, color:'#ce2939', days:'5-6 ימים',  season:'☀️ כל השנה',    url:'budapest.html',    wa:'בודפשט',         desc:'עיר הקסמים על גדות הדנובה - פרלמנט מרהיב, מרחצאות היסטוריים, פארק מים ענק, מגלשות בוב ואטרקציות לכל גיל.', tags:['טירת בודה','Aquaworld','Visegrad Bobsled','שצ\'ני','הפרלמנט'], currency:'HUF', currencySymbol:'Ft' }
+    { id:'budapest',     flag:'flag-hu', name:'בודפשט',          sub:'הונגריה',        lat:47.50, lng:19.04, color:'#ce2939', days:'5-6 ימים',  season:'☀️ כל השנה',    url:'budapest.html',    wa:'בודפשט',         desc:'עיר הקסמים על גדות הדנובה - פרלמנט מרהיב, מרחצאות היסטוריים, פארק מים ענק, מגלשות בוב ואטרקציות לכל גיל.', tags:['טירת בודה','Aquaworld','Visegrad Bobsled','שצ\'ני','הפרלמנט'], currency:'HUF', currencySymbol:'Ft' },
+    { id:'slovenia',     flag:'flag-si', name:'סלובניה',          sub:'מרכז אירופה',   lat:46.12, lng:14.80, color:'#003DA5', days:'7 ימים',    season:'☀️ אוגוסט מומלץ', url:'slovenia.html',    wa:'סלובניה',        desc:'אגם Bled כמו מתוך אגדה, מערת פוסטוינה הענקית, ערוץ וינטגר ירוק וגני פרחים - המדינה הקטנה שמפתיעה בגדול.', tags:['אגם Bled','מערת פוסטוינה','ערוץ וינטגר','הר ווגל','גני וולצ\'י פוטוק'], currency:'EUR', currencySymbol:'€' }
   ];
 
   /* ─── DRAWER ─── */
