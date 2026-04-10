@@ -37,11 +37,16 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
 .nav__whatsapp-mobile{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#25D366;}
 .nav__mobile-menu{display:none;position:fixed;top:var(--nav-height);right:0;left:0;bottom:0;background:var(--cream);padding:24px 20px 32px;flex-direction:column;gap:4px;z-index:999;overflow-y:auto;}
 .nav__mobile-menu.open{display:flex;}
-.nav__link--community{background:var(--amber);color:#2C2C2C !important;font-weight:300;font-size:15px;border-radius:22px;padding:8px 18px;min-height:44px;box-shadow:0 2px 10px rgba(232,160,69,0.45);animation:communityPulse 2.8s ease-in-out infinite;}
-.nav__link--community:hover{background:#d4903c !important;transform:translateY(-2px);animation:none;}
-.nav__link--community::before{content:'';width:8px;height:8px;background:#4ade80;border-radius:50%;display:inline-block;margin-left:7px;box-shadow:0 0 6px #4ade80;animation:dotBlink 1.4s ease-in-out infinite;}
-@keyframes communityPulse{0%,100%{box-shadow:0 2px 10px rgba(232,160,69,0.4);}50%{box-shadow:0 2px 18px rgba(232,160,69,0.75),0 0 0 4px rgba(232,160,69,0.15);}}
-@keyframes dotBlink{0%,100%{opacity:0.4;box-shadow:0 0 3px #4ade80;}50%{opacity:1;box-shadow:0 0 10px #4ade80,0 0 20px #4ade8088;}}
+.nav__link--packages{gap:8px;font-weight:500;position:relative;padding-inline:14px;}
+.nav__link--packages .nav__packages-icon{width:16px;height:16px;flex:0 0 auto;opacity:.95;}
+.nav__link--packages .nav__packages-badge{font-size:10px;font-weight:600;line-height:1;color:var(--teal-dark);background:var(--sand);border:1px solid var(--sand-dark);border-radius:999px;padding:4px 7px;margin-right:4px;}
+.nav__link--packages[aria-current="page"] .nav__packages-badge{color:var(--teal-dark);background:#fff;border-color:rgba(255,255,255,.6);}
+.nav__link--community{background:transparent;color:#0f4a50!important;font-weight:300;font-size:15px;border-radius:22px;padding:8px 18px;min-height:44px;box-shadow:none;position:static;overflow:visible;transition:background .2s ease,color .2s ease,box-shadow .2s ease,transform .2s ease;gap:10px;animation:none;}
+.nav__link--community:hover,.nav__link--community:focus-visible{background:#145960!important;color:#fff!important;transform:none;box-shadow:0 2px 10px rgba(15,74,80,.3);}
+.nav__link--community::before{content:none;animation:none;}
+.nav__link--community .nav__community-icon{width:18px;height:18px;flex:0 0 auto;opacity:.95;margin-left:4px;}
+.nav__link--community:hover .nav__community-icon,.nav__link--community:focus-visible .nav__community-icon{opacity:1;}
+@media (prefers-reduced-motion: reduce){.nav__link--community,.nav__link--community::before,.nav__community-icon{animation:none!important;transition:none!important;transform:none!important;}}
 @media(max-width:900px){
       .nav__hamburger{display:flex;}
   .nav__links{display:none;}
@@ -383,10 +388,10 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
       <li><a href="tips.html" class="nav__link">טיפים</a></li>
       <li><a href="destinations.html" class="nav__link">יעדים</a></li>
       <li><a href="weather.html" class="nav__link" aria-current="page">מזג אוויר</a></li>
-      <li><a href="packages.html" class="nav__link">חבילות</a></li>
+      <li><a href="packages.html" class="nav__link nav__link--packages"><svg class="nav__packages-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 7.5L12 3l9 4.5-9 4.5-9-4.5z"/><path d="M3 12l9 4.5 9-4.5"/><path d="M3 16.5L12 21l9-4.5"/></svg><span>חבילות תכנון</span><span class="nav__packages-badge">3 חבילות</span></a></li>
       <li><a href="about.html" class="nav__link">אודות</a></li>
               <li><a href="calendar.html" class="nav__link">מתי קורה</a></li>
-<li><a href="#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a></li>
+<li><a href="#newsletter" class="nav__link nav__link--community"><svg class="nav__community-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>מצטרפים לקהילה</span></a></li>
     </ul>
     <div class="nav__mobile-actions">
       <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ"><svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
@@ -446,8 +451,8 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
         </svg>
       </div>
       <div class="mob-nav-item__body">
-        <span class="mob-nav-item__title">חבילות</span>
-        <span class="mob-nav-item__sub">עזרה בתכנון מסלול</span>
+        <span class="mob-nav-item__title">חבילות תכנון</span>
+        <span class="mob-nav-item__sub">3 מסלולי ליווי לפי סגנון הטיול שלכם</span>
       </div>
     </a>
 
@@ -1168,7 +1173,7 @@ window.onload = () => {
       <p class="email-popup__subtitle">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
       <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm">
         <input type="hidden" name="_subject" value="הרשמה מעמוד מזג אוויר - מתי טסים">
-        <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/weather.html">
+        <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/weather.html?subscribed=1">
         <input type="hidden" name="_captcha" value="false">
         <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input">
         <button type="submit" class="email-popup__btn">אני רוצה לקבל עדכונים ✈️</button>
@@ -1215,6 +1220,23 @@ window.onload = () => {
           document.body.style.overflow = 'hidden';
         });
       });
+    })();
+  </script>
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('subscribed') !== '1') return;
+      var toast = document.createElement('div');
+      toast.style.cssText = 'position:fixed;left:20px;right:20px;bottom:20px;z-index:4000;max-width:760px;margin:0 auto;background:#0f4a50;color:#fff;border-radius:14px;padding:14px 46px 14px 16px;box-shadow:0 10px 30px rgba(0,0,0,.25);text-align:right;line-height:1.6;';
+      toast.innerHTML = '<button type="button" aria-label="סגור הודעה" style="position:absolute;top:10px;left:10px;width:28px;height:28px;border:none;border-radius:50%;background:rgba(255,255,255,0.16);color:#fff;cursor:pointer;font-size:18px;line-height:1;">×</button><div style="font-size:15px;font-weight:700;">נרשמת בהצלחה! תודה שהצטרפת לקהילת "מתי טסים" ✈️</div>';
+      document.body.appendChild(toast);
+      function closeToast() { if (toast.parentNode) toast.parentNode.removeChild(toast); }
+      toast.querySelector('button').addEventListener('click', closeToast);
+      setTimeout(closeToast, 6000);
+      if (window.history && window.history.replaceState) {
+        var cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
+        window.history.replaceState({}, document.title, cleanUrl);
+      }
     })();
   </script>
 </body>
