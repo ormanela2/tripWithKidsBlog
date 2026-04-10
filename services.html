@@ -338,6 +338,55 @@
       background: var(--teal-dark);
       color: var(--white);
     }
+
+    .nav__link--community {
+      background: linear-gradient(135deg, var(--amber), var(--amber-light));
+      color: var(--charcoal) !important;
+      font-weight: 500;
+      border-radius: 20px;
+      padding: 8px 16px;
+      box-shadow: 0 2px 10px rgba(232, 160, 69, 0.35);
+      position: relative;
+      overflow: hidden;
+      animation: communityPulse 2s ease-in-out infinite;
+    }
+
+    .nav__link--community::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 70%
+      );
+      animation: communityShimmer 3s ease-in-out infinite;
+    }
+
+    .nav__link--community:hover {
+      background: linear-gradient(135deg, var(--amber-dark), var(--amber));
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(232, 160, 69, 0.45);
+    }
+
+    .nav__link--community:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 2px;
+    }
+
+    @keyframes communityPulse {
+      0%, 100% { box-shadow: 0 2px 10px rgba(232, 160, 69, 0.35); }
+      50% { box-shadow: 0 2px 10px rgba(232, 160, 69, 0.55); }
+    }
+
+    @keyframes communityShimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
     }
 
     .nav__cta {
@@ -455,13 +504,38 @@
     }
     .mob-nav-calendar svg { width: 18px; height: 18px; flex-shrink: 0; }
     .mob-nav-community {
-      display: flex; align-items: center; gap: 14px; padding: 14px 16px;
-      background: var(--amber); color: #fff; border-radius: var(--radius-md);
+      display: flex; align-items: center; gap: 16px; padding: 18px 20px;
+      background: linear-gradient(135deg, var(--amber), var(--amber-light)); 
+      color: var(--charcoal); border-radius: 16px;
       border: none; width: 100%; text-align: right; cursor: pointer;
       font-family: var(--font-body); text-decoration: none;
-      transition: background 0.18s; -webkit-tap-highlight-color: transparent; margin-top: 6px;
+      transition: all 0.3s ease; -webkit-tap-highlight-color: transparent; 
+      margin-top: 8px; box-shadow: 0 4px 16px rgba(232, 160, 69, 0.3);
+      position: relative; overflow: hidden;
+      min-height: 60px;
     }
-    .mob-nav-community:active, .mob-nav-community:hover { background: var(--amber-dark); }
+    
+    .mob-nav-community::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 70%
+      );
+      animation: communityShimmer 3s ease-in-out infinite;
+    }
+    
+    .mob-nav-community:active, .mob-nav-community:hover { 
+      background: linear-gradient(135deg, var(--amber-dark), var(--amber));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(232, 160, 69, 0.4);
+    }
     .mob-nav-community__icon { flex-shrink: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
     .mob-nav-community__icon svg { width: 28px; height: 28px; }
     .mob-nav-community__body { flex: 1; text-align: right; }
@@ -1567,6 +1641,35 @@
   
 
     /* ── Community CTA button ── */
+    .nav__link--packages {
+      gap: 8px;
+      font-weight: 500;
+      position: relative;
+      padding-inline: 14px;
+    }
+    .nav__link--packages .nav__packages-icon {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+      opacity: 0.95;
+    }
+    .nav__link--packages .nav__packages-badge {
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--teal-dark);
+      background: var(--sand);
+      border: 1px solid var(--sand-dark);
+      border-radius: 999px;
+      padding: 4px 7px;
+      margin-right: 4px;
+    }
+    .nav__link--packages[aria-current="page"] .nav__packages-badge {
+      color: var(--teal-dark);
+      background: #ffffff;
+      border-color: rgba(255,255,255,0.6);
+    }
+
     .nav__link--community {
       background: transparent;
       color: #0f4a50 !important;
@@ -1574,24 +1677,40 @@
       border-radius: 22px;
       padding: 8px 18px;
       min-height: 44px;
-      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      gap: 10px;
+      animation: none;
     }
     .nav__link--community:hover,
     .nav__link--community:focus-visible {
-      background: #0f4a50 !important;
+      background: #145960 !important;
       color: #fff !important;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(15,74,80,0.5);
+      transform: none;
+      box-shadow: 0 2px 10px rgba(15,74,80,0.3);
     }
     .nav__link--community::before {
-      content: '';
-      width: 7px;
-      height: 7px;
-      background: #4ade80;
-      border-radius: 50%;
-      display: inline-block;
-      margin-left: 7px;
-      box-shadow: 0 0 6px #4ade80;
+      content: none;
+      animation: none;
+    }
+    .nav__link--community .nav__community-icon {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      opacity: 0.95;
+      margin-left: 4px;
+    }
+    .nav__link--community:hover .nav__community-icon,
+    .nav__link--community:focus-visible .nav__community-icon {
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .nav__link--community,
+      .nav__link--community::before,
+      .nav__community-icon {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+      }
     }
     @media(max-width:900px) {
       .nav__links { display:none; }
@@ -1958,10 +2077,28 @@
         <li role="none"><a href="tips.html" class="nav__link" role="menuitem">טיפים</a></li>
         <li role="none"><a href="destinations.html" class="nav__link" role="menuitem">יעדים</a></li>
         <li role="none"><a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a></li>
-        <li role="none"><a href="packages.html" class="nav__link" role="menuitem" aria-current="page">חבילות</a></li>
+        <li role="none">
+          <a href="packages.html" class="nav__link nav__link--packages" role="menuitem" aria-current="page">
+            <svg class="nav__packages-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M3 7.5L12 3l9 4.5-9 4.5-9-4.5z"/>
+              <path d="M3 12l9 4.5 9-4.5"/>
+              <path d="M3 16.5L12 21l9-4.5"/>
+            </svg>
+            <span>חבילות תכנון</span>
+            <span class="nav__packages-badge">3 חבילות</span>
+          </a>
+        </li>
         <li role="none"><a href="about.html" class="nav__link" role="menuitem">אודות</a></li>
         <li role="none"><a href="calendar.html" class="nav__link" role="menuitem">מתי קורה</a></li>
-        <li role="none"><a href="#newsletter" class="nav__link nav__link--community" role="menuitem">מצטרפים לקהילה</a></li>
+        <li role="none">
+          <a href="#newsletter" class="nav__link nav__link--community" role="menuitem">
+            <svg class="nav__community-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <span>מצטרפים לקהילה</span>
+          </a>
+        </li>
       </ul>
 
       
@@ -2003,7 +2140,7 @@
         </div>
         <div class="mob-nav-item__body">
           <span class="mob-nav-item__title">יעדים</span>
-          <span class="mob-nav-item__sub">לאן טסים הפעם?</span>
+          <span class="mob-nav-item__sub">לאן הכי מתאים לטוס בעונה הזאת</span>
         </div>
       </a>
 
@@ -2029,8 +2166,8 @@
           </svg>
         </div>
         <div class="mob-nav-item__body">
-          <span class="mob-nav-item__title">חבילות</span>
-          <span class="mob-nav-item__sub">עזרה בתכנון מסלול</span>
+          <span class="mob-nav-item__title">חבילות תכנון</span>
+          <span class="mob-nav-item__sub">3 מסלולי ליווי לפי סגנון הטיול שלכם</span>
         </div>
       </a>
 
@@ -2936,7 +3073,7 @@
       <form action="https://formsubmit.co/mataytasim@gmail.com" method="POST"
             style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
         <input type="hidden" name="_subject" value="הרשמה לעדכונים - מתי טסים">
-        <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/services.html">
+        <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/services.html?subscribed=1#newsletter">
         <input type="hidden" name="_captcha" value="false">
         <input type="email" name="email" required placeholder="המייל שלכם"
                style="flex:1;min-width:220px;max-width:300px;padding:13px 18px;border:2px solid rgba(255,255,255,0.3);border-radius:40px;font-family:var(--font-body);font-size:15px;background:rgba(255,255,255,0.12);color:white;outline:none;text-align:right;transition:border-color 0.2s,background 0.2s;"
@@ -2956,11 +3093,26 @@
         </div>
       </form>
 
+      <div id="newsletterSuccessMessage" style="display:none;margin-top:18px;padding:18px 20px;border-radius:16px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.35);text-align:right;">
+        <p style="margin:0 0 10px 0;color:#fff;font-size:17px;font-weight:700;line-height:1.6;">נרשמת בהצלחה! תודה שהצטרפת לקהילת "מתי טסים" ✈️</p>
+        <p style="margin:0;color:rgba(255,255,255,0.92);font-size:14px;line-height:1.8;">איזה כיף שאתם איתנו! מעכשיו, כל מה שצריך לטיול משפחתי מושלם יגיע אליכם למייל: עדכונים על יעדים חדשים, טיפים פרקטיים לחיסכון בזמן וכסף, ומסלולים מפורטים שיסגרו לכם את הפינה של התכנון.</p>
+      </div>
+
     </div>
   </section>
 
   <script>
   (function() {
+    var successMessage = document.getElementById('newsletterSuccessMessage');
+    var params = new URLSearchParams(window.location.search);
+    if (successMessage && params.get('subscribed') === '1') {
+      successMessage.style.display = 'block';
+      if (window.history && window.history.replaceState) {
+        var cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
+        window.history.replaceState({}, document.title, cleanUrl);
+      }
+    }
+
     // Scroll-triggered entrance
     var nl = document.getElementById('nlContent');
     if (nl) {
@@ -3308,7 +3460,7 @@
       <p style="font-size:14px;color:#666;line-height:1.6;margin-bottom:24px;">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
       <form action="https://formsubmit.co/mataytasim@gmail.com" method="POST" id="emailPopupForm" style="display:flex;flex-direction:column;gap:12px;">
         <input type="hidden" name="_subject" value="הרשמה לעדכונים - מתי טסים">
-        <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/services.html">
+        <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/services.html?subscribed=1#newsletter">
         <input type="hidden" name="_captcha" value="false">
         <input type="email" name="email" required placeholder="המייל שלכם" style="padding:13px 18px;border:2px solid #e8ddc4;border-radius:40px;font-family:'Rubik',sans-serif;font-size:15px;background:white;color:#2C2C2C;outline:none;text-align:right;width:100%;box-sizing:border-box;">
         <button type="submit" style="background:#1A6B72;color:white;border:none;border-radius:40px;padding:13px 28px;font-family:'Rubik',sans-serif;font-size:15px;font-weight:600;cursor:pointer;">אני רוצה לקבל עדכונים ✈️</button>
