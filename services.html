@@ -1673,10 +1673,14 @@
     .nav__link--community {
       background: transparent;
       color: #0f4a50 !important;
+      font-weight: 300;
       font-size: 15px;
       border-radius: 22px;
       padding: 8px 18px;
       min-height: 44px;
+      box-shadow: none;
+      position: static;
+      overflow: visible;
       transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
       gap: 10px;
       animation: none;
@@ -3093,7 +3097,8 @@
         </div>
       </form>
 
-      <div id="newsletterSuccessMessage" style="display:none;margin-top:18px;padding:18px 20px;border-radius:16px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.35);text-align:right;">
+      <div id="newsletterSuccessMessage" style="display:none;position:relative;margin-top:18px;padding:18px 48px 18px 20px;border-radius:16px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.35);text-align:right;">
+        <button type="button" id="newsletterSuccessClose" aria-label="סגור הודעה" style="position:absolute;top:10px;left:10px;width:28px;height:28px;border:none;border-radius:50%;background:rgba(255,255,255,0.16);color:#fff;cursor:pointer;font-size:18px;line-height:1;">×</button>
         <p style="margin:0 0 10px 0;color:#fff;font-size:17px;font-weight:700;line-height:1.6;">נרשמת בהצלחה! תודה שהצטרפת לקהילת "מתי טסים" ✈️</p>
         <p style="margin:0;color:rgba(255,255,255,0.92);font-size:14px;line-height:1.8;">איזה כיף שאתם איתנו! מעכשיו, כל מה שצריך לטיול משפחתי מושלם יגיע אליכם למייל: עדכונים על יעדים חדשים, טיפים פרקטיים לחיסכון בזמן וכסף, ומסלולים מפורטים שיסגרו לכם את הפינה של התכנון.</p>
       </div>
@@ -3104,9 +3109,15 @@
   <script>
   (function() {
     var successMessage = document.getElementById('newsletterSuccessMessage');
+    var successClose = document.getElementById('newsletterSuccessClose');
+    function hideSuccessMessage() {
+      if (successMessage) successMessage.style.display = 'none';
+    }
+    if (successClose) successClose.addEventListener('click', hideSuccessMessage);
     var params = new URLSearchParams(window.location.search);
     if (successMessage && params.get('subscribed') === '1') {
       successMessage.style.display = 'block';
+      setTimeout(hideSuccessMessage, 6000);
       if (window.history && window.history.replaceState) {
         var cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
         window.history.replaceState({}, document.title, cleanUrl);
