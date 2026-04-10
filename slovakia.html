@@ -107,8 +107,20 @@
     .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.88; margin-bottom: 32px; max-width: 600px; line-height: 1.7; }
     .article-hero__meta { display: flex; flex-wrap: wrap; gap: 12px; }
     .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
-    .article-hero__badge--cta { background: rgba(232,160,69,0.25); border-color: rgba(255,255,255,0.45); font-weight: 700; }
-    .article-hero__badge--cta:hover, .article-hero__badge--cta:focus-visible { background: rgba(232,160,69,0.38); transform: translateY(-1px); }
+    .article-hero__badge--cta {
+      font-family: 'Heebo', sans-serif;
+      font-weight: 700;
+      background: #ffffff;
+      color: #1f5b43;
+      border-color: rgba(31,91,67,0.22);
+      box-shadow: 0 4px 14px 0 rgba(0,0,0,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .article-hero__badge--cta:hover, .article-hero__badge--cta:focus-visible {
+      background: #f4fbf7;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.24);
+    }
     .article-body { padding: 60px 0 80px; }
     .article-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
     .article-content { min-width: 0; }
@@ -285,6 +297,11 @@
       width: auto;
     }
     @media (max-width: 760px) {
+      .article-hero__badge--cta {
+        font-size: 12px;
+        padding: 6px 11px;
+        border-radius: 16px;
+      }
       .countdown-cta {
         padding: 10px 11px 9px;
         margin: 10px 0 6px;
@@ -705,7 +722,7 @@
           <span class="article-hero__badge">🟢 קל עם ילדים</span>
           <span class="article-hero__badge">📅 7-10 ימים מומלץ</span>
           <span class="article-hero__badge">☀️ מאי-ספטמבר</span>
-          <a href="#slovakia-pdf-cta" class="article-hero__badge article-hero__badge--cta">📄 לוח שנה מעוצב מוכן להורדה</a>
+          <a href="#intro-view-start" class="article-hero__badge article-hero__badge--cta">מתנה: לוח ספירה לאחור לסלובקיה 🎁</a>
         </div>
       </div>
     </div>
@@ -739,7 +756,7 @@
             <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> למה סלובקיה עם ילדים?</h2>
             <p>סלובקיה היא יעד מושלם למשפחות כי היא מרגישה כמו מגרש משחקים ענק בלב הטבע. היא מציעה שילוב נדיר בין פסגות הרים דרמטיות ומסלולי הליכה חווייתיים (כמו הגשרים והסולמות ב"גן העדן הסלובקי") לבין פארקי מים טרמיים עצומים שילדים פשוט מעריצים.</p>
             <p>תוכלו לבקר בטירות אבירים אמיתיות שנראות כאילו נשלפו מהאגדות, ולרדת למערות נטיפים ומערות קרח מסתוריות מתחת לאדמה. היתרון הגדול להורים הוא המרחקים הקצרים יחסית בין האטרקציות, שחוסכים שעות של נסיעה משעממת ברכב.</p>
-            <p>מעבר לכך, היא נחשבת ליעד זול ונגיש משמעותית משכנותיה, מה שמאפשר חופשה מפנקת בלי "לקרוע את הכיס". זו הזדמנות להחליף את המסכים במרחבים ירוקים, אוויר צלול וחוויות אקסטרים רגועות שמתאימות לכל גיל.</p>
+            <p id="intro-view-start">מעבר לכך, היא נחשבת ליעד זול ונגיש משמעותית משכנותיה, מה שמאפשר חופשה מפנקת בלי "לקרוע את הכיס". זו הזדמנות להחליף את המסכים במרחבים ירוקים, אוויר צלול וחוויות אקסטרים רגועות שמתאימות לכל גיל.</p>
 
             <div class="countdown-cta" id="slovakia-pdf-cta">
               <div class="countdown-cta__kicker">🎁 בונוס למשפחות שטסות לסלובקיה</div>
