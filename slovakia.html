@@ -54,22 +54,26 @@
     .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; }
     .container--narrow { max-width: 780px; }
     /* ── EMAIL POPUP ─────────────────────────────── */
-    .email-popup-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; padding:24px; }
+    .email-popup-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; padding:max(20px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); box-sizing:border-box; }
     .email-popup-overlay.open { display:flex; }
-    .email-popup { background:var(--cream); border-radius:20px; padding:40px 32px; max-width:420px; width:100%; text-align:center; position:relative; box-shadow:0 16px 48px rgba(0,0,0,0.2); animation:popupIn 0.3s ease; box-sizing:border-box; }
+    .email-popup { background:var(--cream); border-radius:20px; padding:40px 32px 36px; max-width:min(420px, calc(100vw - 32px)); width:100%; text-align:center; position:relative; box-shadow:0 16px 48px rgba(0,0,0,0.2); animation:popupIn 0.3s ease; box-sizing:border-box; }
     @keyframes popupIn { from { transform:translateY(20px); opacity:0; } to { transform:translateY(0); opacity:1; } }
-    .email-popup__close { position:absolute; top:14px; left:16px; font-size:22px; cursor:pointer; color:#aaa; background:none; border:none; line-height:1; }
-    .email-popup__close:hover { color:var(--charcoal); }
-    .email-popup__icon { font-size:40px; margin-bottom:12px; }
-    .email-popup__title { font-family:var(--font-heading); font-size:22px; color:var(--teal); margin-bottom:8px; }
-    .email-popup__subtitle { font-size:14px; color:#666; line-height:1.6; margin-bottom:24px; }
-    .email-popup__form { display:flex; flex-direction:column; gap:12px; }
-    .email-popup__input { padding:13px 18px; border:2px solid var(--sand-dark); border-radius:40px; font-family:var(--font-body); font-size:15px; background:white; color:var(--charcoal); outline:none; text-align:right; width:100%; box-sizing:border-box; }
+    .email-popup__close { position:absolute; top:12px; left:12px; font-size:24px; line-height:1; cursor:pointer; color:#666; background:rgba(0,0,0,0.06); border:none; width:44px; height:44px; min-width:44px; min-height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; padding:0; -webkit-tap-highlight-color:transparent; transition:background 0.2s, color 0.2s; }
+    .email-popup__close:hover { color:var(--charcoal); background:rgba(0,0,0,0.1); }
+    .email-popup__title { font-family:var(--font-heading); font-size:22px; color:var(--teal); margin:8px 0 6px; line-height:1.25; }
+    .email-popup__subtitle { font-size:14px; color:#666; line-height:1.55; margin:0 0 20px; }
+    .email-popup__form { display:flex; flex-direction:column; gap:14px; }
+    .email-popup__input { padding:14px 18px; border:2px solid var(--sand-dark); border-radius:40px; font-family:var(--font-body); font-size:16px; background:white; color:var(--charcoal); outline:none; text-align:right; width:100%; box-sizing:border-box; }
     .email-popup__input:focus { border-color:var(--teal); }
-    .email-popup__btn { background:var(--teal); color:white; border:none; border-radius:40px; padding:13px 28px; font-family:var(--font-body); font-size:15px; font-weight:600; cursor:pointer; transition:background 0.2s; }
+    .email-popup__btn { background:var(--teal); color:white; border:none; border-radius:40px; padding:14px 24px; font-family:var(--font-body); font-size:16px; font-weight:600; cursor:pointer; transition:background 0.2s; min-height:48px; -webkit-tap-highlight-color:transparent; }
     .email-popup__btn:hover { background:var(--teal-dark); }
-    .email-popup__skip { font-size:13px; color:#aaa; cursor:pointer; margin-top:4px; background:none; border:none; text-decoration:underline; }
-    .email-popup__skip:hover { color:var(--charcoal); }
+    @media (max-width:600px) {
+      .email-popup-overlay { padding:max(14px, env(safe-area-inset-top, 10px)) max(18px, env(safe-area-inset-right, 12px)) max(18px, env(safe-area-inset-bottom, 12px)) max(18px, env(safe-area-inset-left, 12px)); align-items:center; }
+      .email-popup { padding:44px 18px 22px; border-radius:18px; max-width:calc(100vw - 36px); }
+      .email-popup__title { font-size:19px; }
+      .email-popup__subtitle { font-size:13px; margin-bottom:18px; }
+      .email-popup__close { top:10px; left:10px; }
+    }
 
     /* ── NAV ─────────────────────────────── */
     .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
@@ -577,6 +581,24 @@
 </script>
 </head>
 <body>
+<script>
+(function () {
+  window.__mtRefreshBodyScrollLock = function () {
+    var lightbox = document.getElementById('lightbox');
+    var email = document.getElementById('emailPopupOverlay');
+    var cta = document.getElementById('ctaEmailPopupOverlay');
+    var menu = document.getElementById('mobileMenu');
+    var pb = document.getElementById('pbOverlay');
+    var lock =
+      (lightbox && lightbox.classList.contains('open')) ||
+      (email && email.classList.contains('open')) ||
+      (cta && cta.classList.contains('open')) ||
+      (menu && menu.classList.contains('open')) ||
+      (pb && pb.classList.contains('open'));
+    document.body.style.overflow = lock ? 'hidden' : '';
+  };
+})();
+</script>
 
   <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
   <div class="container nav__inner">
@@ -689,7 +711,7 @@
 
     <!-- מצטרפים לקהילה — amber banner -->
     <button type="button" class="mob-nav-community" role="menuitem"
-      onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(true); },120);">
+      onclick="var m=document.getElementById('mobileMenu'); var hb=document.getElementById('hamburgerBtn'); m.classList.remove('open'); hb.setAttribute('aria-expanded','false'); hb.setAttribute('aria-label','פתח תפריט'); if(window.__mtRefreshBodyScrollLock)window.__mtRefreshBodyScrollLock(); else document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(true); },120);">
       <div class="mob-nav-community__icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -1360,11 +1382,13 @@
       currentLightbox = idx;
       document.getElementById('lightbox-img').src = galleryImages[idx];
       document.getElementById('lightbox').classList.add('open');
-      document.body.style.overflow = 'hidden';
+      if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+      else document.body.style.overflow = 'hidden';
     };
     window.closeLightbox = function() {
       document.getElementById('lightbox').classList.remove('open');
-      document.body.style.overflow = '';
+      if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+      else document.body.style.overflow = '';
     };
     window.changeLightbox = function(dir) {
       currentLightbox = (currentLightbox + dir + galleryImages.length) % galleryImages.length;
@@ -1424,7 +1448,8 @@
           var isOpen = mobileMenu.classList.toggle('open');
           hamburger.setAttribute('aria-expanded', isOpen.toString());
           hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
-          document.body.style.overflow = isOpen ? 'hidden' : '';
+          if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+          else document.body.style.overflow = isOpen ? 'hidden' : '';
           if (isOpen) fetchMenuWeather();
         });
 
@@ -1433,7 +1458,8 @@
             mobileMenu.classList.remove('open');
             hamburger.setAttribute('aria-expanded', 'false');
             hamburger.setAttribute('aria-label', 'פתח תפריט');
-            document.body.style.overflow = '';
+            if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+            else document.body.style.overflow = '';
           });
         });
       }
@@ -1449,7 +1475,8 @@
           mobileMenu.classList.remove('open');
           hamburger.setAttribute('aria-expanded', 'false');
           hamburger.setAttribute('aria-label', 'פתח תפריט');
-          document.body.style.overflow = '';
+          if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+          else document.body.style.overflow = '';
           hamburger.focus();
         }
       });
@@ -1459,34 +1486,30 @@
 <!-- Email Popup -->
 <div class="email-popup-overlay" id="emailPopupOverlay">
   <div class="email-popup">
-    <button class="email-popup__close" id="emailPopupClose">×</button>
-    <div class="email-popup__icon">✈️</div>
-    <h2 class="email-popup__title">רוצים לקבל עדכונים?</h2>
-    <p class="email-popup__subtitle">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
+    <button type="button" class="email-popup__close" id="emailPopupClose" aria-label="סגור">×</button>
+    <h2 class="email-popup__title">רוצים עדכונים למייל?</h2>
+    <p class="email-popup__subtitle">טיפים, יעדים ומסלולים ועוד הרבה הפתעות - תהיו חלק מקהילת מתי טסים</p>
     <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm">
       <input type="hidden" name="_subject" value="הרשמה מסלובקיה - מתי טסים">
       <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/slovakia.html?subscribed=1#newsletter">
       <input type="hidden" name="_captcha" value="false">
-      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input">
-      <button type="submit" class="email-popup__btn">אני רוצה לקבל עדכונים ✈️</button>
-      <button type="button" class="email-popup__skip" id="emailPopupSkip">דלג</button>
+      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input" inputmode="email" autocomplete="email" enterkeyhint="send">
+      <button type="submit" class="email-popup__btn">קבלו עדכונים</button>
     </form>
   </div>
 </div>
 <!-- CTA Email Popup -->
 <div class="email-popup-overlay" id="ctaEmailPopupOverlay">
   <div class="email-popup">
-    <button class="email-popup__close" id="ctaEmailPopupClose">×</button>
-    <div class="email-popup__icon">✈️</div>
+    <button type="button" class="email-popup__close" id="ctaEmailPopupClose" aria-label="סגור">×</button>
     <h2 class="email-popup__title">תהנו מהלוח שנה של מתי טסים</h2>
     <p class="email-popup__subtitle">לעוד עדכונים על יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
     <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="ctaEmailPopupForm">
-      <input type="hidden" name="_subject" value="הרשמה מסלובקיה - מתי טסים">
+      <input type="hidden" name="_subject" value="הרשמה מסלובקיה לוח שנה - מתי טסים">
       <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/slovakia.html?subscribed=1#newsletter">
       <input type="hidden" name="_captcha" value="false">
-      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input">
-      <button type="submit" class="email-popup__btn">אני רוצה לקבל עדכונים ✈️</button>
-      <button type="button" class="email-popup__skip" id="ctaEmailPopupSkip">דלג</button>
+      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input" inputmode="email" autocomplete="email" enterkeyhint="send">
+      <button type="submit" class="email-popup__btn">קבלו עדכונים</button>
     </form>
   </div>
 </div>
@@ -1494,30 +1517,104 @@
 (function () {
   var overlay = document.getElementById('emailPopupOverlay');
   var closeBtn = document.getElementById('emailPopupClose');
-  var skipBtn = document.getElementById('emailPopupSkip');
   var ctaOverlay = document.getElementById('ctaEmailPopupOverlay');
   var ctaCloseBtn = document.getElementById('ctaEmailPopupClose');
-  var ctaSkipBtn = document.getElementById('ctaEmailPopupSkip');
   var openedAt = 0;
   var ctaOpenedAt = 0;
-  function openPopup(force) { if (!force && localStorage.getItem('mtEmailSubmitted')) return; overlay.classList.add('open'); document.body.style.overflow = 'hidden'; openedAt = Date.now(); }
-  function closePopup() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
-  function openCtaPopup(force) { if (!force && localStorage.getItem('mtEmailSubmitted')) return; ctaOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; ctaOpenedAt = Date.now(); }
-  function closeCtaPopup() { ctaOverlay.classList.remove('open'); document.body.style.overflow = ''; }
-  document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) { link.addEventListener('click', function(e) { e.preventDefault(); openPopup(); }); });
+  var scrollEmailRaf = 0;
+  var emailScrollAwaitLowerHalf = false;
+  var emailPopupUserHasScrolled = false;
+
+  function openPopup(force) {
+    if (!force && localStorage.getItem('mtEmailSubmitted')) return;
+    if (overlay.classList.contains('open')) return;
+    overlay.classList.add('open');
+    if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+    else document.body.style.overflow = 'hidden';
+    openedAt = Date.now();
+  }
+  function closePopup() {
+    overlay.classList.remove('open');
+    if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+    else document.body.style.overflow = '';
+    if (!localStorage.getItem('mtEmailSubmitted')) {
+      sessionStorage.removeItem('mtEmailScrollShown');
+      emailScrollAwaitLowerHalf = true;
+    }
+  }
+  function maybeOpenFromScroll() {
+    if (!emailPopupUserHasScrolled) return;
+    if (localStorage.getItem('mtEmailSubmitted')) return;
+    var doc = document.documentElement;
+    var scrollTop = window.scrollY || doc.scrollTop;
+    var maxScroll = doc.scrollHeight - window.innerHeight;
+    if (maxScroll <= 0) return;
+    var ratio = scrollTop / maxScroll;
+    if (emailScrollAwaitLowerHalf) {
+      if (ratio < 0.42) emailScrollAwaitLowerHalf = false;
+      else return;
+    }
+    if (sessionStorage.getItem('mtEmailScrollShown')) return;
+    if (ratio < 0.5) return;
+    sessionStorage.setItem('mtEmailScrollShown', '1');
+    openPopup(false);
+  }
+  function onScrollEmail() {
+    if (scrollEmailRaf) return;
+    scrollEmailRaf = requestAnimationFrame(function () {
+      scrollEmailRaf = 0;
+      var st = window.scrollY || document.documentElement.scrollTop;
+      if (st > 2) emailPopupUserHasScrolled = true;
+      maybeOpenFromScroll();
+    });
+  }
+
+  function openCtaPopup(force) {
+    if (!force && localStorage.getItem('mtEmailSubmitted')) return;
+    if (ctaOverlay.classList.contains('open')) return;
+    ctaOverlay.classList.add('open');
+    if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+    else document.body.style.overflow = 'hidden';
+    ctaOpenedAt = Date.now();
+  }
+  function closeCtaPopup() {
+    ctaOverlay.classList.remove('open');
+    if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+    else document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('a[href="#newsletter"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      openPopup(true);
+    });
+  });
   if (closeBtn) closeBtn.addEventListener('click', closePopup);
-  if (skipBtn) skipBtn.addEventListener('click', closePopup);
   if (ctaCloseBtn) ctaCloseBtn.addEventListener('click', closeCtaPopup);
-  if (ctaSkipBtn) ctaSkipBtn.addEventListener('click', closeCtaPopup);
-  overlay.addEventListener('click', function(e) { if (e.target === overlay && Date.now() - openedAt > 400) closePopup(); });
-  ctaOverlay.addEventListener('click', function(e) { if (e.target === ctaOverlay && Date.now() - ctaOpenedAt > 400) closeCtaPopup(); });
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closePopup(); closeCtaPopup(); } });
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay && Date.now() - openedAt > 400) closePopup();
+  });
+  ctaOverlay.addEventListener('click', function (e) {
+    if (e.target === ctaOverlay && Date.now() - ctaOpenedAt > 400) closeCtaPopup();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      closePopup();
+      closeCtaPopup();
+    }
+  });
   var form = document.getElementById('emailPopupForm');
-  if (form) form.addEventListener('submit', function() { localStorage.setItem('mtEmailSubmitted', '1'); });
+  if (form) form.addEventListener('submit', function () {
+    localStorage.setItem('mtEmailSubmitted', '1');
+  });
   var ctaForm = document.getElementById('ctaEmailPopupForm');
-  if (ctaForm) ctaForm.addEventListener('submit', function() { localStorage.setItem('mtEmailSubmitted', '1'); });
+  if (ctaForm) ctaForm.addEventListener('submit', function () {
+    localStorage.setItem('mtEmailSubmitted', '1');
+  });
   window.openEmailPopup = openPopup;
   window.openCtaEmailPopup = openCtaPopup;
+  window.addEventListener('scroll', onScrollEmail, { passive: true });
+
   window.handleSlovakiaPdfCta = function(e, source) {
     var pdfUrl = 'MatayTasim-Slovakia-Countdown.pdf';
     var variantKey = 'mtCtaPopupVariant';
@@ -1590,22 +1687,26 @@
     z-index: 900;
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    padding: 0;
     background: #F5EDD8;
     color: #124d52;
     border: 1.5px solid #e8ddc4;
-    border-radius: 30px;
-    padding: 11px 18px;
+    border-radius: 50%;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    font-weight: 700;
     cursor: grab;
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     transition: box-shadow 0.2s ease, background 0.2s ease;
-    letter-spacing: 0.02em;
     animation: pbFloat 3s ease-in-out infinite;
     user-select: none;
     touch-action: none;
+  }
+  .pb-float-btn__icon {
+    font-size: 24px;
+    line-height: 1;
+    pointer-events: none;
   }
   .pb-float-btn:hover {
     background: #e8ddc4;
@@ -1627,8 +1728,10 @@
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.35);
     z-index: 1100;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
   .pb-drawer-overlay.open { display: block; }
 
@@ -1638,7 +1741,7 @@
     left: 0;
     bottom: 0;
     width: 360px;
-    max-width: 95vw;
+    max-width: calc(100vw - 56px);
     background: var(--cream);
     z-index: 1200;
     transform: translateX(-100%);
@@ -1646,15 +1749,20 @@
     display: flex;
     flex-direction: column;
     box-shadow: 8px 0 40px rgba(0,0,0,0.15);
+    max-height: 100dvh;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
   }
   .pb-drawer.open { transform: translateX(0); }
 
   .pb-drawer-head {
     background: var(--teal);
     padding: 18px 20px;
+    padding-top: max(18px, env(safe-area-inset-top, 0px));
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
     flex-shrink: 0;
   }
   .pb-drawer-head h3 {
@@ -1666,6 +1774,9 @@
     align-items: center;
     gap: 8px;
     letter-spacing: 0.03em;
+    flex: 1;
+    min-width: 0;
+    line-height: 1.25;
   }
   .pb-drawer-close {
     width: 32px;
@@ -1675,13 +1786,77 @@
     background: transparent;
     color: #fff;
     font-size: 18px;
+    line-height: 1;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.15s;
+    flex-shrink: 0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    padding: 0;
   }
   .pb-drawer-close:hover { background: rgba(255,255,255,0.15); }
+
+  @media (max-width: 600px) {
+    .pb-drawer {
+      width: min(360px, calc(100vw - 52px));
+      max-width: calc(100vw - 52px);
+    }
+    .pb-drawer-head {
+      padding: 12px 12px 12px 14px;
+      padding-top: max(12px, env(safe-area-inset-top, 0px));
+    }
+    .pb-drawer-head h3 {
+      font-size: 17px;
+      gap: 6px;
+    }
+    .pb-drawer-close {
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      min-height: 46px;
+      font-size: 22px;
+      border-width: 2px;
+      background: rgba(255,255,255,0.12);
+    }
+    .pb-drawer-cats {
+      padding: 10px 12px;
+      gap: 6px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .pb-drawer-cats::-webkit-scrollbar { display: none; }
+    .pb-dcat {
+      flex-shrink: 0;
+      padding: 8px 14px;
+      font-size: 12px;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .pb-drawer-body {
+      flex: 1;
+      min-height: 0;
+      padding: 6px 0 max(20px, env(safe-area-inset-bottom, 12px));
+    }
+    .pb-item {
+      padding: 12px 14px;
+      gap: 10px;
+    }
+    .pb-item-he { font-size: 16px; }
+    .pb-item-sk { font-size: 15px; }
+    .pb-float-btn {
+      bottom: max(88px, calc(env(safe-area-inset-bottom, 12px) + 72px));
+      left: max(12px, env(safe-area-inset-left, 12px));
+      width: 48px;
+      height: 48px;
+    }
+  }
 
   .pb-drawer-cats {
     display: flex;
@@ -1746,6 +1921,7 @@
   .pb-drawer.open .pb-item:nth-child(8)  { animation-delay: 0.29s; }
   .pb-drawer.open .pb-item:nth-child(9)  { animation-delay: 0.31s; }
   .pb-drawer.open .pb-item:nth-child(10) { animation-delay: 0.33s; }
+  .pb-emergency-note {
     background: rgba(232,160,69,0.12);
     border-right: 3px solid var(--amber);
     border-radius: 0 8px 8px 0;
@@ -1759,8 +1935,8 @@
 </style>
 
 <!-- Floating button -->
-<button class="pb-float-btn" id="pbOpenBtn" aria-label="פתח מילון סלובקי">
-  <span style="font-size:20px;line-height:1;display:inline-block;">🗣️</span>
+<button type="button" class="pb-float-btn" id="pbOpenBtn" aria-label="פתח מילון סלובקי" title="מילון סלובקי">
+  <span class="pb-float-btn__icon" aria-hidden="true">&#x1F5E3;&#xFE0F;</span>
 </button>
 
 <!-- Overlay -->
@@ -1770,7 +1946,7 @@
 <div class="pb-drawer" id="pbDrawer" role="dialog" aria-label="מילון שימושי לסלובקית">
   <div class="pb-drawer-head">
     <h3>🗣️ מילון סלובקי</h3>
-    <button class="pb-drawer-close" id="pbCloseBtn">✕</button>
+    <button type="button" class="pb-drawer-close" id="pbCloseBtn" aria-label="סגור מילון">✕</button>
   </div>
 
   <div class="pb-drawer-cats">
@@ -1826,8 +2002,8 @@
   var drawer = document.getElementById('pbDrawer');
   var overlay = document.getElementById('pbOverlay');
 
-  function openPb() { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closePb() { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  function openPb() { drawer.classList.add('open'); overlay.classList.add('open'); if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock(); else document.body.style.overflow = 'hidden'; }
+  function closePb() { drawer.classList.remove('open'); overlay.classList.remove('open'); if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock(); else document.body.style.overflow = ''; }
 
   /* ── DRAG ── */
   var isDragging = false;
@@ -1883,6 +2059,9 @@
   document.addEventListener('touchend', onDragEnd);
   closeBtn.addEventListener('click', closePb);
   overlay.addEventListener('click', closePb);
+  overlay.addEventListener('touchend', function (e) {
+    if (e.target === overlay) closePb();
+  }, { passive: true });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') closePb(); });
 
   window.pbFilter = function(cat, btn) {
