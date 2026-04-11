@@ -329,6 +329,35 @@
     .trip-map-popup-shell .leaflet-popup-tip {
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     }
+    /* Large tap target — default Leaflet × is ~18px and brutal on phones */
+    .trip-map-popup-shell .leaflet-popup-close-button {
+      width: 48px !important;
+      height: 48px !important;
+      min-width: 48px !important;
+      min-height: 48px !important;
+      padding: 0 !important;
+      top: 8px !important;
+      left: 8px !important;
+      right: auto !important;
+      border: none !important;
+      border-radius: 50% !important;
+      background: rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12) !important;
+      font-size: 28px !important;
+      line-height: 1 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      color: var(--charcoal) !important;
+      text-decoration: none !important;
+      z-index: 5 !important;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .trip-map-popup-shell .leaflet-popup-close-button:hover {
+      background: #fff !important;
+      color: var(--teal-dark) !important;
+    }
     .trip-map-popup {
       font-family: 'Rubik', 'Assistant', system-ui, -apple-system, sans-serif;
       text-align: right;
@@ -2749,7 +2778,9 @@
       center: [47.8, 14.5],
       zoom: 7,
       scrollWheelZoom: false,
-      zoomControl: false
+      zoomControl: false,
+      tap: true,
+      tapTolerance: 45
     });
     L.control.zoom({ position: 'bottomright' }).addTo(map);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -2926,38 +2957,49 @@
       if (hoverMapId && markers[hoverMapId]) markers[hoverMapId].setIcon(makeTripMapPin(dayById[hoverMapId]));
     }
 
-    /** Same approach as slovakia.html: solid circle + emoji, className '' — avoids SVG/teardrop hit-test issues on touch. */
+    /** Circle + emoji (slovakia-style) + invisible padding so taps register on first try. */
     function makeTripMapPin(d) {
       var active = d.id === activeId;
       var syncHover = !active && d.id === hoverMapId;
-      var size = active ? 46 : syncHover ? 40 : 38;
+      var inner = active ? 46 : syncHover ? 40 : 38;
+      var pad = 14;
+      var hit = inner + pad * 2;
       var bg = active ? d.color : '#fff';
       var border = active ? '#fff' : d.color;
       var fontSize = active ? 20 : syncHover ? 17 : 16;
       var shadow = syncHover
         ? '0 3px 12px rgba(0,0,0,0.22),0 0 0 3px rgba(26,107,114,0.35)'
         : '0 3px 12px rgba(0,0,0,0.22)';
+      var disc =
+        'width:' +
+        inner +
+        'px;height:' +
+        inner +
+        'px;border-radius:50%;background:' +
+        bg +
+        ';border:2.5px solid ' +
+        border +
+        ';display:flex;align-items:center;justify-content:center;font-size:' +
+        fontSize +
+        'px;box-shadow:' +
+        shadow +
+        ';cursor:pointer;-webkit-tap-highlight-color:transparent;pointer-events:auto';
       return L.divIcon({
         className: '',
         html:
           '<div style="width:' +
-          size +
+          hit +
           'px;height:' +
-          size +
-          'px;border-radius:50%;background:' +
-          bg +
-          ';border:2.5px solid ' +
-          border +
-          ';display:flex;align-items:center;justify-content:center;font-size:' +
-          fontSize +
-          'px;box-shadow:' +
-          shadow +
-          ';cursor:pointer;-webkit-tap-highlight-color:transparent;"><span style="line-height:1;">' +
+          hit +
+          'px;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;cursor:pointer;pointer-events:auto">' +
+          '<div style="' +
+          disc +
+          '"><span style="line-height:1;">' +
           d.emoji +
-          '</span></div>',
-        iconSize: [size, size],
-        iconAnchor: [size / 2, size / 2],
-        popupAnchor: [0, -(size / 2 + 4)]
+          '</span></div></div>',
+        iconSize: [hit, hit],
+        iconAnchor: [hit / 2, hit / 2],
+        popupAnchor: [0, -(hit / 2 + 4)]
       });
     }
 
@@ -2977,9 +3019,11 @@
     }
 
     function flyTo(d) {
-      map.flyTo([d.lat, d.lng], 10, { duration: 1 });
       setActive(d.id);
-      if (markers[d.id]) markers[d.id].openPopup();
+      map.once('moveend', function() {
+        if (markers[d.id]) markers[d.id].openPopup();
+      });
+      map.flyTo([d.lat, d.lng], 10, { duration: 1 });
     }
 
     window.goToDay = function(id) {
@@ -2998,10 +3042,8 @@
         maxWidth: Math.min(320, Math.max(200, (window.innerWidth || 400) - 32)),
         minWidth: 0
       });
-      m.on('click', function() {
-        setActive(d.id);
-      });
       m.on('popupopen', function() {
+        setActive(d.id);
         m.setPopupContent(tripMapPopupHtml(d));
       });
       m.on('mouseover', function() {
