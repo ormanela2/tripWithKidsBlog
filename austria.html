@@ -1,3 +1,7 @@
+﻿                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כ-15 דקות נסיעה מ-Kraftwerk Grafenberg ל-Soccerpark באזור וואגריין-קליינארל.</div>
+                  </div>
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -44,6 +48,11 @@
       --red: #c0392b; --red-dark: #922b21;
       --font-heading: 'Secular One', sans-serif; --font-body: 'Rubik', sans-serif;
       --nav-height: 72px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-xl: 28px;
+      --border: rgba(0, 0, 0, 0.08);
+      --ease: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -56,48 +65,59 @@
     .container--narrow { max-width: 780px; }
 
     /* ── EMAIL POPUP ─────────────────────────────── */
-    .email-popup-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; padding:24px; }
+    .email-popup-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; padding:max(20px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); box-sizing:border-box; }
     .email-popup-overlay.open { display:flex; }
-    .email-popup { background:var(--cream); border-radius:20px; padding:40px 32px; max-width:420px; width:100%; text-align:center; position:relative; box-shadow:0 16px 48px rgba(0,0,0,0.2); animation:popupIn 0.3s ease; box-sizing:border-box; }
+    .email-popup { background:var(--cream); border-radius:20px; padding:40px 32px 36px; max-width:min(420px, calc(100vw - 32px)); width:100%; text-align:center; position:relative; box-shadow:0 16px 48px rgba(0,0,0,0.2); animation:popupIn 0.3s ease; box-sizing:border-box; }
     @keyframes popupIn { from { transform:translateY(20px); opacity:0; } to { transform:translateY(0); opacity:1; } }
-    .email-popup__close { position:absolute; top:14px; left:16px; font-size:22px; cursor:pointer; color:#aaa; background:none; border:none; line-height:1; }
-    .email-popup__close:hover { color:var(--charcoal); }
-    .email-popup__icon { font-size:40px; margin-bottom:12px; }
-    .email-popup__title { font-family:var(--font-heading); font-size:22px; color:var(--teal); margin-bottom:8px; }
-    .email-popup__subtitle { font-size:14px; color:#666; line-height:1.6; margin-bottom:24px; }
-    .email-popup__form { display:flex; flex-direction:column; gap:12px; }
-    .email-popup__input { padding:13px 18px; border:2px solid var(--sand-dark); border-radius:40px; font-family:var(--font-body); font-size:15px; background:white; color:var(--charcoal); outline:none; text-align:right; width:100%; box-sizing:border-box; }
+    .email-popup__close { position:absolute; top:12px; left:12px; font-size:24px; line-height:1; cursor:pointer; color:#666; background:rgba(0,0,0,0.06); border:none; width:44px; height:44px; min-width:44px; min-height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; padding:0; -webkit-tap-highlight-color:transparent; transition:background 0.2s, color 0.2s; }
+    .email-popup__close:hover { color:var(--charcoal); background:rgba(0,0,0,0.1); }
+    .email-popup__title { font-family:var(--font-heading); font-size:22px; color:var(--teal); margin:8px 0 6px; line-height:1.25; }
+    .email-popup__subtitle { font-size:14px; color:#666; line-height:1.55; margin:0 0 20px; }
+    .email-popup__form { display:flex; flex-direction:column; gap:14px; }
+    .email-popup__input { padding:14px 18px; border:2px solid var(--sand-dark); border-radius:40px; font-family:var(--font-body); font-size:16px; background:white; color:var(--charcoal); outline:none; text-align:right; width:100%; box-sizing:border-box; }
     .email-popup__input:focus { border-color:var(--teal); }
-    .email-popup__btn { background:var(--teal); color:white; border:none; border-radius:40px; padding:13px 28px; font-family:var(--font-body); font-size:15px; font-weight:600; cursor:pointer; transition:background 0.2s; }
+    .email-popup__btn { background:var(--teal); color:white; border:none; border-radius:40px; padding:14px 24px; font-family:var(--font-body); font-size:16px; font-weight:600; cursor:pointer; transition:background 0.2s; min-height:48px; -webkit-tap-highlight-color:transparent; }
     .email-popup__btn:hover { background:var(--teal-dark); }
-    .email-popup__skip { font-size:13px; color:#aaa; cursor:pointer; margin-top:4px; background:none; border:none; text-decoration:underline; }
-    .email-popup__skip:hover { color:var(--charcoal); }
-
-    /* ── NAV ─────────────────────────────── */
-    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
-    .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
-    .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
+    @media (max-width:600px) {
+      .email-popup-overlay { padding:max(14px, env(safe-area-inset-top, 10px)) max(18px, env(safe-area-inset-right, 12px)) max(18px, env(safe-area-inset-bottom, 12px)) max(18px, env(safe-area-inset-left, 12px)); align-items:center; }
+      .email-popup { padding:44px 18px 22px; border-radius:18px; max-width:calc(100vw - 36px); }
+      .email-popup__title { font-size:19px; }
+      .email-popup__subtitle { font-size:13px; margin-bottom:18px; }
+      .email-popup__close { top:10px; left:10px; }
+    }
+    /* ── NAV — mobile drawer sibling after </nav> (Safari backdrop-filter). ── */
+    .nav { position:fixed; top:0; right:0; left:0; z-index:1201; background:rgba(253,248,242,0.96); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--border); height:var(--nav-height); transition:box-shadow var(--ease); }
+    .nav.scrolled { box-shadow:0 2px 20px rgba(0,0,0,0.08); }
+    .nav__inner { display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
     .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
     .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
     .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
-    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.02em; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
+    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.02em; color:var(--charcoal); text-decoration:none; transition:background var(--ease),color var(--ease); min-height:44px; display:flex; align-items:center; }
     .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
-    .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
-    .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
+    .nav__link:focus-visible { outline:2px solid var(--teal); outline-offset:2px; }
+    .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
+    .nav__link[aria-current="page"]:hover, .nav__link[aria-current="page"]:focus-visible { background:var(--teal-dark); color:#fff; }
     .nav__mobile-actions { display:none; align-items:center; gap:4px; }
-    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
+    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; padding:8px; position:relative; z-index:1200; }
     .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
     .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
     .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
     .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
     .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
-    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:24px 20px 32px; flex-direction:column; gap:4px; z-index:999; overflow-y:auto; }
+    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:24px 20px max(32px, env(safe-area-inset-bottom)); flex-direction:column; gap:4px; z-index:1200; overflow-y:auto; -webkit-overflow-scrolling:touch; }
     .nav__mobile-menu.open { display:flex; }
-    .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:300; font-size:15px; border-radius:22px; padding:8px 16px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); animation:communityPulse 2.8s ease-in-out infinite; }
-    .nav__link--community:hover, .nav__link--community:focus-visible { background:#d4903c !important; color:#2C2C2C !important; transform:translateY(-2px); box-shadow:0 4px 16px rgba(232,160,69,0.55); animation:none; }
-    .nav__link--community::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; margin-left:7px; box-shadow:0 0 6px #4ade80; animation:dotBlink 1.4s ease-in-out infinite; }
-    @keyframes communityPulse { 0%,100%{box-shadow:0 2px 10px rgba(232,160,69,0.4);} 50%{box-shadow:0 2px 18px rgba(232,160,69,0.75),0 0 0 4px rgba(232,160,69,0.15);} }
-    @keyframes dotBlink { 0%,100%{opacity:0.4;box-shadow:0 0 3px #4ade80;} 50%{opacity:1;box-shadow:0 0 10px #4ade80,0 0 20px #4ade8088;} }
+    .nav__link--packages { gap:8px; font-weight:500; position:relative; padding-inline:14px; }
+    .nav__link--packages .nav__packages-icon { width:16px; height:16px; flex:0 0 auto; opacity:0.95; }
+    .nav__link--packages .nav__packages-badge { font-size:10px; font-weight:600; line-height:1; color:var(--teal-dark); background:var(--sand); border:1px solid var(--sand-dark); border-radius:999px; padding:4px 7px; margin-right:4px; }
+    .nav__link--packages[aria-current="page"] .nav__packages-badge { color:var(--teal-dark); background:#fff; border-color:rgba(255,255,255,0.6); }
+    .nav__link--community { background:transparent; color:#0f4a50 !important; font-size:15px; border-radius:22px; padding:8px 18px; min-height:44px; transition:background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease,transform 0.2s ease; gap:10px; animation:none; }
+    .nav__link--community:hover, .nav__link--community:focus-visible { background:#145960 !important; color:#fff !important; transform:none; box-shadow:0 2px 10px rgba(15,74,80,0.3); }
+    .nav__link--community::before { content:none; animation:none; }
+    .nav__link--community .nav__community-icon { width:18px; height:18px; flex:0 0 auto; opacity:0.95; margin-left:4px; }
+    .nav__link--community:hover .nav__community-icon, .nav__link--community:focus-visible .nav__community-icon { opacity:1; }
+    @media (prefers-reduced-motion: reduce) {
+      .nav__link--community, .nav__link--community::before, .nav__community-icon { animation:none !important; transition:none !important; transform:none !important; }
+    }
     @media(max-width:900px) {
       .nav__links { display:none; }
       .nav__mobile-actions { display:flex; }
@@ -194,19 +214,60 @@
     .timeline::before { content: ''; position: absolute; top: 0; bottom: 0; right: 50%; width: 3px; background: linear-gradient(to bottom, var(--red), var(--amber), var(--teal)); transform: translateX(50%); border-radius: 3px; }
     .tl-item { display: grid; grid-template-columns: 1fr 56px 1fr; gap: 0 0; margin-bottom: 48px; position: relative; align-items: start; }
     .tl-item__label { font-family: var(--font-heading); font-size: 13px; color: #aaa; letter-spacing: 0.5px; padding-top: 18px; }
-    .tl-item:nth-child(odd)  .tl-item__label { text-align: left;  padding-right: 28px; }
-    .tl-item:nth-child(even) .tl-item__label { text-align: right; padding-left: 28px; order: 3; }
+    .tl-item[data-tl-layout="odd"]  .tl-item__label { text-align: left;  padding-right: 28px; }
+    .tl-item[data-tl-layout="even"] .tl-item__label { text-align: right; padding-left: 28px; order: 3; }
     .tl-item__node { display: flex; flex-direction: column; align-items: center; gap: 0; position: relative; z-index: 2; padding-top: 12px; }
     .tl-item__icon { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 4px solid var(--cream); box-shadow: 0 2px 12px rgba(0,0,0,0.15); flex-shrink: 0; }
     .tl-item__day-label { margin-top: 6px; font-family: var(--font-heading); font-size: 11px; color: #aaa; letter-spacing: 0.5px; }
     .tl-item__card { background: var(--white); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 2px solid var(--sand-dark); transition: transform 0.35s ease, box-shadow 0.35s ease; cursor: pointer; }
     .tl-item__card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.13); }
-    .tl-item:nth-child(odd)  .tl-item__card { margin-left: 24px; }
-    .tl-item:nth-child(even) .tl-item__card { margin-right: 24px; order: -1; }
+    .tl-item[data-tl-layout="odd"]  .tl-item__card { margin-left: 24px; }
+    .tl-item[data-tl-layout="even"] .tl-item__card { margin-right: 24px; order: -1; }
     .tl-card__band { height: 6px; width: 100%; }
     .tl-card__header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
     .tl-card__title { font-family: var(--font-heading); font-size: 16px; color: var(--charcoal); line-height: 1.35; }
     .tl-card__where { font-size: 12px; color: #aaa; margin-top: 4px; display: flex; align-items: center; gap: 3px; }
+    .tl-card__travel-from-home {
+      background: rgba(26, 107, 114, 0.08);
+      border-right: 3px solid var(--teal);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 14px;
+      margin: 0 0 14px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #444;
+    }
+    .tl-card__travel-from-home__title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--teal);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .tl-card__travel-from-home__text { color: #555; }
+    .tl-card__travel-from-home__row { display: flex; gap: 8px; align-items: flex-start; }
+    .tl-card__travel-from-home__ic { flex-shrink: 0; font-size: 16px; line-height: 1.4; }
+    .tl-card__travel-from-home__time { font-weight: 700; color: var(--charcoal); }
+    .tl-card__travel-from-home__detail { font-size: 12px; color: #777; margin-top: 6px; padding-right: 24px; }
+    .tl-card__travel-from-home__src {
+      font-size: 11px;
+      color: #999;
+      margin-top: 8px;
+      padding-right: 24px;
+      line-height: 1.45;
+    }
+    .tl-card__travel-inner-day {
+      background: rgba(192, 57, 43, 0.06);
+      border-right: 3px solid #c0392b;
+      border-radius: 0 10px 10px 0;
+      padding: 10px 14px;
+      margin: 0 0 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #555;
+      line-height: 1.45;
+    }
+    .tl-card__travel-inner-day__ic { margin-left: 4px; }
     .tl-card__star { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
     .tl-card__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px 14px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-size: 13px; color: var(--teal); font-weight: 600; border-top: 1px solid var(--sand); }
     .tl-card__toggle:hover { background: var(--sand); }
@@ -219,8 +280,238 @@
     .tl-activity__time { font-size: 11px; font-weight: 700; color: var(--teal); min-width: 46px; padding-top: 2px; letter-spacing: 0.3px; }
     .tl-activity__name { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
     .tl-activity__desc { font-size: 13px; color: #666; line-height: 1.55; }
+    .tl-drive {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 8px 0 12px; margin: 0;
+      border-bottom: 1px dashed var(--sand-dark);
+      font-size: 12px; color: #5a6d70; line-height: 1.5;
+    }
+    .tl-drive__ic { flex-shrink: 0; font-size: 14px; line-height: 1.4; opacity: 0.92; }
+    .tl-drive__text { font-weight: 500; }
     .tl-tip { margin-top: 12px; background: rgba(232,160,69,0.1); border-right: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 9px 13px; font-size: 13px; color: #666; }
     .tl-tip strong { color: var(--amber-dark); }
+
+    /* Trip map — Google-style pins + animated route */
+    .trip-map-pin-wrap { background: transparent !important; border: none !important; }
+    .trip-map-pin-root {
+      position: relative;
+      cursor: pointer;
+      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.32));
+      transition: transform 0.22s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.22s ease;
+    }
+    .trip-map-pin-root:hover {
+      transform: scale(1.06);
+      filter: drop-shadow(0 5px 14px rgba(0, 0, 0, 0.36));
+    }
+    .trip-map-pin-root--active {
+      transform: scale(1.1);
+      filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
+      z-index: 5;
+    }
+    @keyframes tripPinGlowPulse {
+      0%, 100% {
+        filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.32));
+      }
+      50% {
+        filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 14px rgba(26, 107, 114, 0.55));
+      }
+    }
+    .trip-map-pin-root--sync-hover {
+      animation: tripPinGlowPulse 1.15s ease-in-out infinite;
+      z-index: 6;
+    }
+    .trip-map-pin-root--active.trip-map-pin-root--sync-hover {
+      animation: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .trip-map-pin-root--sync-hover { animation: none; }
+    }
+    .trip-map-pin__drop { display: block; width: 100%; height: 100%; }
+    .trip-map-pin__emoji {
+      position: absolute;
+      left: 50%;
+      top: 25%;
+      transform: translate(-50%, -50%);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.85)) drop-shadow(0 0 1px rgba(0, 0, 0, 0.25));
+    }
+
+    .trip-route-arrow-wrap { background: none !important; border: none !important; }
+    .trip-route-arrow-rot {
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
+    }
+    .trip-route-arrow-svg {
+      display: block;
+      width: 24px;
+      height: 24px;
+    }
+
+    .leaflet-overlay-pane svg path.trip-route-path {
+      stroke-linecap: round !important;
+      stroke-linejoin: round !important;
+    }
+
+    .trip-map-popup-shell .leaflet-popup-content-wrapper {
+      padding: 0;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.12);
+      border: none;
+      font-family: 'Rubik', 'Assistant', system-ui, -apple-system, sans-serif;
+    }
+    .trip-map-popup-shell .leaflet-popup-content {
+      margin: 0;
+      min-width: 0;
+      font-family: 'Rubik', 'Assistant', system-ui, -apple-system, sans-serif;
+    }
+    .trip-map-popup-shell .leaflet-popup-tip {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    .trip-map-popup {
+      font-family: 'Rubik', 'Assistant', system-ui, -apple-system, sans-serif;
+      text-align: right;
+      max-width: 300px;
+    }
+    /* Main trip map — card shell + custom zoom (Positron base) */
+    #trip-map {
+      height: 420px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+    @media (max-width: 600px) {
+      #trip-map {
+        height: min(420px, 52vh);
+        min-height: 280px;
+        border-radius: 14px;
+      }
+      .trip-map-popup {
+        max-width: min(300px, calc(100vw - 36px));
+      }
+      .trip-map-popup-shell .leaflet-popup-content-wrapper {
+        max-width: calc(100vw - 40px);
+      }
+      #map-day-pills {
+        gap: 10px;
+      }
+      #map-day-pills .map-pill {
+        min-height: 44px;
+        padding: 8px 14px !important;
+        font-size: 14px !important;
+        -webkit-tap-highlight-color: transparent;
+      }
+    }
+    #trip-map .leaflet-control-zoom {
+      border: none !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      margin: 0 14px 14px 0 !important;
+    }
+    @media (max-width: 600px) {
+      #trip-map .leaflet-control-zoom {
+        margin: 0 max(10px, env(safe-area-inset-right, 0px)) max(12px, env(safe-area-inset-bottom, 0px)) 0 !important;
+      }
+    }
+    #trip-map .leaflet-bar { box-shadow: none !important; border: none !important; }
+    #trip-map .leaflet-control-zoom a {
+      width: 40px !important;
+      height: 40px !important;
+      line-height: 40px !important;
+      border-radius: 50% !important;
+      background: #fff !important;
+      color: var(--teal) !important;
+      border: none !important;
+      box-shadow: 0 2px 14px rgba(0, 0, 0, 0.1) !important;
+      font-size: 18px !important;
+      font-weight: 600 !important;
+    }
+    #trip-map .leaflet-control-zoom a:hover { background: #f8fafb !important; color: var(--teal-dark) !important; }
+    #trip-map .leaflet-control-zoom-in { margin-bottom: 10px !important; border-bottom: none !important; }
+    .trip-map-popup__media {
+      height: 120px;
+      background: var(--sand);
+      overflow: hidden;
+    }
+    .trip-map-popup__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .trip-map-popup__media--ph {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, var(--sand) 0%, var(--cream) 100%);
+    }
+    .trip-map-popup__ph-emoji {
+      font-size: 42px;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+    }
+    .trip-map-popup__body {
+      padding: 12px 14px 14px;
+      background: var(--white);
+    }
+    .trip-map-popup__kicker {
+      font-size: 11px;
+      font-weight: 600;
+      color: #999;
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+    .trip-map-popup__label {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+    .trip-map-popup__title {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+    .trip-map-popup__btn {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Rubik', 'Assistant', system-ui, -apple-system, sans-serif;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .trip-map-popup__link {
+      width: 100%;
+      display: block;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Rubik', 'Assistant', system-ui, -apple-system, sans-serif;
+      background: none;
+      border: none;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: var(--teal);
+    }
+    .trip-map-popup__link:hover {
+      color: var(--teal-dark);
+    }
 
     /* Timeline item color themes */
     .tl-item--flight .tl-item__icon { background: linear-gradient(135deg, #1A6B72, #238a93); color: #fff; }
@@ -249,30 +540,342 @@
       .tl-item { grid-template-columns: 56px 1fr; grid-template-rows: auto auto; }
       .tl-item__label { display: none; }
       .tl-item__node { padding-top: 10px; }
-      .tl-item:nth-child(odd)  .tl-item__card { margin-left: 12px; }
-      .tl-item:nth-child(even) .tl-item__card { margin-right: 0; margin-left: 12px; order: unset; }
-      .tl-item:nth-child(even) .tl-item__label { order: unset; }
+      .tl-item[data-tl-layout="odd"]  .tl-item__card { margin-left: 12px; }
+      .tl-item[data-tl-layout="even"] .tl-item__card { margin-right: 0; margin-left: 12px; order: unset; }
+      .tl-item[data-tl-layout="even"] .tl-item__label { order: unset; }
     }
 
     /* ── MAP ── */
-    #trip-map { height: 420px; border-radius: 16px; overflow: hidden; border: 2px solid var(--sand-dark); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
     #map-day-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 
-    /* ── TIPS ── */
-    .tips-list { display: flex; flex-direction: column; gap: 10px; }
+    /* ── TIPS (base .tip-item — Vienna grid still uses these) ── */
     .tip-item { background: var(--white); border-radius: 12px; border: 2px solid var(--sand-dark); padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
     .tip-item__icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
     .tip-item__text { color: #555; line-height: 1.65; }
     .tip-item__text strong { color: var(--charcoal); }
 
-    /* ── ATTRACTIONS GRID ── */
-    .attractions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .attraction-card { background: var(--white); border-radius: 14px; border: 2px solid var(--sand-dark); padding: 16px 18px; transition: transform 0.25s, box-shadow 0.25s; }
-    .attraction-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-    .attraction-card__icon { font-size: 28px; margin-bottom: 8px; display: block; }
-    .attraction-card__name { font-family: var(--font-heading); font-size: 15px; margin-bottom: 6px; color: var(--teal); }
-    .attraction-card__desc { font-size: 13px; color: #666; line-height: 1.6; }
-    @media (max-width: 500px) { .attractions-grid { grid-template-columns: 1fr; } }
+    /* ── Important tips (#tips): categorized pro-tip cards ── */
+    #tips .tips-pro-wrap { display: flex; flex-direction: column; gap: 28px; margin-top: 4px; }
+    #tips .tips-pro-group__title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      margin: 0 0 4px;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+    #tips .tips-pro-group__sub {
+      margin: 0 0 12px;
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.45;
+    }
+    #tips .tips-pro-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 14px;
+      align-items: stretch;
+    }
+    @media (max-width: 720px) {
+      #tips .tips-pro-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+    #tips .tip-pro {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    #tips .tip-pro:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    #tips .tip-pro:focus-within {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+    #tips .tip-pro--warm {
+      background: linear-gradient(145deg, #fffdf7 0%, #fff4d6 55%, #fffbeb 100%);
+      border-color: rgba(234, 179, 8, 0.38);
+    }
+    #tips .tip-pro--cool {
+      background: linear-gradient(145deg, #f8fbff 0%, #e8f2ff 50%, #f0f7ff 100%);
+      border-color: rgba(96, 165, 250, 0.45);
+    }
+    #tips .tip-pro__icon-wrap {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+    #tips .tip-pro__svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+    #tips .tip-pro--warm .tip-pro__svg { color: #b45309; }
+    #tips .tip-pro--cool .tip-pro__svg { color: #1d4ed8; }
+    #tips .tip-pro__body { flex: 1; min-width: 0; text-align: right; }
+    #tips .tip-pro__subject {
+      display: block;
+      font-weight: 700;
+      font-size: 1.0625rem;
+      color: var(--charcoal);
+      margin: 0 0 5px;
+      line-height: 1.3;
+    }
+    #tips .tip-pro__text {
+      margin: 0;
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.55;
+    }
+    @media (max-width: 720px) {
+      #tips .tip-pro {
+        padding: 10px 12px;
+        gap: 10px;
+        border-radius: 12px;
+      }
+      #tips .tip-pro__icon-wrap {
+        width: 36px;
+        height: 36px;
+      }
+      #tips .tip-pro__svg {
+        width: 18px;
+        height: 18px;
+      }
+      #tips .tip-pro__subject {
+        font-size: 15px;
+        margin-bottom: 3px;
+      }
+      #tips .tip-pro__text {
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      #tips .tips-pro-wrap {
+        gap: 22px;
+      }
+    }
+    #tips .article-section__title-icon-svg {
+      display: inline-flex;
+      vertical-align: middle;
+      margin-inline-end: 6px;
+      color: var(--teal);
+    }
+    #tips .tips-pro-more {
+      margin: 10px 0 0;
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #444;
+      background: linear-gradient(145deg, #faf8f4, #f2ede4);
+      border: 1px solid rgba(26, 107, 114, 0.22);
+      border-radius: 12px;
+    }
+    #tips .tips-pro-more__link {
+      color: inherit;
+      text-decoration: none;
+      display: inline;
+    }
+    #tips .tips-pro-more__cta {
+      color: var(--teal-dark);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    #tips .tips-pro-more__link:hover .tips-pro-more__cta,
+    #tips .tips-pro-more__link:focus-visible .tips-pro-more__cta {
+      color: var(--teal);
+    }
+
+    /* Vienna attractions: grouped responsive grid, compact tiles */
+    #vienna-attractions .vienna-attractions-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #vienna-attractions .vienna-grid__group {
+      margin: 0;
+    }
+    #vienna-attractions .vienna-grid__group-title {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: var(--teal-dark);
+      margin: 0 0 6px;
+      line-height: 1.3;
+      opacity: 0.92;
+    }
+    #vienna-attractions .vienna-grid__cells {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 8px;
+      align-items: stretch;
+    }
+    @media (max-width: 640px) {
+      #vienna-attractions .vienna-grid__cells {
+        grid-template-columns: 1fr;
+      }
+    }
+    #vienna-attractions .tip-item {
+      align-items: flex-start;
+      height: 100%;
+      min-height: 0;
+      padding: 11px 12px;
+      gap: 10px;
+      border-width: 1px;
+      border-color: rgba(0, 0, 0, 0.07);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    #vienna-attractions .tip-item:hover {
+      background: #faf8f4;
+      border-color: rgba(26, 107, 114, 0.16);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+    #vienna-attractions .tip-item__icon {
+      margin-top: 2px;
+      font-size: 18px;
+      line-height: 1;
+      width: 1.65rem;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #vienna-attractions .tip-item__body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      text-align: right;
+    }
+    #vienna-attractions .tip-item__title {
+      font-family: var(--font-heading);
+      font-size: clamp(13px, 1.05vw, 15px);
+      font-weight: 700;
+      color: var(--teal);
+      margin: 0;
+      line-height: 1.28;
+      letter-spacing: -0.01em;
+    }
+    #vienna-attractions .tip-item__desc {
+      font-size: 12.5px;
+      color: #4a4a4a;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ── ATTRACTIONS GRID (magazine-style horizontal cards) ── */
+    .attractions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+    .attraction-card {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 20px;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 22px 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: background-color 0.28s ease, box-shadow 0.28s ease, transform 0.24s ease, border-color 0.24s ease;
+    }
+    .attraction-card:hover {
+      background: #faf8f4;
+      border-color: rgba(26, 107, 114, 0.18);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.11);
+      transform: translateY(-2px);
+    }
+    .attraction-card__body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: right;
+      gap: 0;
+    }
+    .attraction-card__badge {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--teal-dark);
+      background: rgba(26, 107, 114, 0.1);
+      padding: 5px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .attraction-card__name {
+      font-family: var(--font-heading);
+      font-size: clamp(17px, 1.25vw, 20px);
+      font-weight: 700;
+      margin: 0 0 10px;
+      color: var(--teal);
+      line-height: 1.28;
+      letter-spacing: -0.01em;
+    }
+    .attraction-card__desc {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.65;
+      margin: 0;
+    }
+    .attraction-card__thumb-wrap {
+      flex-shrink: 0;
+      width: 118px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.1);
+      align-self: flex-start;
+      background: var(--sand);
+    }
+    .attraction-card__thumb {
+      display: block;
+      width: 100%;
+      height: 88px;
+      object-fit: cover;
+      vertical-align: middle;
+    }
+    @media (max-width: 720px) {
+      .attractions-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 400px) {
+      .attraction-card { flex-wrap: wrap; padding: 18px 18px; gap: 14px; }
+      .attraction-card__thumb-wrap { width: 100%; max-width: 140px; }
+    }
+    .attractions-grid__attrib {
+      font-size: 10px;
+      color: #888;
+      text-align: center;
+      margin: 14px 0 0;
+      line-height: 1.45;
+    }
 
     /* ── SIDEBAR ── */
     .sidebar { position: sticky; top: calc(var(--nav-height) + 20px); }
@@ -334,7 +937,7 @@
   /* ── DAY MAP MODAL ─────────────────────────────── */
   .daymap-overlay { visibility:hidden; opacity:0; pointer-events:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:3000; display:flex; align-items:center; justify-content:center; padding:16px; transition:opacity 0.2s ease, visibility 0.2s ease; }
   .daymap-overlay.open { visibility:visible; opacity:1; pointer-events:auto; }
-  .daymap-modal { background:var(--cream); border-radius:20px; width:100%; max-width:620px; height:580px; max-height:92vh; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.28); animation:popupIn 0.3s ease; display:flex; flex-direction:column; }
+  .daymap-modal { background:var(--cream); border-radius:20px; width:100%; max-width:620px; height:min(580px,92vh); max-height:92vh; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.28); animation:popupIn 0.3s ease; display:flex; flex-direction:column; }
   .daymap-modal__head { padding:16px 20px; display:flex; align-items:flex-start; justify-content:space-between; gap:12px; border-bottom:1px solid var(--sand-dark); flex-shrink:0; }
   .daymap-modal__title { font-family:var(--font-heading); font-size:17px; color:var(--charcoal); }
   .daymap-modal__subtitle { font-size:12px; color:#aaa; margin-top:3px; }
@@ -346,8 +949,89 @@
   .daymap-chip { display:inline-flex; align-items:center; gap:4px; background:var(--sand); padding:5px 11px; border-radius:20px; white-space:nowrap; }
   .tl-card__mapbtn { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:600; padding:3px 9px; border-radius:12px; border:1.5px solid #4A9B6F; color:#4A9B6F; background:rgba(74,155,111,0.08); cursor:pointer; transition:all 0.18s; white-space:nowrap; flex-shrink:0; font-family:var(--font-body); }
   .tl-card__mapbtn:hover { background:#4A9B6F; color:#fff; }
-  @media(max-width:600px) { .daymap-modal { border-radius:16px; max-height:95vh; } .daymap-modal__mapbox { height:260px; } }
+  @media(max-width:600px) {
+    .daymap-overlay {
+      padding: max(10px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) max(14px, env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
+    }
+    .daymap-modal { border-radius:16px; height:auto; max-height:min(580px,96dvh); min-height:0; }
+    .daymap-modal__mapbox { flex:1 1 auto; min-height:220px; height:min(340px,48vh) !important; }
+    .daymap-modal__close { width:44px; height:44px; min-width:44px; min-height:44px; }
+  }
+
+  /* ── Google Place detail sheet: compact centered drawer ── */
+  .place-sheet { position: fixed; inset: 0; z-index: 3100; pointer-events: none; visibility: hidden; opacity: 0; transition: opacity 0.22s ease, visibility 0.22s ease; }
+  .place-sheet.is-open { pointer-events: auto; visibility: visible; opacity: 1; }
+  .place-sheet__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.5); cursor: pointer; }
+  .place-sheet__panel {
+    position: absolute; left: 50%; right: auto; bottom: 0;
+    width: min(420px, calc(100vw - 24px));
+    max-height: min(88vh, 620px);
+    transform: translate(-50%, 105%);
+    transition: transform 0.34s cubic-bezier(0.32, 0.72, 0, 1);
+    background: var(--cream); border-radius: 20px 20px 0 0;
+    box-shadow: 0 -16px 48px rgba(0,0,0,0.22);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .place-sheet.is-open .place-sheet__panel { transform: translate(-50%, 0); }
+  .place-sheet__grab { flex-shrink: 0; width: 36px; height: 4px; border-radius: 2px; background: rgba(0,0,0,0.12); margin: 10px auto 6px; }
+  .place-sheet__close {
+    position: absolute; top: 10px; left: 10px; width: 36px; height: 36px; border: none; border-radius: 50%;
+    background: rgba(255,255,255,0.92); font-size: 20px; line-height: 1; cursor: pointer; color: #444; z-index: 3;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center;
+  }
+  .place-sheet__close:hover { background: #fff; color: var(--charcoal); }
+  .place-sheet__photo-wrap {
+    flex-shrink: 0; position: relative; width: calc(100% + 0px);
+    aspect-ratio: 16 / 10; max-height: 220px; min-height: 140px;
+    background: linear-gradient(165deg, #e5e0d8, #d4cdc2); overflow: hidden;
+  }
+  .place-sheet__photo {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    display: block;
+  }
+  .place-sheet__scroll { flex: 1; overflow-y: auto; padding: 0 18px max(16px, env(safe-area-inset-bottom)) 18px; min-height: 0; }
+  .place-sheet__title { font-family: var(--font-heading); font-size: 1.05rem; margin: 4px 0 10px; color: var(--charcoal); line-height: 1.35; padding-left: 40px; }
+  .place-sheet__summary { font-size: 13px; color: #666; line-height: 1.55; margin: 0 0 12px; }
+  .place-sheet__meta-row { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 10px; font-size: 13px; color: #444; line-height: 1.5; }
+  .place-sheet__meta-row[hidden] { display: none !important; }
+  .place-sheet__ic { flex-shrink: 0; width: 22px; height: 22px; margin-top: 1px; color: var(--teal); display: flex; align-items: center; justify-content: center; }
+  .place-sheet__ic svg { width: 18px; height: 18px; display: block; }
+  .place-sheet__meta-text { flex: 1; min-width: 0; }
+  .place-sheet__pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+  .place-sheet__pills[hidden] { display: none !important; }
+  .place-sheet__pill { border: 1.5px solid var(--sand-dark); background: #fff; border-radius: 999px; padding: 5px 11px; font-size: 11px; font-family: var(--font-body); cursor: pointer; color: var(--charcoal); transition: background 0.15s, border-color 0.15s; }
+  .place-sheet__pill:hover { background: var(--sand); }
+  .place-sheet__pill.is-active { border-color: var(--teal); background: rgba(26,107,114,0.1); color: var(--teal-dark); font-weight: 600; }
+  .place-sheet__actions { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .place-sheet__btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 10px 14px; border-radius: 12px; background: var(--teal); color: #fff; text-decoration: none;
+    font-weight: 600; font-size: 13px; border: none; cursor: pointer; font-family: var(--font-body); width: 100%; box-sizing: border-box;
+  }
+  .place-sheet__btn--secondary { background: #fff; color: var(--teal); border: 2px solid var(--teal); }
+  .place-sheet__btn svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.95; }
+  .place-sheet__btn:hover { filter: brightness(1.04); }
+  .place-sheet__attr { font-size: 10px; color: #999; margin-top: 12px; line-height: 1.45; text-align: center; }
+  @media (max-width: 380px) {
+    .place-sheet__panel { width: calc(100vw - 16px); border-radius: 16px 16px 0 0; }
+    .place-sheet__photo-wrap { max-height: 190px; }
+  }
 </style>
+<!-- הגדירו מפתח Maps JavaScript API (עם Places). הגבילו לדומיין האתר. -->
+<script>window.GOOGLE_MAPS_API_KEY = 'AIzaSyAIpRqCBJr4vL5CiH0dHh1GSfyyjE2w-XI';</script>
+<script>
+(function(){
+  var k = (window.GOOGLE_MAPS_API_KEY || '').trim();
+  if (!k) return;
+  var s = document.createElement('script');
+  /* v=quarterly: fewer script churns than weekly. Place details cached 7d in localStorage (see PLACE_SHEET_*). */
+  s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(k) + '&libraries=places&v=quarterly';
+  s.async = true;
+  document.head.appendChild(s);
+})();
+</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"מתי טסים","item":"https://mataytasim.co.il"},{"@type":"ListItem","position":2,"name":"יעדים","item":"https://mataytasim.co.il/destinations.html"},{"@type":"ListItem","position":3,"name":"אוסטריה","item":"https://mataytasim.co.il/austria.html"}]}
 </script>
@@ -360,30 +1044,50 @@
 </head>
 <body>
 
-<nav class="nav" id="nav">
-  <div class="nav__inner">
-    <a href="services.html" class="nav__logo">
+<nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
+  <div class="container nav__inner">
+    <a href="services.html" class="nav__logo" aria-label="מתי טסים - דף הבית">
       <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
     </a>
-    <ul class="nav__links">
-      <li><a href="tips.html" class="nav__link">טיפים</a></li>
-      <li><a href="destinations.html" class="nav__link" aria-current="page">יעדים</a></li>
-      <li><a href="weather.html" class="nav__link">מזג אוויר</a></li>
-      <li><a href="packages.html" class="nav__link">חבילות</a></li>
-      <li><a href="about.html" class="nav__link">אודות</a></li>
-        <li><a href="calendar.html" class="nav__link">מתי קורה</a></li>
-        <li><a href="#newsletter" class="nav__link nav__link--community">מצטרפים לקהילה</a></li>
+    <ul class="nav__links" role="menubar">
+      <li role="none"><a href="tips.html" class="nav__link" role="menuitem">טיפים</a></li>
+      <li role="none"><a href="destinations.html" class="nav__link" role="menuitem" aria-current="page">יעדים</a></li>
+      <li role="none"><a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a></li>
+      <li role="none">
+        <a href="packages.html" class="nav__link nav__link--packages" role="menuitem">
+          <svg class="nav__packages-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M3 7.5L12 3l9 4.5-9 4.5-9-4.5z"/>
+            <path d="M3 12l9 4.5 9-4.5"/>
+            <path d="M3 16.5L12 21l9-4.5"/>
+          </svg>
+          <span>חבילות תכנון</span>
+          <span class="nav__packages-badge">3 חבילות</span>
+        </a>
+      </li>
+      <li role="none"><a href="about.html" class="nav__link" role="menuitem">אודות</a></li>
+      <li role="none"><a href="calendar.html" class="nav__link" role="menuitem">מתי קורה</a></li>
+      <li role="none">
+        <a href="#newsletter" class="nav__link nav__link--community" role="menuitem">
+          <svg class="nav__community-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span>מצטרפים לקהילה</span>
+        </a>
+      </li>
     </ul>
     <div class="nav__mobile-actions">
-      <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="וואטסאפ">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="שלח הודעת וואטסאפ">
+        <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:22px;height:22px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       </a>
-      <button class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-label="פתח תפריט">
+      <button type="button" class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="פתח תפריט">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
-  <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
+</nav>
+
+<div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
 
     <!-- טיפים -->
     <a href="tips.html" class="mob-nav-item mob-nav-item--tips" role="menuitem">
@@ -408,7 +1112,7 @@
       </div>
       <div class="mob-nav-item__body">
         <span class="mob-nav-item__title">יעדים</span>
-        <span class="mob-nav-item__sub">לאן טסים הפעם?</span>
+        <span class="mob-nav-item__sub">לאן הכי מתאים לטוס בעונה הזאת</span>
       </div>
     </a>
 
@@ -434,8 +1138,8 @@
         </svg>
       </div>
       <div class="mob-nav-item__body">
-        <span class="mob-nav-item__title">חבילות</span>
-        <span class="mob-nav-item__sub">עזרה בתכנון מסלול</span>
+        <span class="mob-nav-item__title">חבילות תכנון</span>
+        <span class="mob-nav-item__sub">3 מסלולי ליווי לפי סגנון הטיול שלכם</span>
       </div>
     </a>
 
@@ -469,7 +1173,7 @@
 
     <!-- מצטרפים לקהילה — amber banner -->
     <button type="button" class="mob-nav-community" role="menuitem"
-      onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(true); },120);">
+      onclick="var hb=document.getElementById('hamburgerBtn'); var m=document.getElementById('mobileMenu'); m.classList.remove('open'); hb.setAttribute('aria-expanded','false'); hb.setAttribute('aria-label','פתח תפריט'); if(window.__mtRefreshBodyScrollLock)window.__mtRefreshBodyScrollLock(); else document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(true); },120);">
       <div class="mob-nav-community__icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -482,8 +1186,7 @@
       </div>
     </button>
 
-  </div>
-</nav>
+</div>
 
 <!-- HERO -->
 <section class="article-hero">
@@ -556,7 +1259,7 @@
           <div class="timeline">
 
             <!-- יום 1 -->
-            <div class="tl-item tl-item--flight" id="tl1">
+            <div class="tl-item tl-item--flight" id="tl1" data-tl-layout="odd">
               <div class="tl-item__label">יום 1<br><span style="font-size:11px;color:#ccc;">16.08 שישי</span></div>
               <div class="tl-item__node">
                 <div class="tl-item__icon">✈️</div>
@@ -600,7 +1303,7 @@
             </div>
 
             <!-- יום 2 -->
-            <div class="tl-item tl-item--mountain" id="tl2">
+            <div class="tl-item tl-item--mountain" id="tl2" data-tl-layout="even">
               <div class="tl-item__label">יום 2<br><span style="font-size:11px;color:#ccc;">17.08 שבת</span></div>
               <div class="tl-item__node">
                 <div class="tl-item__icon">🐾</div>
@@ -639,7 +1342,7 @@
             </div>
 
             <!-- יום 3 -->
-            <div class="tl-item tl-item--mountain" id="tl3">
+            <div class="tl-item tl-item--mountain" id="tl3" data-tl-layout="odd">
               <div class="tl-item__label">יום 3<br><span style="font-size:11px;color:#ccc;">18.08 ראשון</span></div>
               <div class="tl-item__node">
                 <div class="tl-item__icon">🏔️</div>
@@ -691,7 +1394,7 @@
             </div>
 
             <!-- יום 4 -->
-            <div class="tl-item tl-item--castle" id="tl4">
+            <div class="tl-item tl-item--castle" id="tl4" data-tl-layout="even">
               <div class="tl-item__label">יום 4<br><span style="font-size:11px;color:#ccc;">19.08 שני</span></div>
               <div class="tl-item__node">
                 <div class="tl-item__icon">🦅</div>
@@ -729,7 +1432,7 @@
             </div>
 
             <!-- יום 5 -->
-            <div class="tl-item tl-item--mine" id="tl5">
+            <div class="tl-item tl-item--mine" id="tl5" data-tl-layout="odd">
               <div class="tl-item__label">יום 5<br><span style="font-size:11px;color:#ccc;">20.08 שלישי</span></div>
               <div class="tl-item__node">
                 <div class="tl-item__icon">⛏️</div>
@@ -739,8 +1442,8 @@
                 <div class="tl-card__band"></div>
                 <div class="tl-card__header">
                   <div>
-                    <div class="tl-card__title">מכרה מלח ברכטסגאדן + מפל גולינגר</div>
-                    <div class="tl-card__where">📍 Salzbergwerk Berchtesgaden, גרמניה (30 דקות)</div>
+                    <div class="tl-card__title">מכרה מלח + מפל גולינגר + Lucky Flitzer</div>
+                    <div class="tl-card__where">📍 ברכטסגאדן (DE) · גולינג · פלכאו</div>
                   </div>
                   <span class="tl-card__star tl-card__star--highlight">❤️ הכי ייחודי</span>
                 </div>
@@ -749,24 +1452,32 @@
                     <span class="tl-activity__time">בוקר</span>
                     <div>
                       <div class="tl-activity__name">Salzbergwerk Berchtesgaden ⛏️</div>
-                      <div class="tl-activity__desc">לובשים חליפה אפורה של כורים וגולשים על מגלשות עץ לתוך המכרה. רכבת מיניאטורית, אגמי מלח ותאורה מיוחדת. חוויה לכל הגילאים - ילדים שוב ושוב מבקשים לגלוש שוב.</div>
+                      <div class="tl-activity__desc">לובשים חליפה אפורה של כורים וגולשים על מגלשות עץ לתוך המכרה. רכבת מיניאטורית, אגמי מלח ותאורה מיוחדת. חוויה לכל הגילאים - ילדים שוב ושוב מבקשים לגלוש שוב. כתובת: Parkplatz Salzburger Straße 24 (Gästeeinfahrt), Bergwerkstraße 83, 83471 Berchtesgaden, Germany.</div>
                     </div>
+                  </div>
+                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כ-30 דקות נסיעה ממכרה המלח למפל גולינגר (מסלול רגיל במפות).</div>
                   </div>
                   <div class="tl-activity">
                     <span class="tl-activity__time">צהריים</span>
                     <div>
-                      <div class="tl-activity__name">מפל גולינגר 💧</div>
-                      <div class="tl-activity__desc">מפל מרהיב בדרך חזרה לאלטנמרקט. מסלול הליכה קצר ונוח לכל המשפחה. מרענן ביום חם.</div>
+                      <div class="tl-activity__name">Gollinger Wasserfall 💧</div>
+                      <div class="tl-activity__desc">מפל מרהיב עם מסלול הליכה קצר. Wasserfallstraße 23, 5440 Golling an der Salzach, Austria.</div>
                     </div>
+                  </div>
+                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כ-45 דקות נסיעה מהמפל ל-Rodelbahn Lucky Flitzer בפלאכאו (מסלול רגיל במפות).</div>
                   </div>
                   <div class="tl-activity">
                     <span class="tl-activity__time">אחה"צ</span>
                     <div>
-                      <div class="tl-activity__name">Lucky Flitzer 🎢</div>
-                      <div class="tl-activity__desc">מקום מעולה לתת לילדים להשתולל בסוף היום - הרבה מתקנים נחמדים, מגלשת אדרנלין מהירה ומשוגעת, וגם יש מקומות לאכול שם.</div>
+                      <div class="tl-activity__name">Rodelbahn Lucky Flitzer 🎢</div>
+                      <div class="tl-activity__desc">מגלשת הרים ופעילות לסיום היום. Unterberggasse 172, 5542 Flachau, Austria.</div>
                     </div>
                   </div>
-                  <div class="tl-tip"><strong>חשוב:</strong> מכרה ברכטסגאדן נמצא בגרמניה - לא לשכוח תעודות זהות. להזמין מראש!</div>
+                  <div class="tl-tip"><strong>חשוב:</strong> מכרה ברכטסגאדן נמצא בגרמניה - לא לשכוח דרכונים. להזמין מראש!</div>
                   <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
                 </div>
                 <button class="tl-card__toggle" onclick="toggleTl('tl5')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
@@ -774,7 +1485,7 @@
             </div>
 
             <!-- יום 6 -->
-            <div class="tl-item tl-item--waterpark" id="tl6">
+            <div class="tl-item tl-item--waterpark" id="tl6" data-tl-layout="even">
               <div class="tl-item__label">יום 6<br><span style="font-size:11px;color:#ccc;">21.08 רביעי</span></div>
               <div class="tl-item__node">
                 <div class="tl-item__icon">🌊</div>
@@ -793,18 +1504,21 @@
                   <div class="tl-activity">
                     <span class="tl-activity__time">09:30</span>
                     <div>
-                      <div class="tl-activity__name">Wagrainis Grafenberg Water Park 💦</div>
-                      <div class="tl-activity__desc">פארק מים שתלוי על ההר עם נוף לכל העמק הירוק. מגלשות מים, בריכות, מיני גולף, כדורגל גולף ועוד. להגיע עד 9:30 בבוקר לתפוס מקום. הילדים לא הסכימו לצאת.</div>
+                      <div class="tl-activity__name">Kraftwerk Grafenberg – פארק המים 💦</div>
+                      <div class="tl-activity__desc">פארק המים על ההר (Wagrainis). Grafenbergweg 14, 5602 Wagrain. להגיע עד 9:30 בבוקר לתפוס מקום. הילדים לא הסכימו לצאת.</div>
                     </div>
+                  </div>
+                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כ-15 דקות נסיעה מ-Kraftwerk Grafenberg ל-Soccerpark באזור וואגריין-קליינארל.</div>
                   </div>
                   <div class="tl-activity">
                     <span class="tl-activity__time">אחה"צ</span>
                     <div>
                       <div class="tl-activity__name">Soccerpark Wagrain-Kleinarl ⚽</div>
-                      <div class="tl-activity__desc">כדורגל גולף - שילוב מגניב בין כדורגל למיני גולף. מושלם לאחרי הפארק כשהילדים עדיין פעילים.</div>
+                      <div class="tl-activity__desc">כדורגל גולף. Moadörfl 65, 5602 Schwaighof, Austria.</div>
                     </div>
                   </div>
-                  <div class="tl-tip"><strong>המלצה חמה:</strong> Freizeitpark Ruhpolding שווה יום שלם - אל תנסו לדחוס אליו חצי יום. בואו בבוקר, תאכלו שם צהריים עם נוף להרים, ותצאו רק כשהילדים מתחילים ליפול מרגל עייפות.</div>
                   <div class="tl-tip"><strong>מסעדות:</strong> Berggasthof Sattelbauer, Paularei, ו-Restaurant Tauernblick - כולן עם נוף הרים מדהים.</div>
                   <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
                 </div>
@@ -813,7 +1527,7 @@
             </div>
 
             <!-- יום 7 -->
-            <div class="tl-item tl-item--adventure" id="tl7">
+            <div class="tl-item tl-item--adventure" id="tl7" data-tl-layout="odd">
               <div class="tl-item__label">יום 7<br><span style="font-size:11px;color:#ccc;">22.08 חמישי</span></div>
               <div class="tl-item__node">
                 <div class="tl-item__icon">🛷</div>
@@ -823,23 +1537,27 @@
                 <div class="tl-card__band"></div>
                 <div class="tl-card__header">
                   <div>
-                    <div class="tl-card__title">מגלשת הרים אבנטאו + אגם גוסאו</div>
-                    <div class="tl-card__where">📍 Abtenau + Gosausee</div>
+                    <div class="tl-card__title">Karkogel אבנטאו + Vorderer Gosausee</div>
+                    <div class="tl-card__where">📍 Abtenau · אגם גוסאו הקדמי</div>
                   </div>
                 </div>
                 <div class="tl-card__body">
                   <div class="tl-activity">
                     <span class="tl-activity__time">בוקר</span>
                     <div>
-                      <div class="tl-activity__name">מגלשת הרים אבנטאו 🛷</div>
-                      <div class="tl-activity__desc">מגלשת הרים ארוכה ומרהיבה בכפר אבנטאו. ניתן לרכוש ריצות מרובות - הילדים לא מפסיקים. לוקח בסביבות 20 דקות לכל ריצה.</div>
+                      <div class="tl-activity__name">Karkogel | Abtenauer Bergbahnen 🛷</div>
+                      <div class="tl-activity__desc">מגלשות ורכבלים באזור אבנטאו. Au 99, 5441 Abtenau.</div>
                     </div>
+                  </div>
+                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כ-40 דקות נסיעה מאבנטאו ל-Vorderer Gosausee בגוסאו (מסלול רגיל במפות).</div>
                   </div>
                   <div class="tl-activity">
                     <span class="tl-activity__time">אחה"צ</span>
                     <div>
-                      <div class="tl-activity__name">אגם גוסאו + שיט 🚤</div>
-                      <div class="tl-activity__desc">אחד האגמים היפים ביותר באוסטריה עם מראה של גלויה ברקע. שיט קצר על האגם הצלול - חוויה שקטה ומרגיעה אחרי יום פעיל.</div>
+                      <div class="tl-activity__name">Vorderer Gosausee 🚤</div>
+                      <div class="tl-activity__desc">האגם הקדמי של גוסאו, רכס דאכשטיין ברקע. Vorderer Gosausee, 4825 Gosau.</div>
                     </div>
                   </div>
                   <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
@@ -849,7 +1567,7 @@
             </div>
 
             <!-- יום 8 -->
-            <div class="tl-item tl-item--vienna" id="tl8">
+            <div class="tl-item tl-item--vienna" id="tl8" data-tl-layout="even">
               <div class="tl-item__label">יום 8<br><span style="font-size:11px;color:#ccc;">23.08 שישי</span></div>
               <div class="tl-item__node">
                 <div class="tl-item__icon">🏙️</div>
@@ -860,7 +1578,7 @@
                 <div class="tl-card__header">
                   <div>
                     <div class="tl-card__title">נסיעה לווינה - LEOPARK + מפל</div>
-                    <div class="tl-card__where">📍 Vienna - ARCOTEL Wimberger</div>
+                    <div class="tl-card__where">📍 מפל Salza · LEOPARK · ARCOTEL Wimberger, Wien</div>
                   </div>
                   <span class="tl-card__star" style="background:rgba(136,14,79,0.12);color:#880e4f;">ווינה</span>
                 </div>
@@ -869,31 +1587,39 @@
                     <span class="tl-activity__time">בוקר</span>
                     <div>
                       <div class="tl-activity__name">מפל מים קטן בדרך 💧</div>
-                      <div class="tl-activity__desc">Parkplatz Salza-Wasserfall - עצירה קצרה ומרעננת בדרך לווינה. מפל יפה עם אזור פיקניק נוח.</div>
+                      <div class="tl-activity__desc">Salza-Wasserfall Parking – עצירה בדרך. Salzaweg, 8954, Austria.</div>
                     </div>
+                  </div>
+                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כשעה נסיעה ממפל Salza ל-LEOPARK בסנט מיכאל (מסלול רגיל במפות).</div>
                   </div>
                   <div class="tl-activity">
                     <span class="tl-activity__time">צהריים</span>
                     <div>
                       <div class="tl-activity__name">LEOPARK GmbH 🐾</div>
-                      <div class="tl-activity__desc">פארק חיות ייחודי שבו נוגעים בבעלי חיים - כבשים, עיזים, ארנבים. ילדים קטנים פשוט מגיבים בשמחה עצומה. מרחק כשעה מווינה.</div>
+                      <div class="tl-activity__desc">פארק חיות עם מגע בבעלי חיים. Eisenbichl 13, 8770 St. Michael in Obersteiermark.</div>
                     </div>
+                  </div>
+                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כ-2 שעות ו-15 דקות נסיעה מ-LEOPARK למרכז וינה (ARCOTEL) — תלוי מסלול ועומס.</div>
                   </div>
                   <div class="tl-activity">
                     <span class="tl-activity__time">ערב</span>
                     <div>
                       <div class="tl-activity__name">הגעה לווינה + טיול ראשון 🌆</div>
-                      <div class="tl-activity__desc">הגעה למלון ARCOTEL Wimberger Wien. טיול קצר ברינגשטראסה וציון ראשון עם האווירה של הבירה.</div>
+                      <div class="tl-activity__desc">לינת לילה ב-ARCOTEL Wimberger Wien – Neubaugürtel 34–36, 1070 Wien. טיול קצר ברובע.</div>
                     </div>
                   </div>
-                  <div class="tl-tip"><strong>לינה:</strong> ARCOTEL Wimberger Wien - מיקום מרכזי מצוין.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> ARCOTEL Wimberger Wien · Neubaugürtel 34–36, Wien — לילה ראשון בווינה; אותו מלון גם ביום 9.</div>
                 </div>
                 <button class="tl-card__toggle" onclick="toggleTl('tl8')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
               </div>
             </div>
 
             <!-- יום 9 -->
-            <div class="tl-item tl-item--vienna" id="tl9">
+            <div class="tl-item tl-item--vienna" id="tl9" data-tl-layout="odd">
               <div class="tl-item__label">יום 9<br><span style="font-size:11px;color:#ccc;">24.08 שבת</span></div>
               <div class="tl-item__node">
                 <div class="tl-item__icon">🎂</div>
@@ -903,47 +1629,48 @@
                 <div class="tl-card__band"></div>
                 <div class="tl-card__header">
                   <div>
-                    <div class="tl-card__title">שונברון + פארק פארטר + מוזיאון מדע</div>
+                    <div class="tl-card__title">מופע שטרודל · Prater · מוזיאון הטבע · Time Travel</div>
                     <div class="tl-card__where">📍 ווינה</div>
                   </div>
                 </div>
                 <div class="tl-card__body">
+                  <div class="tl-tip" style="margin-top:0;margin-bottom:14px;background:rgba(26,107,114,0.08);border-right-color:var(--teal);"><strong>ניידות:</strong> ביום הזה אפשר להסתדר בהליכה ובתחבורה ציבורית בין האטרקציות — לא חייבים רכב בין שונברון, הפראטר, המוזיאון ו-Time Travel.</div>
                   <div class="tl-activity">
                     <span class="tl-activity__time">בוקר</span>
                     <div>
-                      <div class="tl-activity__name">מופע השטרודל האפל של ווינה 🥐</div>
-                      <div class="tl-activity__desc">הקפה של ארמון שונברון מציג הדגמה חיה של הכנת שטרודל אפל אוסטרי מסורתי. כל ילד מקבל לטעום. חייבים להזמין מראש - מתמלא מהר.</div>
+                      <div class="tl-activity__name">מופע השטרודל של וינה</div>
+                      <div class="tl-activity__desc">Gerstner K. u. K. Hofzuckerbäcker Show בארמון שונברון — הדגמת שטרודל. Schloss Schönbrunn, Schönbrunner Schloßstraße 47, 1130 Wien. להזמין מראש.</div>
                     </div>
                   </div>
                   <div class="tl-activity">
                     <span class="tl-activity__time">צהריים</span>
                     <div>
                       <div class="tl-activity__name">Prater + Riesenrad 🎡</div>
-                      <div class="tl-activity__desc">פארק הענק של ווינה עם גלגל הפנורמה המפורסם Riesenrad מ-1897. הרכיבה על הגלגל נותנת נוף מרהיב לווינה. הפארק עצמו כיפי לכל הגילאים.</div>
+                      <div class="tl-activity__desc">Prater ו-Riesenrad. 1020 Vienna.</div>
                     </div>
                   </div>
                   <div class="tl-activity">
                     <span class="tl-activity__time">אחה"צ</span>
                     <div>
-                      <div class="tl-activity__name">מוזיאון הטבע והמדע 🔬</div>
-                      <div class="tl-activity__desc">אחד ממוזיאוני הטבע הגדולים באירופה - דינוזאורים, מטאוריטים, אנושות קדומה. ילדים יכולים לבלות שם שעות.</div>
+                      <div class="tl-activity__name">Museum of Natural History Vienna 🔬</div>
+                      <div class="tl-activity__desc">מוזיאון הטבע של וינה. Burgring 7, 1010 Wien.</div>
                     </div>
                   </div>
                   <div class="tl-activity">
                     <span class="tl-activity__time">ערב</span>
                     <div>
-                      <div class="tl-activity__name">מעלית הזמן - Zeittunnel ⏰</div>
-                      <div class="tl-activity__desc">מוזיאון אינטראקטיבי על היסטוריית ווינה. חוויה מיוחדת לאחרי יום ארוך.</div>
+                      <div class="tl-activity__name">Time Travel Vienna ⏰</div>
+                      <div class="tl-activity__desc">חוויה אינטראקטיבית על וינה. Habsburgergasse 10A, 1010 Wien.</div>
                     </div>
                   </div>
-                  <div class="tl-tip"><strong>לינה:</strong> ARCOTEL Wimberger Wien.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> ARCOTEL Wimberger Wien — המשך הלילה השני בווינה (אותו מלון).</div>
                 </div>
                 <button class="tl-card__toggle" onclick="toggleTl('tl9')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
               </div>
             </div>
 
             <!-- יום 10 -->
-            <div class="tl-item tl-item--flight" id="tl10">
+            <div class="tl-item tl-item--flight" id="tl10" data-tl-layout="even">
               <div class="tl-item__label">יום 10<br><span style="font-size:11px;color:#ccc;">25.08 ראשון</span></div>
               <div class="tl-item__node">
                 <div class="tl-item__icon">✈️</div>
@@ -987,75 +1714,184 @@
           <h2 class="article-section__title"><span class="article-section__title-icon">🏔️</span> אטרקציות באזור זלצבורגר לנד</h2>
           <div class="attractions-grid">
             <div class="attraction-card">
-              <span class="attraction-card__icon">🌅</span>
-              <div class="attraction-card__name">Skywalk Dachstein</div>
-              <div class="attraction-card__desc">גשר הזכוכית הנפלא. נוף של 360 מעלות על האלפים האוסטריים. אחד הדברים הכי מרהיבים בארץ.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">טבע</span>
+                <div class="attraction-card__name">Skywalk Dachstein</div>
+                <div class="attraction-card__desc">גשר הזכוכית הנפלא. נוף של 360 מעלות על האלפים האוסטריים. אחד הדברים הכי מרהיבים בארץ.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJlxzaQXYxcUcRv3c8jodyHq0" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Dachstein_Skywalk%2C_Austria_%281%29.jpg/320px-Dachstein_Skywalk%2C_Austria_%281%29.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">🧊</span>
-              <div class="attraction-card__name">ארמון הקרח - Dachstein</div>
-              <div class="attraction-card__desc">מערת קרח ענקית עם פסלי קרח ותאורה קסומה. להביא מעיל!</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">מערות</span>
+                <div class="attraction-card__name">ארמון הקרח - Dachstein</div>
+                <div class="attraction-card__desc">מערת קרח ענקית עם פסלי קרח ותאורה קסומה. להביא מעיל!</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJBaG0wSsycUcRCwG6Vrx_sYU" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Eish%C3%B6hle_Dachstein_01.jpg/320px-Eish%C3%B6hle_Dachstein_01.jpg" alt="" width="320" height="240" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">🦅</span>
-              <div class="attraction-card__name">Festung Hohenwerfen</div>
-              <div class="attraction-card__desc">טירת וורפן עם מופע נשרים בלייב. נשרים טסים ישר מעל הראש. חובה!</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">טירה</span>
+                <div class="attraction-card__name">Festung Hohenwerfen</div>
+                <div class="attraction-card__desc">טירת וורפן עם מופע נשרים בלייב. נשרים טסים ישר מעל הראש. חובה!</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJCymTk7PEdkcRk2e9_wpDY8k" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Burg_Hohenwerfen_S%C3%BCdansicht_02.jpg/320px-Burg_Hohenwerfen_S%C3%BCdansicht_02.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">⛏️</span>
-              <div class="attraction-card__name">מכרה מלח Berchtesgaden</div>
-              <div class="attraction-card__desc">גלישה על מגלשות עץ לתוך המכרה בחליפת כורים. חוויה ייחודית ומרתקת.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">חוויה</span>
+                <div class="attraction-card__name">מכרה מלח Berchtesgaden</div>
+                <div class="attraction-card__desc">גלישה על מגלשות עץ לתוך המכרה בחליפת כורים. חוויה ייחודית ומרתקת.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJ0WP8i6LsdkcRgCrR9D8Gzys" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Salzbergwerk_Berchtesgaden_Eingang.jpg/320px-Salzbergwerk_Berchtesgaden_Eingang.jpg" alt="" width="320" height="240" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">💦</span>
-              <div class="attraction-card__name">Wagrainis Grafenberg</div>
-              <div class="attraction-card__desc">פארק מים על ההר עם נוף לעמק. מגלשות מים, בריכות וכדורגל גולף.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">פארק מים</span>
+                <div class="attraction-card__name">Wagrainis Grafenberg</div>
+                <div class="attraction-card__desc">פארק מים על ההר עם נוף לעמק. מגלשות מים, בריכות וכדורגל גולף.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJ2aPuIW_WdkcRufHYEzFMr24" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Pongau_Wagrain_Luftbild.jpg/320px-Pongau_Wagrain_Luftbild.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">🚤</span>
-              <div class="attraction-card__name">אגם גוסאו</div>
-              <div class="attraction-card__desc">אגם צלול עם נוף לגלאצ'ר. שיט שקט ורגוע - אחת הנקודות הכי יפות.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">טבע</span>
+                <div class="attraction-card__name">אגם גוסאו</div>
+                <div class="attraction-card__desc">אגם צלול עם נוף לגלאצ'ר. שיט שקט ורגוע - אחת הנקודות הכי יפות.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJoZE_V1LLdkcR4M2vAchh8ZY" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Gosausee_mit_Dachstein.jpg/320px-Gosausee_mit_Dachstein.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">🦌</span>
-              <div class="attraction-card__name">Der Wild Berg</div>
-              <div class="attraction-card__desc">פארק חיות בר שבו הולכים בין האיילים ועיזי הסלע בטבע חופשי.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">חיות בר</span>
+                <div class="attraction-card__name">Der Wild Berg</div>
+                <div class="attraction-card__desc">פארק חיות בר שבו הולכים בין האיילים ועיזי הסלע בטבע חופשי.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJZ0RJqBYlcUcR6Tw7RZq3Wys" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Red_deer_%28Cervus_elaphus%29_stag.jpg/320px-Red_deer_%28Cervus_elaphus%29_stag.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">🛷</span>
-              <div class="attraction-card__name">מגלשות ההרים</div>
-              <div class="attraction-card__desc">מגלשת הרים באבנטאו ו-Lucky Flitzer - שעות של כיף לכל הגילאים.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">הרפתקאות</span>
+                <div class="attraction-card__name">מגלשות ההרים</div>
+                <div class="attraction-card__desc">מגלשת הרים באבנטאו ו-Lucky Flitzer - שעות של כיף לכל הגילאים.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJPR17J93IdkcRMyFaHISYmtU" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Sommerrodelbahn-Mauterndorf-1.jpg/320px-Sommerrodelbahn-Mauterndorf-1.jpg" alt="" width="320" height="240" loading="lazy" decoding="async">
+              </div>
             </div>
           </div>
+          <p class="attractions-grid__attrib">תמונות ממוזערות: נטענות מ-Google Places כשהמפתח והדפדפן מאפשרים (אחרת נשארת תמונת גיבוי מ-Wikimedia). שימוש בתמונות Places בהתאם לתנאי Google.</p>
         </div>
 
         <!-- 5. VIENNA ATTRACTIONS -->
         <div class="article-section" id="vienna-attractions">
           <h2 class="article-section__title"><span class="article-section__title-icon">🏛️</span> מה לעשות עם ילדים בווינה</h2>
-          <div class="tips-list">
-            <div class="tip-item">
-              <span class="tip-item__icon">🥐</span>
-              <div class="tip-item__text"><strong>מופע השטרודל האפל בשונברון</strong> - הדגמת הכנת שטרודל מסורתי עם טעימה. הזמינו מראש - מתמלא מהר מאוד.</div>
+          <div class="vienna-attractions-layout">
+            <div class="vienna-grid__group">
+              <h3 class="vienna-grid__group-title">חובה לראות</h3>
+              <div class="vienna-grid__cells">
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🏰</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">ארמון שונברון</div>
+                    <p class="tip-item__desc">ארמון המלוכה האוסטרי. גנים מהממים וחדרים היסטוריים מרשימים.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🎡</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">Prater + Riesenrad</div>
+                    <p class="tip-item__desc">הגלגל הפנורמי ההיסטורי מ-1897. פארק ענק עם אטרקציות לכל גיל.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🥐</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">מופע השטרודל של וינה</div>
+                    <p class="tip-item__desc">הדגמת הכנת שטרודל מסורתי עם טעימה. הזמינו מראש - מתמלא מהר מאוד.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🔬</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">מוזיאון הטבע והמדע</div>
+                    <p class="tip-item__desc">אחד הגדולים באירופה. דינוזאורים, אבנים חן, אנושות קדומה. ילדים מתחרטים שיצאו.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">🎡</span>
-              <div class="tip-item__text"><strong>Prater + Riesenrad</strong> - הגלגל הפנורמי ההיסטורי מ-1897. פארק ענק עם אטרקציות לכל גיל.</div>
+            <div class="vienna-grid__group">
+              <h3 class="vienna-grid__group-title">פארקים ופעילות</h3>
+              <div class="vienna-grid__cells">
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🦁</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">LEOPARK GmbH</div>
+                    <p class="tip-item__desc">פארק חיות שנוגעים בבעלי חיים. מרוחק כשעה מווינה אבל שווה את הנסיעה.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">⛵</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">האי הדנובה (Donauinsel)</div>
+                    <p class="tip-item__desc">פארק מים ענק, חופים חוליים ואפשרות להשכרת סירות פדלים - מושלם לפריקת אנרגיה בקיץ.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">🦁</span>
-              <div class="tip-item__text"><strong>LEOPARK GmbH</strong> - פארק חיות שנוגעים בבעלי חיים. מרוחק כשעה מווינה אבל שווה את הנסיעה.</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">🔬</span>
-              <div class="tip-item__text"><strong>מוזיאון הטבע והמדע</strong> - אחד הגדולים באירופה. דינוזאורים, אבנים חן, אנושות קדומה. ילדים מתחרטים שיצאו.</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">⏰</span>
-              <div class="tip-item__text"><strong>מעלית הזמן (Zeittunnel)</strong> - מוזיאון אינטראקטיבי על ווינה ההיסטורית. חוויה מיוחדת לכל הגילאים.</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">🏰</span>
-              <div class="tip-item__text"><strong>ארמון שונברון</strong> - ארמון המלוכה האוסטרי. גנים מהממים וחדרים היסטוריים מרשימים.</div>
+            <div class="vienna-grid__group">
+              <h3 class="vienna-grid__group-title">מוזיאונים ולמידה</h3>
+              <div class="vienna-grid__cells">
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">⏰</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">מעלית הזמן (Zeittunnel)</div>
+                    <p class="tip-item__desc">מוזיאון אינטראקטיבי על ווינה ההיסטורית. חוויה מיוחדת לכל הגילאים.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🌀</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">מוזיאון האשליות (Museum of Illusions)</div>
+                    <p class="tip-item__desc">חדרים שהופכים את הילדים לענקים, מנהרות אורות ומשחקי מוח מרתקים. חוויה אינטראקטיבית ומהנה במרכז העיר.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🦋</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">בית הפרפרים (Schmetterlinghaus)</div>
+                    <p class="tip-item__desc">חממה טרופית קסומה עם מאות פרפרים צבעוניים שעפים מסביבכם בחופשיות.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">👑</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">מוזיאון הילדים בארמון שנברון</div>
+                    <p class="tip-item__desc">הילדים יכולים להתחפש לנסיכים ונסיכות וללמוד על חיי המלוכה בצורה חווייתית.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🎨</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">מוזיאון הזום (ZOOM Kindermuseum)</div>
+                    <p class="tip-item__desc">אחד ממוזיאוני הילדים הטובים באירופה עם סדנאות אמנות, יצירת סרטים ומתחמי משחק.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1103,9 +1939,6 @@
                 </div>
                 <span id="chevron-hornergut" style="font-size:18px;color:var(--teal);transition:transform 0.3s;pointer-events:none;">▾</span>
               </div>
-              <div style="padding:10px 16px;border-top:1px solid var(--sand);">
-                <a href="https://booking.stay22.com/mataytasim/vWxYqXyCic" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:600;font-family:var(--font-body);text-decoration:none;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">להזמנה ←</a>
-              </div>
               <div id="map-hornergut" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;">
                 <iframe width="100%" height="400" src="https://stay22.com/embed/69c172fd51844e7588aa2afd" frameborder="0" style="display:block;"></iframe>
               </div>
@@ -1116,13 +1949,10 @@
               <div onclick="toggleHotelMap('map-arcotel','chevron-arcotel')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='white'">
                 <div style="display:flex;flex-direction:column;gap:4px;pointer-events:none;">
                   <div style="font-weight:700;font-size:14px;">🏙️ ARCOTEL Wimberger Wien</div>
-                  <div style="font-size:12px;color:#888;">📍 Vienna, אוסטריה</div>
+                  <div style="font-size:12px;color:#888;">📍 Neubaugürtel 34–36, 1070 Wien</div>
                   <div style="font-size:12px;color:#666;margin-top:2px;">מיקום מרכזי בוינה, קרוב לבתי קפה ומסעדות</div>
                 </div>
                 <span id="chevron-arcotel" style="font-size:18px;color:var(--teal);transition:transform 0.3s;pointer-events:none;">▾</span>
-              </div>
-              <div style="padding:10px 16px;border-top:1px solid var(--sand);">
-                <a href="https://booking.stay22.com/mataytasim/switurUU_d" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:600;font-family:var(--font-body);text-decoration:none;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">להזמנה ←</a>
               </div>
               <div id="map-arcotel" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;">
                 <iframe width="100%" height="400" src="https://stay22.com/embed/69c1738fe3b92594135cc38d" frameborder="0" style="display:block;"></iframe>
@@ -1138,9 +1968,6 @@
                   <div style="font-size:12px;color:#666;margin-top:2px;">מלון מרכזי בעיירה פלכאו, מסעדה במלון עצמו וקרובה לאטרקציות מסביב - מלון ברמה אחרת!</div>
                 </div>
                 <span id="chevron-matteo" style="font-size:18px;color:var(--teal);transition:transform 0.3s;pointer-events:none;">▾</span>
-              </div>
-              <div style="padding:10px 16px;border-top:1px solid var(--sand);">
-                <a href="https://booking.stay22.com/mataytasim/kdy5TRQvBj" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:600;font-family:var(--font-body);text-decoration:none;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">להזמנה ←</a>
               </div>
               <div id="map-matteo" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;">
                 <iframe width="100%" height="428" src="https://stay22.com/embed/69d2873431f29079785add0d" frameborder="0" style="display:block;"></iframe>
@@ -1161,40 +1988,108 @@
 
         <!-- 7. TIPS -->
         <div class="article-section" id="tips">
-          <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> טיפים חשובים לטיול</h2>
-          <div class="tips-list">
-            <div class="tip-item">
-              <span class="tip-item__icon">🚗</span>
-              <div class="tip-item__text"><strong>השכרת רכבים:</strong> הכרחי - ולמשפחה גדולה מומלץ שני רכבים. משדה התעופה ישר לאלטנמרקט נסיעה של כ-3.5 שעות.</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">🌍</span>
-              <div class="tip-item__text"><strong>מכרה ברכטסגאדן:</strong> נמצא בגרמניה. לא לשכוח תעודות זהות. להזמין כרטיסים מראש - זה מתמלא מהר!</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">🧥</span>
-              <div class="tip-item__text"><strong>לבוש:</strong> גם באוגוסט - להביא מעיל לפסגות. ארמון הקרח ~5 מעלות, Skywalk קר וסוחף. ילדים מתקפאים מהר.</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">⏰</span>
-              <div class="tip-item__text"><strong>פארק המים Wagrainis:</strong> להגיע עד 9:30 בבוקר - אחרי זה מלא ומחכים בתור. מהאחד הכי שווה בטיול.</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">🦅</span>
-              <div class="tip-item__text"><strong>מופע הנשרים בטירת וורפן:</strong> מופע ב-11:15 וב-15:15. כדאי לתכנן את היום סביב אחד מהם. ספטקולרי!</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">💰</span>
-              <div class="tip-item__text"><strong>מטבע:</strong> אוסטריה משתמשת ביורו. כרטיסי אשראי מתקבלים בכל מקום. כספומטים נפוצים.</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">📅</span>
-              <div class="tip-item__text"><strong>הזמנות מראש:</strong> דאכשטיין, ארמון הקרח, מכרה מלח - לכולם מומלץ להזמין לפחות שבוע מראש בקיץ.</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">🏡</span>
-              <div class="tip-item__text"><strong>לינה:</strong> Hornergut in Altenmarkt - בית פרטי עם גינה. מרגיש כמו בית שני. מומלץ מאוד לשבוע הראשון.</div>
-            </div>
+          <h2 class="article-section__title">
+            <svg class="article-section__title-icon-svg" xmlns="http://www.w3.org/2000/svg" width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.88 1.35-2.6A6.98 6.98 0 0 0 18 8a7 7 0 1 0-12 0c0 1.24.33 2.44.96 3.41.69.72 1.17 1.62 1.35 2.6"/></svg>
+            טיפים חשובים לטיול
+          </h2>
+
+          <div class="tips-pro-wrap">
+            <section class="tips-pro-group" aria-labelledby="tips-cat-logistics">
+              <h3 class="tips-pro-group__title" id="tips-cat-logistics">לוגיסטיקה ונסיעות</h3>
+              <p class="tips-pro-group__sub">רכב, גבולות ומסמכים, מטבע ולינה בסיס</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3.3A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">השכרת רכבים</span>
+                    <p class="tip-pro__text">הכרחי - ולמשפחה גדולה מומלץ שני רכבים. משדה התעופה ישר לאלטנמרקט נסיעה של כ-3.5 שעות.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">מכרה ברכטסגאדן</span>
+                    <p class="tip-pro__text">נמצא בגרמניה. לא לשכוח דרכונים. להזמין כרטיסים מראש - זה מתמלא מהר!</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-5.5A3.5 3.5 0 0 0 7 11.5 3.5 3.5 0 0 0 10.5 15H16"/><path d="M7 12h9.5"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">מטבע</span>
+                    <p class="tip-pro__text">אוסטריה משתמשת ביורו. כרטיסי אשראי מתקבלים בכל מקום. כספומטים נפוצים.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">לינה</span>
+                    <p class="tip-pro__text">Hornergut in Altenmarkt - בית פרטי עם גינה. מרגיש כמו בית שני. מומלץ מאוד לשבוע הראשון.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tips-pro-group" aria-labelledby="tips-cat-packing">
+              <h3 class="tips-pro-group__title" id="tips-cat-packing">הכנה ואריזה</h3>
+              <p class="tips-pro-group__sub">מה לקחת בתיק ומה לסגור לפני שיוצאים</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">לבוש</span>
+                    <p class="tip-pro__text">גם באוגוסט - להביא מעיל לפסגות. ארמון הקרח ~5 מעלות, Skywalk קר וסוחף. ילדים מתקפאים מהר.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">הזמנות מראש</span>
+                    <p class="tip-pro__text">דאכשטיין, ארמון הקרח, מכרה מלח - לכולם מומלץ להזמין לפחות שבוע מראש בקיץ.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tips-pro-group" aria-labelledby="tips-cat-onsite">
+              <h3 class="tips-pro-group__title" id="tips-cat-onsite">בזמן הביקור</h3>
+              <p class="tips-pro-group__sub">טיימינג וחווייה ביום הביקור עצמו</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">פארק המים Wagrainis</span>
+                    <p class="tip-pro__text">להגיע עד 9:30 בבוקר - אחרי זה מלא ומחכים בתור. מהאחד הכי שווה בטיול.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">מופע הנשרים בטירת וורפן</span>
+                    <p class="tip-pro__text">מופע ב-11:15 וב-15:15. כדאי לתכנן את היום סביב אחד מהם. ספטקולרי!</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <p class="tips-pro-more">
+              <a id="tipsProMoreLink" class="tips-pro-more__link" href="tips.html?utm_source=austria_guide&amp;utm_medium=article&amp;utm_campaign=tips_section_more&amp;utm_content=pro_tips_block" data-mt-track="austria_tips_more">אם אתם מעוניינים בעוד טיפים שיעזרו לכם בטיול — <span class="tips-pro-more__cta">לחצו כאן</span></a>
+            </p>
           </div>
 
           <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:16px;padding:18px 24px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
@@ -1238,6 +2133,40 @@
   </div>
 </footer>
 
+<!-- Google Place details (days 1–4): set window.GOOGLE_MAPS_API_KEY in <head> -->
+<div id="placeSheet" class="place-sheet" aria-hidden="true">
+  <div class="place-sheet__backdrop" data-place-sheet-close></div>
+  <div class="place-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="placeSheetTitle" dir="rtl">
+    <button type="button" class="place-sheet__close" data-place-sheet-close aria-label="סגור">×</button>
+    <div class="place-sheet__grab" aria-hidden="true"></div>
+    <div class="place-sheet__photo-wrap">
+      <img id="placeSheetPhoto" alt="" class="place-sheet__photo" width="1200" height="750" hidden decoding="async" fetchpriority="high">
+    </div>
+    <div class="place-sheet__scroll">
+      <div id="placeSheetPills" class="place-sheet__pills" hidden></div>
+      <h3 id="placeSheetTitle" class="place-sheet__title"></h3>
+      <p id="placeSheetSummary" class="place-sheet__summary" hidden></p>
+      <p id="placeSheetAddress" class="place-sheet__meta-row" hidden>
+        <span class="place-sheet__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-9.5a7 7 0 1114 0c0 5.15-7 9.5-7 9.5z"/><circle cx="12" cy="11.5" r="2.5"/></svg></span>
+        <span id="placeSheetAddressText" class="place-sheet__meta-text"></span>
+      </p>
+      <p id="placeSheetRating" class="place-sheet__meta-row" hidden>
+        <span class="place-sheet__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+        <span id="placeSheetRatingText" class="place-sheet__meta-text"></span>
+      </p>
+      <p id="placeSheetHours" class="place-sheet__meta-row" hidden>
+        <span class="place-sheet__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <span id="placeSheetHoursText" class="place-sheet__meta-text"></span>
+      </p>
+      <div class="place-sheet__actions">
+        <a id="placeSheetMapsLink" class="place-sheet__btn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>פתיחה ב-Google Maps</a>
+        <a id="placeSheetPhone" class="place-sheet__btn place-sheet__btn--secondary" href="#" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.86.3 1.7.54 2.5a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.58-1.11a2 2 0 012.11-.45c.8.24 1.64.42 2.5.54A2 2 0 0122 16.92z"/></svg><span id="placeSheetPhoneLabel"></span></a>
+        <a id="placeSheetWeb" class="place-sheet__btn place-sheet__btn--secondary" href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>אתר רשמי</a>
+      </div>
+      <p class="place-sheet__attr">נתוני מקום מסופקים על ידי Google · <a href="https://policies.google.com/terms" target="_blank" rel="noopener">תנאים</a></p>
+    </div>
+  </div>
+</div>
 
 <!-- Day 2 Interactive Map Modal -->
 <div class="daymap-overlay" id="daymapOverlay" onclick="closeDayMap2(event)">
@@ -1255,7 +2184,7 @@
     <div class="daymap-modal__footer">
       <span class="daymap-chip">🏨 Hornergut, Altenmarkt</span>
       <span class="daymap-chip">🦌 Der Wild Berg, Mauterndorf</span>
-      <span class="daymap-chip">⏱️ ~40 דק׳ נסיעה</span>
+      <span class="daymap-chip">⏱️ ~1 שעה 34 דק׳ נסיעה</span>
     </div>
   </div>
 </div>
@@ -1280,47 +2209,830 @@
     }
     window.toggleTl = toggleTl;
 
-    // Map
+    // Map — days 1–4: Google Place IDs for the detail sheet
+    function getPlaceEntries(d) {
+      if (d.googlePlaces && d.googlePlaces.length) return d.googlePlaces;
+      if (d.placeId) return [{ placeId: d.placeId, label: d.title || '' }];
+      return [];
+    }
+    /** Hornergut · Hornerweg 41, 5541 Altenmarkt im Pongau — מוצא לנסיעות ימים 2–4 */
+    var HORNERGUT_LAT = 47.3774;
+    var HORNERGUT_LNG = 13.4241;
+    function hornergutLL() {
+      return [HORNERGUT_LAT, HORNERGUT_LNG];
+    }
+
     var days = [
-      { id:'tl1',  day:1,  date:'16.08', label:'טיסה + הגעה',          emoji:'✈️',  lat:47.383, lng:13.433, color:'#1A6B72', title:'Hornergut - Altenmarkt-Wagrain' },
-      { id:'tl2',  day:2,  date:'17.08', label:'Der Wild Berg',         emoji:'🐾',  lat:47.092, lng:13.691, color:'#4A9B6F', title:'Der Wild Berg - Mauterndorf' },
-      { id:'tl3',  day:3,  date:'18.08', label:'דאכשטיין',              emoji:'🏔️', lat:47.478, lng:13.605, color:'#c0392b', title:'Dachstein - Skywalk + ארמון הקרח' },
-      { id:'tl4',  day:4,  date:'19.08', label:'טירת וורפן',            emoji:'🦅',  lat:47.484, lng:13.199, color:'#E8A045', title:'Festung Hohenwerfen + Liechtensteinklamm' },
-      { id:'tl5',  day:5,  date:'20.08', label:'מכרה מלח',              emoji:'⛏️', lat:47.631, lng:13.001, color:'#7f5a0d', title:'Salzbergwerk Berchtesgaden, Germany' },
-      { id:'tl6',  day:6,  date:'21.08', label:'פארק מים Wagrainis',    emoji:'🌊',  lat:47.336, lng:13.302, color:'#1565c0', title:'Wagrainis Grafenberg Water Park' },
-      { id:'tl7',  day:7,  date:'22.08', label:'מגלשת הרים + גוסאו',   emoji:'🛷',  lat:47.603, lng:13.503, color:'#6b4aa0', title:'אבנטאו + אגם גוסאו' },
-      { id:'tl8',  day:8,  date:'23.08', label:'נסיעה לווינה',          emoji:'🏙️', lat:48.200, lng:16.370, color:'#880e4f', title:'Vienna - LEOPARK + ARCOTEL Wimberger' },
-      { id:'tl9',  day:9,  date:'24.08', label:'שונברון + פארק פארטר', emoji:'🎡',  lat:48.200, lng:16.370, color:'#880e4f', title:'Vienna - Schönbrunn + Prater + מוזיאון' },
-      { id:'tl10', day:10, date:'25.08', label:'טיסה חזרה',             emoji:'✈️',  lat:48.121, lng:16.563, color:'#1A6B72', title:'Vienna International Airport → נתב"ג' },
+      { id:'tl1',  day:1,  date:'16.08', label:'טיסה + הגעה',          emoji:'✈️',  lat:HORNERGUT_LAT, lng:HORNERGUT_LNG, color:'#1A6B72', title:'Bauernhof Hornergut · Altenmarkt', placeId:'ChIJm4YAElYrcUcR5cbEpyPmZKw',
+        routePath: [hornergutLL()],
+        driveFromHotel: { type: 'base' }
+      },
+      { id:'tl2',  day:2,  date:'17.08', label:'Der Wilde Berg',         emoji:'🐾',  lat:47.283, lng:14.844, color:'#4A9B6F', title:'Der Wilde Berg Wildpark · Mautern in Steiermark', placeId:'ChIJZ0RJqBYlcUcR6Tw7RZq3Wys',
+        routePath: [[47.283, 14.844]],
+        driveFromHotel: {
+          type: 'leg',
+          minutes: 94,
+          toHe: 'Der Wilde Berg (Alpsteig 1, 8774 Mautern, שטיריה)'
+        }
+      },
+      { id:'tl3',  day:3,  date:'18.08', label:'דאכשטיין',              emoji:'🏔️', lat:47.478, lng:13.605, color:'#c0392b', title:'Dachstein Skywalk + Sommerrodelbahn Keltenblitz',
+        routePath: [
+          [47.476, 13.605],
+          [47.603, 13.656]
+        ],
+        driveFromHotel: {
+          type: 'leg',
+          minutes: 58,
+          toHe: 'אזור Dachstein / כניסה לכיוון Skywalk (Ramsau)',
+          mapsNote: 'נבדק ב-Google Maps (מסלול רגיל): Hornergut → Obertraun / Krippenstein · כ-58 דקות.'
+        },
+        googlePlaces: [
+          { placeId:'ChIJlxzaQXYxcUcRv3c8jodyHq0', label:'Dachstein Skywalk' },
+          { placeId:'ChIJ7beP19iUdkcRRDN8_byB_Sc', label:'Sommerrodelbahn Keltenblitz' }
+        ]
+      },
+      { id:'tl4',  day:4,  date:'19.08', label:'טירת וורפן',            emoji:'🦅',  lat:47.484, lng:13.199, color:'#E8A045', title:'Burg Hohenwerfen + Liechtensteinklamm',
+        routePath: [
+          [47.5038, 13.1897],
+          [47.5165, 13.1868]
+        ],
+        driveFromHotel: {
+          type: 'leg',
+          minutes: 52,
+          toHe: 'Burg Hohenwerfen (Werfen)',
+          mapsNote: 'נבדק ב-Google Maps (מסלול רגיל): Hornergut → Festung Hohenwerfen · כ-52 דקות.'
+        },
+        googlePlaces: [
+          { placeId:'ChIJCymTk7PEdkcRk2e9_wpDY8k', label:'Burg Hohenwerfen' },
+          { placeId:'ChIJWyZ7-P4nd0cRAikvHeOHJso', label:'Liechtensteinklamm' }
+        ]
+      },
+      { id:'tl5',  day:5,  date:'20.08', label:'מכרה מלח',              emoji:'⛏️', lat:47.776, lng:12.992, color:'#7f5a0d',         title:'מכרה מלח · מפל גולינגר · Lucky Flitzer',
+        routePath: [
+          [47.6258, 13.0196],
+          [47.5938, 13.1639],
+          [47.3547, 13.3921]
+        ],
+        googlePlaces: [
+          { placeId:'ChIJ0WP8i6LsdkcRgCrR9D8Gzys', label:'Salzbergwerk Berchtesgaden' },
+          { placeId:'ChIJ39K5TKrBdkcRRjYdpy_ltvs', label:'Gollinger Wasserfall' },
+          { placeId:'ChIJTQLmV43UdkcRgZEuYVYDa6M', label:'Rodelbahn Lucky Flitzer' }
+        ]
+      },
+      { id:'tl6',  day:6,  date:'21.08', label:'פארק מים Wagrainis',    emoji:'🌊',  lat:47.3365, lng:13.3033, color:'#1565c0',         title:'Kraftwerk Grafenberg · Soccerpark',
+        routePath: [
+          [47.3340, 13.2930],
+          [47.3285, 13.3185]
+        ],
+        googlePlaces: [
+          { placeId:'ChIJ2aPuIW_WdkcRufHYEzFMr24', label:'Kraftwerk Grafenberg' },
+          { placeId:'ChIJVatFhyTVdkcR8f_qOa0BYNg', label:'Soccerpark Wagrain-Kleinarl' }
+        ]
+      },
+      { id:'tl7',  day:7,  date:'22.08', label:'מגלשת הרים + גוסאו',   emoji:'🛷',  lat:47.545, lng:13.42, color:'#6b4aa0',         title:'Karkogel Abtenau · Vorderer Gosausee',
+        routePath: [
+          [47.5625, 13.3433],
+          [47.5340, 13.4845]
+        ],
+        googlePlaces: [
+          { placeId:'ChIJPR17J93IdkcRMyFaHISYmtU', label:'Karkogel | Abtenauer Bergbahnen' },
+          { placeId:'ChIJoZE_V1LLdkcR4M2vAchh8ZY', label:'Vorderer Gosausee' }
+        ]
+      },
+      { id:'tl8',  day:8,  date:'23.08', label:'נסיעה לווינה',          emoji:'🏙️', lat:48.1962, lng:16.3383, color:'#880e4f',         title:'מפל Salza · LEOPARK · לינה ב-ARCOTEL Wimberger',
+        routePath: [
+          [47.5760, 14.7680],
+          [47.3389, 15.0206],
+          [48.2018, 16.3386]
+        ],
+        googlePlaces: [
+          { placeId:'ChIJ4-2q69MVcUcRaxQPStkWphQ', label:'Salza-Wasserfall Parking' },
+          { placeId:'ChIJtWAJW23ccUcReN_rPNcadOE', label:'LEOPARK GmbH' },
+          { placeId:'ChIJJwRV4_MHbUcREA0lr3W7ydA', label:'ARCOTEL Wimberger Wien' }
+        ]
+      },
+      { id:'tl9',  day:9,  date:'24.08', label:'שונברון + פארק פארטר', emoji:'🎡',  lat:48.1856, lng:16.3128, color:'#880e4f',         title:'מופע שטרודל · Prater · מוזיאון · Time Travel',
+        routePath: [
+          [48.1858, 16.3124],
+          [48.2161, 16.3956],
+          [48.2053, 16.3594],
+          [48.2088, 16.3675]
+        ],
+        routeSkipHornergut: true,
+        googlePlaces: [
+          { placeId:'ChIJnVmGm-apbUcRZKaVOWyT4wk', label:'Gerstner K. u. K. Hofzuckerbäcker Show' },
+          { placeId:'ChIJY6GrTT8HbUcR9LGo6Zxp5_w', label:'Prater' },
+          { placeId:'ChIJnQAHwZAHbUcRycXUTr8uocQ', label:'Museum of Natural History Vienna' },
+          { placeId:'ChIJbac0_JgHbUcRXkPUJudXIpA', label:'Time Travel Vienna' }
+        ]
+      },
+      { id:'tl10', day:10, date:'25.08', label:'טיסה חזרה',             emoji:'✈️',  lat:48.121, lng:16.563, color:'#1A6B72', title:'Vienna International Airport → נתב"ג',
+        routePath: [
+          [48.2018, 16.3386],
+          [48.1197, 16.5633]
+        ],
+        routeSkipHornergut: true
+      },
     ];
 
-    var map = L.map('trip-map', { center: [47.8, 14.5], zoom: 7, scrollWheelZoom: false });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 18
+    var _placeSheetDay = null;
+
+    window.__mtRefreshBodyScrollLock = function () {
+      var sheet = document.getElementById('placeSheet');
+      var day = document.getElementById('daymapOverlay');
+      var email = document.getElementById('emailPopupOverlay');
+      var menu = document.getElementById('mobileMenu');
+      var pb = document.getElementById('pbOverlay');
+      var lock =
+        (sheet && sheet.classList.contains('is-open')) ||
+        (day && day.classList.contains('open')) ||
+        (email && email.classList.contains('open')) ||
+        (menu && menu.classList.contains('open')) ||
+        (pb && pb.classList.contains('open'));
+      document.body.style.overflow = lock ? 'hidden' : '';
+    };
+
+    /** Place Details (fetchFields) — נשמר ב-localStorage 7 ימים כדי לא לבזבז קריאות ל-Google Places */
+    var PLACE_SHEET_CACHE_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
+    var PLACE_SHEET_CACHE_KEY_PREFIX = 'austriaPlaceSheet:v1:';
+
+    function placeSheetCacheStorageKey(placeId) {
+      return PLACE_SHEET_CACHE_KEY_PREFIX + placeId;
+    }
+
+    function readPlaceSheetCache(placeId) {
+      try {
+        var raw = localStorage.getItem(placeSheetCacheStorageKey(placeId));
+        if (!raw) return null;
+        var wrap = JSON.parse(raw);
+        if (!wrap || wrap.v !== 1 || !wrap.savedAt || !wrap.payload) return null;
+        if (Date.now() - wrap.savedAt > PLACE_SHEET_CACHE_MAX_AGE_MS) return null;
+        return wrap.payload;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function writePlaceSheetCache(placeId, payload) {
+      try {
+        localStorage.setItem(
+          placeSheetCacheStorageKey(placeId),
+          JSON.stringify({ v: 1, savedAt: Date.now(), payload: payload })
+        );
+      } catch (e) {
+        /* quota / private mode */
+      }
+    }
+
+    /** כרטיסי אטרקציות זלצבורג: החלפת תמונת גיבוי ב-URL מ-Google Places (אותו מפתח + מטמון כמו חלון המקום) */
+    function hydrateSalzburgAttractionThumbs() {
+      var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
+      if (!key) return;
+      var root = document.getElementById('salzburg-attractions');
+      if (!root) return;
+      if (!window.google || !google.maps) {
+        if (!hydrateSalzburgAttractionThumbs._wait) hydrateSalzburgAttractionThumbs._wait = 0;
+        if (++hydrateSalzburgAttractionThumbs._wait < 120) {
+          setTimeout(hydrateSalzburgAttractionThumbs, 100);
+        }
+        return;
+      }
+      if (hydrateSalzburgAttractionThumbs._started) return;
+      hydrateSalzburgAttractionThumbs._started = true;
+      var imgs = root.querySelectorAll('img.attraction-card__thumb[data-google-place-id]');
+      var jobs = [];
+      for (var j = 0; j < imgs.length; j++) {
+        var img = imgs[j];
+        var pid = (img.getAttribute('data-google-place-id') || '').trim();
+        if (!pid) continue;
+        jobs.push({ img: img, placeId: pid });
+      }
+      if (!jobs.length) return;
+      google.maps
+        .importLibrary('places')
+        .then(function(lib) {
+          var Place = lib.Place;
+          jobs.forEach(function(job) {
+            var cached = readPlaceSheetCache(job.placeId);
+            if (cached && cached.photoURI) {
+              job.img.src = cached.photoURI;
+              return;
+            }
+            var place = new Place({ id: job.placeId });
+            place
+              .fetchFields({ fields: ['photos'] })
+              .then(function() {
+                if (!place.photos || !place.photos.length || typeof place.photos[0].getURI !== 'function') return;
+                try {
+                  var uri = place.photos[0].getURI({ maxWidth: 480, maxHeight: 360 });
+                  if (uri) job.img.src = uri;
+                } catch (e) {
+                  /* נשארת תמונת גיבוי */
+                }
+              })
+              .catch(function() {
+                /* נשארת תמונת גיבוי */
+              });
+          });
+        })
+        .catch(function() {
+          /* נשארת תמונת גיבוי */
+        });
+    }
+
+    function mapEscAttr(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+    function mapEscHtml(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+    function getPrimaryPlaceIdForMap(d) {
+      var pe = getPlaceEntries(d);
+      if (pe.length && pe[0].placeId) return pe[0].placeId;
+      return d.placeId || null;
+    }
+    function getCachedPhotoUriForDay(d) {
+      var pid = getPrimaryPlaceIdForMap(d);
+      if (!pid) return '';
+      var c = readPlaceSheetCache(pid);
+      return c && c.photoURI ? c.photoURI : '';
+    }
+    function tripMapPopupHtml(d) {
+      var pe = getPlaceEntries(d);
+      var thumb = getCachedPhotoUriForDay(d);
+      var mediaBlock;
+      if (thumb) {
+        mediaBlock =
+          '<div class="trip-map-popup__media"><img class="trip-map-popup__img" src="' +
+          mapEscAttr(thumb) +
+          '" alt="" loading="lazy" decoding="async"/></div>';
+      } else {
+        mediaBlock =
+          '<div class="trip-map-popup__media trip-map-popup__media--ph" style="background:linear-gradient(165deg,' +
+          mapEscAttr(d.color) +
+          ' 0%,#F5EDD8 55%,#FDF8F2 100%)"><span class="trip-map-popup__ph-emoji">' +
+          d.emoji +
+          '</span></div>';
+      }
+      var placeRow = '';
+      if (pe.length) {
+        placeRow =
+          '<button type="button" class="trip-map-popup__link" onclick="event.preventDefault();event.stopPropagation();if(window.openPlaceSheetForDayId)window.openPlaceSheetForDayId(\'' +
+          mapEscAttr(d.id) +
+          '\')">\u05e4\u05e8\u05d8\u05d9 \u05de\u05e7\u05d5\u05dd \u05d1-Google Maps</button>';
+      }
+      return (
+        '<div class="trip-map-popup">' +
+        mediaBlock +
+        '<div class="trip-map-popup__body">' +
+        '<div class="trip-map-popup__kicker">\u05d9\u05d5\u05dd ' +
+        mapEscHtml(d.day) +
+        ' \u00b7 ' +
+        mapEscHtml(d.date) +
+        '</div>' +
+        '<div class="trip-map-popup__label">' +
+        mapEscHtml(d.emoji + ' ' + d.label) +
+        '</div>' +
+        '<div class="trip-map-popup__title">' +
+        mapEscHtml(d.title) +
+        '</div>' +
+        '<button type="button" class="trip-map-popup__btn" style="background:' +
+        mapEscAttr(d.color) +
+        '" onclick="event.stopPropagation();goToDay(\'' +
+        mapEscAttr(d.id) +
+        '\')">\u05dc\u05e4\u05e8\u05d8\u05d9 \u05d4\u05d9\u05d5\u05dd \u05d1\u05de\u05e1\u05dc\u05d5\u05dc</button>' +
+        placeRow +
+        '</div></div>'
+      );
+    }
+
+    function placeDisplayNameText(place) {
+      var dn = place.displayName;
+      if (dn == null) return '';
+      if (typeof dn === 'string') return dn;
+      if (dn.text) return dn.text;
+      return String(dn);
+    }
+
+    function applyPlacePayloadToSheet(payload, day) {
+      var titleEl = document.getElementById('placeSheetTitle');
+      var summaryEl = document.getElementById('placeSheetSummary');
+      var photoEl = document.getElementById('placeSheetPhoto');
+      var mapsLink = document.getElementById('placeSheetMapsLink');
+      var phoneEl = document.getElementById('placeSheetPhone');
+      var phoneLabelEl = document.getElementById('placeSheetPhoneLabel');
+      var webEl = document.getElementById('placeSheetWeb');
+
+      titleEl.textContent = payload.displayName || day.title;
+
+      if (payload.editorialSummary) {
+        summaryEl.textContent = payload.editorialSummary;
+        summaryEl.hidden = false;
+      } else {
+        summaryEl.hidden = true;
+        summaryEl.textContent = '';
+      }
+
+      setPlaceSheetMeta('placeSheetAddress', 'placeSheetAddressText', payload.formattedAddress || '');
+
+      if (payload.rating != null) {
+        var urc = payload.userRatingCount != null ? ' (' + payload.userRatingCount + ' ביקורות)' : '';
+        setPlaceSheetMeta('placeSheetRating', 'placeSheetRatingText', 'דירוג: ' + payload.rating + '\u2605' + urc);
+      } else setPlaceSheetMeta('placeSheetRating', 'placeSheetRatingText', '');
+
+      if (payload.weekdayDescriptions && payload.weekdayDescriptions.length) {
+        setPlaceSheetMeta('placeSheetHours', 'placeSheetHoursText', payload.weekdayDescriptions.join(' · '));
+      } else setPlaceSheetMeta('placeSheetHours', 'placeSheetHoursText', '');
+
+      mapsLink.href = payload.googleMapsURI || 'https://www.google.com/maps?q=' + day.lat + ',' + day.lng;
+
+      var phone = payload.nationalPhoneNumber || payload.internationalPhoneNumber;
+      if (phone) {
+        phoneEl.hidden = false;
+        if (phoneLabelEl) phoneLabelEl.textContent = phone;
+        phoneEl.href = 'tel:' + String(phone).replace(/\s/g, '');
+      } else {
+        phoneEl.hidden = true;
+        if (phoneLabelEl) phoneLabelEl.textContent = '';
+      }
+
+      if (payload.websiteURI) {
+        webEl.hidden = false;
+        webEl.href = payload.websiteURI;
+      } else webEl.hidden = true;
+
+      if (payload.photoURI) {
+        photoEl.src = payload.photoURI;
+        photoEl.hidden = false;
+      } else {
+        photoEl.hidden = true;
+        photoEl.removeAttribute('src');
+      }
+    }
+
+    function buildPayloadFromPlace(place, day) {
+      var oh = place.regularOpeningHours || place.openingHours;
+      var weekdayDescriptions =
+        oh && oh.weekdayDescriptions && oh.weekdayDescriptions.length ? oh.weekdayDescriptions.slice() : null;
+      var photoURI = null;
+      if (place.photos && place.photos.length && typeof place.photos[0].getURI === 'function') {
+        try {
+          photoURI = place.photos[0].getURI({ maxWidth: 1280, maxHeight: 800 }) || null;
+        } catch (e) {
+          photoURI = null;
+        }
+      }
+      return {
+        displayName: placeDisplayNameText(place) || day.title,
+        formattedAddress: place.formattedAddress || '',
+        rating: place.rating != null ? place.rating : null,
+        userRatingCount: place.userRatingCount != null ? place.userRatingCount : null,
+        editorialSummary:
+          place.editorialSummary && place.editorialSummary.text ? place.editorialSummary.text : '',
+        weekdayDescriptions: weekdayDescriptions,
+        googleMapsURI: place.googleMapsURI || '',
+        nationalPhoneNumber: place.nationalPhoneNumber || '',
+        internationalPhoneNumber: place.internationalPhoneNumber || '',
+        websiteURI: place.websiteURI || '',
+        photoURI: photoURI
+      };
+    }
+
+    function setPlaceSheetMeta(rowId, textId, value) {
+      var row = document.getElementById(rowId);
+      var span = document.getElementById(textId);
+      if (!row || !span) return;
+      var t = value == null ? '' : String(value);
+      span.textContent = t;
+      row.hidden = !t;
+    }
+
+    function closePlaceSheet() {
+      var root = document.getElementById('placeSheet');
+      if (!root) return;
+      root.classList.remove('is-open');
+      root.setAttribute('aria-hidden', 'true');
+      _placeSheetDay = null;
+      window.__mtRefreshBodyScrollLock();
+    }
+
+    function openPlaceSheet(day, subIndex) {
+      subIndex = subIndex || 0;
+      var root = document.getElementById('placeSheet');
+      if (!root) return;
+      var entries = getPlaceEntries(day);
+      var pillsEl = document.getElementById('placeSheetPills');
+      var mapsLink = document.getElementById('placeSheetMapsLink');
+      mapsLink.href = 'https://www.google.com/maps?q=' + day.lat + ',' + day.lng;
+
+      if (!entries.length) {
+        document.getElementById('placeSheetTitle').textContent = day.title || '';
+        setPlaceSheetMeta('placeSheetAddress', 'placeSheetAddressText', '');
+        setPlaceSheetMeta('placeSheetRating', 'placeSheetRatingText', '');
+        setPlaceSheetMeta('placeSheetHours', 'placeSheetHoursText', '');
+        document.getElementById('placeSheetSummary').hidden = true;
+        document.getElementById('placeSheetPhoto').hidden = true;
+        document.getElementById('placeSheetPhone').hidden = true;
+        var _plEmpty = document.getElementById('placeSheetPhoneLabel');
+        if (_plEmpty) _plEmpty.textContent = '';
+        document.getElementById('placeSheetWeb').hidden = true;
+        pillsEl.hidden = true;
+        pillsEl.innerHTML = '';
+        root.classList.add('is-open');
+        root.setAttribute('aria-hidden', 'false');
+        window.__mtRefreshBodyScrollLock();
+        return;
+      }
+
+      _placeSheetDay = day;
+      pillsEl.innerHTML = '';
+      if (entries.length > 1) {
+        pillsEl.hidden = false;
+        entries.forEach(function(ent, i) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'place-sheet__pill' + (i === subIndex ? ' is-active' : '');
+          b.textContent = ent.label || ('מקום ' + (i + 1));
+          b.addEventListener('click', function() {
+            openPlaceSheet(day, i);
+          });
+          pillsEl.appendChild(b);
+        });
+      } else {
+        pillsEl.hidden = true;
+      }
+
+      root.classList.add('is-open');
+      root.setAttribute('aria-hidden', 'false');
+      window.__mtRefreshBodyScrollLock();
+
+      var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
+      if (!key || !window.google || !google.maps) {
+        document.getElementById('placeSheetTitle').textContent = entries[subIndex].label || day.title;
+        setPlaceSheetMeta(
+          'placeSheetAddress',
+          'placeSheetAddressText',
+          !key
+            ? 'כדי לטעון שעות, תמונה ודירוג: הגדירו את GOOGLE_MAPS_API_KEY בראש הקובץ (מפתח עם Maps JavaScript API + Places).'
+            : 'טוען את ספריית המפות… נסו שוב בעוד רגע.'
+        );
+        setPlaceSheetMeta('placeSheetRating', 'placeSheetRatingText', '');
+        setPlaceSheetMeta('placeSheetHours', 'placeSheetHoursText', '');
+        document.getElementById('placeSheetSummary').hidden = true;
+        document.getElementById('placeSheetPhoto').hidden = true;
+        document.getElementById('placeSheetPhone').hidden = true;
+        var _plKey = document.getElementById('placeSheetPhoneLabel');
+        if (_plKey) _plKey.textContent = '';
+        document.getElementById('placeSheetWeb').hidden = true;
+        return;
+      }
+
+      loadPlaceIntoSheet(entries[subIndex].placeId, day);
+    }
+
+    function loadPlaceIntoSheet(placeId, day) {
+      var cached = readPlaceSheetCache(placeId);
+      if (cached) {
+        applyPlacePayloadToSheet(cached, day);
+        return;
+      }
+
+      var titleEl = document.getElementById('placeSheetTitle');
+      var summaryEl = document.getElementById('placeSheetSummary');
+      var photoEl = document.getElementById('placeSheetPhoto');
+      var mapsLink = document.getElementById('placeSheetMapsLink');
+      var phoneEl = document.getElementById('placeSheetPhone');
+      var phoneLabelEl = document.getElementById('placeSheetPhoneLabel');
+      var webEl = document.getElementById('placeSheetWeb');
+
+      titleEl.textContent = 'טוען…';
+      summaryEl.hidden = true;
+      summaryEl.textContent = '';
+      setPlaceSheetMeta('placeSheetAddress', 'placeSheetAddressText', '');
+      setPlaceSheetMeta('placeSheetRating', 'placeSheetRatingText', '');
+      setPlaceSheetMeta('placeSheetHours', 'placeSheetHoursText', '');
+      photoEl.hidden = true;
+      photoEl.removeAttribute('src');
+      phoneEl.hidden = true;
+      if (phoneLabelEl) phoneLabelEl.textContent = '';
+      webEl.hidden = true;
+      mapsLink.href = 'https://www.google.com/maps?q=' + day.lat + ',' + day.lng;
+
+      google.maps
+        .importLibrary('places')
+        .then(function(lib) {
+          var Place = lib.Place;
+          var place = new Place({ id: placeId });
+          return place.fetchFields({
+            fields: [
+              'displayName',
+              'formattedAddress',
+              'rating',
+              'userRatingCount',
+              'nationalPhoneNumber',
+              'internationalPhoneNumber',
+              'websiteURI',
+              'regularOpeningHours',
+              'googleMapsURI',
+              'photos',
+              'editorialSummary'
+            ]
+          }).then(function() {
+            return place;
+          });
+        })
+        .then(function(place) {
+          var payload = buildPayloadFromPlace(place, day);
+          applyPlacePayloadToSheet(payload, day);
+          writePlaceSheetCache(placeId, payload);
+        })
+        .catch(function(err) {
+          titleEl.textContent = 'לא ניתן לטעון פרטי מקום';
+          var host = (typeof location !== 'undefined' && location.hostname) ? location.hostname : '';
+          var hints = [];
+          if (host === 'localhost' || host === '127.0.0.1' || !host || location.protocol === 'file:') {
+            hints.push('מפתח עם HTTP referrer מוגבל לא יעבוד מ-file:// או מ-localhost. פתחו את הדף ב-https://mataytasim.co.il/ (אחרי העלאה) או הוסיפו referrer לפיתוח: http://localhost:*/*');
+          } else if (host.indexOf('mataytasim.co.il') !== -1) {
+            hints.push('ב-API key → Application restrictions: הוסיפו גם https://mataytasim.co.il/* וגם https://www.mataytasim.co.il/* (עם https).');
+          }
+          hints.push('באותו פרויקט של המפתח: הפעילו Billing, Maps JavaScript API, ו-Places API (New).');
+          if (err && err.message) hints.push('מסך מפתחים (F12) → Console: ' + err.message);
+          setPlaceSheetMeta('placeSheetAddress', 'placeSheetAddressText', hints.join(' '));
+          setPlaceSheetMeta('placeSheetRating', 'placeSheetRatingText', '');
+          setPlaceSheetMeta('placeSheetHours', 'placeSheetHoursText', '');
+        });
+    }
+
+    window.openPlaceSheetForDayId = function(id) {
+      for (var i = 0; i < days.length; i++) {
+        if (days[i].id === id) {
+          openPlaceSheet(days[i], 0);
+          return;
+        }
+      }
+    };
+
+    document.querySelectorAll('[data-place-sheet-close]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        closePlaceSheet();
+      });
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closePlaceSheet();
+    });
+
+    var map = L.map('trip-map', {
+      center: [47.8, 14.5],
+      zoom: 7,
+      scrollWheelZoom: false,
+      zoomControl: false
+    });
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      maxZoom: 20,
+      subdomains: 'abcd'
     }).addTo(map);
+
+    var tripRouteGroup = L.layerGroup().addTo(map);
+    /** ימים שמציגים קווים + חצים במפה (סדר כרונולוגי). tl1 בלי מסלול; tl9–tl10 בלי חיבור מ-Hornergut */
+    var TRIP_ROUTE_DRAW_ORDER = ['tl2', 'tl3', 'tl4', 'tl5', 'tl6', 'tl7', 'tl8', 'tl9', 'tl10'];
+
+    function getDayRoutePath(d) {
+      if (d.routePath && d.routePath.length) return d.routePath;
+      return [[d.lat, d.lng]];
+    }
+
+    function bearingDeg(a, b) {
+      var la1 = (a[0] * Math.PI) / 180;
+      var la2 = (b[0] * Math.PI) / 180;
+      var dLo = ((b[1] - a[1]) * Math.PI) / 180;
+      var y = Math.sin(dLo) * Math.cos(la2);
+      var x =
+        Math.cos(la1) * Math.sin(la2) - Math.sin(la1) * Math.cos(la2) * Math.cos(dLo);
+      return (Math.atan2(y, x) * 180) / Math.PI;
+    }
+
+    function interpLL(a, b, t) {
+      return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+    }
+
+    function tripPinBodyHex(hex) {
+      var h = (hex || '#333').replace('#', '');
+      if (h.length !== 6) return '#c62828';
+      var r = parseInt(h.slice(0, 2), 16);
+      var g = parseInt(h.slice(2, 4), 16);
+      var b = parseInt(h.slice(4, 6), 16);
+      var k = 0.68;
+      var toHex = function(n) {
+        var x = Math.max(0, Math.min(255, Math.round(n)));
+        return ('0' + x.toString(16)).slice(-2);
+      };
+      return '#' + toHex(r * k) + toHex(g * k) + toHex(b * k);
+    }
+
+    var TRIP_ROUTE_LINE_COLOR = '#2fb8a8';
+    function addMapRouteSegment(a, b) {
+      L.polyline([a, b], {
+        className: 'trip-route-path',
+        color: TRIP_ROUTE_LINE_COLOR,
+        weight: 4,
+        opacity: 0.7,
+        lineCap: 'round',
+        lineJoin: 'round'
+      }).addTo(tripRouteGroup);
+      var mid = interpLL(a, b, 0.52);
+      var brng = bearingDeg(a, b);
+      var rot = brng - 90;
+      L.marker(mid, {
+        interactive: false,
+        keyboard: false,
+        icon: L.divIcon({
+          className: 'trip-route-arrow-wrap',
+          html:
+            '<div class="trip-route-arrow-rot" style="transform:rotate(' +
+            rot +
+            'deg)">' +
+            '<svg class="trip-route-arrow-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+            '<path d="M5 4 L19 12 L5 20 Z" fill="#1a7a6e" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round"/>' +
+            '</svg></div>',
+          iconSize: [26, 26],
+          iconAnchor: [13, 13]
+        })
+      }).addTo(tripRouteGroup);
+    }
+
+    function drawAllTripRoutes() {
+      var byId = {};
+      days.forEach(function(d) {
+        byId[d.id] = d;
+      });
+      var home = hornergutLL();
+      TRIP_ROUTE_DRAW_ORDER.forEach(function(id) {
+        var d = byId[id];
+        if (!d) return;
+        var path = getDayRoutePath(d);
+        if (!path || !path.length) return;
+        if (!d.routeSkipHornergut && id !== 'tl1') {
+          addMapRouteSegment(home, path[0]);
+        }
+        for (var j = 0; j < path.length - 1; j++) {
+          addMapRouteSegment(path[j], path[j + 1]);
+        }
+      });
+    }
+
+    function formatDriveDurationHe(totalMins) {
+      if (totalMins < 60) return '\u05db\u2009' + totalMins + ' \u05d3\u05e7\u05f3';
+      var h = Math.floor(totalMins / 60);
+      var m = totalMins % 60;
+      if (m === 0) {
+        if (h === 1) return '\u05db\u2009\u05e9\u05e2\u05d4';
+        if (h === 2) return '\u05db\u2009\u05e9\u05ea\u05d9\u05d9\u05dd';
+        return '\u05db\u2009' + h + ' \u05e9\u05e2\u05d5\u05ea';
+      }
+      if (h === 1) return '\u05db\u2009\u05e9\u05e2\u05d4 \u05d5\u2013' + m + ' \u05d3\u05e7\u05f3';
+      if (h === 2) return '\u05db\u2009\u05e9\u05ea\u05d9\u05d9\u05dd \u05d5\u2013' + m + ' \u05d3\u05e7\u05f3';
+      return '\u05db\u2009' + h + ' \u05e9\u05e2\u05d5\u05ea \u05d5\u2013' + m + ' \u05d3\u05e7\u05f3';
+    }
+
+    function injectFirstFourTravelFromHome() {
+      var ids = ['tl1', 'tl2', 'tl3', 'tl4'];
+      var byId = {};
+      days.forEach(function(d) {
+        byId[d.id] = d;
+      });
+      ids.forEach(function(tid) {
+        var d = byId[tid];
+        var card = document.querySelector('#' + tid + ' .tl-card__body');
+        if (!card || card.getAttribute('data-drive-home') === '1' || !d || !d.driveFromHotel) return;
+
+        var df = d.driveFromHotel;
+        var wrap = document.createElement('div');
+        wrap.className = 'tl-card__travel-from-home';
+
+        if (df.type === 'base') {
+          wrap.innerHTML =
+            '<div class="tl-card__travel-from-home__title">\u05e0\u05e7\u05d5\u05d3\u05ea \u05d4\u05d1\u05e1\u05d9\u05e1 \u05d4\u05de\u05e9\u05d5\u05e9\u05d1\u05ea</div>' +
+            '<div class="tl-card__travel-from-home__text">Hornergut \u00b7 Hornerweg 41, 5541 Altenmarkt im Pongau. \u05db\u05dc \u05d6\u05de\u05e0\u05d9 \u05d4\u05e0\u05e1\u05d9\u05e2\u05d4 \u05d1\u05d9\u05de\u05d9\u05dd 2\u20134 \u05de\u05d7\u05d5\u05e9\u05d1\u05d9\u05dd \u05de\u05db\u05d0\u05df.</div>';
+        } else if (df.type === 'leg' && df.minutes != null) {
+          wrap.innerHTML =
+            '<div class="tl-card__travel-from-home__row">' +
+            '<span class="tl-card__travel-from-home__ic" aria-hidden="true">\uD83D\uDE97</span>' +
+            '<span><strong>\u05de\u05d1\u05d9\u05ea Hornergut</strong> \u2013 ' +
+            '<span class="tl-card__travel-from-home__time">' +
+            formatDriveDurationHe(df.minutes) +
+            ' \u05e0\u05e1\u05d9\u05e2\u05d4</span> \u2013 \u05e2\u05d3 ' +
+            df.toHe +
+            '</span></div>';
+          if (df.mapsNote) {
+            var src = document.createElement('div');
+            src.className = 'tl-card__travel-from-home__src';
+            src.textContent = df.mapsNote;
+            wrap.appendChild(src);
+          }
+        }
+
+        card.insertBefore(wrap, card.firstChild);
+
+        if (tid === 'tl3') {
+          var inner = document.createElement('div');
+          inner.className = 'tl-card__travel-inner-day';
+          inner.innerHTML =
+            '<span class="tl-card__travel-inner-day__ic" aria-hidden="true">\u21C4</span>' +
+            ' \u05d1\u05d9\u05df \u05e9\u05ea\u05d9 \u05d4\u05e2\u05e6\u05d9\u05e8\u05d5\u05ea \u05d1\u05d9\u05d5\u05dd: \u05db\u200935 \u05d3\u05e7\u05f3 \u05e0\u05e1\u05d9\u05e2\u05d4 \u00b7 Skywalk \u2194 Sommerrodelbahn Keltenblitz';
+          card.insertBefore(inner, wrap.nextSibling);
+        }
+        if (tid === 'tl4') {
+          var inner4 = document.createElement('div');
+          inner4.className = 'tl-card__travel-inner-day';
+          inner4.innerHTML =
+            '<span class="tl-card__travel-inner-day__ic" aria-hidden="true">\u21C4</span>' +
+            ' \u05d1\u05d9\u05df \u05e9\u05ea\u05d9 \u05d4\u05e2\u05e6\u05d9\u05e8\u05d5\u05ea \u05d1\u05d9\u05d5\u05dd: \u05db\u200930 \u05d3\u05e7\u05f3 \u00b7 Burg Hohenwerfen \u2194 Liechtensteinklamm';
+          card.insertBefore(inner4, wrap.nextSibling);
+        }
+
+        card.setAttribute('data-drive-home', '1');
+      });
+    }
+
+    drawAllTripRoutes();
+    injectFirstFourTravelFromHome();
 
     var markers = {};
     var activeId = null;
+    var hoverMapId = null;
+    var dayById = {};
+    days.forEach(function(x) {
+      dayById[x.id] = x;
+    });
 
-    function makeIcon(d, active) {
-      var s = active ? 48 : 40;
+    function setHoverMapId(id) {
+      var prev = hoverMapId;
+      hoverMapId = id;
+      if (prev && markers[prev]) markers[prev].setIcon(makeTripMapPin(dayById[prev]));
+      if (hoverMapId && markers[hoverMapId]) markers[hoverMapId].setIcon(makeTripMapPin(dayById[hoverMapId]));
+    }
+
+    function makeTripMapPin(d) {
+      var active = d.id === activeId;
+      var syncHover = !active && d.id === hoverMapId;
+      var baseW = active ? 50 : 44;
+      var baseH = active ? 64 : 56;
+      var em = active ? 20 : 17;
+      var strokeW = active ? 3 : 2.5;
+      var col = tripPinBodyHex(d.color);
+      var html =
+        '<div class="trip-map-pin-root' +
+        (active ? ' trip-map-pin-root--active' : '') +
+        (syncHover ? ' trip-map-pin-root--sync-hover' : '') +
+        '" style="width:' +
+        baseW +
+        'px;height:' +
+        baseH +
+        'px;font-size:' +
+        em +
+        'px;">' +
+        '<svg class="trip-map-pin__drop" viewBox="0 0 32 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+        '<path fill="' +
+        col +
+        '" stroke="#ffffff" stroke-width="' +
+        strokeW +
+        '" stroke-linejoin="round" d="M16 2.5C9.8 2.5 5 7.3 5 13.2c0 7 11 20.3 11 20.3s11-13.3 11-20.3C27 7.3 22.2 2.5 16 2.5z"/>' +
+        '<circle cx="16" cy="13" r="8.5" fill="#ffffff"/>' +
+        '</svg>' +
+        '<span class="trip-map-pin__emoji" aria-hidden="true">' +
+        d.emoji +
+        '</span></div>';
       return L.divIcon({
-        className: '',
-        html: '<div style="width:'+s+'px;height:'+s+'px;border-radius:50%;background:'+(active?d.color:'#fff')+';border:2.5px solid '+(active?'#fff':d.color)+';display:flex;align-items:center;justify-content:center;font-size:'+(active?20:16)+'px;box-shadow:0 3px 12px rgba(0,0,0,0.22);cursor:pointer;transition:all 0.2s;">'+d.emoji+'</div>',
-        iconSize:[s,s], iconAnchor:[s/2,s/2], popupAnchor:[0,-(s/2+4)]
+        className: 'trip-map-pin-wrap',
+        html: html,
+        iconSize: [baseW, baseH],
+        iconAnchor: [baseW / 2, baseH - 2],
+        popupAnchor: [0, -(baseH - 8)]
       });
     }
 
     function setActive(id) {
+      activeId = id;
       days.forEach(function(d) {
-        if (markers[d.id]) markers[d.id].setIcon(makeIcon(d, d.id === id));
+        if (markers[d.id]) {
+          markers[d.id].setIcon(makeTripMapPin(d));
+          markers[d.id].setZIndexOffset(d.id === id ? 800 : 0);
+        }
       });
       document.querySelectorAll('.map-pill').forEach(function(p) {
         p.style.background = p.dataset.id === id ? 'var(--teal)' : 'var(--white)';
         p.style.color = p.dataset.id === id ? '#fff' : 'var(--charcoal)';
         p.style.borderColor = p.dataset.id === id ? 'var(--teal)' : 'var(--sand-dark)';
       });
-      activeId = id;
     }
 
     function flyTo(d) {
@@ -1339,17 +3051,24 @@
     };
 
     days.forEach(function(d) {
-      var m = L.marker([d.lat, d.lng], { icon: makeIcon(d, false) })
-        .addTo(map)
-        .bindPopup(
-          '<div dir="rtl" style="font-family:Rubik,sans-serif;min-width:160px;padding:4px 2px;">' +
-          '<div style="font-size:11px;color:#aaa;margin-bottom:2px;">יום '+d.day+' · '+d.date+'</div>' +
-          '<div style="font-size:15px;font-weight:600;color:'+d.color+';margin-bottom:4px;">'+d.emoji+' '+d.label+'</div>' +
-          '<div style="font-size:13px;color:#555;margin-bottom:8px;">'+d.title+'</div>' +
-          '<button onclick="goToDay(\''+d.id+'\')" style="width:100%;background:'+d.color+';color:#fff;border:none;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:600;cursor:pointer;font-family:Rubik,sans-serif;">לפרטי היום ↓</button>' +
-          '</div>'
-        );
-      m.on('click', function() { setActive(d.id); });
+      var m = L.marker([d.lat, d.lng], { icon: makeTripMapPin(d) }).bindPopup(tripMapPopupHtml(d), {
+        className: 'trip-map-popup-shell',
+        maxWidth: Math.min(320, Math.max(200, (window.innerWidth || 400) - 32)),
+        minWidth: 0
+      });
+      m.on('click', function() {
+        setActive(d.id);
+      });
+      m.on('popupopen', function() {
+        m.setPopupContent(tripMapPopupHtml(d));
+      });
+      m.on('mouseover', function() {
+        setHoverMapId(d.id);
+      });
+      m.on('mouseout', function() {
+        setHoverMapId(null);
+      });
+      m.addTo(map);
       markers[d.id] = m;
     });
 
@@ -1370,7 +3089,9 @@
       var header = item.querySelector('.tl-card__header');
       if (header) {
         header.style.cursor = 'pointer';
-        header.addEventListener('click', function() { flyTo(d); });
+        header.addEventListener('click', function() {
+          flyTo(d);
+        });
       }
     });
 
@@ -1414,7 +3135,11 @@
         '[out:json][timeout:25];' +
         '(' +
         'node["amenity"~"restaurant|cafe|pub|bar|fast_food"](around:8000,47.092,13.691);' +
-        'node["amenity"~"restaurant|cafe|pub|bar|fast_food"](around:5000,47.383,13.433);' +
+        'node["amenity"~"restaurant|cafe|pub|bar|fast_food"](around:5000,' +
+        HORNERGUT_LAT +
+        ',' +
+        HORNERGUT_LNG +
+        ');' +
         'node["tourism"~"attraction|viewpoint|museum"](around:8000,47.092,13.691);' +
         'node["historic"~"castle|monument|ruins|memorial"](around:8000,47.092,13.691);' +
         'node["leisure"~"park|nature_reserve|playground"](around:5000,47.092,13.691);' +
@@ -1490,24 +3215,26 @@
         zoomControl: true
       });
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap &copy; CARTO',
-        maxZoom: 19
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        maxZoom: 20,
+        subdomains: 'abcd'
       }).addTo(_dayMap2);
 
-      L.marker([47.383, 13.433], { icon: dm2Icon('🏨', '#1A6B72', 40) })
+      L.marker([HORNERGUT_LAT, HORNERGUT_LNG], { icon: dm2Icon('🏨', '#1A6B72', 40) })
         .addTo(_dayMap2)
         .bindPopup(dm2Popup('🏨 Hornergut', 'לינה · Altenmarkt-im-Pongau', '#1A6B72'));
 
-      L.polyline([[47.383, 13.433],[47.24, 13.555],[47.092, 13.691]], {
+      L.polyline([[HORNERGUT_LAT, HORNERGUT_LNG],[47.24, 13.555],[47.092, 13.691]], {
         color: '#4A9B6F', weight: 3, dashArray: '9 7', opacity: 0.7
       }).addTo(_dayMap2);
 
       L.marker([47.238, 13.556], {
         icon: L.divIcon({
           className: '',
-          html: '<div style="background:#fff;border:1.5px solid #4A9B6F;border-radius:12px;padding:4px 10px;font-family:Rubik,sans-serif;font-size:11px;font-weight:600;color:#4A9B6F;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.14);">⏱️ ~40 דק׳</div>',
-          iconSize:[90,24], iconAnchor:[45,12]
+          html: '<div style="background:#fff;border:1.5px solid #4A9B6F;border-radius:12px;padding:4px 10px;font-family:Rubik,sans-serif;font-size:11px;font-weight:600;color:#4A9B6F;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.14);">⏱️ ~1:34</div>',
+          iconSize:[100,24], iconAnchor:[50,12]
         }),
         interactive: false
       }).addTo(_dayMap2);
@@ -1529,22 +3256,46 @@
     function openDayMap2(e) {
       if (e) e.stopPropagation();
       document.getElementById('daymapOverlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
+      window.__mtRefreshBodyScrollLock();
       setTimeout(function() {
         _dayMap2.invalidateSize();
-        _dayMap2.flyToBounds([[47.383, 13.433],[47.092, 13.691]], { padding:[50,50], duration:0.5 });
+        _dayMap2.flyToBounds([[HORNERGUT_LAT, HORNERGUT_LNG],[47.092, 13.691]], { padding:[50,50], duration:0.5 });
       }, 50);
+      setTimeout(function() {
+        if (_dayMap2) _dayMap2.invalidateSize();
+      }, 320);
     }
 
     function closeDayMap2(e) {
       if (e && e.target !== document.getElementById('daymapOverlay')) return;
       document.getElementById('daymapOverlay').classList.remove('open');
-      document.body.style.overflow = '';
+      window.__mtRefreshBodyScrollLock();
     }
 
     window.openDayMap2 = openDayMap2;
     window.closeDayMap2 = closeDayMap2;
 
+    hydrateSalzburgAttractionThumbs();
+
+    var _leafletInvalidateTimer;
+    function scheduleLeafletInvalidate() {
+      clearTimeout(_leafletInvalidateTimer);
+      _leafletInvalidateTimer = setTimeout(function() {
+        try {
+          map.invalidateSize();
+        } catch (err) {}
+        if (_dayMap2) {
+          try {
+            _dayMap2.invalidateSize();
+          } catch (err2) {}
+        }
+      }, 160);
+    }
+    window.addEventListener('resize', scheduleLeafletInvalidate);
+    window.addEventListener('orientationchange', scheduleLeafletInvalidate);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', scheduleLeafletInvalidate);
+    }
 
   })();
 </script>
@@ -1557,27 +3308,41 @@
     var mobileMenu = document.getElementById('mobileMenu');
     if (!hamburger || !mobileMenu) return;
     var WEATHER_CITIES = [
-      { name: 'וינה', lat: 48.2082, lon: 16.3738 },
-      { name: 'ירושלים', lat: 31.7683, lon: 35.2137 },
-      { name: 'ניו יורק', lat: 40.7128, lon: -74.006 },
-      { name: 'לונדון', lat: 51.5074, lon: -0.1278 },
-      { name: 'פריז', lat: 48.8566, lon: 2.3522 },
+      { name: 'לונדון', lat: 51.51, lon: -0.12 },
+      { name: 'בודפשט', lat: 47.5, lon: 19.04 },
+      { name: 'וינה', lat: 48.21, lon: 16.37 },
+      { name: 'אתונה', lat: 37.98, lon: 23.73 },
+      { name: 'פראג', lat: 50.08, lon: 14.44 },
+      { name: 'ורשה', lat: 52.23, lon: 21.01 },
+      { name: 'ברטיסלבה', lat: 48.15, lon: 17.11 },
+      { name: 'ברצלונה', lat: 41.39, lon: 2.17 },
+      { name: 'אמסטרדם', lat: 52.37, lon: 4.9 },
+      { name: 'רומא', lat: 41.9, lon: 12.49 }
     ];
+    var weatherCityIndex = Math.floor(Math.random() * WEATHER_CITIES.length);
     function fetchMenuWeather() {
-      var strip = mobileMenu.querySelector('.mob-nav-weather-strip');
-      if (!strip) return;
-      var city = WEATHER_CITIES[Math.floor(Math.random() * WEATHER_CITIES.length)];
-      var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + city.lat + '&longitude=' + city.lon + '&current_weather=true';
-      fetch(url).then(function(r){ return r.json(); }).then(function(data) {
-        var temp = Math.round(data.current_weather.temperature);
-        strip.textContent = city.name + ' ' + temp + '°C';
-      }).catch(function() { strip.textContent = ''; });
+      var el = document.getElementById('menuWeatherSnippet');
+      if (!el) return;
+      weatherCityIndex = (weatherCityIndex + 1) % WEATHER_CITIES.length;
+      var city = WEATHER_CITIES[weatherCityIndex];
+      el.textContent = city.name + '...';
+      fetch('https://api.open-meteo.com/v1/forecast?latitude=' + city.lat + '&longitude=' + city.lon + '&current_weather=true')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          var t = Math.round(d.current_weather.temperature);
+          var code = d.current_weather.weathercode;
+          var icon = code <= 1 ? '\u2600\uFE0F' : code <= 3 ? '\u26C5' : code <= 67 ? '\uD83C\uDF27' : '\u2744\uFE0F';
+          el.textContent = city.name + ' עכשיו ' + t + '°C ' + icon;
+        })
+        .catch(function() { el.textContent = 'מזג אוויר באירופה'; });
     }
-    hamburger.addEventListener('click', function () {
+    hamburger.addEventListener('click', function (e) {
+      e.stopPropagation();
       var isOpen = mobileMenu.classList.toggle('open');
       hamburger.setAttribute('aria-expanded', isOpen.toString());
       hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
-      document.body.style.overflow = isOpen ? 'hidden' : '';
+      if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+      else document.body.style.overflow = isOpen ? 'hidden' : '';
       if (isOpen) fetchMenuWeather();
     });
     mobileMenu.querySelectorAll('a').forEach(function (link) {
@@ -1585,7 +3350,8 @@
         mobileMenu.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
         hamburger.setAttribute('aria-label', 'פתח תפריט');
-        document.body.style.overflow = '';
+        if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+        else document.body.style.overflow = '';
       });
     });
     if (nav) window.addEventListener('scroll', function () {
@@ -1596,7 +3362,8 @@
         mobileMenu.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
         hamburger.setAttribute('aria-label', 'פתח תפריט');
-        document.body.style.overflow = '';
+        if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+        else document.body.style.overflow = '';
         hamburger.focus();
       }
     });
@@ -1606,17 +3373,15 @@
 <!-- Email Popup -->
 <div class="email-popup-overlay" id="emailPopupOverlay">
   <div class="email-popup">
-    <button class="email-popup__close" id="emailPopupClose">×</button>
-    <div class="email-popup__icon">✈️</div>
-    <h2 class="email-popup__title">רוצים לקבל עדכונים?</h2>
-    <p class="email-popup__subtitle">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
+    <button type="button" class="email-popup__close" id="emailPopupClose" aria-label="סגור">×</button>
+    <h2 class="email-popup__title">רוצים עדכונים למייל?</h2>
+    <p class="email-popup__subtitle">טיפים, יעדים ומסלולים ועוד הרבה הפתעות - תהיו חלק מקהילת מתי טסים</p>
     <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm">
       <input type="hidden" name="_subject" value="הרשמה מאוסטריה - מתי טסים">
       <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/austria.html">
       <input type="hidden" name="_captcha" value="false">
-      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input">
-      <button type="submit" class="email-popup__btn">אני רוצה לקבל עדכונים ✈️</button>
-      <button type="button" class="email-popup__skip" id="emailPopupSkip">דלג</button>
+      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input" inputmode="email" autocomplete="email" enterkeyhint="send">
+      <button type="submit" class="email-popup__btn">קבלו עדכונים</button>
     </form>
   </div>
 </div>
@@ -1624,18 +3389,87 @@
 (function () {
   var overlay = document.getElementById('emailPopupOverlay');
   var closeBtn = document.getElementById('emailPopupClose');
-  var skipBtn = document.getElementById('emailPopupSkip');
   var openedAt = 0;
-  function openPopup(force) { if (!force && localStorage.getItem('mtEmailSubmitted')) return; overlay.classList.add('open'); document.body.style.overflow = 'hidden'; openedAt = Date.now(); }
-  function closePopup() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
-  document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) { link.addEventListener('click', function(e) { e.preventDefault(); openPopup(); }); });
+  var scrollEmailRaf = 0;
+  /** After closing without signup: scroll back up (below ~42% of page) before auto-open can fire again. */
+  var emailScrollAwaitLowerHalf = false;
+  /** Popup only after real scroll — avoids opening from layout/resize or load-time checks. */
+  var emailPopupUserHasScrolled = false;
+  function openPopup(force) {
+    if (!force && localStorage.getItem('mtEmailSubmitted')) return;
+    if (overlay.classList.contains('open')) return;
+    overlay.classList.add('open');
+    if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+    else document.body.style.overflow = 'hidden';
+    openedAt = Date.now();
+  }
+  function closePopup() {
+    overlay.classList.remove('open');
+    if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+    else document.body.style.overflow = '';
+    if (!localStorage.getItem('mtEmailSubmitted')) {
+      sessionStorage.removeItem('mtEmailScrollShown');
+      emailScrollAwaitLowerHalf = true;
+    }
+  }
+  function maybeOpenFromScroll() {
+    if (!emailPopupUserHasScrolled) return;
+    if (localStorage.getItem('mtEmailSubmitted')) return;
+    var doc = document.documentElement;
+    var scrollTop = window.scrollY || doc.scrollTop;
+    var maxScroll = doc.scrollHeight - window.innerHeight;
+    if (maxScroll <= 0) return;
+    var ratio = scrollTop / maxScroll;
+    if (emailScrollAwaitLowerHalf) {
+      if (ratio < 0.42) emailScrollAwaitLowerHalf = false;
+      else return;
+    }
+    if (sessionStorage.getItem('mtEmailScrollShown')) return;
+    if (ratio < 0.5) return;
+    sessionStorage.setItem('mtEmailScrollShown', '1');
+    openPopup(false);
+  }
+  function onScrollEmail() {
+    if (scrollEmailRaf) return;
+    scrollEmailRaf = requestAnimationFrame(function () {
+      scrollEmailRaf = 0;
+      var st = window.scrollY || document.documentElement.scrollTop;
+      if (st > 2) emailPopupUserHasScrolled = true;
+      maybeOpenFromScroll();
+    });
+  }
+  document.querySelectorAll('a[href="#newsletter"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      openPopup(true);
+    });
+  });
   if (closeBtn) closeBtn.addEventListener('click', closePopup);
-  if (skipBtn) skipBtn.addEventListener('click', closePopup);
-  overlay.addEventListener('click', function(e) { if (e.target === overlay && Date.now() - openedAt > 400) closePopup(); });
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePopup(); });
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay && Date.now() - openedAt > 400) closePopup();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePopup();
+  });
   var form = document.getElementById('emailPopupForm');
-  if (form) form.addEventListener('submit', function() { localStorage.setItem('mtEmailSubmitted', '1'); });
+  if (form) form.addEventListener('submit', function () {
+    localStorage.setItem('mtEmailSubmitted', '1');
+  });
   window.openEmailPopup = openPopup;
+  window.addEventListener('scroll', onScrollEmail, { passive: true });
+})();
+</script>
+<script>
+(function () {
+  var el = document.getElementById('tipsProMoreLink');
+  if (!el) return;
+  el.addEventListener('click', function () {
+    if (window.plausible) {
+      plausible('Austria-Tips-More-Click', {
+        props: { target: 'tips.html', section: 'pro_tips_block' }
+      });
+    }
+  });
 })();
 </script>
 
@@ -1648,22 +3482,26 @@
     z-index: 900;
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    padding: 0;
     background: #F5EDD8;
     color: #124d52;
     border: 1.5px solid #e8ddc4;
-    border-radius: 30px;
-    padding: 11px 18px;
+    border-radius: 50%;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    font-weight: 700;
     cursor: grab;
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     transition: box-shadow 0.2s ease, background 0.2s ease;
-    letter-spacing: 0.02em;
     animation: pbFloat 3s ease-in-out infinite;
     user-select: none;
     touch-action: none;
+  }
+  .pb-float-btn__icon {
+    font-size: 24px;
+    line-height: 1;
+    pointer-events: none;
   }
   .pb-float-btn:hover {
     background: #e8ddc4;
@@ -1804,6 +3642,7 @@
   .pb-drawer.open .pb-item:nth-child(8)  { animation-delay: 0.29s; }
   .pb-drawer.open .pb-item:nth-child(9)  { animation-delay: 0.31s; }
   .pb-drawer.open .pb-item:nth-child(10) { animation-delay: 0.33s; }
+  .pb-emergency-note {
     background: rgba(232,160,69,0.12);
     border-right: 3px solid var(--amber);
     border-radius: 0 8px 8px 0;
@@ -1817,8 +3656,8 @@
 </style>
 
 <!-- Floating button -->
-<button class="pb-float-btn" id="pbOpenBtn" aria-label="פתח מילון אוסטרי">
-  <span style="font-size:20px;line-height:1;display:inline-block;">🗣️</span> מילון אוסטרי
+<button type="button" class="pb-float-btn" id="pbOpenBtn" aria-label="פתח מילון אוסטרי" title="מילון אוסטרי">
+  <span class="pb-float-btn__icon" aria-hidden="true">&#x1F5E3;&#xFE0F;</span>
 </button>
 
 <!-- Overlay -->
@@ -1884,8 +3723,8 @@
   var drawer = document.getElementById('pbDrawer');
   var overlay = document.getElementById('pbOverlay');
 
-  function openPb() { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closePb() { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  function openPb() { drawer.classList.add('open'); overlay.classList.add('open'); if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock(); else document.body.style.overflow = 'hidden'; }
+  function closePb() { drawer.classList.remove('open'); overlay.classList.remove('open'); if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock(); else document.body.style.overflow = ''; }
 
   var isDragging = false;
   var didDrag = false;
