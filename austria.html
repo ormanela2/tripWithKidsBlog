@@ -291,60 +291,7 @@
     .tl-tip { margin-top: 12px; background: rgba(232,160,69,0.1); border-right: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 9px 13px; font-size: 13px; color: #666; }
     .tl-tip strong { color: var(--amber-dark); }
 
-    /* Trip map — Google-style pins + animated route */
-    .trip-map-pin-wrap { background: transparent !important; border: none !important; }
-    .trip-map-pin-root {
-      position: relative;
-      cursor: pointer;
-      pointer-events: auto;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: none;
-      filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.32));
-      transition: transform 0.22s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.22s ease;
-    }
-    .trip-map-pin-root:hover {
-      transform: scale(1.06);
-      filter: drop-shadow(0 5px 14px rgba(0, 0, 0, 0.36));
-    }
-    .trip-map-pin-root--active {
-      transform: scale(1.1);
-      filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
-      z-index: 5;
-    }
-    @keyframes tripPinGlowPulse {
-      0%, 100% {
-        filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.32));
-      }
-      50% {
-        filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 14px rgba(26, 107, 114, 0.55));
-      }
-    }
-    .trip-map-pin-root--sync-hover {
-      animation: tripPinGlowPulse 1.15s ease-in-out infinite;
-      z-index: 6;
-    }
-    .trip-map-pin-root--active.trip-map-pin-root--sync-hover {
-      animation: none;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .trip-map-pin-root--sync-hover { animation: none; }
-    }
-    .trip-map-pin__drop {
-      display: block;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-    .trip-map-pin__emoji {
-      position: absolute;
-      left: 50%;
-      top: 25%;
-      transform: translate(-50%, -50%);
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-      filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.85)) drop-shadow(0 0 1px rgba(0, 0, 0, 0.25));
-    }
+    /* Trip map markers: circle divIcons (same pattern as slovakia.html — reliable tap targets on mobile) */
 
     .trip-route-arrow-wrap { background: none !important; border: none !important; }
     .trip-route-arrow-rot {
@@ -396,7 +343,6 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     }
     #trip-map.leaflet-container {
-      touch-action: none;
       -webkit-tap-highlight-color: transparent;
     }
     @media (max-width: 600px) {
@@ -2836,20 +2782,6 @@
       return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
     }
 
-    function tripPinBodyHex(hex) {
-      var h = (hex || '#333').replace('#', '');
-      if (h.length !== 6) return '#c62828';
-      var r = parseInt(h.slice(0, 2), 16);
-      var g = parseInt(h.slice(2, 4), 16);
-      var b = parseInt(h.slice(4, 6), 16);
-      var k = 0.68;
-      var toHex = function(n) {
-        var x = Math.max(0, Math.min(255, Math.round(n)));
-        return ('0' + x.toString(16)).slice(-2);
-      };
-      return '#' + toHex(r * k) + toHex(g * k) + toHex(b * k);
-    }
-
     var TRIP_ROUTE_LINE_COLOR = '#2fb8a8';
     function addMapRouteSegment(a, b) {
       L.polyline([a, b], {
@@ -2994,42 +2926,38 @@
       if (hoverMapId && markers[hoverMapId]) markers[hoverMapId].setIcon(makeTripMapPin(dayById[hoverMapId]));
     }
 
+    /** Same approach as slovakia.html: solid circle + emoji, className '' — avoids SVG/teardrop hit-test issues on touch. */
     function makeTripMapPin(d) {
       var active = d.id === activeId;
       var syncHover = !active && d.id === hoverMapId;
-      var baseW = active ? 50 : 44;
-      var baseH = active ? 64 : 56;
-      var em = active ? 20 : 17;
-      var strokeW = active ? 3 : 2.5;
-      var col = tripPinBodyHex(d.color);
-      var html =
-        '<div class="trip-map-pin-root' +
-        (active ? ' trip-map-pin-root--active' : '') +
-        (syncHover ? ' trip-map-pin-root--sync-hover' : '') +
-        '" style="width:' +
-        baseW +
-        'px;height:' +
-        baseH +
-        'px;font-size:' +
-        em +
-        'px;">' +
-        '<svg class="trip-map-pin__drop" viewBox="0 0 32 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-        '<path fill="' +
-        col +
-        '" stroke="#ffffff" stroke-width="' +
-        strokeW +
-        '" stroke-linejoin="round" d="M16 2.5C9.8 2.5 5 7.3 5 13.2c0 7 11 20.3 11 20.3s11-13.3 11-20.3C27 7.3 22.2 2.5 16 2.5z"/>' +
-        '<circle cx="16" cy="13" r="8.5" fill="#ffffff"/>' +
-        '</svg>' +
-        '<span class="trip-map-pin__emoji" aria-hidden="true">' +
-        d.emoji +
-        '</span></div>';
+      var size = active ? 46 : syncHover ? 40 : 38;
+      var bg = active ? d.color : '#fff';
+      var border = active ? '#fff' : d.color;
+      var fontSize = active ? 20 : syncHover ? 17 : 16;
+      var shadow = syncHover
+        ? '0 3px 12px rgba(0,0,0,0.22),0 0 0 3px rgba(26,107,114,0.35)'
+        : '0 3px 12px rgba(0,0,0,0.22)';
       return L.divIcon({
-        className: 'trip-map-pin-wrap',
-        html: html,
-        iconSize: [baseW, baseH],
-        iconAnchor: [baseW / 2, baseH - 2],
-        popupAnchor: [0, -(baseH - 8)]
+        className: '',
+        html:
+          '<div style="width:' +
+          size +
+          'px;height:' +
+          size +
+          'px;border-radius:50%;background:' +
+          bg +
+          ';border:2.5px solid ' +
+          border +
+          ';display:flex;align-items:center;justify-content:center;font-size:' +
+          fontSize +
+          'px;box-shadow:' +
+          shadow +
+          ';cursor:pointer;-webkit-tap-highlight-color:transparent;"><span style="line-height:1;">' +
+          d.emoji +
+          '</span></div>',
+        iconSize: [size, size],
+        iconAnchor: [size / 2, size / 2],
+        popupAnchor: [0, -(size / 2 + 4)]
       });
     }
 
@@ -3051,6 +2979,7 @@
     function flyTo(d) {
       map.flyTo([d.lat, d.lng], 10, { duration: 1 });
       setActive(d.id);
+      if (markers[d.id]) markers[d.id].openPopup();
     }
 
     window.goToDay = function(id) {
