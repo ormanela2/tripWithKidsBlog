@@ -3677,7 +3677,7 @@
     <p class="email-popup__subtitle">טיפים, יעדים ומסלולים ועוד הרבה הפתעות - תהיו חלק מקהילת מתי טסים</p>
     <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm">
       <input type="hidden" name="_subject" value="הרשמה מאוסטריה - מתי טסים">
-      <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/austria.html">
+      <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/austria.html?subscribed=1#newsletter">
       <input type="hidden" name="_captcha" value="false">
       <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input" inputmode="email" autocomplete="email" enterkeyhint="send">
       <button type="submit" class="email-popup__btn">קבלו עדכונים</button>
@@ -3686,6 +3686,10 @@
 </div>
 <script>
 (function () {
+  try {
+    var _sub = new URLSearchParams(window.location.search).get('subscribed');
+    if (_sub === '1') localStorage.setItem('mtEmailSubmitted', '1');
+  } catch (e) {}
   var overlay = document.getElementById('emailPopupOverlay');
   var closeBtn = document.getElementById('emailPopupClose');
   var openedAt = 0;
@@ -3695,7 +3699,7 @@
   /** Popup only after real scroll — avoids opening from layout/resize or load-time checks. */
   var emailPopupUserHasScrolled = false;
   function openPopup(force) {
-    if (!force && localStorage.getItem('mtEmailSubmitted')) return;
+    if (localStorage.getItem('mtEmailSubmitted')) return;
     if (overlay.classList.contains('open')) return;
     overlay.classList.add('open');
     if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
