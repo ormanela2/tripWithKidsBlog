@@ -1,4 +1,4 @@
-﻿                  <div class="tl-drive">
+                  <div class="tl-drive">
                     <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
                     <div class="tl-drive__text">כ-15 דקות נסיעה מ-Kraftwerk Grafenberg ל-Soccerpark באזור וואגריין-קליינארל.</div>
                   </div>
@@ -3247,38 +3247,6 @@
       }
     };
 
-    function injectTimelineMapLinksRemoved() {
-      days.forEach(function(d) {
-        var item = document.getElementById(d.id);
-        if (!item) return;
-        var band = item.querySelector('.tl-card__band');
-        if (!band || !band.parentNode) return;
-        if (band.nextElementSibling && band.nextElementSibling.classList.contains('tl-card__to-map-wrap')) return;
-        var wrap = document.createElement('div');
-        wrap.className = 'tl-card__to-map-wrap';
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'tl-card__to-map';
-        btn.setAttribute(
-          'title',
-          '\u05de\u05e2\u05d1\u05e8 \u05dc\u05de\u05e4\u05ea \u05d4\u05de\u05e1\u05dc\u05d5\u05dc \u05d5\u05d4\u05e6\u05d2\u05ea \u05d4\u05e1\u05de\u05df \u05dc\u05d9\u05d5\u05dd ' +
-            d.day
-        );
-        btn.setAttribute(
-          'aria-label',
-          '\u05de\u05e2\u05d1\u05e8 \u05dc\u05de\u05e4\u05ea \u05d4\u05de\u05e1\u05dc\u05d5\u05dc, \u05d4\u05e1\u05de\u05df \u05dc\u05d9\u05d5\u05dd ' + d.day
-        );
-        btn.innerHTML =
-          '<span class="tl-card__to-map-ic" aria-hidden="true">🗺️</span>' +
-          '<span>\u05dc\u05de\u05e4\u05d4</span>';
-        btn.addEventListener('click', function(ev) {
-          ev.stopPropagation();
-          goToMapForDay(d.id);
-        });
-        wrap.appendChild(btn);
-        band.parentNode.insertBefore(wrap, band.nextSibling);
-      });
-    }
     /** Hover pins only with real mouse (not touch), otherwise synthetic mouseover + setIcon breaks the first tap opening the popup. */
     var tripMapPinsHoverable =
       typeof window.matchMedia === 'function' &&
