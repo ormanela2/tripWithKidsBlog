@@ -2925,9 +2925,7 @@
       center: [47.8, 14.5],
       zoom: 7,
       scrollWheelZoom: false,
-      zoomControl: false,
-      tap: true,
-      tapTolerance: 45
+      zoomControl: false
     });
     L.control.zoom({ position: 'bottomright' }).addTo(map);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -3259,6 +3257,9 @@
       var w = window.innerWidth || 800;
       var latPad = w <= 600 ? 0.024 : 0.016;
       map.flyTo([d.lat + latPad, d.lng], 10, { duration: 1 });
+      map.once('moveend', function() {
+        if (markers[d.id]) markers[d.id].openPopup();
+      });
     }
 
     window.goToDay = function(id) {
@@ -3335,11 +3336,19 @@
     }
     injectTimelineMapLinks();
 
+    /** Hover pins only with real mouse (not touch), otherwise synthetic mouseover + setIcon breaks the first tap opening the popup. */
+    var tripMapPinsHoverable =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
     days.forEach(function(d) {
       var m = L.marker([d.lat, d.lng], { icon: makeTripMapPin(d) }).bindPopup(
         tripMapPopupHtml(d),
         tripMapPopupBindOptions()
       );
+      m.on('click', function() {
+        setActive(d.id);
+      });
       m.on('popupopen', function() {
         setActive(d.id);
         m.setPopupContent(tripMapPopupHtml(d));
@@ -3357,10 +3366,10 @@
         }
       });
       m.on('mouseover', function() {
-        setHoverMapId(d.id);
+        if (tripMapPinsHoverable) setHoverMapId(d.id);
       });
       m.on('mouseout', function() {
-        setHoverMapId(null);
+        if (tripMapPinsHoverable) setHoverMapId(null);
       });
       m.addTo(map);
       markers[d.id] = m;
