@@ -224,6 +224,41 @@
     .tl-item[data-tl-layout="odd"]  .tl-item__card { margin-left: 24px; }
     .tl-item[data-tl-layout="even"] .tl-item__card { margin-right: 24px; order: -1; }
     .tl-card__band { height: 6px; width: 100%; }
+    .tl-card__to-map-wrap {
+      padding: 8px 20px 4px;
+      border-bottom: 1px solid var(--sand);
+      background: linear-gradient(180deg, rgba(26, 107, 114, 0.04), transparent);
+    }
+    .tl-card__to-map {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--teal);
+      background: rgba(26, 107, 114, 0.1);
+      border: 1px solid rgba(26, 107, 114, 0.28);
+      border-radius: 999px;
+      padding: 7px 14px 7px 12px;
+      cursor: pointer;
+      line-height: 1.2;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .tl-card__to-map:hover {
+      background: rgba(26, 107, 114, 0.16);
+      box-shadow: 0 2px 8px rgba(26, 107, 114, 0.12);
+    }
+    .tl-card__to-map:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+    .tl-card__to-map-ic {
+      font-size: 15px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
     .tl-card__header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
     .tl-card__title { font-family: var(--font-heading); font-size: 16px; color: var(--charcoal); line-height: 1.35; }
     .tl-card__where { font-size: 12px; color: #aaa; margin-top: 4px; display: flex; align-items: center; gap: 3px; }
@@ -477,12 +512,28 @@
       }
       #map-day-pills {
         gap: 10px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        padding-bottom: 6px;
+        margin-left: -4px;
+        margin-right: -4px;
+        padding-left: 4px;
+        padding-right: 4px;
       }
       #map-day-pills .map-pill {
         min-height: 44px;
         padding: 8px 14px !important;
         font-size: 14px !important;
         -webkit-tap-highlight-color: transparent;
+        flex-shrink: 0;
+        touch-action: manipulation;
+      }
+      .tl-card__to-map {
+        min-height: 44px;
+        touch-action: manipulation;
       }
     }
     #trip-map .leaflet-control-zoom {
@@ -622,6 +673,9 @@
     }
 
     /* ── MAP ── */
+    #route-map {
+      scroll-margin-top: calc(var(--nav-height) + 12px);
+    }
     #map-day-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 
     /* ── TIPS (base .tip-item — Vienna grid still uses these) ── */
@@ -1324,7 +1378,7 @@
         <!-- 2. MAP -->
         <div class="article-section" id="route-map">
           <h2 class="article-section__title"><span class="article-section__title-icon">🗺️</span> המסלול על המפה</h2>
-          <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות את המיקום במפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
+          <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בשורה מתחת למפה כדי לקפוץ ליום המתאים במסלול המלא ולעדכן את המפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
           <div id="trip-map"></div>
           <div id="map-day-pills"></div>
         </div>
@@ -3209,6 +3263,7 @@
 
     window.goToDay = function(id) {
       map.closePopup();
+      if (dayById[id]) setActive(id);
       var card = document.getElementById(id);
       if (card) {
         var tl = card.querySelector('.tl-card');
@@ -3216,6 +3271,69 @@
         card.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     };
+
+    window.goToMapForDay = function(id) {
+      var d = dayById[id];
+      if (!d || !map) return;
+      var section = document.getElementById('route-map');
+      var isNarrow = window.innerWidth <= 600;
+      var scrollWaitMs = isNarrow ? 540 : 380;
+      function runMapFocus() {
+        flyTo(d);
+        map.invalidateSize();
+        syncTripMapPopupMaxHeight();
+        if (window.__mtScheduleLeafletInvalidate) window.__mtScheduleLeafletInvalidate();
+        map.once('moveend', function() {
+          map.invalidateSize();
+          syncTripMapPopupMaxHeight();
+        });
+        window.setTimeout(function() {
+          map.invalidateSize();
+          syncTripMapPopupMaxHeight();
+          if (window.__mtScheduleLeafletInvalidate) window.__mtScheduleLeafletInvalidate();
+        }, isNarrow ? 900 : 650);
+      }
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.setTimeout(runMapFocus, scrollWaitMs);
+      } else {
+        runMapFocus();
+      }
+    };
+
+    function injectTimelineMapLinks() {
+      days.forEach(function(d) {
+        var item = document.getElementById(d.id);
+        if (!item) return;
+        var band = item.querySelector('.tl-card__band');
+        if (!band || !band.parentNode) return;
+        if (band.nextElementSibling && band.nextElementSibling.classList.contains('tl-card__to-map-wrap')) return;
+        var wrap = document.createElement('div');
+        wrap.className = 'tl-card__to-map-wrap';
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'tl-card__to-map';
+        btn.setAttribute(
+          'title',
+          '\u05de\u05e2\u05d1\u05e8 \u05dc\u05de\u05e4\u05ea \u05d4\u05de\u05e1\u05dc\u05d5\u05dc \u05d5\u05d4\u05e6\u05d2\u05ea \u05d4\u05e1\u05de\u05df \u05dc\u05d9\u05d5\u05dd ' +
+            d.day
+        );
+        btn.setAttribute(
+          'aria-label',
+          '\u05de\u05e2\u05d1\u05e8 \u05dc\u05de\u05e4\u05ea \u05d4\u05de\u05e1\u05dc\u05d5\u05dc, \u05d4\u05e1\u05de\u05df \u05dc\u05d9\u05d5\u05dd ' + d.day
+        );
+        btn.innerHTML =
+          '<span class="tl-card__to-map-ic" aria-hidden="true">🗺️</span>' +
+          '<span>\u05dc\u05de\u05e4\u05d4</span>';
+        btn.addEventListener('click', function(ev) {
+          ev.stopPropagation();
+          goToMapForDay(d.id);
+        });
+        wrap.appendChild(btn);
+        band.parentNode.insertBefore(wrap, band.nextSibling);
+      });
+    }
+    injectTimelineMapLinks();
 
     days.forEach(function(d) {
       var m = L.marker([d.lat, d.lng], { icon: makeTripMapPin(d) }).bindPopup(
@@ -3255,7 +3373,10 @@
       btn.dataset.id = d.id;
       btn.innerHTML = '<span>'+d.emoji+'</span><span style="font-size:12px;">יום '+d.day+'</span>';
       btn.style.cssText = 'display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;border:1.5px solid var(--sand-dark);background:var(--white);cursor:pointer;font-family:Rubik,sans-serif;font-size:13px;transition:all 0.2s;';
-      btn.addEventListener('click', function() { flyTo(d); });
+      btn.addEventListener('click', function() {
+        flyTo(d);
+        goToDay(d.id);
+      });
       pillsContainer.appendChild(btn);
     });
 
@@ -3459,6 +3580,7 @@
       _leafletInvalidateTimer = setTimeout(function() {
         try {
           map.invalidateSize();
+          syncTripMapPopupMaxHeight();
         } catch (err) {}
         if (_dayMap2) {
           try {
