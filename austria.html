@@ -260,6 +260,17 @@
       flex-shrink: 0;
     }
     .tl-card__header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .tl-card__header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .tl-card__map-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 10px;
+      color: var(--teal); background: rgba(26, 107, 114, 0.1);
+      text-decoration: none; transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tl-card__map-link:hover { background: rgba(26, 107, 114, 0.2); transform: scale(1.06); color: var(--teal-dark); }
+    .tl-card__map-link:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+    .tl-card__map-link svg { width: 18px; height: 18px; flex-shrink: 0; }
     .tl-card__title { font-family: var(--font-heading); font-size: 16px; color: var(--charcoal); line-height: 1.35; }
     .tl-card__where { font-size: 12px; color: #aaa; margin-top: 4px; display: flex; align-items: center; gap: 3px; }
     .tl-card__travel-from-home {
@@ -1402,7 +1413,7 @@
                     <div class="tl-card__title">טיסה לווינה + הגעה לזלצבורגר לנד</div>
                     <div class="tl-card__where">📍 תל אביב → ווינה → Hornergut, Altenmarkt</div>
                   </div>
-                  <span class="tl-card__star tl-card__star--arrival">יום הגעה</span>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl1" aria-label="המפה המלאה - יום 1" title="המפה המלאה - יום 1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--arrival">יום הגעה</span></div>
                 </div>
                 <div class="tl-card__body">
                   <div class="tl-activity">
@@ -1448,7 +1459,7 @@
                       <span>📍 Wild Berg, Mauterndorf</span>
                     </div>
                   </div>
-                  <span class="tl-card__star tl-card__star--highlight">❤️ ממליצים</span>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl2" aria-label="המפה המלאה - יום 2" title="המפה המלאה - יום 2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--highlight">❤️ ממליצים</span></div>
                 </div>
                 <div class="tl-card__body">
                   <div class="tl-activity">
@@ -1485,7 +1496,7 @@
                     <div class="tl-card__title">פסגת דאכשטיין - Skywalk + ארמון הקרח</div>
                     <div class="tl-card__where">📍 Dachstein, Ramsau</div>
                   </div>
-                  <span class="tl-card__star tl-card__star--best">⭐ חובה</span>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl3" aria-label="המפה המלאה - יום 3" title="המפה המלאה - יום 3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--best">⭐ חובה</span></div>
                 </div>
                 <div class="tl-card__body">
                   <div class="tl-activity">
@@ -1537,7 +1548,7 @@
                     <div class="tl-card__title">טירת וורפן + נקיק ליכטנשטיין</div>
                     <div class="tl-card__where">📍 Festung Hohenwerfen + Liechtensteinklamm</div>
                   </div>
-                  <span class="tl-card__star tl-card__star--castle">🏰 טירה</span>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl4" aria-label="המפה המלאה - יום 4" title="המפה המלאה - יום 4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--castle">🏰 טירה</span></div>
                 </div>
                 <div class="tl-card__body">
                   <div class="tl-activity">
@@ -1575,7 +1586,7 @@
                     <div class="tl-card__title">מכרה מלח + מפל גולינגר + Lucky Flitzer</div>
                     <div class="tl-card__where">📍 ברכטסגאדן (DE) · גולינג · פלכאו</div>
                   </div>
-                  <span class="tl-card__star tl-card__star--highlight">❤️ הכי ייחודי</span>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl5" aria-label="המפה המלאה - יום 5" title="המפה המלאה - יום 5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--highlight">❤️ הכי ייחודי</span></div>
                 </div>
                 <div class="tl-card__body">
                   <div class="tl-activity">
@@ -1628,7 +1639,7 @@
                     <div class="tl-card__title">פארק המים Wagrainis Grafenberg</div>
                     <div class="tl-card__where">📍 Wagrain-Kleinarl</div>
                   </div>
-                  <span class="tl-card__star tl-card__star--best">⭐ חובה</span>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl6" aria-label="המפה המלאה - יום 6" title="המפה המלאה - יום 6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--best">⭐ חובה</span></div>
                 </div>
                 <div class="tl-card__body">
                   <div class="tl-activity">
@@ -1670,6 +1681,7 @@
                     <div class="tl-card__title">Karkogel אבנטאו + Vorderer Gosausee</div>
                     <div class="tl-card__where">📍 Abtenau · אגם גוסאו הקדמי</div>
                   </div>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl7" aria-label="המפה המלאה - יום 7" title="המפה המלאה - יום 7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div>
                 </div>
                 <div class="tl-card__body">
                   <div class="tl-activity">
@@ -1710,7 +1722,7 @@
                     <div class="tl-card__title">נסיעה לווינה - LEOPARK + מפל</div>
                     <div class="tl-card__where">📍 מפל Salza · LEOPARK · ARCOTEL Wimberger, Wien</div>
                   </div>
-                  <span class="tl-card__star" style="background:rgba(136,14,79,0.12);color:#880e4f;">ווינה</span>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl8" aria-label="המפה המלאה - יום 8" title="המפה המלאה - יום 8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star" style="background:rgba(136,14,79,0.12);color:#880e4f;">ווינה</span></div>
                 </div>
                 <div class="tl-card__body">
                   <div class="tl-activity">
@@ -1762,6 +1774,7 @@
                     <div class="tl-card__title">מופע שטרודל · Prater · מוזיאון הטבע · Time Travel</div>
                     <div class="tl-card__where">📍 ווינה</div>
                   </div>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl9" aria-label="המפה המלאה - יום 9" title="המפה המלאה - יום 9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div>
                 </div>
                 <div class="tl-card__body">
                   <div class="tl-tip" style="margin-top:0;margin-bottom:14px;background:rgba(26,107,114,0.08);border-right-color:var(--teal);"><strong>ניידות:</strong> ביום הזה אפשר להסתדר בהליכה ובתחבורה ציבורית בין האטרקציות — לא חייבים רכב בין שונברון, הפראטר, המוזיאון ו-Time Travel.</div>
@@ -1813,7 +1826,7 @@
                     <div class="tl-card__title">טיסה חזרה לתל אביב</div>
                     <div class="tl-card__where">📍 Vienna International Airport → נתב"ג</div>
                   </div>
-                  <span class="tl-card__star tl-card__star--arrival">יום חזרה</span>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl10" aria-label="המפה המלאה - יום 10" title="המפה המלאה - יום 10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--arrival">יום חזרה</span></div>
                 </div>
                 <div class="tl-card__body">
                   <div class="tl-activity">
@@ -3401,6 +3414,21 @@
       }
     });
 
+    document.querySelectorAll('a.tl-card__map-link').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var id = a.getAttribute('data-day');
+        var routeMap = document.getElementById('route-map');
+        if (routeMap) routeMap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        var d = days.find(function(x) { return x.id === id; });
+        if (!d) return;
+        setTimeout(function() {
+          if (typeof map.invalidateSize === 'function') map.invalidateSize();
+          flyTo(d);
+        }, 480);
+      });
+    });
 
     // ── Day 2 Interactive Mini-Map ──────────────────────────────
     var _dayMap2 = null;

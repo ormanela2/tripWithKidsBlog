@@ -29,6 +29,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <!-- Maps JavaScript API + Places (same key as austria.html — restrict by domain). -->
+  <script>window.GOOGLE_MAPS_API_KEY = 'AIzaSyAIpRqCBJr4vL5CiH0dHh1GSfyyjE2w-XI';</script>
+  <script>
+  (function (k) {
+    k = (window.GOOGLE_MAPS_API_KEY || '').trim();
+    if (!k) return;
+    var s = document.createElement('script');
+    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(k) + '&libraries=places&v=quarterly';
+    s.async = true;
+    document.head.appendChild(s);
+  })();
+  </script>
   <style>
     .flag-hu { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23ce2939'/%3E%3Crect y='200' width='900' height='200' fill='%23fff'/%3E%3Crect y='400' width='900' height='200' fill='%23477050'/%3E%3C/svg%3E"); }
     .flag-icon { display: inline-block; background-size: cover; background-repeat: no-repeat; border-radius: 4px; }
@@ -42,6 +54,10 @@
       --green: #4A9B6F; --white: #FFFFFF;
       --font-heading: 'Secular One', sans-serif; --font-body: 'Rubik', sans-serif;
       --nav-height: 72px;
+      --border: rgba(0, 0, 0, 0.08);
+      --radius-md: 12px;
+      --radius-xl: 28px;
+      --ease: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -71,29 +87,39 @@
     .email-popup__skip { font-size:13px; color:#aaa; cursor:pointer; margin-top:4px; background:none; border:none; text-decoration:underline; }
     .email-popup__skip:hover { color:var(--charcoal); }
 
-    /* ── NAV ─────────────────────────────── */
-    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
-    .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
-    .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
+    /* ── NAV — mobile drawer sibling after </nav> (Safari backdrop-filter) — same as austria.html ── */
+    .nav { position:fixed; top:0; right:0; left:0; z-index:1201; background:rgba(253,248,242,0.96); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--border); height:var(--nav-height); transition:box-shadow var(--ease); }
+    .nav.scrolled { box-shadow:0 2px 20px rgba(0,0,0,0.08); }
+    .nav__inner { display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
     .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
     .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
-    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.3px; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease,color 0.2s ease; min-height:44px; display:flex; align-items:center; }
+    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.02em; color:var(--charcoal); text-decoration:none; transition:background var(--ease),color var(--ease); min-height:44px; display:flex; align-items:center; }
     .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
-    .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
-    .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
+    .nav__link:focus-visible { outline:2px solid var(--teal); outline-offset:2px; }
+    .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
+    .nav__link[aria-current="page"]:hover, .nav__link[aria-current="page"]:focus-visible { background:var(--teal-dark); color:#fff; }
     .nav__mobile-actions { display:none; align-items:center; gap:4px; }
-    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
+    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; padding:8px; position:relative; z-index:1200; }
     .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
     .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
     .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
     .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
     .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
-    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:24px 20px 32px; flex-direction:column; gap:4px; z-index:999; overflow-y:auto; }
+    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:24px 20px max(32px, env(safe-area-inset-bottom)); flex-direction:column; gap:4px; z-index:1200; overflow-y:auto; -webkit-overflow-scrolling:touch; }
     .nav__mobile-menu.open { display:flex; }
-    .nav__link--community { background:var(--amber); color:#2C2C2C !important; font-weight:300; font-size:15px; line-height:1; border-radius:22px; padding:8px 16px; min-height:44px; box-shadow:0 2px 10px rgba(232,160,69,0.45); position:relative; }
-    .nav__link--community:hover, .nav__link--community:focus-visible { background:#d4903c !important; color:#2C2C2C !important; transform:translateY(-2px); box-shadow:0 4px 16px rgba(232,160,69,0.55); }
-    .nav__link--community::before { content:''; width:8px; height:8px; background:#4ade80; border-radius:50%; display:inline-block; margin-left:7px; box-shadow:0 0 6px #4ade80; animation:dotBlink 1.4s ease-in-out infinite; }
-    .mob-nav-item { display:flex; align-items:center; justify-content:space-between; padding:13px 14px; border-radius:12px; text-decoration:none; color:var(--charcoal); transition:background 0.18s ease; gap:14px; -webkit-tap-highlight-color:transparent; }
+    .nav__link--packages { gap:8px; font-weight:500; position:relative; padding-inline:14px; }
+    .nav__link--packages .nav__packages-icon { width:16px; height:16px; flex:0 0 auto; opacity:0.95; }
+    .nav__link--packages .nav__packages-badge { font-size:10px; font-weight:600; line-height:1; color:var(--teal-dark); background:var(--sand); border:1px solid var(--sand-dark); border-radius:999px; padding:4px 7px; margin-right:4px; }
+    .nav__link--packages[aria-current="page"] .nav__packages-badge { color:var(--teal-dark); background:#fff; border-color:rgba(255,255,255,0.6); }
+    .nav__link--community { background:transparent; color:#0f4a50 !important; font-size:15px; border-radius:22px; padding:8px 18px; min-height:44px; transition:background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease,transform 0.2s ease; gap:10px; animation:none; }
+    .nav__link--community:hover, .nav__link--community:focus-visible { background:#145960 !important; color:#fff !important; transform:none; box-shadow:0 2px 10px rgba(15,74,80,0.3); }
+    .nav__link--community::before { content:none; animation:none; }
+    .nav__link--community .nav__community-icon { width:18px; height:18px; flex:0 0 auto; opacity:0.95; margin-left:4px; }
+    .nav__link--community:hover .nav__community-icon, .nav__link--community:focus-visible .nav__community-icon { opacity:1; }
+    @media (prefers-reduced-motion: reduce) {
+      .nav__link--community, .nav__link--community::before, .nav__community-icon { animation:none !important; transition:none !important; transform:none !important; }
+    }
+    .mob-nav-item { display:flex; align-items:center; justify-content:space-between; padding:13px 14px; border-radius:var(--radius-md); text-decoration:none; color:var(--charcoal); transition:background 0.18s ease; gap:14px; -webkit-tap-highlight-color:transparent; }
     .mob-nav-item:active, .mob-nav-item:hover { background:var(--sand); }
     .mob-nav-item[aria-current="page"] { background:rgba(26,107,114,0.08); }
     .mob-nav-item__icon { flex-shrink:0; width:40px; height:40px; border-radius:10px; background:rgba(26,107,114,0.1); display:flex; align-items:center; justify-content:center; color:var(--teal); transition:background 0.18s, color 0.18s; }
@@ -107,17 +133,16 @@
     .mob-nav-item--tips:hover .mob-nav-item__icon { background:#fef9c3; color:#ca8a04; }
     .mob-nav-item--destinations .mob-nav-item__icon { background:rgba(26,107,114,0.14); }
     .mob-nav-sep { height:1px; background:var(--sand-dark); margin:8px 0; flex-shrink:0; }
-    .mob-nav-calendar { display:flex; align-items:center; justify-content:center; gap:10px; padding:13px 18px; background:var(--teal); color:#fff; border-radius:28px; text-decoration:none; font-family:'Assistant',sans-serif; font-size:16px; font-weight:400; box-shadow:0 4px 14px rgba(26,107,114,0.3); transition:background 0.18s, box-shadow 0.18s; -webkit-tap-highlight-color:transparent; margin-top:4px; }
+    .mob-nav-calendar { display:flex; align-items:center; justify-content:center; gap:10px; padding:13px 18px; background:var(--teal); color:#fff; border-radius:var(--radius-xl); text-decoration:none; font-family:'Assistant',sans-serif; font-size:16px; font-weight:400; box-shadow:0 4px 14px rgba(26,107,114,0.3); transition:background 0.18s, box-shadow 0.18s; -webkit-tap-highlight-color:transparent; margin-top:4px; }
     .mob-nav-calendar:active, .mob-nav-calendar:hover { background:var(--teal-dark); box-shadow:0 6px 18px rgba(26,107,114,0.4); }
     .mob-nav-calendar svg { width:18px; height:18px; flex-shrink:0; }
-    .mob-nav-community { display:flex; align-items:center; gap:14px; padding:14px 16px; background:var(--amber); color:#fff; border-radius:12px; border:none; width:100%; text-align:right; cursor:pointer; font-family:var(--font-body); text-decoration:none; transition:background 0.18s; -webkit-tap-highlight-color:transparent; margin-top:6px; }
+    .mob-nav-community { display:flex; align-items:center; gap:14px; padding:14px 16px; background:var(--amber); color:#fff; border-radius:var(--radius-md); border:none; width:100%; text-align:right; cursor:pointer; font-family:var(--font-body); text-decoration:none; transition:background 0.18s; -webkit-tap-highlight-color:transparent; margin-top:6px; }
     .mob-nav-community:active, .mob-nav-community:hover { background:var(--amber-dark); }
     .mob-nav-community__icon { flex-shrink:0; width:36px; height:36px; display:flex; align-items:center; justify-content:center; }
     .mob-nav-community__icon svg { width:28px; height:28px; }
     .mob-nav-community__body { flex:1; text-align:right; }
     .mob-nav-community__title { display:block; font-family:'Assistant',sans-serif; font-size:16px; font-weight:600; }
     .mob-nav-community__sub { display:block; font-family:'Assistant',sans-serif; font-size:12px; opacity:0.85; margin-top:1px; }
-    @keyframes dotBlink { 0%,100%{opacity:0.4;box-shadow:0 0 3px #4ade80;} 50%{opacity:1;box-shadow:0 0 10px #4ade80,0 0 20px #4ade8088;} }
     @media(max-width:900px) {
       .nav__links { display:none; }
       .nav__mobile-actions { display:flex; }
@@ -172,6 +197,17 @@
     .tl-item:nth-child(even) .tl-item__card { margin-right: 24px; order: -1; }
     .tl-card__band { height: 6px; width: 100%; }
     .tl-card__header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .tl-card__header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .tl-card__map-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 10px;
+      color: var(--teal); background: rgba(26, 107, 114, 0.1);
+      text-decoration: none; transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tl-card__map-link:hover { background: rgba(26, 107, 114, 0.2); transform: scale(1.06); color: var(--teal-dark); }
+    .tl-card__map-link:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+    .tl-card__map-link svg { width: 18px; height: 18px; flex-shrink: 0; }
     .tl-card__title { font-family: var(--font-heading); font-size: 16px; color: var(--charcoal); line-height: 1.35; }
     .tl-card__where { font-size: 12px; color: #aaa; margin-top: 4px; display: flex; align-items: center; gap: 3px; }
     .tl-card__star { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
@@ -213,12 +249,254 @@
       .tl-item:nth-child(even) .tl-item__label { order: unset; }
     }
 
-    /* TIPS */
+    /* TIPS (base .tip-item) */
     .tips-list { display: flex; flex-direction: column; gap: 10px; }
     .tip-item { background: var(--white); border-radius: 12px; border: 2px solid var(--sand-dark); padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
     .tip-item__icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
     .tip-item__text { color: #555; line-height: 1.65; }
     .tip-item__text strong { color: var(--charcoal); }
+
+    /* ── Important tips (#tips): categorized pro-tip cards (same as austria.html) ── */
+    #tips .tips-pro-wrap { display: flex; flex-direction: column; gap: 28px; margin-top: 4px; }
+    #tips .tips-pro-group__title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      margin: 0 0 4px;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+    #tips .tips-pro-group__sub {
+      margin: 0 0 12px;
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.45;
+    }
+    #tips .tips-pro-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 14px;
+      align-items: stretch;
+    }
+    @media (max-width: 720px) {
+      #tips .tips-pro-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+    #tips .tip-pro {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    #tips .tip-pro:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    #tips .tip-pro:focus-within {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+    #tips .tip-pro--warm {
+      background: linear-gradient(145deg, #fffdf7 0%, #fff4d6 55%, #fffbeb 100%);
+      border-color: rgba(234, 179, 8, 0.38);
+    }
+    #tips .tip-pro--cool {
+      background: linear-gradient(145deg, #f8fbff 0%, #e8f2ff 50%, #f0f7ff 100%);
+      border-color: rgba(96, 165, 250, 0.45);
+    }
+    #tips .tip-pro__icon-wrap {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+    #tips .tip-pro__svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+    #tips .tip-pro--warm .tip-pro__svg { color: #b45309; }
+    #tips .tip-pro--cool .tip-pro__svg { color: #1d4ed8; }
+    #tips .tip-pro__body { flex: 1; min-width: 0; text-align: right; }
+    #tips .tip-pro__subject {
+      display: block;
+      font-weight: 700;
+      font-size: 1.0625rem;
+      color: var(--charcoal);
+      margin: 0 0 5px;
+      line-height: 1.3;
+    }
+    #tips .tip-pro__text {
+      margin: 0;
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.55;
+    }
+    @media (max-width: 720px) {
+      #tips .tip-pro {
+        padding: 10px 12px;
+        gap: 10px;
+        border-radius: 12px;
+      }
+      #tips .tip-pro__icon-wrap {
+        width: 36px;
+        height: 36px;
+      }
+      #tips .tip-pro__svg {
+        width: 18px;
+        height: 18px;
+      }
+      #tips .tip-pro__subject {
+        font-size: 15px;
+        margin-bottom: 3px;
+      }
+      #tips .tip-pro__text {
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      #tips .tips-pro-wrap {
+        gap: 22px;
+      }
+    }
+    #tips .article-section__title-icon-svg {
+      display: inline-flex;
+      vertical-align: middle;
+      margin-inline-end: 6px;
+      color: var(--teal);
+    }
+    #tips .tips-pro-more {
+      margin: 10px 0 0;
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #444;
+      background: linear-gradient(145deg, #faf8f4, #f2ede4);
+      border: 1px solid rgba(26, 107, 114, 0.22);
+      border-radius: 12px;
+    }
+    #tips .tips-pro-more__link {
+      color: inherit;
+      text-decoration: none;
+      display: inline;
+    }
+    #tips .tips-pro-more__cta {
+      color: var(--teal-dark);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    #tips .tips-pro-more__link:hover .tips-pro-more__cta,
+    #tips .tips-pro-more__link:focus-visible .tips-pro-more__cta {
+      color: var(--teal);
+    }
+
+    /* ── ATTRACTIONS GRID (magazine-style horizontal cards — austria.html) ── */
+    .attractions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+    .attraction-card {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 20px;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 22px 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: background-color 0.28s ease, box-shadow 0.28s ease, transform 0.24s ease, border-color 0.24s ease;
+    }
+    .attraction-card:hover {
+      background: #faf8f4;
+      border-color: rgba(26, 107, 114, 0.18);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.11);
+      transform: translateY(-2px);
+    }
+    .attraction-card__body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: right;
+      gap: 0;
+    }
+    .attraction-card__badge {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--teal-dark);
+      background: rgba(26, 107, 114, 0.1);
+      padding: 5px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .attraction-card__name {
+      font-family: var(--font-heading);
+      font-size: clamp(17px, 1.25vw, 20px);
+      font-weight: 700;
+      margin: 0 0 10px;
+      color: var(--teal);
+      line-height: 1.28;
+      letter-spacing: -0.01em;
+    }
+    .attraction-card__desc {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.65;
+      margin: 0;
+    }
+    .attraction-card__thumb-wrap {
+      flex-shrink: 0;
+      width: 118px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.1);
+      align-self: flex-start;
+      background: var(--sand);
+    }
+    .attraction-card__thumb {
+      display: block;
+      width: 100%;
+      height: 88px;
+      object-fit: cover;
+      vertical-align: middle;
+    }
+    @media (max-width: 720px) {
+      .attractions-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 400px) {
+      .attraction-card { flex-wrap: wrap; padding: 18px 18px; gap: 14px; }
+      .attraction-card__thumb-wrap { width: 100%; max-width: 140px; }
+    }
+    .attractions-grid__attrib {
+      font-size: 10px;
+      color: #888;
+      text-align: center;
+      margin: 14px 0 0;
+      line-height: 1.45;
+    }
 
     /* SIDEBAR */
     .sidebar { position: sticky; top: calc(var(--nav-height) + 20px); }
@@ -264,28 +542,197 @@
       .sidebar { position: static; }
     }
 
-    @keyframes gold-shimmer {
-      0%   { background-position: -200% center; }
-      100% { background-position: 200% center; }
+    @keyframes bcgo-validation-pulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 2px 8px rgba(180, 83, 9, 0.35)); }
+      50% { transform: scale(1.08); filter: drop-shadow(0 4px 14px rgba(180, 83, 9, 0.5)); }
     }
-    .budapest-gold-tip {
+
+    /* BudapestGO — validation (important alert) */
+    .bcgo-validation-alert {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 20px;
+      margin-bottom: 20px;
+      border-radius: 14px;
+      background: linear-gradient(165deg, #fff4d6 0%, #ffe8a8 55%, #ffdfa0 100%);
+      border: 1.5px solid rgba(180, 120, 20, 0.45);
+      border-inline-start: 5px solid #6b3f09;
+      box-shadow: 0 4px 18px rgba(107, 63, 9, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    }
+    .bcgo-validation-alert__icon-wrap {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: bcgo-validation-pulse 2.2s ease-in-out infinite;
+    }
+    .bcgo-validation-alert__icon-wrap svg {
+      display: block;
+      width: 52px;
+      height: 52px;
+    }
+    .bcgo-validation-alert__content {
+      flex: 1;
+      min-width: 0;
+      text-align: right;
+    }
+    .bcgo-validation-alert__headline {
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #4a2d06;
+      line-height: 1.35;
+      margin: 0 0 10px;
+    }
+    .bcgo-validation-alert__body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      color: #5c4420;
+      line-height: 1.65;
+      margin: 0;
+    }
+    @media (max-width: 640px) {
+      .bcgo-validation-alert {
+        padding: 16px 16px;
+        gap: 14px;
+      }
+      .bcgo-validation-alert__headline {
+        font-size: 15px;
+      }
+      .bcgo-validation-alert__body {
+        font-size: 13.5px;
+      }
+      .bcgo-validation-alert__icon-wrap {
+        width: 48px;
+        height: 48px;
+      }
+      .bcgo-validation-alert__icon-wrap svg {
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    /* BudapestGO — Modern Service Grid */
+    .bcgo-features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    a.bcgo-feature-card {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 0;
+      min-height: 112px;
+      padding: 0;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 14px;
+      border: 1px solid #f0f0f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s ease;
       position: relative;
       overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
     }
-    .budapest-gold-tip::after {
-      content: '';
+    a.bcgo-feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+      border-color: #e8e8e8;
+    }
+    a.bcgo-feature-card:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+    .bcgo-feature-card__sidebar {
+      flex: 0 0 25%;
+      max-width: 25%;
+      min-width: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 8px 16px 12px;
+    }
+    .bcgo-feature-card__badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 128, 128, 0.05);
+      font-size: 24px;
+      line-height: 1;
+    }
+    .bcgo-feature-card__main {
+      flex: 1;
+      min-width: 0;
+      padding: 16px 16px 16px 8px;
+      text-align: right;
+      position: relative;
+      padding-bottom: 28px;
+    }
+    .bcgo-feature-card__title {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.25;
+      margin: 0 0 8px;
+      letter-spacing: -0.01em;
+    }
+    .bcgo-feature-card__desc {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #64748b;
+      line-height: 1.5;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .bcgo-feature-card__arrow {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        105deg,
-        transparent 40%,
-        rgba(255,220,80,0.45) 50%,
-        transparent 60%
-      );
-      background-size: 200% 100%;
-      animation: gold-shimmer 3s ease-in-out infinite;
-      border-radius: 12px;
+      bottom: 10px;
+      inset-inline-start: 14px;
+      font-size: 1rem;
+      line-height: 1;
+      color: #cbd5e1;
+      opacity: 0.4;
+      transition: color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
       pointer-events: none;
+    }
+    a.bcgo-feature-card:hover .bcgo-feature-card__arrow {
+      color: var(--teal);
+      opacity: 1;
+      transform: scale(1.12);
+    }
+    @media (max-width: 640px) {
+      .bcgo-features {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .bcgo-feature-card__sidebar {
+        min-width: 68px;
+        padding: 14px 6px 14px 10px;
+      }
+      .bcgo-feature-card__badge {
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+      }
     }
   </style>
   <link rel="icon" type="image/png" href="logo.png">
@@ -335,21 +782,41 @@
       <li role="none"><a href="tips.html" class="nav__link" role="menuitem">טיפים</a></li>
       <li role="none"><a href="destinations.html" class="nav__link" role="menuitem" aria-current="page">יעדים</a></li>
       <li role="none"><a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a></li>
-      <li role="none"><a href="packages.html" class="nav__link" role="menuitem">חבילות</a></li>
+      <li role="none">
+        <a href="packages.html" class="nav__link nav__link--packages" role="menuitem">
+          <svg class="nav__packages-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M3 7.5L12 3l9 4.5-9 4.5-9-4.5z"/>
+            <path d="M3 12l9 4.5 9-4.5"/>
+            <path d="M3 16.5L12 21l9-4.5"/>
+          </svg>
+          <span>חבילות תכנון</span>
+          <span class="nav__packages-badge">3 חבילות</span>
+        </a>
+      </li>
       <li role="none"><a href="about.html" class="nav__link" role="menuitem">אודות</a></li>
-        <li role="none"><a href="calendar.html" class="nav__link" role="menuitem">מתי קורה</a></li>
-        <li role="none"><a href="#newsletter" class="nav__link nav__link--community" role="menuitem">מצטרפים לקהילה</a></li>
+      <li role="none"><a href="calendar.html" class="nav__link" role="menuitem">מתי קורה</a></li>
+      <li role="none">
+        <a href="#newsletter" class="nav__link nav__link--community" role="menuitem">
+          <svg class="nav__community-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span>מצטרפים לקהילה</span>
+        </a>
+      </li>
     </ul>
     <div class="nav__mobile-actions">
       <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="שלח הודעת וואטסאפ">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px;" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:22px;height:22px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       </a>
-      <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false" aria-controls="mobileMenu">
+      <button type="button" class="nav__hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="פתח תפריט">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
-  <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
+</nav>
+
+<div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
 
     <!-- טיפים -->
     <a href="tips.html" class="mob-nav-item mob-nav-item--tips" role="menuitem">
@@ -374,7 +841,7 @@
       </div>
       <div class="mob-nav-item__body">
         <span class="mob-nav-item__title">יעדים</span>
-        <span class="mob-nav-item__sub">לאן טסים הפעם?</span>
+        <span class="mob-nav-item__sub">לאן הכי מתאים לטוס בעונה הזאת</span>
       </div>
     </a>
 
@@ -400,8 +867,8 @@
         </svg>
       </div>
       <div class="mob-nav-item__body">
-        <span class="mob-nav-item__title">חבילות</span>
-        <span class="mob-nav-item__sub">עזרה בתכנון מסלול</span>
+        <span class="mob-nav-item__title">חבילות תכנון</span>
+        <span class="mob-nav-item__sub">3 מסלולי ליווי לפי סגנון הטיול שלכם</span>
       </div>
     </a>
 
@@ -435,7 +902,7 @@
 
     <!-- מצטרפים לקהילה — amber banner -->
     <button type="button" class="mob-nav-community" role="menuitem"
-      onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(true); },120);">
+      onclick="var hb=document.getElementById('hamburgerBtn'); var m=document.getElementById('mobileMenu'); m.classList.remove('open'); hb.setAttribute('aria-expanded','false'); hb.setAttribute('aria-label','פתח תפריט'); if(window.__mtRefreshBodyScrollLock)window.__mtRefreshBodyScrollLock(); else document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(true); },120);">
       <div class="mob-nav-community__icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -448,8 +915,7 @@
       </div>
     </button>
 
-  </div>
-</nav>
+</div>
 
 <section class="article-hero">
   <div class="container">
@@ -488,7 +954,7 @@
             <a href="#itinerary" class="toc__link"><span class="toc__num">3</span> מסלול יום-יום מומלץ</a>
             <a href="#attractions" class="toc__link"><span class="toc__num">4</span> אטרקציות מומלצות</a>
             <a href="#accommodation" class="toc__link"><span class="toc__num">5</span> המלצות לינה</a>
-            <a href="#logistics" class="toc__link"><span class="toc__num">6</span> טיפים לוגיסטיים</a>
+            <a href="#tips" class="toc__link"><span class="toc__num">6</span> טיפים חשובים</a>
           </div>
         </div>
 
@@ -501,7 +967,7 @@
         </div>
 
         <!-- MAP -->
-        <div class="article-section" id="route-map">
+        <div class="article-section" id="route-map" style="scroll-margin-top:calc(var(--nav-height) + 16px);">
           <h2 class="article-section__title"><span class="article-section__title-icon">🗺️</span> המסלול על המפה</h2>
           <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות את המיקום במפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
           <div id="trip-map" style="height:420px;border-radius:16px;overflow:hidden;border:2px solid var(--sand-dark);box-shadow:0 4px 20px rgba(0,0,0,0.1);"></div>
@@ -532,40 +998,72 @@
               <p style="font-size:14.5px;color:#555;line-height:1.7;margin-bottom:20px;">האפליקציה מרכזת את כל פתרונות התחבורה בעיר תחת קורת גג אחת – החל מתכנון מסלול ועד רכישת כרטיסים דיגיטליים.</p>
 
               <!-- Features grid -->
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
-                <div style="background:#f4fafb;border-radius:12px;padding:14px 16px;border-right:3px solid var(--teal);">
-                  <div style="font-size:18px;margin-bottom:6px;">🎫</div>
-                  <div style="font-size:13px;font-weight:700;color:#1A6B72;margin-bottom:4px;">כרטיסים דיגיטליים</div>
-                  <div style="font-size:12px;color:#777;line-height:1.5;">כרטיסים בודדים, יומיים, שבועיים או חודשיים עם חידוש אוטומטי</div>
-                </div>
-                <div style="background:#f4fafb;border-radius:12px;padding:14px 16px;border-right:3px solid var(--teal);">
-                  <div style="font-size:18px;margin-bottom:6px;">🗺️</div>
-                  <div style="font-size:13px;font-weight:700;color:#1A6B72;margin-bottom:4px;">תכנון מסלול חכם</div>
-                  <div style="font-size:12px;color:#777;line-height:1.5;">לוחות זמנים בזמן אמת לאוטובוס, חשמלית ומטרו</div>
-                </div>
-                <div style="background:#f4fafb;border-radius:12px;padding:14px 16px;border-right:3px solid var(--teal);">
-                  <div style="font-size:18px;margin-bottom:6px;">🔔</div>
-                  <div style="font-size:13px;font-weight:700;color:#1A6B72;margin-bottom:4px;">עדכוני תנועה שוטפים</div>
-                  <div style="font-size:12px;color:#777;line-height:1.5;">התראות על שינויי מסלול ועיכובים בלייב</div>
-                </div>
-                <div style="background:#f4fafb;border-radius:12px;padding:14px 16px;border-right:3px solid var(--teal);">
-                  <div style="font-size:18px;margin-bottom:6px;">🚲</div>
-                  <div style="font-size:13px;font-weight:700;color:#1A6B72;margin-bottom:4px;">MOL Bubi אופניים</div>
-                  <div style="font-size:12px;color:#777;line-height:1.5;">תמיכה מלאה בשירות האופניים השיתופיים ברחבי העיר</div>
-                </div>
+              <div class="bcgo-features">
+                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="כרטיסים דיגיטליים — מעבר להורדת האפליקציה">
+                  <div class="bcgo-feature-card__sidebar">
+                    <span class="bcgo-feature-card__badge" aria-hidden="true">🎫</span>
+                  </div>
+                  <div class="bcgo-feature-card__main">
+                    <div class="bcgo-feature-card__title">כרטיסים דיגיטליים</div>
+                    <p class="bcgo-feature-card__desc">כרטיסים בודדים, יומיים, שבועיים או חודשיים עם חידוש אוטומטי</p>
+                    <span class="bcgo-feature-card__arrow" aria-hidden="true">→</span>
+                  </div>
+                </a>
+                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="תכנון מסלול חכם — מעבר להורדת האפליקציה">
+                  <div class="bcgo-feature-card__sidebar">
+                    <span class="bcgo-feature-card__badge" aria-hidden="true">🗺️</span>
+                  </div>
+                  <div class="bcgo-feature-card__main">
+                    <div class="bcgo-feature-card__title">תכנון מסלול חכם</div>
+                    <p class="bcgo-feature-card__desc">לוחות זמנים בזמן אמת לאוטובוס, חשמלית ומטרו</p>
+                    <span class="bcgo-feature-card__arrow" aria-hidden="true">→</span>
+                  </div>
+                </a>
+                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="עדכוני תנועה שוטפים — מעבר להורדת האפליקציה">
+                  <div class="bcgo-feature-card__sidebar">
+                    <span class="bcgo-feature-card__badge" aria-hidden="true">🔔</span>
+                  </div>
+                  <div class="bcgo-feature-card__main">
+                    <div class="bcgo-feature-card__title">עדכוני תנועה שוטפים</div>
+                    <p class="bcgo-feature-card__desc">התראות על שינויי מסלול ועיכובים בלייב</p>
+                    <span class="bcgo-feature-card__arrow" aria-hidden="true">→</span>
+                  </div>
+                </a>
+                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="MOL Bubi אופניים — מעבר להורדת האפליקציה">
+                  <div class="bcgo-feature-card__sidebar">
+                    <span class="bcgo-feature-card__badge" aria-hidden="true">🚲</span>
+                  </div>
+                  <div class="bcgo-feature-card__main">
+                    <div class="bcgo-feature-card__title">MOL Bubi אופניים</div>
+                    <p class="bcgo-feature-card__desc">תמיכה מלאה בשירות האופניים השיתופיים ברחבי העיר</p>
+                    <span class="bcgo-feature-card__arrow" aria-hidden="true">→</span>
+                  </div>
+                </a>
               </div>
 
-              <!-- Validation warning -->
-              <div class="budapest-gold-tip" style="background:#fff8e6;border:1.5px solid #f0c060;border-radius:12px;padding:14px 18px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;">
-                <span style="font-size:22px;flex-shrink:0;">⚠️</span>
-                <div>
-                  <div style="font-size:13px;font-weight:700;color:#b07d00;margin-bottom:4px;">שימו לב – חובת תיקוף (Validation)!</div>
-                  <div style="font-size:13px;color:#7a5a00;line-height:1.6;">לאחר רכישת כרטיס דיגיטלי, חובה לתקף אותו בכל נסיעה מחדש באמצעות סריקת קוד QR בפתח כלי התחבורה או בכניסה לתחנות המטרו. ללא סריקה – הכרטיס אינו בתוקף ואתם עלולים לספוג קנס.</div>
+              <!-- Validation — important alert -->
+              <div class="bcgo-validation-alert" role="alert">
+                <div class="bcgo-validation-alert__icon-wrap" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="bcgoValTri" x1="24" y1="4" x2="24" y2="44" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#fffbeb"/>
+                        <stop offset="1" stop-color="#fde68a"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M24 5L43.5 38.5c.7 1.2-.2 2.7-1.6 2.7H6.1c-1.4 0-2.3-1.5-1.6-2.7L24 5z" fill="url(#bcgoValTri)" stroke="#78350f" stroke-width="2.25" stroke-linejoin="round"/>
+                    <path d="M24 17v13" stroke="#451a03" stroke-width="3.25" stroke-linecap="round"/>
+                    <circle cx="24" cy="35.5" r="2.5" fill="#451a03"/>
+                  </svg>
+                </div>
+                <div class="bcgo-validation-alert__content">
+                  <div class="bcgo-validation-alert__headline">שימו לב - חובת תיקוף (Validation)!</div>
+                  <p class="bcgo-validation-alert__body">לאחר רכישת כרטיס דיגיטלי, חובה לתקף אותו בכל נסיעה מחדש באמצעות סריקת קוד QR בפתח כלי התחבורה או בכניסה לתחנות המטרו. ללא סריקה – הכרטיס אינו בתוקף ואתם עלולים לספוג קנס.</p>
                 </div>
               </div>
 
               <!-- Download buttons -->
-              <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+              <div id="bcgo-download" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;scroll-margin-top:calc(var(--nav-height) + 12px);">
                 <a href="https://apps.apple.com/us/app/budapestgo/id916193835" target="_blank" rel="noopener noreferrer" style="display:inline-block;text-decoration:none;transition:transform 0.2s,opacity 0.2s;" onmouseover="this.style.transform='scale(1.05)';this.style.opacity='0.9'" onmouseout="this.style.transform='scale(1)';this.style.opacity='1'">
                   <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download on the App Store" style="height:44px;width:auto;display:block;" onerror="this.parentElement.innerHTML='<span style=\'display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:600;font-family:sans-serif;\'>🍎 App Store</span>'">
                 </a>
@@ -611,7 +1109,7 @@
               <div class="tl-item__node"><div class="tl-item__icon">✈️</div><span class="tl-item__day-label">יום 1</span></div>
               <div class="tl-item__card tl-card open" id="tl1">
                 <div class="tl-card__band"></div>
-                <div class="tl-card__header"><div><div class="tl-card__title">הגעה לבודפשט + Visegrad Bobsled</div><div class="tl-card__where">📍 שדה התעופה ← Visegrad</div></div><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">הגעה לבודפשט + Visegrad Bobsled</div><div class="tl-card__where">📍 שדה התעופה ← Visegrad</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl1" aria-label="המפה המלאה - יום 1" title="המפה המלאה - יום 1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div></div>
                 <div class="tl-card__body">
                   <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">נחיתה בבודפשט ✈️</div><div class="tl-activity__desc">נחיתה בשדה התעופה Budapest Ferenc Liszt - כ-20 דקות מהמרכז. איסוף רכב ועזיבה לכיוון Visegrad.</div></div></div>
                   <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">מגלשת הבוב Visegrad Bobsled 🛷</div><div class="tl-activity__desc">עיירה קטנה על גדות הדנובה, 45 דקות מהעיר. מגלשת מתכת ענקית על הגבעה - מהירה, כיפית, מתאים מגיל 4+. הילדים ביקשו לחזור פעמיים.</div></div></div>
@@ -629,7 +1127,7 @@
               <div class="tl-item__node"><div class="tl-item__icon">🏰</div><span class="tl-item__day-label">יום 2</span></div>
               <div class="tl-item__card tl-card" id="tl2">
                 <div class="tl-card__band"></div>
-                <div class="tl-card__header"><div><div class="tl-card__title">טירת בודה + מגדל הדייגים + גשר השרשרות</div><div class="tl-card__where">📍 בודה ← פשט</div></div><span class="tl-card__star tl-card__star--must">⭐ חובה</span></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">טירת בודה + מגדל הדייגים + גשר השרשרות</div><div class="tl-card__where">📍 בודה ← פשט</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl2" aria-label="המפה המלאה - יום 2" title="המפה המלאה - יום 2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--must">⭐ חובה</span></div></div>
                 <div class="tl-card__body">
                   <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">טירת בודה + פוניקולר 🏰</div><div class="tl-activity__desc">הגיעו מוקדם לפני ההמונים. עלייה בפוניקולר ההיסטורי - הילדים מתים עליו. נוף מדהים על פשט מלמעלה. חומות, גנים ותצפיות.</div><a href="https://www.headout.com/r/wwwrecommends-ylJ9N/" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;background:#1A6B72;color:#fff;border-radius:20px;padding:7px 16px;font-family:'Rubik',sans-serif;font-size:13px;font-weight:500;text-decoration:none;">🎫 הזמנת כרטיסים</a></div></div>
                   <div class="tl-activity"><span class="tl-activity__time">צהריים</span><div><div class="tl-activity__name">מגדל הדייגים (Halászbástya) 🗼</div><div class="tl-activity__desc">ממש ליד הטירה - ארכיטקטורה פנטסטית, פסגות מגדלים ותמונות מעולות. אחת הנקודות היפות בבודפשט.</div></div></div>
@@ -647,7 +1145,7 @@
               <div class="tl-item__node"><div class="tl-item__icon">♨️</div><span class="tl-item__day-label">יום 3</span></div>
               <div class="tl-item__card tl-card" id="tl3">
                 <div class="tl-card__band"></div>
-                <div class="tl-card__header"><div><div class="tl-card__title">כיכר הגיבורים + פארק העיר + מרחצאות סצ'ניי</div><div class="tl-card__where">📍 Heroes' Square ← Széchenyi Baths</div></div><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">כיכר הגיבורים + פארק העיר + מרחצאות סצ'ניי</div><div class="tl-card__where">📍 Heroes' Square ← Széchenyi Baths</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl3" aria-label="המפה המלאה - יום 3" title="המפה המלאה - יום 3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div></div>
                 <div class="tl-card__body">
                   <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">כיכר הגיבורים + פארק העיר 🏛️</div><div class="tl-activity__desc">כיכר מרשימה עם פסלים ועמוד ניצחון. פארק העיר הצמוד - אגם מלאכותי שבקיץ הופך לבריכה, נחמד לילדים.</div></div></div>
                   <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">מרחצאות סצ'ניי (Széchenyi) ♨️</div><div class="tl-activity__desc">חווית חיים! בניין מפואר מהמאה ה-19, בריכות חמות בפנים ובחוץ. לילדים יש בריכה רדודה ומגלשות מים קטנות. להביא בגד ים ומגבת.</div><a href="https://www.headout.com/r/wwwrecommends-ya8gj/" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;background:#1A6B72;color:#fff;border-radius:20px;padding:7px 16px;font-family:'Rubik',sans-serif;font-size:13px;font-weight:500;text-decoration:none;">🎫 הזמנת כרטיסים</a></div></div>
@@ -665,7 +1163,7 @@
               <div class="tl-item__node"><div class="tl-item__icon">🏛️</div><span class="tl-item__day-label">יום 4</span></div>
               <div class="tl-item__card tl-card" id="tl4">
                 <div class="tl-card__band"></div>
-                <div class="tl-card__header"><div><div class="tl-card__title">הפרלמנט + שיט בדנובה + רובע יהודי</div><div class="tl-card__where">📍 Parliament ← Danube Cruise ← Jewish Quarter</div></div><span class="tl-card__star tl-card__star--must">⭐ חובה</span></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">הפרלמנט + שיט בדנובה + רובע יהודי</div><div class="tl-card__where">📍 Parliament ← Danube Cruise ← Jewish Quarter</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl4" aria-label="המפה המלאה - יום 4" title="המפה המלאה - יום 4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--must">⭐ חובה</span></div></div>
                 <div class="tl-card__body">
                   <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">הפרלמנט ההונגרי 🏛️</div><div class="tl-activity__desc">אחד הבניינים היפים בעולם - מבחוץ מרהיב, מבפנים עוד יותר. טיול מודרך של כשעה מסביר על ההיסטוריה ההונגרית. חובה להזמין כרטיסים מראש!</div><a href="https://www.headout.com/r/wwwrecommends-yabXn/" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;background:#1A6B72;color:#fff;border-radius:20px;padding:7px 16px;font-family:'Rubik',sans-serif;font-size:13px;font-weight:500;text-decoration:none;">🎫 הזמנת כרטיסים</a></div></div>
                   <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">שיט בדנובה בשעת שקיעה ⛵</div><div class="tl-activity__desc">הנוף על הפרלמנט, טירת בודה וגשרי הדנובה מהמים - לא יישכח. שיטות קצרות של שעה מספיקות בדיוק.</div><a href="https://www.headout.com/r/wwwrecommends-yaqlr/" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;background:#1A6B72;color:#fff;border-radius:20px;padding:7px 16px;font-family:'Rubik',sans-serif;font-size:13px;font-weight:500;text-decoration:none;">🎫 הזמנת כרטיסים</a></div></div>
@@ -683,7 +1181,7 @@
               <div class="tl-item__node"><div class="tl-item__icon">🌊</div><span class="tl-item__day-label">יום 5</span></div>
               <div class="tl-item__card tl-card" id="tl5">
                 <div class="tl-card__band"></div>
-                <div class="tl-card__header"><div><div class="tl-card__title">כל היום ב-Aquaworld</div><div class="tl-card__where">📍 Aquaworld Budapest</div></div><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">כל היום ב-Aquaworld</div><div class="tl-card__where">📍 Aquaworld Budapest</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl5" aria-label="המפה המלאה - יום 5" title="המפה המלאה - יום 5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div></div>
                 <div class="tl-card__body">
                   <div class="tl-activity"><span class="tl-activity__time">כל היום</span><div><div class="tl-activity__name">Aquaworld 🌊</div><div class="tl-activity__desc">פארק המים הגדול ביותר בהונגריה - פנימי לחלוטין, עובד בכל עונה. מגלשות ענק, גלים, בריכות לכל גיל. הגיעו ב-9 בבוקר לפני ההמונים.</div></div></div>
                   <div class="tl-tip"><strong>טיפ:</strong> Aquaworld כדאי להזמין מראש. חנייה בחינם בשטח.</div>
@@ -699,7 +1197,7 @@
               <div class="tl-item__node"><div class="tl-item__icon">✈️</div><span class="tl-item__day-label">יום 6</span></div>
               <div class="tl-item__card tl-card" id="tl6">
                 <div class="tl-card__band"></div>
-                <div class="tl-card__header"><div><div class="tl-card__title">ארוחת בוקר + קניות + טיסה חזרה</div><div class="tl-card__where">📍 בודפשט ← נתב"ג</div></div></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">ארוחת בוקר + קניות + טיסה חזרה</div><div class="tl-card__where">📍 בודפשט ← נתב"ג</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl6" aria-label="המפה המלאה - יום 6" title="המפה המלאה - יום 6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div></div>
                 <div class="tl-card__body">
                   <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">ארוחת בוקר טעימה ☕</div><div class="tl-activity__desc">ארוחת בוקר אחרונה בעיר - קפה, מאפים הונגריים ואווירה נינוחה לפני הדרך.</div></div></div>
                   <div class="tl-activity"><span class="tl-activity__time">לפני טיסה</span><div><div class="tl-activity__name">סיבוב קניות בסופר המקומי 🛒</div><div class="tl-activity__desc">עצירה בסופר לקנות דברים טעימים הביתה - שוקולדים הונגריים, פאפריקה, ממרחים ועוד. המקומיים יודעים מה טוב!</div></div></div>
@@ -715,15 +1213,79 @@
         <!-- ATTRACTIONS -->
         <div class="article-section" id="attractions">
           <h2 class="article-section__title"><span class="article-section__title-icon">⭐</span> אטרקציות מומלצות</h2>
-          <div class="tips-list">
-            <div class="tip-item"><span class="tip-item__icon">🏰</span><div class="tip-item__text"><strong>טירת בודה ומגדל הדייגים:</strong> הפנינה של בודה. עלייה בפוניקולר, נוף מושלם ואדריכלות מהפנטת. להגיע מוקדם בבוקר לפני הצפיפות.</div></div>
-            <div class="tip-item"><span class="tip-item__icon">🏛️</span><div class="tip-item__text"><strong>הפרלמנט ההונגרי:</strong> אחד הבניינים היפים בעולם. כרטיסים חובה להזמין מראש באתר הרשמי. הטיול המודרך אורך כשעה ומרתק לכל הגילאים.</div></div>
-            <div class="tip-item"><span class="tip-item__icon">♨️</span><div class="tip-item__text"><strong>מרחצאות סצ'ניי:</strong> חוויה תרבותית-היסטורית ייחודית. מתאים גם לילדים - יש בריכה רדודה ומגלשות קטנות. להביא בגד ים ומגבת.</div></div>
-            <div class="tip-item"><span class="tip-item__icon">🛷</span><div class="tip-item__text"><strong>Visegrad Bobsled:</strong> כ-45 דקות מהעיר - שווה כל דקה! מגלשת בוב על גבעה עם נוף לדנובה. מתאים מגיל 4+, ילדים מתים עליה.</div></div>
-            <div class="tip-item"><span class="tip-item__icon">🌊</span><div class="tip-item__text"><strong>Aquaworld:</strong> פארק מים פנימי ענק - עובד בכל מזג אוויר. מושלם ליום אחרון לפני הטיסה. כניסה מומלצת ב-9 בבוקר לפני ההמונים.</div></div>
-            <div class="tip-item"><span class="tip-item__icon">⛵</span><div class="tip-item__text"><strong>שיט בדנובה:</strong> שיט בשעת שקיעה הוא חוויה בלתי נשכחת. הנוף על הפרלמנט וטירת בודה מהמים - אחד הרגעים הכי יפים בטיול.</div></div>
-            <div class="tip-item"><span class="tip-item__icon">🏰</span><div class="tip-item__text"><strong>מבצר Visegrad:</strong> ממש ליד הבוב - מבצר רנסנסי עם נוף פנורמי על נהר הדנובה. כניסה בתשלום סמלי, שווה לעצור.</div></div>
+          <div class="attractions-grid">
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">טירה</span>
+                <div class="attraction-card__name">טירת בודה ומגדל הדייגים</div>
+                <div class="attraction-card__desc">הפנינה של בודה. עלייה בפוניקולר, נוף מושלם ואדריכלות מהפנטת. להגיע מוקדם בבוקר לפני הצפיפות.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJDw826jzcQUcRdiUBqV86zj0" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Budapest_Castle_from_the_chain_bridge_01.jpg/320px-Budapest_Castle_from_the_chain_bridge_01.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">אדריכלות</span>
+                <div class="attraction-card__name">הפרלמנט ההונגרי</div>
+                <div class="attraction-card__desc">אחד הבניינים היפים בעולם. כרטיסים חובה להזמין מראש באתר הרשמי. הטיול המודרך אורך כשעה ומרתק לכל הגילאים.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJPaPURhDcQUcRbg-P_7giITQ" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Budapest_Hungarian_Parliament_2016.jpg/320px-Budapest_Hungarian_Parliament_2016.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">מרחצאות</span>
+                <div class="attraction-card__name">מרחצאות סצ'ניי</div>
+                <div class="attraction-card__desc">חוויה תרבותית-היסטורית ייחודית. מתאים גם לילדים - יש בריכה רדודה ומגלשות קטנות. להביא בגד ים ומגבת.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJd1VnBYbbQUcREiSNtgjDwMs" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Budapest_Sz%C3%A9chenyi_f%C3%BCrd%C5%91_2013.jpg/320px-Budapest_Sz%C3%A9chenyi_f%C3%BCrd%C5%91_2013.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">הרפתקה</span>
+                <div class="attraction-card__name">Visegrad Bobsled</div>
+                <div class="attraction-card__desc">כ-45 דקות מהעיר - שווה כל דקה! מגלשת בוב על גבעה עם נוף לדנובה. מתאים מגיל 4+, ילדים מתים עליה.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJPWTVprWAakcRqOKdrn40jx8" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Visegr%C3%A1d_Castle_2019.jpg/320px-Visegr%C3%A1d_Castle_2019.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">פארק מים</span>
+                <div class="attraction-card__name">Aquaworld</div>
+                <div class="attraction-card__desc">פארק מים פנימי ענק - עובד בכל מזג אוויר. מושלם ליום אחרון לפני הטיסה. כניסה מומלצת ב-9 בבוקר לפני ההמונים.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJuf_4gJbRQUcRg4Is70-FJ0s" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Aquaworld_Resort_Budapest.jpg/320px-Aquaworld_Resort_Budapest.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">שייט</span>
+                <div class="attraction-card__name">שיט בדנובה</div>
+                <div class="attraction-card__desc">שיט בשעת שקיעה הוא חוויה בלתי נשכחת. הנוף על הפרלמנט וטירת בודה מהמים - אחד הרגעים הכי יפים בטיול.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJ2dSGoUDcQUcRQPIqeDUNig8" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Budapest_parliament_from_the_river.jpg/320px-Budapest_parliament_from_the_river.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">טירה</span>
+                <div class="attraction-card__name">מבצר Visegrad</div>
+                <div class="attraction-card__desc">ממש ליד הבוב - מבצר רנסנסי עם נוף פנורמי על נהר הדנובה. כניסה בתשלום סמלי, שווה לעצור.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJ-_fvCa6AakcReKkEH_bHgnE" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Visegrad_Upper_Castle_01.jpg/320px-Visegrad_Upper_Castle_01.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
           </div>
+          <p class="attractions-grid__attrib">תמונות ממוזערות: גיבוי מ-Wikimedia; כשמוגדר מפתח Google Maps והדפדפן מאפשרים, נטענת תמונה מ-Google Places לפי מזהה המקום (לפי תנאי Google).</p>
 
           <!-- DISCOVER BANNER -->
           <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:16px;padding:18px 24px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;display:none;">
@@ -756,19 +1318,94 @@
           </div>
         </div>
 
-        <!-- LOGISTICS -->
-        <div class="article-section" id="logistics">
-          <h2 class="article-section__title"><span class="article-section__title-icon">🚗</span> טיפים לוגיסטיים</h2>
-          <div class="tips-list">
-            <div class="tip-item"><span class="tip-item__icon">✈️</span><div class="tip-item__text"><strong>הגעה:</strong> טיסות ישירות מתל אביב לבודפשט - שדה התעופה Budapest Ferenc Liszt. זמן טיסה כשלוש שעות. השדה נמצא כ-20 דקות מהמרכז.</div></div>
-            <div class="tip-item"><span class="tip-item__icon">🚘</span><div class="tip-item__text"><strong>רכב:</strong> בתוך העיר אין צורך - תחבורה ציבורית מצוינת. לטיולים מחוץ לעיר (Visegrad, Aquaworld) - כדאי לשכור. Alamo ו-Europcar בשדה התעופה.</div></div>
-            <div class="tip-item"><span class="tip-item__icon">💶</span><div class="tip-item__text"><strong>כסף:</strong> הונגריה לא בגוש האירו - פורינט הונגרי (HUF). כרטיסי אשראי מקובלים בכל מקום, אך כדאי להמיר מעט מזומן לשווקים ולכניסות.</div></div>
-            <div class="tip-item"><span class="tip-item__icon">🌡️</span><div class="tip-item__text"><strong>מזג אוויר:</strong> קיץ נעים (24-32 מעלות), אביב וסתיו מתונים. בחורף קר מאוד - 0 עד 5 מעלות. Aquaworld מצוין גם בחורף - פנימי לחלוטין.</div></div>
-            <div class="tip-item"><span class="tip-item__icon">🗣️</span><div class="tip-item__text"><strong>שפה:</strong> הונגרית - שפה מורכבת שאין קשר לאף שפה אירופאית אחרת. אנגלית מדוברת היטב בכל אזורי התיירות.</div></div>
-            <div class="tip-item"><span class="tip-item__icon">🎫</span><div class="tip-item__text"><strong>הזמנות מראש:</strong> הפרלמנט וה-Aquaworld - חובה להזמין מראש. מרחצאות סצ'ניי - מומלץ. הפוניקולר - שווה לרכוש מראש בפיק.</div></div>
+        <!-- TIPS (pro cards — same pattern as austria.html) -->
+        <div class="article-section" id="tips">
+          <h2 class="article-section__title">
+            <svg class="article-section__title-icon-svg" xmlns="http://www.w3.org/2000/svg" width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.88 1.35-2.6A6.98 6.98 0 0 0 18 8a7 7 0 1 0-12 0c0 1.24.33 2.44.96 3.41.69.72 1.17 1.62 1.35 2.6"/></svg>
+            טיפים חשובים לטיול
+          </h2>
+
+          <div class="tips-pro-wrap">
+            <section class="tips-pro-group" aria-labelledby="tips-cat-logistics">
+              <h3 class="tips-pro-group__title" id="tips-cat-logistics">לוגיסטיקה ונסיעות</h3>
+              <p class="tips-pro-group__sub">טיסה, רכב ותנועה בתוך העיר</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">הגעה</span>
+                    <p class="tip-pro__text">טיסות ישירות מתל אביב לבודפשט - שדה התעופה Budapest Ferenc Liszt. זמן טיסה כשלוש שעות. השדה נמצא כ-20 דקות מהמרכז.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3.3A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">רכב</span>
+                    <p class="tip-pro__text">בתוך העיר אין צורך - תחבורה ציבורית מצוינת. לטיולים מחוץ לעיר (Visegrad, Aquaworld) - כדאי לשכור. Alamo ו-Europcar בשדה התעופה.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tips-pro-group" aria-labelledby="tips-cat-money">
+              <h3 class="tips-pro-group__title" id="tips-cat-money">כסף, שפה ומזג אוויר</h3>
+              <p class="tips-pro-group__sub">מה לדעת לפני ובמהלך הביקור</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-5.5A3.5 3.5 0 0 0 7 11.5 3.5 3.5 0 0 0 10.5 15H16"/><path d="M7 12h9.5"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">כסף</span>
+                    <p class="tip-pro__text">הונגריה לא בגוש האירו - פורינט הונגרי (HUF). כרטיסי אשראי מקובלים בכל מקום, אך כדאי להמיר מעט מזומן לשווקים ולכניסות.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">שפה</span>
+                    <p class="tip-pro__text">הונגרית - שפה מורכבת שאין קשר לאף שפה אירופאית אחרת. אנגלית מדוברת היטב בכל אזורי התיירות.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">מזג אוויר</span>
+                    <p class="tip-pro__text">קיץ נעים (24-32 מעלות), אביב וסתיו מתונים. בחורף קר מאוד - 0 עד 5 מעלות. Aquaworld מצוין גם בחורף - פנימי לחלוטין.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tips-pro-group" aria-labelledby="tips-cat-booking">
+              <h3 class="tips-pro-group__title" id="tips-cat-booking">הזמנות מראש</h3>
+              <p class="tips-pro-group__sub">מה כדאי לסגור לפני שמגיעים</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">הזמנות מראש</span>
+                    <p class="tip-pro__text">הפרלמנט וה-Aquaworld - חובה להזמין מראש. מרחצאות סצ'ניי - מומלץ. הפוניקולר - שווה לרכוש מראש בפיק.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <p class="tips-pro-more">
+              <a id="tipsProMoreLink" class="tips-pro-more__link" href="tips.html?utm_source=budapest_guide&amp;utm_medium=article&amp;utm_campaign=tips_section_more&amp;utm_content=pro_tips_block" data-mt-track="budapest_tips_more">אם אתם מעוניינים בעוד טיפים שיעזרו לכם בטיול — <span class="tips-pro-more__cta">לחצו כאן</span></a>
+            </p>
           </div>
 
-          <!-- Airalo CTA -->
           <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:16px;padding:18px 24px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
             <div style="display:flex;align-items:center;gap:12px;">
               <div style="width:36px;height:36px;flex-shrink:0;"><img src="https://www.google.com/s2/favicons?domain=airalo.com&sz=64" alt="Airalo" style="width:36px;height:36px;object-fit:contain;" onerror="this.style.display='none'"></div>
@@ -777,7 +1414,7 @@
                 <div style="font-size:13px;color:#888;">הורידו את ה-eSIM לפני הטיסה והתחברו מיד עם הנחיתה. חוסך זמן וכסף לעומת רומינג.</div>
               </div>
             </div>
-            <a href="https://airalo.tpk.mx/jjDTppVR" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:20px;padding:9px 20px;font-family:var(--font-body);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">
+            <a href="https://airalo.tpk.mx/jjDTppVR" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:20px;padding:9px 20px;font-family:var(--font-body);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">
               לרכישה
             </a>
           </div>
@@ -823,7 +1460,7 @@
   var days = [
     { id: 'tl1', day: 1, label: 'Visegrad Bobsled', emoji: '✈️', lat: 47.788, lng: 18.982, color: '#1A6B72', title: 'הגעה לבודפשט + Visegrad Bobsled' },
     { id: 'tl2', day: 2, label: 'טירת בודה + מגדל הדייגים', emoji: '🏰', lat: 47.496, lng: 19.039, color: '#6b4aa0', title: 'טירת בודה + פוניקולר + גשר השרשרות' },
-    { id: 'tl3', day: 3, label: 'כיכר הגיבורים + שצ\'ני', emoji: '♨️', lat: 47.518, lng: 19.082, color: '#4A9B6F', title: 'כיכר הגיבורים + פארק העיר + מרחצאות שצ\'ני' },
+    { id: 'tl3', day: 3, label: 'כיכר הגיבורים + סצ\'ניי', emoji: '♨️', lat: 47.518, lng: 19.082, color: '#4A9B6F', title: 'כיכר הגיבורים + פארק העיר + מרחצאות סצ\'ניי' },
     { id: 'tl4', day: 4, label: 'הפרלמנט + שיט בדנובה', emoji: '🏛️', lat: 47.507, lng: 19.045, color: '#E8A045', title: 'פרלמנט + שיט + רובע יהודי' },
     { id: 'tl5', day: 5, label: 'כל היום Aquaworld', emoji: '🌊', lat: 47.519, lng: 19.080, color: '#ce2939', title: 'כל היום ב-Aquaworld' },
     { id: 'tl6', day: 6, label: 'ארוחת בוקר + קניות + טיסה', emoji: '✈️', lat: 47.437, lng: 19.255, color: '#1A6B72', title: 'ארוחת בוקר + קניות + טיסה חזרה לישראל' }
@@ -912,19 +1549,111 @@
     if (header) { header.style.cursor = 'pointer'; header.addEventListener('click', function() { flyTo(d); }); }
   });
 
+  document.querySelectorAll('a.tl-card__map-link').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var id = a.getAttribute('data-day');
+      var routeMap = document.getElementById('route-map');
+      if (routeMap) routeMap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var d = days.find(function(x) { return x.id === id; });
+      if (!d) return;
+      setTimeout(function() {
+        if (typeof map.invalidateSize === 'function') map.invalidateSize();
+        flyTo(d);
+      }, 480);
+    });
+  });
+
+})();
+</script>
+<script>
+(function () {
+  /** כרטיסי אטרקציות בודפשט: תמונת גיבוי מ-Wikimedia → תמונה מ-Google Places (אותו מפתח כמו austria.html) */
+  var CACHE_PREFIX = 'budapestPlaceSheet:v1:';
+  var CACHE_MAX_MS = 7 * 24 * 60 * 60 * 1000;
+  function readPlaceCache(placeId) {
+    try {
+      var raw = localStorage.getItem(CACHE_PREFIX + placeId);
+      if (!raw) return null;
+      var wrap = JSON.parse(raw);
+      if (!wrap || wrap.v !== 1 || !wrap.savedAt || !wrap.payload) return null;
+      if (Date.now() - wrap.savedAt > CACHE_MAX_MS) return null;
+      return wrap.payload;
+    } catch (e) {
+      return null;
+    }
+  }
+  function hydrateBudapestAttractionThumbs() {
+    var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
+    if (!key) return;
+    var root = document.getElementById('attractions');
+    if (!root) return;
+    if (!window.google || !google.maps) {
+      if (!hydrateBudapestAttractionThumbs._wait) hydrateBudapestAttractionThumbs._wait = 0;
+      if (++hydrateBudapestAttractionThumbs._wait < 120) {
+        setTimeout(hydrateBudapestAttractionThumbs, 100);
+      }
+      return;
+    }
+    if (hydrateBudapestAttractionThumbs._started) return;
+    hydrateBudapestAttractionThumbs._started = true;
+    var imgs = root.querySelectorAll('img.attraction-card__thumb[data-google-place-id]');
+    var jobs = [];
+    for (var j = 0; j < imgs.length; j++) {
+      var img = imgs[j];
+      var pid = (img.getAttribute('data-google-place-id') || '').trim();
+      if (!pid) continue;
+      jobs.push({ img: img, placeId: pid });
+    }
+    if (!jobs.length) return;
+    google.maps
+      .importLibrary('places')
+      .then(function (lib) {
+        var Place = lib.Place;
+        jobs.forEach(function (job) {
+          var cached = readPlaceCache(job.placeId);
+          if (cached && cached.photoURI) {
+            job.img.src = cached.photoURI;
+            return;
+          }
+          var place = new Place({ id: job.placeId });
+          place
+            .fetchFields({ fields: ['photos'] })
+            .then(function () {
+              if (!place.photos || !place.photos.length || typeof place.photos[0].getURI !== 'function') return;
+              try {
+                var uri = place.photos[0].getURI({ maxWidth: 480, maxHeight: 360 });
+                if (uri) job.img.src = uri;
+              } catch (e) {
+                /* נשארת תמונת גיבוי */
+              }
+            })
+            .catch(function () {
+              /* נשארת תמונת גיבוי */
+            });
+        });
+      })
+      .catch(function () {
+        /* נשארת תמונת גיבוי */
+      });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hydrateBudapestAttractionThumbs);
+  } else {
+    hydrateBudapestAttractionThumbs();
+  }
 })();
 </script>
 
 <script>
 (function() {
-  /* ── NAV ── */
+  'use strict';
   var nav = document.getElementById('nav');
-  if (nav) window.addEventListener('scroll', function() {
-    nav.classList.toggle('scrolled', window.scrollY > 10);
-  }, { passive: true });
-
   var hamburger = document.getElementById('hamburgerBtn');
   var mobileMenu = document.getElementById('mobileMenu');
+  if (!hamburger || !mobileMenu) return;
+
   var WEATHER_CITIES = [
     { name: 'לונדון',    lat: 51.51, lon: -0.12 },
     { name: 'בודפשט',   lat: 47.50, lon: 19.04 },
@@ -954,29 +1683,34 @@
       })
       .catch(function() { el.textContent = 'מזג אוויר באירופה'; });
   }
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', function() {
-      var isOpen = mobileMenu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen.toString());
-      hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-      if (isOpen) fetchMenuWeather();
-    });
-    mobileMenu.querySelectorAll('a').forEach(function(link) {
-      link.addEventListener('click', function() {
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.setAttribute('aria-label', 'פתח תפריט');
-        document.body.style.overflow = '';
-      });
-    });
-  }
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('open')) {
+  hamburger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var isOpen = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen.toString());
+    hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
+    if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+    else document.body.style.overflow = isOpen ? 'hidden' : '';
+    if (isOpen) fetchMenuWeather();
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
       mobileMenu.classList.remove('open');
       hamburger.setAttribute('aria-expanded', 'false');
       hamburger.setAttribute('aria-label', 'פתח תפריט');
-      document.body.style.overflow = '';
+      if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+      else document.body.style.overflow = '';
+    });
+  });
+  if (nav) window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'פתח תפריט');
+      if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+      else document.body.style.overflow = '';
       hamburger.focus();
     }
   });
@@ -1027,22 +1761,26 @@
     z-index: 900;
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    padding: 0;
     background: #F5EDD8;
     color: #124d52;
     border: 1.5px solid #e8ddc4;
-    border-radius: 30px;
-    padding: 11px 18px;
+    border-radius: 50%;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    font-weight: 700;
     cursor: grab;
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     transition: box-shadow 0.2s ease, background 0.2s ease;
-    letter-spacing: 0.02em;
     animation: pbFloat 3s ease-in-out infinite;
     user-select: none;
     touch-action: none;
+  }
+  .pb-float-btn__icon {
+    font-size: 24px;
+    line-height: 1;
+    pointer-events: none;
   }
   .pb-float-btn:hover {
     background: #e8ddc4;
@@ -1060,12 +1798,15 @@
     50%       { transform: translateY(-4px); box-shadow: 0 6px 14px rgba(0,0,0,0.13); }
   }
 
+  /* Above .nav so drawer stays on top (austria.html) */
   .pb-drawer-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.3);
-    z-index: 1100;
+    background: rgba(0,0,0,0.35);
+    z-index: 1240;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
   .pb-drawer-overlay.open { display: block; }
 
@@ -1075,23 +1816,28 @@
     left: 0;
     bottom: 0;
     width: 360px;
-    max-width: 95vw;
+    max-width: calc(100vw - 56px);
     background: var(--cream);
-    z-index: 1200;
+    z-index: 1250;
     transform: translateX(-100%);
     transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
     display: flex;
     flex-direction: column;
     box-shadow: 8px 0 40px rgba(0,0,0,0.15);
+    max-height: 100dvh;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
   }
   .pb-drawer.open { transform: translateX(0); }
 
   .pb-drawer-head {
     background: var(--teal);
     padding: 18px 20px;
+    padding-top: max(18px, env(safe-area-inset-top, 0px));
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
     flex-shrink: 0;
   }
   .pb-drawer-head h3 {
@@ -1103,6 +1849,9 @@
     align-items: center;
     gap: 8px;
     letter-spacing: 0.03em;
+    flex: 1;
+    min-width: 0;
+    line-height: 1.25;
   }
   .pb-drawer-close {
     width: 32px;
@@ -1112,13 +1861,77 @@
     background: transparent;
     color: #fff;
     font-size: 18px;
+    line-height: 1;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.15s;
+    flex-shrink: 0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    padding: 0;
   }
   .pb-drawer-close:hover { background: rgba(255,255,255,0.15); }
+
+  @media (max-width: 600px) {
+    .pb-drawer {
+      width: min(360px, calc(100vw - 52px));
+      max-width: calc(100vw - 52px);
+    }
+    .pb-drawer-head {
+      padding: 12px 12px 12px 14px;
+      padding-top: max(12px, env(safe-area-inset-top, 0px));
+    }
+    .pb-drawer-head h3 {
+      font-size: 17px;
+      gap: 6px;
+    }
+    .pb-drawer-close {
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      min-height: 46px;
+      font-size: 22px;
+      border-width: 2px;
+      background: rgba(255,255,255,0.12);
+    }
+    .pb-drawer-cats {
+      padding: 10px 12px;
+      gap: 6px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .pb-drawer-cats::-webkit-scrollbar { display: none; }
+    .pb-dcat {
+      flex-shrink: 0;
+      padding: 8px 14px;
+      font-size: 12px;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .pb-drawer-body {
+      flex: 1;
+      min-height: 0;
+      padding: 6px 0 max(20px, env(safe-area-inset-bottom, 12px));
+    }
+    .pb-item {
+      padding: 12px 14px;
+      gap: 10px;
+    }
+    .pb-item-he { font-size: 16px; }
+    .pb-item-sk { font-size: 15px; }
+    .pb-float-btn {
+      bottom: max(88px, calc(env(safe-area-inset-bottom, 12px) + 72px));
+      left: max(12px, env(safe-area-inset-left, 12px));
+      width: 48px;
+      height: 48px;
+    }
+  }
 
   .pb-drawer-cats {
     display: flex;
@@ -1183,6 +1996,7 @@
   .pb-drawer.open .pb-item:nth-child(8)  { animation-delay: 0.29s; }
   .pb-drawer.open .pb-item:nth-child(9)  { animation-delay: 0.31s; }
   .pb-drawer.open .pb-item:nth-child(10) { animation-delay: 0.33s; }
+  .pb-emergency-note {
     background: rgba(232,160,69,0.12);
     border-right: 3px solid var(--amber);
     border-radius: 0 8px 8px 0;
@@ -1196,8 +2010,8 @@
 </style>
 
 <!-- Floating button -->
-<button class="pb-float-btn" id="pbOpenBtn" aria-label="פתח מילון הונגרי">
-  <span style="font-size:20px;line-height:1;display:inline-block;">🗣️</span> מילון הונגרי
+<button type="button" class="pb-float-btn" id="pbOpenBtn" aria-label="פתח מילון הונגרי" title="מילון הונגרי">
+  <span class="pb-float-btn__icon" aria-hidden="true">&#x1F5E3;&#xFE0F;</span>
 </button>
 
 <!-- Overlay -->
@@ -1207,7 +2021,7 @@
 <div class="pb-drawer" id="pbDrawer" role="dialog" aria-label="מילון שימושי להונגרית">
   <div class="pb-drawer-head">
     <h3>🗣️ מילון הונגרי</h3>
-    <button class="pb-drawer-close" id="pbCloseBtn">✕</button>
+    <button type="button" class="pb-drawer-close" id="pbCloseBtn" aria-label="סגור מילון">✕</button>
   </div>
 
   <div class="pb-drawer-cats">
@@ -1263,8 +2077,20 @@
   var drawer = document.getElementById('pbDrawer');
   var overlay = document.getElementById('pbOverlay');
 
-  function openPb() { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closePb() { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  function openPb() {
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+    else document.body.style.overflow = 'hidden';
+    if (window.__mtScheduleLeafletInvalidate) window.__mtScheduleLeafletInvalidate();
+  }
+  function closePb() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+    else document.body.style.overflow = '';
+    if (window.__mtScheduleLeafletInvalidate) window.__mtScheduleLeafletInvalidate();
+  }
 
   /* ── DRAG ── */
   var isDragging = false;
@@ -1320,6 +2146,9 @@
   document.addEventListener('touchend', onDragEnd);
   closeBtn.addEventListener('click', closePb);
   overlay.addEventListener('click', closePb);
+  overlay.addEventListener('touchend', function (e) {
+    if (e.target === overlay) closePb();
+  }, { passive: true });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') closePb(); });
 
   window.pbFilter = function(cat, btn) {

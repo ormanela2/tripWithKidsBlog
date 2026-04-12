@@ -149,6 +149,18 @@
     .tl-item:nth-child(even) .tl-item__card { margin-right: 24px; order: -1; }
     .tl-card__band { height: 6px; width: 100%; }
     .tl-card__header { padding: 16px 20px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .tl-card__header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .tl-card__map-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 10px;
+      color: var(--teal); background: rgba(26, 107, 114, 0.1);
+      text-decoration: none; transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tl-card__map-link:hover { background: rgba(26, 107, 114, 0.2); transform: scale(1.06); color: var(--teal-dark); }
+    .tl-card__map-link:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+    .tl-card__map-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+    #route-map { scroll-margin-top: calc(var(--nav-height) + 16px); }
     .tl-card__title { font-family: var(--font-heading); font-size: 16px; color: var(--charcoal); line-height: 1.35; }
     .tl-card__where { font-size: 12px; color: #aaa; margin-top: 4px; display: flex; align-items: center; gap: 3px; }
     .tl-card__star { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
@@ -1053,7 +1065,7 @@
                 <div class="tl-item__node"><div class="tl-item__icon">✈️</div><span class="tl-item__day-label">יום 1</span></div>
                 <div class="tl-item__card tl-card open" id="tl1">
                   <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">טיסה לבודפשט + הגעה לסלובקיה</div><div class="tl-card__where">📍 בודפשט → Visegrad</div></div></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">טיסה לבודפשט + הגעה לסלובקיה</div><div class="tl-card__where">📍 בודפשט → Visegrad</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl1" aria-label="המפה המלאה - יום 1" title="המפה המלאה - יום 1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div></div>
                   <div class="tl-card__body">
                     <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">טיסה לבודפשט ✈️</div><div class="tl-activity__desc">נחיתה בבודפשט + השכרת רכב.</div></div></div>
                     <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">מגלשות הרים Visegrad Bobsled</div><div class="tl-activity__desc">בובסלד מהכיפיים ביותר באזור - מגלשת מתכת ענקית על ההר. הילדים מתים עליה.</div></div></div>
@@ -1068,7 +1080,7 @@
                 <div class="tl-item__node"><div class="tl-item__icon">🦎</div><span class="tl-item__day-label">יום 2</span></div>
                 <div class="tl-item__card tl-card" id="tl2">
                   <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">פארק חיות אקזוטי וסיור בליפטובסקי מיקולאש</div><div class="tl-card__where">📍 Liptovský Mikuláš</div></div></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">פארק חיות אקזוטי וסיור בליפטובסקי מיקולאש</div><div class="tl-card__where">📍 Liptovský Mikuláš</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl2" aria-label="המפה המלאה - יום 2" title="המפה המלאה - יום 2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div></div>
                   <div class="tl-card__body">
                     <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">CROC Terrarium &amp; Tropical World</div><div class="tl-activity__desc">מוזיאון טרופי עם חיות אקזוטיות - חוויה מדהימה לילדים ולמבוגרים, לא להחמיץ, יש הדרכה במקום ואפשרות להחזיק חלק מהחיות בידיים.</div></div></div>
                     <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">המוזיאון הסלובקי וסיור בעיר</div><div class="tl-activity__desc">סיור קצר בעיירה הנחמדה ליד האגם.</div></div></div>
@@ -1083,7 +1095,7 @@
                 <div class="tl-item__node"><div class="tl-item__icon">🦇</div><span class="tl-item__day-label">יום 3</span></div>
                 <div class="tl-item__card tl-card" id="tl3">
                   <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">מערת החירות + פסלי ענק ביער</div><div class="tl-card__where">📍 Demänovská Cave → Ziarce</div></div></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">מערת החירות + פסלי ענק ביער</div><div class="tl-card__where">📍 Demänovská Cave → Ziarce</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl3" aria-label="המפה המלאה - יום 3" title="המפה המלאה - יום 3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div></div>
                   <div class="tl-card__body">
                     <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">מערת החירות (Demänovská Cave)</div><div class="tl-activity__desc">אחת המערות היפות בסלובקיה - נטיפים, אגמים תת-קרקעיים וסיור מודרך מרתק.</div></div></div>
                     <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">פסלי ענק ביער + FUN PARK Ziarce</div><div class="tl-activity__desc">פארק ייחודי עם פסלים ענקיים של דמויות מאגדות - מומלץ מאוד לילדים.</div></div></div>
@@ -1098,7 +1110,7 @@
                 <div class="tl-item__node"><div class="tl-item__icon">🌊</div><span class="tl-item__day-label">יום 4</span></div>
                 <div class="tl-item__card tl-card" id="tl4">
                   <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">פארק מים Tatralandia</div><div class="tl-card__where">📍 Tatralandia + Zoo Kontakt</div></div><span class="tl-card__star tl-card__star--tatry">⭐ מומלץ</span></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">פארק מים Tatralandia</div><div class="tl-card__where">📍 Tatralandia + Zoo Kontakt</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl4" aria-label="המפה המלאה - יום 4" title="המפה המלאה - יום 4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--tatry">⭐ מומלץ</span></div></div>
                   <div class="tl-card__body">
                     <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">פארק מים Tatralandia</div><div class="tl-activity__desc">אחד מפארקי המים הגדולים במרכז אירופה - מגלשות, בריכות תרמיות ואטרקציות לכל גיל.</div></div></div>
                     <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">Zoo Kontakt (אופציונלי: מערת הקרח)</div><div class="tl-activity__desc">גן חיות קטן ונחמד, או לחלופין ביקור במערת הקרח הייחודית.</div></div></div>
@@ -1113,7 +1125,7 @@
                 <div class="tl-item__node"><div class="tl-item__icon">⛏️</div><span class="tl-item__day-label">יום 5</span></div>
                 <div class="tl-item__card tl-card" id="tl5">
                   <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">מכרה + מפל + פרפרים</div><div class="tl-card__where">📍 Medvedia štôlňa → מפל שרפיובי</div></div></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">מכרה + מפל + פרפרים</div><div class="tl-card__where">📍 Medvedia štôlňa → מפל שרפיובי</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl5" aria-label="המפה המלאה - יום 5" title="המפה המלאה - יום 5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div></div>
                   <div class="tl-card__body">
                     <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">סיור במכרה (Medvedia štôlňa)</div><div class="tl-activity__desc">מכרה היסטורי עם סיור מודרך מרתק - ילדים מתלהבים מהנהרות התת-קרקעיים.</div></div></div>
                     <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">מפל שרפיובי + פארק הפרפרים</div><div class="tl-activity__desc">מפל יפהפה בטבע + בית גידול לפרפרים טרופיים - אחד הדברים הכי יפים שראינו.</div></div></div>
@@ -1128,7 +1140,7 @@
                 <div class="tl-item__node"><div class="tl-item__icon">🚣</div><span class="tl-item__day-label">יום 6</span></div>
                 <div class="tl-item__card tl-card" id="tl6">
                   <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">רפטינג ומוזיאון TANAP</div><div class="tl-card__where">📍 Ružomberok → Apartmany Belanky</div></div></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">רפטינג ומוזיאון TANAP</div><div class="tl-card__where">📍 Ružomberok → Apartmany Belanky</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl6" aria-label="המפה המלאה - יום 6" title="המפה המלאה - יום 6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div></div>
                   <div class="tl-card__body">
                     <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">רפטינג ברוז'ומברוק 🚣</div><div class="tl-activity__desc">רפטינג על הנהר - מגיל 6+ בערך. כיפי, ספוג ומרגש.</div></div></div>
                     <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">מוזיאון הטבע TANAP</div><div class="tl-activity__desc">מוזיאון טבע מרתק על הטטרה (אופציונלי: דונובאלי לקפה ונוף הרים).</div></div></div>
@@ -1143,7 +1155,7 @@
                 <div class="tl-item__node"><div class="tl-item__icon">🥾</div><span class="tl-item__day-label">יום 7</span></div>
                 <div class="tl-item__card tl-card" id="tl7">
                   <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">נקיקי דיארי + בובסלד + כפר Habakuky</div><div class="tl-card__where">📍 Jánošíkove Diery</div></div></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">נקיקי דיארי + בובסלד + כפר Habakuky</div><div class="tl-card__where">📍 Jánošíkove Diery</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl7" aria-label="המפה המלאה - יום 7" title="המפה המלאה - יום 7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div></div>
                   <div class="tl-card__body">
                     <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">מסלול נקיקי דיארי (Jánošíkove Diery)</div><div class="tl-activity__desc">טיול עם גשרי חבלים וסולמות בין הסלעים - מתאים לילדים מגיל 6.</div></div></div>
                     <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">מגלשות Bobsled + כפר Habakuky</div><div class="tl-activity__desc">עוד סיבוב בובסלד + כפר עם סדנאות מלאכת יד מסורתית לילדים.</div></div></div>
@@ -1158,7 +1170,7 @@
                 <div class="tl-item__node"><div class="tl-item__icon">🏯</div><span class="tl-item__day-label">יום 8</span></div>
                 <div class="tl-item__card tl-card" id="tl8">
                   <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">טירת ספיש + פארק מים Tatrapolis</div><div class="tl-card__where">📍 Spiš Castle → Poprad</div></div><span class="tl-card__star tl-card__star--castle">⭐ חובה</span></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">טירת ספיש + פארק מים Tatrapolis</div><div class="tl-card__where">📍 Spiš Castle → Poprad</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl8" aria-label="המפה המלאה - יום 8" title="המפה המלאה - יום 8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--castle">⭐ חובה</span></div></div>
                   <div class="tl-card__body">
                     <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">טירת ספיש (Spiš Castle)</div><div class="tl-activity__desc">אחת הטירות הגדולות באירופה - אתר UNESCO. הגיעו לפני 9 לפני שמגיעות קבוצות.</div></div></div>
                     <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">פופראד + פארק המים Tatropolis</div><div class="tl-activity__desc">פארק מים נוסף בפופראד - מושלם לסיום יום ארוך.</div></div></div>
@@ -1173,7 +1185,7 @@
                 <div class="tl-item__node"><div class="tl-item__icon">🐻</div><span class="tl-item__day-label">יום 9</span></div>
                 <div class="tl-item__card tl-card" id="tl9">
                   <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">חוות הדובים + בודפשט</div><div class="tl-card__where">📍 Bear Farm → בודפשט</div></div></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">חוות הדובים + בודפשט</div><div class="tl-card__where">📍 Bear Farm → בודפשט</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl9" aria-label="המפה המלאה - יום 9" title="המפה המלאה - יום 9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div></div>
                   <div class="tl-card__body">
                     <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">חוות הדובים (Bear Farm)</div><div class="tl-activity__desc">חווה עם דובי בר - רואים אותם ממרחק קצר. חוויה בלתי נשכחת לילדים.</div></div></div>
                     <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">הגעה לבודפשט + פארק עירוני</div><div class="tl-activity__desc">נסיעה לבודפשט + סיור קצר בפארק העירוני הגדול.</div></div></div>
@@ -1188,7 +1200,7 @@
                 <div class="tl-item__node"><div class="tl-item__icon">🏊</div><span class="tl-item__day-label">יום 10</span></div>
                 <div class="tl-item__card tl-card" id="tl10">
                   <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">Aquaworld בודפשט + יום חופשי</div><div class="tl-card__where">📍 בודפשט</div></div></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">Aquaworld בודפשט + יום חופשי</div><div class="tl-card__where">📍 בודפשט</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl10" aria-label="המפה המלאה - יום 10" title="המפה המלאה - יום 10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div></div>
                   <div class="tl-card__body">
                     <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Aquaworld Resort בודפשט</div><div class="tl-activity__desc">פארק מים מקורה ענקי - מושלם ליום האחרון לפני הטיסה.</div></div></div>
                     <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">זמן חופשי בעיר</div><div class="tl-activity__desc">טיול ברגל, קניות, גלידה - כל מה שרוצים לפני הפרידה.</div></div></div>
@@ -1203,7 +1215,7 @@
                 <div class="tl-item__node"><div class="tl-item__icon">🇮🇱</div><span class="tl-item__day-label">יום 11</span></div>
                 <div class="tl-item__card tl-card" id="tl11">
                   <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">טיסה חזרה לישראל 🇮🇱</div><div class="tl-card__where">📍 בודפשט ✈ ישראל</div></div></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">טיסה חזרה לישראל 🇮🇱</div><div class="tl-card__where">📍 בודפשט ✈ ישראל</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl11" aria-label="המפה המלאה - יום 11" title="המפה המלאה - יום 11"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div></div>
                   <div class="tl-card__body">
                     <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">טיסה חזרה לישראל</div><div class="tl-activity__desc">מגיעים הביתה עם מלא זיכרונות, תמונות ועייפות מתוקה.</div></div></div>
                   </div>
@@ -1598,6 +1610,22 @@
       if (!item) return;
       var header = item.querySelector('.tl-card__header');
       if (header) { header.style.cursor = 'pointer'; header.addEventListener('click', function() { flyTo(d); }); }
+    });
+
+    document.querySelectorAll('a.tl-card__map-link').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var id = a.getAttribute('data-day');
+        var routeMap = document.getElementById('route-map');
+        if (routeMap) routeMap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        var d = days.find(function(x) { return x.id === id; });
+        if (!d) return;
+        setTimeout(function() {
+          if (typeof map.invalidateSize === 'function') map.invalidateSize();
+          flyTo(d);
+        }, 480);
+      });
     });
 
   
