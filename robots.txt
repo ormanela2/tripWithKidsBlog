@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Allow: /
+
+Sitemap: https://mataytasim.co.il/sitemap.xml
+
+# Optional — dev tool; uncomment if you do not want it in search results:
+# Disallow: /flight-price-lab.html
