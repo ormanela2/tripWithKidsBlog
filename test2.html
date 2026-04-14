@@ -794,6 +794,9 @@
       box-shadow: var(--shadow-sm);
       overflow: hidden;
       touch-action: manipulation;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
     }
 
     /* Hover only on devices with real pointer — avoids iOS “first tap = hover, second tap = link” */
@@ -883,6 +886,10 @@
 
     .pricing-card__body {
       padding: 28px 28px 32px;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
     }
 
     .pricing-card__price-row {
@@ -1031,6 +1038,19 @@
       .pricing-card__collapsible {
         max-height: none !important;
         overflow: visible !important;
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-height: 0;
+      }
+
+      .pricing-card__collapsible .pricing-card__features {
+        flex: 0 0 auto;
+      }
+
+      .pricing-card__book {
+        margin-top: auto;
+        flex-shrink: 0;
       }
     }
 
@@ -1042,13 +1062,16 @@
       .pricing-carousel-host {
         max-width: none;
         width: 100%;
-        margin: 0;
+        margin: 28px 0 36px;
         padding: 0;
       }
 
+      /* ~87vw cards → ~6.5vw peek of adjacent card (affordance) */
       .pricing__grid--carousel {
+        --pricing-card-slide: min(420px, 87vw);
         display: flex !important;
         flex-direction: row;
+        align-items: stretch;
         grid-template-columns: unset;
         gap: 14px;
         overflow-x: auto;
@@ -1056,21 +1079,65 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
-        padding: 8px calc(max(0px, (100vw - min(88vw, 340px)) / 2)) 16px;
-        scroll-padding-inline: calc(max(0px, (100vw - min(88vw, 340px)) / 2));
+        overscroll-behavior-x: contain;
+        padding: 12px calc(max(0px, (100vw - var(--pricing-card-slide)) / 2)) 28px;
+        scroll-padding-inline: calc(max(0px, (100vw - var(--pricing-card-slide)) / 2));
         margin: 0;
       }
 
       .pricing__grid--carousel > .pricing-card {
-        flex: 0 0 min(340px, 88vw);
-        width: min(340px, 88vw);
-        max-width: min(340px, 88vw);
+        flex: 0 0 var(--pricing-card-slide);
+        width: var(--pricing-card-slide);
+        max-width: var(--pricing-card-slide);
         scroll-snap-align: center;
         scroll-snap-stop: always;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
       }
 
       .pricing__grid--carousel .pricing-card--highlighted {
         transform: none;
+      }
+
+      .pricing__grid--carousel > .pricing-card.pricing-card--floating {
+        border-radius: 1.5rem;
+        box-shadow:
+          0 24px 56px rgba(0, 0, 0, 0.12),
+          0 10px 28px rgba(0, 0, 0, 0.08),
+          0 0 0 1px rgba(0, 0, 0, 0.04);
+      }
+
+      .pricing__grid--carousel > .pricing-card.pricing-card--floating.pricing-card--highlighted {
+        box-shadow:
+          0 28px 60px rgba(232, 160, 69, 0.22),
+          0 12px 32px rgba(0, 0, 0, 0.1),
+          var(--shadow-lg),
+          0 0 0 1px var(--amber);
+      }
+
+      .pricing__grid--carousel .pricing-card__body {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .pricing__grid--carousel .pricing-card.is-expanded .pricing-card__collapsible {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow: visible;
+      }
+
+      .pricing__grid--carousel .pricing-card__collapsible .pricing-card__features {
+        flex: 0 0 auto;
+      }
+
+      .pricing__grid--carousel .pricing-card__book {
+        margin-top: auto;
+        flex-shrink: 0;
       }
     }
 
@@ -2607,7 +2674,7 @@
         <div class="pricing__grid pricing__grid--carousel" role="region" aria-label="חבילות תכנון — החליקו לצפייה בכל החבילות">
 
           <!-- מצפן -->
-          <div class="pricing-card">
+          <div class="pricing-card pricing-card--floating">
             <div class="pricing-card__header">
               <span class="pricing-card__icon">🧭</span>
               <div class="pricing-card__name">מצפן</div>
@@ -2649,7 +2716,7 @@
           </div>
 
           <!-- הרפתקה (highlighted) -->
-          <div class="pricing-card pricing-card--highlighted">
+          <div class="pricing-card pricing-card--highlighted pricing-card--floating">
             <div class="pricing-card__header" style="padding-top:44px;">
               <div class="pricing-card__badge" style="top:12px;transform:translateX(-50%);">הכי פופולרי ⭐</div>
               <span class="pricing-card__icon">🗺️</span>
@@ -2704,7 +2771,7 @@
           </div>
 
           <!-- אודיסיאה -->
-          <div class="pricing-card">
+          <div class="pricing-card pricing-card--floating">
             <div class="pricing-card__header">
               <span class="pricing-card__icon">🌊</span>
               <div class="pricing-card__name">אודיסיאה</div>
@@ -2764,6 +2831,26 @@
               btn.setAttribute('aria-expanded', open ? 'true' : 'false');
               var label = btn.querySelector('.pricing-card__toggle-text');
               if (label) label.textContent = open ? 'הצג פחות' : 'הצג עוד';
+
+              if (open) {
+                var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var scrollPricing = function() {
+                  var book = card.querySelector('.pricing-card__book');
+                  var target = book || card;
+                  try {
+                    target.scrollIntoView({
+                      behavior: reduced ? 'auto' : 'smooth',
+                      block: 'end',
+                      inline: 'nearest'
+                    });
+                  } catch (err) {
+                    target.scrollIntoView(false);
+                  }
+                };
+                requestAnimationFrame(function() {
+                  setTimeout(scrollPricing, 450);
+                });
+              }
             });
           });
         })();
