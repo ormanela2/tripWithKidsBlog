@@ -1138,88 +1138,7 @@
     }
 
     /* ========================================
-       8. FINAL CTA
-       ======================================== */
-    .final-cta {
-      background: var(--amber);
-      padding: var(--section-padding) 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .final-cta::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      left: -100px;
-      width: 350px;
-      height: 350px;
-      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-
-    .final-cta::after {
-      content: '';
-      position: absolute;
-      bottom: -80px;
-      right: -80px;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(26,107,114,0.1) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-
-    .final-cta__content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .final-cta__title {
-      font-size: clamp(28px, 4.5vw, 46px);
-      color: var(--charcoal);
-      margin-bottom: 16px;
-    }
-
-    .final-cta__subtitle {
-      font-size: 18px;
-      color: rgba(44,44,44,0.8);
-      margin-bottom: 36px;
-      font-weight: 400;
-    }
-
-    .final-cta__actions {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 32px;
-    }
-
-    .final-cta__trust {
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      flex-wrap: wrap;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--charcoal);
-    }
-
-    .final-cta__trust span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    .final-cta__trust .check {
-      color: var(--teal);
-      font-weight: 700;
-    }
-
-    /* ========================================
-       9. FOOTER
+       8. FOOTER
        ======================================== */
     .footer {
       background: var(--charcoal);
@@ -1621,29 +1540,10 @@
         max-width: none;
       }
 
-      .final-cta__trust {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-
       .pricing__grid { grid-template-columns: 1fr; }
       .pricing-card--highlighted { transform: none; box-shadow: var(--shadow-lg), 0 0 0 1px var(--amber); }
       @media (hover: hover) and (pointer: fine) {
         .pricing-card--highlighted:hover { transform: none; }
-      }
-    }
-
-    @media (max-width: 480px) {
-      .final-cta__actions {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .final-cta__actions .btn {
-        width: 100%;
-        justify-content: center;
-        max-width: 320px;
       }
     }
 
@@ -3035,21 +2935,6 @@
     </div>
   </section>
 
-  <!-- ============ FINAL CTA ============ -->
-  <section class="final-cta" id="final-cta" aria-labelledby="cta-title">
-    <div class="container final-cta__content">
-      <h2 class="final-cta__title reveal" id="cta-title">מוכן להתחיל לתכנן?</h2>
-      <p class="final-cta__subtitle reveal reveal-delay-1">שלח לי הודעה - נדבר 10 דקות ואני אגיד לך בדיוק איזו חבילה מתאימה לך</p>
-      <div class="final-cta__actions reveal reveal-delay-2">
-        <button type="button" class="btn btn--outline-dark" id="openContactModal">שלח אימייל <span aria-hidden="true">&larr;</span></button>
-        <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%20%D7%9E%D7%A9%D7%A4%D7%97%D7%AA%D7%99%20%D7%A2%D7%9D%20%D7%99%D7%9C%D7%93%D7%99%D7%9D!" class="btn btn--green" target="_blank" rel="noopener noreferrer">
-          <svg style="width:20px;height:20px;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          דבר איתי בוואטסאפ
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ NEWSLETTER ============ -->
   <style>
     @keyframes nlFloat1 { 0%,100%{transform:translateY(0) rotate(-8deg)} 50%{transform:translateY(-18px) rotate(4deg)} }
@@ -3087,7 +2972,7 @@
       <form action="https://formsubmit.co/mataytasim@gmail.com" method="POST"
             style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
         <input type="hidden" name="_subject" value="הרשמה לעדכונים - מתי טסים">
-        <input type="hidden" name="_next" value="https://mataytasim.co.il/?subscribed=1#newsletter">
+        <input type="hidden" name="_next" value="https://mataytasim.co.il/services.html?subscribed=1">
         <input type="hidden" name="_captcha" value="false">
         <input type="email" name="email" required placeholder="המייל שלכם"
                style="flex:1;min-width:220px;max-width:300px;padding:13px 18px;border:2px solid rgba(255,255,255,0.3);border-radius:40px;font-family:var(--font-body);font-size:15px;background:rgba(255,255,255,0.12);color:white;outline:none;text-align:right;transition:border-color 0.2s,background 0.2s;"
@@ -3125,30 +3010,41 @@
     }
     if (successClose) successClose.addEventListener('click', hideSuccessMessage);
     var params = new URLSearchParams(window.location.search);
+    var nl = document.getElementById('nlContent');
+    var nlSection = document.getElementById('newsletter');
+
+    function revealNlContent() {
+      if (!nl) return;
+      nl.classList.remove('nl-hidden');
+      nl.classList.add('nl-visible');
+      var el = document.getElementById('nlCounter');
+      var target = 500; var current = 0; var step = Math.ceil(target / 40);
+      var t = setInterval(function() {
+        current = Math.min(current + step, target);
+        if (el) el.textContent = current;
+        if (current >= target) clearInterval(t);
+      }, 40);
+    }
+
     if (successMessage && params.get('subscribed') === '1') {
+      revealNlContent();
       successMessage.style.display = 'block';
+      setTimeout(function() {
+        if (nlSection) nlSection.scrollIntoView({ behavior: 'auto', block: 'end' });
+      }, 0);
       setTimeout(hideSuccessMessage, 6000);
       if (window.history && window.history.replaceState) {
-        var cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
+        params.delete('subscribed');
+        var q = params.toString();
+        var cleanUrl = window.location.pathname + (q ? '?' + q : '') + window.location.hash;
         window.history.replaceState({}, document.title, cleanUrl);
       }
     }
 
-    // Scroll-triggered entrance
-    var nl = document.getElementById('nlContent');
-    if (nl) {
+    if (nl && params.get('subscribed') !== '1') {
       var obs = new IntersectionObserver(function(entries) {
         if (entries[0].isIntersecting) {
-          nl.classList.remove('nl-hidden');
-          nl.classList.add('nl-visible');
-          // Animate counter
-          var el = document.getElementById('nlCounter');
-          var target = 500; var current = 0; var step = Math.ceil(target / 40);
-          var t = setInterval(function() {
-            current = Math.min(current + step, target);
-            if (el) el.textContent = current;
-            if (current >= target) clearInterval(t);
-          }, 40);
+          revealNlContent();
           obs.disconnect();
         }
       }, { threshold: 0.3 });
@@ -3195,7 +3091,7 @@
           <ul>
             <li><a href="packages.html">חבילות תכנון</a></li>
             <li><a href="weather.html">מזג אוויר</a></li>
-            <li><a href="#final-cta">צור קשר</a></li>
+            <li><a href="#newsletter">צור קשר</a></li>
           </ul>
         </div>
       </div>
@@ -3409,7 +3305,7 @@
         }, 300);
       }
 
-      openBtn.addEventListener('click', openModal);
+      if (openBtn) openBtn.addEventListener('click', openModal);
       closeBtn.addEventListener('click', closeModal);
 
       contactModal.addEventListener('click', function(e) {
@@ -3481,7 +3377,7 @@
       <p style="font-size:14px;color:#666;line-height:1.6;margin-bottom:24px;">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
       <form action="https://formsubmit.co/mataytasim@gmail.com" method="POST" id="emailPopupForm" style="display:flex;flex-direction:column;gap:12px;">
         <input type="hidden" name="_subject" value="הרשמה לעדכונים - מתי טסים">
-        <input type="hidden" name="_next" value="https://mataytasim.co.il/?subscribed=1#newsletter">
+        <input type="hidden" name="_next" value="https://mataytasim.co.il/services.html?subscribed=1">
         <input type="hidden" name="_captcha" value="false">
         <input type="email" name="email" required placeholder="המייל שלכם" style="padding:13px 18px;border:2px solid #e8ddc4;border-radius:40px;font-family:'Rubik',sans-serif;font-size:15px;background:white;color:#2C2C2C;outline:none;text-align:right;width:100%;box-sizing:border-box;">
         <button type="submit" style="background:#1A6B72;color:white;border:none;border-radius:40px;padding:13px 28px;font-family:'Rubik',sans-serif;font-size:15px;font-weight:600;cursor:pointer;">אני רוצה לקבל עדכונים ✈️</button>
