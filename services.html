@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="המדריך המלא לטיול עם ילדים לחו״ל - מסלולים, יעדים וטיפים לתכנון טיול משפחתי מוצלח. חבילות תכנון מותאמות אישית למשפחות עם ילדים.">
-  <title>מתי טסים</title>
+  <meta name="description" content="תכנון טיול משפחתי מותאם אישית — מסלולים, לינה ואטרקציות לפי גיל הילדים. המדריך לטיול עם ילדים לחו״ל ושלוש חבילות ליווי.">
+  <title>מתי טסים | תכנון טיול משפחתי מותאם אישית</title>
+  <link rel="canonical" href="https://mataytasim.co.il/">
 
   <!-- Open Graph - פייסבוק, וואטסאפ, לינקדאין -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.mataytasim.co.il/">
+  <meta property="og:url" content="https://mataytasim.co.il/">
   <meta property="og:title" content="מתי טסים - טיולים משפחתיים לאירופה">
   <meta property="og:description" content="המדריך המלא לטיול עם ילדים לחו&quot;ל - מסלולים, יעדים וטיפים לתכנון משפחתי מוצלח.">
-  <meta property="og:image" content="https://www.mataytasim.co.il/og-image.png">
+  <meta property="og:image" content="https://mataytasim.co.il/og-image.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -21,10 +22,10 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://www.mataytasim.co.il/">
+  <meta name="twitter:url" content="https://mataytasim.co.il/">
   <meta name="twitter:title" content="מתי טסים - טיולים משפחתיים לאירופה">
   <meta name="twitter:description" content="המדריך המלא לטיול עם ילדים לחו&quot;ל - מסלולים, יעדים וטיפים לתכנון משפחתי מוצלח.">
-  <meta name="twitter:image" content="https://www.mataytasim.co.il/og-image.png">
+  <meta name="twitter:image" content="https://mataytasim.co.il/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
@@ -792,11 +793,20 @@
       transition: transform 0.35s ease, box-shadow 0.35s ease;
       box-shadow: var(--shadow-sm);
       overflow: hidden;
+      touch-action: manipulation;
     }
 
-    .pricing-card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-4px);
+    /* Hover only on devices with real pointer — avoids iOS “first tap = hover, second tap = link” */
+    @media (hover: hover) and (pointer: fine) {
+      .pricing-card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-4px);
+      }
+
+      .pricing-card--highlighted:hover {
+        box-shadow: var(--shadow-xl), 0 0 0 1px var(--amber);
+        transform: scale(1.06);
+      }
     }
 
     .pricing-card--highlighted {
@@ -804,11 +814,6 @@
       box-shadow: var(--shadow-lg), 0 0 0 1px var(--amber);
       transform: scale(1.04);
       z-index: 2;
-    }
-
-    .pricing-card--highlighted:hover {
-      box-shadow: var(--shadow-xl), 0 0 0 1px var(--amber);
-      transform: scale(1.06);
     }
 
     .pricing-card__header {
@@ -1529,8 +1534,10 @@
         transform: none;
       }
 
-      .pricing-card--highlighted:hover {
-        transform: translateY(-4px);
+      @media (hover: hover) and (pointer: fine) {
+        .pricing-card--highlighted:hover {
+          transform: translateY(-4px);
+        }
       }
 
       .process__steps::before {
@@ -1622,7 +1629,9 @@
 
       .pricing__grid { grid-template-columns: 1fr; }
       .pricing-card--highlighted { transform: none; box-shadow: var(--shadow-lg), 0 0 0 1px var(--amber); }
-      .pricing-card--highlighted:hover { transform: none; }
+      @media (hover: hover) and (pointer: fine) {
+        .pricing-card--highlighted:hover { transform: none; }
+      }
     }
 
     @media (max-width: 480px) {
@@ -1637,8 +1646,6 @@
         max-width: 320px;
       }
     }
-    }
-  
 
     /* ── Community CTA button ── */
     .nav__link--packages {
@@ -2526,7 +2533,10 @@
       <h1 class="page-hero__title">היי, אני אור - נשוי לנועה, אבא ל-3 ואני ממש אוהב לתכנן טיולים</h1>
       <p class="page-hero__subtitle"><span style="display:block;font-family:'Secular One',sans-serif;font-size:clamp(18px,2.5vw,26px);color:#fff;opacity:1;margin-bottom:16px;line-height:1.4;">"אם יוצאים, מגיעים למקומות נפלאים"<span style="display:block;font-family:'Rubik',sans-serif;font-size:13px;opacity:0.7;margin-top:6px;font-weight:300;letter-spacing:1px;">- ד"ר סוס</span></span>עבורי, המקומות הנפלאים באמת נמצאים ברגעים שבין לבין: בחקירה מעוררת סקרנות, בכביש שנפתח לנוף עוצר נשימה ובמקומות הנחבאים שמוצאים רק כשמעזים לסטות מהמסלול המוכר. אלו הרגעים שהופכים טיול רגיל לחוויה של פעם בחיים. את "מתי טסים" הקמתי בשביל לרכז את כל המידע למשפחות עם ילדים תחת מטרייה אחת שבו תוכלו לקבל אינפורמציה על מסלולים, יעדים, מזג אוויר, אטרקציות ועוד</p>
 
-      <a href="about.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.3);color:white;border-radius:40px;padding:12px 28px;font-family:'Rubik',sans-serif;font-size:15px;font-weight:500;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">קראו עוד עליי ועל &quot;מתי טסים&quot; ↓</a>
+      <div class="page-hero__actions" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:24px;width:100%;">
+        <a href="packages.html" class="btn btn--primary" style="box-shadow:0 4px 18px rgba(0,0,0,0.2);">תכנון טיול מותאם משפחתי - 3 חבילות</a>
+        <a href="about.html" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.3);color:white;border-radius:40px;padding:12px 28px;font-family:'Rubik',sans-serif;font-size:15px;font-weight:500;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">קראו עוד עליי ועל &quot;מתי טסים&quot; ↓</a>
+      </div>
 
 
     </div>
@@ -3077,7 +3087,7 @@
       <form action="https://formsubmit.co/mataytasim@gmail.com" method="POST"
             style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
         <input type="hidden" name="_subject" value="הרשמה לעדכונים - מתי טסים">
-        <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/services.html?subscribed=1#newsletter">
+        <input type="hidden" name="_next" value="https://mataytasim.co.il/?subscribed=1#newsletter">
         <input type="hidden" name="_captcha" value="false">
         <input type="email" name="email" required placeholder="המייל שלכם"
                style="flex:1;min-width:220px;max-width:300px;padding:13px 18px;border:2px solid rgba(255,255,255,0.3);border-radius:40px;font-family:var(--font-body);font-size:15px;background:rgba(255,255,255,0.12);color:white;outline:none;text-align:right;transition:border-color 0.2s,background 0.2s;"
@@ -3471,7 +3481,7 @@
       <p style="font-size:14px;color:#666;line-height:1.6;margin-bottom:24px;">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
       <form action="https://formsubmit.co/mataytasim@gmail.com" method="POST" id="emailPopupForm" style="display:flex;flex-direction:column;gap:12px;">
         <input type="hidden" name="_subject" value="הרשמה לעדכונים - מתי טסים">
-        <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/services.html?subscribed=1#newsletter">
+        <input type="hidden" name="_next" value="https://mataytasim.co.il/?subscribed=1#newsletter">
         <input type="hidden" name="_captcha" value="false">
         <input type="email" name="email" required placeholder="המייל שלכם" style="padding:13px 18px;border:2px solid #e8ddc4;border-radius:40px;font-family:'Rubik',sans-serif;font-size:15px;background:white;color:#2C2C2C;outline:none;text-align:right;width:100%;box-sizing:border-box;">
         <button type="submit" style="background:#1A6B72;color:white;border:none;border-radius:40px;padding:13px 28px;font-family:'Rubik',sans-serif;font-size:15px;font-weight:600;cursor:pointer;">אני רוצה לקבל עדכונים ✈️</button>
