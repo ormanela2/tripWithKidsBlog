@@ -970,6 +970,28 @@
       margin: 0 auto;
     }
 
+    .pricing-stack {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .pricing-stack__scene {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .pricing-card__stack-blur {
+      transition: filter 0.45s ease, opacity 0.35s ease;
+    }
+
+    @media (min-width: 769px) {
+      .pricing-card__stack-blur {
+        display: contents;
+      }
+    }
+
     .pricing-card__toggle {
       display: none;
       align-items: center;
@@ -1066,64 +1088,136 @@
         padding: 0;
       }
 
-      /* ~87vw cards → ~6.5vw peek of adjacent card (affordance) */
-      .pricing__grid--carousel {
-        --pricing-card-slide: min(420px, 87vw);
-        display: flex !important;
-        flex-direction: row;
-        align-items: stretch;
-        grid-template-columns: unset;
-        gap: 14px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-        overscroll-behavior-x: contain;
-        padding: 12px calc(max(0px, (100vw - var(--pricing-card-slide)) / 2)) 28px;
-        scroll-padding-inline: calc(max(0px, (100vw - var(--pricing-card-slide)) / 2));
-        margin: 0;
+      .pricing-stack__scene {
+        display: block;
+        position: relative;
+        min-height: min(132vw, 720px);
+        max-width: min(400px, 88vw);
+        margin: 0 auto;
+        padding-bottom: 8px;
       }
 
-      .pricing__grid--carousel > .pricing-card {
-        flex: 0 0 var(--pricing-card-slide);
-        width: var(--pricing-card-slide);
-        max-width: var(--pricing-card-slide);
-        scroll-snap-align: center;
-        scroll-snap-stop: always;
+      .pricing-stack__card {
+        position: absolute;
+        left: 50%;
+        width: 100%;
+        max-width: min(400px, 88vw);
+        margin: 0;
         display: flex;
         flex-direction: column;
         min-height: 0;
+        transition:
+          transform 0.48s cubic-bezier(0.25, 0.8, 0.25, 1),
+          opacity 0.36s ease,
+          box-shadow 0.35s ease;
+        transform-origin: 50% 0;
+        border-radius: 1.5rem !important;
+        overflow: hidden;
       }
 
-      .pricing__grid--carousel .pricing-card--highlighted {
-        transform: none;
-      }
-
-      .pricing__grid--carousel > .pricing-card.pricing-card--floating {
-        border-radius: 1.5rem;
+      .pricing-stack__card.is-stack-front {
+        z-index: 30;
+        transform: translate(-50%, 0) scale(1);
         box-shadow:
-          0 24px 56px rgba(0, 0, 0, 0.12),
-          0 10px 28px rgba(0, 0, 0, 0.08),
-          0 0 0 1px rgba(0, 0, 0, 0.04);
+          0 32px 72px rgba(0, 0, 0, 0.14),
+          0 14px 36px rgba(0, 0, 0, 0.1),
+          0 0 0 1px rgba(0, 0, 0, 0.05);
       }
 
-      .pricing__grid--carousel > .pricing-card.pricing-card--floating.pricing-card--highlighted {
+      .pricing-stack__card.is-stack-front.pricing-card--highlighted {
+        transform: translate(-50%, 0) scale(1);
         box-shadow:
-          0 28px 60px rgba(232, 160, 69, 0.22),
-          0 12px 32px rgba(0, 0, 0, 0.1),
+          0 36px 78px rgba(232, 160, 69, 0.28),
+          0 16px 40px rgba(0, 0, 0, 0.1),
           var(--shadow-lg),
           0 0 0 1px var(--amber);
       }
 
-      .pricing__grid--carousel .pricing-card__body {
+      .pricing-stack__card.is-stack-mid {
+        z-index: 20;
+        transform: translate(calc(-50% + 14px), 16px) scale(0.96);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
+      }
+
+      .pricing-stack__card.is-stack-back {
+        z-index: 10;
+        transform: translate(calc(-50% + 26px), 30px) scale(0.92);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+      }
+
+      .pricing-stack__card.is-stack-front .pricing-card__stack-blur {
+        filter: none;
+        opacity: 1;
+      }
+
+      .pricing-stack__card.is-stack-mid .pricing-card__stack-blur {
+        filter: blur(5px);
+        opacity: 0.9;
+      }
+
+      .pricing-stack__card.is-stack-back .pricing-card__stack-blur {
+        filter: blur(10px);
+        opacity: 0.8;
+      }
+
+      .pricing-stack__card.is-stack-exit-up {
+        z-index: 40;
+        transform: translate(-50%, -125vh) scale(0.97) !important;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          transform 0.44s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.32s ease;
+      }
+
+      .pricing-stack__card.is-stack-exit-down {
+        z-index: 40;
+        transform: translate(-50%, 125vh) scale(0.97) !important;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          transform 0.44s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.32s ease;
+      }
+
+      .pricing-card__stack-blur {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+        border-radius: inherit;
+      }
+
+      .pricing-stack__card:not(.is-stack-front) .pricing-card__stack-blur {
+        pointer-events: none;
+      }
+
+      .pricing-stack__card:not(.is-stack-front) .pricing-stack__cta {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        height: 0 !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        border-width: 0 !important;
+      }
+
+      .pricing-stack__card.is-stack-front .pricing-stack__cta {
+        flex-shrink: 0;
+        margin-top: auto;
+      }
+
+      .pricing-stack__card .pricing-card__body {
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
         min-height: 0;
       }
 
-      .pricing__grid--carousel .pricing-card.is-expanded .pricing-card__collapsible {
+      .pricing-stack__card.is-expanded .pricing-card__collapsible {
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
@@ -1131,13 +1225,81 @@
         overflow: visible;
       }
 
-      .pricing__grid--carousel .pricing-card__collapsible .pricing-card__features {
+      .pricing-stack__card .pricing-card__collapsible .pricing-card__features {
         flex: 0 0 auto;
       }
 
-      .pricing__grid--carousel .pricing-card__book {
-        margin-top: auto;
-        flex-shrink: 0;
+      .pricing-stack__hint {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 35;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        color: rgba(44, 44, 44, 0.42);
+        font-size: 10px;
+        font-weight: 600;
+        pointer-events: none;
+        letter-spacing: 0.02em;
+      }
+
+      .pricing-stack__hint-icon {
+        font-size: 20px;
+        line-height: 1;
+        animation: pricing-stack-hint-bounce 1.55s ease-in-out infinite;
+      }
+
+      @keyframes pricing-stack-hint-bounce {
+        0%, 100% { transform: translateY(0); opacity: 0.45; }
+        50% { transform: translateY(7px); opacity: 1; }
+      }
+
+      .pricing-stack__card:not(.is-stack-front) .pricing-stack__hint {
+        display: none;
+      }
+
+      .pricing-stack__card.is-stack-front {
+        touch-action: pan-y;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .pricing-stack__card {
+        position: relative;
+        left: auto;
+        width: auto;
+        max-width: none;
+        transform: none;
+        border-radius: var(--radius-lg) !important;
+      }
+
+      .pricing-stack__card.pricing-card--highlighted {
+        transform: scale(1.04);
+      }
+
+      .pricing-stack__card .pricing-card__stack-blur {
+        filter: none !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+
+      .pricing-stack__card:not(.is-stack-front) .pricing-stack__cta {
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        height: auto !important;
+        min-height: unset !important;
+        margin-top: auto !important;
+        padding: 14px 24px !important;
+        overflow: visible !important;
+        border-width: initial !important;
+      }
+
+      .pricing-stack__hint {
+        display: none !important;
       }
     }
 
@@ -1626,10 +1788,11 @@
         gap: 32px;
       }
 
-      .pricing__grid:not(.pricing__grid--carousel) {
+      .pricing-stack__scene {
         grid-template-columns: 1fr;
         max-width: 520px;
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .pricing-card--highlighted {
@@ -1723,7 +1886,6 @@
         max-width: none;
       }
 
-      .pricing__grid:not(.pricing__grid--carousel) { grid-template-columns: 1fr; }
       .pricing-card--highlighted { transform: none; box-shadow: var(--shadow-lg), 0 0 0 1px var(--amber); }
       @media (hover: hover) and (pointer: fine) {
         .pricing-card--highlighted:hover { transform: none; }
@@ -2671,10 +2833,12 @@
         </div>
 
         <div class="pricing-carousel-host">
-        <div class="pricing__grid pricing__grid--carousel" role="region" aria-label="חבילות תכנון — החליקו לצפייה בכל החבילות">
+        <div class="pricing-stack">
+        <div class="pricing-stack__scene" id="pricing-stack-scene" role="group" aria-label="חבילות תכנון — החליקו מעלה או מטה להחלפת חבילה">
 
           <!-- מצפן -->
-          <div class="pricing-card pricing-card--floating">
+          <div class="pricing-card pricing-card--floating pricing-stack__card" data-stack-index="0">
+            <div class="pricing-card__stack-blur">
             <div class="pricing-card__header">
               <span class="pricing-card__icon">🧭</span>
               <div class="pricing-card__name">מצפן</div>
@@ -2710,13 +2874,19 @@
                     <span>טיפים כלליים ליעד</span>
                   </li>
                 </ul>
-                <a href="packages.html" class="btn btn--primary pricing-card__book">להזמנה ולפרטים מלאים</a>
               </div>
+            </div>
+            </div>
+            <a href="packages.html" class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</a>
+            <div class="pricing-stack__hint" aria-hidden="true">
+              <span class="pricing-stack__hint-icon">&#8964;</span>
+              <span>החלקה למעלה / למטה</span>
             </div>
           </div>
 
           <!-- הרפתקה (highlighted) -->
-          <div class="pricing-card pricing-card--highlighted pricing-card--floating">
+          <div class="pricing-card pricing-card--highlighted pricing-card--floating pricing-stack__card" data-stack-index="1">
+            <div class="pricing-card__stack-blur">
             <div class="pricing-card__header" style="padding-top:44px;">
               <div class="pricing-card__badge" style="top:12px;transform:translateX(-50%);">הכי פופולרי ⭐</div>
               <span class="pricing-card__icon">🗺️</span>
@@ -2765,13 +2935,19 @@
                     <span>התאמות אישיות עד לפני הטיול</span>
                   </li>
                 </ul>
-                <a href="packages.html" class="btn btn--primary pricing-card__book">להזמנה ולפרטים מלאים</a>
               </div>
+            </div>
+            </div>
+            <a href="packages.html" class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</a>
+            <div class="pricing-stack__hint" aria-hidden="true">
+              <span class="pricing-stack__hint-icon">&#8964;</span>
+              <span>החלקה למעלה / למטה</span>
             </div>
           </div>
 
           <!-- אודיסיאה -->
-          <div class="pricing-card pricing-card--floating">
+          <div class="pricing-card pricing-card--floating pricing-stack__card" data-stack-index="2">
+            <div class="pricing-card__stack-blur">
             <div class="pricing-card__header">
               <span class="pricing-card__icon">🌊</span>
               <div class="pricing-card__name">אודיסיאה</div>
@@ -2811,21 +2987,117 @@
                     <span>עדכונים בזמן אמת (מזג אוויר, שינויים)</span>
                   </li>
                 </ul>
-                <a href="packages.html" class="btn btn--primary pricing-card__book">להזמנה ולפרטים מלאים</a>
               </div>
+            </div>
+            </div>
+            <a href="packages.html" class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</a>
+            <div class="pricing-stack__hint" aria-hidden="true">
+              <span class="pricing-stack__hint-icon">&#8964;</span>
+              <span>החלקה למעלה / למטה</span>
             </div>
           </div>
 
         </div>
         </div>
+        </div>
         <script>
         (function() {
+          var scene = document.getElementById('pricing-stack-scene');
+          var cards = scene ? [].slice.call(scene.querySelectorAll('.pricing-stack__card')) : [];
+          var frontIndex = 0;
+          var locked = false;
+          var startY = 0;
+          var tracking = false;
+
+          function isMobileStack() {
+            return window.matchMedia('(max-width: 768px)').matches;
+          }
+
+          function applyStack() {
+            if (!cards.length) return;
+            cards.forEach(function(card, i) {
+              var role = (i - frontIndex + 9) % 3;
+              card.classList.remove('is-stack-front', 'is-stack-mid', 'is-stack-back');
+              if (role === 0) card.classList.add('is-stack-front');
+              else if (role === 1) card.classList.add('is-stack-mid');
+              else card.classList.add('is-stack-back');
+            });
+          }
+
+          function collapseNonFront() {
+            cards.forEach(function(card, i) {
+              if ((i - frontIndex + 9) % 3 !== 0) {
+                card.classList.remove('is-expanded');
+                var t = card.querySelector('.pricing-card__toggle');
+                if (t) {
+                  t.setAttribute('aria-expanded', 'false');
+                  var lab = t.querySelector('.pricing-card__toggle-text');
+                  if (lab) lab.textContent = 'הצג עוד';
+                }
+              }
+            });
+          }
+
+          function rotate(direction) {
+            if (locked || !isMobileStack()) return;
+            var front = cards[frontIndex];
+            if (!front) return;
+            locked = true;
+            var exitUp = direction < 0;
+            front.classList.add(exitUp ? 'is-stack-exit-up' : 'is-stack-exit-down');
+            var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var ms = reduced ? 0 : 440;
+            window.setTimeout(function() {
+              front.classList.remove('is-stack-exit-up', 'is-stack-exit-down');
+              frontIndex = exitUp ? (frontIndex + 1) % 3 : (frontIndex + 2) % 3;
+              collapseNonFront();
+              applyStack();
+              locked = false;
+            }, ms);
+          }
+
+          if (scene && cards.length === 3) {
+            applyStack();
+            window.addEventListener('resize', function() {
+              if (!isMobileStack()) {
+                cards.forEach(function(c) {
+                  c.classList.remove('is-stack-exit-up', 'is-stack-exit-down', 'is-stack-front', 'is-stack-mid', 'is-stack-back');
+                });
+              } else {
+                applyStack();
+              }
+            });
+
+            scene.addEventListener('touchstart', function(e) {
+              if (!isMobileStack()) return;
+              var el = e.target && e.target.nodeType === 1 ? e.target : e.target.parentElement;
+              if (!el || !el.closest) return;
+              if (el.closest('button, a, input, textarea')) return;
+              if (!el.closest('.is-stack-front')) return;
+              startY = e.touches[0].clientY;
+              tracking = true;
+            }, { passive: true });
+
+            scene.addEventListener('touchend', function(e) {
+              if (!tracking || !isMobileStack()) {
+                tracking = false;
+                return;
+              }
+              tracking = false;
+              var dy = e.changedTouches[0].clientY - startY;
+              if (Math.abs(dy) < 48) return;
+              if (dy < 0) rotate(-1);
+              else rotate(1);
+            }, { passive: true });
+          }
+
           document.querySelectorAll('.pricing-card__toggle').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
               e.preventDefault();
               e.stopPropagation();
               var card = btn.closest('.pricing-card');
               if (!card) return;
+              if (isMobileStack() && !card.classList.contains('is-stack-front')) return;
               var open = !card.classList.contains('is-expanded');
               card.classList.toggle('is-expanded', open);
               btn.setAttribute('aria-expanded', open ? 'true' : 'false');
