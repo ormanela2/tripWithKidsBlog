@@ -1146,7 +1146,8 @@
       .pricing-stack__scene {
         display: block;
         position: relative;
-        max-width: min(400px, 88vw);
+        max-width: none;
+        width: 100%;
         margin: 0 auto;
         padding-bottom: 8px;
         overflow: visible;
@@ -1154,19 +1155,41 @@
         transform: translateZ(0);
       }
 
-      /* Fixed height prevents layout jump; pan-y lets the page scroll vertically while we handle horizontal swipe in JS */
+      /* מובייל: קרוסלה אופקית עם snap — כרטיס מלא בכל מסך, בלי גלילה בתוך מסגרת */
       .pricing-stack__viewport {
         position: relative;
         isolation: isolate;
-        height: clamp(380px, 72vh, 640px);
-        height: clamp(380px, 72dvh, 640px);
-        max-height: 640px;
-        overflow: hidden;
-        touch-action: pan-y;
-        overscroll-behavior-y: contain;
-        contain: layout style;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        direction: rtl;
+        gap: 14px;
+        width: 100%;
+        max-width: 100vw;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        margin: 0 auto;
+        padding: 6px 0 20px;
+        padding-inline: max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-left));
+        box-sizing: border-box;
+        overflow-x: auto;
+        overflow-y: visible;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: max(16px, env(safe-area-inset-right));
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        touch-action: pan-x pan-y;
+        scrollbar-width: none;
+        contain: none;
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
+        --pricing-snap-w: min(360px, calc(100vw - 40px));
+      }
+
+      .pricing-stack__viewport::-webkit-scrollbar {
+        display: none;
       }
 
       .pricing-stack__hint--above .pricing-stack__intro-text {
@@ -1234,147 +1257,77 @@
       .pricing-stack__hint--arrows-only {
         justify-content: space-between;
         align-items: center;
-        max-width: min(400px, 88vw);
+        max-width: min(520px, 94vw);
         margin-left: auto;
         margin-right: auto;
         padding: 10px 10px;
       }
 
       .pricing-stack__card {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 100%;
-        max-width: min(400px, 88vw);
-        height: 100%;
-        max-height: 100%;
-        margin: 0;
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        flex: 0 0 var(--pricing-snap-w);
+        width: var(--pricing-snap-w);
+        max-width: var(--pricing-snap-w);
+        height: auto !important;
+        max-height: none !important;
+        margin: 0 !important;
         display: flex;
         flex-direction: column;
         min-height: 0;
-        transition:
-          transform 0.48s cubic-bezier(0.25, 0.8, 0.25, 1),
-          opacity 0.36s ease,
-          box-shadow 0.35s ease;
-        transform-origin: 50% 0;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        transform: none !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        z-index: 1;
         border-radius: 1.5rem !important;
-        overflow: hidden;
+        overflow: visible;
+        transition: box-shadow 0.25s ease;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
+        /* ללא מסגרת כפולה / הילה כתומה — רק כרטיס אחיד */
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        box-shadow: 0 10px 36px rgba(0, 0, 0, 0.1);
       }
 
-      /* Prevent back cards from stealing touches if z-index ever glitches */
-      .pricing-stack__card:not(.is-stack-front) {
-        pointer-events: none;
+      .pricing-stack__card.pricing-card--highlighted {
+        border: 2px solid var(--amber) !important;
+        box-shadow: 0 12px 40px rgba(232, 160, 69, 0.2);
       }
 
-      .pricing-stack__card.is-stack-front {
-        pointer-events: auto;
-        z-index: 30;
-        transform: translate3d(-50%, 0, 0) scale3d(1, 1, 1);
-        touch-action: pan-y;
-        box-shadow:
-          0 32px 72px rgba(0, 0, 0, 0.14),
-          0 14px 36px rgba(0, 0, 0, 0.1),
-          0 0 0 1px rgba(0, 0, 0, 0.05);
-      }
-
-      .pricing-stack__card.is-stack-front.pricing-card--highlighted {
-        transform: translate3d(-50%, 0, 0) scale3d(1, 1, 1);
-        box-shadow:
-          0 36px 78px rgba(232, 160, 69, 0.28),
-          0 16px 40px rgba(0, 0, 0, 0.1),
-          var(--shadow-lg),
-          0 0 0 1px var(--amber);
-      }
-
-      /* RTL: back cards offset toward visual “back” (left in RTL flow) */
-      .pricing-stack__card.is-stack-mid {
-        z-index: 20;
-        transform: translate3d(calc(-50% - 26px), 12px, 0) scale3d(0.95, 0.95, 1);
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
-      }
-
-      .pricing-stack__card.is-stack-back {
-        z-index: 10;
-        transform: translate3d(calc(-50% - 44px), 22px, 0) scale3d(0.9, 0.9, 1);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
-      }
-
-      .pricing-stack__card.is-stack-front .pricing-card__stack-blur {
-        opacity: 1;
-      }
-
-      /* Depth without blur: offset + scale on the card, opacity so edges read as a stack */
-      .pricing-stack__card.is-stack-mid .pricing-card__stack-blur {
-        opacity: 0.9;
-      }
-
-      .pricing-stack__card.is-stack-back .pricing-card__stack-blur {
-        opacity: 0.72;
-      }
-
-      .pricing-stack__card.is-stack-exit-left {
-        z-index: 40;
-        transform: translate3d(calc(-50% - 115vw), 0, 0) scale3d(0.96, 0.96, 1) !important;
-        opacity: 0;
-        pointer-events: none;
-        transition:
-          transform 0.44s cubic-bezier(0.4, 0, 0.2, 1),
-          opacity 0.32s ease;
-      }
-
-      .pricing-stack__card.is-stack-exit-right {
-        z-index: 40;
-        transform: translate3d(calc(-50% + 115vw), 0, 0) scale3d(0.96, 0.96, 1) !important;
-        opacity: 0;
-        pointer-events: none;
-        transition:
-          transform 0.44s cubic-bezier(0.4, 0, 0.2, 1),
-          opacity 0.32s ease;
-      }
+      /* סדר מובייל (RTL): הרפתקה ראשונה מימין, אחר כך מצפן ואודיסיאה */
+      .pricing-stack__card[data-stack-index="1"] { order: 0; }
+      .pricing-stack__card[data-stack-index="0"] { order: 1; }
+      .pricing-stack__card[data-stack-index="2"] { order: 2; }
 
       .pricing-card__stack-blur {
         display: flex;
         flex-direction: column;
         flex: 1 1 auto;
         min-height: 0;
-        overflow: hidden;
+        overflow: visible !important;
         border-radius: inherit;
-        transition: opacity 0.2s ease;
+        opacity: 1 !important;
+        pointer-events: auto !important;
       }
 
-      .pricing-stack__card.is-stack-front .pricing-card__stack-blur {
-        overflow-y: auto;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior: contain;
-        touch-action: pan-y;
-      }
-
-      .pricing-stack__card:not(.is-stack-front) .pricing-card__stack-blur {
-        pointer-events: none;
-      }
-
-      .pricing-stack__card:not(.is-stack-front) .pricing-stack__cta {
-        visibility: hidden;
-        opacity: 0;
-        pointer-events: none;
-        height: 0 !important;
-        min-height: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: hidden !important;
-        border-width: 0 !important;
-      }
-
-      .pricing-stack__card.is-stack-front .pricing-stack__cta {
+      .pricing-stack__card .pricing-stack__cta {
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        height: auto !important;
+        min-height: unset !important;
+        margin-top: 16px !important;
+        padding: 14px 24px !important;
+        overflow: visible !important;
+        border-width: initial !important;
         flex-shrink: 0;
-        margin-top: auto;
       }
 
       .pricing-stack__card .pricing-card__body {
-        flex: 1 1 auto;
+        flex: 0 0 auto;
         display: flex;
         flex-direction: column;
         min-height: 0;
@@ -2917,7 +2870,7 @@
       <p class="page-hero__subtitle"><span style="display:block;font-family:'Secular One',sans-serif;font-size:clamp(18px,2.5vw,26px);color:#fff;opacity:1;margin-bottom:16px;line-height:1.4;">"אם יוצאים, מגיעים למקומות נפלאים"<span style="display:block;font-family:'Rubik',sans-serif;font-size:13px;opacity:0.7;margin-top:6px;font-weight:300;letter-spacing:1px;">- ד"ר סוס</span></span>עבורי, המקומות הנפלאים באמת נמצאים ברגעים שבין לבין: בחקירה מעוררת סקרנות, בכביש שנפתח לנוף עוצר נשימה ובמקומות הנחבאים שמוצאים רק כשמעזים לסטות מהמסלול המוכר. אלו הרגעים שהופכים טיול רגיל לחוויה של פעם בחיים. את "מתי טסים" הקמתי בשביל לרכז את כל המידע למשפחות עם ילדים תחת מטרייה אחת שבו תוכלו לקבל אינפורמציה על מסלולים, יעדים, מזג אוויר, אטרקציות ועוד</p>
 
       <div class="page-hero__actions" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:24px;width:100%;">
-        <a href="packages.html" class="btn btn--primary" style="box-shadow:0 4px 18px rgba(0,0,0,0.2);">תכנון טיול מותאם משפחתי - 3 חבילות</a>
+        <a href="packages.html" class="btn btn--primary" style="box-shadow:0 4px 18px rgba(0,0,0,0.2);">תכנון טיול מותאם למשפחות</a>
         <a href="about.html" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.3);color:white;border-radius:40px;padding:12px 28px;font-family:'Rubik',sans-serif;font-size:15px;font-weight:500;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">קראו עוד עליי ועל &quot;מתי טסים&quot; ↓</a>
       </div>
 
@@ -2979,8 +2932,8 @@
       <div class="pricing-packages-section" style="margin-top:48px;padding-top:40px;padding-bottom:56px;border-top:2px solid var(--sand-dark);border-bottom:2px solid var(--sand-dark);">
 
         <div style="text-align:center;margin-bottom:40px;">
-          <h3 style="font-family:var(--font-heading);font-size:clamp(26px,3vw,34px);color:var(--charcoal);margin-bottom:10px;">איפה אני יכול לעזור לכם?</h3>
-          <p style="font-size:16px;color:#888;max-width:440px;margin:0 auto;line-height:1.6;">3 חבילות תכנון — כל אחת מותאמת לסגנון הטיול שלכם</p>
+          <h3 style="font-family:var(--font-heading);font-size:clamp(26px,3vw,34px);color:var(--charcoal);margin-bottom:10px;">איך אני יכול לעזור לכם?</h3>
+          <p style="font-size:16px;color:#888;max-width:440px;margin:0 auto;line-height:1.6;">3 חבילות תכנון - כל אחת מותאמת לסגנון הטיול שלכם</p>
         </div>
 
         <div class="pricing-carousel-host">
@@ -2988,7 +2941,7 @@
         <div class="pricing-stack__scene">
           <div class="pricing-stack__hint pricing-stack__hint--above pricing-stack__hint--arrows-only" role="toolbar" aria-label="מעבר בין חבילות">
             <button type="button" class="pricing-stack__dir" id="pricing-stack-prev" aria-label="חבילה קודמת">‹</button>
-            <span class="pricing-stack__intro-text" id="pricing-stack-intro">חבילות תכנון - מעבר באמצעות החיצים</span>
+            <span class="pricing-stack__intro-text" id="pricing-stack-intro">מעבר בין חבילות · לחיצה על החיצים</span>
             <button type="button" class="pricing-stack__dir" id="pricing-stack-next" aria-label="חבילה הבאה">›</button>
           </div>
           <div class="pricing-stack__viewport" id="pricing-stack-scene" role="group" aria-label="חבילות תכנון">
@@ -3126,137 +3079,95 @@
         (function() {
           var scene = document.getElementById('pricing-stack-scene');
           var cards = scene ? [].slice.call(scene.querySelectorAll('.pricing-stack__card')) : [];
-          var frontIndex = 0;
-          var locked = false;
-          var startX = 0;
-          var startY = 0;
-          var tracking = false;
-          var axisLock = null;
+          /* מובייל: סדר תצוגה הרפתקה → מצפן → אודיסיאה (data-stack-index 1,0,2) */
+          var visualOrder = [1, 0, 2];
+          var snapPos = 0;
 
           function isMobileStack() {
             return window.matchMedia('(max-width: 768px)').matches;
           }
 
-          function getFrontCard() {
-            return cards[frontIndex];
-          }
-
-          function gestureStartTarget(el) {
-            if (!el || el.nodeType !== 1) return false;
-            var fc = getFrontCard();
-            if (!fc || !fc.contains(el)) return false;
-            if (el.closest && el.closest('button, a, input, textarea, select')) return false;
-            return true;
-          }
-
-          function applyStack() {
-            if (!cards.length) return;
-            cards.forEach(function(card, i) {
-              var role = (i - frontIndex + 9) % 3;
-              card.classList.remove('is-stack-front', 'is-stack-mid', 'is-stack-back');
-              if (role === 0) card.classList.add('is-stack-front');
-              else if (role === 1) card.classList.add('is-stack-mid');
-              else card.classList.add('is-stack-back');
+          function clearStackClasses() {
+            cards.forEach(function(c) {
+              c.classList.remove('is-stack-exit-left', 'is-stack-exit-right', 'is-stack-front', 'is-stack-mid', 'is-stack-back');
             });
           }
 
-          function rotate(direction) {
-            if (locked || !isMobileStack()) return;
-            var front = cards[frontIndex];
-            if (!front) return;
-            locked = true;
-            var exitLeft = direction < 0;
-            front.classList.add(exitLeft ? 'is-stack-exit-left' : 'is-stack-exit-right');
-            var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            var ms = reduced ? 0 : 440;
-            window.setTimeout(function() {
-              front.classList.remove('is-stack-exit-left', 'is-stack-exit-right');
-              frontIndex = exitLeft ? (frontIndex + 1) % 3 : (frontIndex + 2) % 3;
-              applyStack();
-              locked = false;
-            }, ms);
+          function scrollToSnap(index, smooth) {
+            if (!isMobileStack() || !scene || !cards.length) return;
+            snapPos = (index % 3 + 3) % 3;
+            var cardIdx = visualOrder[snapPos];
+            var el = cards[cardIdx];
+            if (!el || !el.scrollIntoView) return;
+            el.scrollIntoView({
+              behavior: smooth ? 'smooth' : 'auto',
+              inline: 'center',
+              block: 'nearest'
+            });
+          }
+
+          function syncSnapFromScroll() {
+            if (!isMobileStack() || !scene) return;
+            var sr = scene.getBoundingClientRect();
+            var center = sr.left + sr.width / 2;
+            var bestDist = Infinity;
+            var bestPos = snapPos;
+            for (var p = 0; p < 3; p++) {
+              var el = cards[visualOrder[p]];
+              if (!el) continue;
+              var r = el.getBoundingClientRect();
+              var c = r.left + r.width / 2;
+              var d = Math.abs(c - center);
+              if (d < bestDist) {
+                bestDist = d;
+                bestPos = p;
+              }
+            }
+            snapPos = bestPos;
+          }
+
+          function layoutPricing() {
+            if (!scene || cards.length !== 3) return;
+            clearStackClasses();
+            if (isMobileStack()) {
+              snapPos = 0;
+              window.requestAnimationFrame(function() {
+                window.requestAnimationFrame(function() {
+                  scrollToSnap(0, false);
+                });
+              });
+            }
           }
 
           if (scene && cards.length === 3) {
             if (document.readyState === 'loading') {
-              document.addEventListener('DOMContentLoaded', applyStack);
+              document.addEventListener('DOMContentLoaded', layoutPricing);
             } else {
-              applyStack();
+              layoutPricing();
             }
 
-            window.addEventListener('resize', function() {
-              if (!isMobileStack()) {
-                cards.forEach(function(c) {
-                  c.classList.remove('is-stack-exit-left', 'is-stack-exit-right', 'is-stack-front', 'is-stack-mid', 'is-stack-back');
-                });
-                tracking = false;
-                axisLock = null;
-              } else {
-                applyStack();
-              }
-            });
+            window.addEventListener('resize', layoutPricing);
 
             var btnPrev = document.getElementById('pricing-stack-prev');
             var btnNext = document.getElementById('pricing-stack-next');
             if (btnPrev) {
               btnPrev.addEventListener('click', function(e) {
                 e.preventDefault();
-                rotate(1);
+                if (!isMobileStack()) return;
+                scrollToSnap(snapPos - 1, true);
               });
             }
             if (btnNext) {
               btnNext.addEventListener('click', function(e) {
                 e.preventDefault();
-                rotate(-1);
+                if (!isMobileStack()) return;
+                scrollToSnap(snapPos + 1, true);
               });
             }
 
-            var passiveOpts = { passive: true };
-
-            scene.addEventListener('touchstart', function(e) {
-              if (!isMobileStack() || locked) return;
-              if (!gestureStartTarget(e.target)) return;
-              var t = e.touches[0];
-              startX = t.clientX;
-              startY = t.clientY;
-              tracking = true;
-              axisLock = null;
-            }, passiveOpts);
-
-            scene.addEventListener('touchmove', function(e) {
-              if (!tracking || !isMobileStack()) return;
-              var t = e.touches[0];
-              var dx = t.clientX - startX;
-              var dy = t.clientY - startY;
-              if (!axisLock && (Math.abs(dx) > 12 || Math.abs(dy) > 12)) {
-                axisLock = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
-              }
-            }, passiveOpts);
-
-            scene.addEventListener('touchcancel', function() {
-              tracking = false;
-              axisLock = null;
-            }, passiveOpts);
-
-            scene.addEventListener('touchend', function(e) {
-              if (!tracking || !isMobileStack()) {
-                tracking = false;
-                axisLock = null;
-                return;
-              }
-              tracking = false;
-              if (axisLock === 'v') {
-                axisLock = null;
-                return;
-              }
-              var t = e.changedTouches[0];
-              var dx = t.clientX - startX;
-              var dy = t.clientY - startY;
-              axisLock = null;
-              if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
-              if (dx < 0) rotate(-1);
-              else rotate(1);
-            }, passiveOpts);
+            scene.addEventListener('scroll', function() {
+              window.requestAnimationFrame(syncSnapFromScroll);
+            }, { passive: true });
           }
         })();
         </script>
@@ -3925,7 +3836,7 @@
   <div class="email-popup-overlay" id="emailPopupOverlay">
     <div class="email-popup">
       <button type="button" class="email-popup__close" id="emailPopupClose" aria-label="סגור">×</button>
-      <h2 class="email-popup__title">רוצים עדכונים למייל?</h2>
+      <h2 class="email-popup__title">הטיול הבא שלכם מתחיל כאן</h2>
       <p class="email-popup__subtitle">טיפים, יעדים ומסלולים ועוד הרבה הפתעות - תהיו חלק מקהילת מתי טסים</p>
       <form class="email-popup__form" action="https://formsubmit.co/mataytasim@gmail.com" method="POST" id="emailPopupForm">
         <input type="hidden" name="_subject" value="הרשמה לעדכונים - דף הבית מתי טסים">
