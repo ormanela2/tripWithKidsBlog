@@ -1091,10 +1091,45 @@
       .pricing-stack__scene {
         display: block;
         position: relative;
-        min-height: min(132vw, 720px);
         max-width: min(400px, 88vw);
         margin: 0 auto;
         padding-bottom: 8px;
+      }
+
+      .pricing-stack__viewport {
+        position: relative;
+        isolation: isolate;
+        touch-action: pan-x;
+        min-height: min(132vw, 720px);
+      }
+
+      .pricing-stack__hint--above {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 14px;
+        padding: 10px 14px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.94);
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+        color: var(--charcoal);
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.35;
+        text-align: center;
+        letter-spacing: 0.01em;
+        pointer-events: none;
+        z-index: 5;
+      }
+
+      .pricing-stack__hint--above .pricing-stack__hint-icon {
+        font-size: 22px;
+        line-height: 1;
+        flex-shrink: 0;
       }
 
       .pricing-stack__card {
@@ -1115,9 +1150,16 @@
         overflow: hidden;
       }
 
+      /* Prevent back cards from stealing touches if z-index ever glitches */
+      .pricing-stack__card:not(.is-stack-front) {
+        pointer-events: none;
+      }
+
       .pricing-stack__card.is-stack-front {
+        pointer-events: auto;
         z-index: 30;
         transform: translate(-50%, 0) scale(1);
+        touch-action: pan-x;
         box-shadow:
           0 32px 72px rgba(0, 0, 0, 0.14),
           0 14px 36px rgba(0, 0, 0, 0.1),
@@ -1135,13 +1177,13 @@
 
       .pricing-stack__card.is-stack-mid {
         z-index: 20;
-        transform: translate(calc(-50% + 14px), 16px) scale(0.96);
+        transform: translate(calc(-50% + 22px), 12px) scale(0.95);
         box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
       }
 
       .pricing-stack__card.is-stack-back {
         z-index: 10;
-        transform: translate(calc(-50% + 26px), 30px) scale(0.92);
+        transform: translate(calc(-50% + 40px), 22px) scale(0.9);
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
       }
 
@@ -1151,18 +1193,18 @@
       }
 
       .pricing-stack__card.is-stack-mid .pricing-card__stack-blur {
-        filter: blur(5px);
-        opacity: 0.9;
+        filter: blur(6px);
+        opacity: 0.88;
       }
 
       .pricing-stack__card.is-stack-back .pricing-card__stack-blur {
-        filter: blur(10px);
-        opacity: 0.8;
+        filter: blur(11px);
+        opacity: 0.76;
       }
 
-      .pricing-stack__card.is-stack-exit-up {
+      .pricing-stack__card.is-stack-exit-left {
         z-index: 40;
-        transform: translate(-50%, -125vh) scale(0.97) !important;
+        transform: translate(calc(-50% - 115vw), 0) scale(0.96) !important;
         opacity: 0;
         pointer-events: none;
         transition:
@@ -1170,9 +1212,9 @@
           opacity 0.32s ease;
       }
 
-      .pricing-stack__card.is-stack-exit-down {
+      .pricing-stack__card.is-stack-exit-right {
         z-index: 40;
-        transform: translate(-50%, 125vh) scale(0.97) !important;
+        transform: translate(calc(-50% + 115vw), 0) scale(0.96) !important;
         opacity: 0;
         pointer-events: none;
         transition:
@@ -1229,44 +1271,31 @@
         flex: 0 0 auto;
       }
 
-      .pricing-stack__hint {
-        position: absolute;
-        bottom: 8px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 35;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2px;
-        color: rgba(44, 44, 44, 0.42);
-        font-size: 10px;
-        font-weight: 600;
-        pointer-events: none;
-        letter-spacing: 0.02em;
-      }
-
       .pricing-stack__hint-icon {
-        font-size: 20px;
-        line-height: 1;
         animation: pricing-stack-hint-bounce 1.55s ease-in-out infinite;
       }
 
       @keyframes pricing-stack-hint-bounce {
-        0%, 100% { transform: translateY(0); opacity: 0.45; }
-        50% { transform: translateY(7px); opacity: 1; }
-      }
-
-      .pricing-stack__card:not(.is-stack-front) .pricing-stack__hint {
-        display: none;
-      }
-
-      .pricing-stack__card.is-stack-front {
-        touch-action: pan-y;
+        0%, 100% { transform: translateX(0); opacity: 0.75; }
+        50% { transform: translateX(-6px); opacity: 1; }
       }
     }
 
     @media (min-width: 769px) {
+      .pricing-stack__hint--above {
+        display: none !important;
+      }
+
+      .pricing-stack__viewport {
+        display: contents;
+      }
+
+      .pricing-stack__card,
+      .pricing-stack__card:not(.is-stack-front),
+      .pricing-stack__card.is-stack-front {
+        pointer-events: auto;
+      }
+
       .pricing-stack__card {
         position: relative;
         left: auto;
@@ -1298,9 +1327,6 @@
         border-width: initial !important;
       }
 
-      .pricing-stack__hint {
-        display: none !important;
-      }
     }
 
     /* ========================================
@@ -2834,10 +2860,15 @@
 
         <div class="pricing-carousel-host">
         <div class="pricing-stack">
-        <div class="pricing-stack__scene" id="pricing-stack-scene" role="group" aria-label="חבילות תכנון — החליקו מעלה או מטה להחלפת חבילה">
+        <div class="pricing-stack__scene">
+          <div class="pricing-stack__hint pricing-stack__hint--above">
+            <span class="pricing-stack__hint-icon" aria-hidden="true">&#8596;</span>
+            <span>החליקו שמאלה או ימינה כדי לעבור בין החבילות</span>
+          </div>
+          <div class="pricing-stack__viewport" id="pricing-stack-scene" role="group" aria-label="חבילות תכנון — החליקו שמאלה או ימינה להחלפת חבילה">
 
           <!-- מצפן -->
-          <div class="pricing-card pricing-card--floating pricing-stack__card" data-stack-index="0">
+          <div class="pricing-card pricing-card--floating pricing-stack__card is-stack-front" data-stack-index="0">
             <div class="pricing-card__stack-blur">
             <div class="pricing-card__header">
               <span class="pricing-card__icon">🧭</span>
@@ -2878,14 +2909,10 @@
             </div>
             </div>
             <a href="packages.html" class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</a>
-            <div class="pricing-stack__hint" aria-hidden="true">
-              <span class="pricing-stack__hint-icon">&#8964;</span>
-              <span>החלקה למעלה / למטה</span>
-            </div>
           </div>
 
           <!-- הרפתקה (highlighted) -->
-          <div class="pricing-card pricing-card--highlighted pricing-card--floating pricing-stack__card" data-stack-index="1">
+          <div class="pricing-card pricing-card--highlighted pricing-card--floating pricing-stack__card is-stack-mid" data-stack-index="1">
             <div class="pricing-card__stack-blur">
             <div class="pricing-card__header" style="padding-top:44px;">
               <div class="pricing-card__badge" style="top:12px;transform:translateX(-50%);">הכי פופולרי ⭐</div>
@@ -2939,14 +2966,10 @@
             </div>
             </div>
             <a href="packages.html" class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</a>
-            <div class="pricing-stack__hint" aria-hidden="true">
-              <span class="pricing-stack__hint-icon">&#8964;</span>
-              <span>החלקה למעלה / למטה</span>
-            </div>
           </div>
 
           <!-- אודיסיאה -->
-          <div class="pricing-card pricing-card--floating pricing-stack__card" data-stack-index="2">
+          <div class="pricing-card pricing-card--floating pricing-stack__card is-stack-back" data-stack-index="2">
             <div class="pricing-card__stack-blur">
             <div class="pricing-card__header">
               <span class="pricing-card__icon">🌊</span>
@@ -2991,12 +3014,9 @@
             </div>
             </div>
             <a href="packages.html" class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</a>
-            <div class="pricing-stack__hint" aria-hidden="true">
-              <span class="pricing-stack__hint-icon">&#8964;</span>
-              <span>החלקה למעלה / למטה</span>
-            </div>
           </div>
 
+        </div>
         </div>
         </div>
         </div>
@@ -3006,6 +3026,7 @@
           var cards = scene ? [].slice.call(scene.querySelectorAll('.pricing-stack__card')) : [];
           var frontIndex = 0;
           var locked = false;
+          var startX = 0;
           var startY = 0;
           var tracking = false;
 
@@ -3043,25 +3064,47 @@
             var front = cards[frontIndex];
             if (!front) return;
             locked = true;
-            var exitUp = direction < 0;
-            front.classList.add(exitUp ? 'is-stack-exit-up' : 'is-stack-exit-down');
+            var exitLeft = direction < 0;
+            front.classList.add(exitLeft ? 'is-stack-exit-left' : 'is-stack-exit-right');
             var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             var ms = reduced ? 0 : 440;
             window.setTimeout(function() {
-              front.classList.remove('is-stack-exit-up', 'is-stack-exit-down');
-              frontIndex = exitUp ? (frontIndex + 1) % 3 : (frontIndex + 2) % 3;
+              front.classList.remove('is-stack-exit-left', 'is-stack-exit-right');
+              frontIndex = exitLeft ? (frontIndex + 1) % 3 : (frontIndex + 2) % 3;
               collapseNonFront();
               applyStack();
               locked = false;
             }, ms);
           }
 
+          function getFrontCard() {
+            return cards[frontIndex];
+          }
+
+          function gestureStart(clientX, clientY, el) {
+            if (!isMobileStack()) return false;
+            var node = el && el.nodeType === 1 ? el : el && el.parentElement;
+            if (!node) return false;
+            var fc = getFrontCard();
+            if (!fc || !fc.contains(node)) return false;
+            if (node.closest && node.closest('button, a, input, textarea, select')) return false;
+            startX = clientX;
+            startY = clientY;
+            tracking = true;
+            return true;
+          }
+
           if (scene && cards.length === 3) {
-            applyStack();
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', applyStack);
+            } else {
+              applyStack();
+            }
+
             window.addEventListener('resize', function() {
               if (!isMobileStack()) {
                 cards.forEach(function(c) {
-                  c.classList.remove('is-stack-exit-up', 'is-stack-exit-down', 'is-stack-front', 'is-stack-mid', 'is-stack-back');
+                  c.classList.remove('is-stack-exit-left', 'is-stack-exit-right', 'is-stack-front', 'is-stack-mid', 'is-stack-back');
                 });
               } else {
                 applyStack();
@@ -3069,13 +3112,11 @@
             });
 
             scene.addEventListener('touchstart', function(e) {
-              if (!isMobileStack()) return;
-              var el = e.target && e.target.nodeType === 1 ? e.target : e.target.parentElement;
-              if (!el || !el.closest) return;
-              if (el.closest('button, a, input, textarea')) return;
-              if (!el.closest('.is-stack-front')) return;
-              startY = e.touches[0].clientY;
-              tracking = true;
+              gestureStart(e.touches[0].clientX, e.touches[0].clientY, e.target);
+            }, { passive: true });
+
+            scene.addEventListener('touchcancel', function() {
+              tracking = false;
             }, { passive: true });
 
             scene.addEventListener('touchend', function(e) {
@@ -3084,9 +3125,12 @@
                 return;
               }
               tracking = false;
-              var dy = e.changedTouches[0].clientY - startY;
-              if (Math.abs(dy) < 48) return;
-              if (dy < 0) rotate(-1);
+              var t = e.changedTouches[0];
+              var dx = t.clientX - startX;
+              var dy = t.clientY - startY;
+              if (Math.abs(dx) < 48 && Math.abs(dy) < 48) return;
+              if (Math.abs(dx) < Math.abs(dy)) return;
+              if (dx < 0) rotate(-1);
               else rotate(1);
             }, { passive: true });
           }
