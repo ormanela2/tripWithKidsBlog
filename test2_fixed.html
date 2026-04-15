@@ -1103,7 +1103,7 @@
     }
 
     .pricing-card__stack-blur {
-      transition: filter 0.45s ease, opacity 0.35s ease;
+      transition: opacity 0.25s ease;
     }
 
     @media (min-width: 769px) {
@@ -1301,19 +1301,16 @@
       }
 
       .pricing-stack__card.is-stack-front .pricing-card__stack-blur {
-        filter: none;
         opacity: 1;
       }
 
-      /* Light blur + opacity for depth (keep blur ≤2px on mobile for stability) */
+      /* Depth without blur: offset + scale on the card, opacity so edges read as a stack */
       .pricing-stack__card.is-stack-mid .pricing-card__stack-blur {
-        filter: blur(1px);
-        opacity: 0.92;
+        opacity: 0.9;
       }
 
       .pricing-stack__card.is-stack-back .pricing-card__stack-blur {
-        filter: blur(2px);
-        opacity: 0.78;
+        opacity: 0.72;
       }
 
       .pricing-stack__card.is-stack-exit-left {
@@ -1343,7 +1340,7 @@
         min-height: 0;
         overflow: hidden;
         border-radius: inherit;
-        transition: opacity 0.35s ease, filter 0.35s ease;
+        transition: opacity 0.2s ease;
       }
 
       .pricing-stack__card.is-stack-front .pricing-card__stack-blur {
@@ -1384,13 +1381,6 @@
 
       .pricing-stack__card .pricing-card__features {
         flex: 0 0 auto;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .pricing-stack__card.is-stack-mid .pricing-card__stack-blur,
-        .pricing-stack__card.is-stack-back .pricing-card__stack-blur {
-          filter: none;
-        }
       }
 
     }
