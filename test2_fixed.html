@@ -1448,6 +1448,10 @@
         flex: 0 0 auto;
       }
 
+      .pricing-stack__card.is-instant-collapse .pricing-card__collapsible {
+        transition: none !important;
+      }
+
     }
 
     @media (min-width: 769px) {
@@ -3245,19 +3249,29 @@
             });
           }
 
+          function collapseExpandedFrontInstant(front) {
+            if (!front || !front.classList.contains('is-expanded')) return;
+            front.classList.add('is-instant-collapse');
+            front.classList.remove('is-expanded');
+            var xt = front.querySelector('.pricing-card__toggle');
+            if (xt) {
+              xt.setAttribute('aria-expanded', 'false');
+              var xl = xt.querySelector('.pricing-card__toggle-text');
+              if (xl) xl.textContent = 'הצג עוד';
+            }
+            void front.offsetHeight;
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() {
+                front.classList.remove('is-instant-collapse');
+              });
+            });
+          }
+
           function rotate(direction) {
             if (locked || !isMobileStack()) return;
             var front = cards[frontIndex];
             if (!front) return;
-            if (front.classList.contains('is-expanded')) {
-              front.classList.remove('is-expanded');
-              var xt = front.querySelector('.pricing-card__toggle');
-              if (xt) {
-                xt.setAttribute('aria-expanded', 'false');
-                var xl = xt.querySelector('.pricing-card__toggle-text');
-                if (xl) xl.textContent = 'הצג עוד';
-              }
-            }
+            collapseExpandedFrontInstant(front);
             locked = true;
             var exitLeft = direction < 0;
             front.classList.add(exitLeft ? 'is-stack-exit-left' : 'is-stack-exit-right');
