@@ -793,7 +793,6 @@
       transition: transform 0.35s ease, box-shadow 0.35s ease;
       box-shadow: var(--shadow-sm);
       overflow: hidden;
-      touch-action: manipulation;
       display: flex;
       flex-direction: column;
       min-height: 0;
@@ -1099,7 +1098,6 @@
       .pricing-stack__viewport {
         position: relative;
         isolation: isolate;
-        touch-action: pan-y;
         min-height: min(132vw, 720px);
       }
 
@@ -1163,7 +1161,6 @@
         pointer-events: auto;
         z-index: 30;
         transform: translate(-50%, 0) scale(1);
-        touch-action: pan-y;
         box-shadow:
           0 32px 72px rgba(0, 0, 0, 0.14),
           0 14px 36px rgba(0, 0, 0, 0.1),
@@ -3144,8 +3141,9 @@
               var t = e.changedTouches[0];
               var dx = t.clientX - startX;
               var dy = t.clientY - startY;
+              // Must be clearly horizontal: dx > 48px AND dx at least 2x dy
               if (Math.abs(dx) < 48) return;
-              if (Math.abs(dx) < Math.abs(dy)) return;
+              if (Math.abs(dx) < Math.abs(dy) * 2) return;
               if (dx < 0) rotate(-1);
               else rotate(1);
             }, { passive: true });
