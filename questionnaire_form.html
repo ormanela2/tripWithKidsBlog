@@ -112,10 +112,16 @@
 
   /* HERO */
   .page-header{background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);padding:56px 24px 64px;text-align:center;margin-top:var(--nav-height);position:relative;overflow:hidden}
-  .page-header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:48px;background:linear-gradient(to top,var(--cream),transparent)}
+  .page-header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:48px;background:linear-gradient(to top,var(--cream),transparent);z-index:0;pointer-events:none}
+  /* Keep hero text above the bottom fade so “חבילה שנבחרה” stays visible on all viewports */
+  .page-header > *{position:relative;z-index:1}
   .page-header__badge{display:inline-block;background:var(--amber);color:var(--charcoal);padding:5px 18px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:16px}
   .page-header__title{font-family:var(--font-heading);font-size:clamp(26px,4vw,42px);color:white;margin-bottom:10px}
   .page-header__sub{font-size:16px;color:rgba(255,255,255,0.85);max-width:480px;margin:0 auto;line-height:1.7}
+  .page-header__package{max-width:520px;margin-left:auto;margin-right:auto;padding:0 8px;line-height:1.5}
+  /* Repeat under the hero on small screens so the choice stays visible while scrolling the form */
+  .form-package-banner{display:none;text-align:center;font-size:15px;font-weight:600;color:var(--teal-dark);background:rgba(26,107,114,0.08);border:1px solid rgba(26,107,114,0.2);border-radius:12px;padding:12px 16px;margin:0 0 20px;line-height:1.45}
+  @media (min-width:769px){.form-package-banner{display:none!important}}
 
   /* progress bar */
   .progress-wrap{max-width:560px;margin:0 auto;padding:32px 24px 0}
@@ -367,6 +373,7 @@
   <div class="page-header__badge">⏱️ 2 דקות בלבד</div>
   <h1 class="page-header__title">ספרו לי על הטיול שלכם</h1>
   <p class="page-header__sub">3 שאלות קצרות ואחזור אליכם עד 24 שעות</p>
+  <p id="packageBanner" class="page-header__package" style="display:none;margin-top:12px;font-size:15px;font-weight:600;color:rgba(255,255,255,0.95);" role="status" aria-live="polite">חבילה שנבחרה: <span id="packageBannerLabel"></span></p>
 </div>
 
 <!-- PROGRESS -->
@@ -376,7 +383,11 @@
 </div>
 
 <div class="form-wrap">
+  <p id="formPackageBanner" class="form-package-banner" style="display:none;" role="status" aria-live="polite">חבילה שנבחרה: <span id="formPackageBannerLabel"></span></p>
   <form id="tripForm" action="https://formspree.io/f/mwvrkdon" method="POST" novalidate>
+    <!-- נשלח ל-Formspree: מופיע במייל ההתראה ובשורת הנושא כשמגיעים מכרטיס חבילה -->
+    <input type="hidden" name="חבילת תכנון" id="f_package" value="">
+    <input type="hidden" name="_subject" id="f_subject" value="שאלון טיול משפחתי | מתי טסים">
 
     <!-- STEP 1: מי אתם -->
     <div class="step active" id="step1">
@@ -499,6 +510,28 @@
 <script>
 (function() {
   'use strict';
+
+  (function applyPackageFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var key = (params.get('package') || '').toLowerCase().trim();
+    var map = { matzpen: 'מצפן', har: 'הרפתקה', ody: 'אודיסיאה' };
+    var label = map[key];
+    var h = document.getElementById('f_package');
+    var subj = document.getElementById('f_subject');
+    var banner = document.getElementById('packageBanner');
+    var bannerLab = document.getElementById('packageBannerLabel');
+    var formBanner = document.getElementById('formPackageBanner');
+    var formBannerLab = document.getElementById('formPackageBannerLabel');
+    if (label && h) {
+      h.value = label;
+      if (subj) subj.value = 'שאלון טיול משפחתי | ' + label + ' | מתי טסים';
+      if (bannerLab) bannerLab.textContent = label;
+      if (formBannerLab) formBannerLab.textContent = label;
+      if (banner) banner.style.display = 'block';
+      /* Shown again inside .form-wrap on narrow viewports (CSS hides on desktop) */
+      if (formBanner) formBanner.style.display = 'block';
+    }
+  })();
 
   var currentStep = 1;
   var totalSteps = 3;

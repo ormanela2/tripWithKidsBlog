@@ -1153,12 +1153,17 @@
         transform: translateZ(0);
       }
 
+      /* Fixed height prevents layout jump; pan-y lets the page scroll vertically while we handle horizontal swipe in JS */
       .pricing-stack__viewport {
         position: relative;
         isolation: isolate;
-        min-height: min(132vw, 720px);
-        overflow: visible;
-        touch-action: manipulation;
+        height: clamp(380px, 72vh, 640px);
+        height: clamp(380px, 72dvh, 640px);
+        max-height: 640px;
+        overflow: hidden;
+        touch-action: pan-y;
+        overscroll-behavior-y: contain;
+        contain: layout style;
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
       }
@@ -1198,9 +1203,11 @@
 
       .pricing-stack__hint--above .pricing-stack__dir {
         pointer-events: auto;
-        flex: 0 0 40px;
-        width: 40px;
-        height: 40px;
+        flex: 0 0 44px;
+        min-width: 44px;
+        min-height: 44px;
+        width: 44px;
+        height: 44px;
         border-radius: 12px;
         border: 1px solid rgba(0, 0, 0, 0.1);
         background: rgba(255, 255, 255, 0.98);
@@ -1238,6 +1245,8 @@
         left: 50%;
         width: 100%;
         max-width: min(400px, 88vw);
+        height: 100%;
+        max-height: 100%;
         margin: 0;
         display: flex;
         flex-direction: column;
@@ -1261,8 +1270,8 @@
       .pricing-stack__card.is-stack-front {
         pointer-events: auto;
         z-index: 30;
-        transform: translate(-50%, 0) scale(1);
-        touch-action: manipulation;
+        transform: translate3d(-50%, 0, 0) scale3d(1, 1, 1);
+        touch-action: pan-y;
         box-shadow:
           0 32px 72px rgba(0, 0, 0, 0.14),
           0 14px 36px rgba(0, 0, 0, 0.1),
@@ -1270,7 +1279,7 @@
       }
 
       .pricing-stack__card.is-stack-front.pricing-card--highlighted {
-        transform: translate(-50%, 0) scale(1);
+        transform: translate3d(-50%, 0, 0) scale3d(1, 1, 1);
         box-shadow:
           0 36px 78px rgba(232, 160, 69, 0.28),
           0 16px 40px rgba(0, 0, 0, 0.1),
@@ -1278,16 +1287,16 @@
           0 0 0 1px var(--amber);
       }
 
-      /* RTL: back cards peek to the left so edges + blur stay visible */
+      /* RTL: back cards offset toward visual “back” (left in RTL flow) */
       .pricing-stack__card.is-stack-mid {
         z-index: 20;
-        transform: translate(calc(-50% - 26px), 12px) scale(0.95);
+        transform: translate3d(calc(-50% - 26px), 12px, 0) scale3d(0.95, 0.95, 1);
         box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
       }
 
       .pricing-stack__card.is-stack-back {
         z-index: 10;
-        transform: translate(calc(-50% - 44px), 22px) scale(0.9);
+        transform: translate3d(calc(-50% - 44px), 22px, 0) scale3d(0.9, 0.9, 1);
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
       }
 
@@ -1296,20 +1305,20 @@
         opacity: 1;
       }
 
-      /* No CSS blur on mobile: large blurred layers + transforms crash WebKit (GPU memory). Use opacity only. */
+      /* Light blur + opacity for depth (keep blur ≤2px on mobile for stability) */
       .pricing-stack__card.is-stack-mid .pricing-card__stack-blur {
-        filter: none;
-        opacity: 0.9;
+        filter: blur(1px);
+        opacity: 0.92;
       }
 
       .pricing-stack__card.is-stack-back .pricing-card__stack-blur {
-        filter: none;
-        opacity: 0.74;
+        filter: blur(2px);
+        opacity: 0.78;
       }
 
       .pricing-stack__card.is-stack-exit-left {
         z-index: 40;
-        transform: translate(calc(-50% - 115vw), 0) scale(0.96) !important;
+        transform: translate3d(calc(-50% - 115vw), 0, 0) scale3d(0.96, 0.96, 1) !important;
         opacity: 0;
         pointer-events: none;
         transition:
@@ -1319,7 +1328,7 @@
 
       .pricing-stack__card.is-stack-exit-right {
         z-index: 40;
-        transform: translate(calc(-50% + 115vw), 0) scale(0.96) !important;
+        transform: translate3d(calc(-50% + 115vw), 0, 0) scale3d(0.96, 0.96, 1) !important;
         opacity: 0;
         pointer-events: none;
         transition:
@@ -1332,9 +1341,17 @@
         flex-direction: column;
         flex: 1 1 auto;
         min-height: 0;
-        overflow: visible;
+        overflow: hidden;
         border-radius: inherit;
-        transition: opacity 0.35s ease;
+        transition: opacity 0.35s ease, filter 0.35s ease;
+      }
+
+      .pricing-stack__card.is-stack-front .pricing-card__stack-blur {
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        touch-action: pan-y;
       }
 
       .pricing-stack__card:not(.is-stack-front) .pricing-card__stack-blur {
@@ -1369,6 +1386,13 @@
         flex: 0 0 auto;
       }
 
+      @media (prefers-reduced-motion: reduce) {
+        .pricing-stack__card.is-stack-mid .pricing-card__stack-blur,
+        .pricing-stack__card.is-stack-back .pricing-card__stack-blur {
+          filter: none;
+        }
+      }
+
     }
 
     @media (min-width: 769px) {
@@ -1391,6 +1415,8 @@
         left: auto;
         width: auto;
         max-width: none;
+        height: auto;
+        max-height: none;
         transform: none;
         border-radius: var(--radius-lg) !important;
       }
@@ -1403,6 +1429,8 @@
         filter: none !important;
         opacity: 1 !important;
         pointer-events: auto !important;
+        overflow: visible !important;
+        touch-action: auto !important;
       }
 
       .pricing-stack__card:not(.is-stack-front) .pricing-stack__cta {
@@ -1937,10 +1965,8 @@
     }
 
     .testimonials-grid { grid-template-columns: repeat(3,1fr) !important; }
-    .mabiya-grid { grid-template-columns: 1fr 1fr !important; }
     @media (max-width: 768px) {
       .testimonials-grid { grid-template-columns: 1fr !important; }
-      .mabiya-grid { grid-template-columns: 1fr !important; }
       .nav__links {
         display: none;
       }
@@ -3112,9 +3138,25 @@
           var cards = scene ? [].slice.call(scene.querySelectorAll('.pricing-stack__card')) : [];
           var frontIndex = 0;
           var locked = false;
+          var startX = 0;
+          var startY = 0;
+          var tracking = false;
+          var axisLock = null;
 
           function isMobileStack() {
             return window.matchMedia('(max-width: 768px)').matches;
+          }
+
+          function getFrontCard() {
+            return cards[frontIndex];
+          }
+
+          function gestureStartTarget(el) {
+            if (!el || el.nodeType !== 1) return false;
+            var fc = getFrontCard();
+            if (!fc || !fc.contains(el)) return false;
+            if (el.closest && el.closest('button, a, input, textarea, select')) return false;
+            return true;
           }
 
           function applyStack() {
@@ -3157,6 +3199,8 @@
                 cards.forEach(function(c) {
                   c.classList.remove('is-stack-exit-left', 'is-stack-exit-right', 'is-stack-front', 'is-stack-mid', 'is-stack-back');
                 });
+                tracking = false;
+                axisLock = null;
               } else {
                 applyStack();
               }
@@ -3176,6 +3220,53 @@
                 rotate(-1);
               });
             }
+
+            var passiveOpts = { passive: true };
+
+            scene.addEventListener('touchstart', function(e) {
+              if (!isMobileStack() || locked) return;
+              if (!gestureStartTarget(e.target)) return;
+              var t = e.touches[0];
+              startX = t.clientX;
+              startY = t.clientY;
+              tracking = true;
+              axisLock = null;
+            }, passiveOpts);
+
+            scene.addEventListener('touchmove', function(e) {
+              if (!tracking || !isMobileStack()) return;
+              var t = e.touches[0];
+              var dx = t.clientX - startX;
+              var dy = t.clientY - startY;
+              if (!axisLock && (Math.abs(dx) > 12 || Math.abs(dy) > 12)) {
+                axisLock = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
+              }
+            }, passiveOpts);
+
+            scene.addEventListener('touchcancel', function() {
+              tracking = false;
+              axisLock = null;
+            }, passiveOpts);
+
+            scene.addEventListener('touchend', function(e) {
+              if (!tracking || !isMobileStack()) {
+                tracking = false;
+                axisLock = null;
+                return;
+              }
+              tracking = false;
+              if (axisLock === 'v') {
+                axisLock = null;
+                return;
+              }
+              var t = e.changedTouches[0];
+              var dx = t.clientX - startX;
+              var dy = t.clientY - startY;
+              axisLock = null;
+              if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
+              if (dx < 0) rotate(-1);
+              else rotate(1);
+            }, passiveOpts);
           }
         })();
         </script>
@@ -3185,39 +3276,10 @@
     </div>
   </section>
 
-  <!-- ============ מה אני מביא ============ -->
-  <section style="padding:20px 0 60px;background:var(--white);">
+  <!-- QUESTIONNAIRE CTA -->
+  <section style="padding:28px 0 60px;background:var(--white);">
     <div class="container" style="max-width:900px;">
-      <h2 style="font-family:var(--font-heading);font-size:clamp(26px,3.5vw,38px);color:var(--charcoal);text-align:center;margin-bottom:36px;">מה כלול בחבילה</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;" class="mabiya-grid">
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--sand);border-radius:12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✓</div>
-          <div style="font-size:14px;color:#555;line-height:1.5;"><strong style="color:var(--charcoal);display:block;margin-bottom:2px;font-size:15px;">מסלול יום-יום מלא</strong>שעות, מקומות, סדר - הכל מסודר</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--sand);border-radius:12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✓</div>
-          <div style="font-size:14px;color:#555;line-height:1.5;"><strong style="color:var(--charcoal);display:block;margin-bottom:2px;font-size:15px;">המלצות לינה אישיות</strong>מקומות שנבדקו עם ילדים</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--sand);border-radius:12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✓</div>
-          <div style="font-size:14px;color:#555;line-height:1.5;"><strong style="color:var(--charcoal);display:block;margin-bottom:2px;font-size:15px;">אטרקציות לגיל הילדים</strong>מותאם לגיל ולאנרגיה שלהם</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--sand);border-radius:12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✓</div>
-          <div style="font-size:14px;color:#555;line-height:1.5;"><strong style="color:var(--charcoal);display:block;margin-bottom:2px;font-size:15px;">טיפים לוגיסטיים</strong>מה לארוז, מה לדעת, מה להזמין מראש</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--sand);border-radius:12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✓</div>
-          <div style="font-size:14px;color:#555;line-height:1.5;"><strong style="color:var(--charcoal);display:block;margin-bottom:2px;font-size:15px;">תמיכה בוואטסאפ</strong>אפשר לשאול שאלות לפני ובמהלך הטיול</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--sand);border-radius:12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:1px;">😊</div>
-          <div style="font-size:14px;color:#555;line-height:1.5;"><strong style="color:var(--charcoal);display:block;margin-bottom:2px;font-size:15px;">חיוך, חיוך וחיוך</strong>כי טיול מוצלח עם ילדים שווה הכל</div>
-        </div>
-    </div>
-
-    <!-- QUESTIONNAIRE CTA -->
-    <div style="border-top:2px solid var(--sand-dark);margin-top:32px;padding:28px 24px 32px;text-align:center;background:var(--white);">
+    <div style="padding:28px 24px 32px;text-align:center;background:var(--white);">
       <div style="max-width:480px;margin:0 auto;background:linear-gradient(135deg,var(--teal),#238a93);border-radius:20px;padding:28px 28px 24px;">
         <div style="font-size:28px;margin-bottom:8px;">📋</div>
         <h3 style="font-family:var(--font-heading);font-size:22px;color:white;margin-bottom:8px;">מתחילים עם שאלון קצר</h3>
@@ -3227,6 +3289,7 @@
         </a>
         <p style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:10px;">מלאו ← תלחצו על שלח בסוף השאלון ואחזור אלייכם</p>
       </div>
+    </div>
     </div>
   </section>
 
