@@ -1099,7 +1099,7 @@
       .pricing-stack__viewport {
         position: relative;
         isolation: isolate;
-        touch-action: pan-x;
+        touch-action: pan-y;
         min-height: min(132vw, 720px);
       }
 
@@ -1163,7 +1163,7 @@
         pointer-events: auto;
         z-index: 30;
         transform: translate(-50%, 0) scale(1);
-        touch-action: pan-x;
+        touch-action: pan-y;
         box-shadow:
           0 32px 72px rgba(0, 0, 0, 0.14),
           0 14px 36px rgba(0, 0, 0, 0.1),
@@ -3131,20 +3131,6 @@
               gestureStart(e.touches[0].clientX, e.touches[0].clientY, e.target);
             }, { passive: true });
 
-            scene.addEventListener('touchmove', function(e) {
-              if (!tracking || !isMobileStack()) return;
-              var dx = Math.abs(e.touches[0].clientX - startX);
-              var dy = Math.abs(e.touches[0].clientY - startY);
-              // Only block scroll if clearly horizontal; stop tracking once vertical intent clear
-              if (dy > dx && dy > 8) {
-                tracking = false;
-                return;
-              }
-              if (dx > dy && dx > 8) {
-                e.preventDefault();
-              }
-            }, { passive: false });
-
             scene.addEventListener('touchcancel', function() {
               tracking = false;
             }, { passive: true });
@@ -3158,13 +3144,13 @@
               var t = e.changedTouches[0];
               var dx = t.clientX - startX;
               var dy = t.clientY - startY;
-              if (Math.abs(dx) < 48 && Math.abs(dy) < 48) return;
+              if (Math.abs(dx) < 48) return;
               if (Math.abs(dx) < Math.abs(dy)) return;
               if (dx < 0) rotate(-1);
               else rotate(1);
             }, { passive: true });
 
-            // Safety: reset tracking if a new touch starts outside the scene
+            // Safety: reset tracking if touch starts outside scene
             document.addEventListener('touchstart', function(e) {
               if (!scene.contains(e.target)) tracking = false;
             }, { passive: true });
