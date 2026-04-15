@@ -768,6 +768,114 @@
       line-height: 1.7;
     }
 
+    /* Budget strip — desktop: row; mobile: column so CTA never overlaps description */
+    .budget-strip-wrap {
+      margin-bottom: 32px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .budget-strip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--charcoal);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-decoration: none;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .budget-strip:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    .budget-strip__shine {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 55%, rgba(232, 160, 69, 0.12) 100%);
+      pointer-events: none;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .budget-strip__icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(232, 160, 69, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .budget-strip__copy {
+      flex: 1;
+      min-width: 0;
+      text-align: right;
+    }
+
+    .budget-strip__title {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      color: #fff;
+      line-height: 1.35;
+      margin-bottom: 2px;
+    }
+
+    .budget-strip__sub {
+      display: block;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.55);
+      font-family: var(--font-body);
+      line-height: 1.4;
+    }
+
+    .budget-strip__cta {
+      flex-shrink: 0;
+      background: var(--amber);
+      color: var(--charcoal);
+      border-radius: 20px;
+      padding: 10px 16px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 540px) {
+      .budget-strip {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 14px;
+        padding: 16px 14px;
+      }
+
+      .budget-strip__copy {
+        text-align: center;
+      }
+
+      .budget-strip__icon {
+        align-self: center;
+      }
+
+      .budget-strip__cta {
+        width: 100%;
+        padding: 12px 16px;
+      }
+    }
+
     /* ========================================
        4. PRICING CARDS (Enhanced)
        ======================================== */
@@ -1112,42 +1220,58 @@
       .pricing-stack__hint--above {
         display: flex;
         flex-direction: row;
+        flex-wrap: nowrap;
         align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
+        justify-content: space-between;
         gap: 8px;
+        width: 100%;
         margin: 0 0 14px;
-        padding: 10px 14px;
+        padding: 10px 10px;
+        box-sizing: border-box;
         border-radius: 14px;
         background: rgba(255, 255, 255, 0.94);
         border: 1px solid rgba(0, 0, 0, 0.07);
         box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
         color: var(--charcoal);
-        font-size: 13px;
-        font-weight: 600;
-        line-height: 1.35;
-        text-align: center;
-        letter-spacing: 0.01em;
         pointer-events: none;
         z-index: 5;
       }
 
+      .pricing-stack__hint-mid {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        text-align: center;
+        pointer-events: none;
+      }
+
+      .pricing-stack__hint-text {
+        font-size: clamp(10px, 3.1vw, 13px);
+        font-weight: 600;
+        line-height: 1.3;
+        letter-spacing: 0.01em;
+      }
+
       .pricing-stack__hint--above .pricing-stack__hint-icon {
-        font-size: 22px;
+        font-size: 20px;
         line-height: 1;
         flex-shrink: 0;
       }
 
       .pricing-stack__hint--above .pricing-stack__dir {
         pointer-events: auto;
-        flex-shrink: 0;
-        width: 42px;
-        height: 42px;
+        flex: 0 0 40px;
+        width: 40px;
+        height: 40px;
         border-radius: 12px;
         border: 1px solid rgba(0, 0, 0, 0.1);
         background: rgba(255, 255, 255, 0.98);
         color: var(--charcoal);
-        font-size: 24px;
+        font-size: 22px;
         line-height: 1;
         cursor: pointer;
         display: inline-flex;
@@ -1157,6 +1281,7 @@
         font-family: inherit;
         -webkit-tap-highlight-color: transparent;
         transition: background 0.15s ease, transform 0.1s ease;
+        align-self: center;
       }
 
       .pricing-stack__hint--above .pricing-stack__dir:active {
@@ -1312,7 +1437,7 @@
         flex: 0 0 auto;
       }
 
-      .pricing-stack__hint-icon {
+      .pricing-stack__hint-mid .pricing-stack__hint-icon {
         animation: pricing-stack-hint-bounce 1.55s ease-in-out infinite;
       }
 
@@ -2898,19 +3023,15 @@
       </div>
 
       <!-- BUDGET CALCULATOR — compact strip above packages -->
-      <div style="margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto;">
-        <a href="budget.html" style="display:flex;align-items:center;gap:12px;background:var(--charcoal);border-radius:14px;padding:14px 16px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(0,0,0,0.15);position:relative;"
-          onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(0,0,0,0.22)'"
-          onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.15)'">
-          <div style="position:absolute;inset:0;background:linear-gradient(105deg,transparent 55%,rgba(232,160,69,0.12) 100%);pointer-events:none;border-radius:14px;overflow:hidden;"></div>
-          <div style="width:38px;height:38px;border-radius:10px;background:rgba(232,160,69,0.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🧮</div>
-          <div style="flex:1;min-width:0;">
-            <div style="font-family:var(--font-heading);font-size:14px;color:#fff;line-height:1.3;margin-bottom:2px;white-space:nowrap;">כמה יעלה הטיול שלכם?</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.5);font-family:var(--font-body);white-space:nowrap;">מחשבון חינמי · טיסות, לינה, אטרקציות</div>
-          </div>
-          <div style="flex-shrink:0;background:var(--amber);color:var(--charcoal);border-radius:20px;padding:8px 14px;font-family:var(--font-body);font-size:12px;font-weight:700;white-space:nowrap;">
-            לחץ לחישוב ←
-          </div>
+      <div class="budget-strip-wrap">
+        <a href="budget.html" class="budget-strip">
+          <span class="budget-strip__shine" aria-hidden="true"></span>
+          <span class="budget-strip__icon" aria-hidden="true">🧮</span>
+          <span class="budget-strip__copy">
+            <span class="budget-strip__title">כמה יעלה הטיול שלכם?</span>
+            <span class="budget-strip__sub">מחשבון חינמי · טיסות, לינה, אטרקציות</span>
+          </span>
+          <span class="budget-strip__cta">לחץ לחישוב ←</span>
         </a>
       </div>
 
@@ -2927,8 +3048,10 @@
         <div class="pricing-stack__scene">
           <div class="pricing-stack__hint pricing-stack__hint--above">
             <button type="button" class="pricing-stack__dir" id="pricing-stack-prev" aria-label="חבילה קודמת">‹</button>
-            <span class="pricing-stack__hint-icon" aria-hidden="true">&#8596;</span>
-            <span>החליקו או לחצו לעבור בין החבילות</span>
+            <div class="pricing-stack__hint-mid">
+              <span class="pricing-stack__hint-icon" aria-hidden="true">&#8596;</span>
+              <span class="pricing-stack__hint-text">החליקו או לחצו לעבור בין החבילות</span>
+            </div>
             <button type="button" class="pricing-stack__dir" id="pricing-stack-next" aria-label="חבילה הבאה">›</button>
           </div>
           <div class="pricing-stack__viewport" id="pricing-stack-scene" role="group" aria-label="חבילות תכנון — החליקו שמאלה או ימינה להחלפת חבילה">
