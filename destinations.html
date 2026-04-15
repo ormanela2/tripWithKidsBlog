@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <link href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" rel="stylesheet" />
   <link rel="icon" type="image/png" href="logo.png">
   <script defer data-domain="mataytasim.co.il" src="https://plausible.io/js/script.js"></script>
   <style>
@@ -197,34 +197,15 @@
     #map{height:560px;width:100%}
     @media(max-width:768px){#map{height:360px}}
 
-    /* LEAFLET */
-    .leaflet-control-zoom.leaflet-bar{border:none!important;box-shadow:0 4px 18px rgba(0,0,0,.1),0 0 0 1px rgba(0,0,0,.06)!important;border-radius:14px!important;overflow:hidden;background:var(--white)}
-    .leaflet-control-zoom.leaflet-bar a{
-      width:42px!important;height:42px!important;line-height:42px!important;
-      font-family:var(--font-body),system-ui,sans-serif!important;
-      font-size:1.35rem!important;font-weight:500!important;
-      color:var(--charcoal)!important;background:var(--white)!important;
-      border:none!important;border-bottom:1px solid var(--border)!important;
-      transition:background .18s ease,color .18s ease!important;
-    }
-    .leaflet-control-zoom.leaflet-bar a:last-child{border-bottom:none!important}
-    .leaflet-control-zoom.leaflet-bar a:hover{
-      background:var(--teal)!important;color:#fff!important;
-      text-decoration:none!important;
-    }
-    .leaflet-control-zoom-in,.leaflet-control-zoom-out{font-weight:400!important;letter-spacing:-0.02em}
-    .leaflet-control-zoom.leaflet-bar a.leaflet-disabled{
-      background:var(--gray-light)!important;color:#b0b5bc!important;cursor:default!important;
-    }
-    .leaflet-popup-content-wrapper{border-radius:14px!important;font-family:var(--font-body)!important;padding:0!important;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.16)!important;border:1px solid var(--border)!important}
-    .leaflet-popup-content{margin:0!important;width:210px!important}
-    .map-popup{padding:16px 16px 14px;direction:rtl}
-    .map-popup__flag{width:28px;height:19px;border-radius:3px;display:block;margin-bottom:8px}
-    .map-popup__name{font-family:var(--font-heading);font-size:16px;color:var(--teal);margin-bottom:2px}
-    .map-popup__sub{font-size:12px;color:var(--gray-mid);margin-bottom:3px}
-    .map-popup__days{font-size:12px;color:#aaa;margin-bottom:10px}
-    .map-popup__btn{display:block;text-align:center;background:var(--teal);color:#fff;border-radius:8px;padding:9px 12px;font-size:13px;font-weight:600;width:100%;border:none;cursor:pointer;font-family:var(--font-body);transition:background var(--ease)}
-    .map-popup__btn:hover{background:var(--teal-dark)}
+    /* MapLibre zoom control */
+    .maplibregl-ctrl-group{border-radius:14px!important;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.1),0 0 0 1px rgba(0,0,0,.06)!important;border:none!important}
+    .maplibregl-ctrl-group button{width:42px!important;height:42px!important;border-bottom:1px solid var(--border)!important}
+    .maplibregl-ctrl-group button:last-child{border-bottom:none!important}
+    .maplibregl-ctrl-zoom-in .maplibregl-ctrl-icon,.maplibregl-ctrl-zoom-out .maplibregl-ctrl-icon{filter:none}
+    .maplibregl-ctrl-group button:hover{background:var(--teal)!important}
+    .maplibregl-ctrl-group button:hover .maplibregl-ctrl-icon{filter:invert(1) brightness(2)}
+    .maplibregl-ctrl-attrib{font-size:10px!important;background:rgba(255,255,255,.7)!important}
+    .maplibregl-canvas{border-radius:0}
 
     /* DRAWER */
     .drawer{position:fixed;top:var(--nav-height);left:0;width:var(--drawer-w);max-width:420px;height:calc(100vh - var(--nav-height));background:var(--white);z-index:1001;transform:translateX(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:8px 0 40px rgba(0,0,0,.12)}
@@ -650,7 +631,7 @@
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.js"></script>
 <script>
 (function() {
   'use strict';
@@ -741,9 +722,9 @@
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
 
-    /* map */
-    if (window._map) window._map.flyTo([d.lat, d.lng], 7, { duration: 0.85 });
-    updateMarkers(id);
+    /* map – zoom to country border + highlight */
+    highlightCountry(id, d.color);
+    zoomToCountry(id);
   }
 
   function closeDrawer() {
@@ -751,7 +732,10 @@
     overlay.classList.remove('open');
     document.body.style.overflow = '';
     document.querySelectorAll('.chip[data-id]').forEach(function(c){ c.classList.remove('active'); });
-    updateMarkers(null);
+    clearHighlight();
+    if (_mapLoaded) {
+      window._map.flyTo({ center: [17.0, 46.8], zoom: 5, duration: 900, easing: function(t){ return t<0.5?2*t*t:-1+(4-2*t)*t; } });
+    }
     activeId = null;
   }
 
@@ -776,51 +760,113 @@
   chipBar.appendChild(comingChip);
 
   /* ─── MAP ─── */
-  function makeIcon(d, active) {
-    var sz   = active ? 46 : 38;
-    var bg   = active ? d.color : '#1A6B72';
-    var shad = active ? '0 6px 20px rgba(0,0,0,.32)' : '0 2px 8px rgba(0,0,0,.22)';
-    var sc   = active ? 'scale(1.12)' : 'scale(1)';
-    return L.divIcon({
-      className: '',
-      html: '<div style="width:' + sz + 'px;height:' + sz + 'px;border-radius:50%;background:' + bg + ';border:3px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:' + shad + ';cursor:pointer;transform:' + sc + ';transition:all .2s;">' +
-            '<span class="flag-icon flag-chip ' + d.flag + '" style="width:18px;height:12px;border-radius:2px;"></span>' +
-            '</div>',
-      iconSize: [sz, sz], iconAnchor: [sz/2, sz/2], popupAnchor: [0, -(sz/2 + 8)]
+  // 🔑 Get your free key at https://maptiler.com (100k loads/month free)
+  var MAPTILER_KEY = 'lMePas8iwlPnL5e5Iw9Q';
+
+  // Bounding boxes [sw_lng, sw_lat, ne_lng, ne_lat] for each destination country
+  var COUNTRY_BOUNDS = {
+    'slovakia':     [16.84, 47.74, 22.56, 49.61],
+    'warsaw':       [14.07, 49.00, 24.15, 54.84],
+    'romania':      [20.22, 43.62, 29.76, 48.27],
+    'athens':       [19.37, 34.80, 29.65, 42.01],
+    'czechia':      [12.09, 48.55, 18.86, 51.06],
+    'austria':      [9.53,  46.37, 17.16, 49.02],
+    'poland-south': [14.07, 49.00, 24.15, 54.84],
+    'budapest':     [16.11, 45.74, 22.90, 48.59],
+    'slovenia':     [13.37, 45.42, 16.61, 46.88]
+  };
+
+  // ISO-3 code for fetching country border GeoJSON
+  var COUNTRY_ISO = {
+    'slovakia':     'SVK', 'warsaw':       'POL',
+    'romania':      'ROU', 'athens':       'GRC',
+    'czechia':      'CZE', 'austria':      'AUT',
+    'poland-south': 'POL', 'budapest':     'HUN',
+    'slovenia':     'SVN'
+  };
+
+  var _geoCache = {};
+  var _mapLoaded = false;
+  var _pendingHighlight = null;
+
+  function highlightCountry(destId, color) {
+    if (!_mapLoaded) { _pendingHighlight = { id: destId, color: color }; return; }
+    var iso = COUNTRY_ISO[destId];
+    if (!iso) return;
+    function applyData(raw) {
+      var clone = JSON.parse(JSON.stringify(raw));
+      // Stamp color onto every feature for the paint expression
+      var features = clone.type === 'FeatureCollection' ? clone.features : [clone];
+      features.forEach(function(f) { (f.properties = f.properties || {}).color = color; });
+      var src = window._map.getSource('country-highlight');
+      if (src) src.setData(clone.type === 'FeatureCollection' ? clone : { type:'FeatureCollection', features: features });
+    }
+    if (_geoCache[iso]) { applyData(_geoCache[iso]); return; }
+    fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries/' + iso + '.geo.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) { _geoCache[iso] = data; applyData(data); })
+      .catch(function() {});
+  }
+
+  function clearHighlight() {
+    var src = window._map && window._map.getSource('country-highlight');
+    if (src) src.setData({ type: 'FeatureCollection', features: [] });
+  }
+
+  function zoomToCountry(destId) {
+    var b = COUNTRY_BOUNDS[destId];
+    if (!b || !_mapLoaded) return;
+    window._map.fitBounds([[b[0], b[1]], [b[2], b[3]]], {
+      padding: 60,
+      maxZoom: 8,
+      duration: 1200,
+      easing: function(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
     });
   }
 
-  function updateMarkers(activeDestId) {
-    dests.forEach(function(d) {
-      if (window._markers && window._markers[d.id]) {
-        window._markers[d.id].setIcon(makeIcon(d, d.id === activeDestId));
-      }
-    });
-  }
-
-  var map = L.map('map', { center: [46.8, 17.0], zoom: 5, scrollWheelZoom: false, zoomControl: true });
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 18
-  }).addTo(map);
+  var map = new maplibregl.Map({
+    container: 'map',
+    style: 'https://api.maptiler.com/maps/outdoor-v2/style.json?key=' + MAPTILER_KEY,
+    center: [17.0, 46.8],
+    zoom: 5,
+    scrollZoom: false,
+    attributionControl: false
+  });
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-left');
+  map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
   window._map = map;
   window._markers = {};
 
-  dests.forEach(function(d) {
-    var m = L.marker([d.lat, d.lng], { icon: makeIcon(d, false) }).addTo(map);
-    m.bindPopup(
-      '<div class="map-popup" dir="rtl">' +
-      '<span class="flag-icon map-popup__flag ' + d.flag + '"></span>' +
-      '<div class="map-popup__name">' + d.name + '</div>' +
-      '<div class="map-popup__sub">' + d.sub + '</div>' +
-      '<div class="map-popup__days">📅 ' + d.days + '</div>' +
-      '<button class="map-popup__btn" onclick="window._activate(\'' + d.id + '\')">פרטים ומדריך מלא ←</button>' +
-      '</div>'
-    );
-    m.on('click', function() { openDrawer(d.id); map.closePopup(); });
-    window._markers[d.id] = m;
-  });
+  window._markers = {};
 
-  window._activate = function(id) { map.closePopup(); openDrawer(id); };
+  map.on('load', function() {
+    _mapLoaded = true;
+
+    // Country border highlight source + layers
+    map.addSource('country-highlight', {
+      type: 'geojson',
+      data: { type: 'FeatureCollection', features: [] }
+    });
+    map.addLayer({
+      id: 'country-fill',
+      type: 'fill',
+      source: 'country-highlight',
+      paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.13 }
+    });
+    map.addLayer({
+      id: 'country-line',
+      type: 'line',
+      source: 'country-highlight',
+      paint: { 'line-color': ['get', 'color'], 'line-width': 2.5, 'line-opacity': 0.85 }
+    });
+
+    // Replay any openDrawer call that happened before load
+    if (_pendingHighlight) {
+      highlightCountry(_pendingHighlight.id, _pendingHighlight.color);
+      zoomToCountry(_pendingHighlight.id);
+      _pendingHighlight = null;
+    }
+  });
 
   /* ─── NAV ─── */
   var nav = document.getElementById('nav');
