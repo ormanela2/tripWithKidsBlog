@@ -523,6 +523,7 @@
       left: -50%;
       width: 200%;
       height: 200%;
+      pointer-events: none;
       background: linear-gradient(
         45deg,
         transparent 30%,
@@ -537,9 +538,9 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(232, 160, 69, 0.4);
     }
-    .mob-nav-community__icon { flex-shrink: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
+    .mob-nav-community__icon { flex-shrink: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
     .mob-nav-community__icon svg { width: 28px; height: 28px; }
-    .mob-nav-community__body { flex: 1; text-align: right; }
+    .mob-nav-community__body { flex: 1; text-align: right; position: relative; z-index: 1; }
     .mob-nav-community__title { display: block; font-family: 'Assistant', sans-serif; font-size: 16px; font-weight: 600; }
     .mob-nav-community__sub { display: block; font-family: 'Assistant', sans-serif; font-size: 12px; opacity: 0.85; margin-top: 1px; }
 
@@ -2593,8 +2594,8 @@
         מתי קורה
       </a>
 
-      <!-- מצטרפים לקהילה — amber banner (popup wired in EMAIL POPUP script) -->
-      <button type="button" class="mob-nav-community" id="mobNavCommunityBtn" role="menuitem">
+      <!-- מצטרפים לקהילה — קישור #newsletter (אותו מודול פופאפ כמו בדסקטופ) -->
+      <a href="#newsletter" class="mob-nav-community" id="mobNavCommunityBtn" role="menuitem">
         <div class="mob-nav-community__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -2605,7 +2606,7 @@
           <span class="mob-nav-community__title">מצטרפים לקהילה</span>
           <span class="mob-nav-community__sub">עדכונים על יעדים חדשים, טיפים מהשטח ופינות נסתרות</span>
         </div>
-      </button>
+      </a>
 
     </div>
   </nav>
@@ -3902,7 +3903,8 @@
   <!-- EMAIL POPUP (A/B: 50% scroll @ 70%, 50% click-only — סלובקיה-style) -->
   <style>
     @keyframes emailPopupIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .email-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 3000; align-items: center; justify-content: center; padding: max(20px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); box-sizing: border-box; }
+    /* מעל news-drawer (8999), events (1400), מודל צור קשר (2000) */
+    .email-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 10050; align-items: center; justify-content: center; padding: max(20px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); box-sizing: border-box; -webkit-overflow-scrolling: touch; }
     .email-popup-overlay.open { display: flex; }
     .email-popup { background: var(--cream); border-radius: 24px; padding: 40px 32px 36px; max-width: min(420px, calc(100vw - 32px)); width: 100%; text-align: center; position: relative; box-shadow: 0 16px 48px rgba(0,0,0,0.2); animation: emailPopupIn 0.3s ease; box-sizing: border-box; }
     .email-popup__close { position: absolute; top: 12px; left: 12px; font-size: 24px; line-height: 1; cursor: pointer; color: #666; background: rgba(0,0,0,0.06); border: none; width: 44px; height: 44px; min-width: 44px; min-height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0; -webkit-tap-highlight-color: transparent; transition: background 0.2s, color 0.2s; }
@@ -4018,30 +4020,13 @@
       });
     }
 
+    /* תפריט נייד: סוגרים דרך ה-listener הקיים על כל ה-a בתוך #mobileMenu, ואז כאן נפתח פופאפ */
     document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
         openPopup();
       });
     });
-
-    var mobCommunityBtn = document.getElementById('mobNavCommunityBtn');
-    if (mobCommunityBtn) {
-      mobCommunityBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        var mm = document.getElementById('mobileMenu');
-        var hb = document.getElementById('hamburgerBtn');
-        if (mm) mm.classList.remove('open');
-        if (hb) {
-          hb.setAttribute('aria-expanded', 'false');
-          hb.setAttribute('aria-label', 'פתח תפריט');
-        }
-        document.body.style.overflow = '';
-        setTimeout(function () {
-          openPopup();
-        }, 80);
-      });
-    }
 
     if (closeBtn) closeBtn.addEventListener('click', closePopup);
     overlay.addEventListener('click', function(e) {
