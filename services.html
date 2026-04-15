@@ -81,6 +81,7 @@
     html {
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
+      overflow-x: hidden;
     }
 
     body {
@@ -89,7 +90,6 @@
       line-height: 1.75;
       color: var(--charcoal);
       background-color: var(--cream);
-      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -523,6 +523,7 @@
       left: -50%;
       width: 200%;
       height: 200%;
+      pointer-events: none;
       background: linear-gradient(
         45deg,
         transparent 30%,
@@ -537,9 +538,9 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(232, 160, 69, 0.4);
     }
-    .mob-nav-community__icon { flex-shrink: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
+    .mob-nav-community__icon { flex-shrink: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
     .mob-nav-community__icon svg { width: 28px; height: 28px; }
-    .mob-nav-community__body { flex: 1; text-align: right; }
+    .mob-nav-community__body { flex: 1; text-align: right; position: relative; z-index: 1; }
     .mob-nav-community__title { display: block; font-family: 'Assistant', sans-serif; font-size: 16px; font-weight: 600; }
     .mob-nav-community__sub { display: block; font-family: 'Assistant', sans-serif; font-size: 12px; opacity: 0.85; margin-top: 1px; }
 
@@ -768,6 +769,114 @@
       line-height: 1.7;
     }
 
+    /* Budget strip — desktop: row; mobile: column so CTA never overlaps description */
+    .budget-strip-wrap {
+      margin-bottom: 32px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .budget-strip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--charcoal);
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-decoration: none;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .budget-strip:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    .budget-strip__shine {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 55%, rgba(232, 160, 69, 0.12) 100%);
+      pointer-events: none;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .budget-strip__icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(232, 160, 69, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .budget-strip__copy {
+      flex: 1;
+      min-width: 0;
+      text-align: right;
+    }
+
+    .budget-strip__title {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      color: #fff;
+      line-height: 1.35;
+      margin-bottom: 2px;
+    }
+
+    .budget-strip__sub {
+      display: block;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.55);
+      font-family: var(--font-body);
+      line-height: 1.4;
+    }
+
+    .budget-strip__cta {
+      flex-shrink: 0;
+      background: var(--amber);
+      color: var(--charcoal);
+      border-radius: 20px;
+      padding: 10px 16px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 540px) {
+      .budget-strip {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 14px;
+        padding: 16px 14px;
+      }
+
+      .budget-strip__copy {
+        text-align: center;
+      }
+
+      .budget-strip__icon {
+        align-self: center;
+      }
+
+      .budget-strip__cta {
+        width: 100%;
+        padding: 12px 16px;
+      }
+    }
+
     /* ========================================
        4. PRICING CARDS (Enhanced)
        ======================================== */
@@ -793,7 +902,9 @@
       transition: transform 0.35s ease, box-shadow 0.35s ease;
       box-shadow: var(--shadow-sm);
       overflow: hidden;
-      touch-action: manipulation;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
     }
 
     /* Hover only on devices with real pointer — avoids iOS “first tap = hover, second tap = link” */
@@ -883,6 +994,10 @@
 
     .pricing-card__body {
       padding: 28px 28px 32px;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
     }
 
     .pricing-card__price-row {
@@ -956,6 +1071,377 @@
 
     .pricing-card__delivery-icon {
       font-size: 15px;
+    }
+
+    .pricing-carousel-host {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .pricing-stack {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .pricing-stack__scene {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .pricing-stack__intro-text {
+      margin: 0 auto 16px;
+      padding: 0 12px;
+      text-align: center;
+      font-family: 'Assistant', sans-serif;
+      font-size: clamp(14px, 1.8vw, 17px);
+      font-weight: 600;
+      color: var(--charcoal);
+      line-height: 1.45;
+      max-width: 860px;
+      grid-column: 1 / -1;
+    }
+
+    .pricing-card__stack-blur {
+      transition: opacity 0.25s ease;
+    }
+
+    @media (min-width: 769px) {
+      .pricing-card__stack-blur {
+        display: contents;
+      }
+    }
+
+    .pricing-card__book {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 16px;
+      padding: 14px 24px;
+      border-radius: var(--radius-xl);
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+
+    @media (min-width: 769px) {
+      .pricing-card__book {
+        margin-top: auto;
+        flex-shrink: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .pricing-carousel-host {
+        max-width: none;
+        width: 100%;
+        margin: 28px 0 36px;
+        padding: 0;
+        overflow: visible;
+      }
+
+      .pricing-stack__scene {
+        display: block;
+        position: relative;
+        max-width: min(400px, 88vw);
+        margin: 0 auto;
+        padding-bottom: 8px;
+        overflow: visible;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+      }
+
+      /* Fixed height prevents layout jump; pan-y lets the page scroll vertically while we handle horizontal swipe in JS */
+      .pricing-stack__viewport {
+        position: relative;
+        isolation: isolate;
+        height: clamp(380px, 72vh, 640px);
+        height: clamp(380px, 72dvh, 640px);
+        max-height: 640px;
+        overflow: hidden;
+        touch-action: pan-y;
+        overscroll-behavior-y: contain;
+        contain: layout style;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+      }
+
+      .pricing-stack__hint--above .pricing-stack__intro-text {
+        flex: 1 1 auto;
+        min-width: 0;
+        margin: 0;
+        padding: 0 4px;
+        text-align: center;
+        font-family: 'Assistant', sans-serif;
+        font-size: clamp(10px, 3.2vw, 14px);
+        font-weight: 600;
+        color: var(--charcoal);
+        line-height: 1.35;
+      }
+
+      .pricing-stack__hint--above {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        width: 100%;
+        margin: 0 0 14px;
+        padding: 10px 10px;
+        box-sizing: border-box;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.94);
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+        color: var(--charcoal);
+        pointer-events: none;
+        z-index: 5;
+      }
+
+      .pricing-stack__hint--above .pricing-stack__dir {
+        pointer-events: auto;
+        flex: 0 0 44px;
+        min-width: 44px;
+        min-height: 44px;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.98);
+        color: var(--charcoal);
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        font-family: inherit;
+        -webkit-tap-highlight-color: transparent;
+        transition: background 0.15s ease, transform 0.1s ease;
+        align-self: center;
+      }
+
+      .pricing-stack__hint--above .pricing-stack__dir:active {
+        background: var(--sand);
+        transform: scale(0.96);
+      }
+
+      .pricing-stack__hint--arrows-only {
+        justify-content: space-between;
+        align-items: center;
+        max-width: min(400px, 88vw);
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px 10px;
+      }
+
+      .pricing-stack__card {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 100%;
+        max-width: min(400px, 88vw);
+        height: 100%;
+        max-height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        transition:
+          transform 0.48s cubic-bezier(0.25, 0.8, 0.25, 1),
+          opacity 0.36s ease,
+          box-shadow 0.35s ease;
+        transform-origin: 50% 0;
+        border-radius: 1.5rem !important;
+        overflow: hidden;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+      }
+
+      /* Prevent back cards from stealing touches if z-index ever glitches */
+      .pricing-stack__card:not(.is-stack-front) {
+        pointer-events: none;
+      }
+
+      .pricing-stack__card.is-stack-front {
+        pointer-events: auto;
+        z-index: 30;
+        transform: translate3d(-50%, 0, 0) scale3d(1, 1, 1);
+        touch-action: pan-y;
+        box-shadow:
+          0 32px 72px rgba(0, 0, 0, 0.14),
+          0 14px 36px rgba(0, 0, 0, 0.1),
+          0 0 0 1px rgba(0, 0, 0, 0.05);
+      }
+
+      .pricing-stack__card.is-stack-front.pricing-card--highlighted {
+        transform: translate3d(-50%, 0, 0) scale3d(1, 1, 1);
+        box-shadow:
+          0 36px 78px rgba(232, 160, 69, 0.28),
+          0 16px 40px rgba(0, 0, 0, 0.1),
+          var(--shadow-lg),
+          0 0 0 1px var(--amber);
+      }
+
+      /* RTL: back cards offset toward visual “back” (left in RTL flow) */
+      .pricing-stack__card.is-stack-mid {
+        z-index: 20;
+        transform: translate3d(calc(-50% - 26px), 12px, 0) scale3d(0.95, 0.95, 1);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09);
+      }
+
+      .pricing-stack__card.is-stack-back {
+        z-index: 10;
+        transform: translate3d(calc(-50% - 44px), 22px, 0) scale3d(0.9, 0.9, 1);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+      }
+
+      .pricing-stack__card.is-stack-front .pricing-card__stack-blur {
+        opacity: 1;
+      }
+
+      /* Depth without blur: offset + scale on the card, opacity so edges read as a stack */
+      .pricing-stack__card.is-stack-mid .pricing-card__stack-blur {
+        opacity: 0.9;
+      }
+
+      .pricing-stack__card.is-stack-back .pricing-card__stack-blur {
+        opacity: 0.72;
+      }
+
+      .pricing-stack__card.is-stack-exit-left {
+        z-index: 40;
+        transform: translate3d(calc(-50% - 115vw), 0, 0) scale3d(0.96, 0.96, 1) !important;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          transform 0.44s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.32s ease;
+      }
+
+      .pricing-stack__card.is-stack-exit-right {
+        z-index: 40;
+        transform: translate3d(calc(-50% + 115vw), 0, 0) scale3d(0.96, 0.96, 1) !important;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          transform 0.44s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.32s ease;
+      }
+
+      .pricing-card__stack-blur {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+        border-radius: inherit;
+        transition: opacity 0.2s ease;
+      }
+
+      .pricing-stack__card.is-stack-front .pricing-card__stack-blur {
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        touch-action: pan-y;
+      }
+
+      .pricing-stack__card:not(.is-stack-front) .pricing-card__stack-blur {
+        pointer-events: none;
+      }
+
+      .pricing-stack__card:not(.is-stack-front) .pricing-stack__cta {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        height: 0 !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        border-width: 0 !important;
+      }
+
+      .pricing-stack__card.is-stack-front .pricing-stack__cta {
+        flex-shrink: 0;
+        margin-top: auto;
+      }
+
+      .pricing-stack__card .pricing-card__body {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .pricing-stack__card .pricing-card__features {
+        flex: 0 0 auto;
+      }
+
+    }
+
+    @media (min-width: 769px) {
+      .pricing-stack__hint--above {
+        display: none !important;
+      }
+
+      .pricing-stack__viewport {
+        display: contents;
+      }
+
+      .pricing-stack__card,
+      .pricing-stack__card:not(.is-stack-front),
+      .pricing-stack__card.is-stack-front {
+        pointer-events: auto;
+      }
+
+      .pricing-stack__card {
+        position: relative;
+        left: auto;
+        width: auto;
+        max-width: none;
+        height: auto;
+        max-height: none;
+        transform: none;
+        border-radius: var(--radius-lg) !important;
+      }
+
+      .pricing-stack__card.pricing-card--highlighted {
+        transform: scale(1.04);
+      }
+
+      .pricing-stack__card .pricing-card__stack-blur {
+        filter: none !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        overflow: visible !important;
+        touch-action: auto !important;
+      }
+
+      .pricing-stack__card:not(.is-stack-front) .pricing-stack__cta {
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        height: auto !important;
+        min-height: unset !important;
+        margin: auto 0 0 0 !important;
+        width: 100% !important;
+        padding: 14px 24px !important;
+        overflow: visible !important;
+        border-width: initial !important;
+      }
+
+      .pricing-stack__card.is-stack-front .pricing-stack__cta {
+        margin: auto 0 0 0 !important;
+        width: 100% !important;
+      }
+
     }
 
     /* ========================================
@@ -1443,10 +1929,11 @@
         gap: 32px;
       }
 
-      .pricing__grid {
+      .pricing-stack__scene {
         grid-template-columns: 1fr;
         max-width: 520px;
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .pricing-card--highlighted {
@@ -1469,10 +1956,8 @@
     }
 
     .testimonials-grid { grid-template-columns: repeat(3,1fr) !important; }
-    .mabiya-grid { grid-template-columns: 1fr 1fr !important; }
     @media (max-width: 768px) {
       .testimonials-grid { grid-template-columns: 1fr !important; }
-      .mabiya-grid { grid-template-columns: 1fr !important; }
       .nav__links {
         display: none;
       }
@@ -1540,7 +2025,6 @@
         max-width: none;
       }
 
-      .pricing__grid { grid-template-columns: 1fr; }
       .pricing-card--highlighted { transform: none; box-shadow: var(--shadow-lg), 0 0 0 1px var(--amber); }
       @media (hover: hover) and (pointer: fine) {
         .pricing-card--highlighted:hover { transform: none; }
@@ -2110,9 +2594,8 @@
         מתי קורה
       </a>
 
-      <!-- מצטרפים לקהילה — amber banner -->
-      <button type="button" class="mob-nav-community" role="menuitem"
-        onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(); },120);">
+      <!-- מצטרפים לקהילה — קישור #newsletter (אותו מודול פופאפ כמו בדסקטופ) -->
+      <a href="#newsletter" class="mob-nav-community" id="mobNavCommunityBtn" role="menuitem">
         <div class="mob-nav-community__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -2123,7 +2606,7 @@
           <span class="mob-nav-community__title">מצטרפים לקהילה</span>
           <span class="mob-nav-community__sub">עדכונים על יעדים חדשים, טיפים מהשטח ופינות נסתרות</span>
         </div>
-      </button>
+      </a>
 
     </div>
   </nav>
@@ -2479,24 +2962,50 @@
         </a>
       </div>
 
-      <!-- PACKAGES CTA -->
-      <div class="reveal reveal-delay-2" style="margin-top:48px;padding-top:40px;border-top:2px solid var(--sand-dark);">
+      <!-- BUDGET CALCULATOR — compact strip above packages -->
+      <div class="budget-strip-wrap">
+        <a href="budget.html" class="budget-strip">
+          <span class="budget-strip__shine" aria-hidden="true"></span>
+          <span class="budget-strip__icon" aria-hidden="true">🧮</span>
+          <span class="budget-strip__copy">
+            <span class="budget-strip__title">כמה יעלה הטיול שלכם?</span>
+            <span class="budget-strip__sub">מחשבון חינמי · טיסות, לינה, אטרקציות</span>
+          </span>
+          <span class="budget-strip__cta">לחץ לחישוב ←</span>
+        </a>
+      </div>
+
+      <!-- PACKAGES CTA (no scroll reveal — cards visible immediately) -->
+      <div class="pricing-packages-section" style="margin-top:48px;padding-top:40px;padding-bottom:56px;border-top:2px solid var(--sand-dark);border-bottom:2px solid var(--sand-dark);">
 
         <div style="text-align:center;margin-bottom:40px;">
           <h3 style="font-family:var(--font-heading);font-size:clamp(26px,3vw,34px);color:var(--charcoal);margin-bottom:10px;">איפה אני יכול לעזור לכם?</h3>
           <p style="font-size:16px;color:#888;max-width:440px;margin:0 auto;line-height:1.6;">3 חבילות תכנון — כל אחת מותאמת לסגנון הטיול שלכם</p>
         </div>
 
-        <div class="pricing__grid" style="max-width:860px;margin:0 auto;">
+        <div class="pricing-carousel-host">
+        <div class="pricing-stack">
+        <div class="pricing-stack__scene">
+          <div class="pricing-stack__hint pricing-stack__hint--above pricing-stack__hint--arrows-only" role="toolbar" aria-label="מעבר בין חבילות">
+            <button type="button" class="pricing-stack__dir" id="pricing-stack-prev" aria-label="חבילה קודמת">‹</button>
+            <span class="pricing-stack__intro-text" id="pricing-stack-intro">חבילות תכנון - מעבר באמצעות החיצים</span>
+            <button type="button" class="pricing-stack__dir" id="pricing-stack-next" aria-label="חבילה הבאה">›</button>
+          </div>
+          <div class="pricing-stack__viewport" id="pricing-stack-scene" role="group" aria-label="חבילות תכנון">
 
           <!-- מצפן -->
-          <a href="packages.html" class="pricing-card" style="text-decoration:none;display:block;">
+          <div class="pricing-card pricing-card--floating pricing-stack__card is-stack-front" data-stack-index="0">
+            <div class="pricing-card__stack-blur">
             <div class="pricing-card__header">
               <span class="pricing-card__icon">🧭</span>
               <div class="pricing-card__name">מצפן</div>
               <div class="pricing-card__tagline">לטיול הראשון שלכם</div>
             </div>
             <div class="pricing-card__body">
+              <div class="pricing-card__price-row">
+                <div class="pricing-card__price">₪490</div>
+                <div class="pricing-card__for">לטיול עד 7 ימים</div>
+              </div>
               <ul class="pricing-card__features" style="list-style:none;padding:0;margin:0;">
                 <li class="pricing-card__feature pricing-card__feature--included">
                   <span class="pricing-card__check">✓</span>
@@ -2515,11 +3024,14 @@
                   <span>טיפים כלליים ליעד</span>
                 </li>
               </ul>
+            <a href="questionnaire_form.html?package=matzpen" class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</a>
             </div>
-          </a>
+            </div>
+          </div>
 
           <!-- הרפתקה (highlighted) -->
-          <a href="packages.html" class="pricing-card pricing-card--highlighted" style="text-decoration:none;display:block;">
+          <div class="pricing-card pricing-card--highlighted pricing-card--floating pricing-stack__card is-stack-mid" data-stack-index="1">
+            <div class="pricing-card__stack-blur">
             <div class="pricing-card__header" style="padding-top:44px;">
               <div class="pricing-card__badge" style="top:12px;transform:translateX(-50%);">הכי פופולרי ⭐</div>
               <span class="pricing-card__icon">🗺️</span>
@@ -2527,6 +3039,10 @@
               <div class="pricing-card__tagline">לרוב המשפחות שלנו</div>
             </div>
             <div class="pricing-card__body">
+              <div class="pricing-card__price-row">
+                <div class="pricing-card__price">₪890</div>
+                <div class="pricing-card__for">לטיול עד 7 ימים • הכי נבחר</div>
+              </div>
               <ul class="pricing-card__features" style="list-style:none;padding:0;margin:0;">
                 <li class="pricing-card__feature pricing-card__feature--included">
                   <span class="pricing-card__check">✓</span>
@@ -2557,17 +3073,24 @@
                   <span>התאמות אישיות עד לפני הטיול</span>
                 </li>
               </ul>
+            <a href="questionnaire_form.html?package=har" class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</a>
             </div>
-          </a>
+            </div>
+          </div>
 
           <!-- אודיסיאה -->
-          <a href="packages.html" class="pricing-card" style="text-decoration:none;display:block;">
+          <div class="pricing-card pricing-card--floating pricing-stack__card is-stack-back" data-stack-index="2">
+            <div class="pricing-card__stack-blur">
             <div class="pricing-card__header">
               <span class="pricing-card__icon">🌊</span>
               <div class="pricing-card__name">אודיסיאה</div>
               <div class="pricing-card__tagline">חוויה מלאה מקצה לקצה</div>
             </div>
             <div class="pricing-card__body">
+              <div class="pricing-card__price-row">
+                <div class="pricing-card__price">₪1,390</div>
+                <div class="pricing-card__for">לטיול עד 14 ימים + ליווי שוטף</div>
+              </div>
               <ul class="pricing-card__features" style="list-style:none;padding:0;margin:0;">
                 <li class="pricing-card__feature pricing-card__feature--included">
                   <span class="pricing-card__check">✓</span>
@@ -2590,155 +3113,163 @@
                   <span>עדכונים בזמן אמת (מזג אוויר, שינויים)</span>
                 </li>
               </ul>
+            <a href="questionnaire_form.html?package=ody" class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</a>
             </div>
-          </a>
+            </div>
+          </div>
+
+        </div>
+        </div>
+        </div>
+        </div>
+        <script>
+        (function() {
+          var scene = document.getElementById('pricing-stack-scene');
+          var cards = scene ? [].slice.call(scene.querySelectorAll('.pricing-stack__card')) : [];
+          var frontIndex = 0;
+          var locked = false;
+          var startX = 0;
+          var startY = 0;
+          var tracking = false;
+          var axisLock = null;
+
+          function isMobileStack() {
+            return window.matchMedia('(max-width: 768px)').matches;
+          }
+
+          function getFrontCard() {
+            return cards[frontIndex];
+          }
+
+          function gestureStartTarget(el) {
+            if (!el || el.nodeType !== 1) return false;
+            var fc = getFrontCard();
+            if (!fc || !fc.contains(el)) return false;
+            if (el.closest && el.closest('button, a, input, textarea, select')) return false;
+            return true;
+          }
+
+          function applyStack() {
+            if (!cards.length) return;
+            cards.forEach(function(card, i) {
+              var role = (i - frontIndex + 9) % 3;
+              card.classList.remove('is-stack-front', 'is-stack-mid', 'is-stack-back');
+              if (role === 0) card.classList.add('is-stack-front');
+              else if (role === 1) card.classList.add('is-stack-mid');
+              else card.classList.add('is-stack-back');
+            });
+          }
+
+          function rotate(direction) {
+            if (locked || !isMobileStack()) return;
+            var front = cards[frontIndex];
+            if (!front) return;
+            locked = true;
+            var exitLeft = direction < 0;
+            front.classList.add(exitLeft ? 'is-stack-exit-left' : 'is-stack-exit-right');
+            var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var ms = reduced ? 0 : 440;
+            window.setTimeout(function() {
+              front.classList.remove('is-stack-exit-left', 'is-stack-exit-right');
+              frontIndex = exitLeft ? (frontIndex + 1) % 3 : (frontIndex + 2) % 3;
+              applyStack();
+              locked = false;
+            }, ms);
+          }
+
+          if (scene && cards.length === 3) {
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', applyStack);
+            } else {
+              applyStack();
+            }
+
+            window.addEventListener('resize', function() {
+              if (!isMobileStack()) {
+                cards.forEach(function(c) {
+                  c.classList.remove('is-stack-exit-left', 'is-stack-exit-right', 'is-stack-front', 'is-stack-mid', 'is-stack-back');
+                });
+                tracking = false;
+                axisLock = null;
+              } else {
+                applyStack();
+              }
+            });
+
+            var btnPrev = document.getElementById('pricing-stack-prev');
+            var btnNext = document.getElementById('pricing-stack-next');
+            if (btnPrev) {
+              btnPrev.addEventListener('click', function(e) {
+                e.preventDefault();
+                rotate(1);
+              });
+            }
+            if (btnNext) {
+              btnNext.addEventListener('click', function(e) {
+                e.preventDefault();
+                rotate(-1);
+              });
+            }
+
+            var passiveOpts = { passive: true };
+
+            scene.addEventListener('touchstart', function(e) {
+              if (!isMobileStack() || locked) return;
+              if (!gestureStartTarget(e.target)) return;
+              var t = e.touches[0];
+              startX = t.clientX;
+              startY = t.clientY;
+              tracking = true;
+              axisLock = null;
+            }, passiveOpts);
+
+            scene.addEventListener('touchmove', function(e) {
+              if (!tracking || !isMobileStack()) return;
+              var t = e.touches[0];
+              var dx = t.clientX - startX;
+              var dy = t.clientY - startY;
+              if (!axisLock && (Math.abs(dx) > 12 || Math.abs(dy) > 12)) {
+                axisLock = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v';
+              }
+            }, passiveOpts);
+
+            scene.addEventListener('touchcancel', function() {
+              tracking = false;
+              axisLock = null;
+            }, passiveOpts);
+
+            scene.addEventListener('touchend', function(e) {
+              if (!tracking || !isMobileStack()) {
+                tracking = false;
+                axisLock = null;
+                return;
+              }
+              tracking = false;
+              if (axisLock === 'v') {
+                axisLock = null;
+                return;
+              }
+              var t = e.changedTouches[0];
+              var dx = t.clientX - startX;
+              var dy = t.clientY - startY;
+              axisLock = null;
+              if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
+              if (dx < 0) rotate(-1);
+              else rotate(1);
+            }, passiveOpts);
+          }
+        })();
+        </script>
 
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ BUDGET CALCULATOR CARD ============ -->
-  <section style="padding: 0px 24px 24px; margin-top:-16px;">
-    <div style="max-width:760px; margin:0 auto; background:linear-gradient(135deg,#e6f4f5 0%,#d0ecee 100%); border:1.5px solid #a8d5da; border-radius:16px; padding:22px 28px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;">
-      <div style="flex:1; min-width:200px;">
-        <div style="font-size:26px; margin-bottom:6px;">🧮</div>
-        <h3 style="font-family:var(--font-heading); font-size:clamp(17px,2.5vw,21px); color:#124d52; margin-bottom:6px; line-height:1.3;">לפני שבוחרים חבילה - כמה עולה הטיול שלכם?</h3>
-        <p style="font-family:var(--font-body); font-size:13.5px; color:#3a6b70; line-height:1.6; margin-bottom:0;">מחשבון התקציב שלנו מחשב טיסות, לינה, אוכל, פעילויות ועוד - לפי יעד, עונה וגודל המשפחה. בחינם, בלי הרשמה.</p>
-      </div>
-      <a href="budget.html" style="flex-shrink:0; background:#1a6b72; color:#fff; font-family:var(--font-body); font-size:14px; font-weight:600; padding:12px 24px; border-radius:50px; text-decoration:none; white-space:nowrap; box-shadow:0 4px 12px rgba(26,107,114,0.3); transition:background 0.2s,transform 0.2s; display:inline-block;" onmouseover="this.style.background='#124d52';this.style.transform='scale(1.04)'" onmouseout="this.style.background='#1a6b72';this.style.transform='scale(1)'">לחשב את התקציב ←</a>
-    </div>
-  </section>
-
-  <!-- ============ אירועים קרובים ============ -->
-  <section style="padding:0 24px 32px;">
-    <div style="max-width:760px;margin:0 auto;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="font-size:20px;">📅</span>
-          <h3 style="font-family:var(--font-heading);font-size:18px;color:var(--charcoal);margin:0;">אירועים קרובים באירופה</h3>
-        </div>
-        <a href="calendar.html" style="font-family:'Assistant',sans-serif;font-size:13px;color:var(--teal);font-weight:600;text-decoration:none;white-space:nowrap;">לכל האירועים ←</a>
-      </div>
-      <div id="events-strip-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;"></div>
-    </div>
-  </section>
-  <style>
-    @media(max-width:600px){
-      #events-strip-grid{grid-template-columns:1fr !important;gap:8px !important;}
-    }
-  </style>
-  <!-- Event popup modal -->
-  <div id="ev-modal-backdrop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:2000;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)closeEvModal();">
-    <div id="ev-modal" style="background:#fff;border-radius:20px;padding:28px 24px 24px;max-width:420px;width:100%;position:relative;max-height:90vh;overflow-y:auto;">
-      <button onclick="closeEvModal()" style="position:absolute;top:14px;left:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#aaa;line-height:1;">✕</button>
-      <div id="ev-modal-body"></div>
-      <a href="calendar.html" style="display:flex;align-items:center;justify-content:center;margin-top:18px;background:#1a6b72;color:#fff;border-radius:50px;padding:11px 24px;font-family:'Assistant',sans-serif;font-size:14px;font-weight:600;text-decoration:none;">לכל האירועים ←</a>
-    </div>
-  </div>
-
-  <script src="events-data.js"></script>
-  <script>
-  function closeEvModal() {
-    var b = document.getElementById('ev-modal-backdrop');
-    b.style.display = 'none';
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeEvModal(); });
-  window.addEventListener('pageshow', function() { closeEvModal(); });
-
-  (function() {
-    var TYPE_COLORS = {
-      holiday:  { bg:'#fee2e2', color:'#991b1b', label:'חג' },
-      festival: { bg:'#fef3c7', color:'#92400e', label:'פסטיבל' },
-      market:   { bg:'#dcfce7', color:'#166534', label:'שוק' },
-      kids:     { bg:'#ede9fe', color:'#5b21b6', label:'לילדים' }
-    };
-    var HEB_MONTHS = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
-    function fmtDate(s, e) {
-      if (s.getMonth() === e.getMonth() && s.getFullYear() === e.getFullYear()) {
-        if (s.getDate() === e.getDate()) return s.getDate() + ' ב' + HEB_MONTHS[s.getMonth()];
-        return s.getDate() + '–' + e.getDate() + ' ב' + HEB_MONTHS[s.getMonth()];
-      }
-      return s.getDate() + ' ב' + HEB_MONTHS[s.getMonth()] + ' – ' + e.getDate() + ' ב' + HEB_MONTHS[e.getMonth()];
-    }
-    function openEvModal(ev) {
-      var c = TYPE_COLORS[ev.type] || TYPE_COLORS.festival;
-      var body = document.getElementById('ev-modal-body');
-      body.innerHTML =
-        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">' +
-          '<span style="font-size:26px;">' + ev.flag + '</span>' +
-          '<span style="font-size:12px;background:' + c.bg + ';color:' + c.color + ';border-radius:20px;padding:3px 10px;font-family:\'Assistant\',sans-serif;font-weight:600;">' + c.label + '</span>' +
-        '</div>' +
-        '<div style="font-family:\'Secular One\',sans-serif;font-size:20px;color:#2c2c2c;line-height:1.3;margin-bottom:6px;">' + ev.title + '</div>' +
-        '<div style="font-size:13px;color:#888;font-family:\'Assistant\',sans-serif;margin-bottom:14px;">📅 ' + fmtDate(ev.startDate, ev.endDate) + ' · ' + ev.city + '</div>' +
-        (ev.description ? '<p style="font-size:14px;color:#444;line-height:1.7;font-family:\'Assistant\',sans-serif;margin-bottom:12px;">' + ev.description + '</p>' : '') +
-        (ev.tip ? '<div style="background:#f0fafa;border-right:3px solid #1a6b72;border-radius:8px;padding:10px 12px;font-size:13px;color:#1a6b72;font-family:\'Assistant\',sans-serif;line-height:1.6;">💡 ' + ev.tip + '</div>' : '') +
-        (ev.stores ? '<div style="margin-top:10px;font-size:12px;color:#666;font-family:\'Assistant\',sans-serif;">' + ev.stores + '</div>' : '');
-      var backdrop = document.getElementById('ev-modal-backdrop');
-      backdrop.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-
-    var today = new Date(); today.setHours(0,0,0,0);
-    var upcoming = (window.CALENDAR_EVENTS || [])
-      .filter(function(e) { return e.endDate >= today; })
-      .sort(function(a,b) { return a.startDate - b.startDate; })
-      .slice(0, 3);
-    var grid = document.getElementById('events-strip-grid');
-    if (!grid) return;
-    upcoming.forEach(function(ev) {
-      var c = TYPE_COLORS[ev.type] || TYPE_COLORS.festival;
-      var card = document.createElement('div');
-      card.style.cssText = 'display:block;background:#fff;border:1.5px solid #e8ddc4;border-radius:12px;padding:14px;cursor:pointer;transition:box-shadow 0.18s,transform 0.18s;';
-      card.onmouseover = function(){ this.style.boxShadow='0 4px 16px rgba(0,0,0,0.1)'; this.style.transform='translateY(-2px)'; };
-      card.onmouseout  = function(){ this.style.boxShadow=''; this.style.transform=''; };
-      card.onclick = (function(e){ return function(){ openEvModal(e); }; })(ev);
-      card.innerHTML =
-        '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">' +
-          '<span style="font-size:18px;">' + ev.flag + '</span>' +
-          '<span style="font-size:11px;background:' + c.bg + ';color:' + c.color + ';border-radius:20px;padding:2px 8px;font-family:\'Assistant\',sans-serif;font-weight:600;">' + c.label + '</span>' +
-        '</div>' +
-        '<div style="font-family:\'Assistant\',sans-serif;font-size:14px;font-weight:600;color:#2c2c2c;line-height:1.3;margin-bottom:5px;">' + ev.title + '</div>' +
-        '<div style="font-size:12px;color:#888;font-family:\'Assistant\',sans-serif;">' + fmtDate(ev.startDate, ev.endDate) + ' · ' + ev.city + '</div>';
-      grid.appendChild(card);
-    });
-  })();
-  </script>
-
-  <!-- ============ מה אני מביא ============ -->
-  <section style="padding:20px 0 60px;background:var(--white);">
+  <!-- QUESTIONNAIRE CTA -->
+  <section style="padding:28px 0 60px;background:var(--white);">
     <div class="container" style="max-width:900px;">
-      <h2 style="font-family:var(--font-heading);font-size:clamp(26px,3.5vw,38px);color:var(--charcoal);text-align:center;margin-bottom:36px;">מה כלול בחבילה</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;" class="mabiya-grid">
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--sand);border-radius:12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✓</div>
-          <div style="font-size:14px;color:#555;line-height:1.5;"><strong style="color:var(--charcoal);display:block;margin-bottom:2px;font-size:15px;">מסלול יום-יום מלא</strong>שעות, מקומות, סדר - הכל מסודר</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--sand);border-radius:12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✓</div>
-          <div style="font-size:14px;color:#555;line-height:1.5;"><strong style="color:var(--charcoal);display:block;margin-bottom:2px;font-size:15px;">המלצות לינה אישיות</strong>מקומות שנבדקו עם ילדים</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--sand);border-radius:12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✓</div>
-          <div style="font-size:14px;color:#555;line-height:1.5;"><strong style="color:var(--charcoal);display:block;margin-bottom:2px;font-size:15px;">אטרקציות לגיל הילדים</strong>מותאם לגיל ולאנרגיה שלהם</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--sand);border-radius:12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✓</div>
-          <div style="font-size:14px;color:#555;line-height:1.5;"><strong style="color:var(--charcoal);display:block;margin-bottom:2px;font-size:15px;">טיפים לוגיסטיים</strong>מה לארוז, מה לדעת, מה להזמין מראש</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--sand);border-radius:12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;">✓</div>
-          <div style="font-size:14px;color:#555;line-height:1.5;"><strong style="color:var(--charcoal);display:block;margin-bottom:2px;font-size:15px;">תמיכה בוואטסאפ</strong>אפשר לשאול שאלות לפני ובמהלך הטיול</div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--sand);border-radius:12px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:1px;">😊</div>
-          <div style="font-size:14px;color:#555;line-height:1.5;"><strong style="color:var(--charcoal);display:block;margin-bottom:2px;font-size:15px;">חיוך, חיוך וחיוך</strong>כי טיול מוצלח עם ילדים שווה הכל</div>
-        </div>
-    </div>
-
-    <!-- QUESTIONNAIRE CTA -->
-    <div style="border-top:2px solid var(--sand-dark);margin-top:32px;padding:28px 24px 32px;text-align:center;background:var(--white);">
+    <div style="padding:28px 24px 32px;text-align:center;background:var(--white);">
       <div style="max-width:480px;margin:0 auto;background:linear-gradient(135deg,var(--teal),#238a93);border-radius:20px;padding:28px 28px 24px;">
         <div style="font-size:28px;margin-bottom:8px;">📋</div>
         <h3 style="font-family:var(--font-heading);font-size:22px;color:white;margin-bottom:8px;">מתחילים עם שאלון קצר</h3>
@@ -2748,6 +3279,7 @@
         </a>
         <p style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:10px;">מלאו ← תלחצו על שלח בסוף השאלון ואחזור אלייכם</p>
       </div>
+    </div>
     </div>
   </section>
 
@@ -3368,54 +3900,153 @@
     })();
   </script>
 
-  <!-- EMAIL POPUP -->
-  <div id="emailPopupOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:3000;align-items:center;justify-content:center;padding:24px;">
-    <div style="background:#FAF7F2;border-radius:20px;padding:40px 32px;max-width:420px;width:100%;text-align:center;position:relative;box-shadow:0 16px 48px rgba(0,0,0,0.2);animation:popupIn 0.3s ease;box-sizing:border-box;">
-      <button id="emailPopupClose" style="position:absolute;top:14px;left:16px;font-size:22px;cursor:pointer;color:#aaa;background:none;border:none;line-height:1;">×</button>
-      <div style="font-size:40px;margin-bottom:12px;">✈️</div>
-      <h2 style="font-family:'Secular One',sans-serif;font-size:22px;color:#1A6B72;margin-bottom:8px;">רוצים לקבל עדכונים?</h2>
-      <p style="font-size:14px;color:#666;line-height:1.6;margin-bottom:24px;">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
-      <form action="https://formsubmit.co/mataytasim@gmail.com" method="POST" id="emailPopupForm" style="display:flex;flex-direction:column;gap:12px;">
-        <input type="hidden" name="_subject" value="הרשמה לעדכונים - מתי טסים">
-        <input type="hidden" name="_next" value="https://mataytasim.co.il/services.html?subscribed=1">
+  <!-- EMAIL POPUP (A/B: 50% scroll @ 70%, 50% click-only — סלובקיה-style) -->
+  <style>
+    @keyframes emailPopupIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    /* מעל news-drawer (8999), events (1400), מודל צור קשר (2000) */
+    .email-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 10050; align-items: center; justify-content: center; padding: max(20px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); box-sizing: border-box; -webkit-overflow-scrolling: touch; }
+    .email-popup-overlay.open { display: flex; }
+    .email-popup { background: var(--cream); border-radius: 24px; padding: 40px 32px 36px; max-width: min(420px, calc(100vw - 32px)); width: 100%; text-align: center; position: relative; box-shadow: 0 16px 48px rgba(0,0,0,0.2); animation: emailPopupIn 0.3s ease; box-sizing: border-box; }
+    .email-popup__close { position: absolute; top: 12px; left: 12px; font-size: 24px; line-height: 1; cursor: pointer; color: #666; background: rgba(0,0,0,0.06); border: none; width: 44px; height: 44px; min-width: 44px; min-height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0; -webkit-tap-highlight-color: transparent; transition: background 0.2s, color 0.2s; }
+    .email-popup__close:hover { color: var(--charcoal); background: rgba(0,0,0,0.1); }
+    .email-popup__title { font-family: var(--font-heading); font-size: 22px; color: var(--teal); margin: 8px 0 6px; line-height: 1.25; }
+    .email-popup__subtitle { font-size: 14px; color: #666; line-height: 1.55; margin: 0 0 20px; }
+    .email-popup__form { display: flex; flex-direction: column; gap: 14px; }
+    .email-popup__input { padding: 14px 18px; border: 2px solid var(--sand-dark); border-radius: 40px; font-family: var(--font-body); font-size: 16px; background: #fff; color: var(--charcoal); outline: none; text-align: right; width: 100%; box-sizing: border-box; }
+    .email-popup__input:focus { border-color: var(--teal); }
+    .email-popup__btn { background: var(--teal); color: #fff; border: none; border-radius: 40px; padding: 14px 24px; font-family: var(--font-body); font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; min-height: 48px; -webkit-tap-highlight-color: transparent; }
+    .email-popup__btn:hover { background: var(--teal-dark); }
+    @media (max-width: 480px) {
+      .email-popup { padding: 44px 18px 22px; border-radius: 20px; }
+      .email-popup__title { font-size: 19px; }
+      .email-popup__subtitle { font-size: 13px; margin-bottom: 18px; }
+    }
+  </style>
+  <div class="email-popup-overlay" id="emailPopupOverlay">
+    <div class="email-popup">
+      <button type="button" class="email-popup__close" id="emailPopupClose" aria-label="סגור">×</button>
+      <h2 class="email-popup__title">רוצים עדכונים למייל?</h2>
+      <p class="email-popup__subtitle">טיפים, יעדים ומסלולים ועוד הרבה הפתעות - תהיו חלק מקהילת מתי טסים</p>
+      <form class="email-popup__form" action="https://formsubmit.co/mataytasim@gmail.com" method="POST" id="emailPopupForm">
+        <input type="hidden" name="_subject" value="הרשמה לעדכונים - דף הבית מתי טסים">
+        <input type="hidden" name="_next" value="https://mataytasim.co.il/services.html?subscribed=1#newsletter">
         <input type="hidden" name="_captcha" value="false">
-        <input type="email" name="email" required placeholder="המייל שלכם" style="padding:13px 18px;border:2px solid #e8ddc4;border-radius:40px;font-family:'Rubik',sans-serif;font-size:15px;background:white;color:#2C2C2C;outline:none;text-align:right;width:100%;box-sizing:border-box;">
-        <button type="submit" style="background:#1A6B72;color:white;border:none;border-radius:40px;padding:13px 28px;font-family:'Rubik',sans-serif;font-size:15px;font-weight:600;cursor:pointer;">אני רוצה לקבל עדכונים ✈️</button>
-        <button type="button" id="emailPopupSkip" style="font-size:13px;color:#aaa;cursor:pointer;background:none;border:none;text-decoration:underline;">דלג</button>
+        <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input" inputmode="email" autocomplete="email" enterkeyhint="send">
+        <button type="submit" class="email-popup__btn">קבלו עדכונים</button>
       </form>
     </div>
   </div>
 
   <script>
   (function() {
+    try {
+      var _sub = new URLSearchParams(window.location.search).get('subscribed');
+      if (_sub === '1') localStorage.setItem('mtEmailSubmitted', '1');
+    } catch (e) {}
+
     var overlay = document.getElementById('emailPopupOverlay');
     var closeBtn = document.getElementById('emailPopupClose');
-    var skipBtn = document.getElementById('emailPopupSkip');
+    var form = document.getElementById('emailPopupForm');
+    if (!overlay) return;
 
     var openedAt = 0;
+    var scrollEmailRaf = 0;
+    var emailPopupUserHasScrolled = false;
+    var variantKey = 'mtTest2NewsletterAbVariant';
+    var scrollShownKey = 'mtTest2EmailScrollShown';
+
+    var params = new URLSearchParams(window.location.search);
+    var forced = params.get('nlAb');
+    var variant = '';
+    try {
+      variant = localStorage.getItem(variantKey) || '';
+    } catch (e) {}
+    if (forced === 'scroll' || forced === 'click') {
+      variant = forced === 'scroll' ? 'scroll' : 'click-only';
+      try { localStorage.setItem(variantKey, variant); } catch (e) {}
+    } else if (!variant) {
+      variant = Math.random() < 0.5 ? 'scroll' : 'click-only';
+      try { localStorage.setItem(variantKey, variant); } catch (e) {}
+    } else if (variant !== 'scroll' && variant !== 'click-only') {
+      variant = 'click-only';
+    }
+
     function openPopup() {
-      overlay.style.display = 'flex';
+      try {
+        if (localStorage.getItem('mtEmailSubmitted')) return;
+      } catch (e) {}
+      if (overlay.classList.contains('open')) return;
+      overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
       openedAt = Date.now();
     }
+
     function closePopup() {
-      overlay.style.display = 'none';
+      overlay.classList.remove('open');
       document.body.style.overflow = '';
     }
-    window.openEmailPopup = openPopup;
 
-    document.addEventListener('click', function(e) {
-      var link = e.target.closest('a[href="#newsletter"]');
-      if (link) { e.preventDefault(); openPopup(); }
+    function maybeOpenFromScroll() {
+      if (variant !== 'scroll') return;
+      try {
+        if (localStorage.getItem('mtEmailSubmitted')) return;
+      } catch (e) {}
+      if (!emailPopupUserHasScrolled) return;
+      try {
+        if (sessionStorage.getItem(scrollShownKey)) return;
+      } catch (e) {}
+      var doc = document.documentElement;
+      var scrollTop = window.scrollY || doc.scrollTop;
+      var maxScroll = doc.scrollHeight - window.innerHeight;
+      if (maxScroll <= 0) return;
+      var ratio = scrollTop / maxScroll;
+      if (ratio < 0.7) return;
+      try {
+        sessionStorage.setItem(scrollShownKey, '1');
+      } catch (e) {}
+      openPopup();
+      if (window.plausible) {
+        plausible('Newsletter-Scroll-Popup-Shown', { props: { page: 'test2_fixed', threshold: 0.7 } });
+      }
+    }
+
+    function onScrollEmail() {
+      if (scrollEmailRaf) return;
+      scrollEmailRaf = requestAnimationFrame(function() {
+        scrollEmailRaf = 0;
+        var st = window.scrollY || document.documentElement.scrollTop;
+        if (st > 2) emailPopupUserHasScrolled = true;
+        maybeOpenFromScroll();
+      });
+    }
+
+    /* תפריט נייד: סוגרים דרך ה-listener הקיים על כל ה-a בתוך #mobileMenu, ואז כאן נפתח פופאפ */
+    document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        openPopup();
+      });
     });
 
     if (closeBtn) closeBtn.addEventListener('click', closePopup);
-    if (skipBtn) skipBtn.addEventListener('click', closePopup);
-    overlay.addEventListener('click', function(e) { if (e.target === overlay && Date.now() - openedAt > 400) closePopup(); });
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePopup(); });
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay && Date.now() - openedAt > 400) closePopup();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closePopup();
+    });
 
-    var form = document.getElementById('emailPopupForm');
-    if (form) form.addEventListener('submit', function() { setTimeout(closePopup, 300); });
+    if (form) {
+      form.addEventListener('submit', function() {
+        try { localStorage.setItem('mtEmailSubmitted', '1'); } catch (e) {}
+      });
+    }
+
+    window.openEmailPopup = openPopup;
+
+    if (variant === 'scroll') {
+      window.addEventListener('scroll', onScrollEmail, { passive: true });
+    }
   })();
   </script>
 
