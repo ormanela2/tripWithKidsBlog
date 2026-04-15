@@ -1318,7 +1318,6 @@
         overflow: hidden;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
-        will-change: transform;
       }
 
       .pricing-stack__card.is-stack-front.is-expanded {
@@ -1368,14 +1367,15 @@
         opacity: 1;
       }
 
+      /* No CSS blur on mobile: large blurred layers + transforms crash WebKit (GPU memory). Use opacity only. */
       .pricing-stack__card.is-stack-mid .pricing-card__stack-blur {
-        filter: blur(6px);
-        opacity: 0.88;
+        filter: none;
+        opacity: 0.9;
       }
 
       .pricing-stack__card.is-stack-back .pricing-card__stack-blur {
-        filter: blur(11px);
-        opacity: 0.76;
+        filter: none;
+        opacity: 0.74;
       }
 
       .pricing-stack__card.is-stack-exit-left {
@@ -1405,6 +1405,7 @@
         min-height: 0;
         overflow: visible;
         border-radius: inherit;
+        transition: opacity 0.35s ease;
       }
 
       .pricing-stack__card:not(.is-stack-front) .pricing-card__stack-blur {
