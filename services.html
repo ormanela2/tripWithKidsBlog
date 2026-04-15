@@ -1155,152 +1155,124 @@
         transform: translateZ(0);
       }
 
-      /* מובייל: קרוסלה אופקית עם snap — כרטיס מלא בכל מסך, בלי גלילה בתוך מסגרת */
+      /* מובייל: שלושה כרטיסים קומפקטיים זה מתחת זה · לחיצה על הכרטיס → שאלון */
+      .pricing-stack__hint--above {
+        display: none !important;
+      }
+
       .pricing-stack__viewport {
         position: relative;
         isolation: isolate;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: nowrap;
-        align-items: stretch;
+        align-items: center;
         direction: rtl;
-        gap: 14px;
+        gap: 12px;
         width: 100%;
-        max-width: 100vw;
+        max-width: 100%;
         height: auto;
         min-height: 0;
-        max-height: none;
         margin: 0 auto;
-        padding: 6px 0 20px;
-        padding-inline: max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-left));
+        padding: 0 0 8px;
+        padding-inline: max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-left));
         box-sizing: border-box;
-        overflow-x: auto;
-        overflow-y: visible;
-        scroll-snap-type: x mandatory;
-        scroll-padding-inline: max(16px, env(safe-area-inset-right));
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-x: contain;
-        touch-action: pan-x pan-y;
-        scrollbar-width: none;
+        overflow: visible;
         contain: none;
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
-        --pricing-snap-w: min(360px, calc(100vw - 40px));
       }
 
-      .pricing-stack__viewport::-webkit-scrollbar {
-        display: none;
-      }
-
-      .pricing-stack__hint--above .pricing-stack__intro-text {
-        flex: 1 1 auto;
-        min-width: 0;
-        margin: 0;
-        padding: 0 4px;
-        text-align: center;
-        font-family: 'Assistant', sans-serif;
-        font-size: clamp(10px, 3.2vw, 14px);
-        font-weight: 600;
-        color: var(--charcoal);
-        line-height: 1.35;
-      }
-
-      .pricing-stack__hint--above {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        width: 100%;
-        margin: 0 0 14px;
-        padding: 10px 10px;
-        box-sizing: border-box;
-        border-radius: 14px;
-        background: rgba(255, 255, 255, 0.94);
-        border: 1px solid rgba(0, 0, 0, 0.07);
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
-        color: var(--charcoal);
-        pointer-events: none;
-        z-index: 5;
-      }
-
-      .pricing-stack__hint--above .pricing-stack__dir {
-        pointer-events: auto;
-        flex: 0 0 44px;
-        min-width: 44px;
-        min-height: 44px;
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        background: rgba(255, 255, 255, 0.98);
-        color: var(--charcoal);
-        font-size: 22px;
-        line-height: 1;
+      a.pricing-stack__card--tap {
+        text-decoration: none;
+        color: inherit;
         cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        font-family: inherit;
-        -webkit-tap-highlight-color: transparent;
-        transition: background 0.15s ease, transform 0.1s ease;
-        align-self: center;
-      }
-
-      .pricing-stack__hint--above .pricing-stack__dir:active {
-        background: var(--sand);
-        transform: scale(0.96);
-      }
-
-      .pricing-stack__hint--arrows-only {
-        justify-content: space-between;
-        align-items: center;
-        max-width: min(520px, 94vw);
-        margin-left: auto;
-        margin-right: auto;
-        padding: 10px 10px;
+        -webkit-tap-highlight-color: rgba(26, 107, 114, 0.15);
       }
 
       .pricing-stack__card {
         position: relative !important;
         top: auto !important;
         left: auto !important;
-        flex: 0 0 var(--pricing-snap-w);
-        width: var(--pricing-snap-w);
-        max-width: var(--pricing-snap-w);
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 320px;
         height: auto !important;
         max-height: none !important;
         margin: 0 !important;
         display: flex;
         flex-direction: column;
         min-height: 0;
-        scroll-snap-align: center;
-        scroll-snap-stop: always;
         transform: none !important;
         opacity: 1 !important;
         pointer-events: auto !important;
         z-index: 1;
-        border-radius: 1.5rem !important;
-        overflow: visible;
-        transition: box-shadow 0.25s ease;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        /* ללא מסגרת כפולה / הילה כתומה — רק כרטיס אחיד */
-        border: 1px solid rgba(0, 0, 0, 0.1) !important;
-        box-shadow: 0 10px 36px rgba(0, 0, 0, 0.1);
+        border-radius: 14px !important;
+        overflow: hidden;
+        transition: box-shadow 0.2s ease, transform 0.15s ease;
+        border: 1px solid rgba(0, 0, 0, 0.09) !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      a.pricing-stack__card--tap:active {
+        transform: scale(0.99) !important;
       }
 
       .pricing-stack__card.pricing-card--highlighted {
         border: 2px solid var(--amber) !important;
-        box-shadow: 0 12px 40px rgba(232, 160, 69, 0.2);
+        box-shadow: 0 8px 24px rgba(232, 160, 69, 0.18);
       }
 
-      /* סדר מובייל (RTL): הרפתקה ראשונה מימין, אחר כך מצפן ואודיסיאה */
+      /* הרפתקה → מצפן → אודיסיאה */
       .pricing-stack__card[data-stack-index="1"] { order: 0; }
       .pricing-stack__card[data-stack-index="0"] { order: 1; }
       .pricing-stack__card[data-stack-index="2"] { order: 2; }
+
+      .pricing-stack__card .pricing-card__header {
+        padding: 14px 16px 10px !important;
+      }
+
+      .pricing-stack__card .pricing-card__icon {
+        font-size: 28px !important;
+        margin-bottom: 6px !important;
+      }
+
+      .pricing-stack__card .pricing-card__name {
+        font-size: 20px !important;
+      }
+
+      .pricing-stack__card .pricing-card__tagline {
+        font-size: 13px !important;
+      }
+
+      .pricing-stack__card .pricing-card__header .pricing-card__badge {
+        font-size: 11px !important;
+        padding: 4px 12px !important;
+      }
+
+      .pricing-stack__card .pricing-card__body {
+        padding: 12px 16px 16px !important;
+      }
+
+      .pricing-stack__card .pricing-card__price {
+        font-size: 22px !important;
+      }
+
+      .pricing-stack__card .pricing-card__for {
+        font-size: 12px !important;
+      }
+
+      .pricing-stack__card .pricing-card__features {
+        display: none !important;
+      }
+
+      .pricing-stack__card .pricing-stack__cta {
+        margin-top: 10px !important;
+        padding: 10px 14px !important;
+        font-size: 13px !important;
+        width: 100%;
+        box-sizing: border-box;
+        pointer-events: none;
+        flex-shrink: 0;
+      }
 
       .pricing-card__stack-blur {
         display: flex;
@@ -1313,19 +1285,6 @@
         pointer-events: auto !important;
       }
 
-      .pricing-stack__card .pricing-stack__cta {
-        visibility: visible !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        height: auto !important;
-        min-height: unset !important;
-        margin-top: 16px !important;
-        padding: 14px 24px !important;
-        overflow: visible !important;
-        border-width: initial !important;
-        flex-shrink: 0;
-      }
-
       .pricing-stack__card .pricing-card__body {
         flex: 0 0 auto;
         display: flex;
@@ -1333,8 +1292,13 @@
         min-height: 0;
       }
 
-      .pricing-stack__card .pricing-card__features {
-        flex: 0 0 auto;
+      .pricing-stack__card .pricing-card__price-row {
+        margin-bottom: 10px !important;
+        padding-bottom: 10px !important;
+      }
+
+      .pricing-stack__card.pricing-card--highlighted .pricing-card__header {
+        padding-top: 34px !important;
       }
 
     }
@@ -2939,7 +2903,7 @@
         <div class="pricing-carousel-host">
         <div class="pricing-stack">
         <div class="pricing-stack__scene">
-          <div class="pricing-stack__hint pricing-stack__hint--above pricing-stack__hint--arrows-only" role="toolbar" aria-label="מעבר בין חבילות">
+          <div class="pricing-stack__hint pricing-stack__hint--above pricing-stack__hint--arrows-only" role="toolbar" aria-label="מעבר בין חבילות (מסך גדול בלבד)">
             <button type="button" class="pricing-stack__dir" id="pricing-stack-prev" aria-label="חבילה קודמת">‹</button>
             <span class="pricing-stack__intro-text" id="pricing-stack-intro">מעבר בין חבילות · לחיצה על החיצים</span>
             <button type="button" class="pricing-stack__dir" id="pricing-stack-next" aria-label="חבילה הבאה">›</button>
@@ -2947,7 +2911,7 @@
           <div class="pricing-stack__viewport" id="pricing-stack-scene" role="group" aria-label="חבילות תכנון">
 
           <!-- מצפן -->
-          <div class="pricing-card pricing-card--floating pricing-stack__card is-stack-front" data-stack-index="0">
+          <a href="questionnaire_form.html?package=matzpen" class="pricing-card pricing-card--floating pricing-stack__card pricing-stack__card--tap is-stack-front" data-stack-index="0">
             <div class="pricing-card__stack-blur">
             <div class="pricing-card__header">
               <span class="pricing-card__icon">🧭</span>
@@ -2977,13 +2941,13 @@
                   <span>טיפים כלליים ליעד</span>
                 </li>
               </ul>
-            <a href="questionnaire_form.html?package=matzpen" class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</a>
+            <span class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</span>
             </div>
             </div>
-          </div>
+          </a>
 
           <!-- הרפתקה (highlighted) -->
-          <div class="pricing-card pricing-card--highlighted pricing-card--floating pricing-stack__card is-stack-mid" data-stack-index="1">
+          <a href="questionnaire_form.html?package=har" class="pricing-card pricing-card--highlighted pricing-card--floating pricing-stack__card pricing-stack__card--tap is-stack-mid" data-stack-index="1">
             <div class="pricing-card__stack-blur">
             <div class="pricing-card__header" style="padding-top:44px;">
               <div class="pricing-card__badge" style="top:12px;transform:translateX(-50%);">הכי פופולרי ⭐</div>
@@ -3026,13 +2990,13 @@
                   <span>התאמות אישיות עד לפני הטיול</span>
                 </li>
               </ul>
-            <a href="questionnaire_form.html?package=har" class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</a>
+            <span class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</span>
             </div>
             </div>
-          </div>
+          </a>
 
           <!-- אודיסיאה -->
-          <div class="pricing-card pricing-card--floating pricing-stack__card is-stack-back" data-stack-index="2">
+          <a href="questionnaire_form.html?package=ody" class="pricing-card pricing-card--floating pricing-stack__card pricing-stack__card--tap is-stack-back" data-stack-index="2">
             <div class="pricing-card__stack-blur">
             <div class="pricing-card__header">
               <span class="pricing-card__icon">🌊</span>
@@ -3066,117 +3030,14 @@
                   <span>עדכונים בזמן אמת (מזג אוויר, שינויים)</span>
                 </li>
               </ul>
-            <a href="questionnaire_form.html?package=ody" class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</a>
+            <span class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</span>
             </div>
             </div>
-          </div>
+          </a>
 
         </div>
         </div>
         </div>
-        </div>
-        <script>
-        (function() {
-          var scene = document.getElementById('pricing-stack-scene');
-          var cards = scene ? [].slice.call(scene.querySelectorAll('.pricing-stack__card')) : [];
-          /* מובייל: סדר תצוגה הרפתקה → מצפן → אודיסיאה (data-stack-index 1,0,2) */
-          var visualOrder = [1, 0, 2];
-          var snapPos = 0;
-
-          function isMobileStack() {
-            return window.matchMedia('(max-width: 768px)').matches;
-          }
-
-          function clearStackClasses() {
-            cards.forEach(function(c) {
-              c.classList.remove('is-stack-exit-left', 'is-stack-exit-right', 'is-stack-front', 'is-stack-mid', 'is-stack-back');
-            });
-          }
-
-          /* גלילה רק בתוך ה-viewport — בלי scrollIntoView (שמקפיץ את כל העמוד לכרטיס) */
-          function scrollToSnap(index, smooth) {
-            if (!isMobileStack() || !scene || !cards.length) return;
-            snapPos = (index % 3 + 3) % 3;
-            var el = cards[visualOrder[snapPos]];
-            if (!el) return;
-            var sr = scene.getBoundingClientRect();
-            var er = el.getBoundingClientRect();
-            var delta = (er.left + er.width / 2) - (sr.left + sr.width / 2);
-            var behavior = smooth ? 'smooth' : 'auto';
-            if (typeof scene.scrollBy === 'function') {
-              try {
-                scene.scrollBy({ left: -delta, top: 0, behavior: behavior });
-              } catch (err) {
-                scene.scrollLeft -= delta;
-              }
-            } else {
-              scene.scrollLeft -= delta;
-            }
-          }
-
-          function syncSnapFromScroll() {
-            if (!isMobileStack() || !scene) return;
-            var sr = scene.getBoundingClientRect();
-            var center = sr.left + sr.width / 2;
-            var bestDist = Infinity;
-            var bestPos = snapPos;
-            for (var p = 0; p < 3; p++) {
-              var el = cards[visualOrder[p]];
-              if (!el) continue;
-              var r = el.getBoundingClientRect();
-              var c = r.left + r.width / 2;
-              var d = Math.abs(c - center);
-              if (d < bestDist) {
-                bestDist = d;
-                bestPos = p;
-              }
-            }
-            snapPos = bestPos;
-          }
-
-          function layoutPricing() {
-            if (!scene || cards.length !== 3) return;
-            clearStackClasses();
-            if (!isMobileStack()) return;
-            snapPos = 0;
-            window.requestAnimationFrame(function() {
-              scrollToSnap(0, false);
-            });
-          }
-
-          if (scene && cards.length === 3) {
-            if (document.readyState === 'loading') {
-              document.addEventListener('DOMContentLoaded', layoutPricing);
-            } else {
-              layoutPricing();
-            }
-
-            window.addEventListener('resize', layoutPricing);
-
-            var btnPrev = document.getElementById('pricing-stack-prev');
-            var btnNext = document.getElementById('pricing-stack-next');
-            if (btnPrev) {
-              btnPrev.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (!isMobileStack()) return;
-                scrollToSnap(snapPos - 1, true);
-              });
-            }
-            if (btnNext) {
-              btnNext.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (!isMobileStack()) return;
-                scrollToSnap(snapPos + 1, true);
-              });
-            }
-
-            scene.addEventListener('scroll', function() {
-              window.requestAnimationFrame(syncSnapFromScroll);
-            }, { passive: true });
-          }
-        })();
-        </script>
-
         </div>
       </div>
     </div>
