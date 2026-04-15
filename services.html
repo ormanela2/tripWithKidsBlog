@@ -3093,17 +3093,25 @@
             });
           }
 
+          /* גלילה רק בתוך ה-viewport — בלי scrollIntoView (שמקפיץ את כל העמוד לכרטיס) */
           function scrollToSnap(index, smooth) {
             if (!isMobileStack() || !scene || !cards.length) return;
             snapPos = (index % 3 + 3) % 3;
-            var cardIdx = visualOrder[snapPos];
-            var el = cards[cardIdx];
-            if (!el || !el.scrollIntoView) return;
-            el.scrollIntoView({
-              behavior: smooth ? 'smooth' : 'auto',
-              inline: 'center',
-              block: 'nearest'
-            });
+            var el = cards[visualOrder[snapPos]];
+            if (!el) return;
+            var sr = scene.getBoundingClientRect();
+            var er = el.getBoundingClientRect();
+            var delta = (er.left + er.width / 2) - (sr.left + sr.width / 2);
+            var behavior = smooth ? 'smooth' : 'auto';
+            if (typeof scene.scrollBy === 'function') {
+              try {
+                scene.scrollBy({ left: -delta, top: 0, behavior: behavior });
+              } catch (err) {
+                scene.scrollLeft -= delta;
+              }
+            } else {
+              scene.scrollLeft -= delta;
+            }
           }
 
           function syncSnapFromScroll() {
@@ -3129,14 +3137,11 @@
           function layoutPricing() {
             if (!scene || cards.length !== 3) return;
             clearStackClasses();
-            if (isMobileStack()) {
-              snapPos = 0;
-              window.requestAnimationFrame(function() {
-                window.requestAnimationFrame(function() {
-                  scrollToSnap(0, false);
-                });
-              });
-            }
+            if (!isMobileStack()) return;
+            snapPos = 0;
+            window.requestAnimationFrame(function() {
+              scrollToSnap(0, false);
+            });
           }
 
           if (scene && cards.length === 3) {
