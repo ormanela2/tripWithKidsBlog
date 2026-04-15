@@ -2593,9 +2593,8 @@
         מתי קורה
       </a>
 
-      <!-- מצטרפים לקהילה — amber banner -->
-      <button type="button" class="mob-nav-community" role="menuitem"
-        onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(); },120);">
+      <!-- מצטרפים לקהילה — amber banner (popup wired in EMAIL POPUP script) -->
+      <button type="button" class="mob-nav-community" id="mobNavCommunityBtn" role="menuitem">
         <div class="mob-nav-community__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -3956,7 +3955,10 @@
 
     var params = new URLSearchParams(window.location.search);
     var forced = params.get('nlAb');
-    var variant = localStorage.getItem(variantKey);
+    var variant = '';
+    try {
+      variant = localStorage.getItem(variantKey) || '';
+    } catch (e) {}
     if (forced === 'scroll' || forced === 'click') {
       variant = forced === 'scroll' ? 'scroll' : 'click-only';
       try { localStorage.setItem(variantKey, variant); } catch (e) {}
@@ -4022,6 +4024,24 @@
         openPopup();
       });
     });
+
+    var mobCommunityBtn = document.getElementById('mobNavCommunityBtn');
+    if (mobCommunityBtn) {
+      mobCommunityBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var mm = document.getElementById('mobileMenu');
+        var hb = document.getElementById('hamburgerBtn');
+        if (mm) mm.classList.remove('open');
+        if (hb) {
+          hb.setAttribute('aria-expanded', 'false');
+          hb.setAttribute('aria-label', 'פתח תפריט');
+        }
+        document.body.style.overflow = '';
+        setTimeout(function () {
+          openPopup();
+        }, 80);
+      });
+    }
 
     if (closeBtn) closeBtn.addEventListener('click', closePopup);
     overlay.addEventListener('click', function(e) {
