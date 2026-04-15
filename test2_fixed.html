@@ -1089,6 +1089,19 @@
       align-items: start;
     }
 
+    .pricing-stack__intro-text {
+      margin: 0 auto 16px;
+      padding: 0 12px;
+      text-align: center;
+      font-family: 'Assistant', sans-serif;
+      font-size: clamp(14px, 1.8vw, 17px);
+      font-weight: 600;
+      color: var(--charcoal);
+      line-height: 1.45;
+      max-width: 860px;
+      grid-column: 1 / -1;
+    }
+
     .pricing-card__stack-blur {
       transition: filter 0.45s ease, opacity 0.35s ease;
     }
@@ -1217,6 +1230,19 @@
         transform: translateZ(0);
       }
 
+      .pricing-stack__hint--above .pricing-stack__intro-text {
+        flex: 1 1 auto;
+        min-width: 0;
+        margin: 0;
+        padding: 0 4px;
+        text-align: center;
+        font-family: 'Assistant', sans-serif;
+        font-size: clamp(10px, 3.2vw, 14px);
+        font-weight: 600;
+        color: var(--charcoal);
+        line-height: 1.35;
+      }
+
       .pricing-stack__hint--above {
         display: flex;
         flex-direction: row;
@@ -1235,31 +1261,6 @@
         color: var(--charcoal);
         pointer-events: none;
         z-index: 5;
-      }
-
-      .pricing-stack__hint-mid {
-        flex: 1;
-        min-width: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2px;
-        text-align: center;
-        pointer-events: none;
-      }
-
-      .pricing-stack__hint-text {
-        font-size: clamp(10px, 3.1vw, 13px);
-        font-weight: 600;
-        line-height: 1.3;
-        letter-spacing: 0.01em;
-      }
-
-      .pricing-stack__hint--above .pricing-stack__hint-icon {
-        font-size: 20px;
-        line-height: 1;
-        flex-shrink: 0;
       }
 
       .pricing-stack__hint--above .pricing-stack__dir {
@@ -1287,6 +1288,15 @@
       .pricing-stack__hint--above .pricing-stack__dir:active {
         background: var(--sand);
         transform: scale(0.96);
+      }
+
+      .pricing-stack__hint--arrows-only {
+        justify-content: space-between;
+        align-items: center;
+        max-width: min(400px, 88vw);
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px 10px;
       }
 
       .pricing-stack__card {
@@ -1437,14 +1447,6 @@
         flex: 0 0 auto;
       }
 
-      .pricing-stack__hint-mid .pricing-stack__hint-icon {
-        animation: pricing-stack-hint-bounce 1.55s ease-in-out infinite;
-      }
-
-      @keyframes pricing-stack-hint-bounce {
-        0%, 100% { transform: translateX(0); opacity: 0.75; }
-        50% { transform: translateX(-6px); opacity: 1; }
-      }
     }
 
     @media (min-width: 769px) {
@@ -3046,15 +3048,12 @@
         <div class="pricing-carousel-host">
         <div class="pricing-stack">
         <div class="pricing-stack__scene">
-          <div class="pricing-stack__hint pricing-stack__hint--above">
+          <div class="pricing-stack__hint pricing-stack__hint--above pricing-stack__hint--arrows-only" role="toolbar" aria-label="מעבר בין חבילות">
             <button type="button" class="pricing-stack__dir" id="pricing-stack-prev" aria-label="חבילה קודמת">‹</button>
-            <div class="pricing-stack__hint-mid">
-              <span class="pricing-stack__hint-icon" aria-hidden="true">&#8596;</span>
-              <span class="pricing-stack__hint-text">החליקו או לחצו לעבור בין החבילות</span>
-            </div>
+            <span class="pricing-stack__intro-text" id="pricing-stack-intro">חבילות תכנון - מעבר באמצעות החיצים</span>
             <button type="button" class="pricing-stack__dir" id="pricing-stack-next" aria-label="חבילה הבאה">›</button>
           </div>
-          <div class="pricing-stack__viewport" id="pricing-stack-scene" role="group" aria-label="חבילות תכנון — החליקו שמאלה או ימינה להחלפת חבילה">
+          <div class="pricing-stack__viewport" id="pricing-stack-scene" role="group" aria-label="חבילות תכנון">
 
           <!-- מצפן -->
           <div class="pricing-card pricing-card--floating pricing-stack__card is-stack-front" data-stack-index="0">
@@ -3215,10 +3214,6 @@
           var cards = scene ? [].slice.call(scene.querySelectorAll('.pricing-stack__card')) : [];
           var frontIndex = 0;
           var locked = false;
-          var startX = 0;
-          var startY = 0;
-          var tracking = false;
-          var activePointerId = null;
 
           function isMobileStack() {
             return window.matchMedia('(max-width: 768px)').matches;
@@ -3276,40 +3271,6 @@
             }, ms);
           }
 
-          function getFrontCard() {
-            return cards[frontIndex];
-          }
-
-          /** Swipe may start on the front card; block only primary CTAs / form fields (not "הצג עוד"). */
-          function gestureStart(clientX, clientY, el) {
-            if (!isMobileStack()) return false;
-            var node = el && el.nodeType === 1 ? el : el && el.parentElement;
-            if (!node) return false;
-            var fc = getFrontCard();
-            if (!fc || !fc.contains(node)) return false;
-            if (node.closest && node.closest('a.pricing-card__book, a.pricing-stack__cta, input, textarea, select')) return false;
-            if (node.closest && node.closest('.pricing-card__toggle, .pricing-card__collapsible')) return false;
-            startX = clientX;
-            startY = clientY;
-            tracking = true;
-            return true;
-          }
-
-          function endSwipe(clientX, clientY) {
-            if (!tracking || !isMobileStack()) {
-              tracking = false;
-              return;
-            }
-            tracking = false;
-            var dx = clientX - startX;
-            var dy = clientY - startY;
-            var min = 36;
-            if (Math.abs(dx) < min && Math.abs(dy) < min) return;
-            if (Math.abs(dx) < Math.abs(dy) * 0.65) return;
-            if (dx < 0) rotate(-1);
-            else rotate(1);
-          }
-
           if (scene && cards.length === 3) {
             if (document.readyState === 'loading') {
               document.addEventListener('DOMContentLoaded', applyStack);
@@ -3326,42 +3287,6 @@
                 applyStack();
               }
             });
-
-            scene.addEventListener('pointerdown', function(e) {
-              if (locked) return;
-              if (!isMobileStack()) return;
-              if (e.pointerType === 'mouse' && e.button !== 0) return;
-              if (!gestureStart(e.clientX, e.clientY, e.target)) return;
-              activePointerId = e.pointerId;
-              try { scene.setPointerCapture(e.pointerId); } catch (err) {}
-            }, { passive: true });
-
-            scene.addEventListener('pointerup', function(e) {
-              if (activePointerId !== null && e.pointerId !== activePointerId) return;
-              try { scene.releasePointerCapture(e.pointerId); } catch (err) {}
-              activePointerId = null;
-              endSwipe(e.clientX, e.clientY);
-            }, { passive: true });
-
-            scene.addEventListener('pointercancel', function() {
-              tracking = false;
-              activePointerId = null;
-            }, { passive: true });
-
-            if (typeof window.PointerEvent === 'undefined') {
-              scene.addEventListener('touchstart', function(e) {
-                if (locked) return;
-                if (!gestureStart(e.touches[0].clientX, e.touches[0].clientY, e.target)) return;
-              }, { passive: true });
-              scene.addEventListener('touchcancel', function() {
-                tracking = false;
-              }, { passive: true });
-              scene.addEventListener('touchend', function(e) {
-                if (!e.changedTouches.length) return;
-                var t = e.changedTouches[0];
-                endSwipe(t.clientX, t.clientY);
-              }, { passive: true });
-            }
 
             var btnPrev = document.getElementById('pricing-stack-prev');
             var btnNext = document.getElementById('pricing-stack-next');
