@@ -207,68 +207,109 @@
     .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
     .article-hero__attr { margin: 0; padding-top: 16px; font-size: 11px; opacity: 0.62; line-height: 1.4; max-width: 780px; }
     .article-hero__attr a { color: rgba(255,255,255,0.78); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* Austria hero: glassmorphism main card over map (all breakpoints)
+       Note: parent .article-hero uses overflow:hidden which breaks backdrop-filter in Chrome/Safari —
+       .article-hero--austria sets overflow:visible. Frost lives on .article-hero__inner::before. */
+    .article-hero--austria {
+      overflow: visible;
+    }
+    .article-hero--austria.article-hero--destination::before {
+      background: linear-gradient(155deg, rgba(15,25,38,0.14) 0%, rgba(20,35,48,0.1) 50%, rgba(12,22,34,0.14) 100%),
+        linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, transparent 45%);
+    }
+    .article-hero--austria .article-hero__inner {
+      position: relative;
+      background: transparent;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      padding: 28px 28px 26px;
+      color: #1a1a1a;
+      margin-inline: auto;
+    }
+    .article-hero--austria .article-hero__inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      border-radius: inherit;
+      background: rgba(255, 255, 255, 0.7);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      pointer-events: none;
+    }
+    .article-hero--austria .article-hero__inner > * {
+      position: relative;
+      z-index: 1;
+    }
+    .article-hero--austria .article-hero__breadcrumb {
+      opacity: 1;
+      margin-bottom: 18px;
+      text-shadow: none;
+    }
+    .article-hero--austria .article-hero__breadcrumb a {
+      color: #1a6b72;
+      opacity: 1;
+      text-shadow: none;
+    }
+    .article-hero--austria .article-hero__breadcrumb span { color: #666; }
+    .article-hero--austria .article-hero__title {
+      color: #111;
+      font-weight: 700;
+      text-shadow: none;
+    }
+    .article-hero--austria .article-hero__subtitle {
+      color: #1a1a1a;
+      opacity: 1;
+      text-shadow: none;
+    }
+    .article-hero--austria .article-hero__meta { gap: 10px; }
+    .article-hero--austria .article-hero__badge {
+      background: rgba(255, 255, 255, 0.95);
+      color: #1a1a1a;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .article-hero--austria .article-hero__attr {
+      color: #1a1a1a;
+      opacity: 0.88;
+      text-shadow: none;
+    }
+    .article-hero--austria .article-hero__attr a { color: #1a6b72; }
+
     @media (max-width: 600px) {
-      /* Austria mobile: map stays visible (light scrim); copy is dark on cream panel */
+      /* Austria mobile: tall hero, map visible; glass card stays centered in container */
       .article-hero.article-hero--austria {
         min-height: clamp(420px, 86vh, 720px);
         min-height: clamp(420px, 86dvh, 720px);
         padding-top: calc(var(--nav-height) + 36px);
         padding-bottom: 56px;
-        color: var(--charcoal);
       }
       .article-hero--austria .article-hero__bg img {
         object-fit: cover;
         object-position: center center;
       }
-      .article-hero--austria.article-hero--destination::before {
-        background: linear-gradient(155deg, rgba(15,25,38,0.14) 0%, rgba(20,35,48,0.1) 50%, rgba(12,22,34,0.14) 100%),
-          linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, transparent 45%);
-      }
       .article-hero--austria .article-hero__inner {
-        background: rgba(253, 248, 242, 0.95);
-        border-radius: 16px;
         padding: 18px 16px 20px;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: 0 8px 28px rgba(0,0,0,0.12);
-        color: #1a1a1a;
       }
-      .article-hero--austria .article-hero__breadcrumb { opacity: 1; margin-bottom: 14px; }
-      .article-hero--austria .article-hero__breadcrumb a { color: #1a6b72; }
-      .article-hero--austria .article-hero__breadcrumb span { color: #666; }
-      .article-hero--austria .article-hero__title {
-        color: #111;
-        text-shadow: none;
-      }
-      .article-hero--austria .article-hero__subtitle {
-        color: #333;
-        opacity: 1;
-        text-shadow: none;
-      }
+      .article-hero--austria .article-hero__breadcrumb { margin-bottom: 14px; }
       .article-hero--austria .article-hero__meta { gap: 8px; margin-top: 4px; }
-      .article-hero--austria .article-hero__badge {
-        background: #fff;
-        color: #222;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        font-weight: 600;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-      }
       .article-hero--austria .article-hero__attr {
-        color: #555;
-        opacity: 1;
         margin-top: 14px;
         padding-top: 0;
         font-size: 11px;
-        background: transparent;
-        border: none;
-        box-shadow: none;
       }
-      .article-hero--austria .article-hero__attr a { color: #1a6b72; }
       .article-hero::after { height: 48px; }
       .article-hero__title { font-size: clamp(26px, 7vw, 38px); line-height: 1.18; margin-bottom: 12px; }
       .article-hero__subtitle { margin-bottom: 20px; line-height: 1.65; }
       .article-hero__flag { font-size: 44px; margin-bottom: 12px; }
       .article-hero__badge { font-size: 13px; padding: 8px 14px; }
       .article-hero__attr { padding-top: 12px; }
+      .article-hero--austria .article-hero__attr { padding-top: 0; }
     }
 
     /* ── BODY ── */
