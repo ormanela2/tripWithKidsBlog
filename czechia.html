@@ -1572,22 +1572,26 @@
     z-index: 900;
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    padding: 0;
     background: #F5EDD8;
     color: #124d52;
     border: 1.5px solid #e8ddc4;
-    border-radius: 30px;
-    padding: 11px 18px;
+    border-radius: 50%;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    font-weight: 700;
     cursor: grab;
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     transition: box-shadow 0.2s ease, background 0.2s ease;
-    letter-spacing: 0.02em;
     animation: pbFloat 3s ease-in-out infinite;
     user-select: none;
     touch-action: none;
+  }
+  .pb-float-btn__icon {
+    font-size: 24px;
+    line-height: 1;
+    pointer-events: none;
   }
   .pb-float-btn:hover {
     background: #e8ddc4;
@@ -1728,6 +1732,7 @@
   .pb-drawer.open .pb-item:nth-child(8)  { animation-delay: 0.29s; }
   .pb-drawer.open .pb-item:nth-child(9)  { animation-delay: 0.31s; }
   .pb-drawer.open .pb-item:nth-child(10) { animation-delay: 0.33s; }
+  .pb-emergency-note {
     background: rgba(232,160,69,0.12);
     border-right: 3px solid var(--amber);
     border-radius: 0 8px 8px 0;
@@ -1741,8 +1746,8 @@
 </style>
 
 <!-- Floating button -->
-<button class="pb-float-btn" id="pbOpenBtn" aria-label="פתח מילון צ'כי">
-  <span style="font-size:20px;line-height:1;display:inline-block;">🗣️</span> מילון צ'כי
+<button type="button" class="pb-float-btn" id="pbOpenBtn" aria-label="פתח מילון צ'כי" title="מילון צ'כי">
+  <span class="pb-float-btn__icon" aria-hidden="true">&#x1F5E3;&#xFE0F;</span>
 </button>
 
 <!-- Overlay -->
