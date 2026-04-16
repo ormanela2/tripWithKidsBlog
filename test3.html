@@ -180,9 +180,9 @@
 
     /* ── HERO ── */
     .article-hero { background: #6b1414; padding-top: calc(var(--nav-height) + 56px); padding-bottom: 70px; color: var(--white); position: relative; overflow: hidden; min-height: min(520px, 75vh); }
-    .article-hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-    .article-hero__bg picture { display: block; width: 100%; height: 100%; }
-    .article-hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .article-hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .article-hero__bg picture { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+    .article-hero__bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
     .article-hero::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(155deg, rgba(139,26,26,0.82) 0%, rgba(192,57,43,0.76) 50%, rgba(146,43,33,0.8) 100%), radial-gradient(ellipse at 80% 50%, rgba(232,160,69,0.1) 0%, transparent 55%); }
     /* Neutral map scrim (shared destination hero): readable text, map stays true */
     .article-hero--destination { background: #1e2936; }
@@ -1320,8 +1320,8 @@
 <section class="article-hero article-hero--destination">
   <div class="article-hero__bg" aria-hidden="true">
     <picture>
-      <source srcset="maps/hero/austria.webp" type="image/webp">
-      <img src="maps/hero/austria.webp" alt="" width="880" height="360" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.osm==='1'){this.style.display='none';return;}this.dataset.osm='1';this.src='https://staticmap.openstreetmap.de/staticmap.php?center=47.5,14.5&amp;zoom=7&amp;size=880x360&amp;maptype=mapnik';">
+      <source srcset="/maps/hero/austria.webp" type="image/webp">
+      <img src="/maps/hero/austria.webp" alt="" width="880" height="360" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.osm==='1'){this.style.display='none';return;}this.dataset.osm='1';this.src='https://staticmap.openstreetmap.de/staticmap.php?center=47.5,14.5&amp;zoom=7&amp;size=880x360&amp;maptype=mapnik';">
     </picture>
   </div>
   <div class="container">
