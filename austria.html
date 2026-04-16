@@ -208,9 +208,8 @@
     .article-hero__attr { margin: 0; padding-top: 16px; font-size: 11px; opacity: 0.62; line-height: 1.4; max-width: 780px; }
     .article-hero__attr a { color: rgba(255,255,255,0.78); text-decoration: underline; text-underline-offset: 2px; }
 
-    /* Austria hero: glassmorphism main card over map (all breakpoints)
-       Note: parent .article-hero uses overflow:hidden which breaks backdrop-filter in Chrome/Safari —
-       .article-hero--austria sets overflow:visible. Frost lives on .article-hero__inner::before. */
+    /* Austria hero: outer frame + frosted “glass” only behind title/copy; chips sit on the map (gaps show map).
+       Parent .article-hero uses overflow:hidden which breaks backdrop-filter — .article-hero--austria uses overflow:visible. */
     .article-hero--austria {
       overflow: visible;
     }
@@ -226,22 +225,41 @@
       box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.12),
         inset 0 1px 0 rgba(255, 255, 255, 0.5);
-      padding: 28px 28px 26px;
+      padding: 22px 22px 18px;
       color: #1a1a1a;
       margin-inline: auto;
     }
-    .article-hero--austria .article-hero__inner::before {
+    .article-hero--austria .article-hero__glass {
+      position: relative;
+      margin-bottom: 14px;
+      padding: 10px 12px 16px;
+      border-radius: 20px;
+    }
+    .article-hero--austria .article-hero__glass::before {
       content: '';
       position: absolute;
       inset: 0;
       z-index: 0;
       border-radius: inherit;
-      background: rgba(255, 255, 255, 0.7);
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.62);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
       pointer-events: none;
+      /* Softer frost at corners so a bit of map shows in the “padding” around the text block */
+      -webkit-mask-image: radial-gradient(
+        ellipse 108% 96% at 50% 42%,
+        #000 0%,
+        #000 58%,
+        rgba(0, 0, 0, 0.55) 100%
+      );
+      mask-image: radial-gradient(
+        ellipse 108% 96% at 50% 42%,
+        #000 0%,
+        #000 58%,
+        rgba(0, 0, 0, 0.55) 100%
+      );
     }
-    .article-hero--austria .article-hero__inner > * {
+    .article-hero--austria .article-hero__glass > * {
       position: relative;
       z-index: 1;
     }
@@ -268,11 +286,11 @@
     }
     .article-hero--austria .article-hero__meta { gap: 10px; }
     .article-hero--austria .article-hero__badge {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.97);
       color: #1a1a1a;
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       font-weight: 600;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
     }
     .article-hero--austria .article-hero__attr {
       color: #1a1a1a;
@@ -280,6 +298,66 @@
       text-shadow: none;
     }
     .article-hero--austria .article-hero__attr a { color: #1a6b72; }
+
+    /* Desktop: single frosted card (reads as one panel; chips sit on glass, not floating on the map). */
+    @media (min-width: 601px) {
+      .article-hero--austria .article-hero__inner {
+        padding: 28px 32px 26px;
+        max-width: 800px;
+      }
+      .article-hero--austria .article-hero__inner::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        border-radius: inherit;
+        background: rgba(255, 255, 255, 0.68);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+        pointer-events: none;
+        -webkit-mask-image: radial-gradient(
+          ellipse 105% 94% at 50% 40%,
+          #000 0%,
+          #000 62%,
+          rgba(0, 0, 0, 0.5) 100%
+        );
+        mask-image: radial-gradient(
+          ellipse 105% 94% at 50% 40%,
+          #000 0%,
+          #000 62%,
+          rgba(0, 0, 0, 0.5) 100%
+        );
+      }
+      .article-hero--austria .article-hero__inner > * {
+        position: relative;
+        z-index: 1;
+      }
+      .article-hero--austria .article-hero__glass {
+        margin-bottom: 0;
+        padding: 0 0 6px;
+        border-radius: 0;
+      }
+      .article-hero--austria .article-hero__glass::before {
+        opacity: 0;
+        background: transparent;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        mask: none;
+        -webkit-mask-image: none;
+      }
+      .article-hero--austria .article-hero__subtitle {
+        margin-bottom: 22px;
+      }
+      .article-hero--austria .article-hero__meta {
+        margin-top: 4px;
+        gap: 12px;
+      }
+      .article-hero--austria .article-hero__badge {
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(255, 255, 255, 0.95);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+      }
+    }
 
     @media (max-width: 600px) {
       /* Austria mobile: tall hero, map visible; glass card stays centered in container */
@@ -294,7 +372,12 @@
         object-position: center center;
       }
       .article-hero--austria .article-hero__inner {
-        padding: 18px 16px 20px;
+        padding: 16px 14px 14px;
+      }
+      .article-hero--austria .article-hero__glass {
+        margin-bottom: 12px;
+        padding: 8px 10px 12px;
+        border-radius: 18px;
       }
       .article-hero--austria .article-hero__breadcrumb { margin-bottom: 14px; }
       .article-hero--austria .article-hero__meta { gap: 8px; margin-top: 4px; }
@@ -1421,6 +1504,7 @@
   </div>
   <div class="container">
     <div class="article-hero__inner">
+      <div class="article-hero__glass">
       <nav class="article-hero__breadcrumb" aria-label="breadcrumb">
         <a href="services.html">מתי טסים</a>
         <span>›</span>
@@ -1431,6 +1515,7 @@
       <span class="article-hero__flag"><span class="flag-icon flag-at flag-icon-hero"></span></span>
       <h1 class="article-hero__title">טיול לאוסטריה עם ילדים</h1>
       <p class="article-hero__subtitle">פסגת הדאכשטיין עם ה-Skywalk שממנה רואים את כל האלפים, מכרה המלח של ברכטסגאדן שהילדים גולשים בו בשקיות, פארק המים של וואגריין עם מגלשות אינסופיות, טירה עם מופע נשרים בלייב, מקומות שממש לקוחים מגלויות - ווינה שמחכה לכם בסוף עם שטרודל אפל ומוזיאונים שילדים אוהבים. אוסטריה היא יעד שמפתיע בכל פינה.</p>
+      </div>
       <div class="article-hero__meta">
         <span class="article-hero__badge">🟢 קל עם ילדים</span>
         <span class="article-hero__badge">📅 7-10 ימים מומלץ</span>
