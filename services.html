@@ -332,62 +332,63 @@
     .nav__link[aria-current="page"] {
       background: var(--teal);
       color: var(--white);
+      animation: none;
+      transition: none;
     }
 
     .nav__link[aria-current="page"]:hover,
     .nav__link[aria-current="page"]:focus-visible {
       background: var(--teal-dark);
       color: var(--white);
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
     .nav__link--community {
-      background: linear-gradient(135deg, var(--amber), var(--amber-light));
-      color: var(--charcoal) !important;
-      font-weight: 500;
-      border-radius: 20px;
-      padding: 8px 16px;
-      box-shadow: 0 2px 10px rgba(232, 160, 69, 0.35);
-      position: relative;
-      overflow: hidden;
-      animation: communityPulse 2s ease-in-out infinite;
+      background: transparent;
+      color: #0f4a50 !important;
+      font-size: 15px;
+      border-radius: 22px;
+      padding: 8px 18px;
+      min-height: 44px;
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      gap: 10px;
+      animation: none;
     }
-
-    .nav__link--community::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        45deg,
-        transparent 30%,
-        rgba(255, 255, 255, 0.3) 50%,
-        transparent 70%
-      );
-      animation: communityShimmer 3s ease-in-out infinite;
-    }
-
-    .nav__link--community:hover {
-      background: linear-gradient(135deg, var(--amber-dark), var(--amber));
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(232, 160, 69, 0.45);
-    }
-
+    .nav__link--community:hover,
     .nav__link--community:focus-visible {
-      outline: 2px solid var(--amber);
-      outline-offset: 2px;
+      background: #145960 !important;
+      color: #fff !important;
+      transform: none;
+      box-shadow: 0 2px 10px rgba(15, 74, 80, 0.3);
     }
-
-    @keyframes communityPulse {
-      0%, 100% { box-shadow: 0 2px 10px rgba(232, 160, 69, 0.35); }
-      50% { box-shadow: 0 2px 10px rgba(232, 160, 69, 0.55); }
+    .nav__link--community::before {
+      content: none;
+      animation: none;
+    }
+    .nav__link--community .nav__community-icon {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      opacity: 0.95;
+      margin-left: 4px;
+    }
+    .nav__link--community:hover .nav__community-icon,
+    .nav__link--community:focus-visible .nav__community-icon {
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .nav__link--community,
+      .nav__link--community::before,
+      .nav__community-icon {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+      }
     }
 
     @keyframes communityShimmer {
       0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
       100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-    }
     }
 
     .nav__cta {
@@ -1978,52 +1979,6 @@
       border-color: rgba(255,255,255,0.6);
     }
 
-    .nav__link--community {
-      background: transparent;
-      color: #0f4a50 !important;
-      font-weight: 300;
-      font-size: 15px;
-      border-radius: 22px;
-      padding: 8px 18px;
-      min-height: 44px;
-      box-shadow: none;
-      position: static;
-      overflow: visible;
-      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-      gap: 10px;
-      animation: none;
-    }
-    .nav__link--community:hover,
-    .nav__link--community:focus-visible {
-      background: #145960 !important;
-      color: #fff !important;
-      transform: none;
-      box-shadow: 0 2px 10px rgba(15,74,80,0.3);
-    }
-    .nav__link--community::before {
-      content: none;
-      animation: none;
-    }
-    .nav__link--community .nav__community-icon {
-      width: 18px;
-      height: 18px;
-      flex: 0 0 auto;
-      opacity: 0.95;
-      margin-left: 4px;
-    }
-    .nav__link--community:hover .nav__community-icon,
-    .nav__link--community:focus-visible .nav__community-icon {
-      opacity: 1;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .nav__link--community,
-      .nav__link--community::before,
-      .nav__community-icon {
-        animation: none !important;
-        transition: none !important;
-        transform: none !important;
-      }
-    }
     @media(max-width:900px) {
       .nav__links { display:none; }
       .nav__mobile-actions { display:flex; }
@@ -2381,7 +2336,7 @@
   <!-- ============ NAVIGATION ============ -->
   <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
     <div class="container nav__inner">
-      <a href="services.html" class="nav__logo" aria-label="מתי טסים - דף הבית">
+      <a href="services.html" class="nav__logo" aria-label="מתי טסים – עמוד ראשי">
         <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
       </a>
 
@@ -2390,7 +2345,7 @@
         <li role="none"><a href="destinations.html" class="nav__link" role="menuitem">יעדים</a></li>
         <li role="none"><a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a></li>
         <li role="none">
-          <a href="packages.html" class="nav__link nav__link--packages" role="menuitem" aria-current="page">
+          <a href="packages.html" class="nav__link nav__link--packages" role="menuitem">
             <svg class="nav__packages-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
               <path d="M3 7.5L12 3l9 4.5-9 4.5-9-4.5z"/>
               <path d="M3 12l9 4.5 9-4.5"/>
@@ -2416,7 +2371,7 @@
       
 
       <div class="nav__mobile-actions">
-        <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="שלח הודעת וואטסאפ">
+        <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="שלחו הודעת וואטסאפ">
           <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </a>
         <button class="nav__hamburger" id="hamburgerBtn" aria-label="פתח תפריט" aria-expanded="false" aria-controls="mobileMenu">
@@ -2441,6 +2396,7 @@
           <span class="mob-nav-item__sub">איך לתכנן נכון טיול משפחתי</span>
         </div>
       </a>
+
 
       <!-- יעדים -->
       <a href="destinations.html" class="mob-nav-item mob-nav-item--destinations" role="menuitem">
@@ -2527,6 +2483,7 @@
 
     </div>
   </nav>
+
 
   <!-- ============ NEWS TICKER ============ -->
   <style>
@@ -3367,7 +3324,7 @@
     <div class="container">
       <div class="footer__inner">
         <div class="footer__brand">
-          <a href="services.html" class="nav__logo" aria-label="מתי טסים - דף הבית">
+          <a href="services.html" class="nav__logo" aria-label="מתי טסים – עמוד ראשי">
             <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
           </a>
           <p class="footer__tagline">טיולים שמתחילים בשיחה אחת, ומסתיימים בזכרון שהילדים שלך יספרו לנכדים שלך.</p>
@@ -3677,7 +3634,7 @@
     })();
   </script>
 
-  <!-- EMAIL POPUP (A/B: 50% scroll @ 70%, 50% click-only — סלובקיה-style) -->
+  <!-- EMAIL POPUP: scroll @ 50% page depth; מצטרפים לקהילה (#newsletter) opens same modal -->
   <style>
     @keyframes emailPopupIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     /* מעל news-drawer (8999), events (1400), מודל צור קשר (2000) */
@@ -3729,26 +3686,9 @@
     var openedAt = 0;
     var scrollEmailRaf = 0;
     var emailPopupUserHasScrolled = false;
-    var variantKey = 'mtTest2NewsletterAbVariant';
     var scrollShownKey = 'mtTest2EmailScrollShown';
 
-    var params = new URLSearchParams(window.location.search);
-    var forced = params.get('nlAb');
-    var variant = '';
-    try {
-      variant = localStorage.getItem(variantKey) || '';
-    } catch (e) {}
-    if (forced === 'scroll' || forced === 'click') {
-      variant = forced === 'scroll' ? 'scroll' : 'click-only';
-      try { localStorage.setItem(variantKey, variant); } catch (e) {}
-    } else if (!variant) {
-      variant = Math.random() < 0.5 ? 'scroll' : 'click-only';
-      try { localStorage.setItem(variantKey, variant); } catch (e) {}
-    } else if (variant !== 'scroll' && variant !== 'click-only') {
-      variant = 'click-only';
-    }
-
-    function openPopup() {
+    function openPopup(fromNav) {
       try {
         if (localStorage.getItem('mtEmailSubmitted')) return;
       } catch (e) {}
@@ -3756,6 +3696,9 @@
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
       openedAt = Date.now();
+      if (fromNav && window.plausible) {
+        plausible('Newsletter-Open-Nav', { props: { page: 'services' } });
+      }
     }
 
     function closePopup() {
@@ -3764,7 +3707,6 @@
     }
 
     function maybeOpenFromScroll() {
-      if (variant !== 'scroll') return;
       try {
         if (localStorage.getItem('mtEmailSubmitted')) return;
       } catch (e) {}
@@ -3777,13 +3719,13 @@
       var maxScroll = doc.scrollHeight - window.innerHeight;
       if (maxScroll <= 0) return;
       var ratio = scrollTop / maxScroll;
-      if (ratio < 0.7) return;
+      if (ratio < 0.5) return;
       try {
         sessionStorage.setItem(scrollShownKey, '1');
       } catch (e) {}
       openPopup();
       if (window.plausible) {
-        plausible('Newsletter-Scroll-Popup-Shown', { props: { page: 'test2_fixed', threshold: 0.7 } });
+        plausible('Newsletter-Scroll-Popup-Shown', { props: { page: 'services', threshold: 0.5 } });
       }
     }
 
@@ -3801,7 +3743,7 @@
     document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        openPopup();
+        openPopup(true);
       });
     });
 
@@ -3819,11 +3761,9 @@
       });
     }
 
-    window.openEmailPopup = openPopup;
+    window.openEmailPopup = function() { openPopup(true); };
 
-    if (variant === 'scroll') {
-      window.addEventListener('scroll', onScrollEmail, { passive: true });
-    }
+    window.addEventListener('scroll', onScrollEmail, { passive: true });
   })();
   </script>
 
