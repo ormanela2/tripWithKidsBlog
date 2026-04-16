@@ -123,22 +123,6 @@
     .article-hero__attr { margin: 0; padding-top: 16px; font-size: 11px; opacity: 0.62; line-height: 1.4; max-width: 780px; }
     .article-hero__attr a { color: rgba(255,255,255,0.78); text-decoration: underline; text-underline-offset: 2px; }
     @media (max-width: 600px) {
-      .article-hero { min-height: min(420px, 70vh); padding-top: calc(var(--nav-height) + 40px); padding-bottom: 52px; }
-      /* Hero map: smaller frame on mobile so the full image stays visible (less aggressive crop) */
-      .article-hero__bg picture {
-        inset: auto;
-        left: 50%;
-        right: auto;
-        top: calc(var(--nav-height) + 12px);
-        transform: translateX(-50%);
-        width: min(92vw, 500px);
-        height: min(34vh, 210px);
-        max-height: 240px;
-      }
-      .article-hero__bg img {
-        object-fit: contain;
-        object-position: center center;
-      }
       .article-hero::after { height: 48px; }
       .article-hero__title { font-size: clamp(26px, 7vw, 38px); line-height: 1.18; margin-bottom: 12px; }
       .article-hero__subtitle { margin-bottom: 20px; line-height: 1.65; }
