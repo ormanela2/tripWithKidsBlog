@@ -1370,6 +1370,25 @@
 
   var plausiblePage = 'romania';
 
+  function newsletterPopupTrack(action, popupKind) {
+    var props = { page: plausiblePage, popup: popupKind };
+    if (window.plausible) {
+      if (action === 'close-x') plausible('Romania-Newsletter-Popup-Close-X', { props: props });
+      else if (action === 'cta') plausible('Romania-Newsletter-Popup-CTA-Click', { props: props });
+      else if (action === 'facebook') plausible('Romania-Newsletter-Popup-Facebook-Click', { props: props });
+    }
+    try {
+      var evName =
+        action === 'close-x'
+          ? 'mt-romania-newsletter-popup-close-x'
+          : action === 'cta'
+            ? 'mt-romania-newsletter-popup-cta-click'
+            : 'mt-romania-newsletter-popup-facebook-click';
+      document.dispatchEvent(new CustomEvent(evName, { detail: props, bubbles: true }));
+    } catch (e) {}
+  }
+  window.__mtNewsletterPopupTrack = newsletterPopupTrack;
+
   function openPopup(fromNav) {
     if (overlay.classList.contains('open')) {
       if (!fromNav) return;
@@ -1431,7 +1450,24 @@
     });
   });
 
-  if (closeBtn) closeBtn.addEventListener('click', closePopup);
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function () {
+      newsletterPopupTrack('close-x', 'main');
+      closePopup();
+    });
+  }
+  var mainSubmitBtn = form && form.querySelector('button[type="submit"]');
+  var mainFbLink = overlay.querySelector('.email-popup__fb-link');
+  if (mainSubmitBtn) {
+    mainSubmitBtn.addEventListener('click', function () {
+      newsletterPopupTrack('cta', 'main');
+    });
+  }
+  if (mainFbLink) {
+    mainFbLink.addEventListener('click', function () {
+      newsletterPopupTrack('facebook', 'main');
+    });
+  }
   overlay.addEventListener('click', function(e) {
     if (e.target === overlay && Date.now() - openedAt > 400) closePopup();
   });
