@@ -47,7 +47,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
   <link rel="stylesheet" href="destination-hero-glass.css"/>
-  <!-- Maps JavaScript API + Places (same key as austria.html — restrict by domain). -->
+  <!-- Maps JavaScript API + Places (same key as austria.html - restrict by domain). -->
   <script>window.GOOGLE_MAPS_API_KEY = 'AIzaSyAIpRqCBJr4vL5CiH0dHh1GSfyyjE2w-XI';</script>
   <script>
   (function (k) {
@@ -87,7 +87,7 @@
     .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; }
     .container--narrow { max-width: 780px; }
 
-    /* ── NAV — mobile drawer sibling after </nav> (Safari backdrop-filter) — same as austria.html ── */
+    /* ── NAV - mobile drawer sibling after </nav> (Safari backdrop-filter) - same as austria.html ── */
     .nav { position:fixed; top:0; right:0; left:0; z-index:1201; background:rgba(253,248,242,0.96); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--border); height:var(--nav-height); transition:box-shadow var(--ease); }
     .nav.scrolled { box-shadow:0 2px 20px rgba(0,0,0,0.08); }
     .nav__inner { display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
@@ -105,6 +105,39 @@
     .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
     .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
     .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
+    .nav__facebook-mobile {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1877f2;
+      font-size: 22px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav__facebook-mobile:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+      border-radius: 10px;
+    }
+
+    .icon-fb {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      vertical-align: middle;
+    }
+    .nav__whatsapp-mobile svg,
+    .nav__facebook-mobile svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+      flex-shrink: 0;
+    }
+
+
+
     .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:24px 20px max(32px, env(safe-area-inset-bottom)); flex-direction:column; gap:4px; z-index:1200; overflow-y:auto; -webkit-overflow-scrolling:touch; }
     .nav__mobile-menu.open { display:flex; }
     .nav__link--packages { gap:8px; font-weight:500; position:relative; padding-inline:14px; }
@@ -430,7 +463,7 @@
       color: var(--teal);
     }
 
-    /* ── ATTRACTIONS GRID (magazine-style horizontal cards — austria.html) ── */
+    /* ── ATTRACTIONS GRID (magazine-style horizontal cards - austria.html) ── */
     .attractions-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -582,7 +615,7 @@
       50% { transform: scale(1.08); filter: drop-shadow(0 4px 14px rgba(180, 83, 9, 0.5)); }
     }
 
-    /* BudapestGO — validation (important alert) */
+    /* BudapestGO - validation (important alert) */
     .bcgo-validation-alert {
       position: relative;
       display: flex;
@@ -653,7 +686,7 @@
       }
     }
 
-    /* BudapestGO — Modern Service Grid */
+    /* BudapestGO - Modern Service Grid */
     .bcgo-features {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -846,6 +879,9 @@
       
 
       <div class="nav__mobile-actions">
+        <a href="https://www.facebook.com/profile.php?id=61582155200249" class="nav__facebook-mobile" target="_blank" rel="noopener noreferrer" aria-label="עמוד הפייסבוק של מתי טסים">
+          <svg class="icon-fb" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
         <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="שלחו הודעת וואטסאפ">
           <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </a>
@@ -931,7 +967,7 @@
         </div>
       </a>
 
-      <!-- מתי קורה — teal pill -->
+      <!-- מתי קורה - teal pill -->
       <a href="calendar.html" class="mob-nav-calendar" role="menuitem">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -942,7 +978,7 @@
         מתי קורה
       </a>
 
-      <!-- מצטרפים לקהילה — קישור #newsletter (אותו מודול פופאפ כמו בדסקטופ) -->
+      <!-- מצטרפים לקהילה - קישור #newsletter (אותו מודול פופאפ כמו בדסקטופ) -->
       <a href="#newsletter" class="mob-nav-community" id="mobNavCommunityBtn" role="menuitem">
         <div class="mob-nav-community__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1051,7 +1087,7 @@
 
               <!-- Features grid -->
               <div class="bcgo-features">
-                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="כרטיסים דיגיטליים — מעבר להורדת האפליקציה">
+                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="כרטיסים דיגיטליים - מעבר להורדת האפליקציה">
                   <div class="bcgo-feature-card__sidebar">
                     <span class="bcgo-feature-card__badge" aria-hidden="true">🎫</span>
                   </div>
@@ -1061,7 +1097,7 @@
                     <span class="bcgo-feature-card__arrow" aria-hidden="true">→</span>
                   </div>
                 </a>
-                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="תכנון מסלול חכם — מעבר להורדת האפליקציה">
+                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="תכנון מסלול חכם - מעבר להורדת האפליקציה">
                   <div class="bcgo-feature-card__sidebar">
                     <span class="bcgo-feature-card__badge" aria-hidden="true">🗺️</span>
                   </div>
@@ -1071,7 +1107,7 @@
                     <span class="bcgo-feature-card__arrow" aria-hidden="true">→</span>
                   </div>
                 </a>
-                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="עדכוני תנועה שוטפים — מעבר להורדת האפליקציה">
+                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="עדכוני תנועה שוטפים - מעבר להורדת האפליקציה">
                   <div class="bcgo-feature-card__sidebar">
                     <span class="bcgo-feature-card__badge" aria-hidden="true">🔔</span>
                   </div>
@@ -1081,7 +1117,7 @@
                     <span class="bcgo-feature-card__arrow" aria-hidden="true">→</span>
                   </div>
                 </a>
-                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="MOL Bubi אופניים — מעבר להורדת האפליקציה">
+                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="MOL Bubi אופניים - מעבר להורדת האפליקציה">
                   <div class="bcgo-feature-card__sidebar">
                     <span class="bcgo-feature-card__badge" aria-hidden="true">🚲</span>
                   </div>
@@ -1093,7 +1129,7 @@
                 </a>
               </div>
 
-              <!-- Validation — important alert -->
+              <!-- Validation - important alert -->
               <div class="bcgo-validation-alert" role="alert">
                 <div class="bcgo-validation-alert__icon-wrap" aria-hidden="true">
                   <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1380,7 +1416,7 @@
           </div>
         </div>
 
-        <!-- TIPS (pro cards — same pattern as austria.html) -->
+        <!-- TIPS (pro cards - same pattern as austria.html) -->
         <div class="article-section" id="tips">
           <h2 class="article-section__title">
             <svg class="article-section__title-icon-svg" xmlns="http://www.w3.org/2000/svg" width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.88 1.35-2.6A6.98 6.98 0 0 0 18 8a7 7 0 1 0-12 0c0 1.24.33 2.44.96 3.41.69.72 1.17 1.62 1.35 2.6"/></svg>
@@ -1464,7 +1500,7 @@
             </section>
 
             <p class="tips-pro-more">
-              <a id="tipsProMoreLink" class="tips-pro-more__link" href="tips.html?utm_source=budapest_guide&amp;utm_medium=article&amp;utm_campaign=tips_section_more&amp;utm_content=pro_tips_block" data-mt-track="budapest_tips_more">אם אתם מעוניינים בעוד טיפים שיעזרו לכם בטיול — <span class="tips-pro-more__cta">לחצו כאן</span></a>
+              <a id="tipsProMoreLink" class="tips-pro-more__link" href="tips.html?utm_source=budapest_guide&amp;utm_medium=article&amp;utm_campaign=tips_section_more&amp;utm_content=pro_tips_block" data-mt-track="budapest_tips_more">אם אתם מעוניינים בעוד טיפים שיעזרו לכם בטיול - <span class="tips-pro-more__cta">לחצו כאן</span></a>
             </p>
           </div>
 
@@ -2420,7 +2456,7 @@
 <div id="gyg-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:3000;align-items:center;justify-content:center;padding:20px;">
   <div style="background:#fff;border-radius:20px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;position:relative;padding:28px 24px 24px;">
     <button onclick="closeGygModal()" style="position:absolute;top:14px;left:16px;font-size:22px;cursor:pointer;color:#aaa;background:none;border:none;line-height:1;font-family:sans-serif;">✕</button>
-    <div style="font-family:'Secular One',sans-serif;font-size:18px;color:#1A6B72;margin-bottom:16px;text-align:right;">האי מרגיט 🌿 — פעילויות</div>
+    <div style="font-family:'Secular One',sans-serif;font-size:18px;color:#1A6B72;margin-bottom:16px;text-align:right;">האי מרגיט 🌿 - פעילויות</div>
     <div data-gyg-href="https://widget.getyourguide.com/default/activities.frame" data-gyg-locale-code="en-US" data-gyg-widget="activities" data-gyg-number-of-items="3" data-gyg-partner-id="GL1NS3P" data-gyg-tour-ids=""><span>Powered by <a target="_blank" rel="sponsored" href="https://www.getyourguide.com/">GetYourGuide</a></span></div>
   </div>
 </div>
