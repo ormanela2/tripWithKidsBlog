@@ -46,6 +46,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+  <link rel="stylesheet" href="destination-hero-glass.css"/>
   <style>
     /* Inline Austria flag SVG */
     .flag-at { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23ed2939'/%3E%3Crect y='200' width='900' height='200' fill='%23fff'/%3E%3Crect y='400' width='900' height='200' fill='%23ed2939'/%3E%3C/svg%3E"); }
@@ -208,191 +209,13 @@
     .article-hero__attr { margin: 0; padding-top: 16px; font-size: 11px; opacity: 0.62; line-height: 1.4; max-width: 780px; }
     .article-hero__attr a { color: rgba(255,255,255,0.78); text-decoration: underline; text-underline-offset: 2px; }
 
-    /* Austria hero: outer frame + frosted “glass” only behind title/copy; chips sit on the map (gaps show map).
-       Parent .article-hero uses overflow:hidden which breaks backdrop-filter — .article-hero--austria uses overflow:visible. */
-    .article-hero--austria {
-      overflow: visible;
-    }
-    .article-hero--austria.article-hero--destination::before {
-      background: linear-gradient(155deg, rgba(15,25,38,0.14) 0%, rgba(20,35,48,0.1) 50%, rgba(12,22,34,0.14) 100%),
-        linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, transparent 45%);
-    }
-    .article-hero--austria .article-hero__inner {
-      position: relative;
-      background: transparent;
-      border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5);
-      padding: 22px 22px 18px;
-      color: #1a1a1a;
-      margin-inline: auto;
-    }
-    .article-hero--austria .article-hero__glass {
-      position: relative;
-      margin-bottom: 14px;
-      padding: 10px 12px 16px;
-      border-radius: 20px;
-    }
-    .article-hero--austria .article-hero__glass::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      border-radius: inherit;
-      background: rgba(255, 255, 255, 0.62);
-      -webkit-backdrop-filter: blur(14px);
-      backdrop-filter: blur(14px);
-      pointer-events: none;
-      /* Softer frost at corners so a bit of map shows in the “padding” around the text block */
-      -webkit-mask-image: radial-gradient(
-        ellipse 108% 96% at 50% 42%,
-        #000 0%,
-        #000 58%,
-        rgba(0, 0, 0, 0.55) 100%
-      );
-      mask-image: radial-gradient(
-        ellipse 108% 96% at 50% 42%,
-        #000 0%,
-        #000 58%,
-        rgba(0, 0, 0, 0.55) 100%
-      );
-    }
-    .article-hero--austria .article-hero__glass > * {
-      position: relative;
-      z-index: 1;
-    }
-    .article-hero--austria .article-hero__breadcrumb {
-      opacity: 1;
-      margin-bottom: 18px;
-      text-shadow: none;
-    }
-    .article-hero--austria .article-hero__breadcrumb a {
-      color: #1a6b72;
-      opacity: 1;
-      text-shadow: none;
-    }
-    .article-hero--austria .article-hero__breadcrumb span { color: #666; }
-    .article-hero--austria .article-hero__title {
-      color: #111;
-      font-weight: 700;
-      text-shadow: none;
-    }
-    .article-hero--austria .article-hero__subtitle {
-      color: #1a1a1a;
-      opacity: 1;
-      text-shadow: none;
-    }
-    .article-hero--austria .article-hero__meta { gap: 10px; }
-    .article-hero--austria .article-hero__badge {
-      background: rgba(255, 255, 255, 0.97);
-      color: #1a1a1a;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      font-weight: 600;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.12);
-    }
-    .article-hero--austria .article-hero__attr {
-      color: #1a1a1a;
-      opacity: 0.88;
-      text-shadow: none;
-    }
-    .article-hero--austria .article-hero__attr a { color: #1a6b72; }
-
-    /* Desktop: single frosted card (reads as one panel; chips sit on glass, not floating on the map). */
-    @media (min-width: 601px) {
-      .article-hero--austria .article-hero__inner {
-        padding: 28px 32px 26px;
-        max-width: 800px;
-      }
-      .article-hero--austria .article-hero__inner::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        border-radius: inherit;
-        background: rgba(255, 255, 255, 0.68);
-        -webkit-backdrop-filter: blur(14px);
-        backdrop-filter: blur(14px);
-        pointer-events: none;
-        -webkit-mask-image: radial-gradient(
-          ellipse 105% 94% at 50% 40%,
-          #000 0%,
-          #000 62%,
-          rgba(0, 0, 0, 0.5) 100%
-        );
-        mask-image: radial-gradient(
-          ellipse 105% 94% at 50% 40%,
-          #000 0%,
-          #000 62%,
-          rgba(0, 0, 0, 0.5) 100%
-        );
-      }
-      .article-hero--austria .article-hero__inner > * {
-        position: relative;
-        z-index: 1;
-      }
-      .article-hero--austria .article-hero__glass {
-        margin-bottom: 0;
-        padding: 0 0 6px;
-        border-radius: 0;
-      }
-      .article-hero--austria .article-hero__glass::before {
-        opacity: 0;
-        background: transparent;
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-        mask: none;
-        -webkit-mask-image: none;
-      }
-      .article-hero--austria .article-hero__subtitle {
-        margin-bottom: 22px;
-      }
-      .article-hero--austria .article-hero__meta {
-        margin-top: 4px;
-        gap: 12px;
-      }
-      .article-hero--austria .article-hero__badge {
-        background: rgba(255, 255, 255, 0.88);
-        border: 1px solid rgba(255, 255, 255, 0.95);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-      }
-    }
-
     @media (max-width: 600px) {
-      /* Austria mobile: tall hero, map visible; glass card stays centered in container */
-      .article-hero.article-hero--austria {
-        min-height: clamp(420px, 86vh, 720px);
-        min-height: clamp(420px, 86dvh, 720px);
-        padding-top: calc(var(--nav-height) + 36px);
-        padding-bottom: 56px;
-      }
-      .article-hero--austria .article-hero__bg img {
-        object-fit: cover;
-        object-position: center center;
-      }
-      .article-hero--austria .article-hero__inner {
-        padding: 16px 14px 14px;
-      }
-      .article-hero--austria .article-hero__glass {
-        margin-bottom: 12px;
-        padding: 8px 10px 12px;
-        border-radius: 18px;
-      }
-      .article-hero--austria .article-hero__breadcrumb { margin-bottom: 14px; }
-      .article-hero--austria .article-hero__meta { gap: 8px; margin-top: 4px; }
-      .article-hero--austria .article-hero__attr {
-        margin-top: 14px;
-        padding-top: 0;
-        font-size: 11px;
-      }
       .article-hero::after { height: 48px; }
       .article-hero__title { font-size: clamp(26px, 7vw, 38px); line-height: 1.18; margin-bottom: 12px; }
       .article-hero__subtitle { margin-bottom: 20px; line-height: 1.65; }
       .article-hero__flag { font-size: 44px; margin-bottom: 12px; }
       .article-hero__badge { font-size: 13px; padding: 8px 14px; }
       .article-hero__attr { padding-top: 12px; }
-      .article-hero--austria .article-hero__attr { padding-top: 0; }
     }
 
     /* ── BODY ── */
@@ -1184,6 +1007,16 @@
     .cta-card__btn:hover { background: var(--amber-dark); transform: translateY(-2px); }
     .cta-card__wa { display: flex; align-items: center; justify-content: center; gap: 8px; background: #25D366; color: var(--white); border-radius: 12px; padding: 13px 20px; font-size: 15px; font-weight: 600; transition: background 0.2s; margin-top: 10px; }
     .cta-card__wa:hover { background: #1da851; }
+    /* Same CTA as sidebar, mobile-only above Salzburg attractions block (sidebar stacks below article) */
+    .cta-card--timeline-mobile { display: none; }
+    @media (max-width: 900px) {
+      .cta-card--timeline-mobile {
+        display: block;
+        margin: 0 0 24px;
+        border-radius: 24px;
+        padding: 22px 20px;
+      }
+    }
 
     /* ── TOC ── */
     .toc { background: var(--sand); border-radius: 14px; padding: 20px; margin-bottom: 36px; }
@@ -1495,7 +1328,7 @@
 
 
 <!-- HERO -->
-<section class="article-hero article-hero--destination article-hero--austria">
+<section class="article-hero article-hero--destination article-hero--mapglass">
   <div class="article-hero__bg" aria-hidden="true">
     <picture>
       <source srcset="austria.webp" type="image/webp">
@@ -2028,6 +1861,15 @@
 
         <!-- 4. SALZBURG ATTRACTIONS -->
         <div class="article-section" id="salzburg-attractions">
+          <div class="cta-card cta-card--timeline-mobile" aria-label="תכנון מסלול אישי">
+            <div class="cta-card__title">רוצים מסלול מותאם? 🇦🇹</div>
+            <div class="cta-card__text">אבנה לכם מסלול מלא לאוסטריה – יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.</div>
+            <a href="packages.html" class="cta-card__btn">לחבילות תכנון</a>
+            <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לאוסטריה עם ילדים" target="_blank" rel="noopener noreferrer" class="cta-card__wa">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              שלחו הודעה
+            </a>
+          </div>
           <h2 class="article-section__title"><span class="article-section__title-icon">🏔️</span> אטרקציות באזור זלצבורגר לנד</h2>
           <div class="attractions-grid">
             <div class="attraction-card">
@@ -3867,15 +3709,19 @@
   var openedAt = 0;
   var scrollEmailRaf = 0;
   var emailPopupUserHasScrolled = false;
-  var scrollShownKey = 'mtTest2EmailScrollShown';
+  var scrollHalfArm = true;
 
   var plausiblePage = 'austria';
 
   function openPopup(fromNav) {
-    try {
-      if (localStorage.getItem('mtEmailSubmitted')) return;
-    } catch (e) {}
-    if (overlay.classList.contains('open')) return;
+    if (overlay.classList.contains('open')) {
+      if (!fromNav) return;
+      openedAt = Date.now();
+      if (window.plausible) {
+        plausible('Newsletter-Open-Nav', { props: { page: plausiblePage } });
+      }
+      return;
+    }
     overlay.classList.add('open');
     if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
     else document.body.style.overflow = 'hidden';
@@ -3892,22 +3738,19 @@
   }
 
   function maybeOpenFromScroll() {
-    try {
-      if (localStorage.getItem('mtEmailSubmitted')) return;
-    } catch (e) {}
     if (!emailPopupUserHasScrolled) return;
-    try {
-      if (sessionStorage.getItem(scrollShownKey)) return;
-    } catch (e) {}
     var doc = document.documentElement;
     var scrollTop = window.scrollY || doc.scrollTop;
     var maxScroll = doc.scrollHeight - window.innerHeight;
     if (maxScroll <= 0) return;
     var ratio = scrollTop / maxScroll;
+    if (ratio < 0.42) {
+      scrollHalfArm = true;
+      return;
+    }
     if (ratio < 0.5) return;
-    try {
-      sessionStorage.setItem(scrollShownKey, '1');
-    } catch (e) {}
+    if (!scrollHalfArm) return;
+    scrollHalfArm = false;
     openPopup();
     if (window.plausible) {
       plausible('Newsletter-Scroll-Popup-Shown', { props: { page: plausiblePage, threshold: 0.5 } });

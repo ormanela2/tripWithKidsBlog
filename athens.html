@@ -1289,15 +1289,19 @@
   var openedAt = 0;
   var scrollEmailRaf = 0;
   var emailPopupUserHasScrolled = false;
-  var scrollShownKey = 'mtTest2EmailScrollShown';
+  var scrollHalfArm = true;
 
   var plausiblePage = 'athens';
 
   function openPopup(fromNav) {
-    try {
-      if (localStorage.getItem('mtEmailSubmitted')) return;
-    } catch (e) {}
-    if (overlay.classList.contains('open')) return;
+    if (overlay.classList.contains('open')) {
+      if (!fromNav) return;
+      openedAt = Date.now();
+      if (window.plausible) {
+        plausible('Newsletter-Open-Nav', { props: { page: plausiblePage } });
+      }
+      return;
+    }
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
     openedAt = Date.now();
@@ -1312,22 +1316,19 @@
   }
 
   function maybeOpenFromScroll() {
-    try {
-      if (localStorage.getItem('mtEmailSubmitted')) return;
-    } catch (e) {}
     if (!emailPopupUserHasScrolled) return;
-    try {
-      if (sessionStorage.getItem(scrollShownKey)) return;
-    } catch (e) {}
     var doc = document.documentElement;
     var scrollTop = window.scrollY || doc.scrollTop;
     var maxScroll = doc.scrollHeight - window.innerHeight;
     if (maxScroll <= 0) return;
     var ratio = scrollTop / maxScroll;
+    if (ratio < 0.42) {
+      scrollHalfArm = true;
+      return;
+    }
     if (ratio < 0.5) return;
-    try {
-      sessionStorage.setItem(scrollShownKey, '1');
-    } catch (e) {}
+    if (!scrollHalfArm) return;
+    scrollHalfArm = false;
     openPopup();
     if (window.plausible) {
       plausible('Newsletter-Scroll-Popup-Shown', { props: { page: plausiblePage, threshold: 0.5 } });
