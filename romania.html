@@ -27,7 +27,7 @@
   <!-- Twitter/X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="טיול לרומניה עם ילדים 2026 | מדריך ומסלול למשפחות | מתי טסים">
-  <meta name="twitter:description" content="מדריך מלא לטיול לרומניה עם ילדים: דרקולה, הקרפטים, Dino Park — טיפים מהשטח.">
+  <meta name="twitter:description" content="מדריך מלא לטיול לרומניה עם ילדים: דרקולה, הקרפטים, Dino Park - טיפים מהשטח.">
   <meta name="twitter:image" content="https://mataytasim.co.il/og-image.png">
 
   <script type="application/ld+json">
@@ -193,11 +193,155 @@
       .tl-item:nth-child(even) .tl-item__label { order: unset; }
     }
     .attraction-card__age { display: none; }
-    .tips-list { display: flex; flex-direction: column; gap: 10px; }
-    .tip-item { background: var(--white); border-radius: 12px; border: 2px solid var(--sand-dark); padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
-    .tip-item__icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-    .tip-item__text { color: #555; line-height: 1.65; }
-    .tip-item__text strong { color: var(--charcoal); }
+    /* Pro tip cards (#logistics) - same pattern as slovakia.html / tips */
+    #logistics .tips-pro-wrap { display: flex; flex-direction: column; gap: 28px; margin-top: 4px; }
+    #logistics .tips-pro-group__title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      margin: 0 0 4px;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+    #logistics .tips-pro-group__sub {
+      margin: 0 0 12px;
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.45;
+    }
+    #logistics .tips-pro-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 14px;
+      align-items: stretch;
+    }
+    @media (max-width: 720px) {
+      #logistics .tips-pro-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+    #logistics .tip-pro {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    #logistics .tip-pro:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    #logistics .tip-pro:focus-within {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+    #logistics .tip-pro--warm {
+      background: linear-gradient(145deg, #fffdf7 0%, #fff4d6 55%, #fffbeb 100%);
+      border-color: rgba(234, 179, 8, 0.38);
+    }
+    #logistics .tip-pro--cool {
+      background: linear-gradient(145deg, #f8fbff 0%, #e8f2ff 50%, #f0f7ff 100%);
+      border-color: rgba(96, 165, 250, 0.45);
+    }
+    #logistics .tip-pro__icon-wrap {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+    #logistics .tip-pro__svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+    #logistics .tip-pro--warm .tip-pro__svg { color: #b45309; }
+    #logistics .tip-pro--cool .tip-pro__svg { color: #1d4ed8; }
+    #logistics .tip-pro__body { flex: 1; min-width: 0; text-align: right; }
+    #logistics .tip-pro__subject {
+      display: block;
+      font-weight: 700;
+      font-size: 1.0625rem;
+      color: var(--charcoal);
+      margin: 0 0 5px;
+      line-height: 1.3;
+    }
+    #logistics .tip-pro__text {
+      margin: 0;
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.55;
+    }
+    @media (max-width: 720px) {
+      #logistics .tip-pro {
+        padding: 10px 12px;
+        gap: 10px;
+        border-radius: 12px;
+      }
+      #logistics .tip-pro__icon-wrap {
+        width: 36px;
+        height: 36px;
+      }
+      #logistics .tip-pro__svg {
+        width: 18px;
+        height: 18px;
+      }
+      #logistics .tip-pro__subject {
+        font-size: 15px;
+        margin-bottom: 3px;
+      }
+      #logistics .tip-pro__text {
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      #logistics .tips-pro-wrap {
+        gap: 22px;
+      }
+    }
+    #logistics .article-section__title-icon-svg {
+      display: inline-flex;
+      vertical-align: middle;
+      margin-inline-end: 6px;
+      color: var(--teal);
+    }
+    #logistics .tips-pro-more {
+      margin: 10px 0 0;
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #444;
+      background: linear-gradient(145deg, #faf8f4, #f2ede4);
+      border: 1px solid rgba(26, 107, 114, 0.22);
+      border-radius: 12px;
+    }
+    #logistics .tips-pro-more__link {
+      color: inherit;
+      text-decoration: none;
+      display: inline;
+    }
+    #logistics .tips-pro-more__cta {
+      color: var(--teal-dark);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    #logistics .tips-pro-more__link:hover .tips-pro-more__cta,
+    #logistics .tips-pro-more__link:focus-visible .tips-pro-more__cta {
+      color: var(--teal);
+    }
+    #logistics { scroll-margin-top: calc(var(--nav-height) + 12px); }
     .sidebar { position: sticky; top: calc(var(--nav-height) + 20px); }
     .cta-card { background: var(--teal); border-radius: 18px; padding: 24px; color: var(--white); text-align: center; }
     .cta-card__title { font-family: var(--font-heading); font-size: 18px; margin-bottom: 10px; }
@@ -546,7 +690,7 @@
         </div>
       </a>
 
-      <!-- מתי קורה — teal pill -->
+      <!-- מתי קורה - teal pill -->
       <a href="calendar.html" class="mob-nav-calendar" role="menuitem">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -557,7 +701,7 @@
         מתי קורה
       </a>
 
-      <!-- מצטרפים לקהילה — קישור #newsletter (אותו מודול פופאפ כמו בדסקטופ) -->
+      <!-- מצטרפים לקהילה - קישור #newsletter (אותו מודול פופאפ כמו בדסקטופ) -->
       <a href="#newsletter" class="mob-nav-community" id="mobNavCommunityBtn" role="menuitem">
         <div class="mob-nav-community__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -619,7 +763,7 @@
               <a href="#route-map"   class="toc__link"><span class="toc__num">2</span> המסלול על המפה</a>
               <a href="#itinerary"   class="toc__link"><span class="toc__num">3</span> מסלול יום-יום</a>
               <a href="#accommodation" class="toc__link"><span class="toc__num">4</span> המלצות לינה</a>
-              <a href="#logistics"   class="toc__link"><span class="toc__num">5</span> טיפים לוגיסטיים</a>
+              <a href="#logistics"   class="toc__link"><span class="toc__num">5</span> טיפים חשובים</a>
             </div>
           </div>
 
@@ -698,7 +842,7 @@
                 <div class="tl-item__node"><div class="tl-item__icon">🧛</div><span class="tl-item__day-label">יום 4</span></div>
                 <div class="tl-item__card tl-card" id="tl4">
                   <div class="tl-card__band"></div>
-                  <div class="tl-card__header"><div><div class="tl-card__title">Pestera Valeacelati + Rasnov יום שני</div><div class="tl-card__where">📍 Pestera Valeacelati</div></div></div>
+                  <div class="tl-card__header"><div><div class="tl-card__title">Pestera Valeacelati + Rasnov</div><div class="tl-card__where">📍 Pestera Valeacelati</div></div></div>
                   <div class="tl-card__body">
                     <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">Pestera Valeacelati - מערה</div><div class="tl-activity__desc">מערה מרהיבה עם נטיפים - חוויה גיאולוגית מדהימה לילדים. <a href="https://www.pestera-valeacelati.ro" target="_blank" style="color:var(--teal);">לאתר המערה</a></div></div></div>
                     <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">Rasnov - חקירה נוספת</div><div class="tl-activity__desc">אם נשארה אנרגיה - חזרה לרשנוב לשוק המקומי וצעידה בעיר.</div></div></div>
@@ -765,14 +909,14 @@
             <h2 class="article-section__title"><span class="article-section__title-icon">🏨</span> המלצות לינה</h2>
             <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px;">
 
-              <iframe width="100%" height="428" src="https://stay22.com/embed/69c1222ae3b92594135b8c9f" frameborder="0" style="display:block;border-radius:12px;"></iframe>
+              <iframe width="100%" height="428" src="https://stay22.com/embed/69c1222ae3b92594135b8c9f" frameborder="0" style="display:block;"></iframe>
               <div style="background:white;border-radius:12px;border:2px solid var(--sand-dark);margin-top:12px;align-self:flex-start;max-width:100%;box-sizing:border-box;overflow:hidden;">
                 <div style="padding:12px 16px;pointer-events:none;">
                   <div style="font-weight:700;font-size:14px;">🏡 Green Resort Bran</div>
                   <div style="font-size:12px;color:#888;margin-top:4px;">📍 Bran, טרנסילבניה, רומניה</div>
                 </div>
                 <div style="padding:8px 16px 12px;border-top:1px solid var(--sand);">
-                  <a href="https://booking.stay22.com/mataytasim/HjxYBwHU_Y" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:600;font-family:var(--font-body);text-decoration:none;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">להזמנה ←</a>
+                  <a href="https://booking.stay22.com/mataytasim/HjxYBwHU_Y" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:600;font-family:var(--font-body);text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='var(--teal-dark)'" onmouseout="this.style.background='var(--teal)'">להזמנה ←</a>
                 </div>
               </div>
 
@@ -794,14 +938,99 @@
         </div>
 
 <div class="article-section" id="logistics">
-            <h2 class="article-section__title"><span class="article-section__title-icon">🚗</span> טיפים לוגיסטיים</h2>
-            <div class="tips-list">
-              <div class="tip-item"><span class="tip-item__icon">✈️</span><div class="tip-item__text"><strong>הגעה:</strong> טיסות ישירות מתל אביב לבוקרשט (Henri Coandă). מהשדה - שכירות רכב הכרחית לאזור בראן וסינאיה.</div></div>
-              <div class="tip-item"><span class="tip-item__icon">🚘</span><div class="tip-item__text"><strong>רכב:</strong> חובה לשכור רכב. הנסיעה מבוקרשט לבראן כ-2.5 שעות, לסינאיה כ-1 שעה מבראן. כבישים בסדר, נוף מהמם.</div></div>
-              <div class="tip-item"><span class="tip-item__icon">💶</span><div class="tip-item__text"><strong>כסף:</strong> רומניה לא בגוש האירו - לאו (RON). מחירים זולים משמעותית מאירופה המערבית. כרטיסי אשראי מקובלים בערים.</div></div>
-              <div class="tip-item"><span class="tip-item__icon">🌡️</span><div class="tip-item__text"><strong>מזג אוויר באפריל:</strong> 10-18 מעלות ביום, קריר בלילה. בהרים קצת יותר קר. הביאו מעיל ובגדים בשכבות.</div></div>
-              <div class="tip-item"><span class="tip-item__icon">🎫</span><div class="tip-item__text"><strong>כרטיסים:</strong> Dino Park וטירת Peleș - כדאי להזמין מראש. Sinaia Gondola - בדקו שעות פעילות לפני הנסיעה.</div></div>
-              <div class="tip-item"><span class="tip-item__icon">🛒</span><div class="tip-item__text"><strong>סופר:</strong> Mega Image בבראן - ממש בסביבה, נוח לקניות יומיומיות. רשת סופרמרקטים מצוינת.</div></div>
+            <h2 class="article-section__title">
+              <svg class="article-section__title-icon-svg" xmlns="http://www.w3.org/2000/svg" width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.88 1.35-2.6A6.98 6.98 0 0 0 18 8a7 7 0 1 0-12 0c0 1.24.33 2.44.96 3.41.69.72 1.17 1.62 1.35 2.6"/></svg>
+              טיפים חשובים לטיול
+            </h2>
+
+            <div class="tips-pro-wrap">
+              <section class="tips-pro-group" aria-labelledby="tips-ro-logistics">
+                <h3 class="tips-pro-group__title" id="tips-ro-logistics">לוגיסטיקה ונסיעות</h3>
+                <p class="tips-pro-group__sub">הגעה, רכב ומטבע מקומי</p>
+                <div class="tips-pro-grid">
+                  <div class="tip-pro tip-pro--warm" dir="ltr">
+                    <div class="tip-pro__icon-wrap" aria-hidden="true">
+                      <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-3 3 7 3 3-3v-3l3-3 3.2 3.2c.4.4 1 .5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+                    </div>
+                    <div class="tip-pro__body" dir="rtl">
+                      <span class="tip-pro__subject">הגעה</span>
+                      <p class="tip-pro__text">טיסות ישירות מתל אביב לבוקרשט (Henri Coandă). מהשדה - שכירות רכב חיונית לטרנסילבניה: בראן, סינאיה וסביבה.</p>
+                    </div>
+                  </div>
+                  <div class="tip-pro tip-pro--cool" dir="ltr">
+                    <div class="tip-pro__icon-wrap" aria-hidden="true">
+                      <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3.3A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                    </div>
+                    <div class="tip-pro__body" dir="rtl">
+                      <span class="tip-pro__subject">רכב ונסיעות</span>
+                      <p class="tip-pro__text">חובה לשכור רכב. מבוקרשט לבראן כ־2.5 שעות, לסינאיה כ־שעה מבראן. כבישים נוחים ונוף מרהיב בין היעדים.</p>
+                    </div>
+                  </div>
+                  <div class="tip-pro tip-pro--warm" dir="ltr">
+                    <div class="tip-pro__icon-wrap" aria-hidden="true">
+                      <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-5.5A3.5 3.5 0 0 0 7 11.5 3.5 3.5 0 0 0 10.5 15H16"/><path d="M7 12h9.5"/></svg>
+                    </div>
+                    <div class="tip-pro__body" dir="rtl">
+                      <span class="tip-pro__subject">מטבע</span>
+                      <p class="tip-pro__text">רומניה לא בגוש האירו - המטבע הוא לאו (RON). מחירים נוחים; כרטיסי אשראי מקובלים בערים ובמרכזי תיירות.</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="tips-pro-group" aria-labelledby="tips-ro-prep">
+                <h3 class="tips-pro-group__title" id="tips-ro-prep">הכנה לפני היציאה</h3>
+                <p class="tips-pro-group__sub">מזג אוויר ושפה</p>
+                <div class="tips-pro-grid">
+                  <div class="tip-pro tip-pro--cool" dir="ltr">
+                    <div class="tip-pro__icon-wrap" aria-hidden="true">
+                      <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/><circle cx="12" cy="12" r="4"/></svg>
+                    </div>
+                    <div class="tip-pro__body" dir="rtl">
+                      <span class="tip-pro__subject">מזג אוויר</span>
+                      <p class="tip-pro__text">באפריל לרוב 10–18 מעלות ביום, קריר בלילה; בהרים קצת יותר קר. הביאו מעיל ובגדים בשכבות.</p>
+                    </div>
+                  </div>
+                  <div class="tip-pro tip-pro--warm" dir="ltr">
+                    <div class="tip-pro__icon-wrap" aria-hidden="true">
+                      <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <div class="tip-pro__body" dir="rtl">
+                      <span class="tip-pro__subject">שפה</span>
+                      <p class="tip-pro__text">רומנית היא השפה המקומית; באנגלית מתקשרים היטב באתרי תיירות ובערים גדולות. Google Translate עם מצלמה עוזר בתפריטים.</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="tips-pro-group" aria-labelledby="tips-ro-onsite">
+                <h3 class="tips-pro-group__title" id="tips-ro-onsite">בזמן הביקור</h3>
+                <p class="tips-pro-group__sub">כרטיסים, שעות וקניות</p>
+                <div class="tips-pro-grid">
+                  <div class="tip-pro tip-pro--cool" dir="ltr">
+                    <div class="tip-pro__icon-wrap" aria-hidden="true">
+                      <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div class="tip-pro__body" dir="rtl">
+                      <span class="tip-pro__subject">כרטיסים ושעות</span>
+                      <p class="tip-pro__text">ל־Dino Park ולטירת Peleș כדאי להזמין מראש. ל־Sinaia Gondola ובתי גובה - בדקו שעות פעילות לפי עונה לפני הנסיעה.</p>
+                    </div>
+                  </div>
+                  <div class="tip-pro tip-pro--warm" dir="ltr">
+                    <div class="tip-pro__icon-wrap" aria-hidden="true">
+                      <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    </div>
+                    <div class="tip-pro__body" dir="rtl">
+                      <span class="tip-pro__subject">סופר וקניות</span>
+                      <p class="tip-pro__text">Mega Image בבראן - קרוב ונוח לקניות יומיומיות; רשת סופרמרקטים אמינה לאורח חיים במטבח בווילה.</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <p class="tips-pro-more">
+                <a class="tips-pro-more__link" href="tips.html?utm_source=romania_guide&amp;utm_medium=article&amp;utm_campaign=tips_section_more&amp;utm_content=pro_tips_block">אם אתם מעוניינים בעוד טיפים שיעזרו לכם בטיול - <span class="tips-pro-more__cta">לחצו כאן</span></a>
+              </p>
             </div>
 
             <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:16px;padding:18px 24px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
