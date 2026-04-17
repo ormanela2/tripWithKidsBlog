@@ -270,22 +270,25 @@
     .mob-nav-community__sub { display: block; font-family: 'Assistant', sans-serif; font-size: 12px; opacity: 0.85; margin-top: 1px; }
     /* ── END NAV ─────────────────────────── */
 
-    /* EMAIL POPUP */
-    .email-popup-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; padding:24px; }
-    .email-popup-overlay.open { display:flex; }
-    .email-popup { background:var(--cream); border-radius:20px; padding:40px 32px; max-width:420px; width:100%; text-align:center; position:relative; box-shadow:0 16px 48px rgba(0,0,0,0.2); animation:popupIn 0.3s ease; box-sizing:border-box; }
-    @keyframes popupIn { from { transform:translateY(20px); opacity:0; } to { transform:translateY(0); opacity:1; } }
-    .email-popup__close { position:absolute; top:14px; left:16px; font-size:22px; cursor:pointer; color:#aaa; background:none; border:none; line-height:1; }
-    .email-popup__close:hover { color:var(--charcoal); }
-    .email-popup__icon { font-size:40px; margin-bottom:12px; }
-    .email-popup__title { font-family:var(--font-heading); font-size:22px; color:var(--teal); margin-bottom:8px; }
-    .email-popup__subtitle { font-size:14px; color:#666; line-height:1.6; margin-bottom:24px; }
-    .email-popup__form { display:flex; flex-direction:column; gap:12px; }
-    .email-popup__input { padding:13px 18px; border:2px solid var(--sand-dark); border-radius:40px; font-family:var(--font-body); font-size:15px; background:white; color:var(--charcoal); outline:none; text-align:right; width:100%; box-sizing:border-box; }
-    .email-popup__input:focus { border-color:var(--teal); }
-    .email-popup__btn { background:var(--teal); color:white; border:none; border-radius:40px; padding:13px 28px; font-family:var(--font-body); font-size:15px; font-weight:600; cursor:pointer; transition:background 0.2s; }
-    .email-popup__btn:hover { background:var(--teal-dark); }
-    .email-popup__skip { font-size:13px; color:#aaa; cursor:pointer; margin-top:4px; background:none; border:none; text-decoration:underline; }
+    /* EMAIL POPUP (aligned with services / destination guides) */
+    @keyframes emailPopupIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .email-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 10050; align-items: center; justify-content: center; padding: max(20px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); box-sizing: border-box; -webkit-overflow-scrolling: touch; }
+    .email-popup-overlay.open { display: flex; }
+    .email-popup { background: var(--cream); border-radius: 24px; padding: 40px 32px 36px; max-width: min(420px, calc(100vw - 32px)); width: 100%; text-align: center; position: relative; box-shadow: 0 16px 48px rgba(0,0,0,0.2); animation: emailPopupIn 0.3s ease; box-sizing: border-box; }
+    .email-popup__close { position: absolute; top: 12px; left: 12px; font-size: 24px; line-height: 1; cursor: pointer; color: #666; background: rgba(0,0,0,0.06); border: none; width: 44px; height: 44px; min-width: 44px; min-height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0; -webkit-tap-highlight-color: transparent; transition: background 0.2s, color 0.2s; }
+    .email-popup__close:hover { color: var(--charcoal); background: rgba(0,0,0,0.1); }
+    .email-popup__title { font-family: var(--font-heading); font-size: 22px; color: var(--teal); margin: 8px 0 6px; line-height: 1.25; }
+    .email-popup__subtitle { font-size: 14px; color: #666; line-height: 1.55; margin: 0 0 20px; }
+    .email-popup__form { display: flex; flex-direction: column; gap: 14px; }
+    .email-popup__input { padding: 14px 18px; border: 2px solid var(--sand-dark); border-radius: 40px; font-family: var(--font-body); font-size: 16px; background: #fff; color: var(--charcoal); outline: none; text-align: right; width: 100%; box-sizing: border-box; }
+    .email-popup__input:focus { border-color: var(--teal); }
+    .email-popup__btn { background: var(--teal); color: #fff; border: none; border-radius: 40px; padding: 14px 24px; font-family: var(--font-body); font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; min-height: 48px; -webkit-tap-highlight-color: transparent; }
+    .email-popup__btn:hover { background: var(--teal-dark); }
+    @media (max-width: 480px) {
+      .email-popup { padding: 44px 18px 22px; border-radius: 20px; }
+      .email-popup__title { font-size: 19px; }
+      .email-popup__subtitle { font-size: 13px; margin-bottom: 18px; }
+    }
   </style>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
@@ -729,32 +732,46 @@
 <!-- Email Popup -->
 <div class="email-popup-overlay" id="emailPopupOverlay">
   <div class="email-popup">
-    <button class="email-popup__close" id="emailPopupClose">×</button>
-    <div class="email-popup__icon">✈️</div>
-    <h2 class="email-popup__title">רוצים לקבל עדכונים?</h2>
-    <p class="email-popup__subtitle">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם.</p>
-    <form class="email-popup__form" action="https://formsubmit.co/ormanela@gmail.com" method="POST" id="emailPopupForm">
+    <button type="button" class="email-popup__close" id="emailPopupClose" aria-label="סגור">×</button>
+    <h2 class="email-popup__title">הטיול הבא שלכם מתחיל כאן</h2>
+    <p class="email-popup__subtitle">טיפים, יעדים ומסלולים ועוד הרבה הפתעות - תהיו חלק מקהילת מתי טסים</p>
+    <form class="email-popup__form" action="https://formsubmit.co/mataytasim@gmail.com" method="POST" id="emailPopupForm">
       <input type="hidden" name="_subject" value="הרשמה מעמוד אודות - מתי טסים">
-      <input type="hidden" name="_next" value="https://ormanela2.github.io/tripWithKidsBlog/about.html?subscribed=1#newsletter">
+      <input type="hidden" name="_next" value="https://mataytasim.co.il/about.html?subscribed=1#newsletter">
       <input type="hidden" name="_captcha" value="false">
-      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input">
-      <button type="submit" class="email-popup__btn">אני רוצה לקבל עדכונים ✈️</button>
-      <button type="button" class="email-popup__skip" id="emailPopupSkip">דלג</button>
+      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input" inputmode="email" autocomplete="email" enterkeyhint="send">
+      <button type="submit" class="email-popup__btn">אני רוצה להצטרף</button>
     </form>
   </div>
 </div>
 
 <script>
 (function() {
+  try {
+    var _sub = new URLSearchParams(window.location.search).get('subscribed');
+    if (_sub === '1') localStorage.setItem('mtEmailSubmitted', '1');
+  } catch (e) {}
+
   var overlay = document.getElementById('emailPopupOverlay');
   var closeBtn = document.getElementById('emailPopupClose');
-  var skipBtn = document.getElementById('emailPopupSkip');
-  var openedAt = 0;
+  var form = document.getElementById('emailPopupForm');
+  if (!overlay) return;
 
+  var openedAt = 0;
+  var scrollEmailRaf = 0;
+  var emailPopupUserHasScrolled = false;
+  var scrollHalfArm = true;
   var plausiblePage = 'about';
 
-  function openPopup(force, fromNav) {
-    if (!force && localStorage.getItem('mtEmailSubmitted')) return;
+  function openPopup(fromNav) {
+    if (overlay.classList.contains('open')) {
+      if (!fromNav) return;
+      openedAt = Date.now();
+      if (window.plausible) {
+        plausible('Newsletter-Open-Nav', { props: { page: plausiblePage } });
+      }
+      return;
+    }
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
     openedAt = Date.now();
@@ -762,26 +779,66 @@
       plausible('Newsletter-Open-Nav', { props: { page: plausiblePage } });
     }
   }
+
   function closePopup() {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  window.openEmailPopup = function(force) { openPopup(force, true); };
+  function maybeOpenFromScroll() {
+    if (!emailPopupUserHasScrolled) return;
+    var doc = document.documentElement;
+    var scrollTop = window.scrollY || doc.scrollTop;
+    var maxScroll = doc.scrollHeight - window.innerHeight;
+    if (maxScroll <= 0) return;
+    var ratio = scrollTop / maxScroll;
+    if (ratio < 0.42) {
+      scrollHalfArm = true;
+      return;
+    }
+    if (ratio < 0.5) return;
+    if (!scrollHalfArm) return;
+    scrollHalfArm = false;
+    openPopup();
+    if (window.plausible) {
+      plausible('Newsletter-Scroll-Popup-Shown', { props: { page: plausiblePage, threshold: 0.5 } });
+    }
+  }
+
+  function onScrollEmail() {
+    if (scrollEmailRaf) return;
+    scrollEmailRaf = requestAnimationFrame(function() {
+      scrollEmailRaf = 0;
+      var st = window.scrollY || document.documentElement.scrollTop;
+      if (st > 2) emailPopupUserHasScrolled = true;
+      maybeOpenFromScroll();
+    });
+  }
 
   document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
-    link.addEventListener('click', function(e) { e.preventDefault(); openPopup(false, true); });
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      openPopup(true);
+    });
   });
 
   if (closeBtn) closeBtn.addEventListener('click', closePopup);
-  if (skipBtn) skipBtn.addEventListener('click', closePopup);
   overlay.addEventListener('click', function(e) {
     if (e.target === overlay && Date.now() - openedAt > 400) closePopup();
   });
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePopup(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePopup();
+  });
 
-  var form = document.getElementById('emailPopupForm');
-  if (form) form.addEventListener('submit', function() { localStorage.setItem('mtEmailSubmitted', '1'); });
+  if (form) {
+    form.addEventListener('submit', function() {
+      try { localStorage.setItem('mtEmailSubmitted', '1'); } catch (e) {}
+    });
+  }
+
+  window.openEmailPopup = function() { openPopup(true); };
+
+  window.addEventListener('scroll', onScrollEmail, { passive: true });
 })();
 </script>
 <script>

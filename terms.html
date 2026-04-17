@@ -220,9 +220,8 @@
       מתי קורה
     </a>
 
-    <!-- מצטרפים לקהילה — amber banner -->
-    <button type="button" class="mob-nav-community" role="menuitem"
-      onclick="var m=document.getElementById('mobileMenu'); m.classList.remove('open'); document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false'); document.body.style.overflow=''; setTimeout(function(){ if(window.openEmailPopup) window.openEmailPopup(); },120);">
+    <!-- מצטרפים לקהילה — קישור #newsletter (פופאפ) -->
+    <a href="#newsletter" class="mob-nav-community" role="menuitem">
       <div class="mob-nav-community__icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -233,7 +232,7 @@
         <span class="mob-nav-community__title">מצטרפים לקהילה</span>
         <span class="mob-nav-community__sub">עדכונים על יעדים חדשים, טיפים מהשטח ופינות נסתרות</span>
       </div>
-    </button>
+    </a>
 
   </div>
 </nav>
@@ -315,6 +314,8 @@
 
 </div>
 
+<div id="newsletter" tabindex="-1" style="scroll-margin-top:calc(var(--nav-height) + 12px);height:0;overflow:hidden;" aria-hidden="true"></div>
+
 <footer class="footer">
   <p>&copy; 2026 מתי טסים | כל הזכויות שמורות &nbsp;&middot;&nbsp; <a href="services.html">דף הבית</a> &nbsp;&middot;&nbsp; <a href="terms.html">תנאי שימוש</a></p>
 </footer>
@@ -368,6 +369,7 @@
     });
     mobileMenu.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
+        if (link.getAttribute('href') === '#newsletter') return;
         mobileMenu.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
         hamburger.setAttribute('aria-label', 'פתח תפריט');
@@ -380,3 +382,169 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
         mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'פתח תפריט');
+        document.body.style.overflow = '';
+        hamburger.focus();
+      }
+    });
+  })();
+</script>
+
+<!-- EMAIL POPUP (same as services.html) -->
+<style>
+  @keyframes emailPopupIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .email-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 10050; align-items: center; justify-content: center; padding: max(20px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); box-sizing: border-box; -webkit-overflow-scrolling: touch; }
+  .email-popup-overlay.open { display: flex; }
+  .email-popup { background: var(--cream); border-radius: 24px; padding: 40px 32px 36px; max-width: min(420px, calc(100vw - 32px)); width: 100%; text-align: center; position: relative; box-shadow: 0 16px 48px rgba(0,0,0,0.2); animation: emailPopupIn 0.3s ease; box-sizing: border-box; }
+  .email-popup__close { position: absolute; top: 12px; left: 12px; font-size: 24px; line-height: 1; cursor: pointer; color: #666; background: rgba(0,0,0,0.06); border: none; width: 44px; height: 44px; min-width: 44px; min-height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0; -webkit-tap-highlight-color: transparent; transition: background 0.2s, color 0.2s; }
+  .email-popup__close:hover { color: var(--charcoal); background: rgba(0,0,0,0.1); }
+  .email-popup__title { font-family: var(--font-heading); font-size: 22px; color: var(--teal); margin: 8px 0 6px; line-height: 1.25; }
+  .email-popup__subtitle { font-size: 14px; color: #666; line-height: 1.55; margin: 0 0 20px; }
+  .email-popup__form { display: flex; flex-direction: column; gap: 14px; }
+  .email-popup__input { padding: 14px 18px; border: 2px solid var(--sand-dark); border-radius: 40px; font-family: var(--font-body); font-size: 16px; background: #fff; color: var(--charcoal); outline: none; text-align: right; width: 100%; box-sizing: border-box; }
+  .email-popup__input:focus { border-color: var(--teal); }
+  .email-popup__btn { background: var(--teal); color: #fff; border: none; border-radius: 40px; padding: 14px 24px; font-family: var(--font-body); font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; min-height: 48px; -webkit-tap-highlight-color: transparent; }
+  .email-popup__btn:hover { background: var(--teal-dark); }
+  @media (max-width: 480px) {
+    .email-popup { padding: 44px 18px 22px; border-radius: 20px; }
+    .email-popup__title { font-size: 19px; }
+    .email-popup__subtitle { font-size: 13px; margin-bottom: 18px; }
+  }
+</style>
+<div class="email-popup-overlay" id="emailPopupOverlay">
+  <div class="email-popup">
+    <button type="button" class="email-popup__close" id="emailPopupClose" aria-label="סגור">×</button>
+    <h2 class="email-popup__title">הטיול הבא שלכם מתחיל כאן</h2>
+    <p class="email-popup__subtitle">טיפים, יעדים ומסלולים ועוד הרבה הפתעות - תהיו חלק מקהילת מתי טסים</p>
+    <form class="email-popup__form" action="https://formsubmit.co/mataytasim@gmail.com" method="POST" id="emailPopupForm">
+      <input type="hidden" name="_subject" value="הרשמה לעדכונים - תנאי שימוש | מתי טסים">
+      <input type="hidden" name="_next" value="https://mataytasim.co.il/terms.html?subscribed=1#newsletter">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="email" name="email" required placeholder="המייל שלכם" class="email-popup__input" inputmode="email" autocomplete="email" enterkeyhint="send">
+      <button type="submit" class="email-popup__btn">אני רוצה להצטרף</button>
+    </form>
+  </div>
+</div>
+<script>
+(function() {
+  try {
+    var _sub = new URLSearchParams(window.location.search).get('subscribed');
+    if (_sub === '1') localStorage.setItem('mtEmailSubmitted', '1');
+  } catch (e) {}
+
+  var overlay = document.getElementById('emailPopupOverlay');
+  var closeBtn = document.getElementById('emailPopupClose');
+  var form = document.getElementById('emailPopupForm');
+  if (!overlay) return;
+
+  var openedAt = 0;
+  var scrollEmailRaf = 0;
+  var emailPopupUserHasScrolled = false;
+  var scrollHalfArm = true;
+  var plausiblePage = 'terms';
+
+  function openPopup(fromNav) {
+    if (overlay.classList.contains('open')) {
+      if (!fromNav) return;
+      openedAt = Date.now();
+      if (window.plausible) {
+        plausible('Newsletter-Open-Nav', { props: { page: plausiblePage } });
+      }
+      return;
+    }
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    openedAt = Date.now();
+    if (fromNav && window.plausible) {
+      plausible('Newsletter-Open-Nav', { props: { page: plausiblePage } });
+    }
+  }
+
+  function closePopup() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function maybeOpenFromScroll() {
+    if (!emailPopupUserHasScrolled) return;
+    var doc = document.documentElement;
+    var scrollTop = window.scrollY || doc.scrollTop;
+    var maxScroll = doc.scrollHeight - window.innerHeight;
+    if (maxScroll <= 0) return;
+    var ratio = scrollTop / maxScroll;
+    if (ratio < 0.42) {
+      scrollHalfArm = true;
+      return;
+    }
+    if (ratio < 0.5) return;
+    if (!scrollHalfArm) return;
+    scrollHalfArm = false;
+    openPopup();
+    if (window.plausible) {
+      plausible('Newsletter-Scroll-Popup-Shown', { props: { page: plausiblePage, threshold: 0.5 } });
+    }
+  }
+
+  function onScrollEmail() {
+    if (scrollEmailRaf) return;
+    scrollEmailRaf = requestAnimationFrame(function() {
+      scrollEmailRaf = 0;
+      var st = window.scrollY || document.documentElement.scrollTop;
+      if (st > 2) emailPopupUserHasScrolled = true;
+      maybeOpenFromScroll();
+    });
+  }
+
+  document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var mob = document.getElementById('mobileMenu');
+      var ham = document.getElementById('hamburgerBtn');
+      if (mob && mob.classList.contains('open')) {
+        mob.classList.remove('open');
+        if (ham) { ham.setAttribute('aria-expanded', 'false'); ham.setAttribute('aria-label', 'פתח תפריט'); }
+        document.body.style.overflow = '';
+      }
+      setTimeout(function() { openPopup(true); }, 50);
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closePopup);
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay && Date.now() - openedAt > 400) closePopup();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePopup();
+  });
+
+  if (form) {
+    form.addEventListener('submit', function() {
+      try { localStorage.setItem('mtEmailSubmitted', '1'); } catch (e) {}
+    });
+  }
+
+  window.openEmailPopup = function() { openPopup(true); };
+
+  window.addEventListener('scroll', onScrollEmail, { passive: true });
+})();
+</script>
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('subscribed') !== '1') return;
+  var toast = document.createElement('div');
+  toast.style.cssText = 'position:fixed;left:20px;right:20px;bottom:20px;z-index:11000;max-width:760px;margin:0 auto;background:#0f4a50;color:#fff;border-radius:14px;padding:14px 46px 14px 16px;box-shadow:0 10px 30px rgba(0,0,0,.25);text-align:right;line-height:1.6;';
+  toast.innerHTML = '<button type="button" aria-label="סגור הודעה" style="position:absolute;top:10px;left:10px;width:28px;height:28px;border:none;border-radius:50%;background:rgba(255,255,255,0.16);color:#fff;cursor:pointer;font-size:18px;line-height:1;">×</button><div style="font-size:15px;font-weight:700;">נרשמת בהצלחה! תודה שהצטרפת לקהילת "מתי טסים" ✈️</div>';
+  document.body.appendChild(toast);
+  function closeToast() { if (toast.parentNode) toast.parentNode.removeChild(toast); }
+  toast.querySelector('button').addEventListener('click', closeToast);
+  setTimeout(closeToast, 6000);
+  if (window.history && window.history.replaceState) {
+    var cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
+    window.history.replaceState({}, document.title, cleanUrl);
+  }
+})();
+</script>
+</body>
+</html>
