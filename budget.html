@@ -3002,9 +3002,6 @@
   if (!overlay) return;
 
   var openedAt = 0;
-  var scrollEmailRaf = 0;
-  var emailPopupUserHasScrolled = false;
-  var scrollHalfArm = true;
   var plausiblePage = 'budget';
 
   function openPopup(fromNav) {
@@ -3029,35 +3026,6 @@
     document.body.style.overflow = '';
   }
 
-  function maybeOpenFromScroll() {
-    if (!emailPopupUserHasScrolled) return;
-    var doc = document.documentElement;
-    var scrollTop = window.scrollY || doc.scrollTop;
-    var maxScroll = doc.scrollHeight - window.innerHeight;
-    if (maxScroll <= 0) return;
-    var ratio = scrollTop / maxScroll;
-    if (ratio < 0.42) {
-      scrollHalfArm = true;
-      return;
-    }
-    if (ratio < 0.5) return;
-    if (!scrollHalfArm) return;
-    scrollHalfArm = false;
-    openPopup();
-    if (window.plausible) {
-      plausible('Newsletter-Scroll-Popup-Shown', { props: { page: plausiblePage, threshold: 0.5 } });
-    }
-  }
-
-  function onScrollEmail() {
-    if (scrollEmailRaf) return;
-    scrollEmailRaf = requestAnimationFrame(function() {
-      scrollEmailRaf = 0;
-      var st = window.scrollY || document.documentElement.scrollTop;
-      if (st > 2) emailPopupUserHasScrolled = true;
-      maybeOpenFromScroll();
-    });
-  }
 
   document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
     link.addEventListener('click', function(e) {
@@ -3082,7 +3050,6 @@
 
   window.openEmailPopup = function() { openPopup(true); };
 
-  window.addEventListener('scroll', onScrollEmail, { passive: true });
 })();
 </script>
 </body>

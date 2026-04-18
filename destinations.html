@@ -66,6 +66,39 @@
     .nav__hamburger[aria-expanded="true"] span:nth-child(2){opacity:0}
     .nav__hamburger[aria-expanded="true"] span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
     .nav__whatsapp-mobile{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#25D366}
+    .nav__facebook-mobile {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1877f2;
+      font-size: 22px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav__facebook-mobile:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+      border-radius: 10px;
+    }
+
+    .icon-fb {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      vertical-align: middle;
+    }
+    .nav__whatsapp-mobile svg,
+    .nav__facebook-mobile svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+      flex-shrink: 0;
+    }
+
+
+
     .nav__mobile-menu{display:none;position:fixed;top:var(--nav-height);right:0;left:0;bottom:0;background:var(--cream);padding:24px 20px max(32px, env(safe-area-inset-bottom));flex-direction:column;gap:4px;z-index:1200;overflow-y:auto;-webkit-overflow-scrolling:touch}
     .nav__mobile-menu.open{display:flex}
     .nav__link--packages{gap:8px;font-weight:500;position:relative;padding-inline:14px}
@@ -181,6 +214,12 @@
     .seo-article-card--poland .seo-article-card__icons{margin-bottom:2px;gap:6px}
     .seo-article-card--poland .seo-article-card__icon{width:28px;height:28px;border-radius:8px}
     .seo-article-card--poland .seo-article-card__icon svg{width:14px;height:14px}
+    .seo-article-card--poland{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+    .seo-article-card--poland:hover{border-color:rgba(26,107,114,.28);box-shadow:0 8px 28px rgba(26,107,114,.1);transform:translateY(-3px)}
+    .seo-article-card--poland:focus-within{border-color:rgba(26,107,114,.35);box-shadow:0 8px 28px rgba(26,107,114,.12);outline:none}
+    @media (prefers-reduced-motion: reduce){.seo-article-card--poland,.seo-article-card--poland:hover,.seo-article-card--poland:focus-within{transition:none;transform:none}}
+    .seo-article-card__readtime{display:inline-flex;align-items:center;gap:5px;margin:0 0 6px;font-size:11px;font-weight:600;color:#6b7280;letter-spacing:.02em}
+    .seo-article-card__readtime .seo-article-card__readtime-ico{font-size:13px;line-height:1;opacity:.9}
     @media(max-width:720px){.seo-articles__grid{flex-direction:column;align-items:stretch}.seo-articles__medium-stack{width:100%;max-width:none}.seo-article-card--poland{max-width:none}}
     /* CHIP BAR */
     .chip-bar-outer{margin-bottom:20px}
@@ -276,7 +315,7 @@
     .drawer-body{padding:14px 18px 28px;overflow-y:auto;flex:1}
     .drawer-desc{font-size:14px;color:#555;line-height:1.7;margin-top:4px;margin-bottom:14px}
 
-    /* Quick stats — compact single row (duration, season, flight time) */
+    /* Quick stats - compact single row (duration, season, flight time) */
     .drawer-stats{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:6px;margin-bottom:22px}
     .stat-box{
       flex:1 1 0;min-width:0;
@@ -393,6 +432,9 @@
       
 
       <div class="nav__mobile-actions">
+        <a href="https://www.facebook.com/profile.php?id=61582155200249" class="nav__facebook-mobile" target="_blank" rel="noopener noreferrer" aria-label="עמוד הפייסבוק של מתי טסים">
+          <svg class="icon-fb" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
         <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="nav__whatsapp-mobile" aria-label="שלחו הודעת וואטסאפ">
           <svg class="icon-wa" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </a>
@@ -478,7 +520,7 @@
         </div>
       </a>
 
-      <!-- מתי קורה — teal pill -->
+      <!-- מתי קורה - teal pill -->
       <a href="calendar.html" class="mob-nav-calendar" role="menuitem">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -489,7 +531,7 @@
         מתי קורה
       </a>
 
-      <!-- מצטרפים לקהילה — קישור #newsletter (אותו מודול פופאפ כמו בדסקטופ) -->
+      <!-- מצטרפים לקהילה - קישור #newsletter (אותו מודול פופאפ כמו בדסקטופ) -->
       <a href="#newsletter" class="mob-nav-community" id="mobNavCommunityBtn" role="menuitem">
         <div class="mob-nav-community__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -551,14 +593,23 @@
           <span class="seo-article-card__icon" title="עיר"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></svg></span>
         </div>
         <h3>פולין: שלוש חוויות, שלושה יעדים</h3>
+        <p class="seo-article-card__readtime"><span class="seo-article-card__readtime-ico" aria-hidden="true">⏱</span><span>כ-4 דקות קריאה</span></p>
         <p>שלושה טיולי רכב, שלושה עולמות שונים לגמרי: ורשה, קרקוב וזקופנה - ומה באמת עבד לנו כמשפחה.</p>
         <a class="seo-article-card__link" href="poland-three-experiences.html">לקריאת הכתבה המלאה ←</a>
       </article>
+      <article class="seo-article-card seo-article-card--poland" data-article-card="slovakia">
+        <div class="seo-article-card__icons" aria-hidden="true">
+          <span class="seo-article-card__icon" title="רכב"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14v-5l-2-5H7L5 12v5z"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/><path d="M2 17h3M19 17h3"/></svg></span>
+          <span class="seo-article-card__icon" title="טיסה"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V11l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></span>
+          <span class="seo-article-card__icon" title="טבע"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="m3 20 5.5-11 3.5 6L16 7l5 13"/></svg></span>
+          <span class="seo-article-card__icon" title="עיר"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></svg></span>
+        </div>
+        <h3>סלובקיה למתקדמים: איך לא לפספס את הקסם האמיתי</h3>
+        <p class="seo-article-card__readtime"><span class="seo-article-card__readtime-ico" aria-hidden="true">⏱</span><span>כ-3 דקות קריאה</span></p>
+        <p>הרי הטטרה, גופס, גן העדן הסלובקי ומערות - איך לתזמן נכון ולחסוך תורים.</p>
+        <a class="seo-article-card__link" href="slovakia-advanced.html">לקריאת הכתבה המלאה ←</a>
+      </article>
       <div class="seo-articles__medium-stack">
-        <article class="seo-article-card seo-article-card--medium" data-article-card="slovakia">
-          <h3>סלובקיה למתקדמים: איך לא לפספס את הקסם האמיתי</h3>
-          <p class="seo-article-card__soon">בקרוב באתר</p>
-        </article>
         <article class="seo-article-card seo-article-card--medium" data-article-card="romania">
           <h3>רומניה הכפרית: בין טירות למרחבים</h3>
           <p class="seo-article-card__soon">בקרוב באתר</p>
@@ -1091,9 +1142,6 @@
   if (!overlay) return;
 
   var openedAt = 0;
-  var scrollEmailRaf = 0;
-  var emailPopupUserHasScrolled = false;
-  var scrollHalfArm = true;
 
   var plausiblePage = 'destinations';
 
@@ -1119,36 +1167,6 @@
     document.body.style.overflow = '';
   }
 
-  function maybeOpenFromScroll() {
-    if (!emailPopupUserHasScrolled) return;
-    var doc = document.documentElement;
-    var scrollTop = window.scrollY || doc.scrollTop;
-    var maxScroll = doc.scrollHeight - window.innerHeight;
-    if (maxScroll <= 0) return;
-    var ratio = scrollTop / maxScroll;
-    if (ratio < 0.42) {
-      scrollHalfArm = true;
-      return;
-    }
-    if (ratio < 0.5) return;
-    if (!scrollHalfArm) return;
-    scrollHalfArm = false;
-    openPopup();
-    if (window.plausible) {
-      plausible('Newsletter-Scroll-Popup-Shown', { props: { page: plausiblePage, threshold: 0.5 } });
-    }
-  }
-
-  function onScrollEmail() {
-    if (scrollEmailRaf) return;
-    scrollEmailRaf = requestAnimationFrame(function() {
-      scrollEmailRaf = 0;
-      var st = window.scrollY || document.documentElement.scrollTop;
-      if (st > 2) emailPopupUserHasScrolled = true;
-      maybeOpenFromScroll();
-    });
-  }
-
   document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
     link.addEventListener('click', function(e) {
       e.preventDefault();
@@ -1171,7 +1189,6 @@
   }
 
   window.openEmailPopup = function() { openPopup(true); };
-  window.addEventListener('scroll', onScrollEmail, { passive: true });
 })();
 </script>
 <script>
