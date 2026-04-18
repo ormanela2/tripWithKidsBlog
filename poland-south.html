@@ -11,6 +11,11 @@
   <link rel="canonical" href="https://mataytasim.co.il/poland-south.html">
   <link rel="alternate" hreflang="he-IL" href="https://mataytasim.co.il/poland-south.html">
 
+  <meta name="geo.region" content="PL-12">
+  <meta name="geo.placename" content="דרום פולין, זקופנה">
+  <meta name="geo.position" content="49.2992;19.9496">
+  <meta name="ICBM" content="49.2992, 19.9496">
+
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="טיול לדרום פולין עם ילדים 2026 | מדריך, מסלול ואטרקציות למשפחות | מתי טסים">
@@ -26,13 +31,13 @@
 
   <!-- Twitter/X Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="טיול לדרום פולין עם ילדים 2026 | מדריך ומסלול למשפחות | מתי טסים">
+  <meta name="twitter:title" content="טיול לדרום פולין עם ילדים 2026 | מדריך, מסלול ואטרקציות למשפחות | מתי טסים">
   <meta name="twitter:description" content="מדריך מלא לטיול לדרום פולין עם ילדים: זקופנה, הרי הטטרה, מכרת מלח ומסלול משפחתי.">
   <meta name="twitter:image" content="https://mataytasim.co.il/og-image.png">
 
   <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[
-    {"@type":"TravelGuide","@id":"https://mataytasim.co.il/poland-south.html#travelguide","name":"טיול לדרום פולין עם ילדים 2026","headline":"טיול לדרום פולין עם ילדים","description":"מדריך מלא לטיול לדרום פולין עם ילדים: זקופנה, הרי הטטרה, מכרת המלח בווייליצ'קה ומסלול יום־יום מהשטח.","url":"https://mataytasim.co.il/poland-south.html","inLanguage":"he-IL","isAccessibleForFree":true,"publisher":{"@id":"https://mataytasim.co.il/#organization"},"touristType":"משפחות עם ילדים","touristDestination":{"@type":"TouristDestination","name":"דרום פולין","geo":{"@type":"GeoCoordinates","latitude":49.2992,"longitude":19.9496}}},
+    {"@type":"Article","@id":"https://mataytasim.co.il/poland-south.html#article","name":"טיול לדרום פולין עם ילדים 2026","headline":"טיול לדרום פולין עם ילדים","description":"מדריך מלא לטיול לדרום פולין עם ילדים: זקופנה, הרי הטטרה, מכרת המלח בווייליצ'קה ומסלול יום־יום מהשטח.","url":"https://mataytasim.co.il/poland-south.html","inLanguage":"he-IL","isAccessibleForFree":true,"keywords":"משפחות עם ילדים, דרום פולין, זקופנה","publisher":{"@id":"https://mataytasim.co.il/#organization"},"about":{"@type":"TouristDestination","name":"דרום פולין","geo":{"@type":"GeoCoordinates","latitude":49.2992,"longitude":19.9496}}},
     {"@type":"Organization","@id":"https://mataytasim.co.il/#organization","name":"מתי טסים","url":"https://mataytasim.co.il","logo":{"@type":"ImageObject","url":"https://mataytasim.co.il/logo.png"}},
     {"@type":"BreadcrumbList","@id":"https://mataytasim.co.il/poland-south.html#breadcrumb","itemListElement":[
       {"@type":"ListItem","position":1,"name":"מתי טסים","item":"https://mataytasim.co.il/services.html"},
@@ -308,21 +313,254 @@
     #trip-map { height: 420px; border-radius: 16px; overflow: hidden; border: 2px solid var(--sand-dark); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
     #map-day-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 
-    /* ── TIPS ── */
-    .tips-list { display: flex; flex-direction: column; gap: 10px; }
+    /* ── TIPS (base .tip-item נשמר לתאימות) ── */
     .tip-item { background: var(--white); border-radius: 12px; border: 2px solid var(--sand-dark); padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
     .tip-item__icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
     .tip-item__text { color: #555; line-height: 1.65; }
     .tip-item__text strong { color: var(--charcoal); }
 
-    /* ── ATTRACTIONS GRID ── */
-    .attractions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .attraction-card { background: var(--white); border-radius: 14px; border: 2px solid var(--sand-dark); padding: 16px 18px; transition: transform 0.25s, box-shadow 0.25s; }
-    .attraction-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-    .attraction-card__icon { font-size: 28px; margin-bottom: 8px; display: block; }
-    .attraction-card__name { font-family: var(--font-heading); font-size: 15px; margin-bottom: 6px; color: var(--teal); }
-    .attraction-card__desc { font-size: 13px; color: #666; line-height: 1.6; }
-    @media (max-width: 500px) { .attractions-grid { grid-template-columns: 1fr; } }
+    /* ── Important tips (#tips): categorized pro-tip cards (כמו austria.html) ── */
+    #tips .tips-pro-wrap { display: flex; flex-direction: column; gap: 28px; margin-top: 4px; }
+    #tips .tips-pro-group__title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      margin: 0 0 4px;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+    #tips .tips-pro-group__sub {
+      margin: 0 0 12px;
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.45;
+    }
+    #tips .tips-pro-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 14px;
+      align-items: stretch;
+    }
+    @media (max-width: 720px) {
+      #tips .tips-pro-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+    #tips .tip-pro {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    #tips .tip-pro:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    #tips .tip-pro:focus-within {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+    #tips .tip-pro--warm {
+      background: linear-gradient(145deg, #fffdf7 0%, #fff4d6 55%, #fffbeb 100%);
+      border-color: rgba(234, 179, 8, 0.38);
+    }
+    #tips .tip-pro--cool {
+      background: linear-gradient(145deg, #f8fbff 0%, #e8f2ff 50%, #f0f7ff 100%);
+      border-color: rgba(96, 165, 250, 0.45);
+    }
+    #tips .tip-pro__icon-wrap {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+    #tips .tip-pro__svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+    #tips .tip-pro--warm .tip-pro__svg { color: #b45309; }
+    #tips .tip-pro--cool .tip-pro__svg { color: #1d4ed8; }
+    #tips .tip-pro__body { flex: 1; min-width: 0; text-align: right; }
+    #tips .tip-pro__subject {
+      display: block;
+      font-weight: 700;
+      font-size: 1.0625rem;
+      color: var(--charcoal);
+      margin: 0 0 5px;
+      line-height: 1.3;
+    }
+    #tips .tip-pro__text {
+      margin: 0;
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 1.55;
+    }
+    @media (max-width: 720px) {
+      #tips .tip-pro {
+        padding: 10px 12px;
+        gap: 10px;
+        border-radius: 12px;
+      }
+      #tips .tip-pro__icon-wrap {
+        width: 36px;
+        height: 36px;
+      }
+      #tips .tip-pro__svg {
+        width: 18px;
+        height: 18px;
+      }
+      #tips .tip-pro__subject {
+        font-size: 15px;
+        margin-bottom: 3px;
+      }
+      #tips .tip-pro__text {
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      #tips .tips-pro-wrap {
+        gap: 22px;
+      }
+    }
+    #tips .article-section__title-icon-svg {
+      display: inline-flex;
+      vertical-align: middle;
+      margin-inline-end: 6px;
+      color: var(--teal);
+    }
+    #tips .tips-pro-more {
+      margin: 10px 0 0;
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #444;
+      background: linear-gradient(145deg, #faf8f4, #f2ede4);
+      border: 1px solid rgba(26, 107, 114, 0.22);
+      border-radius: 12px;
+    }
+    #tips .tips-pro-more__link {
+      color: inherit;
+      text-decoration: none;
+      display: inline;
+    }
+    #tips .tips-pro-more__cta {
+      color: var(--teal-dark);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    #tips .tips-pro-more__link:hover .tips-pro-more__cta,
+    #tips .tips-pro-more__link:focus-visible .tips-pro-more__cta {
+      color: var(--teal);
+    }
+
+    /* ── ATTRACTIONS GRID (magazine-style horizontal cards, כמו austria.html) ── */
+    .attractions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+    .attraction-card {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 20px;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--sand-dark);
+      padding: 22px 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: background-color 0.28s ease, box-shadow 0.28s ease, transform 0.24s ease, border-color 0.24s ease;
+    }
+    .attraction-card:hover {
+      background: #faf8f4;
+      border-color: rgba(26, 107, 114, 0.18);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.11);
+      transform: translateY(-2px);
+    }
+    .attraction-card__body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: right;
+      gap: 0;
+    }
+    .attraction-card__badge {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--teal-dark);
+      background: rgba(26, 107, 114, 0.1);
+      padding: 5px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .attraction-card__name {
+      font-family: var(--font-heading);
+      font-size: clamp(17px, 1.25vw, 20px);
+      font-weight: 700;
+      margin: 0 0 10px;
+      color: var(--teal);
+      line-height: 1.28;
+      letter-spacing: -0.01em;
+    }
+    .attraction-card__desc {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.65;
+      margin: 0;
+    }
+    .attraction-card__thumb-wrap {
+      flex-shrink: 0;
+      width: 118px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.1);
+      align-self: flex-start;
+      background: var(--sand);
+    }
+    .attraction-card__thumb {
+      display: block;
+      width: 100%;
+      height: 88px;
+      object-fit: cover;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+    @media (max-width: 720px) {
+      .attractions-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 400px) {
+      .attraction-card { flex-wrap: wrap; padding: 18px 18px; gap: 14px; }
+      .attraction-card__thumb-wrap { width: 100%; max-width: 140px; }
+    }
+    .attractions-grid__attrib {
+      font-size: 10px;
+      color: #888;
+      text-align: center;
+      margin: 14px 0 0;
+      line-height: 1.45;
+    }
 
     /* ── SIDEBAR ── */
     .sidebar { position: sticky; top: calc(var(--nav-height) + 20px); }
@@ -364,6 +602,18 @@
   </script>
   <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
   <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+  <!-- הגדירו מפתח Maps JavaScript API (עם Places). הגבילו לדומיין האתר. -->
+  <script>window.GOOGLE_MAPS_API_KEY = 'AIzaSyAIpRqCBJr4vL5CiH0dHh1GSfyyjE2w-XI';</script>
+  <script>
+  (function(){
+    var k = (window.GOOGLE_MAPS_API_KEY || '').trim();
+    if (!k) return;
+    var s = document.createElement('script');
+    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(k) + '&libraries=places&v=quarterly';
+    s.async = true;
+    document.head.appendChild(s);
+  })();
+  </script>
 <style>
   .float-nav { position: fixed; bottom: max(24px, env(safe-area-inset-bottom) + 12px); right: 24px; z-index: 996; display: flex; flex-direction: column; gap: 10px; opacity: 0; transform: translateY(12px); transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
   .float-nav.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
@@ -377,9 +627,68 @@
     .float-nav__btn--top { width: 36px; }
   }
 </style>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"מתי טסים","item":"https://mataytasim.co.il"},{"@type":"ListItem","position":2,"name":"יעדים","item":"https://mataytasim.co.il/destinations.html"},{"@type":"ListItem","position":3,"name":"דרום פולין","item":"https://mataytasim.co.il/poland-south.html"}]}
-</script>
+<style>
+  /* ── Google Place detail sheet (כמו austria.html) ── */
+  .place-sheet { position: fixed; inset: 0; z-index: 3100; pointer-events: none; visibility: hidden; opacity: 0; transition: opacity 0.22s ease, visibility 0.22s ease; }
+  .place-sheet.is-open { pointer-events: auto; visibility: visible; opacity: 1; }
+  .place-sheet__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.5); cursor: pointer; }
+  .place-sheet__panel {
+    position: absolute; left: 50%; right: auto; bottom: 0;
+    width: min(420px, calc(100vw - 24px));
+    max-height: min(88vh, 620px);
+    transform: translate(-50%, 105%);
+    transition: transform 0.34s cubic-bezier(0.32, 0.72, 0, 1);
+    background: var(--cream); border-radius: 20px 20px 0 0;
+    box-shadow: 0 -16px 48px rgba(0,0,0,0.22);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .place-sheet.is-open .place-sheet__panel { transform: translate(-50%, 0); }
+  .place-sheet__grab { flex-shrink: 0; width: 36px; height: 4px; border-radius: 2px; background: rgba(0,0,0,0.12); margin: 10px auto 6px; }
+  .place-sheet__close {
+    position: absolute; top: 10px; left: 10px; width: 36px; height: 36px; border: none; border-radius: 50%;
+    background: rgba(255,255,255,0.92); font-size: 20px; line-height: 1; cursor: pointer; color: #444; z-index: 3;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center;
+  }
+  .place-sheet__close:hover { background: #fff; color: var(--charcoal); }
+  .place-sheet__photo-wrap {
+    flex-shrink: 0; position: relative; width: calc(100% + 0px);
+    aspect-ratio: 16 / 10; max-height: 220px; min-height: 140px;
+    background: linear-gradient(165deg, #e5e0d8, #d4cdc2); overflow: hidden;
+  }
+  .place-sheet__photo {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    display: block;
+  }
+  .place-sheet__scroll { flex: 1; overflow-y: auto; padding: 0 18px max(16px, env(safe-area-inset-bottom)) 18px; min-height: 0; }
+  .place-sheet__title { font-family: var(--font-heading); font-size: 1.05rem; margin: 4px 0 10px; color: var(--charcoal); line-height: 1.35; padding-left: 40px; }
+  .place-sheet__summary { font-size: 13px; color: #666; line-height: 1.55; margin: 0 0 12px; }
+  .place-sheet__meta-row { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 10px; font-size: 13px; color: #444; line-height: 1.5; }
+  .place-sheet__meta-row[hidden] { display: none !important; }
+  .place-sheet__ic { flex-shrink: 0; width: 22px; height: 22px; margin-top: 1px; color: var(--teal); display: flex; align-items: center; justify-content: center; }
+  .place-sheet__ic svg { width: 18px; height: 18px; display: block; }
+  .place-sheet__meta-text { flex: 1; min-width: 0; }
+  .place-sheet__pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+  .place-sheet__pills[hidden] { display: none !important; }
+  .place-sheet__pill { border: 1.5px solid var(--sand-dark); background: #fff; border-radius: 999px; padding: 5px 11px; font-size: 11px; font-family: var(--font-body); cursor: pointer; color: var(--charcoal); transition: background 0.15s, border-color 0.15s; }
+  .place-sheet__pill:hover { background: var(--sand); }
+  .place-sheet__pill.is-active { border-color: var(--teal); background: rgba(26,107,114,0.1); color: var(--teal-dark); font-weight: 600; }
+  .place-sheet__actions { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .place-sheet__btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 10px 14px; border-radius: 12px; background: var(--teal); color: #fff; text-decoration: none;
+    font-weight: 600; font-size: 13px; border: none; cursor: pointer; font-family: var(--font-body); width: 100%; box-sizing: border-box;
+  }
+  .place-sheet__btn--secondary { background: #fff; color: var(--teal); border: 2px solid var(--teal); }
+  .place-sheet__btn svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.95; }
+  .place-sheet__btn:hover { filter: brightness(1.04); }
+  .place-sheet__attr { font-size: 10px; color: #999; margin-top: 12px; line-height: 1.45; text-align: center; }
+  @media (max-width: 380px) {
+    .place-sheet__panel { width: calc(100vw - 16px); border-radius: 16px 16px 0 0; }
+    .place-sheet__photo-wrap { max-height: 190px; }
+  }
+</style>
 </head>
 <body>
 
@@ -922,48 +1231,100 @@
         <!-- 4. ATTRACTIONS -->
         <div class="article-section" id="attractions">
           <h2 class="article-section__title"><span class="article-section__title-icon">🏔️</span> אטרקציות באזור זקופנה</h2>
+          <p style="font-size:14px;color:#666;line-height:1.6;margin:-8px 0 18px;">לחצו על תמונת המקום לפרטים מ-Google Maps (שעות פתיחה, דירוג, קישור לניווט).</p>
           <div class="attractions-grid">
             <div class="attraction-card">
-              <span class="attraction-card__icon">⛏️</span>
-              <div class="attraction-card__name">מכרה מלח ויילצ'קה</div>
-              <div class="attraction-card__desc">קתדרלות מלח, פסלים ומגלשות עץ תת-קרקעיות. להזמין הרבה מראש.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">מלח</span>
+                <div class="attraction-card__name">מכרה מלח ויילצ'קה</div>
+                <div class="attraction-card__desc">קתדרלות מלח, פסלים ומגלשות עץ תת-קרקעיות. להזמין הרבה מראש.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJS46BBdhDFkcRFbST_a5JJZc" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/St_Kinga%27s_Chapel%2C_Wieliczka_salt_mine%2C_Poland_2.jpg/320px-St_Kinga%27s_Chapel%2C_Wieliczka_salt_mine%2C_Poland_2.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">🏞️</span>
-              <div class="attraction-card__name">עמק קושיליסקה</div>
-              <div class="attraction-card__desc">הליכה לאורך נהר צלול בין כיפי סלע. מסלול קל לכל המשפחה.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">רכבל</span>
+                <div class="attraction-card__name">רכבל קספרוי ויירך</div>
+                <div class="attraction-card__desc">תחנת הקרקע בקוז'ניצה - עלייה לפסגה עם נוף להרי הטטרה (כרטיסים במספר מוגבל, מומלץ להזמין מראש).</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJ0YIng9OMFUcRUMoNfX1ePbQ" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Kolej_linowa_na_Kasprowy_Wierch_2012_01.JPG/320px-Kolej_linowa_na_Kasprowy_Wierch_2012_01.JPG" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">🌊</span>
-              <div class="attraction-card__name">Terma Bania</div>
-              <div class="attraction-card__desc">בריכות תרמיות עם מגלשות ונוף פנורמי להרי הטטרה.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">טרמה</span>
+                <div class="attraction-card__name">Terma Bania</div>
+                <div class="attraction-card__desc">בריכות תרמיות עם מגלשות ונוף פנורמי להרי הטטרה, ליד בייאלקה טטרז'נסקה.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJeZfybMDwFUcR_YMP5hSh_BU" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Poland_Tatra_mountains_2012_mountain_panorama.jpg/320px-Poland_Tatra_mountains_2012_mountain_panorama.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">🚡</span>
-              <div class="attraction-card__name">הר גובלובקה</div>
-              <div class="attraction-card__desc">עלייה ברכבל לנוף פנורמי על כל הטטרה וזקופנה.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">נוף</span>
+                <div class="attraction-card__name">הר גובלובקה</div>
+                <div class="attraction-card__desc">פוניקולר לראש הגבעה - נוף פנורמי על זקופנה ועל רכס הטטרה.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJLQEM0pztFUcRctConjdBHCM" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Guba%C5%82%C3%B3wka_kolejka.jpg/320px-Guba%C5%82%C3%B3wka_kolejka.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">🏰</span>
-              <div class="attraction-card__name">טירת דונאיץ נידזיצה</div>
-              <div class="attraction-card__desc">טירה גותית מהמאה ה-14 עם שיט על אגם צ'ורשטין.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">טירה</span>
+                <div class="attraction-card__name">טירת צ'ורשטין</div>
+                <div class="attraction-card__desc">טירה ליד אגם צ'ורשטין - שיט בסירות ונוף לטירה ולהרים.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJy4cDk1QBPkcRSgxyUsBR86Q" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Zamek_w_Czorsztynie_2013.jpg/320px-Zamek_w_Czorsztynie_2013.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">🎢</span>
-              <div class="attraction-card__name">Energylandia</div>
-              <div class="attraction-card__desc">פארק שעשועים גדול עם רכבות הרים ומגלשות מים לכל גיל.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">פארק</span>
+                <div class="attraction-card__name">Energylandia</div>
+                <div class="attraction-card__desc">פארק שעשועים גדול ליד זאטור - רכבות הרים ומגלשות מים לכל גיל.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJGW2UsWqTFkcRCUTc99B1_Gk" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Energylandia_Zadra_2021.jpg/320px-Energylandia_Zadra_2021.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">🦜</span>
-              <div class="attraction-card__name">בית התוכים</div>
-              <div class="attraction-card__desc">מאכילים תוכים צבעוניים ביד - חוויה שהילדים לא שוכחים.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">מידע</span>
+                <div class="attraction-card__name">Zakoatrakcje</div>
+                <div class="attraction-card__desc">סיורים מאורגנים ואטרקציות בזקופנה - חוסכים זמן בתכנון.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJy2aI2zzzFUcRZNQFQ3nktnQ" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Krupowki_Zakopane.jpg/320px-Krupowki_Zakopane.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
             <div class="attraction-card">
-              <span class="attraction-card__icon">🦋</span>
-              <div class="attraction-card__name">בית הפרפרים + הבית ההפוך</div>
-              <div class="attraction-card__desc">שני מוזיאונים כיפיים בזקופנה - פרפרים טרופיים ואשליות אופטיות.</div>
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">מוזיאון</span>
+                <div class="attraction-card__name">הבית ההפוך</div>
+                <div class="attraction-card__desc">חוויה משעשעת - חדרים הפוכים וחדרי צילום מבלבלים לכל המשפחה.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJwSG75JPyFUcRaHNHIOn337c" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Zakopane_Panorama_2.jpg/320px-Zakopane_Panorama_2.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">אשליות</span>
+                <div class="attraction-card__name">Illusion House</div>
+                <div class="attraction-card__desc">מוזיאון אשליות אופטיות וחדרי צילום - במרכז זקופנה.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJQe3YfWDzFUcRatve1wlsKF8" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Zakopane_sklepy.jpg/320px-Zakopane_sklepy.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
             </div>
           </div>
+          <p class="attractions-grid__attrib">תמונות ממוזערות: נטענות מ-Google Places כשהמפתח והדפדפן מאפשרים (אחרת נשארת תמונת גיבוי מ-Wikimedia). שימוש בתמונות Places בהתאם לתנאי Google.</p>
         </div>
 
         <!-- 5. ACCOMMODATION -->
@@ -973,48 +1334,37 @@
 
             <!-- Hotel Great Polonia -->
             <div style="border-radius:12px;border:2px solid var(--sand-dark);overflow:hidden;background:white;">
-              <div onclick="toggleHotelMap('map-polonia','chevron-polonia')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='white'">
-                <div style="display:flex;flex-direction:column;gap:4px;pointer-events:none;">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;">
+                <div style="display:flex;flex-direction:column;gap:4px;">
                   <div style="font-weight:700;font-size:14px;">🏨 Hotel Great Polonia Kraków Airport</div>
                   <div style="font-size:12px;color:#888;">📍 קרקוב, פולין</div>
                 </div>
-                <span id="chevron-polonia" style="font-size:18px;color:var(--teal);transition:transform 0.3s;pointer-events:none;">▾</span>
               </div>
               <div style="padding:10px 16px;border-top:1px solid var(--sand);">
                 <a href="https://booking.stay22.com/mataytasim/b2-bh8uuzv" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:600;font-family:var(--font-body);text-decoration:none;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">להזמנה ←</a>
               </div>
-              <div id="map-polonia" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;">
-                <iframe width="100%" height="400" src="https://stay22.com/embed/69c25ca0f6f33abb87e3241f" frameborder="0" style="display:block;"></iframe>
+              <div id="map-polonia" style="border-top:1px solid var(--sand);background:var(--sand);">
+                <iframe title="מפת Stay22 - Hotel Great Polonia" width="100%" height="400" src="https://stay22.com/embed/69c25ca0f6f33abb87e3241f" frameborder="0" style="display:block;vertical-align:middle;"></iframe>
               </div>
             </div>
 
             <!-- Aparthotel Bellamonte -->
             <div style="border-radius:12px;border:2px solid var(--sand-dark);overflow:hidden;background:white;">
-              <div onclick="toggleHotelMap('map-bellamonte','chevron-bellamonte')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='white'">
-                <div style="display:flex;flex-direction:column;gap:4px;pointer-events:none;">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;">
+                <div style="display:flex;flex-direction:column;gap:4px;">
                   <div style="font-weight:700;font-size:14px;">🏔️ Aparthotel Bellamonte</div>
                   <div style="font-size:12px;color:#888;">📍 זקופנה, פולין</div>
                 </div>
-                <span id="chevron-bellamonte" style="font-size:18px;color:var(--teal);transition:transform 0.3s;pointer-events:none;">▾</span>
               </div>
               <div style="padding:10px 16px;border-top:1px solid var(--sand);">
                 <a href="https://booking.stay22.com/mataytasim/0dN0PAp8eW" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:600;font-family:var(--font-body);text-decoration:none;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">להזמנה ←</a>
               </div>
-              <div id="map-bellamonte" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;">
-                <iframe width="100%" height="400" src="https://stay22.com/embed/69c25d76f6f33abb87e32678" frameborder="0" style="display:block;"></iframe>
+              <div id="map-bellamonte" style="border-top:1px solid var(--sand);background:var(--sand);">
+                <iframe title="מפת Stay22 - Aparthotel Bellamonte" width="100%" height="400" src="https://stay22.com/embed/69c25d76f6f33abb87e32678" frameborder="0" style="display:block;vertical-align:middle;"></iframe>
               </div>
             </div>
 
           </div>
-          <script>
-          function toggleHotelMap(mapId, chevronId) {
-            var map = document.getElementById(mapId);
-            var chevron = document.getElementById(chevronId);
-            var isOpen = map.style.maxHeight !== '0px' && map.style.maxHeight !== '';
-            map.style.maxHeight = isOpen ? '0' : '400px';
-            chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
-          }
-          </script>
         </div>
 
                 <!-- DISCOVER BANNER -->
@@ -1046,28 +1396,90 @@
 
 <!-- 6. TIPS -->
         <div class="article-section" id="tips">
-          <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> טיפים חשובים לטיול</h2>
-          <div class="tips-list">
-            <div class="tip-item">
-              <span class="tip-item__icon">⛏️</span>
-              <div class="tip-item__text"><strong>מכרה ויילצ'קה:</strong> להזמין כרטיסים לפחות שבועיים מראש בקיץ. המכרה מתמלא מאוד מהר. כניסה ב-<a href="https://www.wieliczka-saltmine.com/" target="_blank" style="color:var(--teal);">wieliczka-saltmine.com</a></div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">🧥</span>
-              <div class="tip-item__text"><strong>לבוש:</strong> גם בקיץ ההרים יכולים להיות קרירים. להביא מעיל קל לטיולים ובגד חם לטרמה לאחרי המים.</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">💰</span>
-              <div class="tip-item__text"><strong>מטבע:</strong> פולין משתמשת בזלוטי (PLN) ולא ביורו. כדאי להחליף מעט מזומן - בכפרים ובשווקים לפעמים לא מקבלים כרטיס.</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">🌊</span>
-              <div class="tip-item__text"><strong>טרמה בניה:</strong> להגיע ב-9:30 כשנפתח - אחרי הצהריים עמוס מאוד. להביא בגד ים ומגבת כמובן.</div>
-            </div>
-            <div class="tip-item">
-              <span class="tip-item__icon">📅</span>
-              <div class="tip-item__text"><strong>עונת הקיץ:</strong> יוני-אוגוסט - הזמן הטוב ביותר. הכל פתוח, ירוק ואפשר להיכנס לנהרות. הרבה תיירים - להזמין מוקדם.</div>
-            </div>
+          <h2 class="article-section__title">
+            <svg class="article-section__title-icon-svg" xmlns="http://www.w3.org/2000/svg" width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.88 1.35-2.6A6.98 6.98 0 0 0 18 8a7 7 0 1 0-12 0c0 1.24.33 2.44.96 3.41.69.72 1.17 1.62 1.35 2.6"/></svg>
+            טיפים חשובים לטיול
+          </h2>
+
+          <div class="tips-pro-wrap">
+            <section class="tips-pro-group" aria-labelledby="tips-pl-logistics">
+              <h3 class="tips-pro-group__title" id="tips-pl-logistics">לוגיסטיקה ונסיעות</h3>
+              <p class="tips-pro-group__sub">מטבע, מזומן ותנועה בין קרקוב לאזור זקופנה</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-5.5A3.5 3.5 0 0 0 7 11.5 3.5 3.5 0 0 0 10.5 15H16"/><path d="M7 12h9.5"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">זלוטי ותשלום</span>
+                    <p class="tip-pro__text">בפולין משתמשים בזלוטי (PLN), לא ביורו. כרטיסי אשראי מקובלים ברוב המקומות; כדאי גם קצת מזומן לשווקים ולכפרים.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3.3A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">קרקוב וזקופנה</span>
+                    <p class="tip-pro__text">הקו מרכז קרקוב לזקופנה נמשך בערך שעתיים (אוטובוס ורכבת). בעונה עמוסה כדאי להזמין מקומות מראש או לצאת מוקדם.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tips-pro-group" aria-labelledby="tips-pl-packing">
+              <h3 class="tips-pro-group__title" id="tips-pl-packing">הכנה ואריזה</h3>
+              <p class="tips-pro-group__sub">הזמנות מראש ולבוש בהרים ובמים חמים</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">מכרה ויילצ'קה</span>
+                    <p class="tip-pro__text">להזמין כרטיסים לפחות שבועיים מראש בקיץ - המכרה מתמלא מהר. כרטיסים באתר הרשמי: <a href="https://www.wieliczka-saltmine.com/" target="_blank" rel="noopener noreferrer" style="color:var(--teal);">wieliczka-saltmine.com</a></p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">לבוש</span>
+                    <p class="tip-pro__text">גם בקיץ בטטרה יכול להיות קריר. מעיל דק לטיולים, ובגד חם אחרי בריכות חמות או רכבל.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tips-pro-group" aria-labelledby="tips-pl-onsite">
+              <h3 class="tips-pro-group__title" id="tips-pl-onsite">בזמן הביקור</h3>
+              <p class="tips-pro-group__sub">טיימינג באטרקציות ובחירת עונה</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">Terma Bania</span>
+                    <p class="tip-pro__text">להגיע סמוך לפתיחה (למשל 9:30) - אחר הצהריים עמוס מאוד. בגד ים, מגבת וכובע.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">מתי לנסוע</span>
+                    <p class="tip-pro__text">יוני עד אוגוסט - מזג נוח, הכל פתוח וירוק, ואפשר גם לרחוץ בנחלים. עונה תיירותית: להזמין ולבחור שעות מראש.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <p class="tips-pro-more">
+              <a id="tipsProMoreLink" class="tips-pro-more__link" href="tips.html?utm_source=poland_guide&amp;utm_medium=article&amp;utm_campaign=tips_section_more&amp;utm_content=pro_tips_block" data-mt-track="poland_south_tips_more">אם אתם מעוניינים בעוד טיפים שיעזרו לכם בטיול - <span class="tips-pro-more__cta">לחצו כאן</span></a>
+            </p>
           </div>
 
           <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:16px;padding:18px 24px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
@@ -1110,6 +1522,381 @@
     <p style="margin-top:12px;font-size:12px;opacity:0.6;">* חלק מהקישורים באתר הם קישורי שותפים. אם תזמינו דרכם, אקבל עמלה קטנה - ללא עלות נוספת עבורכם. ההמלצות תמיד מבוססות על ניסיון אישי בלבד.</p>
   </div>
 </footer>
+
+<!-- Google Place details: window.GOOGLE_MAPS_API_KEY בראש העמוד -->
+<div id="placeSheet" class="place-sheet" aria-hidden="true">
+  <div class="place-sheet__backdrop" data-place-sheet-close></div>
+  <div class="place-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="placeSheetTitle" dir="rtl">
+    <button type="button" class="place-sheet__close" data-place-sheet-close aria-label="סגור">×</button>
+    <div class="place-sheet__grab" aria-hidden="true"></div>
+    <div class="place-sheet__photo-wrap">
+      <img id="placeSheetPhoto" alt="" class="place-sheet__photo" width="1200" height="750" hidden decoding="async" fetchpriority="high">
+    </div>
+    <div class="place-sheet__scroll">
+      <div id="placeSheetPills" class="place-sheet__pills" hidden></div>
+      <h3 id="placeSheetTitle" class="place-sheet__title"></h3>
+      <p id="placeSheetSummary" class="place-sheet__summary" hidden></p>
+      <p id="placeSheetAddress" class="place-sheet__meta-row" hidden>
+        <span class="place-sheet__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-9.5a7 7 0 1114 0c0 5.15-7 9.5-7 9.5z"/><circle cx="12" cy="11.5" r="2.5"/></svg></span>
+        <span id="placeSheetAddressText" class="place-sheet__meta-text"></span>
+      </p>
+      <p id="placeSheetRating" class="place-sheet__meta-row" hidden>
+        <span class="place-sheet__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+        <span id="placeSheetRatingText" class="place-sheet__meta-text"></span>
+      </p>
+      <p id="placeSheetHours" class="place-sheet__meta-row" hidden>
+        <span class="place-sheet__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <span id="placeSheetHoursText" class="place-sheet__meta-text"></span>
+      </p>
+      <div class="place-sheet__actions">
+        <a id="placeSheetMapsLink" class="place-sheet__btn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>פתיחה ב-Google Maps</a>
+        <a id="placeSheetPhone" class="place-sheet__btn place-sheet__btn--secondary" href="#" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.86.3 1.7.54 2.5a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.58-1.11a2 2 0 012.11-.45c.8.24 1.64.42 2.5.54A2 2 0 0122 16.92z"/></svg><span id="placeSheetPhoneLabel"></span></a>
+        <a id="placeSheetWeb" class="place-sheet__btn place-sheet__btn--secondary" href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>אתר רשמי</a>
+      </div>
+      <p class="place-sheet__attr">נתוני מקום מסופקים על ידי Google · <a href="https://policies.google.com/terms" target="_blank" rel="noopener">תנאים</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var PLACE_SHEET_CACHE_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
+  var PLACE_SHEET_CACHE_KEY_PREFIX = 'polandSouthPlaceSheet:v1:';
+  var ZAKOPANE_STUB_DAY = { title: '', lat: 49.2992, lng: 19.9496 };
+  var _placeSheetDay = null;
+
+  window.__mtRefreshBodyScrollLock = function () {
+    var sheet = document.getElementById('placeSheet');
+    var email = document.getElementById('emailPopupOverlay');
+    var menu = document.getElementById('mobileMenu');
+    var pb = document.getElementById('pbOverlay');
+    var lock =
+      (sheet && sheet.classList.contains('is-open')) ||
+      (email && email.classList.contains('open')) ||
+      (menu && menu.classList.contains('open')) ||
+      (pb && pb.classList.contains('open'));
+    document.body.style.overflow = lock ? 'hidden' : '';
+  };
+
+  function placeSheetCacheStorageKey(placeId) {
+    return PLACE_SHEET_CACHE_KEY_PREFIX + placeId;
+  }
+  function readPlaceSheetCache(placeId) {
+    try {
+      var raw = localStorage.getItem(placeSheetCacheStorageKey(placeId));
+      if (!raw) return null;
+      var wrap = JSON.parse(raw);
+      if (!wrap || wrap.v !== 1 || !wrap.savedAt || !wrap.payload) return null;
+      if (Date.now() - wrap.savedAt > PLACE_SHEET_CACHE_MAX_AGE_MS) return null;
+      return wrap.payload;
+    } catch (e) {
+      return null;
+    }
+  }
+  function writePlaceSheetCache(placeId, payload) {
+    try {
+      localStorage.setItem(
+        placeSheetCacheStorageKey(placeId),
+        JSON.stringify({ v: 1, savedAt: Date.now(), payload: payload })
+      );
+    } catch (e) {}
+  }
+
+  function hydratePolandAttractionThumbs() {
+    var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
+    if (!key) return;
+    var root = document.getElementById('attractions');
+    if (!root) return;
+    if (!window.google || !google.maps) {
+      if (!hydratePolandAttractionThumbs._wait) hydratePolandAttractionThumbs._wait = 0;
+      if (++hydratePolandAttractionThumbs._wait < 120) {
+        setTimeout(hydratePolandAttractionThumbs, 100);
+      }
+      return;
+    }
+    if (hydratePolandAttractionThumbs._started) return;
+    hydratePolandAttractionThumbs._started = true;
+    var imgs = root.querySelectorAll('img.attraction-card__thumb[data-google-place-id]');
+    var jobs = [];
+    for (var j = 0; j < imgs.length; j++) {
+      var img = imgs[j];
+      var pid = (img.getAttribute('data-google-place-id') || '').trim();
+      if (!pid) continue;
+      jobs.push({ img: img, placeId: pid });
+    }
+    if (!jobs.length) return;
+    google.maps
+      .importLibrary('places')
+      .then(function (lib) {
+        var Place = lib.Place;
+        jobs.forEach(function (job) {
+          var cached = readPlaceSheetCache(job.placeId);
+          if (cached && cached.photoURI) {
+            job.img.src = cached.photoURI;
+            return;
+          }
+          var place = new Place({ id: job.placeId });
+          place
+            .fetchFields({ fields: ['photos'] })
+            .then(function () {
+              if (!place.photos || !place.photos.length || typeof place.photos[0].getURI !== 'function') return;
+              try {
+                var uri = place.photos[0].getURI({ maxWidth: 480, maxHeight: 360 });
+                if (uri) job.img.src = uri;
+              } catch (e) {}
+            })
+            .catch(function () {});
+        });
+      })
+      .catch(function () {});
+  }
+
+  function placeDisplayNameText(place) {
+    var dn = place.displayName;
+    if (dn == null) return '';
+    if (typeof dn === 'string') return dn;
+    if (dn.text) return dn.text;
+    return String(dn);
+  }
+
+  function setPlaceSheetMeta(rowId, textId, value) {
+    var row = document.getElementById(rowId);
+    var span = document.getElementById(textId);
+    if (!row || !span) return;
+    var t = value == null ? '' : String(value);
+    span.textContent = t;
+    row.hidden = !t;
+  }
+
+  function buildPayloadFromPlace(place, day) {
+    var oh = place.regularOpeningHours || place.openingHours;
+    var weekdayDescriptions =
+      oh && oh.weekdayDescriptions && oh.weekdayDescriptions.length ? oh.weekdayDescriptions.slice() : null;
+    var photoURI = null;
+    if (place.photos && place.photos.length && typeof place.photos[0].getURI === 'function') {
+      try {
+        photoURI = place.photos[0].getURI({ maxWidth: 1280, maxHeight: 800 }) || null;
+      } catch (e) {
+        photoURI = null;
+      }
+    }
+    return {
+      displayName: placeDisplayNameText(place) || day.title,
+      formattedAddress: place.formattedAddress || '',
+      rating: place.rating != null ? place.rating : null,
+      userRatingCount: place.userRatingCount != null ? place.userRatingCount : null,
+      editorialSummary:
+        place.editorialSummary && place.editorialSummary.text ? place.editorialSummary.text : '',
+      weekdayDescriptions: weekdayDescriptions,
+      googleMapsURI: place.googleMapsURI || '',
+      nationalPhoneNumber: place.nationalPhoneNumber || '',
+      internationalPhoneNumber: place.internationalPhoneNumber || '',
+      websiteURI: place.websiteURI || '',
+      photoURI: photoURI
+    };
+  }
+
+  function applyPlacePayloadToSheet(payload, day) {
+    var titleEl = document.getElementById('placeSheetTitle');
+    var summaryEl = document.getElementById('placeSheetSummary');
+    var photoEl = document.getElementById('placeSheetPhoto');
+    var mapsLink = document.getElementById('placeSheetMapsLink');
+    var phoneEl = document.getElementById('placeSheetPhone');
+    var phoneLabelEl = document.getElementById('placeSheetPhoneLabel');
+    var webEl = document.getElementById('placeSheetWeb');
+
+    titleEl.textContent = payload.displayName || day.title;
+
+    if (payload.editorialSummary) {
+      summaryEl.textContent = payload.editorialSummary;
+      summaryEl.hidden = false;
+    } else {
+      summaryEl.hidden = true;
+      summaryEl.textContent = '';
+    }
+
+    setPlaceSheetMeta('placeSheetAddress', 'placeSheetAddressText', payload.formattedAddress || '');
+
+    if (payload.rating != null) {
+      var urc = payload.userRatingCount != null ? ' (' + payload.userRatingCount + ' ביקורות)' : '';
+      setPlaceSheetMeta('placeSheetRating', 'placeSheetRatingText', 'דירוג: ' + payload.rating + '\u2605' + urc);
+    } else setPlaceSheetMeta('placeSheetRating', 'placeSheetRatingText', '');
+
+    if (payload.weekdayDescriptions && payload.weekdayDescriptions.length) {
+      setPlaceSheetMeta('placeSheetHours', 'placeSheetHoursText', payload.weekdayDescriptions.join(' · '));
+    } else setPlaceSheetMeta('placeSheetHours', 'placeSheetHoursText', '');
+
+    mapsLink.href = payload.googleMapsURI || 'https://www.google.com/maps?q=' + day.lat + ',' + day.lng;
+
+    var phone = payload.nationalPhoneNumber || payload.internationalPhoneNumber;
+    if (phone) {
+      phoneEl.hidden = false;
+      if (phoneLabelEl) phoneLabelEl.textContent = phone;
+      phoneEl.href = 'tel:' + String(phone).replace(/\s/g, '');
+    } else {
+      phoneEl.hidden = true;
+      if (phoneLabelEl) phoneLabelEl.textContent = '';
+    }
+
+    if (payload.websiteURI) {
+      webEl.hidden = false;
+      webEl.href = payload.websiteURI;
+    } else webEl.hidden = true;
+
+    if (payload.photoURI) {
+      photoEl.src = payload.photoURI;
+      photoEl.hidden = false;
+    } else {
+      photoEl.hidden = true;
+      photoEl.removeAttribute('src');
+    }
+  }
+
+  function loadPlaceIntoSheet(placeId, day) {
+    var cached = readPlaceSheetCache(placeId);
+    if (cached) {
+      applyPlacePayloadToSheet(cached, day);
+      return;
+    }
+
+    var titleEl = document.getElementById('placeSheetTitle');
+    var summaryEl = document.getElementById('placeSheetSummary');
+    var photoEl = document.getElementById('placeSheetPhoto');
+    var mapsLink = document.getElementById('placeSheetMapsLink');
+    var phoneEl = document.getElementById('placeSheetPhone');
+    var phoneLabelEl = document.getElementById('placeSheetPhoneLabel');
+    var webEl = document.getElementById('placeSheetWeb');
+
+    titleEl.textContent = 'טוען…';
+    summaryEl.hidden = true;
+    summaryEl.textContent = '';
+    setPlaceSheetMeta('placeSheetAddress', 'placeSheetAddressText', '');
+    setPlaceSheetMeta('placeSheetRating', 'placeSheetRatingText', '');
+    setPlaceSheetMeta('placeSheetHours', 'placeSheetHoursText', '');
+    photoEl.hidden = true;
+    photoEl.removeAttribute('src');
+    phoneEl.hidden = true;
+    if (phoneLabelEl) phoneLabelEl.textContent = '';
+    webEl.hidden = true;
+    mapsLink.href = 'https://www.google.com/maps?q=' + day.lat + ',' + day.lng;
+
+    var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
+    if (!key || !window.google || !google.maps) {
+      titleEl.textContent = day.title || 'מקום';
+      setPlaceSheetMeta(
+        'placeSheetAddress',
+        'placeSheetAddressText',
+        !key
+          ? 'כדי לטעון שעות, תמונה ודירוג: הגדירו את GOOGLE_MAPS_API_KEY בראש הקובץ (מפתח עם Maps JavaScript API + Places).'
+          : 'טוען את ספריית המפות… נסו שוב בעוד רגע.'
+      );
+      return;
+    }
+
+    google.maps
+      .importLibrary('places')
+      .then(function (lib) {
+        var Place = lib.Place;
+        var place = new Place({ id: placeId });
+        return place
+          .fetchFields({
+            fields: [
+              'displayName',
+              'formattedAddress',
+              'rating',
+              'userRatingCount',
+              'nationalPhoneNumber',
+              'internationalPhoneNumber',
+              'websiteURI',
+              'regularOpeningHours',
+              'googleMapsURI',
+              'photos',
+              'editorialSummary'
+            ]
+          })
+          .then(function () {
+            return place;
+          });
+      })
+      .then(function (place) {
+        var payload = buildPayloadFromPlace(place, day);
+        applyPlacePayloadToSheet(payload, day);
+        writePlaceSheetCache(placeId, payload);
+      })
+      .catch(function (err) {
+        titleEl.textContent = 'לא ניתן לטעון פרטי מקום';
+        var host = typeof location !== 'undefined' && location.hostname ? location.hostname : '';
+        var hints = [];
+        if (host === 'localhost' || host === '127.0.0.1' || !host || location.protocol === 'file:') {
+          hints.push('מפתח עם HTTP referrer מוגבל לא יעבוד מ-file:// או מ-localhost. פתחו את הדף ב-https://mataytasim.co.il/ (אחרי העלאה) או הוסיפו referrer לפיתוח: http://localhost:*/*');
+        } else if (host.indexOf('mataytasim.co.il') !== -1) {
+          hints.push('ב-API key → Application restrictions: הוסיפו גם https://mataytasim.co.il/* וגם https://www.mataytasim.co.il/* (עם https).');
+        }
+        hints.push('באותו פרויקט של המפתח: הפעילו Billing, Maps JavaScript API, ו-Places API (New).');
+        if (err && err.message) hints.push('מסך מפתחים (F12) → Console: ' + err.message);
+        setPlaceSheetMeta('placeSheetAddress', 'placeSheetAddressText', hints.join(' '));
+        setPlaceSheetMeta('placeSheetRating', 'placeSheetRatingText', '');
+        setPlaceSheetMeta('placeSheetHours', 'placeSheetHoursText', '');
+      });
+  }
+
+  function openPlaceSheetForAttraction(placeId, titleHint) {
+    var root = document.getElementById('placeSheet');
+    if (!root) return;
+    var pillsEl = document.getElementById('placeSheetPills');
+    if (pillsEl) {
+      pillsEl.hidden = true;
+      pillsEl.innerHTML = '';
+    }
+    _placeSheetDay = {
+      title: titleHint || '',
+      lat: ZAKOPANE_STUB_DAY.lat,
+      lng: ZAKOPANE_STUB_DAY.lng
+    };
+    root.classList.add('is-open');
+    root.setAttribute('aria-hidden', 'false');
+    window.__mtRefreshBodyScrollLock();
+    loadPlaceIntoSheet(placeId, _placeSheetDay);
+  }
+
+  function closePlaceSheet() {
+    var root = document.getElementById('placeSheet');
+    if (!root) return;
+    root.classList.remove('is-open');
+    root.setAttribute('aria-hidden', 'true');
+    _placeSheetDay = null;
+    window.__mtRefreshBodyScrollLock();
+  }
+
+  document.querySelectorAll('[data-place-sheet-close]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      closePlaceSheet();
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePlaceSheet();
+  });
+
+  var attrRoot = document.getElementById('attractions');
+  if (attrRoot) {
+    attrRoot.addEventListener('click', function (e) {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var img = t.closest('img.attraction-card__thumb[data-google-place-id]');
+      if (!img) return;
+      e.preventDefault();
+      var pid = (img.getAttribute('data-google-place-id') || '').trim();
+      if (!pid) return;
+      var card = img.closest('.attraction-card');
+      var nameEl = card && card.querySelector('.attraction-card__name');
+      openPlaceSheetForAttraction(pid, nameEl ? nameEl.textContent.trim() : '');
+    });
+  }
+
+  hydratePolandAttractionThumbs();
+})();
+</script>
 
 <!-- WhatsApp FAB -->
 <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;" target="_blank" aria-label="וואטסאפ">
