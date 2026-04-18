@@ -787,111 +787,109 @@
       line-height: 1.7;
     }
 
-    /* Budget strip - desktop: row; mobile: column so CTA never overlaps description */
-    .budget-strip-wrap {
-      margin-bottom: 32px;
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .budget-strip {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--charcoal);
-      border-radius: 14px;
-      padding: 14px 16px;
-      text-decoration: none;
-      position: relative;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .budget-strip:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
-    }
-
-    .budget-strip__shine {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(105deg, transparent 55%, rgba(232, 160, 69, 0.12) 100%);
-      pointer-events: none;
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    .budget-strip__icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: rgba(232, 160, 69, 0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .budget-strip__copy {
-      flex: 1;
-      min-width: 0;
-      text-align: right;
-    }
-
-    .budget-strip__title {
-      display: block;
-      font-family: var(--font-heading);
-      font-size: 14px;
-      color: #fff;
-      line-height: 1.35;
-      margin-bottom: 2px;
-    }
-
-    .budget-strip__sub {
-      display: block;
-      font-size: 11px;
-      color: rgba(255, 255, 255, 0.55);
-      font-family: var(--font-body);
-      line-height: 1.4;
-    }
-
-    .budget-strip__cta {
-      flex-shrink: 0;
-      background: var(--amber);
-      color: var(--charcoal);
+    /* Destinations teaser (value prop): flags + primary CTA */
+    .value-prop-dest-block {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      padding: 22px 18px 24px;
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 237, 216, 0.45) 100%);
+      border: 1px solid rgba(232, 221, 196, 0.85);
       border-radius: 20px;
-      padding: 10px 16px;
+      box-shadow: 0 6px 28px rgba(44, 44, 44, 0.06);
+    }
+
+    .value-prop-dest-kicker {
+      text-align: center;
       font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--teal-dark);
+      margin: 0 0 16px;
+      line-height: 1.45;
+    }
+
+    .value-prop-flags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px 10px;
+      margin-bottom: 18px;
+    }
+
+    .value-prop-flag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       font-size: 12px;
-      font-weight: 700;
-      white-space: nowrap;
+      font-weight: 600;
+      color: var(--charcoal);
+      padding: 6px 11px;
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    }
+
+    .value-prop-flag img {
+      width: 22px;
+      height: auto;
+      border-radius: 3px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+      display: block;
+    }
+
+    .value-prop-dest-actions {
+      text-align: center;
+    }
+
+    .value-prop-dest-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 420px;
+      box-sizing: border-box;
+      padding: 14px 22px;
+      font-family: var(--font-heading);
+      font-size: 17px;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      box-shadow: 0 4px 20px rgba(26, 107, 114, 0.28);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .value-prop-dest-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(26, 107, 114, 0.34);
+    }
+
+    .value-prop-dest-link:focus-visible {
+      outline: 3px solid var(--amber);
+      outline-offset: 3px;
+    }
+
+    .value-prop-dest-link__arrow {
+      font-size: 1.15em;
+      line-height: 1;
+      opacity: 0.95;
     }
 
     @media (max-width: 540px) {
-      .budget-strip {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-        gap: 14px;
-        padding: 16px 14px;
+      .value-prop-dest-block {
+        padding: 18px 14px 20px;
+        margin-bottom: 32px;
       }
 
-      .budget-strip__copy {
-        text-align: center;
-      }
-
-      .budget-strip__icon {
-        align-self: center;
-      }
-
-      .budget-strip__cta {
-        width: 100%;
-        padding: 12px 16px;
+      .value-prop-dest-link {
+        font-size: 15px;
+        padding: 13px 18px;
+        max-width: none;
       }
     }
 
@@ -913,12 +911,12 @@
 
     .pricing-card {
       background: var(--white);
-      border-radius: var(--radius-lg);
+      border-radius: 20px;
       padding: 0;
-      border: 2px solid var(--sand-dark);
+      border: 1px solid rgba(0, 0, 0, 0.07);
       position: relative;
       transition: transform 0.35s ease, box-shadow 0.35s ease;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 4px 24px rgba(44, 44, 44, 0.06), 0 1px 0 rgba(255, 255, 255, 0.8) inset;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -933,14 +931,14 @@
       }
 
       .pricing-card--highlighted:hover {
-        box-shadow: var(--shadow-xl), 0 0 0 1px var(--amber);
+        box-shadow: 0 16px 48px rgba(232, 160, 69, 0.28), 0 0 0 1px rgba(232, 160, 69, 0.45);
         transform: scale(1.06);
       }
     }
 
     .pricing-card--highlighted {
-      border-color: var(--amber);
-      box-shadow: var(--shadow-lg), 0 0 0 1px var(--amber);
+      border-color: rgba(232, 160, 69, 0.55);
+      box-shadow: 0 12px 40px rgba(232, 160, 69, 0.18), 0 0 0 1px rgba(232, 160, 69, 0.35);
       transform: scale(1.04);
       z-index: 2;
     }
@@ -949,6 +947,7 @@
       padding: 32px 28px 24px;
       text-align: center;
       position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .pricing-card--highlighted .pricing-card__header {
@@ -957,6 +956,7 @@
 
     .pricing-card:first-child .pricing-card__header {
       background: linear-gradient(135deg, var(--sand) 0%, var(--sand-dark) 100%);
+      border-bottom-color: rgba(0, 0, 0, 0.06);
     }
 
     .pricing-card:last-child .pricing-card__header {
@@ -968,7 +968,7 @@
       top: 0;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: var(--teal);
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
       color: var(--white);
       padding: 6px 24px;
       border-radius: var(--radius-xl);
@@ -976,13 +976,36 @@
       font-weight: 600;
       white-space: nowrap;
       letter-spacing: 0.3px;
+      box-shadow: 0 4px 14px rgba(26, 107, 114, 0.35);
     }
 
     .pricing-card__icon {
-      font-size: 44px;
-      margin-bottom: 12px;
-      display: block;
+      font-size: 30px;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
       line-height: 1;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .pricing-card:first-child .pricing-card__icon {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+    }
+
+    .pricing-card--highlighted .pricing-card__icon {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 6px 20px rgba(196, 135, 46, 0.2);
+    }
+
+    .pricing-card:last-child .pricing-card__icon {
+      background: rgba(255, 255, 255, 0.22);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
     }
 
     .pricing-card__name {
@@ -1020,9 +1043,9 @@
 
     .pricing-card__price-row {
       text-align: center;
-      margin-bottom: 24px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--sand-dark);
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(232, 221, 196, 0.85);
     }
 
     .pricing-card__price {
@@ -1030,7 +1053,9 @@
       font-size: clamp(40px, 4.5vw, 50px);
       color: var(--teal);
       line-height: 1.1;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
     }
 
     .pricing-card--highlighted .pricing-card__price {
@@ -1044,7 +1069,12 @@
     }
 
     .pricing-card__features {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(26, 107, 114, 0.05) 0%, rgba(245, 237, 216, 0.35) 100%);
+      border: none;
+      box-shadow: 0 2px 14px rgba(44, 44, 44, 0.05);
     }
 
     .pricing-card__feature {
@@ -1052,17 +1082,28 @@
       align-items: flex-start;
       gap: 10px;
       font-size: 15px;
-      line-height: 1.6;
-      padding: 7px 0;
+      line-height: 1.55;
+      padding: 8px 0;
       color: var(--charcoal);
+    }
+
+    .pricing-card__feature:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .pricing-card__feature--included .pricing-card__check {
       color: var(--green);
       font-weight: 700;
       flex-shrink: 0;
-      font-size: 16px;
-      margin-top: 2px;
+      font-size: 15px;
+      margin-top: 3px;
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(74, 155, 111, 0.12);
+      border-radius: 6px;
     }
 
     .pricing-card__feature--excluded {
@@ -1178,6 +1219,7 @@
         display: none !important;
       }
 
+      /* direction:ltr on the flex wrapper so flex `order` is top-to-bottom; cards use dir:rtl for text */
       .pricing-stack__viewport {
         position: relative;
         isolation: isolate;
@@ -1185,7 +1227,7 @@
         flex-direction: column;
         flex-wrap: nowrap;
         align-items: center;
-        direction: rtl;
+        direction: ltr;
         gap: 12px;
         width: 100%;
         max-width: 100%;
@@ -1219,6 +1261,7 @@
         display: flex;
         flex-direction: column;
         min-height: 0;
+        direction: rtl;
         transform: none !important;
         opacity: 1 !important;
         pointer-events: auto !important;
@@ -1249,8 +1292,10 @@
       }
 
       .pricing-stack__card .pricing-card__icon {
-        font-size: 28px !important;
-        margin-bottom: 6px !important;
+        font-size: 26px !important;
+        width: 56px !important;
+        height: 56px !important;
+        margin: 0 auto 8px !important;
       }
 
       .pricing-stack__card .pricing-card__name {
@@ -1278,8 +1323,22 @@
         font-size: 12px !important;
       }
 
+      /* Show package bullets on mobile (was display:none for compact stack layout) */
       .pricing-stack__card .pricing-card__features {
-        display: none !important;
+        display: block !important;
+        margin-bottom: 12px !important;
+        padding: 10px 12px !important;
+      }
+
+      .pricing-stack__card .pricing-card__feature {
+        font-size: 13px !important;
+        padding: 6px 0 !important;
+      }
+
+      .pricing-stack__card .pricing-card__feature--included .pricing-card__check {
+        width: 20px !important;
+        height: 20px !important;
+        font-size: 12px !important;
       }
 
       .pricing-stack__card .pricing-stack__cta {
@@ -2840,52 +2899,30 @@
       <h2 class="value-prop__headline reveal" id="vp-title">לא עוד לילות של תכנון אינסופי</h2>
       <p class="value-prop__subheadline reveal reveal-delay-1">מקבלים תכנית טיול מלאה לטיול עם ילדים - בדיוק לפי הילדים שלך, התקציב שלך, והתאריכים שלך.</p>
 
-      <!-- דגלי יעדים -->
-      <div class="reveal reveal-delay-1" style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:32px;">
-        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/sk.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">סלובקיה</span>
-        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/hu.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">הונגריה</span>
-        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/ro.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">רומניה</span>
-        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/pl.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">פולין</span>
-        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/at.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">אוסטריה</span>
-        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/gr.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">יוון</span>
-        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/cz.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">צ׳כיה</span>
-        <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#444;"><img src="https://flagcdn.com/si.svg" width="28" height="19" style="border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,0.18);" alt="">סלובניה</span>
-      </div>
-
-      <div class="reveal reveal-delay-1" style="text-align:center;margin-bottom:48px;">
-        <a href="destinations.html" style="
-          display:inline-flex;align-items:center;gap:10px;
-          background:linear-gradient(135deg,var(--teal),#238a93);
-          color:white;border-radius:32px;
-          padding:16px 36px;
-          font-family:var(--font-heading);font-size:18px;
-          box-shadow:0 6px 24px rgba(26,107,114,0.35);
-          transition:transform 0.25s,box-shadow 0.25s;
-          text-decoration:none;
-        "
-        onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 32px rgba(26,107,114,0.45)'"
-        onmouseout="this.style.transform='';this.style.boxShadow='0 6px 24px rgba(26,107,114,0.35)'">
-          <span>✈️</span>
-          <span>מתי טסים - תלחצו ותגלו יעדים נפלאים</span>
-          <span style="font-size:20px;margin-right:2px;">←</span>
-        </a>
-      </div>
-
-      <!-- BUDGET CALCULATOR - compact strip above packages -->
-      <div class="budget-strip-wrap">
-        <a href="budget.html" class="budget-strip">
-          <span class="budget-strip__shine" aria-hidden="true"></span>
-          <span class="budget-strip__icon" aria-hidden="true">🧮</span>
-          <span class="budget-strip__copy">
-            <span class="budget-strip__title">כמה יעלה הטיול שלכם?</span>
-            <span class="budget-strip__sub">מחשבון חינמי · טיסות, לינה, אטרקציות</span>
-          </span>
-          <span class="budget-strip__cta">לחץ לחישוב ←</span>
-        </a>
+      <!-- יעדים: דגלים + קישור למדריכים -->
+      <div class="value-prop-dest-block reveal reveal-delay-1">
+        <p class="value-prop-dest-kicker">מסלולים, טיפים, המלצות על אטרקציות ועוד הרבה הפתעות טובות למשפחות</p>
+        <div class="value-prop-flags" aria-hidden="true">
+          <span class="value-prop-flag"><img src="https://flagcdn.com/sk.svg" width="28" height="19" alt="">סלובקיה</span>
+          <span class="value-prop-flag"><img src="https://flagcdn.com/hu.svg" width="28" height="19" alt="">הונגריה</span>
+          <span class="value-prop-flag"><img src="https://flagcdn.com/ro.svg" width="28" height="19" alt="">רומניה</span>
+          <span class="value-prop-flag"><img src="https://flagcdn.com/pl.svg" width="28" height="19" alt="">פולין</span>
+          <span class="value-prop-flag"><img src="https://flagcdn.com/at.svg" width="28" height="19" alt="">אוסטריה</span>
+          <span class="value-prop-flag"><img src="https://flagcdn.com/gr.svg" width="28" height="19" alt="">יוון</span>
+          <span class="value-prop-flag"><img src="https://flagcdn.com/cz.svg" width="28" height="19" alt="">צ׳כיה</span>
+          <span class="value-prop-flag"><img src="https://flagcdn.com/si.svg" width="28" height="19" alt="">סלובניה</span>
+        </div>
+        <div class="value-prop-dest-actions">
+          <a href="destinations.html" class="value-prop-dest-link">
+            <span aria-hidden="true">🗺️</span>
+            <span>לדף היעדים</span>
+            <span class="value-prop-dest-link__arrow" aria-hidden="true">←</span>
+          </a>
+        </div>
       </div>
 
       <!-- PACKAGES CTA (no scroll reveal - cards visible immediately) -->
-      <div class="pricing-packages-section" style="margin-top:48px;padding-top:40px;padding-bottom:56px;border-top:2px solid var(--sand-dark);border-bottom:2px solid var(--sand-dark);">
+      <div class="pricing-packages-section" style="margin-top:32px;padding-top:40px;padding-bottom:56px;border-top:2px solid var(--sand-dark);border-bottom:2px solid var(--sand-dark);">
 
         <div style="text-align:center;margin-bottom:40px;">
           <h3 style="font-family:var(--font-heading);font-size:clamp(26px,3vw,34px);color:var(--charcoal);margin-bottom:10px;">איך אני יכול לעזור לכם?</h3>
