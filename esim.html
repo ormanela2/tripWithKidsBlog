@@ -69,6 +69,10 @@
   </script>
 
   <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preload" as="image" href="airalo.png">
+  <link rel="preload" as="image" href="breeze.png">
+  <link rel="preload" as="image" href="saily.png">
+  <link rel="preload" as="image" href="yesim.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
@@ -242,7 +246,7 @@
     .compare-table tbody tr:nth-child(even) td{background:rgba(26,107,114,.03);}
     .compare-table tbody tr:hover td{background:rgba(232,160,69,.08);}
     .compare-provider-img{
-      display:block;max-height:44px;width:auto;max-width:120px;object-fit:contain;
+      display:block;max-height:44px;width:auto;max-width:120px;object-fit:contain;height:44px;
       border-radius:8px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.08);
     }
     .compare-table tbody td:first-child{
@@ -468,7 +472,7 @@
         <tbody>
           <tr>
             <td>
-              <img class="compare-provider-img" src="airalo.png" width="120" height="44" alt="Airalo" loading="lazy" decoding="async">
+              <img class="compare-provider-img" src="airalo.png" width="120" height="44" alt="Airalo" loading="eager" decoding="sync">
             </td>
             <td>מי שרוצה <strong>קטלוג רחב</strong> של מדינות ואזורים, חבילות לפי ג׳יגה ותוקף.</td>
             <td>אפליקציה + אתר - נוח להשוות חבילות בין יעדים.</td>
@@ -477,7 +481,7 @@
           </tr>
           <tr>
             <td>
-              <img class="compare-provider-img" src="yesim.png" width="44" height="44" alt="Yesim" loading="lazy" decoding="async">
+              <img class="compare-provider-img" src="yesim.png" width="44" height="44" alt="Yesim" loading="eager" decoding="sync">
             </td>
             <td>מי שמחפש <strong>גמישות</strong> ולעיתים שימוש גבוה יותר בנתונים (תלוי בתוכנית).</td>
             <td>בעיקר אפליקציה; חבילות משתנות לפי יעד.</td>
@@ -486,7 +490,7 @@
           </tr>
           <tr>
             <td>
-              <img class="compare-provider-img" src="saily.png" width="44" height="44" alt="Saily" loading="lazy" decoding="async">
+              <img class="compare-provider-img" src="saily.png" width="44" height="44" alt="Saily" loading="eager" decoding="sync">
             </td>
             <td>מי שאוהב <strong>אפליקציה מרכזית</strong> וחוויית משתמש מודרנית.</td>
             <td>אפליקציה; רכישה והפעלה מתוך המותג.</td>
@@ -495,7 +499,7 @@
           </tr>
           <tr>
             <td>
-              <img class="compare-provider-img" src="breeze.png" width="120" height="44" alt="Breeze eSIM" loading="lazy" decoding="async">
+              <img class="compare-provider-img" src="breeze.png" width="120" height="44" alt="Breeze eSIM" loading="eager" decoding="sync">
             </td>
             <td>מי שמעדיף <strong>התחלה פשוטה</strong> (לעיתים QR / אתר), טיולים באירופה ובעוד יעדים.</td>
             <td>דגש על אתר ו־QR; ניהול לפי הספק.</td>
