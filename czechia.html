@@ -2105,140 +2105,54 @@
 
 <script>
 (function () {
-  var CACHE_PREFIX = 'mt-czechia-lipno-place-photo-v1:';
-  var CACHE_TTL_MS = 14 * 24 * 60 * 60 * 1000;
-  var placesServicePromise = null;
-
-  function cacheGet(key) {
-    try {
-      var raw = localStorage.getItem(CACHE_PREFIX + key);
-      if (!raw) return null;
-      var data = JSON.parse(raw);
-      if (!data || !data.url || !data.ts) return null;
-      if (Date.now() - data.ts > CACHE_TTL_MS) return null;
-      return data.url;
-    } catch (e) { return null; }
-  }
-
-  function cacheSet(key, url) {
-    if (!url) return;
-    try {
-      localStorage.setItem(CACHE_PREFIX + key, JSON.stringify({ url: url, ts: Date.now() }));
-    } catch (e) {}
-  }
-
-  function bindFallback(img) {
-    if (img.__mtLipnoFallbackBound) return;
-    img.__mtLipnoFallbackBound = true;
-    img.addEventListener('error', function onImgError() {
-      var fallback = (img.getAttribute('data-fallback-src') || '').trim();
-      var current = (img.getAttribute('src') || '').trim();
-      if (fallback && current !== fallback) {
-        img.src = fallback;
-      }
-    });
-  }
-
-  function ensurePlacesService() {
-    if (placesServicePromise) return placesServicePromise;
-    placesServicePromise = new Promise(function (resolve, reject) {
-      if (!(window.google && google.maps && google.maps.places)) {
-        reject(new Error('Google Places לא זמין בדף.'));
-        return;
-      }
-      var holder = document.createElement('div');
-      holder.style.cssText = 'position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;';
-      document.body.appendChild(holder);
-      var map = new google.maps.Map(holder, { center: { lat: 49.06, lng: 14.44 }, zoom: 8, disableDefaultUI: true });
-      resolve(new google.maps.places.PlacesService(map));
-    });
-    return placesServicePromise;
-  }
-
-  function placePhotoUrl(placeResult) {
-    var photos = placeResult && placeResult.photos;
-    if (!photos || !photos.length) return null;
-    try {
-      return photos[0].getUrl({ maxWidth: 1000, maxHeight: 700 });
-    } catch (e) {
-      return null;
-    }
-  }
-
-  function getByTextQuery(service, query) {
-    return new Promise(function (resolve) {
-      service.textSearch({ query: query }, function (results, status) {
-        if (status !== google.maps.places.PlacesServiceStatus.OK || !results || !results.length) {
-          resolve(null);
-          return;
-        }
-        var best = results[0];
-        resolve({
-          photoUrl: placePhotoUrl(best),
-          placeId: best.place_id || null
-        });
-      });
-    });
-  }
-
-  function getByPlaceId(service, placeId) {
-    return new Promise(function (resolve) {
-      service.getDetails({ placeId: placeId, fields: ['photos', 'place_id'] }, function (result, status) {
-        if (status !== google.maps.places.PlacesServiceStatus.OK || !result) {
-          resolve(null);
-          return;
-        }
-        resolve({
-          photoUrl: placePhotoUrl(result),
-          placeId: result.place_id || placeId
-        });
-      });
-    });
-  }
-
-  async function hydrateImg(img) {
-    var placeId = (img.getAttribute('data-google-place-id') || '').trim();
-    var query = (img.getAttribute('data-google-query') || '').trim();
-    var cacheKey = placeId ? ('placeid:' + placeId) : (query ? ('query:' + query.toLowerCase()) : null);
-    if (!cacheKey) return;
-
-    var cached = cacheGet(cacheKey);
-    if (cached) { img.src = cached; return; }
-
-    try {
-      var service = await ensurePlacesService();
-      var payload = null;
-
-      if (placeId) {
-        payload = await getByPlaceId(service, placeId);
-      }
-      if (!payload && query) {
-        payload = await getByTextQuery(service, query);
-      }
-      if (!payload || !payload.photoUrl) return;
-
-      img.src = payload.photoUrl;
-      cacheSet(cacheKey, payload.photoUrl);
-
-      if (!placeId && payload.placeId) {
-        img.setAttribute('data-google-place-id', payload.placeId);
-        cacheSet('placeid:' + payload.placeId, payload.photoUrl);
-      }
-    } catch (e) {
-      // Keep fallback image if Places fails.
-    }
-  }
-
   function run() {
-    var imgs = Array.prototype.slice.call(document.querySelectorAll('.attraction-card__thumb[data-google-query], .attraction-card__thumb[data-google-place-id]'));
-    if (!imgs.length) return;
-    imgs.forEach(function (img, idx) {
-      if (!img.getAttribute('data-fallback-src')) {
-        img.setAttribute('data-fallback-src', img.getAttribute('src') || '');
-      }
-      bindFallback(img);
-      setTimeout(function () { hydrateImg(img); }, idx * 160);
-    });
+    var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
+    if (!key) return;
+    var root = document.getElementById('lipno');
+    if (!root) return;
+    if (!window.google || !google.maps) {
+      if (!run._wait) run._wait = 0;
+      if (++run._wait < 120) setTimeout(run, 100);
+      return;
+    }
+    if (run._started) return;
+    run._started = true;
+
+    var imgs = root.querySelectorAll('img.attraction-card__thumb[data-google-place-id]');
+    var jobs = [];
+    for (var i = 0; i < imgs.length; i++) {
+      var img = imgs[i];
+      var pid = (img.getAttribute('data-google-place-id') || '').trim();
+      if (!pid) continue;
+      jobs.push({ img: img, placeId: pid });
+    }
+    if (!jobs.length) return;
+
+    google.maps
+      .importLibrary('places')
+      .then(function (lib) {
+        var Place = lib.Place;
+        jobs.forEach(function (job) {
+          var place = new Place({ id: job.placeId });
+          place
+            .fetchFields({ fields: ['photos'] })
+            .then(function () {
+              if (!place.photos || !place.photos.length || typeof place.photos[0].getURI !== 'function') return;
+              try {
+                var uri = place.photos[0].getURI({ maxWidth: 480, maxHeight: 360 });
+                if (uri) job.img.src = uri;
+              } catch (e) {
+                /* Keep fallback src image */
+              }
+            })
+            .catch(function () {
+              /* Keep fallback src image */
+            });
+        });
+      })
+      .catch(function () {
+        /* Keep fallback src image */
+      });
   }
 
   if (document.readyState === 'loading') {
