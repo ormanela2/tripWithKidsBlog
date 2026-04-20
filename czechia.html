@@ -2108,6 +2108,7 @@
   var CACHE_PREFIX = 'mt-czechia-lipno-place-photo-v1:';
   var CACHE_TTL_MS = 14 * 24 * 60 * 60 * 1000;
   var placesServicePromise = null;
+  var SECONDARY_FALLBACK_SRC = 'og-image.png';
 
   function cacheGet(key) {
     try {
@@ -2125,6 +2126,23 @@
     try {
       localStorage.setItem(CACHE_PREFIX + key, JSON.stringify({ url: url, ts: Date.now() }));
     } catch (e) {}
+  }
+
+  function bindFallback(img) {
+    if (img.__mtLipnoFallbackBound) return;
+    img.__mtLipnoFallbackBound = true;
+    img.addEventListener('error', function onImgError() {
+      var fallback = (img.getAttribute('data-fallback-src') || '').trim();
+      var fallback2 = (img.getAttribute('data-fallback-src-2') || '').trim();
+      var current = (img.getAttribute('src') || '').trim();
+      if (fallback && current !== fallback) {
+        img.src = fallback;
+        return;
+      }
+      if (fallback2 && current !== fallback2) {
+        img.src = fallback2;
+      }
+    });
   }
 
   function ensurePlacesService() {
@@ -2221,6 +2239,13 @@
     var imgs = Array.prototype.slice.call(document.querySelectorAll('.attraction-card__thumb[data-google-query], .attraction-card__thumb[data-google-place-id]'));
     if (!imgs.length) return;
     imgs.forEach(function (img, idx) {
+      if (!img.getAttribute('data-fallback-src')) {
+        img.setAttribute('data-fallback-src', img.getAttribute('src') || '');
+      }
+      if (!img.getAttribute('data-fallback-src-2')) {
+        img.setAttribute('data-fallback-src-2', SECONDARY_FALLBACK_SRC);
+      }
+      bindFallback(img);
       setTimeout(function () { hydrateImg(img); }, idx * 160);
     });
   }
