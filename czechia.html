@@ -2108,7 +2108,6 @@
   var CACHE_PREFIX = 'mt-czechia-lipno-place-photo-v1:';
   var CACHE_TTL_MS = 14 * 24 * 60 * 60 * 1000;
   var placesServicePromise = null;
-  var SECONDARY_FALLBACK_SRC = 'czechia.webp';
 
   function cacheGet(key) {
     try {
@@ -2133,14 +2132,9 @@
     img.__mtLipnoFallbackBound = true;
     img.addEventListener('error', function onImgError() {
       var fallback = (img.getAttribute('data-fallback-src') || '').trim();
-      var fallback2 = (img.getAttribute('data-fallback-src-2') || '').trim();
       var current = (img.getAttribute('src') || '').trim();
       if (fallback && current !== fallback) {
         img.src = fallback;
-        return;
-      }
-      if (fallback2 && current !== fallback2) {
-        img.src = fallback2;
       }
     });
   }
@@ -2241,9 +2235,6 @@
     imgs.forEach(function (img, idx) {
       if (!img.getAttribute('data-fallback-src')) {
         img.setAttribute('data-fallback-src', img.getAttribute('src') || '');
-      }
-      if (!img.getAttribute('data-fallback-src-2')) {
-        img.setAttribute('data-fallback-src-2', SECONDARY_FALLBACK_SRC);
       }
       bindFallback(img);
       setTimeout(function () { hydrateImg(img); }, idx * 160);
