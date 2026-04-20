@@ -845,6 +845,76 @@
       text-align: center;
     }
 
+    .value-prop-hub-card {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid rgba(26, 107, 114, 0.2);
+      box-shadow: 0 8px 22px rgba(18, 77, 82, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-prop-hub-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal) 0%, var(--amber) 100%);
+    }
+
+    .value-prop-hub-title {
+      margin: 0 0 6px;
+      text-align: center;
+      font-family: var(--font-heading);
+      font-size: 19px;
+      color: var(--teal-dark);
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+    }
+
+    .value-prop-hub-copy {
+      margin: 0 0 12px;
+      text-align: center;
+      font-size: 14px;
+      color: #465566;
+      line-height: 1.55;
+    }
+
+    .value-prop-hub-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 420px;
+      box-sizing: border-box;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--teal-dark);
+      text-decoration: none;
+      background: linear-gradient(180deg, #ffffff 0%, #f7fbfb 100%);
+      border: 1.5px solid rgba(26, 107, 114, 0.32);
+      box-shadow: 0 3px 10px rgba(18, 77, 82, 0.09);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .value-prop-hub-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 7px 18px rgba(18, 77, 82, 0.14);
+      border-color: rgba(26, 107, 114, 0.5);
+    }
+
+    .value-prop-hub-link:focus-visible {
+      outline: 3px solid var(--amber);
+      outline-offset: 3px;
+    }
+
     .value-prop-dest-link {
       display: inline-flex;
       align-items: center;
@@ -891,6 +961,16 @@
       .value-prop-dest-link {
         font-size: 15px;
         padding: 13px 18px;
+        max-width: none;
+      }
+
+      .value-prop-hub-title {
+        font-size: 17px;
+      }
+
+      .value-prop-hub-link {
+        font-size: 15px;
+        padding: 11px 16px;
         max-width: none;
       }
     }
@@ -2852,6 +2932,15 @@
             <span>לדף היעדים</span>
             <span class="value-prop-dest-link__arrow" aria-hidden="true">←</span>
           </a>
+          <div class="value-prop-hub-card">
+            <h3 class="value-prop-hub-title">טיפים וכלים לתכנון חכם</h3>
+            <p class="value-prop-hub-copy">מרכז הידע שלנו לתכנון טיול: תקציב, מזג אוויר, מה לקחת לטיול, השוואת ספקי תקשורת וכל מה שצריך כדי לסגור טיול במקום אחד.</p>
+            <a href="tips.html" class="value-prop-hub-link" aria-label="לכל מה שצריך לדעת לפני שטסים">
+              <span aria-hidden="true">🧭</span>
+              <span>כל מה שצריך לדעת לפני שטסים</span>
+              <span class="value-prop-dest-link__arrow" aria-hidden="true">←</span>
+            </a>
+          </div>
         </div>
       </div>
 
