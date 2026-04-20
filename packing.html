@@ -255,7 +255,6 @@
 </head>
 <body>
 
-<!-- ── NAV ── -->
   <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
     <div class="container nav__inner">
       <a href="services.html" class="nav__logo" aria-label="מתי טסים - עמוד ראשי">
@@ -345,8 +344,10 @@
 
 <!-- ── PAGE HEADER ── -->
 <header class="page-header">
-  <nav class="page-header__breadcrumb" aria-label="breadcrumb">
+    <nav class="page-header__breadcrumb" aria-label="breadcrumb">
     <a href="services.html">מתי טסים</a>
+    <span aria-hidden="true">›</span>
+    <a href="tips.html">טיפים וכלים</a>
     <span aria-hidden="true">›</span>
     <span>רשימת ציוד</span>
   </nav>
@@ -1301,7 +1302,7 @@
     });
     mobileMenu.querySelectorAll('a').forEach(function(link) {
       link.addEventListener('click', function() {
-        if (link.getAttribute('href') === '#newsletter') return;
+        var href = link.getAttribute('href'); if (href === '#newsletter' || href === 'tips.html#newsletter') return;
         mobileMenu.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
