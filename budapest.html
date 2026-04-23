@@ -216,6 +216,16 @@
     .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.92; margin-bottom: 32px; max-width: 600px; line-height: 1.7; text-shadow: 0 1px 14px rgba(0,0,0,0.3); }
     .article-hero__meta { display: flex; flex-wrap: wrap; gap: 12px; }
     .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
+    .article-hero__actions { display: flex; flex-direction: column; gap: 14px; margin-top: 6px; align-items: flex-start; }
+    .article-hero__actions .gtk-trigger { margin-top: 0; width: auto; max-width: 100%; box-sizing: border-box; justify-content: flex-start; }
+    .article-hero__partner-lead { margin: 0; font-size: 13px; line-height: 1.45; opacity: 0.9; }
+    .article-hero__partner-link {
+      color: rgba(255,255,255,0.95); font-weight: 600; text-decoration: underline; text-underline-offset: 3px;
+      text-decoration-color: rgba(255,255,255,0.45); transition: color 0.2s, text-decoration-color 0.2s;
+    }
+    .article-hero__partner-link:hover, .article-hero__partner-link:focus-visible {
+      color: #fff; text-decoration-color: rgba(232,160,69,0.85); outline: none;
+    }
     .article-hero__attr { margin: 0; padding-top: 16px; font-size: 11px; opacity: 0.62; line-height: 1.4; max-width: 780px; }
     .article-hero__attr a { color: rgba(255,255,255,0.78); text-decoration: underline; text-underline-offset: 2px; }
     @media (max-width: 600px) {
@@ -225,7 +235,22 @@
       .article-hero__flag { font-size: 44px; margin-bottom: 12px; }
       .article-hero__badge { font-size: 13px; padding: 8px 14px; }
       .article-hero__attr { padding-top: 12px; }
+      .article-hero__actions { gap: 12px; align-items: stretch; }
+      .article-hero__actions .gtk-trigger { order: -1; width: 100%; }
+      .article-hero__actions .article-hero__meta { order: 0; }
+      .article-hero__actions .article-hero__partner-lead { order: 1; }
     }
+    .gtk-trigger{display:inline-flex;align-items:center;gap:12px;margin-top:18px;padding:10px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.4);background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.08));color:var(--white);font-family:var(--font-body);font-size:14px;font-weight:700;line-height:1.3;text-align:right;}
+    .gtk-trigger__label{display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1.25}.gtk-trigger__title{font-size:1.12em}.gtk-trigger__sub{font-size:11px;font-weight:500;opacity:.86;margin-top:1px}.gtk-trigger__icon{flex-shrink:0;width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);font-size:16px}
+    .gtk-drawer{position:fixed;inset:0;z-index:10040;pointer-events:none}.gtk-drawer.is-open{pointer-events:auto}.gtk-drawer__backdrop{position:absolute;inset:0;background:rgba(15,25,38,.55);opacity:0;transition:opacity .28s ease}.gtk-drawer.is-open .gtk-drawer__backdrop{opacity:1}
+    .gtk-drawer__panel{position:absolute;top:0;bottom:0;inset-inline-end:0;width:min(420px,100%);background:var(--cream);box-shadow:-8px 0 32px rgba(0,0,0,.18);display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.22,1,.36,1);z-index:1}
+    html[dir="rtl"] .gtk-drawer:not(.is-open) .gtk-drawer__panel{transform:translateX(-100%)}html[dir="ltr"] .gtk-drawer:not(.is-open) .gtk-drawer__panel{transform:translateX(100%)}.gtk-drawer.is-open .gtk-drawer__panel{transform:translateX(0)}
+    .gtk-drawer__head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 14px;border-bottom:1px solid var(--sand-dark);background:var(--white)}.gtk-drawer__title{margin:0;font-family:var(--font-heading);font-size:1.25rem;color:var(--teal-dark)}.gtk-drawer__close{width:44px;height:44px;border-radius:12px;border:none;background:rgba(0,0,0,.05);font-size:22px}
+    .gtk-drawer__body{flex:1;overflow-y:auto;padding:20px}.gtk-drawer__lead{margin:0 0 16px;font-size:14px;color:#555}.gtk-drawer__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}.gtk-drawer__item[hidden]{display:none}
+    .gtk-drawer__card{display:block;padding:12px 14px;border-radius:12px;border:1px solid var(--sand-dark);border-inline-start-width:3px;border-inline-start-color:rgba(26,107,114,.35);background:var(--white);text-decoration:none;color:inherit}
+    .gtk-drawer__headrow{display:flex;align-items:center;gap:8px;margin-bottom:7px}.gtk-drawer__icon{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px;background:rgba(26,107,114,.1)}.gtk-drawer__card-title{font-family:var(--font-heading);font-size:.99rem;color:var(--teal-dark);margin-left:auto}.gtk-drawer__chip{border-radius:999px;border:1px solid rgba(26,107,114,.25);background:rgba(26,107,114,.08);color:#0f4a50;font-size:11px;font-weight:600;padding:3px 8px}
+    .gtk-drawer__card-summary{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;font-size:13.5px;color:#4a4a4a;line-height:1.55;margin-bottom:8px}.gtk-drawer__card-more{font-size:12.5px;font-weight:600;color:var(--teal)}
+    .gtk-drawer__more-toggle{width:100%;margin-top:10px;min-height:42px;border-radius:10px;border:1px dashed rgba(26,107,114,.35);background:rgba(26,107,114,.06);color:#0f4a50;font-size:13px;font-weight:600}.gtk-drawer__error{margin:0;padding:12px 14px;border-radius:12px;background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.25);font-size:13px;color:#7f1d1d}.gtk-drawer__foot{padding:16px 20px calc(20px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--sand-dark);background:var(--white)}.gtk-drawer__cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 18px;border-radius:14px;background:var(--teal);color:#fff;font-size:15px;font-weight:600;text-decoration:none}
 
     .article-body { padding: 60px 0 80px; }
     .article-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
@@ -686,36 +711,36 @@
       }
     }
 
-    /* BudapestGO - Modern Service Grid */
+    /* BudapestGO - compact service grid */
     .bcgo-features {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      margin-bottom: 20px;
+      gap: 10px;
+      margin-bottom: 16px;
     }
     a.bcgo-feature-card {
       display: flex;
       flex-direction: row;
       align-items: stretch;
       gap: 0;
-      min-height: 112px;
+      min-height: 0;
       padding: 0;
       text-decoration: none;
       color: inherit;
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border-radius: 14px;
+      border-radius: 11px;
       border: 1px solid #f0f0f0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.22s ease;
       position: relative;
       overflow: hidden;
       -webkit-tap-highlight-color: transparent;
     }
     a.bcgo-feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(0, 0, 0, 0.03);
       border-color: #e8e8e8;
     }
     a.bcgo-feature-card:focus-visible {
@@ -723,59 +748,59 @@
       outline-offset: 2px;
     }
     .bcgo-feature-card__sidebar {
-      flex: 0 0 25%;
-      max-width: 25%;
-      min-width: 72px;
+      flex: 0 0 22%;
+      max-width: 22%;
+      min-width: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px 8px 16px 12px;
+      padding: 8px 4px 8px 8px;
     }
     .bcgo-feature-card__badge {
-      width: 52px;
-      height: 52px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       background: rgba(0, 128, 128, 0.05);
-      font-size: 24px;
+      font-size: 17px;
       line-height: 1;
     }
     .bcgo-feature-card__main {
       flex: 1;
       min-width: 0;
-      padding: 16px 16px 16px 8px;
+      padding: 9px 10px 9px 5px;
       text-align: right;
       position: relative;
-      padding-bottom: 28px;
+      padding-bottom: 22px;
     }
     .bcgo-feature-card__title {
       font-family: var(--font-body);
-      font-size: 1.05rem;
+      font-size: 0.88rem;
       font-weight: 700;
       color: #1e293b;
-      line-height: 1.25;
-      margin: 0 0 8px;
+      line-height: 1.22;
+      margin: 0 0 3px;
       letter-spacing: -0.01em;
     }
     .bcgo-feature-card__desc {
       font-family: var(--font-body);
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       font-weight: 400;
       color: #64748b;
-      line-height: 1.5;
+      line-height: 1.38;
       margin: 0;
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
     .bcgo-feature-card__arrow {
       position: absolute;
-      bottom: 10px;
-      inset-inline-start: 14px;
-      font-size: 1rem;
+      bottom: 5px;
+      inset-inline-start: 9px;
+      font-size: 0.85rem;
       line-height: 1;
       color: #cbd5e1;
       opacity: 0.4;
@@ -785,21 +810,236 @@
     a.bcgo-feature-card:hover .bcgo-feature-card__arrow {
       color: var(--teal);
       opacity: 1;
-      transform: scale(1.12);
+      transform: scale(1.08);
     }
     @media (max-width: 640px) {
       .bcgo-features {
         grid-template-columns: 1fr;
-        gap: 14px;
+        gap: 9px;
       }
       .bcgo-feature-card__sidebar {
-        min-width: 68px;
-        padding: 14px 6px 14px 10px;
+        min-width: 44px;
+        padding: 8px 4px 8px 7px;
       }
       .bcgo-feature-card__badge {
-        width: 48px;
-        height: 48px;
-        font-size: 22px;
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+      }
+    }
+
+    /* BudapestGO + Pay&GO - stacked; Pay&GO compact strip */
+    .bcgo-paygo-row {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 20px;
+      align-items: stretch;
+    }
+    .bcgo-paygo-row__main,
+    .bcgo-paygo-aside {
+      min-width: 0;
+      width: 100%;
+    }
+    .bcgo-paygo-aside {
+      display: flex;
+      justify-content: center;
+    }
+    .bcgo-ticket-panel {
+      background: #fff;
+      border: 2px solid #e8f4f5;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(26, 107, 114, 0.1);
+      height: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .bcgo-app-panel__body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 18px 20px 20px;
+    }
+    .bcgo-app-panel__body > #bcgo-download {
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    .bcgo-paygo-panel--compact {
+      max-width: 640px;
+      width: 100%;
+      border-radius: 16px;
+      border-color: #d4e8ea;
+      box-shadow: 0 4px 20px rgba(26, 107, 114, 0.08);
+    }
+    .bcgo-paygo-panel--compact .bcgo-paygo-panel__header {
+      background: linear-gradient(135deg, #124f55 0%, #1A6B72 45%, #238f99 100%);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .bcgo-paygo-panel--compact .bcgo-paygo-panel__header-icon {
+      width: min(158px, 42vw);
+      height: 50px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.98);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 4px 8px;
+      overflow: hidden;
+      line-height: 0;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
+    }
+    .bcgo-paygo-panel__header-icon img {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+    .bcgo-paygo-panel__header-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      color: #fff;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      line-height: 1.25;
+    }
+    .bcgo-paygo-panel--compact .bcgo-paygo-panel__header-sub {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-top: 1px;
+      line-height: 1.3;
+    }
+    .bcgo-paygo-panel--compact .bcgo-paygo-panel__header-pill {
+      margin-inline-start: auto;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 11px;
+      color: #fff;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .bcgo-paygo-panel__compact {
+      display: grid;
+      grid-template-columns: minmax(92px, 118px) minmax(0, 1fr);
+      gap: 14px 16px;
+      padding: 14px 16px 16px;
+      align-items: start;
+      text-align: right;
+      background: linear-gradient(180deg, #f7fcfc 0%, #fff 52%);
+      border-top: 1px solid rgba(26, 107, 114, 0.08);
+    }
+    .bcgo-paygo-panel__thumb {
+      border-radius: 11px;
+      overflow: hidden;
+      background: #0f172a;
+      aspect-ratio: 4 / 3;
+      max-height: 86px;
+      box-shadow: 0 2px 12px rgba(26, 107, 114, 0.12);
+      outline: 1px solid rgba(26, 107, 114, 0.12);
+      outline-offset: 0;
+    }
+    .bcgo-paygo-panel__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 38%;
+      display: block;
+    }
+    .bcgo-paygo-panel__tagline {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.55;
+      margin: 0 0 10px;
+    }
+    .bcgo-paygo-panel__points--compact {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .bcgo-paygo-panel__points--compact li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: #475569;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+    .bcgo-paygo-panel__points--compact li:last-child {
+      margin-bottom: 0;
+    }
+    .bcgo-paygo-panel__points--compact li::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--teal);
+      margin-top: 0.42em;
+      flex-shrink: 0;
+    }
+    .bcgo-paygo-panel__btn--inline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: fit-content;
+      max-width: 100%;
+      min-height: 40px;
+      margin-top: 12px;
+      padding: 10px 18px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #145a60 0%, #1A6B72 50%, #1f7d86 100%);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 2px 12px rgba(26, 107, 114, 0.22);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+    .bcgo-paygo-panel__btn--inline:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 18px rgba(26, 107, 114, 0.28);
+      color: #fff;
+    }
+    .bcgo-paygo-panel__btn--inline:focus-visible {
+      outline: 2px solid #1A6B72;
+      outline-offset: 3px;
+    }
+    @media (max-width: 420px) {
+      .bcgo-paygo-panel__compact {
+        grid-template-columns: 1fr;
+        text-align: right;
+      }
+      .bcgo-paygo-panel__thumb {
+        max-height: 120px;
+        aspect-ratio: 16 / 9;
+        max-width: 100%;
+      }
+    }
+    @media (max-width: 520px) {
+      .bcgo-paygo-panel--compact .bcgo-paygo-panel__header {
+        flex-wrap: wrap;
+        padding: 10px 12px;
+      }
+      .bcgo-paygo-panel--compact .bcgo-paygo-panel__header-pill {
+        width: 100%;
+        margin-inline-start: 0;
+        margin-top: 6px;
+        text-align: center;
       }
     }
   </style>
@@ -839,7 +1079,7 @@
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"מתי טסים","item":"https://mataytasim.co.il"},{"@type":"ListItem","position":2,"name":"יעדים","item":"https://mataytasim.co.il/destinations.html"},{"@type":"ListItem","position":3,"name":"בודפשט","item":"https://mataytasim.co.il/budapest.html"}]}
 </script>
 </head>
-<body>
+<body data-good-to-know-country="HU">
 
   <!-- ============ NAVIGATION ============ -->
     <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
@@ -949,11 +1189,15 @@
       <h1 class="article-hero__title">טיול לבודפשט עם ילדים</h1>
       <p class="article-hero__subtitle">עיר מלאת קסם על גדות הדנובה - רחובות מלאי חיים, מסעדות טעימות, פארק מים מטורף ואטרקציות לכל גיל</p>
       </div>
-      <div class="article-hero__meta">
-        <span class="article-hero__badge">🟢 קל עם ילדים</span>
-        <span class="article-hero__badge">📅 6 ימים</span>
-        <span class="article-hero__badge">✈️ טיסה ישירה</span>
-        <span class="article-hero__badge">🇭🇺 הונגריה</span>
+      <div class="article-hero__actions">
+        <div class="article-hero__meta">
+          <span class="article-hero__badge">🟢 קל עם ילדים</span>
+          <span class="article-hero__badge">✈️ טיסה לבודפשט</span>
+        </div>
+        <button type="button" class="gtk-trigger" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog"><span class="gtk-trigger__icon" aria-hidden="true">🧭</span><span class="gtk-trigger__label"><span class="gtk-trigger__title">טוב לדעת לפני הטיול</span><span class="gtk-trigger__sub">טיפים ממוקדים ליעד הזה</span></span></button>
+        <p class="article-hero__partner-lead">
+          <a href="car-rental-partners.html" class="article-hero__partner-link" onclick="plausible('PartnerCarRental-Click', {props: {partner: 'barkro', code: 'MATAY6', source: 'budapest-hero-text'}})">השכרת רכב BARKRO · קוד MATAY6 (6%)</a>
+        </p>
       </div>
     </div>
     <p class="article-hero__attr">מפת סטטית · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></p>
@@ -993,13 +1237,15 @@
           <div id="trip-map" style="height:420px;border-radius:16px;overflow:hidden;border:2px solid var(--sand-dark);box-shadow:0 4px 20px rgba(0,0,0,0.1);"></div>
           <div id="map-day-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;"></div>
 
-          <!-- BudapestGO note -->
+          <!-- BudapestGO + Pay&GO note -->
           <p style="margin-top:18px;font-size:14px;color:#666;line-height:1.6;">
-            למרות ש-Google Maps עובד מצוין בבודפשט, <strong style="color:var(--teal);">BudapestGO</strong> הוא המקום היחיד שבו תוכלו לקנות ולתקף כרטיסים דיגיטלית בלי לחפש דוכנים.
+            למרות ש-Google Maps עובד מצוין בבודפשט, לרכישה ולתיקוף דיגיטלי יש שתי דרכים רשמיות עיקריות: <strong style="color:var(--teal);">BudapestGO</strong> – אפליקציה אחת לכל הרשת – ו-<strong style="color:#156b73;">Pay&amp;GO</strong> של BKK, תשלום במגע בקוראים צהובים (בלי אפליקציה), בהיקף מוגבל לפי מה שהמפעיל מפרסם.
           </p>
 
+          <div class="bcgo-paygo-row">
+          <div class="bcgo-paygo-row__main">
           <!-- BudapestGO Card -->
-          <div style="margin-top:20px;background:#fff;border:2px solid #e8f4f5;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(26,107,114,0.1);">
+          <div class="bcgo-ticket-panel">
 
             <!-- Header -->
             <div style="background:linear-gradient(135deg,#1A6B72 0%,#25919a 100%);padding:20px 24px;display:flex;align-items:center;gap:16px;">
@@ -1014,7 +1260,7 @@
             </div>
 
             <!-- Body -->
-            <div style="padding:22px 24px;">
+            <div class="bcgo-app-panel__body">
               <p style="font-size:14.5px;color:#555;line-height:1.7;margin-bottom:20px;">האפליקציה מרכזת את כל פתרונות התחבורה בעיר תחת קורת גג אחת – החל מתכנון מסלול ועד רכישת כרטיסים דיגיטליים.</p>
 
               <!-- Features grid -->
@@ -1093,6 +1339,37 @@
               </div>
             </div>
           </div>
+          </div>
+
+          <aside class="bcgo-paygo-aside">
+            <article class="bcgo-ticket-panel bcgo-paygo-panel bcgo-paygo-panel--compact" aria-label="Pay&amp;GO BKK">
+              <div class="bcgo-paygo-panel__header">
+                <div class="bcgo-paygo-panel__header-icon">
+                  <img src="../paygo-payment-strip.png" width="185" height="109" alt="אמצעי תשלום: טלפון, שעון, כרטיס, ויסה ומאסטרקארד" decoding="async" loading="eager">
+                </div>
+                <div>
+                  <div class="bcgo-paygo-panel__header-title">Pay&amp;GO - BKK</div>
+                  <div class="bcgo-paygo-panel__header-sub">מגע בקורא הצהוב - ללא אפליקציה</div>
+                </div>
+                <div class="bcgo-paygo-panel__header-pill">רשמי</div>
+              </div>
+              <div class="bcgo-paygo-panel__compact">
+                <div class="bcgo-paygo-panel__thumb">
+                  <img src="../pay-and-go-bkk.png" width="452" height="209" alt="קורא צהוב לתשלום ללא מגע: רכישה ותיקוף עם כרטיס או טלפון" loading="lazy" decoding="async">
+                </div>
+                <div>
+                  <p class="bcgo-paygo-panel__tagline">רכישה ותיקוף בכרטיס או בטלפון - מחיר רגיל; היקף מוגבל (פרטים אצל BKK).</p>
+                  <ul class="bcgo-paygo-panel__points bcgo-paygo-panel__points--compact">
+                    <li>Apple Pay / Google Pay או כרטיס בנק על הקורא הצהוב.</li>
+                    <li>בביקורת: אותו אמצעי תשלום בו שילמתם.</li>
+                  </ul>
+                  <a class="bcgo-paygo-panel__btn--inline" href="https://bkk.hu/jegyek-es-berletek/pay-and-go/" target="_blank" rel="noopener noreferrer">עמוד Pay&amp;GO ב־BKK<span aria-hidden="true"> ↗</span></a>
+                </div>
+              </div>
+            </article>
+          </aside>
+          </div>
+
         </div>
 
         <!-- BUDAPEST CARD -->
@@ -1469,7 +1746,7 @@
 
 <footer class="footer">
   <div class="container">
-    <p>מתי טסים &copy; 2026 - <a href="services.html">דף הבית</a> | <a href="tips.html">טיפים</a> | <a href="destinations.html">יעדים</a> | <a href="terms.html">תנאי שימוש</a> | <a href="https://wa.me/972546758145">וואטסאפ</a></p>
+    <p>מתי טסים &copy; 2026 - <a href="services.html">דף הבית</a> | <a href="tips.html">טיפים</a> | <a href="destinations.html">יעדים</a> | <a href="terms.html">תנאי שימוש</a> · <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" aria-label="עמוד הפייסבוק של מתי טסים" style="display:inline-flex;align-items:center;vertical-align:middle;"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;"><circle cx="16" cy="16" r="16" fill="#1877F2"/><path d="M21.5 16H18v-2c0-.828.672-1 1-1h2V10h-2.5C16.015 10 15 11.79 15 13.5V16h-2.5v3H15v8h3v-8h2l.5-3z" fill="#FFFFFF"/></svg></a></p>
     <p style="margin-top:12px;font-size:12px;opacity:0.6;">* חלק מהקישורים באתר הם קישורי שותפים. אם תזמינו דרכם, אקבל עמלה קטנה - ללא עלות נוספת עבורכם. ההמלצות תמיד מבוססות על ניסיון אישי בלבד.</p>
   </div>
 </footer>
@@ -2281,19 +2558,40 @@ document.getElementById('gyg-modal').addEventListener('click', function(e) {
       document.body.style.overflow = '';
     }
 
-    document.querySelectorAll('a[href="#newsletter"], a[href="tips.html#newsletter"]').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        var mobileMenu = document.getElementById('mobileMenu');
-        var hamburger = document.getElementById('hamburgerBtn');
-        if (mobileMenu && mobileMenu.classList.contains('open')) {
-          mobileMenu.classList.remove('open');
-          if (hamburger) { hamburger.setAttribute('aria-expanded', 'false'); hamburger.setAttribute('aria-label', 'פתח תפריט'); }
-          document.body.style.overflow = '';
+    function closeMobileMenuForNewsletter() {
+      var mobileMenu = document.getElementById('mobileMenu');
+      var hamburger = document.getElementById('hamburgerBtn');
+      if (mobileMenu && mobileMenu.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        if (hamburger) {
+          hamburger.setAttribute('aria-expanded', 'false');
+          hamburger.setAttribute('aria-label', 'פתח תפריט');
         }
-        openPopup(true);
-      });
-    });
+        if (window.__mtRefreshBodyScrollLock) window.__mtRefreshBodyScrollLock();
+        else document.body.style.overflow = '';
+      }
+    }
+
+    (function bindNewsletterNavLinks() {
+      var nodes = document.querySelectorAll(
+        'a[href="#newsletter"], a[href="tips.html#newsletter"], a[href$="tips.html#newsletter"], a.nav__link--community, a.mob-nav-community'
+      );
+      var bound = [];
+      for (var i = 0; i < nodes.length; i++) {
+        var link = nodes[i];
+        if (bound.indexOf(link) !== -1) continue;
+        var href = (link.getAttribute('href') || '').trim();
+        var matchHref = href === '#newsletter' || href === 'tips.html#newsletter' || href.slice(-20) === 'tips.html#newsletter';
+        var matchClass = link.classList.contains('nav__link--community') || link.classList.contains('mob-nav-community');
+        if (!matchHref && !matchClass) continue;
+        bound.push(link);
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeMobileMenuForNewsletter();
+          openPopup(true);
+        }, true);
+      }
+    })();
 
     if (closeBtn) closeBtn.addEventListener('click', function() { closePopup(); });
     overlay.addEventListener('click', function(e) { if (e.target === overlay && Date.now() - openedAt > 400) closePopup(); });
@@ -2309,5 +2607,7 @@ document.getElementById('gyg-modal').addEventListener('click', function(e) {
     window.openEmailPopup = function() { openPopup(true); };
   })();
   </script>
+  <div class="gtk-drawer" id="gtkDrawerRoot" hidden><div class="gtk-drawer__backdrop" id="gtkDrawerBackdrop" aria-hidden="true"></div><div class="gtk-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="gtkDrawerTitle" id="gtkDrawerDialog"><div class="gtk-drawer__head"><h2 class="gtk-drawer__title" id="gtkDrawerTitle">טוב לדעת</h2><button type="button" class="gtk-drawer__close" id="gtkDrawerClose" aria-label="סגור">×</button></div><div class="gtk-drawer__body" id="gtkDrawerBody"><p class="gtk-drawer__lead" id="gtkDrawerLead">טוען…</p><ul class="gtk-drawer__list" id="gtkDrawerList" role="list" aria-live="polite"></ul><button type="button" class="gtk-drawer__more-toggle" id="gtkDrawerMoreBtn" hidden aria-expanded="false">הצג עוד טיפים</button><p class="gtk-drawer__error" id="gtkDrawerError" hidden></p></div><div class="gtk-drawer__foot"><a href="tips.html" class="gtk-drawer__cta" id="gtkDrawerCta">לדף הטיפים המלא</a></div></div></div>
+  <script>(function(){var r=document.getElementById('gtkDrawerRoot'),b=document.getElementById('gtkDrawerBackdrop'),d=document.getElementById('gtkDrawerDialog'),o=document.getElementById('gtkOpenBtn'),c=document.getElementById('gtkDrawerClose'),t=document.getElementById('gtkDrawerTitle'),l=document.getElementById('gtkDrawerLead'),s=document.getElementById('gtkDrawerList'),m=document.getElementById('gtkDrawerMoreBtn'),a=document.getElementById('gtkDrawerCta'),e=document.getElementById('gtkDrawerError');if(!r||!d||!o||!t||!l||!s)return;var k=(document.body.getAttribute('data-good-to-know-country')||'').trim()||'HU',op=0,pf=null,j='data/good-to-know-by-country.json',C=4,x=false;function g(i){var id=(i&&i.id?i.id:'').toLowerCase();if(id.includes('etias')||id.includes('entry')||id.includes('schengen'))return{icon:'🛂',chip:'כניסה'};if(id.includes('esim')||id.includes('sim')||id.includes('internet'))return{icon:'📶',chip:'קישוריות'};if(id.includes('transport')||id.includes('drive')||id.includes('road'))return{icon:'🚗',chip:'תחבורה'};if(id.includes('weather')||id.includes('season'))return{icon:'🌦️',chip:'מזג אוויר'};if(id.includes('budget')||id.includes('money')||id.includes('cost'))return{icon:'💶',chip:'תקציב'};if(id.includes('packing')||id.includes('gear')||id.includes('bag'))return{icon:'🎒',chip:'ציוד'};return{icon:'💡',chip:'תכנון'};}function col(){var it=s.querySelectorAll('.gtk-drawer__item');if(!it.length){if(m)m.hidden=true;return;}var n=it.length>C;for(var i=0;i<it.length;i++)it[i].hidden=n&&!x&&i>=C;if(m){m.hidden=!n;m.setAttribute('aria-expanded',x?'true':'false');m.textContent=x?'הצג פחות':'הצג עוד טיפים';}}function er(msg){if(!e)return;if(msg){e.textContent=msg;e.hidden=false;}else{e.textContent='';e.hidden=true;}}function ren(en){er('');t.textContent=en.title_he||'טוב לדעת';l.textContent=en.lead_he||'';s.innerHTML='';x=false;(en.items||[]).forEach(function(it){if(!it||!it.tips_url)return;var meta=g(it),li=document.createElement('li');li.className='gtk-drawer__item';var A=document.createElement('a');A.className='gtk-drawer__card';A.href=it.tips_url;A.dataset.cardId=it.id||'';A.dataset.cardTitle=it.title_he||'';A.dataset.cardCategory=meta.chip||'';A.dataset.cardPosition=String(s.children.length+1);var hr=document.createElement('span');hr.className='gtk-drawer__headrow';var ic=document.createElement('span');ic.className='gtk-drawer__icon';ic.textContent=meta.icon;var tt=document.createElement('span');tt.className='gtk-drawer__card-title';tt.textContent=it.title_he||'';var cp=document.createElement('span');cp.className='gtk-drawer__chip';cp.textContent=meta.chip;var sm=document.createElement('span');sm.className='gtk-drawer__card-summary';sm.textContent=it.summary_he||'';var mr=document.createElement('span');mr.className='gtk-drawer__card-more';mr.textContent='להמשך קריאה ←';hr.appendChild(ic);hr.appendChild(tt);hr.appendChild(cp);A.appendChild(hr);A.appendChild(sm);A.appendChild(mr);li.appendChild(A);s.appendChild(li);});col();if(!s.children.length)er('אין פריטים מוגדרים ליעד זה.');}function lo(){fetch(j,{credentials:'same-origin'}).then(function(R){if(!R.ok)throw new Error();return R.json();}).then(function(data){var en=data&&data[k];if(!en){er('לא נמצאה רשימה למפתח '+k);return;}ren(en);}).catch(function(){er('לא ניתן לטעון את הרשימה כרגע.');});}lo();s.addEventListener('click',function(ev){var A=ev.target.closest('a.gtk-drawer__card');if(!A||!s.contains(A))return;if(window.plausible)try{plausible('GoodToKnow-CardClick',{props:{country:k,href:A.getAttribute('href')||'',card_id:A.dataset.cardId||'',card_title:A.dataset.cardTitle||'',card_category:A.dataset.cardCategory||'',card_position:A.dataset.cardPosition||'',total_cards:String(s.querySelectorAll('.gtk-drawer__card').length||0)}});}catch(_){}});if(a)a.addEventListener('click',function(){if(window.plausible)try{plausible('GoodToKnow-CTA',{props:{country:k,href:a.getAttribute('href')||'tips.html',total_cards:String(s.querySelectorAll('.gtk-drawer__card').length||0),expanded_items:x?'1':'0'}});}catch(_){}});if(m)m.addEventListener('click',function(){x=!x;col();if(window.plausible)try{plausible('GoodToKnow-ToggleMore',{props:{country:k,expanded:x?'1':'0'}});}catch(_){}});function lock(v){var em=document.getElementById('emailPopupOverlay');if(v){if(!(em&&em.classList.contains('open')))document.body.style.overflow='hidden';}else{if(!(em&&em.classList.contains('open')))document.body.style.overflow='';}}function foc(){return Array.prototype.slice.call(d.querySelectorAll('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])')).filter(function(n){var st=getComputedStyle(n);return st.visibility!=='hidden'&&st.display!=='none';});}function trap(ev){if(ev.key!=='Tab'||!r.classList.contains('is-open'))return;var f=foc();if(!f.length)return;var fi=f[0],la=f[f.length-1];if(ev.shiftKey&&document.activeElement===fi){ev.preventDefault();la.focus();}else if(!ev.shiftKey&&document.activeElement===la){ev.preventDefault();fi.focus();}}function open(){pf=document.activeElement;r.hidden=false;requestAnimationFrame(function(){r.classList.add('is-open');lock(true);op=Date.now();o.setAttribute('aria-expanded','true');if(window.plausible)try{plausible('GoodToKnow-Open',{props:{country:k}});}catch(_){} if(c)c.focus();});}function close(){r.classList.remove('is-open');lock(false);o.setAttribute('aria-expanded','false');var z=pf;pf=null;if(z&&typeof z.focus==='function')z.focus();setTimeout(function(){if(!r.classList.contains('is-open'))r.hidden=true;},320);}o.addEventListener('click',open);if(c)c.addEventListener('click',close);if(b)b.addEventListener('click',function(){if(Date.now()-op>350)close();});document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&r.classList.contains('is-open')){ev.preventDefault();close();}},true);d.addEventListener('keydown',trap);  })();</script>
 </body>
 </html>

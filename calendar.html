@@ -1070,6 +1070,7 @@
         <button class="filter-pill" data-country="hungary" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/hu.png" alt="הונגריה"> הונגריה</button>
         <button class="filter-pill" data-country="austria" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/at.png" alt="אוסטריה"> אוסטריה</button>
         <button class="filter-pill" data-country="slovakia" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/sk.png" alt="סלובקיה"> סלובקיה</button>
+        <button class="filter-pill" data-country="slovenia" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/si.png" alt="סלובניה"> סלובניה</button>
         <button class="filter-pill" data-country="greece" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/gr.png" alt="יוון"> יוון</button>
         <button class="filter-pill" data-country="czechia" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/cz.png" alt="צ'כיה"> צ'כיה</button>
         <button class="filter-pill" data-country="poland" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/pl.png" alt="פולין"> פולין</button>
@@ -1824,7 +1825,123 @@
       startDate:new Date(2026,7,15), endDate:new Date(2026,7,15),
       description:'חג הנחת מריה - חג קתולי ואורתודוקסי ברומניה. חנויות ובנקים סגורים.',
       tip:'עלייה לרגל בכנסיות רבות. יום טוב לטיול בטבע ובכפרים הציוריים של רומניה.',
-      stores:'🔴 חנויות סגורות. אטרקציות טבע פתוחות.', url:'' }
+      stores:'🔴 חנויות סגורות. אטרקציות טבע פתוחות.', url:'' },
+
+    { id:108, country:'slovenia', flag:'🇸🇮', city:'מריבור', title:'פסטיבל Lent', type:'festival',
+      startDate:new Date(2026,5,26), endDate:new Date(2026,6,4),
+      description:'פסטיבל הרחוב הגדול בסלובניה עם מופעים חיים, פעילויות לכל המשפחה ו-Art Camp עשיר לילדים בפארק העירוני.',
+      tip:'מומלץ להגיע בשעות אחה"צ ולהישאר להופעות הערב. אזור Art Camp מעולה למשפחות עם ילדים קטנים.',
+      stores:null, url:'' },
+    { id:109, country:'slovenia', flag:'🇸🇮', city:'לובליאנה', title:'סיורי הדרקון ואירועי טירה בקיץ', type:'kids',
+      startDate:new Date(2026,6,1), endDate:new Date(2026,7,31),
+      description:'בקיץ מתקיימים סיורים בעקבות הדרקון ואירועים משפחתיים בטירת לובליאנה, עם פעילויות יצירה והדרכות מותאמות לילדים.',
+      tip:'בדקו מראש את שעות הסיורים בטירה והזמינו כרטיסים אונליין לימים עמוסים.',
+      stores:null, url:'' },
+    { id:110, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'עמק האמנויות (Művészetek Völgye)', type:'festival',
+      startDate:new Date(2026,6,24), endDate:new Date(2026,7,2),
+      description:'פסטיבל פסטורלי בכפרים ליד אגם בלטון עם פולקלור, סדנאות יצירה ומתחמי משחקים מסורתיים לילדים.',
+      tip:'שלבו לינה כפרית באזור כדי להנות מהפעילויות לאורך היום בלי נסיעות ארוכות.',
+      stores:null, url:'' },
+    { id:111, country:'hungary', flag:'🇭🇺', city:'בודפשט', title:'SEK Budapest Summer Camp and Events', type:'kids',
+      startDate:new Date(2026,7,3), endDate:new Date(2026,7,7),
+      description:'שבוע אירועי קיץ פתוחים למשפחות בעיר עם סדנאות יצירה, משחקי מים ופעילויות קהילתיות לילדים.',
+      tip:'בדקו האם נדרשת הרשמה מוקדמת לכל פעילות כדי להבטיח מקום.',
+      stores:null, url:'' },
+    { id:112, country:'austria', flag:'🇦🇹', city:'Petronell-Carnuntum', title:'פסטיבל הילדים בקרנונטום', type:'kids',
+      startDate:new Date(2026,5,20), endDate:new Date(2026,5,21),
+      description:'אירוע משפחתי בתוך עיר רומית משוחזרת עם סדנאות היסטוריות, משחקי תפקידים ופעילויות אינטראקטיביות לילדים.',
+      tip:'הביאו כובע ומים - חלק מהפעילויות מתקיימות בשטח פתוח במשך שעות היום.',
+      stores:null, url:'' },
+    { id:113, country:'austria', flag:'🇦🇹', city:'Seefeld', title:'פסטיבל קיץ למשפחות בזיפלד', type:'kids',
+      startDate:new Date(2026,5,13), endDate:new Date(2026,5,13),
+      description:'אירוע קיץ אזורי בטירול עם מתנפחים, משחקי עץ, מוזיקה לילדים ואווירה אלפינית נעימה.',
+      tip:'יום מעולה לשילוב עם טיול טבע קצר באזור ההרים סביב זיפלד.',
+      stores:null, url:'' },
+    { id:114, country:'austria', flag:'🇦🇹', city:'Nickelsdorf', title:'Nova Rock Festival', type:'festival',
+      startDate:new Date(2026,5,11), endDate:new Date(2026,5,14),
+      description:'פסטיבל מוזיקה ענק עם אזורי שירות ידידותיים למשפחות ואפשרויות ישיבה ומנוחה בין הופעות.',
+      tip:'אם מגיעים עם ילדים - העדיפו שעות מוקדמות ועמדות צפייה מרוחקות מהבמה המרכזית.',
+      stores:null, url:'' },
+    { id:115, country:'austria', flag:'🇦🇹', city:'Sittersdorf', title:'Acoustic Lakeside', type:'festival',
+      startDate:new Date(2026,6,16), endDate:new Date(2026,6,18),
+      description:'פסטיבל אינטימי על שפת אגם עם הופעות אקוסטיות, אווירה רגועה ומרחבים פתוחים למשפחות.',
+      tip:'שלבו שמיכה לפיקניק - זה אחד האירועים הכי נעימים לקיץ רגוע עם ילדים.',
+      stores:null, url:'' },
+    { id:116, country:'austria', flag:'🇦🇹', city:'Lustenau', title:'Szene Openair Festival', type:'festival',
+      startDate:new Date(2026,6,30), endDate:new Date(2026,7,1),
+      description:'פסטיבל מוזיקה תחת כיפת השמיים באזור פורארלברג, עם דגש על חוויה קיצית באוויר הפתוח.',
+      tip:'הזמינו לינה מראש - סוף יולי הוא תקופה מבוקשת מאוד באזור.',
+      stores:null, url:'' },
+    { id:117, country:'czechia', flag:'🇨🇿', city:'צ׳סקי קרומלוב', title:'חגיגות ורד חמשת העלים', type:'festival',
+      startDate:new Date(2026,5,19), endDate:new Date(2026,5,21),
+      description:'פסטיבל ימי ביניים מרהיב שבו העיר כולה הופכת לבמה חיה עם תלבושות, אבירים, תהלוכות ודוכני אוכל מסורתי.',
+      tip:'כדאי להגיע מוקדם לתהלוכה המרכזית - ילדים נהנים במיוחד מהתלבושות והאביזרים ההיסטוריים.',
+      stores:null, url:'' },
+    { id:118, country:'czechia', flag:'🇨🇿', city:'Strážnice', title:'פסטיבל הפולקלור הבינלאומי', type:'festival',
+      startDate:new Date(2026,5,25), endDate:new Date(2026,5,28),
+      description:'אחד מפסטיבלי הפולקלור הוותיקים באירופה עם מופעי מחול מסורתיים ופעילויות לילדים במוזיאון הפתוח.',
+      tip:'האירועים המשפחתיים מתחילים מוקדם - שווה לתכנן הגעה משעות הבוקר.',
+      stores:null, url:'' },
+    { id:119, country:'czechia', flag:'🇨🇿', city:'פראג', title:'Children\'s Day at Vypich', type:'kids',
+      startDate:new Date(2026,5,1), endDate:new Date(2026,5,1),
+      description:'אירוע ילדים גדול וחינמי עם הופעות מוזיקה, מתחמי אקסטרים, סדנאות אמנות ופעילויות חוץ לכל המשפחה.',
+      tip:'הביאו מים וכובע - זה אירוע יום מלא בפעילויות בשטח פתוח.',
+      stores:null, url:'' },
+    { id:120, country:'poland', flag:'🇵🇱', city:'גדנסק', title:'St. Dominic\'s Fair', type:'market',
+      startDate:new Date(2026,7,1), endDate:new Date(2026,7,31),
+      description:'אחד השווקים העתיקים והגדולים באירופה עם דוכני יצירה, מופעי רחוב, אזורי צעצועים וגלגל ענק פופולרי.',
+      tip:'בערבים יש עומס גבוה - משפחות נהנות יותר מביקור בוקר או אחה"צ מוקדם.',
+      stores:null, url:'' },
+    { id:121, country:'poland', flag:'🇵🇱', city:'לודז׳', title:'Light Move Festival', type:'festival',
+      startDate:new Date(2026,8,25), endDate:new Date(2026,8,27),
+      description:'פסטיבל אורות עירוני עם מיצגים אינטראקטיביים, הקרנות תלת-ממד ועמדות יצירה לילדים במרחב הציבורי.',
+      tip:'מומלץ להגיע עם עגלה קלה או מנשא - חלק מהמסלול ארוך וצפוף בשעות השיא.',
+      stores:null, url:'' },
+    { id:122, country:'greece', flag:'🇬🇷', city:'Aigio-Patra', title:'פסטיבל ריקודים מסורתיים לילדים', type:'kids',
+      startDate:new Date(2026,5,26), endDate:new Date(2026,6,1),
+      description:'אירוע פאן-אירופי שבו קבוצות ילדים ממדינות שונות מציגות ריקודים מסורתיים במופעי קיץ חגיגיים.',
+      tip:'יש פעילויות אחר הצהריים למשפחות - בדקו תכנית יומית לפי גילאי הילדים.',
+      stores:null, url:'' },
+    { id:123, country:'greece', flag:'🇬🇷', city:'פאראליה', title:'Paralia Fest', type:'festival',
+      startDate:new Date(2026,5,10), endDate:new Date(2026,5,14),
+      description:'פסטיבל קיץ צבעוני על קו החוף עם מוזיקה, ריקוד ואירועי תרבות ידידותיים למשפחות.',
+      tip:'שילוב מעולה עם חופשת חוף משפחתית - מומלץ להזמין לינה קרובה לטיילת.',
+      stores:null, url:'' },
+    { id:124, country:'greece', flag:'🇬🇷', city:'פאראליה', title:'Paralia Fest - Autumn Edition', type:'festival',
+      startDate:new Date(2026,8,8), endDate:new Date(2026,8,12),
+      description:'מהדורת הסתיו של הפסטיבל, עם מזג אוויר נעים ואירועי ערב פתוחים לכל המשפחה.',
+      tip:'ספטמבר נוח במיוחד לטיול עם ילדים - עומסים נמוכים יותר מאוגוסט.',
+      stores:null, url:'' },
+    { id:125, country:'romania', flag:'🇷🇴', city:'Sighișoara', title:'פסטיבל ימי הביניים בסיגישוארה', type:'festival',
+      startDate:new Date(2026,6,24), endDate:new Date(2026,6,26),
+      description:'סוף שבוע היסטורי במצודה עם תלבושות תקופתיות, אבירים, מופעי רחוב ואווירה ימי-ביניימית מרשימה.',
+      tip:'לינה בתוך או ליד המצודה תאפשר ליהנות גם מהמופעים הליליים בלי נסיעות.',
+      stores:null, url:'' },
+    { id:126, country:'slovakia', flag:'🇸🇰', city:'טרנצ׳ין', title:'Pohoda Festival', type:'festival',
+      startDate:new Date(2026,6,9), endDate:new Date(2026,6,11),
+      description:'פסטיבל קיץ מרכזי בסלובקיה עם מתחם Family Park ייעודי, מופעים ופעילויות מותאמות לילדים.',
+      tip:'אם מגיעים עם ילדים קטנים, העדיפו את אזור המשפחות בשעות היום ופחות את הבמות המרכזיות בלילה.',
+      stores:null, url:'' },
+    { id:127, country:'slovakia', flag:'🇸🇰', city:'Piešťany', title:'Grape Festival', type:'festival',
+      startDate:new Date(2026,7,14), endDate:new Date(2026,7,15),
+      description:'פסטיבל מוזיקה עם אווירת קיץ ועם מתחמי משפחות ייעודיים.',
+      tip:'בדקו מראש את מפת המתחם כדי לבחור אזור ישיבה נוח למשפחות.',
+      stores:null, url:'' },
+    { id:128, country:'slovakia', flag:'🇸🇰', city:'ברטיסלבה', title:'Lovestream Festival', type:'festival',
+      startDate:new Date(2026,7,14), endDate:new Date(2026,7,17),
+      description:'פסטיבל הופעות גדול עם אמנים בינלאומיים ותשתית לוגיסטית טובה למשפחות שמגיעות עם ילדים.',
+      tip:'בגלל עומסים, מומלץ להגיע מוקדם ולתאם נקודת מפגש קבועה לבני המשפחה.',
+      stores:null, url:'' },
+    { id:129, country:'slovenia', flag:'🇸🇮', city:'Brežice', title:'City Promenade Brežice', type:'festival',
+      startDate:new Date(2026,6,8), endDate:new Date(2026,6,18),
+      description:'העיר העתיקה הופכת לבמה פתוחה עם הופעות רחוב, דוכנים ופעילויות לכל הגילאים.',
+      tip:'רבים מהאירועים ללא תשלום - אידיאלי לערב משפחתי רגוע במרכז העיר.',
+      stores:null, url:'' },
+    { id:130, country:'slovenia', flag:'🇸🇮', city:'Logar Valley', title:'Solčava Days', type:'festival',
+      startDate:new Date(2026,6,24), endDate:new Date(2026,6,26),
+      description:'שלושה ימי פולקלור, אוכל מקומי ופעילויות בטבע באחד האזורים היפים בסלובניה.',
+      tip:'שלבו מסלולי הליכה קצרים בבוקר ופסטיבל אחר הצהריים לחוויה משפחתית מלאה.',
+      stores:null, url:'' }
 
   ];
 
@@ -1833,6 +1950,7 @@
     hungary:  { city:'בודפשט',   1:{t:0,r:10,l:'נמוך',i:'❄️'}, 2:{t:2,r:9,l:'נמוך',i:'❄️'}, 3:{t:7,r:9,l:'בינוני',i:'🌦️'}, 4:{t:13,r:10,l:'בינוני',i:'🌤️'}, 5:{t:18,r:11,l:'בינוני',i:'⛅'}, 6:{t:22,r:10,l:'גבוה',i:'⛅'}, 7:{t:25,r:9,l:'גבוה מאוד',i:'☀️'}, 8:{t:24,r:9,l:'גבוה מאוד',i:'☀️'}, 9:{t:19,r:8,l:'גבוה',i:'🌤️'}, 10:{t:13,r:9,l:'בינוני',i:'🌤️'}, 11:{t:6,r:12,l:'נמוך',i:'🌦️'}, 12:{t:2,r:12,l:'נמוך',i:'❄️'} },
     austria:  { city:'וינה',     1:{t:1,r:11,l:'נמוך',i:'❄️'}, 2:{t:3,r:10,l:'נמוך',i:'❄️'}, 3:{t:8,r:10,l:'בינוני',i:'🌦️'}, 4:{t:12,r:10,l:'בינוני',i:'🌤️'}, 5:{t:17,r:11,l:'בינוני',i:'⛅'}, 6:{t:21,r:11,l:'גבוה',i:'⛅'}, 7:{t:24,r:10,l:'גבוה מאוד',i:'☀️'}, 8:{t:23,r:10,l:'גבוה מאוד',i:'☀️'}, 9:{t:18,r:9,l:'גבוה',i:'🌤️'}, 10:{t:12,r:10,l:'בינוני',i:'🌦️'}, 11:{t:6,r:12,l:'נמוך',i:'🌧️'}, 12:{t:2,r:12,l:'נמוך',i:'❄️'} },
     slovakia: { city:'ברטיסלבה', 1:{t:0,r:10,l:'נמוך',i:'❄️'}, 2:{t:2,r:9,l:'נמוך',i:'❄️'}, 3:{t:7,r:9,l:'בינוני',i:'🌦️'}, 4:{t:12,r:9,l:'נמוך',i:'🌤️'}, 5:{t:17,r:10,l:'נמוך',i:'⛅'}, 6:{t:21,r:10,l:'בינוני',i:'⛅'}, 7:{t:23,r:9,l:'בינוני',i:'☀️'}, 8:{t:23,r:9,l:'בינוני',i:'☀️'}, 9:{t:18,r:8,l:'בינוני',i:'🌤️'}, 10:{t:12,r:10,l:'נמוך',i:'🌦️'}, 11:{t:5,r:12,l:'נמוך',i:'🌧️'}, 12:{t:1,r:12,l:'נמוך',i:'❄️'} },
+    slovenia: { city:'לובליאנה', 1:{t:0,r:11,l:'נמוך',i:'❄️'}, 2:{t:2,r:10,l:'נמוך',i:'❄️'}, 3:{t:8,r:10,l:'בינוני',i:'🌦️'}, 4:{t:13,r:11,l:'בינוני',i:'🌤️'}, 5:{t:18,r:12,l:'בינוני',i:'⛅'}, 6:{t:22,r:11,l:'גבוה',i:'⛅'}, 7:{t:25,r:9,l:'גבוה מאוד',i:'☀️'}, 8:{t:24,r:9,l:'גבוה מאוד',i:'☀️'}, 9:{t:19,r:10,l:'גבוה',i:'🌤️'}, 10:{t:13,r:11,l:'בינוני',i:'🌦️'}, 11:{t:7,r:12,l:'נמוך',i:'🌧️'}, 12:{t:2,r:12,l:'נמוך',i:'❄️'} },
     greece:   { city:'אתונה',    1:{t:9,r:13,l:'נמוך',i:'🌧️'}, 2:{t:11,r:10,l:'נמוך',i:'🌦️'}, 3:{t:14,r:9,l:'נמוך',i:'🌤️'}, 4:{t:19,r:6,l:'בינוני',i:'🌤️'}, 5:{t:24,r:4,l:'גבוה',i:'☀️'}, 6:{t:29,r:1,l:'גבוה מאוד',i:'☀️'}, 7:{t:33,r:0,l:'גבוה מאוד',i:'🌞'}, 8:{t:33,r:1,l:'גבוה מאוד',i:'🌞'}, 9:{t:28,r:2,l:'גבוה',i:'☀️'}, 10:{t:22,r:7,l:'בינוני',i:'🌤️'}, 11:{t:16,r:11,l:'נמוך',i:'🌦️'}, 12:{t:11,r:14,l:'נמוך',i:'🌧️'} },
     france:   { city:'פריז',     1:{t:5,r:13,l:'נמוך',i:'🌧️'}, 2:{t:6,r:12,l:'נמוך',i:'🌧️'}, 3:{t:9,r:11,l:'נמוך',i:'🌦️'}, 4:{t:13,r:11,l:'בינוני',i:'🌦️'}, 5:{t:17,r:9,l:'בינוני',i:'⛅'}, 6:{t:21,r:7,l:'גבוה',i:'⛅'}, 7:{t:26,r:5,l:'גבוה מאוד',i:'☀️'}, 8:{t:25,r:6,l:'גבוה מאוד',i:'☀️'}, 9:{t:20,r:8,l:'גבוה',i:'🌤️'}, 10:{t:14,r:11,l:'בינוני',i:'🌦️'}, 11:{t:8,r:13,l:'בינוני',i:'🌧️'}, 12:{t:5,r:12,l:'נמוך-בינוני',i:'🌧️'} },
     czechia:  { city:'פראג',     1:{t:0,r:13,l:'נמוך',i:'❄️'}, 2:{t:1,r:11,l:'נמוך',i:'❄️'}, 3:{t:6,r:10,l:'בינוני',i:'🌦️'}, 4:{t:12,r:10,l:'בינוני',i:'🌤️'}, 5:{t:17,r:10,l:'בינוני',i:'⛅'}, 6:{t:21,r:9,l:'גבוה',i:'⛅'}, 7:{t:23,r:9,l:'גבוה מאוד',i:'☀️'}, 8:{t:23,r:9,l:'גבוה מאוד',i:'☀️'}, 9:{t:18,r:9,l:'גבוה',i:'🌤️'}, 10:{t:12,r:11,l:'בינוני',i:'🌦️'}, 11:{t:5,r:13,l:'נמוך',i:'🌧️'}, 12:{t:1,r:13,l:'נמוך',i:'❄️'} },
@@ -1842,7 +1960,7 @@
 
   var COUNTRY_FLAG_CODES = {
     england: 'gb', hungary: 'hu', austria: 'at',
-    slovakia: 'sk', greece: 'gr', czechia: 'cz',
+    slovakia: 'sk', slovenia: 'si', greece: 'gr', czechia: 'cz',
     poland: 'pl', romania: 'ro'
   };
   function flagImg(country, size) {
@@ -1851,7 +1969,7 @@
     return '<img src="https://flagcdn.com/w40/' + code + '.png" style="width:' + size + 'px;height:' + Math.round(size*0.75) + 'px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,0.1);vertical-align:middle;flex-shrink:0;" alt="">';
   }
 
-  var COUNTRY_ORDER = ['england','hungary','austria','slovakia','greece','czechia','poland','romania'];
+  var COUNTRY_ORDER = ['england','hungary','austria','slovakia','slovenia','greece','czechia','poland','romania'];
 
   var TYPE_LABELS = {
     holiday: 'חג לאומי',
@@ -2724,10 +2842,25 @@
       document.body.style.overflow = '';
     }
 
+    function closeMobileMenuForNewsletter() {
+      var mm = document.getElementById('mobileMenu');
+      var hb = document.getElementById('hamburgerBtn');
+      if (mm && mm.classList.contains('open')) {
+        mm.classList.remove('open');
+        if (hb) {
+          hb.setAttribute('aria-expanded', 'false');
+          hb.setAttribute('aria-label', 'פתח תפריט');
+        }
+        document.body.style.overflow = '';
+      }
+    }
     document.addEventListener('click', function(e) {
-      var link = e.target.closest('a[href="#newsletter"]');
-      if (link) { e.preventDefault(); openPopup(true); }
-    });
+      var link = e.target.closest('a[href="#newsletter"], a[href="tips.html#newsletter"]');
+      if (!link) return;
+      e.preventDefault();
+      closeMobileMenuForNewsletter();
+      openPopup(true);
+    }, true);
 
     if (closeBtn) closeBtn.addEventListener('click', closePopup);
     overlay.addEventListener('click', function(e) { if (e.target === overlay && Date.now() - openedAt > 400) closePopup(); });

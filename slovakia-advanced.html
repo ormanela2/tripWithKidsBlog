@@ -231,6 +231,114 @@
     .article-cta{display:inline-flex;align-items:center;gap:8px;margin-top:20px;background:var(--teal);color:#fff;padding:14px 24px;border-radius:999px;text-decoration:none;font-weight:700;font-size:16px;transition:background .2s ease;max-width:100%;text-align:center;line-height:1.45;box-sizing:border-box}
     .article-cta:hover,.article-cta:focus-visible{background:var(--teal-dark);color:#fff}
 
+    .article-partner-callout {
+      position: relative;
+      margin: 28px -12px 32px;
+      padding: 24px 22px 22px;
+      border-radius: var(--radius-xl);
+      border: 2px solid rgba(26, 107, 114, 0.35);
+      background: #fff;
+      box-shadow:
+        0 0 0 1px rgba(232, 160, 69, 0.35),
+        0 12px 36px rgba(26, 107, 114, 0.14),
+        0 4px 12px rgba(0, 0, 0, 0.06);
+      border-inline-start: 6px solid var(--teal);
+      overflow: hidden;
+    }
+    .article-partner-callout::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(165deg, rgba(26, 107, 114, 0.06) 0%, transparent 42%, rgba(232, 160, 69, 0.05) 100%);
+      border-radius: inherit;
+    }
+    .article-partner-callout > * { position: relative; z-index: 1; }
+    .article-partner-callout__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.2rem, 2.6vw, 1.38rem);
+      color: var(--teal-dark);
+      margin: 0 0 12px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+    .article-partner-callout p { font-size: 17px; margin: 0 0 14px; line-height: 1.68; color: var(--charcoal); }
+    .article-partner-callout p:last-child { margin-bottom: 0; }
+    button.article-partner-callout__code {
+      display: inline-block;
+      font-family: ui-monospace, monospace;
+      font-weight: 700;
+      font-size: 0.95em;
+      letter-spacing: 0.04em;
+      padding: 3px 12px;
+      border-radius: 8px;
+      background: rgba(26, 107, 114, 0.08);
+      border: 1px solid rgba(26, 107, 114, 0.28);
+      color: var(--teal-dark);
+      cursor: pointer;
+      vertical-align: baseline;
+      min-width: 6.5rem;
+      text-align: center;
+      line-height: inherit;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    button.article-partner-callout__code:hover {
+      background: rgba(26, 107, 114, 0.14);
+      border-color: rgba(26, 107, 114, 0.4);
+    }
+    button.article-partner-callout__code:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 3px;
+    }
+    button.article-partner-callout__code.is-copied {
+      font-family: var(--font-body);
+      letter-spacing: 0;
+      font-weight: 700;
+      background: rgba(22, 163, 74, 0.12);
+      border-color: rgba(22, 163, 74, 0.45);
+      color: #166534;
+    }
+    .article-partner-callout__sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+    .article-partner-callout__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.35;
+      color: #fff !important;
+      background: var(--teal);
+      text-decoration: none !important;
+      border: 2px solid transparent;
+      box-shadow: 0 4px 14px rgba(26, 107, 114, 0.35);
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .article-partner-callout__cta:hover,
+    .article-partner-callout__cta:focus-visible {
+      background: var(--teal-dark);
+      color: #fff !important;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(26, 107, 114, 0.42);
+      outline: none;
+    }
+    @media (max-width: 600px) {
+      .article-partner-callout { margin-left: 0; margin-right: 0; padding: 20px 18px 18px; }
+    }
+
     .footer{background:var(--charcoal);color:rgba(255,255,255,.6);padding:40px 0;text-align:center;font-size:14px}
     .footer a{color:var(--amber-light)}
 
@@ -367,6 +475,13 @@
       <h2>סלובקיה למתקדמים: איך לא לפספס את הקסם האמיתי</h2>
       <p>סלובקיה היא לא עוד יעד אירופאי שבאים אליו רק כדי לעשות "וי" על רשימת אטרקציות. אחרי שטיילנו בה, הבנתי שהרווח האמיתי כאן הוא היכולת לחזור לבסיס - לטבע פראי, לשקט ולפשטות. אבל כדי באמת להפיק את המקסימום מהמדינה הזו ולא למצוא את עצכם בתורים אינסופיים, צריך להבין איך היא עובדת. הנה התובנות ששדרגו לנו את הטיול:</p>
 
+      <aside class="article-partner-callout" aria-label="הטבת השכרת רכב לקהילה">
+        <span id="promoCopyMatay6Live" class="article-partner-callout__sr-only" role="status" aria-live="polite" aria-atomic="true"></span>
+        <p class="article-partner-callout__title">רכב בין פסגות לעיירות? שווה להזמין נכון</p>
+        <p>אם אתם מתכננים לחבר בין הטטרה, אגמים וערים - <a href="https://barkro.com/" class="article-inline-link" target="_blank" rel="noopener noreferrer">BARKRO</a> היא הבחירה המומלצת שלנו באזור. לקהילת מתי טסים יש 6% הנחה כשמזינים בשלב האחרון של ההזמנה את קוד הקופון <button type="button" class="article-partner-callout__code" id="promoCopyMatay6" data-code="MATAY6" aria-label="העתקת קוד הקופון MATAY6 ללוח העתקה"><span class="article-partner-callout__copy-label" translate="no">MATAY6</span></button>.</p>
+        <p><a href="car-rental-partners.html" class="article-partner-callout__cta" onclick="if(window.plausible){plausible('PartnerCarRental-Click',{props:{partner:'barkro',code:'MATAY6',source:'slovakia-advanced-article'}});}">לעמוד ההטבה ושאלות נפוצות ←</a></p>
+      </aside>
+
       <h3>הרי הטטרה: הסוד הוא בתזמון ובמיקום</h3>
       <p>כולם מגיעים להרי הטטרה, אבל הנה מה שלמדנו: אל תיצמדו רק לעיירות המוכרות. נכון, שטרבסקה פלסו (Štrbské Pleso) מהפנטת, אבל הקסם האמיתי קורה כשמתרחקים מעט מהמרכז.</p>
       <p>הטיפ שלי? תעלו על הרכבלים מוקדם בבוקר. התחושה של להיות לבד מול פסגה משוננת, כשערפל עדין עדיין נח על האגם, היא חוויה ששווה את הקימה המוקדמת. זה הרגע שבו הילדים מניחים את המסכים ופשוט עומדים פעורי פה מול העוצמה של ההר. שם מבינים שהטבע בסלובקיה הוא לא רק תפאורה - הוא העיקר.</p>
@@ -398,7 +513,7 @@
 
   <footer class="footer">
     <div class="container">
-      <p>מתי טסים &copy; 2026 · <a href="services.html">דף הבית</a> · <a href="tips.html">טיפים</a> · <a href="destinations.html">יעדים</a> · <a href="terms.html">תנאי שימוש</a> · <a href="https://wa.me/972546758145">וואטסאפ</a></p>
+      <p>מתי טסים &copy; 2026 · <a href="services.html">דף הבית</a> · <a href="tips.html">טיפים</a> · <a href="destinations.html">יעדים</a> · <a href="terms.html">תנאי שימוש</a> · <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" aria-label="עמוד הפייסבוק של מתי טסים" style="display:inline-flex;align-items:center;vertical-align:middle;"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;"><circle cx="16" cy="16" r="16" fill="#1877F2"/><path d="M21.5 16H18v-2c0-.828.672-1 1-1h2V10h-2.5C16.015 10 15 11.79 15 13.5V16h-2.5v3H15v8h3v-8h2l.5-3z" fill="#FFFFFF"/></svg></a></p>
       <p style="margin-top:10px;font-size:12px;opacity:.5;">* חלק מהקישורים באתר הם קישורי שותפים. ההמלצות תמיד מבוססות על ניסיון אישי בלבד.</p>
     </div>
   </footer>
@@ -548,10 +663,25 @@
       if (e.key === 'Escape') closeEP();
     });
 
+    function closeMobileMenuForNewsletter() {
+      var mm = document.getElementById('mobileMenu');
+      var hb = document.getElementById('hamburgerBtn');
+      if (mm && mm.classList.contains('open')) {
+        mm.classList.remove('open');
+        if (hb) {
+          hb.setAttribute('aria-expanded', 'false');
+          hb.setAttribute('aria-label', 'פתח תפריט');
+        }
+        document.body.style.overflow = '';
+      }
+    }
     document.addEventListener('click', function(e) {
-      var link = e.target.closest('a[href="#newsletter"]');
-      if (link) { e.preventDefault(); openEP(true); }
-    });
+      var link = e.target.closest('a[href="#newsletter"], a[href="tips.html#newsletter"]');
+      if (!link) return;
+      e.preventDefault();
+      closeMobileMenuForNewsletter();
+      openEP(true);
+    }, true);
 
     if (epForm) epForm.addEventListener('submit', function() {
       try { localStorage.setItem('mtEmailSubmitted', '1'); } catch (e) {}
@@ -599,6 +729,82 @@
       var cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
       window.history.replaceState({}, document.title, cleanUrl);
     }
+  })();
+  </script>
+  <script>
+  (function () {
+    var btn = document.getElementById('promoCopyMatay6');
+    var label = btn && btn.querySelector('.article-partner-callout__copy-label');
+    var live = document.getElementById('promoCopyMatay6Live');
+    if (!btn || !label) return;
+
+    var CODE = (btn.getAttribute('data-code') || 'MATAY6').trim();
+    var COPIED_MS = 2200;
+    var resetTimer;
+
+    function fallbackCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.setAttribute('aria-hidden', 'true');
+      ta.style.cssText = 'position:fixed;left:-9999px;top:0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        return document.execCommand('copy');
+      } catch (err) {
+        return false;
+      } finally {
+        document.body.removeChild(ta);
+      }
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        return navigator.clipboard.writeText(text).then(function () { return true; }).catch(function () {
+          return fallbackCopy(text);
+        });
+      }
+      return Promise.resolve(fallbackCopy(text));
+    }
+
+    function showCopied() {
+      clearTimeout(resetTimer);
+      label.textContent = 'הועתק';
+      label.removeAttribute('translate');
+      btn.classList.add('is-copied');
+      btn.setAttribute('aria-label', 'הועתק ללוח העתקה');
+      if (live) live.textContent = 'הועתק ללוח העתקה';
+      resetTimer = setTimeout(function () {
+        label.textContent = CODE;
+        label.setAttribute('translate', 'no');
+        btn.classList.remove('is-copied');
+        btn.setAttribute('aria-label', 'העתקת קוד הקופון MATAY6 ללוח העתקה');
+        if (live) live.textContent = '';
+      }, COPIED_MS);
+    }
+
+    function showCopyFailed() {
+      if (live) live.textContent = 'לא הצלחנו להעתיק אוטומטית - אפשר לסמן את הקוד ולהעתיק ידנית';
+      setTimeout(function () {
+        if (live) live.textContent = '';
+      }, 5000);
+    }
+
+    btn.addEventListener('click', function () {
+      copyToClipboard(CODE).then(function (ok) {
+        if (ok) {
+          showCopied();
+          if (window.plausible) {
+            try {
+              plausible('PartnerCarRental-CodeCopy', { props: { partner: 'barkro', code: CODE, source: 'slovakia-advanced-article' } });
+            } catch (ex) {}
+          }
+        } else {
+          showCopyFailed();
+        }
+      });
+    });
   })();
   </script>
 </body>
