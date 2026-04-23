@@ -231,6 +231,16 @@
     .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.92; margin-bottom: 32px; max-width: 600px; line-height: 1.7; text-shadow: 0 1px 14px rgba(0,0,0,0.3); }
     .article-hero__meta { display: flex; flex-wrap: wrap; gap: 12px; }
     .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
+    .article-hero__actions { display: flex; flex-direction: column; gap: 14px; margin-top: 6px; align-items: flex-start; }
+    .article-hero__actions .gtk-trigger { margin-top: 0; width: auto; max-width: 100%; box-sizing: border-box; justify-content: flex-start; }
+    .article-hero__partner-lead { margin: 0; font-size: 13px; line-height: 1.45; opacity: 0.9; }
+    .article-hero__partner-link {
+      color: rgba(255,255,255,0.95); font-weight: 600; text-decoration: underline; text-underline-offset: 3px;
+      text-decoration-color: rgba(255,255,255,0.45); transition: color 0.2s, text-decoration-color 0.2s;
+    }
+    .article-hero__partner-link:hover, .article-hero__partner-link:focus-visible {
+      color: #fff; text-decoration-color: rgba(232,160,69,0.85); outline: none;
+    }
     .article-hero__attr { margin: 0; padding-top: 16px; font-size: 11px; opacity: 0.62; line-height: 1.4; max-width: 780px; }
     .article-hero__attr a { color: rgba(255,255,255,0.78); text-decoration: underline; text-underline-offset: 2px; }
     @media (max-width: 600px) {
@@ -240,6 +250,307 @@
       .article-hero__flag { font-size: 44px; margin-bottom: 12px; }
       .article-hero__badge { font-size: 13px; padding: 8px 14px; }
       .article-hero__attr { padding-top: 12px; }
+      .article-hero__actions { gap: 12px; align-items: stretch; }
+      .article-hero__actions .gtk-trigger { order: -1; width: 100%; }
+      .article-hero__actions .article-hero__meta { order: 0; }
+      .article-hero__actions .article-hero__partner-lead { order: 1; }
+    }
+
+    /* ── Good to know drawer ── */
+    .gtk-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+      padding: 10px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.08));
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.3;
+      text-align: right;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .gtk-trigger:hover,
+    .gtk-trigger:focus-visible {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.14));
+      border-color: rgba(255, 255, 255, 0.62);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+      transform: translateY(-1px);
+      outline: none;
+    }
+    .gtk-trigger:focus-visible {
+      box-shadow: 0 0 0 3px rgba(232, 160, 69, 0.45);
+    }
+    .gtk-trigger__label {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.25;
+    }
+    .gtk-trigger__title {
+      font-size: 1.12em;
+      letter-spacing: 0.01em;
+    }
+    .gtk-trigger__sub {
+      font-size: 11px;
+      font-weight: 500;
+      opacity: 0.86;
+      margin-top: 1px;
+    }
+    .gtk-trigger__icon {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      font-size: 16px;
+      line-height: 1;
+    }
+    @media (max-width: 600px) {
+      .gtk-trigger {
+        padding: 10px 14px;
+        border-radius: 14px;
+      }
+      .gtk-trigger__title { font-size: 14px; }
+      .gtk-trigger__sub { font-size: 10.5px; }
+    }
+    .gtk-drawer { position: fixed; inset: 0; z-index: 10040; pointer-events: none; }
+    .gtk-drawer.is-open { pointer-events: auto; }
+    .gtk-drawer__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 25, 38, 0.55);
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+    .gtk-drawer.is-open .gtk-drawer__backdrop { opacity: 1; }
+    .gtk-drawer__panel {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      inset-inline-end: 0;
+      width: min(420px, 100%);
+      max-width: 100%;
+      background: var(--cream);
+      box-shadow: -8px 0 32px rgba(0, 0, 0, 0.18);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 1;
+    }
+    html[dir="rtl"] .gtk-drawer:not(.is-open) .gtk-drawer__panel { transform: translateX(-100%); }
+    html[dir="ltr"] .gtk-drawer:not(.is-open) .gtk-drawer__panel { transform: translateX(100%); }
+    .gtk-drawer.is-open .gtk-drawer__panel { transform: translateX(0); }
+    .gtk-drawer__head {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--sand-dark);
+      background: var(--white);
+    }
+    .gtk-drawer__title {
+      margin: 0;
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      color: var(--teal-dark);
+      line-height: 1.25;
+    }
+    .gtk-drawer__close {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      line-height: 1;
+      color: #666;
+      background: rgba(0, 0, 0, 0.05);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .gtk-drawer__close:hover,
+    .gtk-drawer__close:focus-visible {
+      background: rgba(0, 0, 0, 0.1);
+      color: var(--charcoal);
+      outline: none;
+    }
+    .gtk-drawer__body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+    .gtk-drawer__lead {
+      margin: 0 0 16px;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .gtk-drawer__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .gtk-drawer__item { margin: 0; }
+    .gtk-drawer__item[hidden] { display: none; }
+    .gtk-drawer__card {
+      display: block;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--sand-dark);
+      border-inline-start-width: 3px;
+      border-inline-start-color: rgba(26, 107, 114, 0.35);
+      background: var(--white);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, transform 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .gtk-drawer__card:hover,
+    .gtk-drawer__card:focus-visible {
+      border-color: rgba(26, 107, 114, 0.38);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      background: #faf8f4;
+      transform: translateY(-1px);
+      outline: none;
+    }
+    .gtk-drawer__headrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 7px;
+    }
+    .gtk-drawer__icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      background: rgba(26, 107, 114, 0.1);
+      color: var(--teal-dark);
+      flex-shrink: 0;
+    }
+    .gtk-drawer__card-title {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 0.99rem;
+      color: var(--teal-dark);
+      line-height: 1.3;
+      margin-left: auto;
+    }
+    .gtk-drawer__chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(26, 107, 114, 0.25);
+      background: rgba(26, 107, 114, 0.08);
+      color: #0f4a50;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .gtk-drawer__card-summary {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      overflow: hidden;
+      font-size: 13.5px;
+      color: #4a4a4a;
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+    .gtk-drawer__card-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--teal);
+    }
+    .gtk-drawer__more-toggle {
+      width: 100%;
+      margin-top: 10px;
+      min-height: 42px;
+      border-radius: 10px;
+      border: 1px dashed rgba(26, 107, 114, 0.35);
+      background: rgba(26, 107, 114, 0.06);
+      color: #0f4a50;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .gtk-drawer__more-toggle:hover,
+    .gtk-drawer__more-toggle:focus-visible {
+      background: rgba(26, 107, 114, 0.1);
+      border-color: rgba(26, 107, 114, 0.5);
+      outline: none;
+    }
+    .gtk-drawer__error {
+      margin: 0;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(220, 38, 38, 0.08);
+      border: 1px solid rgba(220, 38, 38, 0.25);
+      font-size: 13px;
+      color: #7f1d1d;
+      line-height: 1.5;
+    }
+    .gtk-drawer__foot {
+      flex-shrink: 0;
+      padding: 16px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--sand-dark);
+      background: var(--white);
+    }
+    .gtk-drawer__cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 14px;
+      background: var(--teal);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .gtk-drawer__cta:hover,
+    .gtk-drawer__cta:focus-visible {
+      background: var(--teal-dark);
+      outline: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gtk-drawer__backdrop,
+      .gtk-drawer__panel { transition: none; }
     }
 
     /* ── BODY ── */
@@ -640,7 +951,7 @@
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"מתי טסים","item":"https://mataytasim.co.il"},{"@type":"ListItem","position":2,"name":"יעדים","item":"https://mataytasim.co.il/destinations.html"},{"@type":"ListItem","position":3,"name":"דרום צ'כיה","item":"https://mataytasim.co.il/czechia.html"}]}
 </script>
 </head>
-<body>
+<body data-good-to-know-country="CZ">
 
   <!-- ============ NAVIGATION ============ -->
     <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
@@ -751,11 +1062,21 @@
       <h1 class="article-hero__title">טיול לדרום צ'כיה עם ילדים</h1>
       <p class="article-hero__subtitle">מסלול הצמרות של ליפנו שממנו רואים את כל האגם, ראפטינג של 45 דקות בנהר ולטאבה בין עצים ירוקים, עיירת טירות שנראית כמו מתוך ספר אגדות, בובסלד שהילדים מבקשים לחזור שוב ושוב - ופראג שמחכה לכם בסוף כבונוס שאי אפשר לפספס. צ'כיה היא אחת ההפתעות הכי טובות שנתקלנו בהן - גם יפה, זולה וגם טיסה לא ארוכה מדי, אזור מדהים שילדים פשוט מתים לחזור שוב ושוב.</p>
       </div>
-      <div class="article-hero__meta">
-        <span class="article-hero__badge">🟢 קל עם ילדים</span>
-        <span class="article-hero__badge">📅 10-14 ימים מומלץ</span>
-        <span class="article-hero__badge">☀️ אוגוסט מומלץ</span>
-        <span class="article-hero__badge">✈️ טיסה לפראג</span>
+      <div class="article-hero__actions">
+        <div class="article-hero__meta">
+          <span class="article-hero__badge">🟢 קל עם ילדים</span>
+          <span class="article-hero__badge">✈️ טיסה לפראג</span>
+        </div>
+        <button type="button" class="gtk-trigger" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog">
+          <span class="gtk-trigger__icon" aria-hidden="true">🧭</span>
+          <span class="gtk-trigger__label">
+            <span class="gtk-trigger__title">טוב לדעת לפני הטיול</span>
+            <span class="gtk-trigger__sub">טיפים ממוקדים ליעד הזה</span>
+          </span>
+        </button>
+        <p class="article-hero__partner-lead">
+          <a href="car-rental-partners.html" class="article-hero__partner-link" onclick="plausible('PartnerCarRental-Click', {props: {partner: 'barkro', code: 'MATAY6', source: 'czechia-hero-text'}})">השכרת רכב BARKRO · קוד MATAY6 (6%)</a>
+        </p>
       </div>
     </div>
     <p class="article-hero__attr">מפת סטטית · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></p>
@@ -1593,7 +1914,7 @@
 <!-- FOOTER -->
 <footer class="footer">
   <div class="container">
-    <p>מתי טסים &copy; 2026 · <a href="services.html">דף הבית</a> · <a href="destinations.html">יעדים</a> · <a href="https://wa.me/972546758145">וואטסאפ</a></p>
+    <p>מתי טסים &copy; 2026 · <a href="services.html">דף הבית</a> · <a href="destinations.html">יעדים</a> · <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" aria-label="עמוד הפייסבוק של מתי טסים" style="display:inline-flex;align-items:center;vertical-align:middle;"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;"><circle cx="16" cy="16" r="16" fill="#1877F2"/><path d="M21.5 16H18v-2c0-.828.672-1 1-1h2V10h-2.5C16.015 10 15 11.79 15 13.5V16h-2.5v3H15v8h3v-8h2l.5-3z" fill="#FFFFFF"/></svg></a></p>
     <p style="margin-top:12px;font-size:12px;opacity:0.6;">* חלק מהקישורים באתר הם קישורי שותפים. אם תזמינו דרכם, אקבל עמלה קטנה - ללא עלות נוספת עבורכם. ההמלצות תמיד מבוססות על ניסיון אישי בלבד.</p>
   </div>
 </footer>
@@ -2181,6 +2502,334 @@
   }, { passive: true });
 })();
 </script>
+
+  <!-- Good to know drawer -->
+  <div class="gtk-drawer" id="gtkDrawerRoot" hidden>
+    <div class="gtk-drawer__backdrop" id="gtkDrawerBackdrop" aria-hidden="true"></div>
+    <div class="gtk-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="gtkDrawerTitle" id="gtkDrawerDialog">
+      <div class="gtk-drawer__head">
+        <h2 class="gtk-drawer__title" id="gtkDrawerTitle">טוב לדעת</h2>
+        <button type="button" class="gtk-drawer__close" id="gtkDrawerClose" aria-label="סגור">×</button>
+      </div>
+      <div class="gtk-drawer__body" id="gtkDrawerBody">
+        <p class="gtk-drawer__lead" id="gtkDrawerLead">טוען…</p>
+        <ul class="gtk-drawer__list" id="gtkDrawerList" role="list" aria-live="polite"></ul>
+        <button type="button" class="gtk-drawer__more-toggle" id="gtkDrawerMoreBtn" hidden aria-expanded="false">הצג עוד טיפים</button>
+        <p class="gtk-drawer__error" id="gtkDrawerError" hidden></p>
+      </div>
+      <div class="gtk-drawer__foot">
+        <a href="tips.html" class="gtk-drawer__cta" id="gtkDrawerCta">לדף הטיפים המלא</a>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('gtkDrawerRoot');
+    var backdrop = document.getElementById('gtkDrawerBackdrop');
+    var dialog = document.getElementById('gtkDrawerDialog');
+    var openBtn = document.getElementById('gtkOpenBtn');
+    var closeBtn = document.getElementById('gtkDrawerClose');
+    var titleEl = document.getElementById('gtkDrawerTitle');
+    var leadEl = document.getElementById('gtkDrawerLead');
+    var listEl = document.getElementById('gtkDrawerList');
+    var moreBtn = document.getElementById('gtkDrawerMoreBtn');
+    var ctaEl = document.getElementById('gtkDrawerCta');
+    var errEl = document.getElementById('gtkDrawerError');
+    if (!root || !dialog || !openBtn || !titleEl || !leadEl || !listEl) return;
+
+    var countryKey = (document.body.getAttribute('data-good-to-know-country') || '').trim() || 'CZ';
+    var openedAt = 0;
+    var prevFocus = null;
+    var GTK_JSON = 'data/good-to-know-by-country.json';
+    var COLLAPSE_AFTER = 4;
+    var expandedItems = false;
+
+    function getCategoryMeta(item) {
+      var id = (item && item.id ? item.id : '').toLowerCase();
+      if (id.indexOf('etias') > -1 || id.indexOf('entry') > -1 || id.indexOf('schengen') > -1) {
+        return { icon: '🛂', chip: 'כניסה' };
+      }
+      if (id.indexOf('esim') > -1 || id.indexOf('sim') > -1 || id.indexOf('internet') > -1) {
+        return { icon: '📶', chip: 'קישוריות' };
+      }
+      if (id.indexOf('transport') > -1 || id.indexOf('drive') > -1 || id.indexOf('road') > -1) {
+        return { icon: '🚗', chip: 'תחבורה' };
+      }
+      if (id.indexOf('weather') > -1 || id.indexOf('season') > -1) {
+        return { icon: '🌦️', chip: 'מזג אוויר' };
+      }
+      if (id.indexOf('budget') > -1 || id.indexOf('money') > -1 || id.indexOf('cost') > -1) {
+        return { icon: '💶', chip: 'תקציב' };
+      }
+      if (id.indexOf('packing') > -1 || id.indexOf('gear') > -1 || id.indexOf('bag') > -1) {
+        return { icon: '🎒', chip: 'ציוד' };
+      }
+      return { icon: '💡', chip: 'תכנון' };
+    }
+
+    function applyCollapse() {
+      var items = listEl.querySelectorAll('.gtk-drawer__item');
+      if (!items.length) {
+        if (moreBtn) moreBtn.hidden = true;
+        return;
+      }
+      var needsCollapse = items.length > COLLAPSE_AFTER;
+      for (var i = 0; i < items.length; i++) {
+        items[i].hidden = needsCollapse && !expandedItems && i >= COLLAPSE_AFTER;
+      }
+      if (moreBtn) {
+        moreBtn.hidden = !needsCollapse;
+        moreBtn.setAttribute('aria-expanded', expandedItems ? 'true' : 'false');
+        moreBtn.textContent = expandedItems ? 'הצג פחות' : 'הצג עוד טיפים';
+      }
+    }
+
+    function setError(msg) {
+      if (!errEl) return;
+      if (msg) {
+        errEl.textContent = msg;
+        errEl.hidden = false;
+      } else {
+        errEl.textContent = '';
+        errEl.hidden = true;
+      }
+    }
+
+    function renderFromEntry(entry) {
+      setError('');
+      titleEl.textContent = entry.title_he || 'טוב לדעת';
+      leadEl.textContent = entry.lead_he || '';
+      listEl.innerHTML = '';
+      expandedItems = false;
+      var items = entry.items || [];
+      items.forEach(function (item) {
+        if (!item || !item.tips_url) return;
+        var meta = getCategoryMeta(item);
+        var li = document.createElement('li');
+        li.className = 'gtk-drawer__item';
+        var a = document.createElement('a');
+        a.className = 'gtk-drawer__card';
+        a.href = item.tips_url;
+        a.setAttribute('rel', 'noopener');
+        a.dataset.cardId = item.id || '';
+        a.dataset.cardTitle = item.title_he || '';
+        a.dataset.cardCategory = meta.chip || '';
+        a.dataset.cardPosition = String(listEl.children.length + 1);
+        var t = document.createElement('span');
+        t.className = 'gtk-drawer__card-title';
+        t.textContent = item.title_he || '';
+        var headrow = document.createElement('span');
+        headrow.className = 'gtk-drawer__headrow';
+        var icon = document.createElement('span');
+        icon.className = 'gtk-drawer__icon';
+        icon.textContent = meta.icon;
+        icon.setAttribute('aria-hidden', 'true');
+        var chip = document.createElement('span');
+        chip.className = 'gtk-drawer__chip';
+        chip.textContent = meta.chip;
+        var s = document.createElement('span');
+        s.className = 'gtk-drawer__card-summary';
+        s.textContent = item.summary_he || '';
+        var m = document.createElement('span');
+        m.className = 'gtk-drawer__card-more';
+        m.textContent = 'להמשך קריאה ←';
+        headrow.appendChild(icon);
+        headrow.appendChild(t);
+        headrow.appendChild(chip);
+        a.appendChild(headrow);
+        a.appendChild(s);
+        a.appendChild(m);
+        li.appendChild(a);
+        listEl.appendChild(li);
+      });
+      applyCollapse();
+      if (!listEl.children.length) {
+        setError('אין פריטים מוגדרים ליעד זה. נסו שוב מאוחר יותר או עברו לדף הטיפים.');
+      }
+    }
+
+    function renderFallback(msg) {
+      titleEl.textContent = 'טוב לדעת';
+      leadEl.textContent =
+        'לא הצלחנו לטעון את הרשימה מהשרת. אפשר עדיין לפתוח את מרכז התכנון והעמודים המקושרים מהדף הראשי.';
+      listEl.innerHTML = '';
+      if (moreBtn) moreBtn.hidden = true;
+      setError(msg || 'שגיאת טעינה.');
+    }
+
+    function loadJson() {
+      fetch(GTK_JSON, { credentials: 'same-origin' })
+        .then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function (data) {
+          var entry = data && data[countryKey];
+          if (!entry) {
+            renderFallback('לא נמצאה רשימה למפתח המדינה "' + countryKey + '".');
+            return;
+          }
+          renderFromEntry(entry);
+        })
+        .catch(function () {
+          renderFallback('לא ניתן לטעון את הקובץ כרגע (בדיקת חיבור או נתיב לקובץ).');
+        });
+    }
+
+    loadJson();
+
+    listEl.addEventListener('click', function (e) {
+      var a = e.target.closest('a.gtk-drawer__card');
+      if (!a || !listEl.contains(a)) return;
+      if (window.plausible) {
+        try {
+          plausible('GoodToKnow-CardClick', {
+            props: {
+              country: countryKey,
+              href: a.getAttribute('href') || '',
+              card_id: a.dataset.cardId || '',
+              card_title: a.dataset.cardTitle || '',
+              card_category: a.dataset.cardCategory || '',
+              card_position: a.dataset.cardPosition || '',
+              total_cards: String(listEl.querySelectorAll('.gtk-drawer__card').length || 0)
+            }
+          });
+        } catch (ex) {}
+      }
+    });
+    if (ctaEl) {
+      ctaEl.addEventListener('click', function () {
+        if (!window.plausible) return;
+        try {
+          plausible('GoodToKnow-CTA', {
+            props: {
+              country: countryKey,
+              href: ctaEl.getAttribute('href') || 'tips.html',
+              total_cards: String(listEl.querySelectorAll('.gtk-drawer__card').length || 0),
+              expanded_items: expandedItems ? '1' : '0'
+            }
+          });
+        } catch (ex) {}
+      });
+    }
+    if (moreBtn) {
+      moreBtn.addEventListener('click', function () {
+        expandedItems = !expandedItems;
+        applyCollapse();
+        if (window.plausible) {
+          try {
+            plausible('GoodToKnow-ToggleMore', {
+              props: { country: countryKey, expanded: expandedItems ? '1' : '0' }
+            });
+          } catch (ex) {}
+        }
+      });
+    }
+
+    function emailOverlayOpen() {
+      var el = document.getElementById('emailPopupOverlay');
+      return el && el.classList.contains('open');
+    }
+
+    function lockScroll(lock) {
+      if (lock) {
+        if (!emailOverlayOpen()) document.body.style.overflow = 'hidden';
+      } else {
+        if (!emailOverlayOpen()) document.body.style.overflow = '';
+      }
+    }
+
+    function getFocusables() {
+      var nodes = dialog.querySelectorAll(
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      return Array.prototype.slice.call(nodes).filter(function (n) {
+        if (n.disabled) return false;
+        var st = window.getComputedStyle(n);
+        return st.visibility !== 'hidden' && st.display !== 'none';
+      });
+    }
+
+    function trapKeydown(e) {
+      if (e.key !== 'Tab' || !root.classList.contains('is-open')) return;
+      var list = getFocusables();
+      if (!list.length) return;
+      var first = list[0];
+      var last = list[list.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+
+    function openDrawer() {
+      prevFocus = document.activeElement;
+      root.hidden = false;
+      requestAnimationFrame(function () {
+        root.classList.add('is-open');
+        lockScroll(true);
+        openedAt = Date.now();
+        openBtn.setAttribute('aria-expanded', 'true');
+        if (window.plausible) {
+          try {
+            plausible('GoodToKnow-Open', { props: { country: countryKey } });
+          } catch (ex) {}
+        }
+        if (closeBtn) closeBtn.focus();
+        else {
+          var list = getFocusables();
+          if (list[0]) list[0].focus();
+        }
+      });
+    }
+
+    function closeDrawer() {
+      root.classList.remove('is-open');
+      lockScroll(false);
+      openBtn.setAttribute('aria-expanded', 'false');
+      var t = prevFocus;
+      prevFocus = null;
+      if (t && typeof t.focus === 'function') t.focus();
+      window.setTimeout(function () {
+        if (!root.classList.contains('is-open')) root.hidden = true;
+      }, 320);
+    }
+
+    openBtn.addEventListener('click', function () {
+      openDrawer();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    if (backdrop) {
+      backdrop.addEventListener('click', function () {
+        if (Date.now() - openedAt > 350) closeDrawer();
+      });
+    }
+
+    document.addEventListener(
+      'keydown',
+      function (e) {
+        if (e.key !== 'Escape' || !root.classList.contains('is-open')) return;
+        e.preventDefault();
+        closeDrawer();
+      },
+      true
+    );
+
+    dialog.addEventListener('keydown', trapKeydown);
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden' && root.classList.contains('is-open')) closeDrawer();
+    });
+  })();
+  </script>
+
   <!-- EMAIL POPUP: מצטרפים לקהילה (#newsletter) opens this modal -->
   <style>
     @keyframes emailPopupIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
