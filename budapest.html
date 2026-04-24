@@ -44,7 +44,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&family=Heebo:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
   <link rel="stylesheet" href="destination-hero-glass.css"/>
   <!-- Maps JavaScript API + Places (same key as austria.html - restrict by domain). -->
@@ -88,8 +88,74 @@
     .container--narrow { max-width: 780px; }
 
     /* ── NAV - mobile drawer sibling after </nav> (Safari backdrop-filter) - same as austria.html ── */
-    .nav { position:fixed; top:0; right:0; left:0; z-index:1201; background:rgba(253,248,242,0.96); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--border); height:var(--nav-height); transition:box-shadow var(--ease); }
+    .nav { position:fixed; top:0; right:0; left:0; z-index:1201; background:rgba(253,248,242,0.96); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-bottom:1px solid var(--border); height:var(--nav-height); transition:box-shadow var(--ease); overflow: visible; }
     .nav.scrolled { box-shadow:0 2px 20px rgba(0,0,0,0.08); }
+    /* Flight-path progress in header safe-zone: RTL fill + dynamic plane tilt. */
+    .read-progress {
+      --read-safe-h: 10px;
+      --read-bar-h: 5px;
+      --read-plane-w: 20px;
+      --read-plane-h: 20px;
+      position: absolute;
+      left: max(24px, env(safe-area-inset-left, 0px));
+      right: max(24px, env(safe-area-inset-right, 0px));
+      bottom: 4px;
+      height: var(--read-safe-h);
+      z-index: 5;
+      pointer-events: none;
+      direction: ltr;
+    }
+    .read-progress__inner {
+      position: relative;
+      height: 100%;
+      overflow: visible;
+    }
+    .read-progress__track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: var(--read-bar-h);
+      border-radius: 999px;
+      background: rgba(27, 67, 114, 0.12);
+    }
+    .read-progress__fill {
+      position: absolute;
+      top: 50%;
+      transform: translate3d(0, -50%, 0) scaleX(0);
+      transform-origin: right center;
+      height: var(--read-bar-h);
+      width: 100%;
+      right: 0;
+      left: auto;
+      border-radius: 999px;
+      background: linear-gradient(to left, rgba(27, 67, 114, 0.4) 0%, rgba(27, 67, 114, 1) 50%, rgba(230, 161, 92, 1) 100%);
+      box-shadow: inset 0 0 5px rgba(100, 200, 255, 0.2);
+      will-change: transform;
+      z-index: 1;
+    }
+    .read-progress__plane {
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: var(--read-plane-w);
+      height: var(--read-plane-h);
+      margin: 0;
+      transform: translate3d(-100%, -50%, 0);
+      color: #1b4372;
+      filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9));
+      will-change: left;
+      z-index: 2;
+    }
+    .read-progress__plane svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-8deg);
+      transform-origin: 50% 50%;
+      transition: transform 0.2s ease-out;
+    }
     .nav__inner { display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
     .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
     .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
@@ -181,6 +247,18 @@
       .nav__mobile-actions { display:flex; }
       .nav__hamburger { display:flex; }
       .nav__logo img { height:44px !important; }
+      .read-progress {
+        --read-bar-h: 3px;
+        --read-plane-w: 15px;
+        --read-plane-h: 15px;
+        left: max(16px, env(safe-area-inset-left, 0px));
+        right: max(16px, env(safe-area-inset-right, 0px));
+        bottom: 3px;
+      }
+      .read-progress__track { background: rgba(27, 67, 114, 0.09); }
+      .read-progress__fill {
+        background: linear-gradient(to left, rgba(27, 67, 114, 0.28) 0%, rgba(27, 67, 114, 0.78) 50%, rgba(230, 161, 92, 0.78) 100%);
+      }
     }
 
     /* ── Page CSS ── */
@@ -216,6 +294,23 @@
     .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.92; margin-bottom: 32px; max-width: 600px; line-height: 1.7; text-shadow: 0 1px 14px rgba(0,0,0,0.3); }
     .article-hero__meta { display: flex; flex-wrap: wrap; gap: 12px; }
     .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
+    .article-hero__badge--cta {
+      font-family: 'Heebo', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 8px 18px;
+      background: rgba(255,255,255,0.95);
+      color: #145960;
+      border: 1px solid rgba(20,89,96,0.2);
+      box-shadow: 0 6px 20px rgba(20,89,96,0.18);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .article-hero__badge--cta:hover, .article-hero__badge--cta:focus-visible {
+      background: #fff;
+      color: #114d53;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(20,89,96,0.24);
+    }
     .article-hero__actions { display: flex; flex-direction: column; gap: 14px; margin-top: 6px; align-items: flex-start; }
     .article-hero__actions .gtk-trigger { margin-top: 0; width: auto; max-width: 100%; box-sizing: border-box; justify-content: flex-start; }
     .article-hero__partner-lead { margin: 0; font-size: 13px; line-height: 1.45; opacity: 0.9; }
@@ -234,6 +329,11 @@
       .article-hero__subtitle { margin-bottom: 20px; line-height: 1.65; }
       .article-hero__flag { font-size: 44px; margin-bottom: 12px; }
       .article-hero__badge { font-size: 13px; padding: 8px 14px; }
+      .article-hero__badge--cta {
+        font-size: 12px;
+        padding: 6px 11px;
+        border-radius: 16px;
+      }
       .article-hero__attr { padding-top: 12px; }
       .article-hero__actions { gap: 12px; align-items: stretch; }
       .article-hero__actions .gtk-trigger { order: -1; width: 100%; }
@@ -618,6 +718,135 @@
       .bc-promo__img-wrap { width:120px; align-self:center; }
       .bc-promo__title { font-size:22px; }
     }
+
+    .countdown-cta {
+      background: linear-gradient(180deg, #fff9ef 0%, #ffffff 16%, #f8fbfc 100%);
+      border: 2px solid #eadfcb;
+      border-top: 4px solid var(--amber);
+      border-radius: 14px;
+      padding: 14px 16px 12px;
+      margin: 14px 0 8px;
+      box-shadow: 0 8px 22px rgba(18,77,82,0.08);
+    }
+    .countdown-cta__kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: #0f4a50;
+      border: 1px solid #f2d4a7;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .countdown-cta__title {
+      font-family: 'Heebo', sans-serif;
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.35;
+      color: var(--charcoal);
+      margin-bottom: 6px;
+    }
+    .countdown-cta__lead {
+      font-family: 'Assistant', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 9px;
+    }
+    .countdown-cta__hooks {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 11px;
+    }
+    .countdown-cta__hook {
+      font-family: 'Assistant', sans-serif;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdfd 100%);
+      border: 1px solid #dbe7e8;
+      border-radius: 8px;
+      padding: 8px 11px;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+    .countdown-cta__btn {
+      font-family: 'Heebo', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(180deg, #16727a 0%, #145960 100%);
+      color: #fff;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      border: 1px solid rgba(20,89,96,0.35);
+      box-shadow: 0 7px 18px rgba(20,89,96,0.26);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .countdown-cta__btn:hover {
+      background: linear-gradient(180deg, #145f66 0%, #114d53 100%);
+      transform: translateY(-2px);
+      border-color: rgba(20,89,96,0.55);
+      box-shadow: 0 11px 22px rgba(20,89,96,0.3);
+    }
+    @keyframes ctaMobilePulse {
+      0%, 100% { box-shadow: 0 7px 18px rgba(20,89,96,0.26); transform: translateY(0); }
+      50% { box-shadow: 0 12px 24px rgba(20,89,96,0.36); transform: translateY(-1px); }
+    }
+    .countdown-cta__download-row { display: block; margin-top: 2px; }
+    .countdown-cta__actions { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+    .countdown-cta__download-row .countdown-cta__btn {
+      flex: 0 0 auto;
+      min-height: 36px;
+      max-width: 280px;
+      width: auto;
+    }
+    @media (max-width: 760px) {
+      .countdown-cta {
+        padding: 10px 11px 9px;
+        margin: 10px 0 6px;
+        border-radius: 12px;
+      }
+      .countdown-cta__kicker { margin-bottom: 6px; padding: 3px 9px; }
+      .countdown-cta__title { font-size: clamp(16px, 5.6vw, 20px); line-height: 1.28; margin-bottom: 4px; }
+      .countdown-cta__lead { font-size: 12px; line-height: 1.45; margin-bottom: 7px; }
+      .countdown-cta__hooks { gap: 4px; margin-bottom: 8px; }
+      .countdown-cta__hook { padding: 6px 8px; font-size: 11.5px; line-height: 1.4; border-radius: 7px; }
+      .countdown-cta__actions { width: 100%; }
+      .countdown-cta__download-row .countdown-cta__btn {
+        max-width: 100%;
+        width: 100%;
+        animation: ctaMobilePulse 8s ease-in-out infinite;
+      }
+      .countdown-cta__micro { font-size: 10.5px; line-height: 1.3; }
+      .countdown-cta__tag { margin-top: 3px; font-size: 10.5px; line-height: 1.35; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .countdown-cta__btn,
+      .countdown-cta__btn:hover,
+      .countdown-cta__download-row .countdown-cta__btn {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+      }
+    }
+    .countdown-cta__micro {
+      font-family: 'Assistant', sans-serif;
+      font-size: 11px;
+      color: #5e656d;
+      margin-top: 2px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+    .countdown-cta__tag { margin-top: 4px; font-size: 11px; line-height: 1.5; color: #666; }
 
     /* TOC */
     .toc { background: var(--sand); border-radius: 14px; padding: 20px; margin-bottom: 36px; }
@@ -1120,6 +1349,20 @@
       </div>
     </div>
 
+    <div class="read-progress" aria-hidden="true">
+      <div class="read-progress__inner">
+        <div class="read-progress__track" aria-hidden="true"></div>
+        <div class="read-progress__fill" id="readProgressFill"></div>
+        <div class="read-progress__plane" id="readProgressPlane" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true" width="100%" height="100%">
+            <g transform="translate(24,0) scale(-1,1)" fill="currentColor">
+              <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
     <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
       <a href="tips.html" class="mob-nav-item mob-nav-item--tips" role="menuitem">
         <div class="mob-nav-item__icon">
@@ -1193,6 +1436,7 @@
         <div class="article-hero__meta">
           <span class="article-hero__badge">🟢 קל עם ילדים</span>
           <span class="article-hero__badge">✈️ טיסה לבודפשט</span>
+          <a href="#intro-view-start" class="article-hero__badge article-hero__badge--cta">מתנה: לוח ספירה לאחור לבודפשט 🎁</a>
         </div>
         <button type="button" class="gtk-trigger" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog"><span class="gtk-trigger__icon" aria-hidden="true">🧭</span><span class="gtk-trigger__label"><span class="gtk-trigger__title">טוב לדעת לפני הטיול</span><span class="gtk-trigger__sub">טיפים ממוקדים ליעד הזה</span></span></button>
         <p class="article-hero__partner-lead">
@@ -1227,7 +1471,27 @@
           <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> למה בודפשט עם ילדים?</h2>
           <p>בודפשט היא אחת מהערים היפות של אירופה ויעד מצוין לטיול משפחתי עם ילדים. רחובות נקיים, מסעדות טעימות ומזמינות, אטרקציות כיפיות, שהות זולה ואנשים נחמדים - קיבלנו הכל במקום אחד.</p>
           <p>פארק מים ענק שעובד בכל עונה, מגלשות על הרים ירוקים ושייט על הדנובה - בודפשט בהחלט עונה לקטגוריות שיש להציע לכל גיל.</p>
-          <p>מה שמייחד את בודפשט הוא הצפיפות המדהימה של אטרקציות: הפרלמנט, טירת בודה, מגדל הדייגים, כיכר הגיבורים, האי מרגיט - כולן נמצאות במרחק קצר זו מזו, מה שחוסך נסיעות ארוכות ומייגעות עם ילדים. כמו כן, מחירים נוחים משמעותית ממערב אירופה מאפשרים חופשה מפנקת בלי לרוקן את הארנק.</p>
+          <p id="intro-view-start">מה שמייחד את בודפשט הוא הצפיפות המדהימה של אטרקציות: הפרלמנט, טירת בודה, מגדל הדייגים, כיכר הגיבורים, האי מרגיט - כולן נמצאות במרחק קצר זו מזו, מה שחוסך נסיעות ארוכות ומייגעות עם ילדים. כמו כן, מחירים נוחים משמעותית ממערב אירופה מאפשרים חופשה מפנקת בלי לרוקן את הארנק.</p>
+
+          <div class="countdown-cta" id="budapest-pdf-cta">
+            <div class="countdown-cta__kicker">🎁 בונוס למשפחות שטסות לבודפשט</div>
+            <h3 class="countdown-cta__title">לוח "מתי טסים" לבודפשט: סופרים לאחור ומתכוננים להרפתקה!</h3>
+            <p class="countdown-cta__lead">הכנתי לכם לוח "ספירה לאחור" מיוחד לבודפשט. 24 ימים של משימות, עובדות מגניבות והרבה התרגשות.</p>
+            <div class="countdown-cta__hooks">
+              <div class="countdown-cta__hook"><strong>הופכים את ההמתנה לחוויה:</strong> משימה יומית קטנה שתכניס את הילדים לאווירה.</div>
+              <div class="countdown-cta__hook"><strong>לומדים בכיף:</strong> בכל יום מגלים פרט מרתק על בודפשט.</div>
+              <div class="countdown-cta__hook"><strong>מורידים:</strong> קובץ PDF מעוצב ל-24 ימים של הרפתקה, שכיף להדפיס ולתלות על המקרר!</div>
+            </div>
+            <div class="countdown-cta__download-row">
+              <div class="countdown-cta__actions">
+                <a href="MatayTasim-Budapest-Countdown.pdf" target="_blank" rel="noopener noreferrer" class="countdown-cta__btn" onclick="return window.handleBudapestPdfCta ? window.handleBudapestPdfCta(event,'cta-button') : true;">
+                  אני מוריד/ה את הלוח שנה עכשיו
+                </a>
+                <div class="countdown-cta__micro">PDF חינם • 24 ימים • מוכן להדפסה • קובץ: MatayTasim-Budapest-Countdown.pdf</div>
+              </div>
+            </div>
+            <p class="countdown-cta__tag">הדפסתם? תייגו את עצמכם בפייסבוק של מתי טסים כדי שאראה איך אתם מתכוננים! <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;color:var(--teal-dark);font-weight:600;text-decoration:none;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true" style="transform:translateY(1px);"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg><span>לדף הפייסבוק</span></a></p>
+          </div>
         </div>
 
         <!-- Car rental promo -->
@@ -2020,6 +2284,86 @@
   if (nav) window.addEventListener('scroll', function() {
     nav.classList.toggle('scrolled', window.scrollY > 10);
   }, { passive: true });
+
+  /* Scroll reading progress: rAF, RTL contrail scaling, and speed-aware plane tilt. */
+  (function () {
+    var fill = document.getElementById('readProgressFill');
+    var plane = document.getElementById('readProgressPlane');
+    var planeIcon = plane ? plane.querySelector('svg') : null;
+    if (!fill) return;
+    var ticking = false;
+    var lastScrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+    var lastTime = performance.now();
+    var smoothAngle = -8;
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+    function updateReadProgress(now) {
+      var doc = document.documentElement;
+      var scrollTop = window.scrollY || doc.scrollTop || 0;
+      var scrollable = doc.scrollHeight - doc.clientHeight;
+      var ratio = scrollable <= 0 ? 0 : scrollTop / scrollable;
+      var pct = clamp(Math.round(ratio * 1000) / 10, 0, 100);
+      fill.style.transform = 'translate3d(0, -50%, 0) scaleX(' + (pct / 100) + ')';
+      if (plane) {
+        plane.style.left = (100 - pct) + '%';
+      }
+      if (planeIcon) {
+        var dt = Math.max(1, now - lastTime);
+        var delta = scrollTop - lastScrollTop;
+        var direction = delta >= 0 ? 1 : -1;
+        var speedPxPerMs = Math.abs(delta) / dt;
+        var speedFactor = clamp(speedPxPerMs / 2.2, 0, 1);
+        var targetAngle = direction > 0
+          ? -8 - (20 * speedFactor)
+          : -4 + (14 * speedFactor);
+        smoothAngle += (targetAngle - smoothAngle) * 0.2;
+        planeIcon.style.transform = 'rotate(' + smoothAngle.toFixed(2) + 'deg)';
+      }
+      lastScrollTop = scrollTop;
+      lastTime = now;
+    }
+    function onScrollOrResize() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function (now) {
+        ticking = false;
+        updateReadProgress(now);
+      });
+    }
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize, { passive: true });
+    window.addEventListener('orientationchange', onScrollOrResize, { passive: true });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(onScrollOrResize).catch(onScrollOrResize);
+    } else {
+      window.addEventListener('load', onScrollOrResize, { passive: true });
+    }
+    onScrollOrResize();
+  })();
+
+  window.trackBudapestPdfDownload = function(source) {
+    if (!window.plausible) return;
+    plausible('Budapest-PDF-Download', {
+      props: {
+        asset: 'MatayTasim-Budapest-Countdown.pdf',
+        source: source || 'cta-button',
+        page: 'budapest'
+      }
+    });
+  };
+  window.handleBudapestPdfCta = function(e, source) {
+    var pdfUrl = 'MatayTasim-Budapest-Countdown.pdf';
+    if (e && typeof e.preventDefault === 'function') e.preventDefault();
+    window.trackBudapestPdfDownload(source || 'cta-button');
+    window.open(pdfUrl, '_blank', 'noopener');
+    return false;
+  };
+  document.querySelectorAll('a[href="MatayTasim-Budapest-Countdown.pdf"]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      window.trackBudapestPdfDownload('direct-link');
+    });
+  });
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
       mobileMenu.classList.remove('open');

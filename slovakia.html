@@ -72,8 +72,89 @@
     .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; }
     .container--narrow { max-width: 780px; }
     /* ── NAV ─────────────────────────────── */
-    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
+    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; overflow:visible; }
     .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+
+    /* Flight-path progress in header safe-zone: RTL fill + dynamic plane tilt. */
+    .read-progress {
+      --read-safe-h: 10px;
+      --read-bar-h: 5px;
+      --read-plane-w: 20px;
+      --read-plane-h: 20px;
+      position: absolute;
+      left: max(24px, env(safe-area-inset-left, 0px));
+      right: max(24px, env(safe-area-inset-right, 0px));
+      bottom: 4px;
+      height: var(--read-safe-h);
+      z-index: 5;
+      pointer-events: none;
+      direction: ltr;
+    }
+    .read-progress__inner {
+      position: relative;
+      height: 100%;
+      overflow: visible;
+    }
+    .read-progress__track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: var(--read-bar-h);
+      border-radius: 999px;
+      background: rgba(27, 67, 114, 0.12);
+    }
+    .read-progress__fill {
+      position: absolute;
+      top: 50%;
+      transform: translate3d(0, -50%, 0) scaleX(0);
+      transform-origin: right center;
+      height: var(--read-bar-h);
+      width: 100%;
+      right: 0;
+      left: auto;
+      border-radius: 999px;
+      background: linear-gradient(to left, rgba(27, 67, 114, 0.4) 0%, rgba(27, 67, 114, 1) 50%, rgba(230, 161, 92, 1) 100%);
+      box-shadow: inset 0 0 5px rgba(100, 200, 255, 0.2);
+      will-change: transform;
+      z-index: 1;
+    }
+    .read-progress__plane {
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: var(--read-plane-w);
+      height: var(--read-plane-h);
+      margin: 0;
+      transform: translate3d(-100%, -50%, 0);
+      color: #1b4372;
+      filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9));
+      will-change: left;
+      z-index: 2;
+    }
+    .read-progress__plane svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-8deg);
+      transform-origin: 50% 50%;
+      transition: transform 0.2s ease-out;
+    }
+    @media (max-width: 900px) {
+      .read-progress {
+        --read-bar-h: 3px;
+        --read-plane-w: 15px;
+        --read-plane-h: 15px;
+        left: max(16px, env(safe-area-inset-left, 0px));
+        right: max(16px, env(safe-area-inset-right, 0px));
+        bottom: 3px;
+      }
+      .read-progress__track { background: rgba(27, 67, 114, 0.09); }
+      .read-progress__fill {
+        background: linear-gradient(to left, rgba(27, 67, 114, 0.28) 0%, rgba(27, 67, 114, 0.78) 50%, rgba(230, 161, 92, 0.78) 100%);
+      }
+    }
     .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
     .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
     .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
@@ -1005,6 +1086,21 @@
       </div>
     </div>
 
+    <div class="read-progress" aria-hidden="true">
+      <div class="read-progress__inner">
+        <div class="read-progress__track" aria-hidden="true"></div>
+        <div class="read-progress__fill" id="readProgressFill"></div>
+        <div class="read-progress__plane" id="readProgressPlane" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true" width="100%" height="100%">
+            <!-- Clear aircraft silhouette, mirrored so nose points left (RTL). -->
+            <g transform="translate(24,0) scale(-1,1)" fill="currentColor">
+              <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
     <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
       <a href="tips.html" class="mob-nav-item mob-nav-item--tips" role="menuitem">
         <div class="mob-nav-item__icon">
@@ -1051,7 +1147,6 @@
       </a>
     </div>
   </nav>
-
 
   <section class="article-hero article-hero--destination article-hero--mapglass">
     <div class="article-hero__bg" aria-hidden="true">
@@ -1132,7 +1227,7 @@
               <div class="countdown-cta__hooks">
                 <div class="countdown-cta__hook"><strong>הופכים את ההמתנה לחוויה:</strong> משימה יומית קטנה שתכניס את הילדים לאווירה.</div>
                 <div class="countdown-cta__hook"><strong>לומדים בכיף:</strong> בכל יום מגלים פרט מרתק על סלובקיה.</div>
-                <div class="countdown-cta__hook"><strong>מורידים פעם אחת:</strong> קובץ PDF מעוצב ל-24 ימים של הרפתקה, שכיף להדפיס ולתלות על המקרר!</div>
+                <div class="countdown-cta__hook"><strong>מורידים:</strong> קובץ PDF מעוצב ל-24 ימים של הרפתקה, שכיף להדפיס ולתלות על המקרר!</div>
               </div>
               <div class="countdown-cta__download-row">
                 <div class="countdown-cta__actions">
@@ -1927,6 +2022,64 @@
           nav.classList.toggle('scrolled', window.scrollY > 10);
         }, { passive: true });
       }
+
+      /* Scroll reading progress: rAF, RTL contrail scaling, and speed-aware plane tilt. */
+      (function () {
+        var fill = document.getElementById('readProgressFill');
+        var plane = document.getElementById('readProgressPlane');
+        var planeIcon = plane ? plane.querySelector('svg') : null;
+        if (!fill) return;
+        var ticking = false;
+        var lastScrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+        var lastTime = performance.now();
+        var smoothAngle = -8;
+        function clamp(value, min, max) {
+          return Math.min(max, Math.max(min, value));
+        }
+        function updateReadProgress(now) {
+          var doc = document.documentElement;
+          var scrollTop = window.scrollY || doc.scrollTop || 0;
+          var scrollable = doc.scrollHeight - doc.clientHeight;
+          var ratio = scrollable <= 0 ? 0 : scrollTop / scrollable;
+          var pct = clamp(Math.round(ratio * 1000) / 10, 0, 100);
+          fill.style.transform = 'translate3d(0, -50%, 0) scaleX(' + (pct / 100) + ')';
+          if (plane) {
+            plane.style.left = (100 - pct) + '%';
+          }
+
+          if (planeIcon) {
+            var dt = Math.max(1, now - lastTime);
+            var delta = scrollTop - lastScrollTop;
+            var direction = delta >= 0 ? 1 : -1;
+            var speedPxPerMs = Math.abs(delta) / dt;
+            var speedFactor = clamp(speedPxPerMs / 2.2, 0, 1);
+            var targetAngle = direction > 0
+              ? -8 - (20 * speedFactor)
+              : -4 + (14 * speedFactor);
+            smoothAngle += (targetAngle - smoothAngle) * 0.2;
+            planeIcon.style.transform = 'rotate(' + smoothAngle.toFixed(2) + 'deg)';
+          }
+          lastScrollTop = scrollTop;
+          lastTime = now;
+        }
+        function onScrollOrResize() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function (now) {
+            ticking = false;
+            updateReadProgress(now);
+          });
+        }
+        window.addEventListener('scroll', onScrollOrResize, { passive: true });
+        window.addEventListener('resize', onScrollOrResize, { passive: true });
+        window.addEventListener('orientationchange', onScrollOrResize, { passive: true });
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(onScrollOrResize).catch(onScrollOrResize);
+        } else {
+          window.addEventListener('load', onScrollOrResize, { passive: true });
+        }
+        onScrollOrResize();
+      })();
 
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('open')) {
