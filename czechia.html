@@ -75,6 +75,14 @@
     /* ── NAV ─────────────────────────────── */
     .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
     .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+    /* Flight-path progress in header safe-zone: RTL fill + dynamic plane tilt. */
+    .read-progress { --read-safe-h: 10px; --read-bar-h: 5px; --read-plane-w: 20px; --read-plane-h: 20px; position: absolute; left: max(24px, env(safe-area-inset-left, 0px)); right: max(24px, env(safe-area-inset-right, 0px)); bottom: 4px; height: var(--read-safe-h); z-index: 5; pointer-events: none; direction: ltr; }
+    .read-progress__inner { position: relative; height: 100%; overflow: visible; }
+    .read-progress__track { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); height: var(--read-bar-h); border-radius: 999px; background: rgba(27, 67, 114, 0.12); }
+    .read-progress__fill { position: absolute; top: 50%; transform: translate3d(0, -50%, 0) scaleX(0); transform-origin: right center; height: var(--read-bar-h); width: 100%; right: 0; left: auto; border-radius: 999px; background: linear-gradient(to left, rgba(27, 67, 114, 0.4) 0%, rgba(27, 67, 114, 1) 50%, rgba(230, 161, 92, 1) 100%); box-shadow: inset 0 0 5px rgba(100, 200, 255, 0.2); will-change: transform; z-index: 1; }
+    .read-progress__plane { position: absolute; top: 50%; left: 100%; width: var(--read-plane-w); height: var(--read-plane-h); transform: translate3d(-100%, -50%, 0); color: #1b4372; filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9)); will-change: left; z-index: 2; }
+    .read-progress__plane svg { display: block; width: 100%; height: 100%; transform: rotate(-8deg); transform-origin: 50% 50%; transition: transform 0.2s ease-out; }
+    @media (max-width: 900px) { .read-progress { --read-bar-h: 3px; --read-plane-w: 15px; --read-plane-h: 15px; left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); bottom: 3px; } .read-progress__track { background: rgba(27, 67, 114, 0.09); } .read-progress__fill { background: linear-gradient(to left, rgba(27, 67, 114, 0.28) 0%, rgba(27, 67, 114, 0.78) 50%, rgba(230, 161, 92, 0.78) 100%); } }
     .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
     .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
     .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
@@ -1037,6 +1045,7 @@
         </div>
       </a>
     </div>
+    <div class="read-progress" aria-hidden="true"><div class="read-progress__inner"><div class="read-progress__track" aria-hidden="true"></div><div class="read-progress__fill" id="readProgressFill"></div><div class="read-progress__plane" id="readProgressPlane" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false" aria-hidden="true" width="100%" height="100%"><g transform="translate(24,0) scale(-1,1)" fill="currentColor"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></g></svg></div></div></div>
   </nav>
 
 
@@ -1101,7 +1110,8 @@
             <a href="#lipno" class="toc__link"><span class="toc__num">4</span> אטרקציות אגם ליפנו</a>
             <a href="#prague-attractions" class="toc__link"><span class="toc__num">5</span> מה לעשות עם ילדים בפראג</a>
             <a href="#accommodation" class="toc__link"><span class="toc__num">6</span> המלצות לינה</a>
-            <a href="#tips" class="toc__link"><span class="toc__num">7</span> טיפים חשובים</a>
+            <a href="#airport-stay" class="toc__link"><span class="toc__num">7</span> המלצת לינה ליד שדה התעופה</a>
+            <a href="#tips" class="toc__link"><span class="toc__num">8</span> טיפים חשובים</a>
           </div>
         </div>
 
@@ -1813,7 +1823,16 @@
           </div>
         </div>
 
-<!-- 7. TIPS -->
+        <div class="article-section" id="airport-stay">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🛬</span> המלצת לינה ליד שדה התעופה</h2>
+          <p>לטיסה מוקדמת או נחיתה מאוחרת באזור פראג, לינה ליד שדה התעופה PRG יכולה לחסוך התעסקות מיותרת ולהפוך את המעבר לנוח יותר.</p>
+          <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:14px;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:20px;">
+            <span style="font-size:14px;color:#4b5563;">ריכזנו את ההמלצות לעמוד מלונות ליד שדות תעופה (קטע צ׳כיה):</span>
+            <a href="airport-hotels.html#airport-prg" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:999px;padding:9px 14px;font-size:13px;font-weight:600;text-decoration:none;">למלונות ליד PRG ←</a>
+          </div>
+        </div>
+
+<!-- 8. TIPS -->
         <div class="article-section" id="tips">
           <h2 class="article-section__title">
             <svg class="article-section__title-icon-svg" xmlns="http://www.w3.org/2000/svg" width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.88 1.35-2.6A6.98 6.98 0 0 0 18 8a7 7 0 1 0-12 0c0 1.24.33 2.44.96 3.41.69.72 1.17 1.62 1.35 2.6"/></svg>
@@ -2103,6 +2122,29 @@
     if (nav) window.addEventListener('scroll', function () {
       nav.classList.toggle('scrolled', window.scrollY > 10);
     }, { passive: true });
+    (function () {
+      var fill = document.getElementById('readProgressFill'), plane = document.getElementById('readProgressPlane'), planeIcon = plane ? plane.querySelector('svg') : null;
+      if (!fill) return;
+      var ticking = false, lastScrollTop = window.scrollY || document.documentElement.scrollTop || 0, lastTime = performance.now(), smoothAngle = -8;
+      function clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
+      function update(now) {
+        var doc = document.documentElement, scrollTop = window.scrollY || doc.scrollTop || 0, scrollable = doc.scrollHeight - doc.clientHeight;
+        var ratio = scrollable <= 0 ? 0 : scrollTop / scrollable, pct = clamp(Math.round(ratio * 1000) / 10, 0, 100);
+        fill.style.transform = 'translate3d(0, -50%, 0) scaleX(' + (pct / 100) + ')';
+        if (plane) plane.style.left = (100 - pct) + '%';
+        if (planeIcon) {
+          var dt = Math.max(1, now - lastTime), delta = scrollTop - lastScrollTop, direction = delta >= 0 ? 1 : -1;
+          var speedFactor = clamp((Math.abs(delta) / dt) / 2.2, 0, 1), targetAngle = direction > 0 ? -8 - (20 * speedFactor) : -4 + (14 * speedFactor);
+          smoothAngle += (targetAngle - smoothAngle) * 0.2;
+          planeIcon.style.transform = 'rotate(' + smoothAngle.toFixed(2) + 'deg)';
+        }
+        lastScrollTop = scrollTop; lastTime = now;
+      }
+      function onSR() { if (ticking) return; ticking = true; requestAnimationFrame(function (now) { ticking = false; update(now); }); }
+      window.addEventListener('scroll', onSR, { passive: true }); window.addEventListener('resize', onSR, { passive: true }); window.addEventListener('orientationchange', onSR, { passive: true });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(onSR).catch(onSR); else window.addEventListener('load', onSR, { passive: true });
+      onSR();
+    })();
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
         mobileMenu.classList.remove('open');
