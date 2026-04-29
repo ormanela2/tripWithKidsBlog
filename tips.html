@@ -230,10 +230,16 @@
       transform-origin: top right;
       pointer-events: none;
     }
+    .hub-card__preview--themeparks iframe {
+      transform: translateY(0) scale(0.32);
+    }
     @media (max-width: 400px) {
       .hub-card__preview { height: 112px; }
       .hub-card__preview iframe {
         transform: translateY(calc(-1 * (var(--nav-height) + 6px))) scale(0.28);
+      }
+      .hub-card__preview--themeparks iframe {
+        transform: translateY(0) scale(0.28);
       }
     }
     .hub-card--amber .hub-card__preview { border-color: rgba(196, 135, 46, 0.32); }
@@ -580,8 +586,8 @@
         <div class="hub-card">
           <div class="hub-card__inner">
             <p class="hub-card__crumb"><span class="hub-card__crumb-brand">מתי טסים</span><span aria-hidden="true"> › </span><span>פארקי שעשועים באירופה</span></p>
-            <div class="hub-card__preview">
-              <iframe src="theme-parks.html" loading="lazy" tabindex="-1" title="תצוגה מקדימה של מפת פארקי השעשועים באירופה" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
+            <div class="hub-card__preview hub-card__preview--themeparks">
+              <iframe src="theme-parks.html?embed=map" loading="lazy" tabindex="-1" title="תצוגה מקדימה של מפת פארקי השעשועים באירופה" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
             </div>
             <h3 class="hub-card__title" id="hub-card-title-theme-parks">פארקי שעשועים באירופה</h3>
             <p class="hub-card__desc">מפה אינטראקטיבית עם סינון לפי מדינה, גילאים וסוג חוויה - כולל תצוגת פארקים מהירה והמשך למדריך המלא.</p>
