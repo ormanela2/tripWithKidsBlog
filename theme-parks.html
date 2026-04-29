@@ -722,11 +722,18 @@
     .tp-split__map .leaflet-tooltip-pane { z-index: 800 !important; }
     .tp-split__map .tp-map-tip.leaflet-tooltip-top:before { border-top-color: #fff; }
     .tp-split__map .tp-map-tip.leaflet-tooltip-bottom:before { border-bottom-color: #fff; }
-    .tp-map-reset-home {
+    .tp-map-actions {
       position: absolute;
       top: 58px;
       inset-inline-end: 18px;
       z-index: 810;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tp-map-actions[hidden] { display: none !important; }
+    .tp-map-reset-home {
+      position: static;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -741,7 +748,21 @@
       -webkit-tap-highlight-color: transparent;
     }
     .tp-map-reset-home:hover { background: rgba(18, 77, 82, 0.98); }
-    .tp-map-reset-home[hidden] { display: none !important; }
+    .tp-map-destinations-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(232,160,69,0.42);
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: linear-gradient(135deg, #f9d98b, #e8a045);
+      color: #4a3207;
+      font: 700 12px/1.2 var(--font-body);
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.16);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tp-map-destinations-pill:hover { filter: brightness(0.98); }
 
     @media (min-width: 961px) {
       .tp-split__map {
@@ -826,13 +847,17 @@
       .tp-toolbar__inner > .tp-meta {
         display: none !important;
       }
-      .tp-map-reset-home {
+      .tp-map-actions {
         top: 12px;
         inset-inline-end: 12px;
+        gap: 6px;
+      }
+      .tp-map-reset-home,
+      .tp-map-destinations-pill {
         padding: 8px 11px;
         font-size: 11px;
       }
-      html.tp-embed-map .tp-map-reset-home {
+      html.tp-embed-map .tp-map-actions {
         top: 50px;
       }
       .tp-map-mobile-hint { display: block; }
@@ -1296,11 +1321,21 @@
         border-radius: 12px;
       }
       .tp-modal__close {
-        position: sticky;
-        top: 0;
-        left: 0;
-        z-index: 3;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        font-size: 22px;
+        line-height: 1;
+        background: #fff;
+        border: 1px solid #dbe3ea;
+        color: #334155;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+        z-index: 4;
       }
+      .tp-modal h2 { padding-left: 46px; }
     }
     .tp-lead-overlay {
       position: fixed;
@@ -1664,7 +1699,10 @@
         <span class="tp-embed-map-bar__text">ריחוף או לחיצה על סימון לפרטים מהירים</span>
       </div>
       <p class="tp-map-mobile-hint" id="tpMapMobileHint">לוחצים על סימון במפה כדי לבחור פארק ולפתוח פרטים — סינון וחיפוש למעלה</p>
-      <button type="button" class="tp-map-reset-home" id="tpMapResetHome" hidden>חזור למפה הכללית</button>
+      <div class="tp-map-actions" id="tpMapActions" hidden>
+        <button type="button" class="tp-map-reset-home" id="tpMapResetHome">חזור למפה הכללית</button>
+        <a class="tp-map-destinations-pill" id="tpMapDestinationsPill" href="destinations.html" onclick="if(window.plausible){plausible('ThemeParks-CTA-Click',{props:{source:'theme-parks-map-pill',country:'ALL',target:'destinations'}});}">יעדים</a>
+      </div>
       <div id="tpMap" style="height:100%;min-height:400px;"></div>
     </div>
     <div class="tp-split__list" id="listRoot">
@@ -2848,21 +2886,24 @@
       if (!state.map) return;
       var isEmbed = document.documentElement.classList.contains('tp-embed-map');
       var btn = state.embedResetButton || document.getElementById('tpMapResetHome');
+      var actionsWrap = document.getElementById('tpMapActions');
       state.embedResetButton = btn;
       updateEmbedMapResetLabel();
       if (!btn) return;
       if (isEmbed && (!state.embedResetBounds || !state.embedResetBounds.isValid())) {
-        if (btn) btn.hidden = true;
+        if (actionsWrap) actionsWrap.hidden = true;
         return;
       }
       if (!isEmbed) {
-        btn.hidden = !(state.map.getZoom() > 4);
+        var showMain = state.map.getZoom() > 4;
+        if (actionsWrap) actionsWrap.hidden = !showMain;
         return;
       }
       var current = state.map.getBounds();
       var movedAway = !current.pad(-0.08).contains(state.embedResetBounds);
       var zoomedIn = state.map.getZoom() > 6;
-      btn.hidden = !(movedAway || zoomedIn);
+      var showEmbed = movedAway || zoomedIn;
+      if (actionsWrap) actionsWrap.hidden = !showEmbed;
     }
 
     function initMap() {
