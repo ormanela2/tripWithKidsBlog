@@ -1,0 +1,819 @@
+{
+  "meta": {
+    "generated": "2026-04-27",
+    "source": "google_places_nearby + distance_matrix",
+    "criteria": {
+      "minRatingGoogle5": 4,
+      "minRatingDisplay10": 8,
+      "minReviews": 1000,
+      "maxDrivingDistanceM": 10000,
+      "minHotelsToList": 1,
+      "maxHotelsListed": 1,
+      "note": "ratingDisplay10 = Google 1–5 mapped to a Booking-like /10 for display only (not Booking.com data)."
+    },
+    "parkCount": 81
+  },
+  "byParkId": {
+    "PL__energylandia": {
+      "hotels": [
+        {
+          "name": "Holiday Park Zator",
+          "ratingGoogle": 4.8,
+          "ratingDisplay10": 9.6,
+          "reviews": 1512,
+          "driveTextHe": "4 דקות נסיעה מהפארק",
+          "distanceM": 2167,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=50.0032813&lng=19.4045039&campaign=theme-parks-lodging&campaign=PL__energylandia",
+          "image": null
+        }
+      ]
+    },
+    "PL__legendia": {
+      "hotels": [
+        {
+          "name": "Hotel Diament Plaza Katowice",
+          "ratingGoogle": 4.8,
+          "ratingDisplay10": 9.6,
+          "reviews": 1483,
+          "driveTextHe": "19 דקות נסיעה מהפארק",
+          "distanceM": 6824,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=50.2577743&lng=19.0221546&campaign=theme-parks-lodging&campaign=PL__legendia",
+          "image": null
+        }
+      ]
+    },
+    "PL__majaland-warsaw": {
+      "hotels": []
+    },
+    "PL__zatorland": {
+      "hotels": [
+        {
+          "name": "Holiday Park Zator",
+          "ratingGoogle": 4.8,
+          "ratingDisplay10": 9.6,
+          "reviews": 1512,
+          "driveTextHe": "3 דקות נסיעה מהפארק",
+          "distanceM": 1673,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=50.0032813&lng=19.4045039&campaign=theme-parks-lodging&campaign=PL__zatorland",
+          "image": null
+        }
+      ]
+    },
+    "PL__inwa-d-park-wiat-marze": {
+      "hotels": [
+        {
+          "name": "Czarny Groń Hotel & SPA",
+          "ratingGoogle": 4.7,
+          "ratingDisplay10": 9.4,
+          "reviews": 2568,
+          "driveTextHe": "6 דקות נסיעה מהפארק",
+          "distanceM": 2088,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=49.794489&lng=19.387206&campaign=theme-parks-lodging&campaign=PL__inwa-d-park-wiat-marze",
+          "image": null
+        }
+      ]
+    },
+    "PL__jurapark-krasiej-w": {
+      "hotels": [
+        {
+          "name": "Restauracja Hotel Joanna Kluczbork",
+          "ratingGoogle": 4.4,
+          "ratingDisplay10": 8.8,
+          "reviews": 1278,
+          "driveTextHe": "7 דקות נסיעה מהפארק",
+          "distanceM": 5177,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=50.9702242&lng=18.2632689&campaign=theme-parks-lodging&campaign=PL__jurapark-krasiej-w",
+          "image": null
+        }
+      ]
+    },
+    "PL__ba-towski-kompleks-turystyczny": {
+      "hotels": []
+    },
+    "PL__mandoria-miasto-przyg-d": {
+      "hotels": []
+    },
+    "PL__suntago-park-of-poland": {
+      "hotels": []
+    },
+    "PL__julinek-park": {
+      "hotels": []
+    },
+    "PL__dzielnica-filmowa": {
+      "hotels": []
+    },
+    "PL__farma-iluzji": {
+      "hotels": [
+        {
+          "name": "Jakubowa Izba - Restauracja | Pokoje gościnne",
+          "ratingGoogle": 4.6,
+          "ratingDisplay10": 9.2,
+          "reviews": 8451,
+          "driveTextHe": "9 mins נסיעה מהפארק",
+          "distanceM": 7959,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=51.6753258&lng=21.8642098&campaign=theme-parks-lodging&campaign=PL__farma-iluzji",
+          "image": null
+        }
+      ]
+    },
+    "PL__magiczne-ogrody": {
+      "hotels": []
+    },
+    "PL__sady-klemensa": {
+      "hotels": []
+    },
+    "PL__majaland-gda-sk": {
+      "hotels": [
+        {
+          "name": "Radisson Blu Hotel, Gdansk",
+          "ratingGoogle": 4.5,
+          "ratingDisplay10": 9,
+          "reviews": 2116,
+          "driveTextHe": "15 mins נסיעה מהפארק",
+          "distanceM": 9103,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=54.3479056&lng=18.6546403&campaign=theme-parks-lodging&campaign=PL__majaland-gda-sk",
+          "image": null
+        }
+      ]
+    },
+    "PL__hossoland": {
+      "hotels": []
+    },
+    "PL__lunapark-sowi-ski": {
+      "hotels": [
+        {
+          "name": "Gwiazda Morza Resort SPA&SPORT",
+          "ratingGoogle": 4.6,
+          "ratingDisplay10": 9.2,
+          "reviews": 3020,
+          "driveTextHe": "3 דקות נסיעה מהפארק",
+          "distanceM": 1028,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=54.7981784&lng=18.4076917&campaign=theme-parks-lodging&campaign=PL__lunapark-sowi-ski",
+          "image": null
+        }
+      ]
+    },
+    "PL__deli-park": {
+      "hotels": [
+        {
+          "name": "Hotel Włoski",
+          "ratingGoogle": 4.7,
+          "ratingDisplay10": 9.4,
+          "reviews": 2000,
+          "driveTextHe": "23 דקות נסיעה מהפארק",
+          "distanceM": 8319,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=52.39754869999999&lng=16.9263935&campaign=theme-parks-lodging&campaign=PL__deli-park",
+          "image": null
+        }
+      ]
+    },
+    "PL__majaland-kownaty": {
+      "hotels": []
+    },
+    "AT__familypark": {
+      "hotels": [
+        {
+          "name": "Seehotel Rust",
+          "ratingGoogle": 4.3,
+          "ratingDisplay10": 8.6,
+          "reviews": 1575,
+          "driveTextHe": "13 mins נסיעה מהפארק",
+          "distanceM": 8578,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=47.8021033&lng=16.6782042&campaign=theme-parks-lodging&campaign=AT__familypark",
+          "image": null
+        }
+      ]
+    },
+    "AT__prater-wurstelprater": {
+      "hotels": [
+        {
+          "name": "Boutiquehotel Stadthalle by Cocoon",
+          "ratingGoogle": 4.8,
+          "ratingDisplay10": 9.6,
+          "reviews": 1317,
+          "driveTextHe": "22 דקות נסיעה מהפארק",
+          "distanceM": 7525,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=48.19921710000001&lng=16.333811&campaign=theme-parks-lodging&campaign=AT__prater-wurstelprater",
+          "image": null
+        }
+      ]
+    },
+    "AT__area-47": {
+      "hotels": []
+    },
+    "AT__fantasiana-erlebnispark-stra-walchen": {
+      "hotels": []
+    },
+    "CZ__kr-lovstv-lesa-kingdom-of-the-forest": {
+      "hotels": [
+        {
+          "name": "Wellness Hotel Frymburk",
+          "ratingGoogle": 4,
+          "ratingDisplay10": 8,
+          "reviews": 2274,
+          "driveTextHe": "10 דקות נסיעה מהפארק",
+          "distanceM": 8766,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=48.6675092&lng=14.1640414&campaign=theme-parks-lodging&campaign=CZ__kr-lovstv-lesa-kingdom-of-the-forest",
+          "image": null
+        }
+      ]
+    },
+    "IT__gardaland-resort": {
+      "hotels": [
+        {
+          "name": "Hotel Parchi del Garda",
+          "ratingGoogle": 4.3,
+          "ratingDisplay10": 8.6,
+          "reviews": 3412,
+          "driveTextHe": "3 דקות נסיעה מהפארק",
+          "distanceM": 1438,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=45.4619654&lng=10.7195691&campaign=theme-parks-lodging&campaign=IT__gardaland-resort",
+          "image": null
+        }
+      ]
+    },
+    "IT__movieland-studios": {
+      "hotels": [
+        {
+          "name": "Gardaland Hotel",
+          "ratingGoogle": 4.5,
+          "ratingDisplay10": 9,
+          "reviews": 6379,
+          "driveTextHe": "6 mins נסיעה מהפארק",
+          "distanceM": 4546,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=45.4430018&lng=10.7263723&campaign=theme-parks-lodging&campaign=IT__movieland-studios",
+          "image": null
+        }
+      ]
+    },
+    "IT__canevaworld-caneva-aquapark": {
+      "hotels": [
+        {
+          "name": "Gardaland Hotel",
+          "ratingGoogle": 4.5,
+          "ratingDisplay10": 9,
+          "reviews": 6379,
+          "driveTextHe": "7 דקות נסיעה מהפארק",
+          "distanceM": 4391,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=45.4430018&lng=10.7263723&campaign=theme-parks-lodging&campaign=IT__canevaworld-caneva-aquapark",
+          "image": null
+        }
+      ]
+    },
+    "IT__leolandia": {
+      "hotels": [
+        {
+          "name": "Villa Appiani",
+          "ratingGoogle": 4.5,
+          "ratingDisplay10": 9,
+          "reviews": 1043,
+          "driveTextHe": "9 דקות נסיעה מהפארק",
+          "distanceM": 5241,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=45.6096649&lng=9.522089899999997&campaign=theme-parks-lodging&campaign=IT__leolandia",
+          "image": null
+        }
+      ]
+    },
+    "IT__mirabilandia": {
+      "hotels": []
+    },
+    "IT__magicland": {
+      "hotels": [
+        {
+          "name": "Fashion Hotel",
+          "ratingGoogle": 4,
+          "ratingDisplay10": 8,
+          "reviews": 1785,
+          "driveTextHe": "1 דקות נסיעה מהפארק",
+          "distanceM": 480,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=41.7685547&lng=12.9211282&campaign=theme-parks-lodging&campaign=IT__magicland",
+          "image": null
+        }
+      ]
+    },
+    "DE__europa-park": {
+      "hotels": [
+        {
+          "name": "Hotel-Restaurant Mythos",
+          "ratingGoogle": 4.4,
+          "ratingDisplay10": 8.8,
+          "reviews": 1368,
+          "driveTextHe": "2 דקות נסיעה מהפארק",
+          "distanceM": 364,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=48.2642416&lng=7.725595999999998&campaign=theme-parks-lodging&campaign=DE__europa-park",
+          "image": null
+        }
+      ]
+    },
+    "DE__phantasialand": {
+      "hotels": [
+        {
+          "name": "Hotel Matamba",
+          "ratingGoogle": 4.5,
+          "ratingDisplay10": 9,
+          "reviews": 2316,
+          "driveTextHe": "2 דקות נסיעה מהפארק",
+          "distanceM": 337,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=50.79822360000001&lng=6.8803728&campaign=theme-parks-lodging&campaign=DE__phantasialand",
+          "image": null
+        }
+      ]
+    },
+    "DE__legoland-deutschland-resort": {
+      "hotels": [
+        {
+          "name": "Vienna House Easy Günzburg",
+          "ratingGoogle": 4.5,
+          "ratingDisplay10": 9,
+          "reviews": 1514,
+          "driveTextHe": "8 דקות נסיעה מהפארק",
+          "distanceM": 4202,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=48.4538301&lng=10.2779558&campaign=theme-parks-lodging&campaign=DE__legoland-deutschland-resort",
+          "image": null
+        }
+      ]
+    },
+    "DE__heide-park-resort": {
+      "hotels": [
+        {
+          "name": "Camping Auf dem Simpel",
+          "ratingGoogle": 4.6,
+          "ratingDisplay10": 9.2,
+          "reviews": 2377,
+          "driveTextHe": "8 דקות נסיעה מהפארק",
+          "distanceM": 6961,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=53.0240836&lng=9.8586969&campaign=theme-parks-lodging&campaign=DE__heide-park-resort",
+          "image": null
+        }
+      ]
+    },
+    "DE__hansa-park": {
+      "hotels": []
+    },
+    "DE__tripsdrill": {
+      "hotels": []
+    },
+    "DE__bayern-park": {
+      "hotels": [
+        {
+          "name": "Schlappinger Hof",
+          "ratingGoogle": 4.6,
+          "ratingDisplay10": 9.2,
+          "reviews": 1101,
+          "driveTextHe": "12 דקות נסיעה מהפארק",
+          "distanceM": 9750,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=48.5713082&lng=12.6282837&campaign=theme-parks-lodging&campaign=DE__bayern-park",
+          "image": null
+        }
+      ]
+    },
+    "DE__holiday-park": {
+      "hotels": []
+    },
+    "DE__movie-park-germany": {
+      "hotels": [
+        {
+          "name": "Hotel I Restaurant I Biergarten Beisenbusch",
+          "ratingGoogle": 4.5,
+          "ratingDisplay10": 9,
+          "reviews": 1415,
+          "driveTextHe": "4 mins נסיעה מהפארק",
+          "distanceM": 2794,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=51.59957370000001&lng=6.9627454&campaign=theme-parks-lodging&campaign=DE__movie-park-germany",
+          "image": null
+        }
+      ]
+    },
+    "NL__efteling": {
+      "hotels": []
+    },
+    "NL__walibi-holland": {
+      "hotels": [
+        {
+          "name": "Golfclub Dorhout Mees",
+          "ratingGoogle": 4.4,
+          "ratingDisplay10": 8.8,
+          "reviews": 1651,
+          "driveTextHe": "10 דקות נסיעה מהפארק",
+          "distanceM": 8226,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=52.41142620000001&lng=5.676497500000001&campaign=theme-parks-lodging&campaign=NL__walibi-holland",
+          "image": null
+        }
+      ]
+    },
+    "NL__duinrell": {
+      "hotels": [
+        {
+          "name": "Van der Valk Hotel Den Haag - Wassenaar",
+          "ratingGoogle": 4.3,
+          "ratingDisplay10": 8.6,
+          "reviews": 3972,
+          "driveTextHe": "12 דקות נסיעה מהפארק",
+          "distanceM": 7769,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=52.1049303&lng=4.3605861&campaign=theme-parks-lodging&campaign=NL__duinrell",
+          "image": null
+        }
+      ]
+    },
+    "NL__toverland": {
+      "hotels": [
+        {
+          "name": "De Maasparel - Hotel & Restaurant",
+          "ratingGoogle": 4.3,
+          "ratingDisplay10": 8.6,
+          "reviews": 1055,
+          "driveTextHe": "11 דקות נסיעה מהפארק",
+          "distanceM": 8235,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=51.47355559999999&lng=6.1796473&campaign=theme-parks-lodging&campaign=NL__toverland",
+          "image": null
+        }
+      ]
+    },
+    "NL__julianatoren": {
+      "hotels": [
+        {
+          "name": "Van der Valk Hotel Apeldoorn - De Cantharel",
+          "ratingGoogle": 4.3,
+          "ratingDisplay10": 8.6,
+          "reviews": 7083,
+          "driveTextHe": "12 דקות נסיעה מהפארק",
+          "distanceM": 7080,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=52.1776063&lng=5.9114589&campaign=theme-parks-lodging&campaign=NL__julianatoren",
+          "image": null
+        }
+      ]
+    },
+    "NL__slagharen": {
+      "hotels": [
+        {
+          "name": "PonyparkCity",
+          "ratingGoogle": 4.5,
+          "ratingDisplay10": 9,
+          "reviews": 2426,
+          "driveTextHe": "8 דקות נסיעה מהפארק",
+          "distanceM": 7904,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=52.5915039&lng=6.5992295&campaign=theme-parks-lodging&campaign=NL__slagharen",
+          "image": null
+        }
+      ]
+    },
+    "FR__disneyland-paris": {
+      "hotels": [
+        {
+          "name": "Hotel l'Elysee Val d'Europe",
+          "ratingGoogle": 4.6,
+          "ratingDisplay10": 9.2,
+          "reviews": 3623,
+          "driveTextHe": "7 דקות נסיעה מהפארק",
+          "distanceM": 2272,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=48.85558770000001&lng=2.775725599999999&campaign=theme-parks-lodging&campaign=FR__disneyland-paris",
+          "image": null
+        }
+      ]
+    },
+    "FR__parc-ast-rix": {
+      "hotels": [
+        {
+          "name": "Hôtel des Trois Hiboux",
+          "ratingGoogle": 4.5,
+          "ratingDisplay10": 9,
+          "reviews": 3566,
+          "driveTextHe": "7 mins נסיעה מהפארק",
+          "distanceM": 2652,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=49.1297505&lng=2.571310699999999&campaign=theme-parks-lodging&campaign=FR__parc-ast-rix",
+          "image": null
+        }
+      ]
+    },
+    "FR__puy-du-fou": {
+      "hotels": []
+    },
+    "FR__futuroscope": {
+      "hotels": [
+        {
+          "name": "Château le Clos de la Ribaudière",
+          "ratingGoogle": 4.5,
+          "ratingDisplay10": 9,
+          "reviews": 1579,
+          "driveTextHe": "9 דקות נסיעה מהפארק",
+          "distanceM": 4666,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=46.651&lng=0.3766436&campaign=theme-parks-lodging&campaign=FR__futuroscope",
+          "image": null
+        }
+      ]
+    },
+    "FR__nigloland": {
+      "hotels": []
+    },
+    "FR__walibi-rh-ne-alpes": {
+      "hotels": []
+    },
+    "FR__parc-spirou-provence": {
+      "hotels": []
+    },
+    "ES__portaventura-world-ferrari-land": {
+      "hotels": [
+        {
+          "name": "Estival Centurión Playa Sup.",
+          "ratingGoogle": 4.5,
+          "ratingDisplay10": 9,
+          "reviews": 2756,
+          "driveTextHe": "15 דקות נסיעה מהפארק",
+          "distanceM": 8378,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=41.0676196&lng=1.0918633&campaign=theme-parks-lodging&campaign=ES__portaventura-world-ferrari-land",
+          "image": null
+        }
+      ]
+    },
+    "ES__parque-warner-madrid": {
+      "hotels": []
+    },
+    "GB__alton-towers": {
+      "hotels": [
+        {
+          "name": "Splash Landings Hotel",
+          "ratingGoogle": 4.1,
+          "ratingDisplay10": 8.2,
+          "reviews": 2489,
+          "driveTextHe": "2 דקות נסיעה מהפארק",
+          "distanceM": 380,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=52.985054&lng=-1.8759302&campaign=theme-parks-lodging&campaign=GB__alton-towers",
+          "image": null
+        }
+      ]
+    },
+    "GB__thorpe-park": {
+      "hotels": [
+        {
+          "name": "The Crown (Hotel)",
+          "ratingGoogle": 4.2,
+          "ratingDisplay10": 8.4,
+          "reviews": 1221,
+          "driveTextHe": "8 דקות נסיעה מהפארק",
+          "distanceM": 4116,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=51.3921089&lng=-0.5028439&campaign=theme-parks-lodging&campaign=GB__thorpe-park",
+          "image": null
+        }
+      ]
+    },
+    "GB__legoland-windsor": {
+      "hotels": [
+        {
+          "name": "Sir Christopher Wren Hotel",
+          "ratingGoogle": 4.3,
+          "ratingDisplay10": 8.6,
+          "reviews": 2152,
+          "driveTextHe": "8 דקות נסיעה מהפארק",
+          "distanceM": 2961,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=51.4852946&lng=-0.6080171999999999&campaign=theme-parks-lodging&campaign=GB__legoland-windsor",
+          "image": null
+        }
+      ]
+    },
+    "GB__chessington-world-of-adventures": {
+      "hotels": [
+        {
+          "name": "Woodlands Park Hotel",
+          "ratingGoogle": 4.4,
+          "ratingDisplay10": 8.8,
+          "reviews": 1033,
+          "driveTextHe": "11 דקות נסיעה מהפארק",
+          "distanceM": 7278,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=51.3166497&lng=-0.3627903&campaign=theme-parks-lodging&campaign=GB__chessington-world-of-adventures",
+          "image": null
+        }
+      ]
+    },
+    "BE__plopsaland-de-panne": {
+      "hotels": []
+    },
+    "BE__walibi-belgium": {
+      "hotels": [
+        {
+          "name": "ibis Wavre Brussels East",
+          "ratingGoogle": 4.3,
+          "ratingDisplay10": 8.6,
+          "reviews": 1128,
+          "driveTextHe": "3 דקות נסיעה מהפארק",
+          "distanceM": 1526,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=50.7087184&lng=4.608728200000001&campaign=theme-parks-lodging&campaign=BE__walibi-belgium",
+          "image": null
+        }
+      ]
+    },
+    "BE__bobbejaanland": {
+      "hotels": []
+    },
+    "SE__liseberg": {
+      "hotels": [
+        {
+          "name": "Hotel Royal",
+          "ratingGoogle": 4.6,
+          "ratingDisplay10": 9.2,
+          "reviews": 1107,
+          "driveTextHe": "8 דקות נסיעה מהפארק",
+          "distanceM": 2999,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=57.70637599999999&lng=11.97226&campaign=theme-parks-lodging&campaign=SE__liseberg",
+          "image": null
+        }
+      ]
+    },
+    "SE__gr-na-lund": {
+      "hotels": [
+        {
+          "name": "Grand Hôtel",
+          "ratingGoogle": 4.6,
+          "ratingDisplay10": 9.2,
+          "reviews": 4243,
+          "driveTextHe": "12 mins נסיעה מהפארק",
+          "distanceM": 3404,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=59.3297258&lng=18.07571339999999&campaign=theme-parks-lodging&campaign=SE__gr-na-lund",
+          "image": null
+        }
+      ]
+    },
+    "NO__tusenfryd": {
+      "hotels": []
+    },
+    "DK__tivoli-gardens": {
+      "hotels": [
+        {
+          "name": "Hotel D'Angleterre",
+          "ratingGoogle": 4.7,
+          "ratingDisplay10": 9.4,
+          "reviews": 1894,
+          "driveTextHe": "9 דקות נסיעה מהפארק",
+          "distanceM": 2821,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=55.68060519999999&lng=12.5846997&campaign=theme-parks-lodging&campaign=DK__tivoli-gardens",
+          "image": null
+        }
+      ]
+    },
+    "DK__bakken": {
+      "hotels": []
+    },
+    "PT__zoomarine-algarve": {
+      "hotels": [
+        {
+          "name": "Falésia Hotel",
+          "ratingGoogle": 4.7,
+          "ratingDisplay10": 9.4,
+          "reviews": 1659,
+          "driveTextHe": "3 דקות נסיעה מהפארק",
+          "distanceM": 775,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=37.0951581&lng=-8.175540800000002&campaign=theme-parks-lodging&campaign=PT__zoomarine-algarve",
+          "image": null
+        }
+      ]
+    },
+    "PT__aquashow-park-hotel": {
+      "hotels": [
+        {
+          "name": "Tivoli Marina Vilamoura Algarve Resort",
+          "ratingGoogle": 4.6,
+          "ratingDisplay10": 9.2,
+          "reviews": 3877,
+          "driveTextHe": "6 דקות נסיעה מהפארק",
+          "distanceM": 2549,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=37.074277&lng=-8.1198056&campaign=theme-parks-lodging&campaign=PT__aquashow-park-hotel",
+          "image": null
+        }
+      ]
+    },
+    "GR__allou-fun-park": {
+      "hotels": [
+        {
+          "name": "Hotel Grande Bretagne, a Luxury Collection Hotel",
+          "ratingGoogle": 4.8,
+          "ratingDisplay10": 9.6,
+          "reviews": 6623,
+          "driveTextHe": "17 דקות נסיעה מהפארק",
+          "distanceM": 5164,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=37.976178&lng=23.7353123&campaign=theme-parks-lodging&campaign=GR__allou-fun-park",
+          "image": null
+        }
+      ]
+    },
+    "CH__conny-land": {
+      "hotels": []
+    },
+    "CH__swiss-vapeur-parc": {
+      "hotels": [
+        {
+          "name": "Grand Hotel Suisse Majestic, Autograph Collection",
+          "ratingGoogle": 4.4,
+          "ratingDisplay10": 8.8,
+          "reviews": 1797,
+          "driveTextHe": "17 mins נסיעה מהפארק",
+          "distanceM": 9816,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=46.4358971&lng=6.909875&campaign=theme-parks-lodging&campaign=CH__swiss-vapeur-parc",
+          "image": null
+        }
+      ]
+    },
+    "SK__donovalkovo": {
+      "hotels": []
+    },
+    "SK__habakuky": {
+      "hotels": []
+    },
+    "HU__zobori-adventure-park": {
+      "hotels": [
+        {
+          "name": "Mala Garden",
+          "ratingGoogle": 4.7,
+          "ratingDisplay10": 9.4,
+          "reviews": 3715,
+          "driveTextHe": "3 mins נסיעה מהפארק",
+          "distanceM": 1572,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=46.913869&lng=18.0619299&campaign=theme-parks-lodging&campaign=HU__zobori-adventure-park",
+          "image": null
+        }
+      ]
+    },
+    "FI__linnanm-ki": {
+      "hotels": [
+        {
+          "name": "Hilton Helsinki Kalastajatorppa",
+          "ratingGoogle": 4.4,
+          "ratingDisplay10": 8.8,
+          "reviews": 2481,
+          "driveTextHe": "13 דקות נסיעה מהפארק",
+          "distanceM": 4724,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=60.19251249999999&lng=24.8731381&campaign=theme-parks-lodging&campaign=FI__linnanm-ki",
+          "image": null
+        }
+      ]
+    },
+    "FI__s-rk-nniemi": {
+      "hotels": [
+        {
+          "name": "Original Sokos Hotel Ilves",
+          "ratingGoogle": 4.3,
+          "ratingDisplay10": 8.6,
+          "reviews": 3760,
+          "driveTextHe": "8 דקות נסיעה מהפארק",
+          "distanceM": 2325,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=61.4962457&lng=23.7665689&campaign=theme-parks-lodging&campaign=FI__s-rk-nniemi",
+          "image": null
+        }
+      ]
+    },
+    "RO__salina-turda": {
+      "hotels": [
+        {
+          "name": "SunGarden Hotel",
+          "ratingGoogle": 4.2,
+          "ratingDisplay10": 8.4,
+          "reviews": 1006,
+          "driveTextHe": "10 mins נסיעה מהפארק",
+          "distanceM": 5847,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=46.58583609999999&lng=23.7595565&campaign=theme-parks-lodging&campaign=RO__salina-turda",
+          "image": null
+        }
+      ]
+    },
+    "RO__divertiland-water-park": {
+      "hotels": [
+        {
+          "name": "Yesterday",
+          "ratingGoogle": 4,
+          "ratingDisplay10": 8,
+          "reviews": 1359,
+          "driveTextHe": "19 דקות נסיעה מהפארק",
+          "distanceM": 8772,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=44.4416881&lng=26.059107&campaign=theme-parks-lodging&campaign=RO__divertiland-water-park",
+          "image": null
+        }
+      ]
+    },
+    "HR__istralandia": {
+      "hotels": [
+        {
+          "name": "Aminess Maestral Hotel",
+          "ratingGoogle": 4.5,
+          "ratingDisplay10": 9,
+          "reviews": 3397,
+          "driveTextHe": "7 דקות נסיעה מהפארק",
+          "distanceM": 5776,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=45.3163908&lng=13.5730555&campaign=theme-parks-lodging&campaign=HR__istralandia",
+          "image": null
+        }
+      ]
+    },
+    "IE__emerald-park": {
+      "hotels": [
+        {
+          "name": "Pillo Hotel Ashbourne",
+          "ratingGoogle": 4.1,
+          "ratingDisplay10": 8.2,
+          "reviews": 2453,
+          "driveTextHe": "8 דקות נסיעה מהפארק",
+          "distanceM": 3374,
+          "stay22Url": "https://www.stay22.com/embed/gm?lmaID=69c0491c51844e7588a7882e&lat=53.526063&lng=-6.413903&campaign=theme-parks-lodging&campaign=IE__emerald-park",
+          "image": null
+        }
+      ]
+    }
+  }
+}
