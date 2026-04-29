@@ -339,7 +339,7 @@
     .mob-nav-community__title { display: block; font-family: 'Assistant', sans-serif; font-size: 16px; font-weight: 600; }
     .mob-nav-community__sub { display: block; font-family: 'Assistant', sans-serif; font-size: 12px; opacity: 0.85; margin-top: 1px; }
     @media (max-width: 900px) {
-      .nav__inner { flex-direction: row-reverse; }
+      .nav__inner { flex-direction: row; }
       .nav__links { display: none; }
       .nav__mobile-actions { display: flex; }
       .nav__hamburger { display: flex; }
@@ -2866,7 +2866,12 @@
     }
 
     function initMap() {
-      state.map = L.map('tpMap', { scrollWheelZoom: false });
+      var isCoarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+      state.map = L.map('tpMap', {
+        scrollWheelZoom: false,
+        zoomSnap: 0.5,
+        zoomDelta: 0.5
+      });
       L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         maxZoom: 19,
         attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
@@ -2883,7 +2888,12 @@
         state.cluster = L.layerGroup().addTo(state.map);
       }
       state.map.setView([50.5, 10.5], 4);
-      state.map.once('click', function () { state.map.scrollWheelZoom.enable(); });
+      if (!isCoarsePointer) {
+        state.map.once('click', function () { state.map.scrollWheelZoom.enable(); });
+      } else {
+        state.map.doubleClickZoom.disable();
+        state.map.boxZoom.disable();
+      }
       state.map.on('moveend', onMapViewportChange);
       state.map.on('zoomend', onMapViewportChange);
       var resetBtn = document.getElementById('tpMapResetHome');
