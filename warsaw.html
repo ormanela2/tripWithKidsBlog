@@ -84,7 +84,7 @@
       right: max(24px, env(safe-area-inset-right, 0px));
       bottom: 4px;
       height: var(--read-safe-h);
-      z-index: 5;
+      z-index: 1;
       pointer-events: none;
       direction: ltr;
     }
@@ -122,6 +122,9 @@
     }
     .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
     .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
+    @media (min-width: 901px) {
+      .nav__logo img { transform: translateY(-4px); }
+    }
     .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
     .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
     .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.02em; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
@@ -229,6 +232,26 @@
     .article-section { margin-bottom: 52px; }
     .article-section__title { font-size: clamp(20px, 2.5vw, 26px); color: var(--teal); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--sand-dark); display: flex; align-items: center; gap: 10px; }
     .article-section__title-icon { font-size: 24px; }
+    .wa-tp-embed { margin-top: 8px; }
+    .wa-tp-embed .article-section__title { justify-content: space-between; flex-wrap: wrap; row-gap: 10px; }
+    .wa-tp-embed__title-main { display: inline-flex; align-items: center; gap: 10px; }
+    .wa-tp-embed__cta {
+      display: inline-flex; align-items: center; justify-content: center; padding: 9px 14px;
+      border-radius: 999px; background: linear-gradient(135deg, var(--amber), #d68f35); color: #1f2937;
+      font-size: 14px; font-weight: 700; text-decoration: none; box-shadow: 0 6px 16px rgba(232, 160, 69, 0.26);
+      white-space: nowrap; transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .wa-tp-embed__cta:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(232, 160, 69, 0.32); }
+    .wa-tp-embed__intro { margin: -6px 0 14px; color: #4b5563; font-size: 15px; line-height: 1.75; max-width: 760px; }
+    .wa-tp-embed__frame { border-radius: 12px; overflow: hidden; border: 1px solid var(--sand-dark); box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08); background: #fff; }
+    .wa-tp-embed__frame iframe { display: block; width: 100%; height: min(880px, 86vh); min-height: 520px; border: 0; }
+    @media (max-width: 640px) {
+      .wa-tp-embed .article-section__title { align-items: flex-start; }
+      .wa-tp-embed__title-main { width: 100%; }
+      .wa-tp-embed__cta { width: 100%; min-height: 42px; }
+      .wa-tp-embed__intro { font-size: 14px; line-height: 1.65; margin-top: -2px; }
+      .wa-tp-embed__frame iframe { min-height: 420px; height: min(78vh, 620px); }
+    }
     .article-content p { margin-bottom: 16px; color: #444; line-height: 1.85; }
     .article-content p:last-child { margin-bottom: 0; }
     #map { height: 340px; width: 100%; }
@@ -519,7 +542,7 @@
     <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
     <div class="container nav__inner">
       <a href="services.html" class="nav__logo" aria-label="מתי טסים - עמוד ראשי">
-        <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+        <img src="logo.png" alt="מתי טסים" style="height:56px;width:auto;mix-blend-mode:multiply;">
       </a>
 
       <ul class="nav__links" role="menubar">
@@ -664,9 +687,10 @@
               <a href="#intro" class="toc__link"><span class="toc__num">1</span> למה וורשה עם ילדים?</a>
               <a href="#route-map" class="toc__link"><span class="toc__num">2</span> המסלול על המפה</a>
               <a href="#itinerary" class="toc__link"><span class="toc__num">3</span> מסלול יום-יום מומלץ</a>
-              <a href="#accommodation" class="toc__link"><span class="toc__num">4</span> המלצות לינה</a>
-              <a href="#airport-stay" class="toc__link"><span class="toc__num">5</span> המלצת לינה ליד שדה התעופה</a>
-              <a href="#logistics" class="toc__link"><span class="toc__num">6</span> טיפים לוגיסטיים</a>
+              <a href="#theme-parks-warsaw" class="toc__link"><span class="toc__num">4</span> פארקי שעשועים בפולין</a>
+              <a href="#accommodation" class="toc__link"><span class="toc__num">5</span> המלצות לינה</a>
+              <a href="#airport-stay" class="toc__link"><span class="toc__num">6</span> המלצת לינה ליד שדה התעופה</a>
+              <a href="#logistics" class="toc__link"><span class="toc__num">7</span> טיפים לוגיסטיים</a>
             </div>
           </div>
 
@@ -837,6 +861,17 @@
           <div style="border-radius:14px;overflow:hidden;height:clamp(160px,30vw,240px);margin-bottom:20px;">
             <img src="warsaw3.jpg" alt="פארק חבלים" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;">
           </div>
+          <div class="article-section wa-tp-embed" id="theme-parks-warsaw">
+            <h2 class="article-section__title">
+              <span class="wa-tp-embed__title-main"><span class="article-section__title-icon">🎢</span> פארקי שעשועים בפולין</span>
+              <a class="wa-tp-embed__cta" href="theme-parks.html?cc=PL" aria-label="פתיחת מדריך פארקי אירופה המלא" onclick="if(window.plausible){plausible('ThemeParks-CTA-Click',{props:{source:'warsaw-embed-title',country:'PL',target:'theme-parks'}});}">מדריך פארקי אירופה המלא</a>
+            </h2>
+            <p class="wa-tp-embed__intro">מפה אינטראקטיבית לפארקי השעשועים בפולין - מהאטרקציות של ורשה ועד הפארקים הגדולים בדרום המדינה. לחצו על הסימונים ותכננו את היום המתאים לכם.</p>
+            <div class="wa-tp-embed__frame">
+              <iframe src="theme-parks.html?cc=PL&embed=map" title="פארקי שעשועים בפולין — מפה אינטראקטיבית" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+
           <div class="article-section" id="accommodation">
             <h2 class="article-section__title"><span class="article-section__title-icon">🏨</span> המלצות לינה</h2>
             <p>בטיול הזה לנו במקום אחד לאורך כל השהות - נוח, מרווח ומתאים למשפחה עם ילדים. קרוב למסעדות טעימות, בתי קפה וסופרים.</p>

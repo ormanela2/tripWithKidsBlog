@@ -76,7 +76,7 @@
     .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
     .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
     /* Flight-path progress in header safe-zone: RTL fill + dynamic plane tilt. */
-    .read-progress { --read-safe-h: 10px; --read-bar-h: 5px; --read-plane-w: 20px; --read-plane-h: 20px; position: absolute; left: max(24px, env(safe-area-inset-left, 0px)); right: max(24px, env(safe-area-inset-right, 0px)); bottom: 4px; height: var(--read-safe-h); z-index: 5; pointer-events: none; direction: ltr; }
+    .read-progress { --read-safe-h: 10px; --read-bar-h: 5px; --read-plane-w: 20px; --read-plane-h: 20px; position: absolute; left: max(24px, env(safe-area-inset-left, 0px)); right: max(24px, env(safe-area-inset-right, 0px)); bottom: 4px; height: var(--read-safe-h); z-index: 1; pointer-events: none; direction: ltr; }
     .read-progress__inner { position: relative; height: 100%; overflow: visible; }
     .read-progress__track { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); height: var(--read-bar-h); border-radius: 999px; background: rgba(27, 67, 114, 0.12); }
     .read-progress__fill { position: absolute; top: 50%; transform: translate3d(0, -50%, 0) scaleX(0); transform-origin: right center; height: var(--read-bar-h); width: 100%; right: 0; left: auto; border-radius: 999px; background: linear-gradient(to left, rgba(27, 67, 114, 0.4) 0%, rgba(27, 67, 114, 1) 50%, rgba(230, 161, 92, 1) 100%); box-shadow: inset 0 0 5px rgba(100, 200, 255, 0.2); will-change: transform; z-index: 1; }
@@ -85,6 +85,9 @@
     @media (max-width: 900px) { .read-progress { --read-bar-h: 3px; --read-plane-w: 15px; --read-plane-h: 15px; left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); bottom: 3px; } .read-progress__track { background: rgba(27, 67, 114, 0.09); } .read-progress__fill { background: linear-gradient(to left, rgba(27, 67, 114, 0.28) 0%, rgba(27, 67, 114, 0.78) 50%, rgba(230, 161, 92, 0.78) 100%); } }
     .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
     .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
+    @media (min-width: 901px) {
+      .nav__logo img { transform: translateY(-4px); }
+    }
     .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
     .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
     .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Assistant',sans-serif; font-weight:300; font-size:15px; line-height:1.8; letter-spacing:0.02em; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
@@ -528,7 +531,7 @@
     <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
     <div class="container nav__inner">
       <a href="services.html" class="nav__logo" aria-label="מתי טסים - עמוד ראשי">
-        <img src="logo.png" alt="מתי טסים" style="height:70px;width:auto;mix-blend-mode:multiply;">
+        <img src="logo.png" alt="מתי טסים" style="height:56px;width:auto;mix-blend-mode:multiply;">
       </a>
 
       <ul class="nav__links" role="menubar">
