@@ -255,6 +255,20 @@
     .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.92; margin-bottom: 32px; max-width: 600px; line-height: 1.7; text-shadow: 0 1px 14px rgba(0,0,0,0.3); }
     .article-hero__meta { display: flex; flex-wrap: wrap; gap: 12px; }
     .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
+    .article-hero__badge--cta {
+      font-family: 'Heebo', sans-serif;
+      font-weight: 700;
+      background: #ffffff;
+      color: #1f5b43;
+      border-color: rgba(31,91,67,0.22);
+      box-shadow: 0 4px 14px 0 rgba(0,0,0,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .article-hero__badge--cta:hover, .article-hero__badge--cta:focus-visible {
+      background: #f4fbf7;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.24);
+    }
     .article-hero__actions { display: flex; flex-direction: column; gap: 14px; margin-top: 6px; align-items: flex-start; }
     .article-hero__actions .gtk-trigger { margin-top: 0; width: auto; max-width: 100%; box-sizing: border-box; justify-content: flex-start; }
     .article-hero__partner-lead { margin: 0; font-size: 13px; line-height: 1.45; opacity: 0.9; }
@@ -1512,6 +1526,7 @@
         <div class="article-hero__meta">
           <span class="article-hero__badge">🟢 קל עם ילדים</span>
           <span class="article-hero__badge">✈️ טיסה לווינה</span>
+          <a href="#austria-drive-bonus" class="article-hero__badge article-hero__badge--cta">משחקי דרך לאוסטריה 🚗</a>
         </div>
         <button type="button" class="gtk-trigger" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog">
           <span class="gtk-trigger__icon" aria-hidden="true">🧭</span>
@@ -1561,7 +1576,26 @@
           <p><strong>Festung Hohenwerfen</strong> - טירת וורפן היא אחת הטירות הדרמטיות ביותר שראינו, ממש על קרן סלע מעל העמק. מופע הנשרים הלייב בשעה 11:15 הוא חובה - הנשרים טסים מעל הראשים של הקהל בצורה מרהיבה. הילדים לא יכלו להפסיק לדבר על זה.</p>
           <p><strong>Salzbergwerk Berchtesgaden</strong> (מכרה מלח) - אחת החוויות הכי ייחודיות של הטיול. לובשים חליפה אפורה וגולשים על מגלשות עץ לתוך המכרה. ילדים פשוט מתים על זה, ומבוגרים גם כן.</p>
           <p><strong>פארק המים Wagrainis Grafenberg</strong> - ראינו צילום ולא האמנו עד שהגענו. פארק מים תלוי על ההר עם נוף לכל העמק. הילדים לא הסכימו לצאת. מגיעים עד 9:30 בבוקר כדי לתפוס מקומות טובים.</p>
-          <p><strong>ווינה</strong> ממתינה בסוף הטיול - עיר מלכותית עם מופע שטרודל בשונברון, פארק פארטר, מוזיאון הטבע והמדע, ו-LEOPARK שהילדים נוגעים בחיות. סיום מושלם לטיול.</p>
+          <p id="intro-view-start"><strong>ווינה</strong> ממתינה בסוף הטיול - עיר מלכותית עם מופע שטרודל בשונברון, פארק פארטר, מוזיאון הטבע והמדע, ו-LEOPARK שהילדים נוגעים בחיות. סיום מושלם לטיול.</p>
+
+          <aside id="austria-drive-bonus" style="scroll-margin-top:calc(var(--nav-height) + 16px);margin-top:22px;padding:20px 22px;background:linear-gradient(145deg,#fbfefd 0%,#eef8f5 48%,#fff9f0 100%);border:1px solid #b8dfd8;border-radius:18px;box-shadow:0 8px 28px rgba(26,107,114,0.12),0 1px 0 rgba(255,255,255,0.9) inset;">
+            <div style="display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:10px;">
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;color:#0f766e;background:rgba(20,184,166,0.12);border:1px solid rgba(20,184,166,0.35);padding:5px 11px;border-radius:999px;">🎁 בונוס למשפחות</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:#9a3412;background:rgba(251,146,60,0.15);border:1px solid rgba(234,88,12,0.28);padding:5px 11px;border-radius:999px;">בלי מסכים בנסיעה</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:#155c63;background:rgba(255,255,255,0.85);border:1px dashed rgba(21,92,99,0.35);padding:5px 11px;border-radius:999px;">חינם · מוכן תוך דקה</span>
+            </div>
+            <h3 style="font-family:var(--font-heading);font-size:clamp(19px,2.6vw,24px);color:#0d3d42;margin:0 0 8px;line-height:1.2;">משחקי דרך לאוסטריה - כיף שמלווה אתכם עד ליעד</h3>
+            <p style="margin:0 0 12px;font-size:15px;line-height:1.6;color:#374151;font-weight:500;">רוצים שהנסיעה תרגיש קצרה יותר והילדים (וגם המבוגרים) יישארו מעורבים? שילוב קלאסי של <strong>בינגו להדפסה לחלון הרכב</strong> ו<strong>טריוויה חכמה בעברית</strong> - עם עובדות קצרות אחרי כל שאלה.</p>
+            <ul style="margin:0 0 16px;padding:12px 14px 12px 0;list-style:none;border-inline-start:3px solid var(--amber);background:rgba(255,251,235,0.65);border-radius:0 12px 12px 0;line-height:1.55;">
+              <li style="margin-bottom:8px;padding-inline-start:8px;font-size:14px;color:#3d5456;"><strong style="color:#134f55;">בינגו PDF:</strong> לחלק כרטיסים - כל הנוסעים מחפשים מהחלון מה מופיע על הלוח.</li>
+              <li style="margin:0;padding-inline-start:8px;font-size:14px;color:#3d5456;"><strong style="color:#134f55;">טריוויה באתר:</strong> מסלול לילדים או להורים, ניקוד, רמזים לנסיעה ועובדות קצרות אחרי כל תשובה.</li>
+            </ul>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:stretch;">
+              <a href="MatayTasim-Austria-Bingo.pdf" download="MatayTasim-Austria-Bingo.pdf" target="_blank" rel="noopener noreferrer" onclick="if(window.plausible){plausible('Austria-Bingo-PDF-Download',{props:{page:'austria',source:'austria-drive-bonus',file:'MatayTasim-Austria-Bingo.pdf'}});}" style="flex:1 1 200px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(180deg,#fbbf24 0%,var(--amber) 100%);color:#1c1917;font-weight:800;font-size:14px;padding:14px 22px;border-radius:999px;text-decoration:none;box-shadow:0 6px 20px rgba(232,160,69,0.45);border:1px solid rgba(180,83,9,0.25);">📄 הורידו בינגו (PDF)</a>
+              <a href="austria_trivia_game.html" onclick="if(window.plausible){plausible('Austria-Trivia-Game-Click',{props:{page:'austria',source:'austria-drive-bonus',target:'austria_trivia_game'}});}" style="flex:1 1 200px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(180deg,#1a6b72 0%,var(--teal) 100%);color:#fff;font-weight:800;font-size:14px;padding:14px 22px;border-radius:999px;text-decoration:none;box-shadow:0 6px 22px rgba(26,107,114,0.38);border:1px solid rgba(15,77,82,0.35);">🧠 טריוויה אינטראקטיבית - שחקו עכשיו</a>
+            </div>
+            <p style="margin:12px 0 0;font-size:12.5px;line-height:1.45;color:#64748b;text-align:center;">מומלץ להוריד את ה-PDF לפני יציאה לדרך · הקובץ נשמר בשם <strong style="color:#475569;">MatayTasim-Austria-Bingo.pdf</strong></p>
+          </aside>
         </div>
 
         <!-- Car rental promo -->
