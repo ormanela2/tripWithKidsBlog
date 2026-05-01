@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>משחק טריוויה אוסטריה בעברית | משפחות ונסיעה בדרך | מתי טסים</title>
-<meta name="description" content="משחק טריוויה אינטראקטיבי בעברית על אוסטריה: מסלול לילדים או להורים, עובדות קצרות, קריאת שאלות בקול וניקוד - מושלם למשפחה בנסיעה (לנוסעים בלבד). חינם באתר מתי טסים.">
+<meta name="description" content="משחק טריוויה אינטראקטיבי בעברית על אוסטריה: מסלול לילדים או להורים, עובדות קצרות וניקוד - מושלם למשפחה בנסיעה (לנוסעים בלבד). חינם באתר מתי טסים.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="מתי טסים">
 <meta name="keywords" content="טריוויה אוסטריה, משחק דרך, טיול לאוסטריה עם ילדים, משחק משפחתי, וינה, זלצבורג, אטרקציות אוסטריה, מתי טסים">
@@ -35,7 +35,7 @@
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-  {"@type":"WebApplication","@id":"https://mataytasim.co.il/austria_trivia_game.html#app","name":"משחק טריוויה אוסטריה","description":"משחק טריוויה אינטראקטיבי בעברית על אוסטריה עם מסלול לילדים או להורים, עובדות וקריאה בקול - למשפחה בנסיעה.","url":"https://mataytasim.co.il/austria_trivia_game.html","applicationCategory":"GameApplication","operatingSystem":"Web browser","browserRequirements":"Requires JavaScript. מיועד לנוסעים בלבד בזמן נסיעה.","inLanguage":"he-IL","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"ILS"},"publisher":{"@id":"https://mataytasim.co.il/#organization"}},
+  {"@type":"WebApplication","@id":"https://mataytasim.co.il/austria_trivia_game.html#app","name":"משחק טריוויה אוסטריה","description":"משחק טריוויה אינטראקטיבי בעברית על אוסטריה עם מסלול לילדים או להורים ועובדות קצרות - למשפחה בנסיעה.","url":"https://mataytasim.co.il/austria_trivia_game.html","applicationCategory":"GameApplication","operatingSystem":"Web browser","browserRequirements":"Requires JavaScript. מיועד לנוסעים בלבד בזמן נסיעה.","inLanguage":"he-IL","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"ILS"},"publisher":{"@id":"https://mataytasim.co.il/#organization"}},
   {"@type":"Organization","@id":"https://mataytasim.co.il/#organization","name":"מתי טסים","url":"https://mataytasim.co.il","logo":{"@type":"ImageObject","url":"https://mataytasim.co.il/logo.png"}},
   {"@type":"BreadcrumbList","@id":"https://mataytasim.co.il/austria_trivia_game.html#breadcrumb","itemListElement":[
     {"@type":"ListItem","position":1,"name":"מתי טסים","item":"https://mataytasim.co.il/services.html"},
@@ -1084,11 +1084,6 @@ body.is-quiz-active .drive-toast {
     bottom: 28px;
   }
 }
-.quiz-head-toolbar {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 6px;
-}
 .quiz-streak-strip {
   margin-bottom: 6px;
   padding: 6px 8px;
@@ -1125,31 +1120,6 @@ body.is-quiz-active .quiz-streak-milestones {
 }
 body.is-quiz-active .quiz-streak-now {
   font-size: 10.5px;
-}
-.btn-speak {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 11px;
-  border-radius: 999px;
-  border: 1px solid rgba(22, 22, 31, 0.14);
-  background: rgba(255, 255, 255, 0.92);
-  font-family: inherit;
-  font-size: 11px;
-  font-weight: 800;
-  color: #2d5a63;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(22, 22, 31, 0.06);
-  transition: transform 0.12s ease, box-shadow 0.15s ease;
-}
-.btn-speak:active { transform: scale(0.97); }
-.btn-speak:hover {
-  border-color: rgba(45, 90, 99, 0.35);
-  box-shadow: 0 4px 12px rgba(22, 22, 31, 0.08);
-}
-body.is-quiz-active .btn-speak {
-  padding: 4px 9px;
-  font-size: 10px;
 }
 body.streak-burst-on::after {
   content: '✨ 🔥 ✨';
@@ -1221,7 +1191,6 @@ body.streak-burst-on::after {
         <ul>
           <li>🛡️ <strong>בטיחות:</strong> הנהג לא נוגע במסך ולא קובע תשובות - רק הנוסעים.</li>
           <li>🔄 <strong>משחק משפחתי:</strong> בכל שאלה מחליפים מי עונה בקול (ילדים ↔ מבוגרים).</li>
-          <li>🔊 <strong>בלי להצמיד עיניים:</strong> אחרי שמתחילים סיבוב יש כפתור «קרא בשקט» - השאלה נקראת בקול לכל הרכב.</li>
           <li>💬 <strong>שיחה:</strong> העובדות הקצרות מזמינות «וואו, לא ידעתי!» - מזכירות טיולים ומה תראו בדרך לאוסטריה.</li>
           <li>⭐ <strong>כיף בלי לחץ:</strong> רצף תשובות נכונות מקבל חגיגה קטנה; טעות פשוט מתחילה רצף חדש - בלי עונש.</li>
         </ul>
@@ -1401,8 +1370,6 @@ body.streak-burst-on::after {
   var toastTimer = null;
   /** Ignore answer clicks right after mount (mobile tap carries through from track picker). */
   var quizAnswersUnlockAt = 0;
-  /** Invalidates queued speech utterances when starting a new read-aloud. */
-  var speechSessionId = 0;
 
   var CHEER_OK = ['יאללה!', 'מצוין לנסיעה!', 'זה הכיוון!', 'חכמים!', 'איזה כיף בדרך!', 'טיסה חלקה של ידע!'];
   var CHEER_MISS = ['לא נורא - זו בדיוק הסיבה שיש עובדה!', 'נסיעה טובה זה גם ללמוד חדש!', 'בול פגיע בדרך - נמשיך!', 'טוב לנסוע עם טעות קטנה וחיוך גדול.', 'עוד רגע נמשיך - העיקר שיחה במכונית.'];
@@ -1457,10 +1424,6 @@ body.streak-burst-on::after {
       clearTimeout(advanceTimer);
       advanceTimer = null;
     }
-    if (window.speechSynthesis) {
-      speechSessionId++;
-      window.speechSynthesis.cancel();
-    }
   }
 
   function advanceDelayMs() {
@@ -1500,94 +1463,6 @@ body.streak-burst-on::after {
     if (idx !== 0) return;
     var arr = wasCorrect ? CHEER_OK : CHEER_MISS;
     showDriveToast(arr[Math.floor(Math.random() * arr.length)]);
-  }
-
-  function hebrewLetterName(letter) {
-    var map = { א: 'אלף', ב: 'בית', ג: 'גימל', ד: 'דלת' };
-    return map[letter] || letter;
-  }
-
-  function pickBestHebrewVoice() {
-    if (!window.speechSynthesis) return null;
-    var voices = window.speechSynthesis.getVoices();
-    if (!voices || !voices.length) return null;
-    var candidates = voices.filter(function (v) {
-      var lang = (v.lang || '').replace('_', '-').toLowerCase();
-      return lang.indexOf('he') === 0 || lang === 'iw-il' || lang === 'iw';
-    });
-    if (!candidates.length) return null;
-    function scoreVoice(v) {
-      var n = (v.name || '').toLowerCase();
-      var s = 0;
-      if (/premium|enhanced|natural|neural|wavenet/i.test(n)) s += 6;
-      if (/google|microsoft/i.test(n)) s += 3;
-      if (v.localService) s += 2;
-      if (/עברית|hebrew/i.test(n)) s += 2;
-      return s;
-    }
-    candidates.sort(function (a, b) { return scoreVoice(b) - scoreVoice(a); });
-    return candidates[0];
-  }
-
-  function speakQuestion(q) {
-    if (!window.speechSynthesis) return;
-    speechSessionId++;
-    window.speechSynthesis.cancel();
-    var session = speechSessionId;
-
-    var voice = pickBestHebrewVoice();
-
-    var parts = [];
-    parts.push('השאלה.');
-    parts.push(q.q);
-    parts.push('האפשרויות.');
-    q.opts.forEach(function (o) {
-      parts.push('אפשרות ' + hebrewLetterName(o.letter) + ', ' + o.text + '.');
-    });
-
-    function speakNext(i) {
-      if (session !== speechSessionId || i >= parts.length) return;
-      var u = new SpeechSynthesisUtterance(parts[i]);
-      u.lang = 'he-IL';
-      u.rate = 0.86;
-      u.pitch = 1;
-      if (voice) u.voice = voice;
-      u.onend = function () { speakNext(i + 1); };
-      u.onerror = function () { speakNext(i + 1); };
-      window.speechSynthesis.speak(u);
-    }
-
-    function run() {
-      if (fallbackVoicesTimer !== null) {
-        clearTimeout(fallbackVoicesTimer);
-        fallbackVoicesTimer = null;
-      }
-      voice = pickBestHebrewVoice();
-      speakNext(0);
-    }
-
-    var fallbackVoicesTimer = null;
-
-    if (window.speechSynthesis.getVoices().length) {
-      run();
-      return;
-    }
-    window.speechSynthesis.onvoiceschanged = function () {
-      window.speechSynthesis.onvoiceschanged = null;
-      if (fallbackVoicesTimer !== null) {
-        clearTimeout(fallbackVoicesTimer);
-        fallbackVoicesTimer = null;
-      }
-      if (session !== speechSessionId) return;
-      run();
-    };
-    fallbackVoicesTimer = setTimeout(function () {
-      fallbackVoicesTimer = null;
-      if (session !== speechSessionId) return;
-      window.speechSynthesis.onvoiceschanged = null;
-      run();
-    }, 900);
-    window.speechSynthesis.getVoices();
   }
 
   function resetToPicker() {
@@ -1677,9 +1552,6 @@ body.streak-burst-on::after {
       '<div class="quiz-card ' + q.cat + '" role="region" aria-labelledby="qq">' +
       '<div class="quiz-num">' + (idx + 1) + '</div>' +
       '<div class="quiz-card__head">' +
-      '<div class="quiz-head-toolbar">' +
-      '<button type="button" class="btn-speak" id="btnSpeakQ" title="קריאת השאלה והאפשרויות בקול (אלף, בית, גימל, דלת) לכל הנוסעים">🔊 קרא בשקט</button>' +
-      '</div>' +
       '<div class="quiz-streak-strip" role="status" aria-live="polite">' +
       '<span class="quiz-streak-milestones">3 נכונות ברצף - חגיגה קטנה · 5 ברצף - חגיגה גדולה</span>' +
       '<span class="quiz-streak-now is-zero" id="quizStreakNow">רצף נוכחי: עדיין לא</span>' +
@@ -1694,13 +1566,6 @@ body.streak-burst-on::after {
     document.getElementById('factEl').classList.remove('is-visible');
 
     syncQuizStreakBanner();
-
-    var btnSpeak = document.getElementById('btnSpeakQ');
-    if (btnSpeak) {
-      btnSpeak.addEventListener('click', function () {
-        speakQuestion(q);
-      });
-    }
 
     mount.querySelectorAll('.quiz-opt-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
