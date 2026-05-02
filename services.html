@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="תכנון טיול משפחתי מותאם אישית - מסלולים, לינה ואטרקציות לפי גיל הילדים. המדריך לטיול עם ילדים לחו״ל ושלוש חבילות ליווי.">
+  <meta name="description" content="תכנון טיול משפחתי לאירופה עם ילדים - סדר יום ברור ויותר ביטחון בכל יום. תוכנית יום-יום, לינה ואטרקציות לפי גילאים. מחיר שקוף: 890 ₪ עד 7 ימים + 100 ₪ לכל יום נוסף.">
   <title>מתי טסים | תכנון טיול משפחתי מותאם אישית</title>
   <link rel="canonical" href="https://mataytasim.co.il/">
 
@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mataytasim.co.il/">
   <meta property="og:title" content="מתי טסים - טיולים משפחתיים לאירופה">
-  <meta property="og:description" content="המדריך המלא לטיול עם ילדים לחו&quot;ל - מסלולים, יעדים וטיפים לתכנון משפחתי מוצלח.">
+  <meta property="og:description" content="תכנון טיול משפחתי לאירופה - פחות החלטות אינסופיות, יותר שקט בדרך. תוכנית מלאה לפי גילאים ותקציב. מתחילים בשאלון קצר.">
   <meta property="og:image" content="https://mataytasim.co.il/og-image.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
@@ -24,7 +24,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://mataytasim.co.il/">
   <meta name="twitter:title" content="מתי טסים - טיולים משפחתיים לאירופה">
-  <meta name="twitter:description" content="המדריך המלא לטיול עם ילדים לחו&quot;ל - מסלולים, יעדים וטיפים לתכנון משפחתי מוצלח.">
+  <meta name="twitter:description" content="תכנון טיול משפחתי לאירופה - סדר יום ברור, יותר ביטחון בכל יום. תוכנית לפי גילאים ותקציב. מתחילים בשאלון קצר.">
   <meta name="twitter:image" content="https://mataytasim.co.il/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -709,6 +709,96 @@
       margin-right: auto;
     }
 
+    /* Editorial intro column (value proposition lead-in) */
+    .value-prop__intro {
+      max-width: 640px;
+      margin-inline: auto;
+      text-align: right;
+      margin-bottom: 44px;
+    }
+
+    .value-prop__eyebrow {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--teal-dark);
+      margin: 0 0 12px;
+      opacity: 0.92;
+    }
+
+    .value-prop__intro .value-prop__headline {
+      text-align: right;
+      font-family: var(--font-heading);
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+    }
+
+    .value-prop__intro .value-prop__subheadline {
+      text-align: right;
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 22px;
+      max-width: none;
+      color: #555;
+    }
+
+    .value-prop__sell-points {
+      list-style: none;
+      padding: 18px 22px 18px 0;
+      margin: 0;
+      border-right: 3px solid rgba(26, 107, 114, 0.28);
+    }
+
+    .value-prop__sell-points li {
+      margin-bottom: 14px;
+      padding-right: 28px;
+      position: relative;
+      font-size: 16px;
+      line-height: 1.68;
+      color: #3d4545;
+    }
+
+    .value-prop__sell-points li:last-child {
+      margin-bottom: 0;
+    }
+
+    .value-prop__sell-points .value-prop__check {
+      position: absolute;
+      right: 0;
+      color: var(--teal);
+      font-weight: 800;
+    }
+
+    /* Editorial row: intro column + lifestyle photo (RTL: text right, image left) */
+    .value-prop__mag-row {
+      display: grid;
+      grid-template-columns: minmax(0, 640px) minmax(260px, 1fr);
+      gap: clamp(22px, 4vw, 40px);
+      align-items: center;
+      margin-bottom: 36px;
+    }
+
+    .value-prop__mag-row .value-prop__intro {
+      margin-bottom: 0;
+      margin-inline: 0;
+      max-width: none;
+    }
+
+    .value-prop__photo {
+      margin: 0;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 42px rgba(18, 77, 82, 0.13);
+      border: 1px solid rgba(232, 221, 196, 0.95);
+    }
+
+    .value-prop__photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     .value-prop__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -791,23 +881,39 @@
 
     /* Destinations teaser (value prop): flags + primary CTA */
     .value-prop-dest-block {
-      max-width: 700px;
+      max-width: 640px;
       margin: 0 auto 40px;
-      padding: 22px 18px 24px;
-      background: linear-gradient(165deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 237, 216, 0.45) 100%);
+      padding: 24px 22px 26px;
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.97) 0%, rgba(252, 249, 240, 0.72) 100%);
       border: 1px solid rgba(232, 221, 196, 0.85);
       border-radius: 20px;
-      box-shadow: 0 6px 28px rgba(44, 44, 44, 0.06);
+      box-shadow: 0 8px 32px rgba(44, 44, 44, 0.055);
     }
 
     .value-prop-dest-kicker {
-      text-align: center;
+      text-align: right;
+      margin: 0 0 18px;
+      line-height: 1.35;
+    }
+
+    .value-prop-dest-kicker__title {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: clamp(21px, 2.7vw, 28px);
+      color: var(--charcoal);
+      font-weight: 400;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+      line-height: 1.22;
+    }
+
+    .value-prop-dest-kicker__deck {
+      display: block;
       font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--teal-dark);
-      margin: 0 0 16px;
-      line-height: 1.45;
+      font-size: 15px;
+      font-weight: 500;
+      color: #5a6569;
+      line-height: 1.55;
     }
 
     .value-prop-flags {
@@ -846,41 +952,46 @@
     }
 
     .value-prop-hub-card {
-      margin-top: 16px;
-      padding: 16px;
-      border-radius: 16px;
-      background: #fff;
-      border: 1px solid rgba(26, 107, 114, 0.2);
-      box-shadow: 0 8px 22px rgba(18, 77, 82, 0.08);
+      margin-top: 22px;
+      padding: 20px 0 0;
+      border-radius: 0;
+      background: transparent;
+      border: none;
+      border-top: 1px dashed rgba(26, 107, 114, 0.28);
+      box-shadow: none;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
     }
 
     .value-prop-hub-card::before {
-      content: '';
-      position: absolute;
-      inset: 0 auto auto 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--teal) 0%, var(--amber) 100%);
+      display: none;
+    }
+
+    .value-prop-hub-eyebrow {
+      margin: 0 0 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: rgba(26, 107, 114, 0.78);
+      text-align: right;
     }
 
     .value-prop-hub-title {
-      margin: 0 0 6px;
-      text-align: center;
+      margin: 0 0 8px;
+      text-align: right;
       font-family: var(--font-heading);
-      font-size: 19px;
+      font-size: 18px;
       color: var(--teal-dark);
       letter-spacing: 0.01em;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .value-prop-hub-copy {
-      margin: 0 0 12px;
-      text-align: center;
+      margin: 0 0 14px;
+      text-align: right;
       font-size: 14px;
       color: #465566;
-      line-height: 1.55;
+      line-height: 1.62;
     }
 
     .value-prop-hub-link {
@@ -952,10 +1063,38 @@
       opacity: 0.95;
     }
 
+    @media (max-width: 900px) {
+      .value-prop__mag-row {
+        grid-template-columns: 1fr;
+        margin-bottom: 28px;
+        gap: 18px;
+      }
+
+      .value-prop__mag-row .value-prop__intro {
+        margin-bottom: 0;
+      }
+
+      .value-prop__photo {
+        max-width: min(340px, 88vw);
+        margin-inline: auto;
+        margin-top: 4px;
+        border-radius: 14px;
+        box-shadow: 0 8px 26px rgba(18, 77, 82, 0.1);
+      }
+    }
+
     @media (max-width: 540px) {
+      .value-prop__sell-points li {
+        font-size: 15px;
+      }
+
       .value-prop-dest-block {
         padding: 18px 14px 20px;
         margin-bottom: 32px;
+      }
+
+      .value-prop-dest-kicker__title {
+        font-size: 20px;
       }
 
       .value-prop-dest-link {
@@ -1215,8 +1354,52 @@
     }
 
     .pricing-carousel-host {
-      max-width: 860px;
+      max-width: 480px;
       margin: 0 auto;
+    }
+
+    .pricing-single-layout {
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .pricing-single-layout .pricing-card {
+      width: 100%;
+    }
+
+    .pricing-package-pricing {
+      text-align: center;
+      margin-bottom: 20px;
+      padding: 18px 16px 20px;
+      border-bottom: 1px solid rgba(232, 221, 196, 0.85);
+      background: linear-gradient(180deg, rgba(255, 249, 240, 0.95) 0%, rgba(255, 255, 255, 0.75) 100%);
+      border-radius: 16px;
+      border: 1px solid rgba(232, 160, 69, 0.22);
+    }
+
+    .pricing-package-pricing__main {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 5vw, 48px);
+      color: var(--amber-dark);
+      line-height: 1.1;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pricing-package-pricing__extra {
+      font-size: 15px;
+      color: var(--charcoal);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .pricing-package-pricing__fine {
+      font-size: 13px;
+      color: #6b6b6b;
+      margin: 14px 0 0;
+      line-height: 1.55;
+      font-weight: 500;
     }
 
     .pricing-stack {
@@ -1364,7 +1547,7 @@
         box-shadow: 0 8px 24px rgba(232, 160, 69, 0.18);
       }
 
-      /* הרפתקה → מצפן → אודיסיאה */
+      /* חבילת תכנון אחת (מובייל: כרטיס מלא רוחב) */
       .pricing-stack__card[data-stack-index="1"] { order: 0; }
       .pricing-stack__card[data-stack-index="0"] { order: 1; }
       .pricing-stack__card[data-stack-index="2"] { order: 2; }
@@ -1787,51 +1970,6 @@
       padding: 24px 0;
       text-align: center;
       font-size: 14px;
-    }
-
-    /* ========================================
-       WhatsApp FAB
-       ======================================== */
-    .whatsapp-fab {
-      position: fixed;
-      bottom: 24px;
-      left: 24px;
-      z-index: 999;
-      width: 60px;
-      height: 60px;
-      background: var(--green);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-      font-size: 28px;
-      box-shadow: 0 4px 16px rgba(74, 155, 111, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .whatsapp-fab:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 24px rgba(74, 155, 111, 0.5);
-    }
-
-    .whatsapp-fab:focus-visible {
-      outline: 3px solid var(--white);
-      outline-offset: 3px;
-    }
-
-    .whatsapp-fab__pulse {
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      border: 2px solid var(--green);
-      animation: fabPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes fabPulse {
-      0% { transform: scale(1); opacity: 0.6; }
-      50% { transform: scale(1.15); opacity: 0; }
-      100% { transform: scale(1); opacity: 0; }
     }
 
     .icon-wa {
@@ -2520,7 +2658,7 @@
           <a href="packages.html" class="nav__link nav__link--packages" role="menuitem">
             <svg class="nav__packages-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5L12 3l9 4.5-9 4.5-9-4.5z"/><path d="M3 12l9 4.5 9-4.5"/><path d="M3 16.5L12 21l9-4.5"/></svg>
             <span>חבילות תכנון</span>
-            <span class="nav__packages-badge">3 חבילות</span>
+            <span class="nav__packages-badge">חבילה אחת</span>
           </a>
         </li>
         <li role="none"><a href="about.html" class="nav__link" role="menuitem">אודות</a></li>
@@ -2570,7 +2708,7 @@
         </div>
         <div class="mob-nav-item__body">
           <span class="mob-nav-item__title">חבילות תכנון</span>
-          <span class="mob-nav-item__sub">3 מסלולי ליווי</span>
+          <span class="mob-nav-item__sub">תכנון מותאם משפחות</span>
         </div>
       </a>
       <div class="mob-nav-sep" role="separator"></div>
@@ -2895,12 +3033,13 @@
   <header class="page-hero" id="page-hero">
     <div class="page-hero__bg" aria-hidden="true"></div>
     <div class="page-hero__content">
-      <h1 class="page-hero__title">היי, אני אור - נשוי לנועה, אבא ל-3 ואני ממש אוהב לתכנן טיולים</h1>
-      <p class="page-hero__subtitle"><span style="display:block;font-family:'Secular One',sans-serif;font-size:clamp(18px,2.5vw,26px);color:#fff;opacity:1;margin-bottom:16px;line-height:1.4;">"אם יוצאים, מגיעים למקומות נפלאים"<span style="display:block;font-family:'Rubik',sans-serif;font-size:13px;opacity:0.7;margin-top:6px;font-weight:300;letter-spacing:1px;">- ד"ר סוס</span></span>עבורי, המקומות הנפלאים באמת נמצאים ברגעים שבין לבין: בחקירה מעוררת סקרנות, בכביש שנפתח לנוף עוצר נשימה ובמקומות הנחבאים שמוצאים רק כשמעזים לסטות מהמסלול המוכר. אלו הרגעים שהופכים טיול רגיל לחוויה של פעם בחיים. את "מתי טסים" הקמתי בשביל לרכז את כל המידע למשפחות עם ילדים תחת מטרייה אחת שבו תוכלו לקבל אינפורמציה על מסלולים, יעדים, מזג אוויר, אטרקציות ועוד</p>
+      <h1 class="page-hero__title">היי, אני אור - יותר שקט וביטחון בטיול משפחתי בחו"ל</h1>
+      <p class="page-hero__subtitle"><span style="display:block;font-family:'Secular One',sans-serif;font-size:clamp(17px,2.3vw,24px);color:#fff;opacity:1;margin-bottom:14px;line-height:1.45;">&quot;אם יוצאים, מגיעים למקומות נפלאים&quot;<span style="display:block;font-family:'Rubik',sans-serif;font-size:12px;opacity:0.72;margin-top:6px;font-weight:300;letter-spacing:1px;">- ד&quot;ר סוס</span></span><span style="display:block;margin-bottom:12px;line-height:1.75;opacity:0.96;">נשוי לנועה, אבא לשלושה, ומת על תכנון שעובד בחיים האמיתיים - לא רק על מפה יפה. ב&quot;מתי טסים&quot; אני נותן למשפחות כמוכם קצב ריאלי לילדים, לינה שנוחה גם אחרי יום בדרך, ומסלול שלא שובר את כולם.</span><span style="display:block;font-size:15px;opacity:0.9;line-height:1.68;">מה אתם מקבלים? לא רשימת &quot;חובה לראות&quot; בלי הקשר - אלא סדר יום ברור: פחות טאבים פתוחים, פחות ריב על מה עושים מחר, פחות תחושת &quot;פספסנו&quot; - ויותר ביטחון בכל יום בדרך.</span></p>
 
       <div class="page-hero__actions" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;margin-top:24px;width:100%;">
-        <a href="packages.html" class="btn btn--primary" style="box-shadow:0 4px 18px rgba(0,0,0,0.2);">תכנון טיול מותאם למשפחות</a>
-        <a href="about.html" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.3);color:white;border-radius:40px;padding:12px 28px;font-family:'Rubik',sans-serif;font-size:15px;font-weight:500;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">קראו עוד עליי ועל &quot;מתי טסים&quot; ↓</a>
+        <a href="questionnaire_form.html" class="btn btn--primary" style="box-shadow:0 4px 18px rgba(0,0,0,0.2);">שאלון קצר - מתחילים כאן</a>
+        <a href="#pricing-plan" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.3);color:white;border-radius:40px;padding:12px 28px;font-family:'Rubik',sans-serif;font-size:15px;font-weight:500;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">מה כלול וכמה זה עולה ↓</a>
+        <a href="about.html" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.22);color:white;border-radius:40px;padding:12px 22px;font-family:'Rubik',sans-serif;font-size:14px;font-weight:500;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.16)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">אודות מתי טסים</a>
       </div>
 
 
@@ -2910,12 +3049,28 @@
   <!-- ============ VALUE PROPOSITION ============ -->
   <section class="value-prop" id="services-content" aria-labelledby="vp-title">
     <div class="container">
-      <h2 class="value-prop__headline reveal" id="vp-title">לא עוד לילות של תכנון אינסופי</h2>
-      <p class="value-prop__subheadline reveal reveal-delay-1">מקבלים תכנית טיול מלאה לטיול עם ילדים - בדיוק לפי הילדים שלך, התקציב שלך, והתאריכים שלך.</p>
+      <div class="value-prop__mag-row">
+        <div class="value-prop__intro">
+          <p class="value-prop__eyebrow reveal">לפני שסוגרים תאריכים</p>
+          <h2 class="value-prop__headline reveal" id="vp-title">לא קונים תוכנית על הנייר - קונים שקט נפשי, סדר יום ברור וזמן חזרה למשפחה</h2>
+          <p class="value-prop__subheadline reveal reveal-delay-1">במקום מאות החלטות קטנות שמצטברות ללילות של תכנון - אני מרכז לכם הכול למסלול אחד שנוח לצאת איתו מהבית: קצב משפחתי שלא דוחף יותר מדי, נסיעות שנוח לספוג, ולינה במקום הנכון גם אחרי יום ארוך בדרך.</p>
+          <ul class="value-prop__sell-points reveal reveal-delay-1">
+            <li><span class="value-prop__check" aria-hidden="true">✓</span> חוסכים שעות של דפדוף וחיפושים בין אתרים וביקורות סותרות - ומקבלים סדר יום שכבר מתאים למשפחה שלכם</li>
+            <li><span class="value-prop__check" aria-hidden="true">✓</span> פחות טעויות יקרות: בסיס לינה חכם, מרחקים ריאליים, והפרטים שקל לפספס כשמתכננים לבד</li>
+            <li><span class="value-prop__check" aria-hidden="true">✓</span> תוכנית שנבנית סביב <strong>גילאי הילדים</strong> ו<strong>התקציב</strong> שלכם - לא תבנית גנרית שמתאימה לכולם</li>
+          </ul>
+        </div>
+        <figure class="value-prop__photo reveal reveal-delay-1">
+          <img src="services-value-family.webp" alt="משפחה מהלכת בשביל ביער בהרים - רגע שקט מהטיול" loading="lazy" decoding="async">
+        </figure>
+      </div>
 
       <!-- יעדים: דגלים + קישור למדריכים -->
       <div class="value-prop-dest-block reveal reveal-delay-1">
-        <p class="value-prop-dest-kicker">מסלולים, טיפים, המלצות על אטרקציות ועוד הרבה הפתעות טובות למשפחות</p>
+        <p class="value-prop-dest-kicker">
+          <span class="value-prop-dest-kicker__title">מצאו את היעד הבא שלכם</span>
+          <span class="value-prop-dest-kicker__deck">מדריכים חינמיים עם מסלולים, טיפים והמלצות שנכתבו עם ילדים ברקע</span>
+        </p>
         <div class="value-prop-flags" aria-hidden="true">
           <span class="value-prop-flag"><img src="https://flagcdn.com/sk.svg" width="28" height="19" alt="">סלובקיה</span>
           <span class="value-prop-flag"><img src="https://flagcdn.com/hu.svg" width="28" height="19" alt="">הונגריה</span>
@@ -2933,6 +3088,7 @@
             <span class="value-prop-dest-link__arrow" aria-hidden="true">←</span>
           </a>
           <div class="value-prop-hub-card">
+            <p class="value-prop-hub-eyebrow">מדור התכנון</p>
             <h3 class="value-prop-hub-title">טיפים וכלים לתכנון חכם</h3>
             <p class="value-prop-hub-copy">מרכז הידע שלנו לתכנון טיול: תקציב, מזג אוויר, מה לקחת לטיול, השוואת ספקי תקשורת וכל מה שצריך כדי לסגור טיול במקום אחד.</p>
             <a href="tips.html" class="value-prop-hub-link" aria-label="לכל מה שצריך לדעת לפני שטסים">
@@ -2945,151 +3101,64 @@
       </div>
 
       <!-- PACKAGES CTA (no scroll reveal - cards visible immediately) -->
-      <div class="pricing-packages-section" style="margin-top:32px;padding-top:40px;padding-bottom:56px;border-top:2px solid var(--sand-dark);border-bottom:2px solid var(--sand-dark);">
+      <div class="pricing-packages-section" id="pricing-plan" style="margin-top:32px;padding-top:40px;padding-bottom:56px;border-top:2px solid var(--sand-dark);border-bottom:2px solid var(--sand-dark);">
 
         <div style="text-align:center;margin-bottom:40px;">
-          <h3 style="font-family:var(--font-heading);font-size:clamp(26px,3vw,34px);color:var(--charcoal);margin-bottom:10px;">איך אני יכול לעזור לכם?</h3>
-          <p style="font-size:16px;color:#888;max-width:440px;margin:0 auto;line-height:1.6;">3 חבילות תכנון - כל אחת מותאמת לסגנון הטיול שלכם</p>
+          <h3 style="font-family:var(--font-heading);font-size:clamp(26px,3vw,34px);color:var(--charcoal);margin-bottom:10px;">איך זה עובד - וכמה זה עולה?</h3>
+          <p style="font-size:16px;color:#888;max-width:500px;margin:0 auto;line-height:1.65;"><strong style="color:#555;font-weight:700;">זה לא יוקרה - זה ארגון וביטחון</strong> לטיול שכבר השקעתם בו טיסות, לינה וחופשה. חבילת תכנון אחת, מלאה וברורה. המחיר המדויק בתוך המסגרת למטה.</p>
         </div>
 
         <div class="pricing-carousel-host">
-        <div class="pricing-stack">
-        <div class="pricing-stack__scene">
-          <div class="pricing-stack__hint pricing-stack__hint--above pricing-stack__hint--arrows-only" role="toolbar" aria-label="מעבר בין חבילות (מסך גדול בלבד)">
-            <button type="button" class="pricing-stack__dir" id="pricing-stack-prev" aria-label="חבילה קודמת">‹</button>
-            <span class="pricing-stack__intro-text" id="pricing-stack-intro">מעבר בין חבילות · לחיצה על החיצים</span>
-            <button type="button" class="pricing-stack__dir" id="pricing-stack-next" aria-label="חבילה הבאה">›</button>
+          <div class="pricing-single-layout">
+            <a href="questionnaire_form.html?package=har" class="pricing-card pricing-card--highlighted pricing-card--floating">
+              <div class="pricing-card__stack-blur">
+                <div class="pricing-card__header">
+                  <span class="pricing-card__icon">🗺️</span>
+                  <div class="pricing-card__name">תכנון משפחתי מלא</div>
+                  <div class="pricing-card__tagline">מסלול בקצב של משפחה, לינה נכונה לאזור, ואטרקציות שמתאימות לגיל - בלי להציף אתכם באופציות</div>
+                </div>
+                <div class="pricing-card__body">
+                  <div class="pricing-package-pricing">
+                    <div class="pricing-package-pricing__main">₪890</div>
+                    <div class="pricing-package-pricing__extra">לתכנון טיול עד <strong>7 ימים</strong></div>
+                    <div class="pricing-package-pricing__extra" style="margin-top:8px;">+ <strong>₪100</strong> לכל יום נוסף</div>
+                    <p class="pricing-package-pricing__fine">טיולים ארוכים או ליווי צמוד - אפשרות לפנייה ותמחור אישי.</p>
+                  </div>
+                  <ul class="pricing-card__features" style="list-style:none;padding:0;margin:0;">
+                    <li class="pricing-card__feature pricing-card__feature--included">
+                      <span class="pricing-card__check">✓</span>
+                      <span>המלצות למסלולים - מרחקים וקצב שמתאימים לילדים</span>
+                    </li>
+                    <li class="pricing-card__feature pricing-card__feature--included">
+                      <span class="pricing-card__check">✓</span>
+                      <span>המלצות לינה לפי תקציב</span>
+                    </li>
+                    <li class="pricing-card__feature pricing-card__feature--included">
+                      <span class="pricing-card__check">✓</span>
+                      <span>אטרקציות לפי גיל הילדים</span>
+                    </li>
+                    <li class="pricing-card__feature pricing-card__feature--included">
+                      <span class="pricing-card__check">✓</span>
+                      <span>גיליון לכל יום - יודעים מה עושים מחר בבוקר בלי לאבד יום</span>
+                    </li>
+                    <li class="pricing-card__feature pricing-card__feature--included">
+                      <span class="pricing-card__check">✓</span>
+                      <span>רשימת טיפים להכרת המקום, הרגשה של מקומי ביעד</span>
+                    </li>
+                    <li class="pricing-card__feature pricing-card__feature--included">
+                      <span class="pricing-card__check">✓</span>
+                      <span>רשימת ציוד מלאה</span>
+                    </li>
+                    <li class="pricing-card__feature pricing-card__feature--included">
+                      <span class="pricing-card__check">✓</span>
+                      <span>התאמות אישיות עד לפני הטיול</span>
+                    </li>
+                  </ul>
+                  <span class="btn btn--primary pricing-card__book">למילוי שאלון והזמנה</span>
+                </div>
+              </div>
+            </a>
           </div>
-          <div class="pricing-stack__viewport" id="pricing-stack-scene" role="group" aria-label="חבילות תכנון">
-
-          <!-- מצפן -->
-          <a href="questionnaire_form.html?package=matzpen" class="pricing-card pricing-card--floating pricing-stack__card pricing-stack__card--tap is-stack-front" data-stack-index="0">
-            <div class="pricing-card__stack-blur">
-            <div class="pricing-card__header">
-              <span class="pricing-card__icon">🧭</span>
-              <div class="pricing-card__name">מצפן</div>
-              <div class="pricing-card__tagline">לטיול הראשון שלכם</div>
-            </div>
-            <div class="pricing-card__body">
-              <div class="pricing-card__price-row">
-                <div class="pricing-card__price">₪490</div>
-                <div class="pricing-card__for">לטיול עד 7 ימים</div>
-              </div>
-              <ul class="pricing-card__features" style="list-style:none;padding:0;margin:0;">
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>המלצות למסלולים</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>המלצות לינה לפי תקציב</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>אטרקציות לפי גיל הילדים</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>טיפים כלליים ליעד</span>
-                </li>
-              </ul>
-            <span class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</span>
-            </div>
-            </div>
-          </a>
-
-          <!-- הרפתקה (highlighted) -->
-          <a href="questionnaire_form.html?package=har" class="pricing-card pricing-card--highlighted pricing-card--floating pricing-stack__card pricing-stack__card--tap is-stack-mid" data-stack-index="1">
-            <div class="pricing-card__stack-blur">
-            <div class="pricing-card__header" style="padding-top:44px;">
-              <div class="pricing-card__badge" style="top:12px;transform:translateX(-50%);">הכי פופולרי ⭐</div>
-              <span class="pricing-card__icon">🗺️</span>
-              <div class="pricing-card__name">הרפתקה</div>
-              <div class="pricing-card__tagline">לרוב המשפחות שלנו</div>
-            </div>
-            <div class="pricing-card__body">
-              <div class="pricing-card__price-row">
-                <div class="pricing-card__price">₪890</div>
-                <div class="pricing-card__for">לטיול עד 7 ימים • הכי נבחר</div>
-              </div>
-              <ul class="pricing-card__features" style="list-style:none;padding:0;margin:0;">
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>המלצות למסלולים</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>המלצות לינה לפי תקציב</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>אטרקציות לפי גיל הילדים</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>גיליון מפורט לכל יום</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>רשימת טיפים להכרת המקום, הרגשה של מקומי ביעד</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>רשימת ציוד מלאה</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>התאמות אישיות עד לפני הטיול</span>
-                </li>
-              </ul>
-            <span class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</span>
-            </div>
-            </div>
-          </a>
-
-          <!-- אודיסיאה -->
-          <a href="questionnaire_form.html?package=ody" class="pricing-card pricing-card--floating pricing-stack__card pricing-stack__card--tap is-stack-back" data-stack-index="2">
-            <div class="pricing-card__stack-blur">
-            <div class="pricing-card__header">
-              <span class="pricing-card__icon">🌊</span>
-              <div class="pricing-card__name">אודיסיאה</div>
-              <div class="pricing-card__tagline">חוויה מלאה מקצה לקצה</div>
-            </div>
-            <div class="pricing-card__body">
-              <div class="pricing-card__price-row">
-                <div class="pricing-card__price">₪1,390</div>
-                <div class="pricing-card__for">לטיול עד 14 ימים + ליווי שוטף</div>
-              </div>
-              <ul class="pricing-card__features" style="list-style:none;padding:0;margin:0;">
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>כל מה שבהרפתקה +</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>מסלול עד 14 ימים</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>התאמות ללא הגבלה</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>עדכונים בזמן אמת על אטרקציות ואירועים</span>
-                </li>
-                <li class="pricing-card__feature pricing-card__feature--included">
-                  <span class="pricing-card__check">✓</span>
-                  <span>עדכונים בזמן אמת (מזג אוויר, שינויים)</span>
-                </li>
-              </ul>
-            <span class="btn btn--primary pricing-card__book pricing-stack__cta">להזמנה ולפרטים מלאים</span>
-            </div>
-            </div>
-          </a>
-
-        </div>
-        </div>
-        </div>
         </div>
       </div>
     </div>
@@ -3101,8 +3170,8 @@
     <div style="padding:28px 24px 32px;text-align:center;background:var(--white);">
       <div style="max-width:480px;margin:0 auto;background:linear-gradient(135deg,var(--teal),#238a93);border-radius:20px;padding:28px 28px 24px;">
         <div style="font-size:28px;margin-bottom:8px;">📋</div>
-        <h3 style="font-family:var(--font-heading);font-size:22px;color:white;margin-bottom:8px;">מתחילים עם שאלון קצר</h3>
-        <p style="font-size:14px;color:rgba(255,255,255,0.85);margin-bottom:18px;line-height:1.6;">לפני שנדבר - תמלאו את השאלון ושלחו לי.</p>
+        <h3 style="font-family:var(--font-heading);font-size:22px;color:white;margin-bottom:8px;">רוצים תוכנית מסודרת לטיול?</h3>
+        <p style="font-size:14px;color:rgba(255,255,255,0.88);margin-bottom:18px;line-height:1.65;">שאלון קצר על תאריכים, גילאים וסגנון טיול - ואחזור אליכם עם צעדים ברורים (בלי התחייבות לפני שמבינים שהכיוון מתאים).</p>
         <a href="questionnaire_form.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--amber);color:var(--charcoal);border-radius:28px;padding:12px 28px;font-family:var(--font-heading);font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,0.18);transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
           📋 תמלאו את השאלון
         </a>
@@ -3118,7 +3187,7 @@
       <div style="margin-top:0;">
         <span style="display:block;text-align:center;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:12px;">מה אומרים עליי</span>
         <h2 style="font-family:var(--font-heading);font-size:clamp(22px,3vw,32px);color:var(--charcoal);text-align:center;margin-bottom:8px;">משפחות שכבר טסו איתנו</h2>
-        <p style="text-align:center;font-size:15px;color:#888;margin-bottom:24px;"></p>
+        <p style="text-align:center;font-size:15px;color:#666;margin-bottom:24px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.55;">משפחות מתארות פחות לחץ בתכנון ויותר ביטחון ביעד - זה בדיוק מה שאני משקיע בכל תוכנית.</p>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;" class="testimonials-grid">
 
           <!-- Budapest -->
@@ -3223,12 +3292,12 @@
       <div class="faq__list" role="list">
         <div class="faq__item" data-open="false" role="listitem">
           <button class="faq__question" aria-expanded="false">
-            <span>האם אפשר להתאים את המסלול אחרי שקיבלתי אותו?</span>
+            <span>האם אפשר להתאים את התוכנית אחרי שקיבלתי אותה - כולל מסלול, לינה ואטרקציות?</span>
             <span class="faq__icon" aria-hidden="true">+</span>
           </button>
           <div class="faq__answer" role="region">
             <div class="faq__answer-inner">
-              תלוי בחבילה שבחרת. בחבילה הבסיסית - המסלול סופי כפי שהוא נמסר. בחבילה המלאה - עד 3 סבבי עריכה, כולל שינויים ביעדים, ימים, או אטרקציות. בפרימיום - עריכות ללא הגבלה עד שאתה מרגיש שזה 100%.
+              כן. בחבילת התכנון המשפחתי המלא יש התאמות אישיות עד לפני הטיול: נעדכן יחד את הנסיעות בין היעדים, את האיזורים של לינה ואת האטרקציות עד שהתוכנית יושבת נכון על הגילאים, הקצב והתקציב שלכם. טיולים ארוכים במיוחד או ליווי צמוד בזמן הטיול מתומחרים בנפרד - על זה נברר בשיחה לפני האישור כדי שלא תופתעו.
             </div>
           </div>
         </div>
@@ -3276,7 +3345,7 @@
           </button>
           <div class="faq__answer" role="region">
             <div class="faq__answer-inner">
-              המלצות - כן, כולל השוואת מחירים וקישורים ממוקדים. הזמנות בפועל - לא. אני רוצה שתשמור שליטה מלאה על התקציב שלך. אתה מזמין, אתה מחליט, ואני מכוון אותך למקומות הנכונים.
+              המלצות - כן, כולל השוואת מחירים וקישורים ממוקדים. הזמנות בפועל - לא. אני רוצה שתשמרו שליטה מלאה על התקציב. אתם מזמינים, אתם מחליטים, ואני מכוון אתכם למקומות הנכונים.
             </div>
           </div>
         </div>
@@ -3288,7 +3357,7 @@
           </button>
           <div class="faq__answer" role="region">
             <div class="faq__answer-inner">
-              מושלם. המסלול נבנה סביב מה שהם כן אוהבים - לא סביב מה שנראה טוב בתמונות. אם הילד שלך אוהב חיות - נמצא חוות ופארקים. אם הוא אוהב מים - חופים, נהרות, פארקי מים. בשביל זה אני שואל שאלות לפני שאני מתחיל לבנות.
+              מושלם. המסלול נבנה סביב מה שהם כן אוהבים - לא סביב מה שנראה טוב בתמונות. אם הילד שלכם אוהב חיות - נמצא חוות ופארקים. אם הוא אוהב מים - חופים, נהרות, פארקי מים. בשביל זה אני שואל שאלות לפני שאני מתחיל לבנות.
             </div>
           </div>
         </div>
@@ -3489,12 +3558,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ============ WhatsApp FAB ============ -->
-  <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="צור קשר בוואטסאפ">
-    <span class="whatsapp-fab__pulse" aria-hidden="true"></span>
-    <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
 
   <!-- ============ JAVASCRIPT ============ -->
   <script>
