@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>חבילות תכנון | מתי טסים</title>
+<meta name="description" content="תכנון טיול משפחתי - חבילת תכנון אחת ברורה: 890 ₪ עד 7 ימים + 100 ₪ לכל יום נוסף. טיולים ארוכים או ליווי צמוד במחיר נפרד לפי פנייה.">
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;900&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 
     :root {
-      --teal:#1A6B72; --teal-dark:#134f55; --amber:#E8A045; --amber-dark:#c4842a;
+      --teal:#1A6B72; --teal-dark:#134f55; --amber:#E8A045; --amber-light:#f0b868; --amber-dark:#c4842a;
       --sand:#F5EDD8; --sand-dark:#e8ddc4; --charcoal:#2C2C2C; --cream:#FAF7F2;
-      --white:#fff; --green:#2a9d5c;
+      --white:#fff; --green:#4A9B6F;
       --font-heading:'Secular One',sans-serif;
       --font-body:'Rubik',sans-serif;
       --nav-height: 72px;
@@ -18,17 +19,72 @@
       --shadow-lg:0 12px 40px rgba(0,0,0,0.13);
       --shadow-xl:0 24px 60px rgba(0,0,0,0.18);
       --radius:16px;
+      --radius-xl:28px;
     }
     .container { max-width:1140px; margin:0 auto; padding:0 24px; }
 
   /* ── WHY ME SECTION ── */
   .why-me { background: var(--cream); padding: 72px 24px 80px; }
   .why-me__inner { max-width: 960px; margin: 0 auto; }
-  .why-me__top { text-align: center; margin-bottom: 52px; }
-  .why-me__badge { display: inline-block; background: var(--teal); color: white; padding: 5px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; font-family: 'Rubik',sans-serif; margin-bottom: 20px; letter-spacing: 0.04em; }
-  .why-me__title { font-family: 'Secular One',sans-serif; font-size: clamp(26px,4vw,44px); color: var(--charcoal); margin-bottom: 14px; line-height: 1.2; }
+  /* Editorial lead-in (aligned with services.html value-prop) */
+  .why-me__mag-row {
+    display: grid;
+    grid-template-columns: minmax(0, 640px) minmax(260px, 1fr);
+    gap: clamp(22px, 4vw, 40px);
+    align-items: center;
+    margin-bottom: 48px;
+  }
+  .why-me__intro { text-align: right; margin: 0; max-width: none; }
+  .why-me__eyebrow {
+    font-family: 'Rubik', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--teal-dark);
+    margin: 0 0 12px;
+    opacity: 0.92;
+  }
+  .why-me__intro .why-me__title {
+    text-align: right;
+    margin-bottom: 14px;
+    font-family: 'Secular One', sans-serif;
+    font-size: clamp(26px, 4vw, 44px);
+    color: var(--charcoal);
+    line-height: 1.2;
+  }
   .why-me__title span { color: var(--teal); }
-  .why-me__sub { font-family: 'Rubik',sans-serif; font-size: 16px; color: #666; max-width: 540px; margin: 0 auto; line-height: 1.75; }
+  .why-me__intro .why-me__sub {
+    font-family: 'Rubik', sans-serif;
+    font-size: 17px;
+    color: #555;
+    margin: 0;
+    max-width: none;
+    line-height: 1.75;
+    text-align: right;
+  }
+  .why-me__photo {
+    margin: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 14px 42px rgba(18, 77, 82, 0.13);
+    border: 1px solid rgba(232, 221, 196, 0.95);
+  }
+  .why-me__photo img { width: 100%; height: auto; display: block; }
+
+  @media (max-width: 900px) {
+    .why-me__mag-row {
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+    .why-me__photo {
+      max-width: min(340px, 88vw);
+      margin-inline: auto;
+      margin-top: 4px;
+      border-radius: 14px;
+      box-shadow: 0 8px 26px rgba(18, 77, 82, 0.1);
+    }
+  }
 
   /* compare grid */
   .why-me__grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: stretch; }
@@ -63,7 +119,6 @@
   .why-me__cta-wrap { text-align: center; margin-top: 44px; }
   .why-me__cta { display: inline-flex; align-items: center; gap: 10px; background: var(--teal); color: white; padding: 16px 40px; border-radius: 40px; font-family: 'Rubik',sans-serif; font-size: 17px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 24px rgba(26,107,114,0.3); transition: all 0.2s; }
   .why-me__cta:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(26,107,114,0.4); }
-  .why-me__note { font-family: 'Rubik',sans-serif; font-size: 13px; color: #aaa; margin-top: 12px; }
 
   /* trust badges */
   .why-me__trust { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 36px; }
@@ -82,33 +137,281 @@
   }
   .why-me__arrow-mobile { display: none; }
 
-  /* PACKAGES GRID - Option A */
-  .grid-a { display:grid; grid-template-columns:repeat(3,1fr); gap:0; max-width:960px; margin:0 auto; border-radius:20px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.1); }
-  .col-a { background:white; padding:36px 28px; border-left:1px solid var(--sand-dark); position:relative; display:flex; flex-direction:column; }
-  .col-a:last-child { border-left:none; }
-  .col-a--mid { background:var(--teal); color:white; }
-  .col-a__badge { position:absolute; top:-1px; left:50%; transform:translateX(-50%); background:var(--amber); color:#2C2C2C; font-family:'Rubik',sans-serif; font-size:11px; font-weight:700; padding:4px 16px; border-radius:0 0 12px 12px; white-space:nowrap; }
-  .col-a__icon { font-size:36px; margin-bottom:12px; }
-  .col-a__name { font-family:'Secular One',sans-serif; font-size:22px; margin-bottom:4px; color:var(--charcoal); }
-  .col-a--mid .col-a__name { color:white; }
-  .col-a__tagline { font-family:'Rubik',sans-serif; font-size:13px; color:#999; margin-bottom:20px; }
-  .col-a--mid .col-a__tagline { color:rgba(255,255,255,0.7); }
-  .col-a__price { font-family:'Secular One',sans-serif; font-size:44px; color:var(--teal); line-height:1; margin-bottom:4px; }
-  .col-a--mid .col-a__price { color:var(--amber); }
-  .col-a__period { font-family:'Rubik',sans-serif; font-size:12px; color:#aaa; margin-bottom:24px; padding-bottom:20px; border-bottom:1px solid var(--sand-dark); }
-  .col-a--mid .col-a__period { color:rgba(255,255,255,0.6); border-bottom-color:rgba(255,255,255,0.2); }
-  .col-a__list { list-style:none; margin-bottom:28px; flex:1; }
-  .col-a__list li { font-family:'Rubik',sans-serif; font-size:14px; padding:7px 0; border-bottom:1px solid var(--sand); display:flex; align-items:flex-start; gap:8px; line-height:1.5; color:var(--charcoal); }
-  .col-a--mid .col-a__list li { border-bottom-color:rgba(255,255,255,0.15); color:white; }
-  .col-a__list li::before { content:'✓'; color:var(--green); font-weight:700; flex-shrink:0; }
-  .col-a--mid .col-a__list li::before { color:#86efac; }
-  .col-a__btn { width:100%; padding:13px; border-radius:40px; font-family:'Rubik',sans-serif; font-size:15px; font-weight:700; cursor:pointer; border:2px solid var(--teal); background:white; color:var(--teal); transition:all 0.2s; }
-  .col-a__btn:hover { background:var(--teal); color:white; }
-  .col-a--mid .col-a__btn { background:var(--amber); border-color:var(--amber); color:#2C2C2C; }
-  .col-a--mid .col-a__btn:hover { background:var(--amber-dark); }
-  .col-a__btn--teal { border-color:var(--teal); color:var(--teal); }
-  .col-a__delivery { font-family:'Rubik',sans-serif; text-align:center; font-size:12px; color:#aaa; margin-top:10px; }
-  .col-a--mid .col-a__delivery { color:rgba(255,255,255,0.5); }
+  /* Buttons (match services.html pricing CTA) */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border-radius: var(--radius-xl);
+    font-size: 16px;
+    font-weight: 600;
+    min-height: 48px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    white-space: nowrap;
+  }
+  .btn--primary {
+    background: var(--amber);
+    color: var(--charcoal);
+    box-shadow: 0 4px 14px rgba(232, 160, 69, 0.35);
+  }
+  .btn--primary:hover,
+  .btn--primary:focus-visible {
+    background: var(--amber-dark);
+    box-shadow: 0 6px 20px rgba(232, 160, 69, 0.5);
+    transform: translateY(-2px);
+  }
+
+  /* Pricing card (aligned with services.html #pricing-plan) */
+  a.pricing-card {
+    text-decoration: none;
+    color: inherit;
+  }
+  .pricing-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    position: relative;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    box-shadow: 0 4px 24px rgba(44, 44, 44, 0.06), 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .pricing-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+    .pricing-card--highlighted:hover {
+      box-shadow: 0 16px 48px rgba(232, 160, 69, 0.28), 0 0 0 1px rgba(232, 160, 69, 0.45);
+      transform: scale(1.06);
+    }
+  }
+  .pricing-card--highlighted {
+    border-color: rgba(232, 160, 69, 0.55);
+    box-shadow: 0 12px 40px rgba(232, 160, 69, 0.18), 0 0 0 1px rgba(232, 160, 69, 0.35);
+    transform: scale(1.04);
+    z-index: 2;
+  }
+  .pricing-card__header {
+    padding: 32px 28px 24px;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .pricing-card--highlighted .pricing-card__header {
+    background: linear-gradient(135deg, var(--amber) 0%, var(--amber-light) 100%);
+  }
+  .pricing-card:first-child .pricing-card__header {
+    background: linear-gradient(135deg, var(--sand) 0%, var(--sand-dark) 100%);
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+  }
+  .pricing-card:last-child .pricing-card__header {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+  }
+  .pricing-card__icon {
+    font-size: 30px;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    line-height: 1;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  }
+  .pricing-card:first-child .pricing-card__icon {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  }
+  .pricing-card--highlighted .pricing-card__icon {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 6px 20px rgba(196, 135, 46, 0.2);
+  }
+  .pricing-card:last-child .pricing-card__icon {
+    background: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+  }
+  .pricing-card__name {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    margin-bottom: 4px;
+  }
+  .pricing-card:first-child .pricing-card__name,
+  .pricing-card--highlighted .pricing-card__name {
+    color: var(--charcoal);
+  }
+  .pricing-card:last-child .pricing-card__name {
+    color: var(--white);
+  }
+  .pricing-card__tagline {
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.75;
+  }
+  .pricing-card:last-child .pricing-card__tagline {
+    color: rgba(255,255,255,0.8);
+  }
+  .pricing-card__body {
+    padding: 28px 28px 32px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .pricing-card__features {
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(26, 107, 114, 0.05) 0%, rgba(245, 237, 216, 0.35) 100%);
+    border: none;
+    box-shadow: 0 2px 14px rgba(44, 44, 44, 0.05);
+    list-style: none;
+  }
+  .pricing-card__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.55;
+    padding: 8px 0;
+    color: var(--charcoal);
+  }
+  .pricing-card__feature:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .pricing-card__feature--included .pricing-card__check {
+    color: var(--green);
+    font-weight: 700;
+    flex-shrink: 0;
+    font-size: 15px;
+    margin-top: 3px;
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(74, 155, 111, 0.12);
+    border-radius: 6px;
+  }
+  .pricing-carousel-host {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .pricing-single-layout {
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .pricing-single-layout .pricing-card {
+    width: 100%;
+  }
+  .pricing-package-pricing {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 18px 16px 20px;
+    border-bottom: 1px solid rgba(232, 221, 196, 0.85);
+    background: linear-gradient(180deg, rgba(255, 249, 240, 0.95) 0%, rgba(255, 255, 255, 0.75) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(232, 160, 69, 0.22);
+  }
+  .pricing-package-pricing__main {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 5vw, 48px);
+    color: var(--amber-dark);
+    line-height: 1.1;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .pricing-package-pricing__extra {
+    font-size: 15px;
+    color: var(--charcoal);
+    font-weight: 600;
+    line-height: 1.45;
+  }
+  .pricing-package-pricing__fine {
+    font-size: 13px;
+    color: #6b6b6b;
+    margin: 14px 0 0;
+    line-height: 1.55;
+    font-weight: 500;
+  }
+  .pricing-card__stack-blur {
+    transition: opacity 0.25s ease;
+  }
+  @media (min-width: 769px) {
+    .pricing-card__stack-blur {
+      display: contents;
+    }
+  }
+  .pricing-card__book {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 16px;
+    padding: 14px 24px;
+    border-radius: var(--radius-xl);
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  @media (min-width: 769px) {
+    .pricing-card__book {
+      margin-top: auto;
+      flex-shrink: 0;
+    }
+  }
+  @media (max-width: 768px) {
+    .pricing-carousel-host {
+      max-width: none;
+      width: 100%;
+      margin: 28px 0 36px;
+      padding: 0;
+      overflow: visible;
+    }
+  }
+
+  .packages {
+    padding: 56px 24px 72px;
+    scroll-margin-top: calc(var(--nav-height) + 24px);
+    background: var(--cream);
+  }
+  .packages .pricing-packages-section {
+    margin-top: 0;
+    padding-top: 40px;
+    padding-bottom: 56px;
+    border-top: 2px solid var(--sand-dark);
+    border-bottom: 2px solid var(--sand-dark);
+  }
+
+  .packages__intro {
+    max-width: 640px;
+    margin: 0 auto 44px;
+    text-align: right;
+    padding: 0 4px;
+  }
+  .packages__intro h2 {
+    font-family: 'Secular One', sans-serif;
+    font-size: clamp(26px, 3vw, 38px);
+    color: var(--charcoal);
+    margin: 0 0 12px;
+    padding-top: 8px;
+    line-height: 1.25;
+  }
+  .packages__intro p {
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+    line-height: 1.65;
+  }
 
   /* COMPARISON TABLE */
   .compare { max-width:860px; margin:0 auto 80px; padding:0 24px; }
@@ -125,7 +428,7 @@
   .val { font-weight:700; color:var(--teal); }
 
   /* FAQ */
-  .faq-section { max-width:720px; margin:0 auto 80px; padding:0 24px; }
+  .faq-section { max-width:720px; margin:0 auto 80px; padding:0 24px; scroll-margin-top: calc(var(--nav-height) + 16px); }
   .faq-title { font-family:'Secular One',sans-serif; font-size:24px; text-align:center; margin-bottom:24px; }
   .faq-item2 { border-bottom:1px solid var(--sand-dark); }
   .faq-item2 summary { font-family:'Rubik',sans-serif; font-size:16px; font-weight:600; padding:18px 0; cursor:pointer; display:flex; justify-content:space-between; align-items:center; list-style:none; color:var(--charcoal); }
@@ -143,9 +446,6 @@
   .btn-dl:hover { background:var(--amber-dark); transform:translateY(-2px); }
 
   @media(max-width:768px) {
-    .grid-a { grid-template-columns:1fr; border-radius:16px; }
-    .col-a { border-left:none; border-bottom:1px solid var(--sand-dark); }
-    .col-a--mid { border-bottom:none; }
     .hero__stats { gap:24px; }
   }
        /* ── NAV ─────────────────────────────── */
@@ -317,7 +617,7 @@
           <a href="packages.html" class="nav__link nav__link--packages" role="menuitem" aria-current="page">
             <svg class="nav__packages-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5L12 3l9 4.5-9 4.5-9-4.5z"/><path d="M3 12l9 4.5 9-4.5"/><path d="M3 16.5L12 21l9-4.5"/></svg>
             <span>חבילות תכנון</span>
-            <span class="nav__packages-badge">3 חבילות</span>
+            <span class="nav__packages-badge">חבילה אחת</span>
           </a>
         </li>
         <li role="none"><a href="about.html" class="nav__link" role="menuitem">אודות</a></li>
@@ -367,7 +667,7 @@
         </div>
         <div class="mob-nav-item__body">
           <span class="mob-nav-item__title">חבילות תכנון</span>
-          <span class="mob-nav-item__sub">3 מסלולי ליווי</span>
+          <span class="mob-nav-item__sub">מחיר שקוף וברור</span>
         </div>
       </a>
       <div class="mob-nav-sep" role="separator"></div>
@@ -398,10 +698,15 @@
       <span>›</span>
       <span>חבילות</span>
     </nav>
-    <div class="why-me__top">
-      <span class="why-me__badge">✈ תכנון טיולים משפחתיים</span>
-      <h1 class="why-me__title">תכנון טיול עם ילדים זה <span>לא</span> חייב להיות מלחיץ</h1>
-      <p class="why-me__sub">רוב המשפחות מבזבזות עשרות שעות ועדיין לא בטוחות שעשו את הבחירות הנכונות. יש דרך אחרת.</p>
+    <div class="why-me__mag-row">
+      <div class="why-me__intro">
+        <p class="why-me__eyebrow">לפני שבוחרים חבילה</p>
+        <h1 class="why-me__title">תכנון טיול עם ילדים זה <span>לא</span> חייב להיות מלחיץ</h1>
+        <p class="why-me__sub">רוב המשפחות מבזבזות עשרות שעות ועדיין לא בטוחות שעשו את הבחירות הנכונות. יש דרך אחרת.</p>
+      </div>
+      <figure class="why-me__photo">
+        <img src="pichome/WhatsApp Image 2026-05-02 at 06.49.14.webp" alt="רגע משפחתי בטיול – נוף אגם והרים" loading="lazy" decoding="async">
+      </figure>
     </div>
 
     <div class="why-me__grid">
@@ -484,70 +789,71 @@
     </div>
 
     <div class="why-me__cta-wrap">
-      <a href="questionnaire_form.html" class="why-me__cta">📋 אני רוצה מסלול מותאם אישית ←</a>
-      <p class="why-me__note">✓ חוזר תוך 24 שעות &nbsp;·&nbsp; ✓ מבוסס על ניסיון אישי בלבד</p>
+      <a href="questionnaire_form.html?package=har" class="why-me__cta">📋 אני רוצה מסלול מותאם אישית ←</a>
     </div>
 
   </div>
 </div>
 
 <!-- PACKAGES -->
-<section class="packages">
-  <h2 style="text-align:center;font-family:'Secular One',sans-serif;font-size:clamp(28px,3vw,38px);color:var(--charcoal);margin-bottom:10px;">החבילות שלנו</h2>
-  <p style="text-align:center;font-family:'Rubik',sans-serif;font-size:16px;color:#777;margin-bottom:48px;">כל חבילה בנויה להוריד מכם את ההתלבטות - ולהביא לכם שקט אמיתי</p>
-
-  <div class="grid-a">
-    <!-- מצפן -->
-    <div class="col-a">
-      <div class="col-a__icon">✨</div>
-      <div class="col-a__name">מצפן</div>
-      <div class="col-a__tagline">מסלול מוכן, מסודר ומותאם לילדים שלכם</div>
-      <div class="col-a__price">₪490</div>
-      <div class="col-a__period">לטיול עד 7 ימים</div>
-      <ul class="col-a__list">
-        <li>המלצות למסלולים</li>
-        <li>המלצות לינה לפי תקציב</li>
-        <li>אטרקציות לפי גיל הילדים</li>
-        <li>טיפים כלליים ליעד</li>
-      </ul>
-      <button class="col-a__btn" onclick="openContactModalWithPackage('מצפן')">אני רוצה מצפן</button>
+<section class="packages" id="pricing-plan">
+  <div class="pricing-packages-section">
+    <div class="packages__intro">
+      <h2>תכנון משפחתי מלא</h2>
+      <p><strong style="color:#444;font-weight:700;">זה לא יוקרה - זה ארגון וביטחון</strong> לטיול שכבר השקעתם בו טיסות, לינה וחופשה. חבילת תכנון אחת, מלאה וברורה.</p>
     </div>
 
-    <!-- הרפתקה -->
-    <div class="col-a col-a--mid">
-      <div class="col-a__badge">🔥 הכי שווה</div>
-      <div class="col-a__icon">🌍</div>
-      <div class="col-a__name">הרפתקה</div>
-      <div class="col-a__tagline">הכל מתוכנן. הכל מסודר. רק ליהנות.</div>
-      <div class="col-a__price">₪890</div>
-      <div class="col-a__period">לטיול עד 7 ימים • הכי נבחר</div>
-      <ul class="col-a__list">
-        <li>המלצות למסלולים</li>
-        <li>המלצות לינה לפי תקציב</li>
-        <li>אטרקציות לפי גיל הילדים</li>
-        <li>גיליון מפורט לכל יום</li>
-        <li>רשימת טיפים להכרת המקום, הרגשה של מקומי ביעד</li>
-        <li>רשימת ציוד מלאה</li>
-        <li>התאמות אישיות עד לפני הטיול</li>
-      </ul>
-      <button class="col-a__btn" onclick="openContactModalWithPackage('הרפתקה')">אני רוצה הרפתקה 🔥</button>
-    </div>
-
-    <!-- אודיסיאה -->
-    <div class="col-a">
-      <div class="col-a__icon">🚀</div>
-      <div class="col-a__name">אודיסיאה</div>
-      <div class="col-a__tagline">ראש שקט מלא - מהרגע הראשון ועד הנחיתה</div>
-      <div class="col-a__price">₪1,390</div>
-      <div class="col-a__period">לטיול עד 14 ימים + ליווי שוטף</div>
-      <ul class="col-a__list">
-        <li>כל מה שבהרפתקה +</li>
-        <li>מסלול עד 14 ימים</li>
-        <li>התאמות ללא הגבלה</li>
-        <li>עדכונים בזמן אמת על אטרקציות ואירועים</li>
-        <li>עדכונים בזמן אמת (מזג אוויר, שינויים)</li>
-      </ul>
-      <button class="col-a__btn col-a__btn--teal" onclick="openContactModalWithPackage('אודיסיאה')">אני רוצה אודיסיאה 🚀</button>
+    <div class="pricing-carousel-host">
+      <div class="pricing-single-layout">
+        <a href="questionnaire_form.html?package=har" class="pricing-card pricing-card--highlighted pricing-card--floating">
+          <div class="pricing-card__stack-blur">
+            <div class="pricing-card__header">
+              <span class="pricing-card__icon">🗺️</span>
+              <div class="pricing-card__name">תכנון משפחתי מלא</div>
+              <div class="pricing-card__tagline">מסלול בקצב של משפחה, לינה נכונה לאזור, ואטרקציות שמתאימות לגיל - בלי להציף אתכם באופציות</div>
+            </div>
+            <div class="pricing-card__body">
+              <div class="pricing-package-pricing">
+                <div class="pricing-package-pricing__main">₪890</div>
+                <div class="pricing-package-pricing__extra">לתכנון טיול עד <strong>7 ימים</strong></div>
+                <div class="pricing-package-pricing__extra" style="margin-top:8px;">+ <strong>₪100</strong> לכל יום נוסף</div>
+                <p class="pricing-package-pricing__fine">טיולים ארוכים או ליווי צמוד - אפשרות לפנייה ותמחור אישי.</p>
+              </div>
+              <ul class="pricing-card__features" style="list-style:none;padding:0;margin:0;">
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>המלצות למסלולים - מרחקים וקצב שמתאימים לילדים</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>המלצות לינה לפי תקציב</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>אטרקציות לפי גיל הילדים</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>גיליון לכל יום - יודעים מה עושים מחר בבוקר בלי לאבד יום</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>רשימת טיפים להכרת המקום, הרגשה של מקומי ביעד</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>רשימת ציוד מלאה</span>
+                </li>
+                <li class="pricing-card__feature pricing-card__feature--included">
+                  <span class="pricing-card__check">✓</span>
+                  <span>התאמות אישיות עד לפני הטיול</span>
+                </li>
+              </ul>
+              <span class="btn btn--primary pricing-card__book">למילוי שאלון והזמנה</span>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -557,7 +863,7 @@
   <div style="max-width:760px; margin:0 auto; background:linear-gradient(135deg,#e6f4f5 0%,#d0ecee 100%); border:1.5px solid #a8d5da; border-radius:20px; padding:36px 40px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;">
     <div style="flex:1; min-width:220px;">
       <div style="font-size:36px; margin-bottom:10px;">🧮</div>
-      <h3 style="font-family:'Secular One',sans-serif; font-size:clamp(20px,3vw,26px); color:#124d52; margin-bottom:10px; line-height:1.3;">לפני שבוחרים חבילה - כמה עולה הטיול שלכם?</h3>
+      <h3 style="font-family:'Secular One',sans-serif; font-size:clamp(20px,3vw,26px); color:#124d52; margin-bottom:10px; line-height:1.3;">לפני שסוגרים תכנון - כמה עולה הטיול שלכם?</h3>
       <p style="font-family:'Rubik',sans-serif; font-size:15px; color:#3a6b70; line-height:1.65; margin-bottom:0;">מחשבון התקציב שלנו מחשב טיסות, לינה, אוכל, פעילויות ועוד - לפי יעד, עונה וגודל המשפחה. בחינם, בלי הרשמה.</p>
     </div>
     <a href="budget.html" style="flex-shrink:0; background:#1a6b72; color:#fff; font-family:'Rubik',sans-serif; font-size:16px; font-weight:600; padding:16px 32px; border-radius:50px; text-decoration:none; white-space:nowrap; box-shadow:0 4px 16px rgba(26,107,114,0.35); transition:background 0.2s,transform 0.2s; display:inline-block;" onmouseover="this.style.background='#124d52';this.style.transform='scale(1.04)'" onmouseout="this.style.background='#1a6b72';this.style.transform='scale(1)'">לחשב את התקציב ←</a>
@@ -566,7 +872,7 @@
 
 
 <!-- FAQ -->
-<section class="faq-section">
+<section class="faq-section" id="faq">
   <h2 class="faq-title">שאלות נפוצות</h2>
   <details class="faq-item2">
     <summary>איך מתחילים?</summary>
@@ -577,12 +883,12 @@
     <p>מינימום חודש לפני - אבל ככל שמוקדם יותר, כך יש יותר זמן להתאים ולשפר.</p>
   </details>
   <details class="faq-item2">
-    <summary>האם ניתן לשדרג חבילה?</summary>
-    <p>כן! בכל שלב ניתן לשדרג לחבילה הבאה - משלמים רק את ההפרש.</p>
+    <summary>מה קורה אם הטיול ארוך מ־7 ימים?</summary>
+    <p>המחיר הבסיס כולל תכנון עד שבעה ימים; כל יום נוסף ₪100. לטיולים ארוכים במיוחד או לליווי צמוד בזמן הטיול אפשר לפנות ונבנה הצעה מותאמת.</p>
   </details>
   <details class="faq-item2">
     <summary>מה אם לא אהבנו את המסלול?</summary>
-    <p>בחבילת הרפתקה ואודיסיאה יש סבבי עריכה - עד שמגיעים למסלול שאתם אוהבים.</p>
+    <p>במסגרת התכנון יש התאמות אישיות עד לפני הטיול - מסלול, לינה והדגשים - עד שמרגישים בנוח עם התוכנית.</p>
   </details>
 </section>
 
@@ -594,7 +900,7 @@
   <h2>מוכנים להתחיל?</h2>
   <p>תמלאו את השאלון ושלחו לי - אחזור אליכם תוך 24 שעות</p>
   <div class="cta-btns">
-    <a href="questionnaire_form.html" class="btn-dl">📋 תמלאו את השאלון</a>
+    <a href="questionnaire_form.html?package=har" class="btn-dl">📋 תמלאו את השאלון</a>
   </div>
 </div>
 
@@ -707,19 +1013,6 @@ const closeBtn = document.getElementById('closeContactModal');
 const submitBtn = document.getElementById('submitContact');
 const contactForm = document.getElementById('contactForm');
 const modalSuccess = document.getElementById('modalSuccess');
-
-function openModal() {
-  contactModal.classList.add('active');
-  contactModal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function openContactModalWithPackage(packageName) {
-  openModal();
-  setTimeout(() => {
-    document.getElementById('contactMessage').value = 'אני מתעניין בחבילת ' + packageName;
-  }, 320);
-}
 
 function closeModal() {
   contactModal.classList.remove('active');
