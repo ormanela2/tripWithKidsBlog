@@ -665,11 +665,85 @@
     .combo-section__tip strong {
       color: var(--teal-dark);
     }
+    .combo-scroll-block {
+      margin-bottom: 4px;
+    }
+    .combo-swipe-ribbon {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 0 10px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(26, 107, 114, 0.09) 0%, rgba(245, 237, 216, 0.65) 100%);
+      border: 1px solid rgba(26, 107, 114, 0.22);
+      box-shadow: 0 2px 10px rgba(26, 107, 114, 0.06);
+    }
+    .combo-swipe-ribbon__icon {
+      font-size: 20px;
+      line-height: 1;
+      flex-shrink: 0;
+      animation: comboSwipeNudge 2.2s ease-in-out infinite;
+    }
+    .combo-swipe-ribbon__text {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--teal-dark);
+      line-height: 1.45;
+      text-align: center;
+    }
+    .combo-swipe-ribbon__text small {
+      display: block;
+      margin-top: 3px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #5a5a5a;
+      opacity: 0.95;
+    }
+    @keyframes comboSwipeNudge {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-5px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .combo-swipe-ribbon__icon { animation: none; }
+    }
+    @media (max-width: 559px) {
+      .combo-swipe-ribbon { display: flex; }
+    }
+    .combo-short-scroll-edge {
+      position: relative;
+    }
+    .combo-short-scroll-edge .combo-short-grid {
+      position: relative;
+      z-index: 2;
+    }
+    @media (max-width: 559px) {
+      .combo-short-scroll-edge::before,
+      .combo-short-scroll-edge::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 10px;
+        width: 28px;
+        z-index: 1;
+        pointer-events: none;
+      }
+      .combo-short-scroll-edge::before {
+        right: 0;
+        background: linear-gradient(to left, #fff, rgba(255, 255, 255, 0));
+      }
+      .combo-short-scroll-edge::after {
+        left: 0;
+        background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+      }
+    }
     .combo-picker-hint {
       font-size: 13px;
       font-weight: 600;
       color: var(--teal-dark);
       margin: 0 0 10px;
+      line-height: 1.55;
     }
     .combo-short-grid {
       display: flex;
@@ -681,6 +755,7 @@
       padding-bottom: 6px;
       margin: 0 -4px;
       -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
     }
     .combo-short-grid::-webkit-scrollbar {
       height: 6px;
@@ -1758,7 +1833,18 @@
             <p class="combo-section__fineprint">טיולים ארוכים יותר (למשל המשך לפראג או לחופשה רב־שבועית בין שלוש מדינות) אפשריים - אבל דורשים תכנון לוחות זמנים נפרד; אם זה מה שאתם צריכים, דברו איתי דרך האפשרויות למטה.</p>
             <p class="combo-section__tip"><strong>להתחיל במקום אחד ולסיים בשני:</strong> אפשר לפתוח חופשה בנקודה אחת (למשל טיסה לבודפשט או ברטיסלבה), לטייל בסלובקיה וביעדים הסמוכים מהרשימה למטה, ו<strong>לסיים ביעד אחר</strong> - כמו וינה, בודפשט או ברנו - ומשם טיסה הביתה או המשך. כך לא חוזרים פעמיים על אותו קטע דרך ארוך. חשוב לתאם מראש: השכרת רכב עם <strong>החזרה במדינה אחרת</strong> (אם רלוונטי), טיסות פתוחות או כרטיס יוצא מנקודה שונה מנקודת ההגעה, ומספר לילות בכל צד.</p>
 
-            <p class="combo-picker-hint" id="combo-routes-label">גררו אופקית במובייל · בחרו קטע דרך והמשיכו למדריך</p>
+            <div class="combo-scroll-block">
+              <div class="combo-swipe-ribbon" aria-hidden="true">
+                <span class="combo-swipe-ribbon__icon" aria-hidden="true">↔</span>
+                <p class="combo-swipe-ribbon__text">
+                  החליקו לצדדים כדי לעבור בין שילובי היעדים
+                  <small>5 כרטיסים · גלילה אופקית (Swipe) בטלפון</small>
+                </p>
+                <span class="combo-swipe-ribbon__icon" aria-hidden="true">↔</span>
+              </div>
+              <p class="combo-picker-hint" id="combo-routes-label">בחרו קטע דרך והמשיכו מהקישור למדריך.</p>
+            </div>
+            <div class="combo-short-scroll-edge">
             <div class="combo-short-grid" role="list" aria-labelledby="combo-routes-label">
               <article class="combo-short" role="listitem">
                 <h3 class="combo-short__route">ברטיסלבה ↔ וינה</h3>
@@ -1819,6 +1905,7 @@
                   </a>
                 </div>
               </article>
+            </div>
             </div>
 
             <div class="combo-contact-bar">
