@@ -409,6 +409,454 @@
     .article-section { margin-bottom: 52px; }
     .article-section__title { font-size: clamp(20px, 2.5vw, 26px); color: var(--teal); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--sand-dark); display: flex; align-items: center; gap: 10px; }
     .article-section__title-icon { font-size: 24px; }
+    .article-section__title .article-section__title-icon-svg {
+      display: inline-flex;
+      vertical-align: middle;
+      margin-inline-end: 6px;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+
+    /* Climate chart block - same as slovakia-climate-preview.html */
+    .climate-block {
+      background: linear-gradient(165deg, #fff 0%, var(--sand) 100%);
+      border: 1px solid var(--sand-dark);
+      border-radius: 20px;
+      padding: 22px 18px 26px;
+      box-shadow: 0 6px 28px rgba(26, 107, 114, 0.08);
+      margin-bottom: 28px;
+      scroll-margin-top: calc(var(--nav-height) + 16px);
+    }
+    .climate-block__kicker {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      color: var(--teal-dark);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .climate-block__lead {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--charcoal);
+      margin-bottom: 18px;
+      max-width: 62ch;
+    }
+    .climate-chart-wrap {
+      direction: ltr;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(26, 107, 114, 0.12);
+      padding: 12px 8px 8px;
+    }
+    .climate-chart-wrap svg {
+      display: block;
+      width: 100%;
+      min-width: 580px;
+      height: auto;
+      vertical-align: middle;
+    }
+    .climate-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 28px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(26, 107, 114, 0.1);
+      font-size: 13px;
+      color: #4a4a4a;
+    }
+    .climate-legend__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .climate-legend__swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .climate-legend__swatch--line {
+      height: 3px;
+      width: 22px;
+      border-radius: 2px;
+    }
+    .climate-footnote {
+      font-size: 13px;
+      color: #5c5c5c;
+      margin-top: 14px;
+      line-height: 1.65;
+    }
+    .climate-footnote a {
+      color: var(--teal-dark);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .climate-source-note {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #555;
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: rgba(245, 237, 216, 0.45);
+      border-radius: 10px;
+      border-right: 3px solid var(--amber-light);
+      max-width: 72ch;
+    }
+    .climate-source-note abbr { text-decoration: underline dotted; cursor: help; }
+    .climate-table-wrap {
+      margin-top: 16px;
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--sand-dark);
+    }
+    .climate-table-wrap table {
+      width: 100%;
+      min-width: 520px;
+      border-collapse: collapse;
+      font-size: 12px;
+      background: #fff;
+    }
+    .climate-table-wrap th,
+    .climate-table-wrap td {
+      padding: 8px 6px;
+      text-align: center;
+      border-bottom: 1px solid var(--sand);
+    }
+    .climate-table-wrap thead th {
+      background: var(--sand);
+      font-weight: 600;
+      color: var(--teal-dark);
+    }
+    .climate-table-wrap tbody th {
+      background: rgba(253, 248, 242, 0.9);
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .climate-table-wrap caption {
+      caption-side: bottom;
+      padding: 10px 8px 6px;
+      font-size: 11px;
+      color: #777;
+      text-align: center;
+    }
+    .climate-table-wrap tr:last-child td {
+      border-bottom: none;
+    }
+    .climate-table-wrap tr.row--current td,
+    .climate-table-wrap tr.row--current th {
+      background: rgba(26, 107, 114, 0.09);
+      font-weight: 600;
+    }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .climate-details {
+      margin-top: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(26, 107, 114, 0.18);
+      background: rgba(255, 255, 255, 0.75);
+      overflow: hidden;
+    }
+    .climate-details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--teal-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      user-select: none;
+    }
+    .climate-details summary::-webkit-details-marker { display: none; }
+    .climate-details summary::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-left: 2px solid var(--teal);
+      border-bottom: 2px solid var(--teal);
+      transform: rotate(-45deg);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    .climate-details[open] summary::after {
+      transform: rotate(135deg);
+      margin-top: 4px;
+    }
+    .climate-details summary:hover,
+    .climate-details summary:focus-visible {
+      background: rgba(26, 107, 114, 0.06);
+      outline: none;
+    }
+    .climate-details .climate-table-wrap {
+      margin-top: 0;
+      border: none;
+      border-radius: 0;
+      border-top: 1px solid var(--sand-dark);
+    }
+
+    /* Short-drive combos - same as slovakia-climate-preview.html */
+    .combo-section {
+      scroll-margin-top: calc(var(--nav-height) + 16px);
+      margin-bottom: 32px;
+      padding: 22px 20px 24px;
+      background: #fff;
+      border: 1px solid var(--sand-dark);
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+    .combo-section__kicker {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--teal-dark);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .combo-section__title {
+      font-family: var(--font-heading);
+      font-size: clamp(20px, 2.2vw, 24px);
+      color: var(--teal);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+    .combo-section__lead {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+      max-width: 68ch;
+    }
+    .combo-section__fineprint {
+      font-size: 13px;
+      line-height: 1.55;
+      color: #666;
+      margin-bottom: 12px;
+      max-width: 68ch;
+    }
+    .combo-section__tip {
+      font-size: 14px;
+      line-height: 1.62;
+      color: var(--charcoal);
+      margin: 0 0 20px;
+      padding: 14px 16px;
+      max-width: 70ch;
+      background: rgba(26, 107, 114, 0.06);
+      border-radius: 12px;
+      border-right: 3px solid var(--teal);
+    }
+    .combo-section__tip strong {
+      color: var(--teal-dark);
+    }
+    .combo-picker-hint {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--teal-dark);
+      margin: 0 0 10px;
+    }
+    .combo-short-grid {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 4px;
+      padding-bottom: 6px;
+      margin: 0 -4px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .combo-short-grid::-webkit-scrollbar {
+      height: 6px;
+    }
+    .combo-short-grid::-webkit-scrollbar-thumb {
+      background: rgba(26, 107, 114, 0.25);
+      border-radius: 999px;
+    }
+    @media (min-width: 560px) {
+      .combo-short-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        overflow: visible;
+        scroll-snap-type: none;
+        margin: 0;
+        padding-bottom: 0;
+      }
+    }
+    @media (min-width: 900px) {
+      .combo-short-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    .combo-short {
+      flex: 0 0 min(88vw, 300px);
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 12px 12px 10px;
+      border: 1px solid var(--sand-dark);
+      border-radius: 14px;
+      background: linear-gradient(165deg, #fff 0%, var(--cream) 100%);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+    @media (min-width: 560px) {
+      .combo-short {
+        flex: none;
+        min-height: 0;
+      }
+    }
+    .combo-short__route {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      color: var(--teal-dark);
+      margin: 0 0 4px;
+      line-height: 1.3;
+    }
+    .combo-short__time {
+      font-size: 12px;
+      font-weight: 700;
+      color: #9a6b2d;
+      letter-spacing: 0.02em;
+      margin: 0 0 8px;
+      line-height: 1.35;
+    }
+    .combo-short__hint {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #444;
+      margin: 0 0 10px;
+      flex: 1 1 auto;
+    }
+    .combo-short__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: stretch;
+      margin-top: auto;
+    }
+    .combo-mini {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(26, 107, 114, 0.22);
+      background: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      max-width: 100%;
+    }
+    .combo-mini:hover,
+    .combo-mini:focus-visible {
+      border-color: var(--teal);
+      box-shadow: 0 3px 12px rgba(26, 107, 114, 0.12);
+      outline: none;
+    }
+    .combo-mini__title {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--teal-dark);
+    }
+    .combo-mini__sub {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.35;
+    }
+    .combo-contact-bar {
+      margin-top: 22px;
+      padding: 18px 16px 20px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(26, 107, 114, 0.06) 0%, var(--sand) 100%);
+      border: 1px solid var(--sand-dark);
+    }
+    .combo-contact-bar__title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--teal-dark);
+      margin: 0 0 6px;
+    }
+    .combo-contact-bar__text {
+      font-size: 13px;
+      line-height: 1.55;
+      color: #4a4a4a;
+      margin: 0 0 14px;
+      max-width: 62ch;
+    }
+    .combo-contact-bar__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .combo-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .combo-pill svg {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+    }
+    .combo-pill--wa {
+      background: #25d366;
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(37, 211, 102, 0.35);
+    }
+    .combo-pill--wa:hover,
+    .combo-pill--wa:focus-visible {
+      background: #1fb855;
+      outline: none;
+    }
+    .combo-pill--mail {
+      background: #fff;
+      color: var(--teal-dark);
+      border-color: rgba(26, 107, 114, 0.35);
+    }
+    .combo-pill--mail:hover,
+    .combo-pill--mail:focus-visible {
+      border-color: var(--teal);
+      outline: none;
+    }
+    .combo-pill--form {
+      background: var(--teal);
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(26, 107, 114, 0.3);
+    }
+    .combo-pill--form:hover,
+    .combo-pill--form:focus-visible {
+      background: var(--teal-dark);
+      outline: none;
+    }
     .sk-tp-embed { margin-top: 8px; }
     .sk-tp-embed .article-section__title { justify-content: space-between; flex-wrap: wrap; row-gap: 10px; }
     .sk-tp-embed__title-main { display: inline-flex; align-items: center; gap: 10px; }
@@ -1231,11 +1679,13 @@
             <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
             <div class="toc__list">
               <a href="#intro" class="toc__link"><span class="toc__num">1</span> למה סלובקיה עם ילדים?</a>
-              <a href="#route-map" class="toc__link"><span class="toc__num">2</span> המסלול על המפה</a>
-              <a href="#itinerary" class="toc__link"><span class="toc__num">3</span> מסלול יום-יום מומלץ</a>
-              <a href="#theme-parks-slovakia" class="toc__link"><span class="toc__num">4</span> פארקי שעשועים בסלובקיה</a>
-              <a href="#accommodation" class="toc__link"><span class="toc__num">5</span> המלצות לינה</a>
-              <a href="#tips" class="toc__link"><span class="toc__num">6</span> טיפים חשובים</a>
+              <a href="#climate-sk" class="toc__link"><span class="toc__num">2</span> אקלים ועונה מומלצת</a>
+              <a href="#slovakia-combos" class="toc__link"><span class="toc__num">3</span> נסיעות קצרות ליעדים שכנים</a>
+              <a href="#route-map" class="toc__link"><span class="toc__num">4</span> המסלול על המפה</a>
+              <a href="#itinerary" class="toc__link"><span class="toc__num">5</span> מסלול יום-יום מומלץ</a>
+              <a href="#theme-parks-slovakia" class="toc__link"><span class="toc__num">6</span> פארקי שעשועים בסלובקיה</a>
+              <a href="#accommodation" class="toc__link"><span class="toc__num">7</span> המלצות לינה</a>
+              <a href="#tips" class="toc__link"><span class="toc__num">8</span> טיפים חשובים</a>
             </div>
           </div>
 
@@ -1265,6 +1715,128 @@
               <p class="countdown-cta__tag">הדפסתם? תייגו את עצמכם בפייסבוק של מתי טסים כדי שאראה איך אתם מתכוננים! <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;color:var(--teal-dark);font-weight:600;text-decoration:none;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true" style="transform:translateY(1px);"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg><span>לדף הפייסבוק</span></a></p>
             </div>
           </div>
+
+          <div class="article-section climate-block" id="climate-sk" aria-labelledby="climate-sk-heading">
+            <h2 class="article-section__title" id="climate-sk-heading">
+              <svg class="article-section__title-icon-svg" xmlns="http://www.w3.org/2000/svg" width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              אקלים בסלובקיה - מתי נוח לטייל?
+            </h2>
+            <p class="climate-block__kicker">ממוצעים חודשיים · מעלות צלזיוס וימי משקע (מספרים שלמים, מעוגלים)</p>
+            <p class="climate-block__lead">הגרף מציג נורמות חודשיות לברטיסלבה (מישור דרום המדינה): ממוצע טמפרטורה יומית (קו) וממוצע ימים עם משקע של לפחות 1 מ״מ (עמודות). בטטרה ובגובה חישבו על קור משמעותי יותר גם בקיץ, ובחורף שלג וכבישים תלויים במזג אוויר.</p>
+            <div class="climate-chart-wrap" role="img" aria-labelledby="climate-chart-summary climate-sk-heading">
+              <span id="climate-chart-summary" class="visually-hidden">תרשים משולב: טמפרטורה ממוצעת וימי גשם לכל חודש בשנה.</span>
+              <div id="climate-chart-svg-host"></div>
+            </div>
+            <div class="climate-legend" aria-hidden="true">
+              <span class="climate-legend__item"><span class="climate-legend__swatch" style="background:linear-gradient(180deg,#3d9ca8,#1A6B72);"></span> ימים עם משקע ≥1 מ״מ (ממוצע לחודש)</span>
+              <span class="climate-legend__item"><span class="climate-legend__swatch climate-legend__swatch--line" style="background:var(--amber);"></span> טמפרטורה ממוצעת (°C)</span>
+            </div>
+            <p class="climate-footnote">הנתונים משקפים ממוצעים ארוכי טווח (לא תחזית לטיסה הקרובה). לתחזית עדכנית לעיר צעדו ל<a href="weather.html">דף מזג האוויר</a> וחפשו לדוגמה Bratislava או Poprad.</p>
+            <p class="climate-source-note">הנתונים מתאימים להשוואת עונות באזור עירוני וכבישים ראשיים; אינם תחזית לטיסה הקרובה ואינם משקפים פסגות. לפני יציאה לשטח עדכנו לפי <a href="weather.html">תחזית חיה</a>.</p>
+            <details class="climate-details">
+              <summary>הצגת טבלת מספרים מלאה לפי חודש</summary>
+              <div class="climate-table-wrap">
+                <table id="climate-data-table">
+                  <caption class="visually-hidden">ממוצע חודשי: טמפרטורה וימי גשם בסלובקיה</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">חודש</th>
+                      <th scope="col">טמפ. ממוצע (°C)</th>
+                      <th scope="col">ימי משקע ≥1 מ״מ (ממוצע)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="climate-table-body"></tbody>
+                </table>
+              </div>
+            </details>
+          </div>
+
+          <section class="combo-section" id="slovakia-combos" aria-labelledby="slovakia-combos-heading">
+            <p class="combo-section__kicker">קומבו ריאליסטי</p>
+            <h2 class="combo-section__title" id="slovakia-combos-heading">נסיעות קצרות בין סלובקיה ליעדים שכנים</h2>
+            <p class="combo-section__lead">הדגש כאן על <strong>קטעי דרך קצרים</strong> שנוחים למשפחות עם רכב - לא רשימת מדינות שלמות. זמני הנסיעה הם הערכה בכביש רגיל בלי פקקים כבדים; מעבר גבול, עצירות בדרך וילדים במושב האחורי מוסיפים זמן.</p>
+            <p class="combo-section__fineprint">טיולים ארוכים יותר (למשל המשך לפראג או לחופשה רב־שבועית בין שלוש מדינות) אפשריים - אבל דורשים תכנון לוחות זמנים נפרד; אם זה מה שאתם צריכים, דברו איתי דרך האפשרויות למטה.</p>
+            <p class="combo-section__tip"><strong>להתחיל במקום אחד ולסיים בשני:</strong> אפשר לפתוח חופשה בנקודה אחת (למשל טיסה לבודפשט או ברטיסלבה), לטייל בסלובקיה וביעדים הסמוכים מהרשימה למטה, ו<strong>לסיים ביעד אחר</strong> - כמו וינה, בודפשט או ברנו - ומשם טיסה הביתה או המשך. כך לא חוזרים פעמיים על אותו קטע דרך ארוך. חשוב לתאם מראש: השכרת רכב עם <strong>החזרה במדינה אחרת</strong> (אם רלוונטי), טיסות פתוחות או כרטיס יוצא מנקודה שונה מנקודת ההגעה, ומספר לילות בכל צד.</p>
+
+            <p class="combo-picker-hint" id="combo-routes-label">גררו אופקית במובייל · בחרו קטע דרך והמשיכו למדריך</p>
+            <div class="combo-short-grid" role="list" aria-labelledby="combo-routes-label">
+              <article class="combo-short" role="listitem">
+                <h3 class="combo-short__route">ברטיסלבה ↔ וינה</h3>
+                <p class="combo-short__time">בערך 50–70 דק׳ נסיעה · גבול שגרתי</p>
+                <p class="combo-short__hint">מתאים ליום טיול מהבירה, או ללילה בווינה לפני/אחרי זמן בהרים.</p>
+                <div class="combo-short__links">
+                  <a class="combo-mini" href="austria.html?utm_source=slovakia_guide&utm_medium=short_drive&utm_campaign=at">
+                    <span class="combo-mini__title">אוסטריה - המדריך שלנו</span>
+                    <span class="combo-mini__sub">משפחות, הרים וווינה במסלול אחד</span>
+                  </a>
+                </div>
+              </article>
+
+              <article class="combo-short" role="listitem">
+                <h3 class="combo-short__route">ברטיסלבה ↔ בודפשט</h3>
+                <p class="combo-short__time">בערך שעתיים עד שעתיים וחצי</p>
+                <p class="combo-short__hint">קו נפוץ לפני או אחרי טיול בצפון סלובקיה; מתאים גם כבסיס לילה אחד בעיר.</p>
+                <div class="combo-short__links">
+                  <a class="combo-mini" href="budapest.html?utm_source=slovakia_guide&utm_medium=short_drive&utm_campaign=hu">
+                    <span class="combo-mini__title">בודפשט - המדריך שלנו</span>
+                    <span class="combo-mini__sub">פארק מים, מרחצאות וטיולים עם ילדים</span>
+                  </a>
+                </div>
+              </article>
+
+              <article class="combo-short" role="listitem">
+                <h3 class="combo-short__route">בודפשט ↔ ליפטוב / אזור טטרה</h3>
+                <p class="combo-short__time">בערך 3–4 שעות נהיגה ישירה (תלוי בעיר המדויקת)</p>
+                <p class="combo-short__hint">זה בדיוק טווח המסלול שבו משתמשים הרבה משפחות: טיסה לבודפשט, רכב לסלובקיה. הפרטים המלאים במסלול יום־יום <a href="#itinerary" style="color:var(--teal-dark);font-weight:600;">בחלק המסלול כאן בדף</a>.</p>
+                <div class="combo-short__links">
+                  <a class="combo-mini" href="budapest.html?utm_source=slovakia_guide&utm_medium=short_drive&utm_campaign=hu_loop">
+                    <span class="combo-mini__title">בודפשט - תכנון כניסה/יציאה</span>
+                    <span class="combo-mini__sub">כשמחברים לטטרה כמו במדריך הזה</span>
+                  </a>
+                </div>
+              </article>
+
+              <article class="combo-short" role="listitem">
+                <h3 class="combo-short__route">פופרד / ליפטוב ↔ זקופנה (פולין)</h3>
+                <p class="combo-short__time">בערך שעה עד שעה וחצי + מעבר גבול</p>
+                <p class="combo-short__hint">אותו רכס טטרה מהצד הפולני - טיול יום או לילה כשמתכננים מראש את הגבול והחניה.</p>
+                <div class="combo-short__links">
+                  <a class="combo-mini" href="poland-south.html?utm_source=slovakia_guide&utm_medium=short_drive&utm_campaign=pl">
+                    <span class="combo-mini__title">זקופנה ודרום פולין</span>
+                    <span class="combo-mini__sub">מדריך למשפחות באזור ההרים</span>
+                  </a>
+                </div>
+              </article>
+
+              <article class="combo-short" role="listitem">
+                <h3 class="combo-short__route">ברטיסלבה ↔ ברנו (מוראביה)</h3>
+                <p class="combo-short__time">בערך שעה וחצי עד שעתיים</p>
+                <p class="combo-short__hint">פתיחה נוחה לצ׳כיה בלי להגיע מיד לפראג; המדריך שלנו מכסה גם דרום וצפון למסלול ארוך יותר.</p>
+                <div class="combo-short__links">
+                  <a class="combo-mini" href="czechia.html?utm_source=slovakia_guide&utm_medium=short_drive&utm_campaign=cz">
+                    <span class="combo-mini__title">צ׳כיה - המדריך שלנו</span>
+                    <span class="combo-mini__sub">דרום, פראג ורעיונות למסלול מורחב</span>
+                  </a>
+                </div>
+              </article>
+            </div>
+
+            <div class="combo-contact-bar">
+              <p class="combo-contact-bar__title">רוצים שאעזור לחבר את הקטעים בפועל?</p>
+              <p class="combo-contact-bar__text">אפשר לפנות בוואטסאפ, במייל, או למלא שאלון קצר - ואחזור עם כיוון למסלול (ימים, נהיגה, לינה לפי גילאים).</p>
+              <div class="combo-contact-bar__actions">
+                <a class="combo-pill combo-pill--wa" href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%99%D7%99%D7%A2%D7%95%D7%A5%20%D7%A2%D7%9C%20%D7%A7%D7%95%D7%9E%D7%91%D7%95%20%D7%98%D7%99%D7%95%D7%9C%20%D7%A1%D7%9C%D7%95%D7%91%D7%A7%D7%99%D7%94%20%2B%20%D7%99%D7%A2%D7%93%20%D7%A9%D7%9B%D7%9F%20%D7%A0%D7%A1%D7%99%D7%A2%D7%95%D7%AA%20%D7%A7%D7%A6%D7%A8%D7%95%D7%AA." target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  וואטסאפ
+                </a>
+                <a class="combo-pill combo-pill--mail" href="mailto:mataytasim@gmail.com?subject=%D7%A7%D7%95%D7%9E%D7%91%D7%95%20%D7%98%D7%99%D7%95%D7%9C%20%D7%A1%D7%9C%D7%95%D7%91%D7%A7%D7%99%D7%94%20%D7%95%D7%A9%D7%9B%D7%A0%D7%95%D7%AA">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  מייל
+                </a>
+                <a class="combo-pill combo-pill--form" href="questionnaire_form.html?package=har&amp;utm_source=slovakia_guide&amp;utm_medium=short_drive_combo&amp;utm_campaign=questionnaire">שאלון קצר</a>
+              </div>
+            </div>
+          </section>
 
         <!-- Car rental promo -->
         <aside style="margin:8px 0 20px;background:#fff;border:1px solid #d7e7e9;border-radius:16px;padding:14px 16px;box-shadow:0 4px 14px rgba(17,72,78,0.08);">
@@ -1850,6 +2422,93 @@
   </a>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script>
+  (function () {
+    /* Bratislava Airport norms 1991-2020 - values rounded for display (°C whole numbers; rainy days whole days). */
+    var SK = {
+      temps: [0, 2, 6, 12, 16, 20, 22, 22, 16, 11, 6, 1],
+      rainDays: [13, 11, 12, 9, 11, 11, 12, 10, 10, 11, 13, 14]
+    };
+    var months = ['ינו', 'פבר', 'מרץ', 'אפר', 'מאי', 'יונ', 'יול', 'אוג', 'ספט', 'אוק', 'נוב', 'דצמ'];
+    var host = document.getElementById('climate-chart-svg-host');
+    var tbody = document.getElementById('climate-table-body');
+    if (!host) return;
+    var W = 720;
+    var H = 268;
+    var padL = 52;
+    var padR = 20;
+    var padT = 24;
+    var padB = 46;
+    var plotW = W - padL - padR;
+    var plotH = H - padT - padB;
+    var tMin = -4;
+    var tMax = 26;
+    var baseY = padT + plotH;
+    var barMaxH = plotH * 0.4;
+    function yTemp(t) {
+      return padT + ((tMax - t) / (tMax - tMin)) * plotH;
+    }
+    function barHeight(d) {
+      return (d / 15) * barMaxH;
+    }
+    var cur = new Date().getMonth();
+    var colW = plotW / 12;
+    var bw = Math.min(27, colW - 5);
+
+    var defs = '<defs><linearGradient id="skRainGrad" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#124d52"/><stop offset="100%" stop-color="#3d9ea8"/></linearGradient></defs>';
+
+    var gridLines = '';
+    [0, 10, 20].forEach(function (mark) {
+      if (mark < tMin || mark > tMax) return;
+      var gy = yTemp(mark);
+      gridLines += '<line x1="' + padL + '" y1="' + gy + '" x2="' + (padL + plotW) + '" y2="' + gy + '" stroke="#e5dfd4" stroke-width="1" stroke-dasharray="5 7"/>';
+      gridLines += '<text x="' + (padL - 10) + '" y="' + (gy + 4) + '" text-anchor="end" font-size="11" fill="#888" font-family="Rubik,Arial,sans-serif">' + mark + '°</text>';
+    });
+
+    var bars = SK.rainDays.map(function (d, i) {
+      var cx = padL + (i + 0.5) * colW;
+      var h = barHeight(d);
+      var stroke = i === cur ? '#1A6B72' : 'none';
+      var sw = i === cur ? 2 : 0;
+      return '<rect x="' + (cx - bw / 2) + '" y="' + (baseY - h) + '" width="' + bw + '" height="' + h + '" rx="4" fill="url(#skRainGrad)" opacity="' + (i === cur ? '1' : '0.9') + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>';
+    }).join('');
+
+    var pts = SK.temps.map(function (t, i) {
+      var cx = padL + (i + 0.5) * colW;
+      return cx + ',' + yTemp(t);
+    }).join(' ');
+
+    var monthLabels = SK.temps.map(function (_, i) {
+      var cx = padL + (i + 0.5) * colW;
+      var fw = i === cur ? '700' : '500';
+      var fill = i === cur ? '#124d52' : '#5a5a5a';
+      return '<text x="' + cx + '" y="' + (H - 12) + '" text-anchor="middle" font-size="11" font-weight="' + fw + '" fill="' + fill + '" font-family="Rubik,Arial,sans-serif">' + months[i] + '</text>';
+    }).join('');
+
+    var circles = SK.temps.map(function (t, i) {
+      var cx = padL + (i + 0.5) * colW;
+      var cy = yTemp(t);
+      var r = i === cur ? 5 : 4;
+      return '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="#fff" stroke="#c4872e" stroke-width="2.5"/>';
+    }).join('');
+
+    host.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet">' +
+      defs + gridLines + bars +
+      '<polyline fill="none" stroke="#E8A045" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="' + pts + '"/>' +
+      circles + monthLabels +
+      '</svg>';
+
+    if (tbody) {
+      tbody.innerHTML = SK.temps
+        .map(function (t, i) {
+          var rowClass = i === cur ? ' class="row--current"' : '';
+          return '<tr' + rowClass + '><th scope="row">' + months[i] + '</th><td>' + t + '</td><td>' + SK.rainDays[i] + '</td></tr>';
+        })
+        .join('');
+    }
+  })();
+  </script>
   <script>
   (function() {
     var nav = document.getElementById('nav');
