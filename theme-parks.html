@@ -534,6 +534,271 @@
     .tp-chip:disabled:hover, .tp-chip[aria-disabled="true"]:hover { border-color: #e2e8f0; color: #64748b; }
     .tp-filter-help { width: 100%; margin: 2px 0 0; font-size: 12px; color: #64748b; font-family: 'Assistant', sans-serif; }
 
+    /* tp-family-planner (Phase C) */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .tp-family-planner {
+      margin-top: 16px;
+      margin-bottom: 6px;
+      padding: 14px 16px 14px;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 14px;
+      border: 1px solid rgba(26, 107, 114, 0.2);
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(253, 249, 242, 0.96) 100%);
+      box-shadow: 0 4px 16px rgba(26, 107, 114, 0.06);
+      direction: rtl;
+      text-align: right;
+    }
+    .tp-family-planner__title {
+      font-family: var(--font-heading);
+      font-size: clamp(17px, 2vw, 22px);
+      color: var(--teal-dark);
+      margin: 0 0 6px;
+      line-height: 1.2;
+    }
+    .tp-family-planner__lead {
+      font-family: 'Assistant', sans-serif;
+      font-size: 13px;
+      line-height: 1.45;
+      color: #475569;
+      margin: 0 0 8px;
+    }
+    .tp-family-planner__details {
+      margin: 0 0 12px;
+      padding: 0;
+      border: none;
+    }
+    .tp-family-planner__details-sum {
+      cursor: pointer;
+      font-family: 'Assistant', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal-dark);
+      list-style: none;
+    }
+    .tp-family-planner__details-sum::-webkit-details-marker {
+      display: none;
+    }
+    .tp-family-planner__details-body {
+      margin: 8px 0 0;
+      padding: 0;
+      font-family: 'Assistant', sans-serif;
+      font-size: 12px;
+      line-height: 1.45;
+      color: #64748b;
+    }
+    .tp-family-planner__ages-wrap {
+      margin-bottom: 12px;
+    }
+    .tp-family-planner__ages-kicker {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal-dark);
+      margin-bottom: 6px;
+    }
+    .tp-family-planner__ages {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .tp-family-planner__age-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      width: 100%;
+      max-width: 100%;
+    }
+    .tp-family-planner__age-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex: 0 1 auto;
+      min-width: 0;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--charcoal);
+    }
+    .tp-family-planner__age-inp {
+      width: 60px;
+      max-width: 100%;
+      padding: 7px 9px;
+      border-radius: 10px;
+      border: 1px solid var(--sand-dark);
+      font-size: 15px;
+      font-family: var(--font-body);
+      background: #fff;
+    }
+    .tp-family-planner__age-inp:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(26, 107, 114, 0.15);
+    }
+    .tp-family-planner__remove {
+      flex: 0 0 auto;
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: 'Assistant', sans-serif;
+      color: #64748b;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .tp-family-planner__remove:hover:not(:disabled) {
+      border-color: var(--teal);
+      color: var(--teal-dark);
+      background: #fff;
+    }
+    .tp-family-planner__remove:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .tp-family-planner__add {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px dashed rgba(26, 107, 114, 0.45);
+      background: rgba(26, 107, 114, 0.06);
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'Assistant', sans-serif;
+      color: var(--teal-dark);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .tp-family-planner__add:hover:not(:disabled) {
+      background: rgba(26, 107, 114, 0.1);
+      border-style: solid;
+    }
+    .tp-family-planner__add:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .tp-family-planner__controls-grid {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    @media (min-width: 640px) {
+      .tp-family-planner__controls-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 16px;
+        align-items: stretch;
+      }
+    }
+    .tp-family-planner__budget,
+    .tp-family-planner__limit {
+      border: none;
+      margin: 0;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(26, 107, 114, 0.1);
+    }
+    .tp-family-planner__legend {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal-dark);
+      margin-bottom: 6px;
+      padding: 0;
+    }
+    .tp-family-planner__budget-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      align-items: flex-start;
+    }
+    .tp-family-planner__budget-row--compact {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+    }
+    .tp-family-planner__radio {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: var(--font-body);
+      color: var(--charcoal);
+      cursor: pointer;
+    }
+    .tp-family-planner__radio input {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      accent-color: var(--teal);
+    }
+    .tp-family-planner__budget-hint {
+      font-size: 11px;
+      color: #64748b;
+      margin: 8px 0 0;
+      line-height: 1.4;
+      font-family: 'Assistant', sans-serif;
+    }
+    .tp-family-planner__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .tp-family-planner__apply {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: var(--font-body);
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(26, 107, 114, 0.28);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .tp-family-planner__apply:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(26, 107, 114, 0.38);
+    }
+    .tp-family-planner__clear {
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 2px solid var(--sand-dark);
+      background: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      color: var(--charcoal);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .tp-family-planner__clear:hover {
+      border-color: var(--teal);
+      color: var(--teal-dark);
+    }
+    @media (max-width: 560px) {
+      .tp-family-planner {
+        padding: 12px 12px 12px;
+        margin-top: 14px;
+      }
+      .tp-family-planner__controls-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .tp-flag-strip {
       display: flex;
       flex-wrap: wrap;
@@ -1494,7 +1759,7 @@
           <a href="packages.html" class="nav__link nav__link--packages" role="menuitem">
             <svg class="nav__packages-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5L12 3l9 4.5-9 4.5-9-4.5z"/><path d="M3 12l9 4.5 9-4.5"/><path d="M3 16.5L12 21l9-4.5"/></svg>
             <span>חבילות תכנון</span>
-            <span class="nav__packages-badge">3 חבילות</span>
+            <span class="nav__packages-badge">חבילה אחת</span>
           </a>
         </li>
         <li role="none"><a href="about.html" class="nav__link" role="menuitem">אודות</a></li>
@@ -1542,7 +1807,7 @@
         </div>
         <div class="mob-nav-item__body">
           <span class="mob-nav-item__title">חבילות תכנון</span>
-          <span class="mob-nav-item__sub">3 מסלולי ליווי</span>
+          <span class="mob-nav-item__sub">חבילה אחת</span>
         </div>
       </a>
       <div class="mob-nav-sep" role="separator"></div>
@@ -1672,6 +1937,53 @@
           </button>
         </div>
       </section>
+
+      <section class="tp-family-planner" id="tpFamilyPlanner" aria-labelledby="tp-family-planner-title">
+        <h2 id="tp-family-planner-title" class="tp-family-planner__title">התאמה למשפחה</h2>
+        <p class="tp-family-planner__lead">
+          «התאם פארקים» מפעיל סינון לפי גיל/תקציב על בסיס המסננים למעלה. המסננים המהירים מתחת לכאן מציגים את כל הפארקים לפי הקטגוריה בלבד ומבטלים את מצב ההתאמה.
+        </p>
+        <details class="tp-family-planner__details">
+          <summary class="tp-family-planner__details-sum">איך זה עובד ומה חשוב לדעת</summary>
+          <p class="tp-family-planner__details-body">
+            ההתאמה חלה על הפארקים שנשארו אחרי המסננים שלמעלה. הסיווג הוא כללי (לא מחיר כניסה מדויק). גובה, גיל ומחירים — תמיד באתר הרשמי של כל פארק.
+          </p>
+        </details>
+        <div class="tp-family-planner__ages-wrap">
+          <span class="tp-family-planner__ages-kicker" id="tpFamilyAgesLabel">גילאי הילדים (בשנים)</span>
+          <div class="tp-family-planner__ages" id="tpFamilyAges" role="group" aria-labelledby="tpFamilyAgesLabel"></div>
+          <button type="button" class="tp-family-planner__add" id="tpFamilyAddChild">+ הוסף ילד</button>
+        </div>
+        <div class="tp-family-planner__controls-grid">
+          <fieldset class="tp-family-planner__budget">
+            <legend class="tp-family-planner__legend">רמת הוצאה יומית משוערת</legend>
+            <div class="tp-family-planner__budget-row tp-family-planner__budget-row--compact">
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyBudget" value="low"> צנוע (€)</label>
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyBudget" value="mid" checked> בינוני (€–€€)</label>
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyBudget" value="high"> גבוה (עד €€€)</label>
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyBudget" value="any"> ללא הגבלה</label>
+            </div>
+            <p class="tp-family-planner__budget-hint" id="tpFamilyBudgetHint">
+              לא מחיר כניסה — לפני רכישה בודקים באתר הפארק.
+            </p>
+          </fieldset>
+          <fieldset class="tp-family-planner__limit">
+            <legend class="tp-family-planner__legend">כמה להציג במפה</legend>
+            <div class="tp-family-planner__budget-row tp-family-planner__budget-row--compact">
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyLimit" value="4" checked> עד 4</label>
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyLimit" value="8"> עד 8</label>
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyLimit" value="12"> עד 12</label>
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyLimit" value="all"> הכול</label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="tp-family-planner__actions">
+          <button type="button" class="tp-family-planner__apply" id="tpFamilyApply">התאם פארקים</button>
+          <button type="button" class="tp-family-planner__clear" id="tpFamilyClear">נקה</button>
+        </div>
+        <p class="tp-family-planner__live visually-hidden" id="tpFamilyLive" aria-live="polite" aria-atomic="true"></p>
+      </section>
+
       <div class="tp-filters" role="toolbar" aria-label="מסננים מהירים לפי משפחות">
         <button type="button" class="tp-chip" data-filter="all" aria-pressed="true">הכל</button>
         <button type="button" class="tp-chip" data-filter="toddlers" aria-pressed="false">פעוטות</button>
@@ -1902,7 +2214,21 @@
       lodgingFetchOk: false,
       embedResetBounds: null,
       embedResetButton: null,
-      hasUserInteracted: false
+      hasUserInteracted: false,
+      /**
+       * Family matcher widget (theme-parks-family-planner-design.md).
+       * When active, applyFilters() narrows by ages + budgetBand, then caps map/list by resultLimit ('4'|'8'|'12'|'all').
+       */
+      familyPlanner: {
+        active: false,
+        ages: [],
+        budgetBand: 'mid',
+        resultLimit: '4'
+      },
+      /** Count after country/chip/... filters, before family planner (for #resultMeta). */
+      filterCountBeforeFamily: 0,
+      /** Parks matching age+budget before the map cap (family planner). */
+      familyPlannerTotalMatched: 0
     };
     /** Generic map embed (per Stay22 docs) — lat/lng must be on /embed/gm, not a fixed Hub embed id. */
     var STAY22_THEME_PARKS_AFFILIATE_ID = '69c0491c51844e7588a7882e';
@@ -2132,6 +2458,148 @@
       if (p && p.price_level) return String(p.price_level);
       var lv = ['€', '€€', '€€€'];
       return lv[hashString((item ? item.id : '') + '|price') % lv.length];
+    }
+
+    /**
+     * Normalize € strings for family-planner budget bands (€ | €€ | €€€).
+     * Google may return four tiers (€€€€); we map to €€€ for planner sets.
+     */
+    function normalizePriceLevelForPlanner(raw) {
+      if (raw == null || raw === '') return null;
+      var s = String(raw).trim();
+      if (!/^€+$/.test(s)) return null;
+      var n = s.length;
+      if (n >= 4) return '€€€';
+      if (n === 3) return '€€€';
+      if (n === 2) return '€€';
+      return '€';
+    }
+
+    /**
+     * Canonical price tier for filtering (A2). Uses Google Places when cached, else JSON price_level.
+     * Returns null when unknown — family planner treats null as "pass budget" (see theme-parks-family-planner-design.md).
+     * Does not use the hash fallback from displayPriceLevel (that fallback is display-only).
+     */
+    function getEffectivePriceLevel(item) {
+      if (!item || !item.park) return null;
+      var p = item.park;
+      var googleInfo = state.placesCache[item.id];
+      if (googleInfo && googleInfo.price_level != null && googleInfo.price_level !== '') {
+        var g = normalizePriceLevelForPlanner(googleInfo.price_level);
+        if (g) return g;
+      }
+      if (p.price_level != null && String(p.price_level).trim() !== '') {
+        return normalizePriceLevelForPlanner(p.price_level);
+      }
+      return null;
+    }
+
+    /** Label shown on cards, map tip, modal: real data when present, else editorial/hash fallback. */
+    function getPriceLevelLabel(item) {
+      if (!item || !item.park) return '—';
+      var eff = getEffectivePriceLevel(item);
+      if (eff) return eff;
+      return displayPriceLevel(item.park, item);
+    }
+
+    /**
+     * Budget band → allowed editorial price tiers (B1). Matches theme-parks-family-planner-design.md §2.2.
+     * @returns {string[]|null} List of '€'|'€€'|'€€€', or null when band is 'any' (no tier restriction).
+     */
+    function allowedPriceLevels(budgetBand) {
+      var band = budgetBand == null || budgetBand === '' ? 'mid' : String(budgetBand);
+      if (band === 'low') return ['€'];
+      if (band === 'mid') return ['€', '€€'];
+      if (band === 'high') return ['€', '€€', '€€€'];
+      if (band === 'any') return null;
+      return ['€', '€€'];
+    }
+
+    /**
+     * Family planner budget check (B2). Uses getEffectivePriceLevel + allowedPriceLevels.
+     * Unknown tier (null) passes so parks without JSON/Google price data stay visible.
+     * budgetBand 'any' passes via allowedPriceLevels → null.
+     */
+    function parkPassesBudgetGate(item, budgetBand) {
+      var allowed = allowedPriceLevels(budgetBand);
+      if (allowed == null) return true;
+      var eff = getEffectivePriceLevel(item);
+      if (eff == null || eff === '') return true;
+      for (var i = 0; i < allowed.length; i++) {
+        if (allowed[i] === eff) return true;
+      }
+      return false;
+    }
+
+    /** Sanitize ages for family planner (integers 0–17, drop invalid). */
+    function normalizePlannerAges(ages) {
+      if (!ages || !ages.length) return [];
+      var out = [];
+      for (var i = 0; i < ages.length; i++) {
+        var n = Number(ages[i]);
+        if (isNaN(n)) continue;
+        n = Math.floor(n);
+        if (n < 0) n = 0;
+        if (n > 17) n = 17;
+        out.push(n);
+      }
+      return out;
+    }
+
+    /**
+     * Family planner age gate (B3). See theme-parks-family-planner-design.md §3.2.
+     * Empty ages → pass (no-op) so incomplete UI does not hide all parks.
+     */
+    function parkPassesAgeGate(item, ages) {
+      if (!item || !item.park) return true;
+      var list = normalizePlannerAges(ages);
+      if (!list.length) return true;
+
+      var p = item.park;
+      var tags = p.tags || [];
+      function has(t) {
+        return tags.indexOf(t) !== -1;
+      }
+      var k = String(p.kind || '');
+      var lod = (p.visitor_extras && p.visitor_extras.lodging) || {};
+      var resortish =
+        lod.sleep_inside_park_or_resort === true || k.indexOf('resort') !== -1 || has('resort');
+
+      var minAge = Math.min.apply(null, list);
+      var hasToddler = minAge <= 3;
+      var hasYoungKid = list.some(function (a) {
+        return a >= 4 && a <= 11;
+      });
+      var hasTeen = list.some(function (a) {
+        return a >= 13;
+      });
+      var onlyTeens = list.every(function (a) {
+        return a >= 13;
+      });
+
+      if (onlyTeens) {
+        return has('teen_thrills') || has('family_all_ages');
+      }
+      if (hasToddler && hasTeen) {
+        if (has('family_all_ages')) return true;
+        if (has('toddler_friendly') && (has('teen_thrills') || has('young_kids'))) return true;
+        if (resortish) return true;
+        return false;
+      }
+      if (hasToddler) {
+        var toddlerOk = has('toddler_friendly') || has('young_kids') || has('family_all_ages');
+        if (!toddlerOk) return false;
+        if (has('teen_only') && !has('family_all_ages')) return false;
+        return true;
+      }
+      if (hasTeen && !hasToddler) {
+        return has('teen_thrills') || has('family_all_ages') || has('young_kids') || resortish;
+      }
+      if (hasYoungKid && !hasTeen) {
+        if (has('teen_only')) return false;
+        return has('toddler_friendly') || has('young_kids') || has('family_all_ages');
+      }
+      return true;
     }
 
     function starsHtml(score, ariaLabel) {
@@ -2400,7 +2868,7 @@
       var locShort = item.countryFlag + ' ' + countryHe;
       var sl = state.browseSpotlight ? spotlightLinesFor(item) : null;
       var cardClass = 'tp-card' + (sl ? ' tp-card--spotlight' : '');
-      var price = displayPriceLevel(p, item);
+      var price = getPriceLevelLabel(item);
       var dist = displayDistanceFromCity(p, item);
       var metaInner = '<span class="tp-card__rating">' + ratingBlockHtml(p, item.id, false) + '</span> · ' + escapeHtml(city) + ' · ' + escapeHtml(locShort) + ' · ' + escapeHtml(kind) + ' · ' + escapeHtml(price);
       var logistics = '<p class="tp-card__logistics">' + escapeHtml(dist) + '</p>';
@@ -2440,7 +2908,7 @@
       var googleInfo = state.placesCache[item.id] || null;
       var score = googleInfo && googleInfo.rating != null ? googleInfo.rating : displayRatingScore(p, item.id);
       var reviewsCount = googleInfo && googleInfo.reviews_total != null ? String(googleInfo.reviews_total) : String(displayReviewCount(p, item.id));
-      var price = googleInfo && googleInfo.price_level ? googleInfo.price_level : displayPriceLevel(p, item);
+      var price = getPriceLevelLabel(item);
       var dist = displayDistanceFromCity(p, item);
       var imgInner = googleInfo && googleInfo.photo_url
         ? '<img class="tp-map-tip__img" src="' + escapeAttr(googleInfo.photo_url) + '" alt="" loading="lazy" decoding="async">'
@@ -2683,6 +3151,440 @@
       syncFlagStripPressed();
     }
 
+    var TP_FAMILY_MAX_CHILDREN = 6;
+    var TP_FAMILY_SS_KEY = 'matayTpFamilyPlannerV1';
+
+    function writeThemeParksResultMeta() {
+      var el = document.getElementById('resultMeta');
+      if (!el) return;
+      if (state.browseSpotlight) {
+        el.className = 'tp-meta tp-meta--spotlight';
+        var spotlightHtml =
+          'נבחרו עבורכם <strong>ארבעה פארקים מובילים</strong> — הקלידו <strong>שם מדינה</strong> כדי לראות את כל הפארקים במדינה.';
+        if (state.familyPlanner && state.familyPlanner.active) {
+          spotlightHtml +=
+            ' <span class="tp-meta__family-note">· מתוך ארבעת הפארקים המוצגים כאן <strong>' +
+            escapeHtml(String(state.filtered.length)) +
+            '</strong> מתאימים לפרופיל המשפחה.</span>';
+        }
+        el.innerHTML = spotlightHtml;
+        return;
+      }
+      var listItems = getListDisplayItems();
+      var base = state.filtered.length;
+      if (state.familyPlanner && state.familyPlanner.active) {
+        el.className = 'tp-meta tp-meta--family';
+        var famParts = [];
+        var totalM =
+          state.familyPlannerTotalMatched != null && state.familyPlannerTotalMatched > 0
+            ? state.familyPlannerTotalMatched
+            : base;
+        if (totalM > base) {
+          famParts.push(
+            '<strong>' +
+              escapeHtml(String(base)) +
+              '</strong> פארקים נבחרו אקראית (מדינות שונות כשניתן) · מתוך ' +
+              escapeHtml(String(totalM)) +
+              ' שמתאימים לפרופיל · מתוך ' +
+              escapeHtml(String(state.filterCountBeforeFamily)) +
+              ' אחרי המסננים'
+          );
+        } else {
+          famParts.push(
+            '<strong>' +
+              escapeHtml(String(base)) +
+              '</strong> מתאימים לפרופיל · מתוך ' +
+              escapeHtml(String(state.filterCountBeforeFamily)) +
+              ' אחרי המסננים'
+          );
+        }
+        if (state.viewportListEnabled && base > 0) {
+          famParts.push(escapeHtml(String(listItems.length)) + ' ברשימה לפי שטח המפה');
+        }
+        el.innerHTML = famParts.join(' · ');
+        return;
+      }
+      el.className = 'tp-meta';
+      if (state.viewportListEnabled && base > 0) {
+        el.innerHTML =
+          escapeHtml(String(listItems.length)) +
+          ' ברשימה לפי המפה · מתוך ' +
+          escapeHtml(String(base)) +
+          ' אחרי המסננים';
+      } else {
+        el.textContent = base + ' פארקים מוצגים';
+      }
+    }
+
+    function getFamilyBudgetRadioValue() {
+      var r = document.querySelector('input[name="tpFamilyBudget"]:checked');
+      return r ? r.value : 'mid';
+    }
+
+    function familyBudgetBandLabelHe(band) {
+      var b = band == null || band === '' ? 'mid' : String(band);
+      if (b === 'low') return 'צנועה';
+      if (b === 'high') return 'גבוהה';
+      if (b === 'any') return 'ללא הגבלה';
+      return 'בינונית';
+    }
+
+    function getFamilyLimitRadioValue() {
+      var r = document.querySelector('input[name="tpFamilyLimit"]:checked');
+      return r ? r.value : '4';
+    }
+
+    function setFamilyLimitRadioValue(v) {
+      var val = v == null || v === '' ? '4' : String(v);
+      var el = document.querySelector('input[name="tpFamilyLimit"][value="' + val + '"]');
+      if (el) el.checked = true;
+    }
+
+    /**
+     * When family matcher is active: max parks on map, or null = show every match.
+     */
+    function getFamilyResultSliceCap() {
+      if (!state.familyPlanner || !state.familyPlanner.active) return null;
+      var v =
+        state.familyPlanner.resultLimit != null ? String(state.familyPlanner.resultLimit) : getFamilyLimitRadioValue();
+      if (v === 'all') return null;
+      var n = parseInt(v, 10);
+      if (isNaN(n) || n < 1) return 4;
+      return n;
+    }
+
+    function shuffleInPlace(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = arr[i];
+        arr[i] = arr[j];
+        arr[j] = t;
+      }
+      return arr;
+    }
+
+    /**
+     * After family matching, the pool order follows the JSON (often many parks per country in a row).
+     * Taking slice(0, N) therefore skews to one country. Prefer a random round-robin across countries,
+     * then random within each country. If the user filtered to a single country, fall back to random there.
+     */
+    function pickRandomDiverseParksByCountry(items, cap) {
+      if (!items || !items.length || cap == null || cap < 1) return items ? items.slice() : [];
+      if (items.length <= cap) {
+        var full = items.slice();
+        shuffleInPlace(full);
+        return full;
+      }
+      var byCountry = {};
+      for (var i = 0; i < items.length; i++) {
+        var it = items[i];
+        var cc = it.countryCode || '_';
+        if (!byCountry[cc]) byCountry[cc] = [];
+        byCountry[cc].push(it);
+      }
+      var countries = Object.keys(byCountry);
+      shuffleInPlace(countries);
+      for (var c = 0; c < countries.length; c++) {
+        shuffleInPlace(byCountry[countries[c]]);
+      }
+      if (countries.length === 1) {
+        var only = byCountry[countries[0]].slice();
+        shuffleInPlace(only);
+        return only.slice(0, cap);
+      }
+      var out = [];
+      var idx = {};
+      while (out.length < cap) {
+        var addedRound = false;
+        var roundOrder = countries.slice();
+        shuffleInPlace(roundOrder);
+        for (var r = 0; r < roundOrder.length && out.length < cap; r++) {
+          var cc2 = roundOrder[r];
+          var list = byCountry[cc2];
+          var pos = idx[cc2] || 0;
+          if (pos < list.length) {
+            out.push(list[pos]);
+            idx[cc2] = pos + 1;
+            addedRound = true;
+          }
+        }
+        if (!addedRound) break;
+      }
+      return out;
+    }
+
+    function familyResultLimitLabelHe() {
+      var v =
+        state.familyPlanner && state.familyPlanner.resultLimit != null
+          ? String(state.familyPlanner.resultLimit)
+          : getFamilyLimitRadioValue();
+      if (v === 'all') return 'במפה מוצגות כל ההתאמות לפרופיל';
+      if (v === '12') return 'במפה מוצגים עד שנים־עשר פארקים';
+      if (v === '8') return 'במפה מוצגים עד שמונה פארקים';
+      return 'במפה מוצגים עד ארבעה פארקים';
+    }
+
+    function setFamilyBudgetRadioValue(v) {
+      var el = document.querySelector('input[name="tpFamilyBudget"][value="' + v + '"]');
+      if (el) el.checked = true;
+    }
+
+    function renumberFamilyPlannerRows() {
+      var wrap = document.getElementById('tpFamilyAges');
+      if (!wrap) return;
+      var rows = wrap.querySelectorAll('.tp-family-planner__age-row');
+      for (var r = 0; r < rows.length; r++) {
+        var row = rows[r];
+        var n = row.querySelector('.tp-family-planner__n');
+        if (n) n.textContent = String(r + 1);
+        var inp = row.querySelector('.tp-family-planner__age-inp');
+        if (inp) {
+          inp.id = 'tpFamilyAge' + (r + 1);
+          inp.setAttribute('aria-label', 'גיל ילד או ילדה מספר ' + (r + 1));
+        }
+      }
+    }
+
+    function syncFamilyPlannerRemoveButtons() {
+      var wrap = document.getElementById('tpFamilyAges');
+      if (!wrap) return;
+      var rows = wrap.querySelectorAll('.tp-family-planner__age-row');
+      var multi = rows.length > 1;
+      for (var i = 0; i < rows.length; i++) {
+        var btn = rows[i].querySelector('.tp-family-planner__remove');
+        if (btn) {
+          btn.disabled = !multi;
+          btn.style.visibility = multi ? 'visible' : 'hidden';
+        }
+      }
+    }
+
+    function syncFamilyPlannerAddButton() {
+      var btn = document.getElementById('tpFamilyAddChild');
+      if (!btn) return;
+      var wrap = document.getElementById('tpFamilyAges');
+      var n = wrap ? wrap.querySelectorAll('.tp-family-planner__age-row').length : 0;
+      btn.disabled = n >= TP_FAMILY_MAX_CHILDREN;
+    }
+
+    function createFamilyAgeRow(index1, value) {
+      var row = document.createElement('div');
+      row.className = 'tp-family-planner__age-row';
+      var lab = document.createElement('label');
+      lab.className = 'tp-family-planner__age-label';
+      lab.innerHTML = 'ילד/ה <span class="tp-family-planner__n">' + index1 + '</span> · גיל ';
+      var inp = document.createElement('input');
+      inp.type = 'number';
+      inp.className = 'tp-family-planner__age-inp';
+      inp.min = '0';
+      inp.max = '17';
+      inp.step = '1';
+      inp.value = value === '' || value == null ? '' : String(value);
+      inp.setAttribute('aria-label', 'גיל ילד או ילדה מספר ' + index1);
+      inp.id = 'tpFamilyAge' + index1;
+      lab.appendChild(inp);
+      row.appendChild(lab);
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'tp-family-planner__remove';
+      btn.textContent = 'הסר';
+      btn.setAttribute('aria-label', 'הסר שורת גיל ' + index1);
+      btn.addEventListener('click', function () {
+        row.remove();
+        renumberFamilyPlannerRows();
+        syncFamilyPlannerRemoveButtons();
+        syncFamilyPlannerAddButton();
+      });
+      row.appendChild(btn);
+      return row;
+    }
+
+    function renderFamilyPlannerRows(agesArr) {
+      var wrap = document.getElementById('tpFamilyAges');
+      if (!wrap) return;
+      var ages = agesArr && agesArr.length ? agesArr.slice() : [''];
+      if (ages.length > TP_FAMILY_MAX_CHILDREN) ages = ages.slice(0, TP_FAMILY_MAX_CHILDREN);
+      wrap.innerHTML = '';
+      for (var i = 0; i < ages.length; i++) {
+        wrap.appendChild(createFamilyAgeRow(i + 1, ages[i]));
+      }
+      renumberFamilyPlannerRows();
+      syncFamilyPlannerRemoveButtons();
+      syncFamilyPlannerAddButton();
+    }
+
+    function collectAgesFromFamilyPlannerDom() {
+      var wrap = document.getElementById('tpFamilyAges');
+      if (!wrap) return [];
+      var inputs = wrap.querySelectorAll('.tp-family-planner__age-inp');
+      var out = [];
+      for (var i = 0; i < inputs.length; i++) {
+        var v = String(inputs[i].value || '').trim();
+        if (v === '') continue;
+        var n = Number(v);
+        if (isNaN(n)) continue;
+        out.push(n);
+      }
+      return normalizePlannerAges(out);
+    }
+
+    function persistFamilyPlannerSession() {
+      try {
+        sessionStorage.setItem(
+          TP_FAMILY_SS_KEY,
+          JSON.stringify({
+            ages: collectAgesFromFamilyPlannerDom(),
+            budgetBand: getFamilyBudgetRadioValue(),
+            resultLimit: getFamilyLimitRadioValue(),
+            active: !!(state.familyPlanner && state.familyPlanner.active)
+          })
+        );
+      } catch (e) {}
+    }
+
+    /**
+     * Optional family matcher off: browse by country/chips only (no age/budget gate).
+     * Used when picking quick category chips or full toolbar reset — not when changing country alone.
+     */
+    function deactivateFamilyPlannerForChipFilters() {
+      if (!state.familyPlanner || !state.familyPlanner.active) return;
+      state.familyPlanner.active = false;
+      state.familyPlanner.ages = [];
+      persistFamilyPlannerSession();
+      var live = document.getElementById('tpFamilyLive');
+      if (live) live.textContent = '';
+    }
+
+    function initFamilyPlannerUi() {
+      var wrap = document.getElementById('tpFamilyAges');
+      var applyBtn = document.getElementById('tpFamilyApply');
+      var clearBtn = document.getElementById('tpFamilyClear');
+      var addBtn = document.getElementById('tpFamilyAddChild');
+      if (!wrap || !applyBtn || !clearBtn || !addBtn) return;
+
+      try {
+        var raw = sessionStorage.getItem(TP_FAMILY_SS_KEY);
+        if (raw) {
+          var o = JSON.parse(raw);
+          if (o && typeof o === 'object') {
+            if (o.budgetBand) setFamilyBudgetRadioValue(o.budgetBand);
+            if (o.resultLimit) setFamilyLimitRadioValue(o.resultLimit);
+            if (o.ages && o.ages.length) {
+              var ag = normalizePlannerAges(
+                o.ages.map(function (x) {
+                  return Number(x);
+                })
+              );
+              renderFamilyPlannerRows(ag);
+              state.familyPlanner.budgetBand = getFamilyBudgetRadioValue();
+              state.familyPlanner.resultLimit = getFamilyLimitRadioValue();
+              if (o.active && ag.length) {
+                state.familyPlanner.active = true;
+                state.familyPlanner.ages = ag.slice();
+              } else {
+                state.familyPlanner.active = false;
+                state.familyPlanner.ages = [];
+              }
+            } else {
+              renderFamilyPlannerRows([]);
+              state.familyPlanner.resultLimit = getFamilyLimitRadioValue();
+            }
+          } else {
+            renderFamilyPlannerRows([]);
+            state.familyPlanner.resultLimit = getFamilyLimitRadioValue();
+          }
+        } else {
+          renderFamilyPlannerRows([]);
+          state.familyPlanner.resultLimit = getFamilyLimitRadioValue();
+        }
+      } catch (e) {
+        renderFamilyPlannerRows([]);
+        state.familyPlanner.resultLimit = getFamilyLimitRadioValue();
+      }
+
+      document.querySelectorAll('input[name="tpFamilyLimit"]').forEach(function (limInp) {
+        limInp.addEventListener('change', function () {
+          state.familyPlanner.resultLimit = getFamilyLimitRadioValue();
+          persistFamilyPlannerSession();
+          if (state.familyPlanner && state.familyPlanner.active) {
+            applyFilters();
+            var liveEl = document.getElementById('tpFamilyLive');
+            if (liveEl) liveEl.textContent = 'עודכן: ' + familyResultLimitLabelHe();
+          }
+        });
+      });
+
+      addBtn.addEventListener('click', function () {
+        var w = document.getElementById('tpFamilyAges');
+        if (!w || w.querySelectorAll('.tp-family-planner__age-row').length >= TP_FAMILY_MAX_CHILDREN) return;
+        var next = w.querySelectorAll('.tp-family-planner__age-row').length + 1;
+        w.appendChild(createFamilyAgeRow(next, ''));
+        renumberFamilyPlannerRows();
+        syncFamilyPlannerRemoveButtons();
+        syncFamilyPlannerAddButton();
+      });
+
+      applyBtn.addEventListener('click', function () {
+        var ages = collectAgesFromFamilyPlannerDom();
+        if (!ages.length) {
+          window.alert('נא להזין לפחות גיל אחד (0–17).');
+          return;
+        }
+        state.familyPlanner.active = true;
+        state.familyPlanner.ages = ages;
+        state.familyPlanner.budgetBand = getFamilyBudgetRadioValue();
+        state.familyPlanner.resultLimit = getFamilyLimitRadioValue();
+        persistFamilyPlannerSession();
+        if (window.plausible) {
+          try {
+            plausible('ThemeParks-FamilyPlanner-Apply', {
+              props: {
+                child_count: String(ages.length),
+                budget_band: state.familyPlanner.budgetBand,
+                result_limit: state.familyPlanner.resultLimit
+              }
+            });
+          } catch (e1) {}
+        }
+        applyFilters();
+        var live = document.getElementById('tpFamilyLive');
+        if (live) {
+          live.textContent =
+            'הותאם: ' +
+            familyResultLimitLabelHe() +
+            ' · ' +
+            ages.length +
+            (ages.length === 1 ? ' ילד או ילדה' : ' ילדים') +
+            ', רמת הוצאה ' +
+            familyBudgetBandLabelHe(state.familyPlanner.budgetBand);
+        }
+        var split = document.getElementById('splitRoot');
+        if (split) {
+          try {
+            split.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } catch (e2) {
+            split.scrollIntoView(true);
+          }
+        }
+      });
+
+      clearBtn.addEventListener('click', function () {
+        state.familyPlanner.active = false;
+        state.familyPlanner.ages = [];
+        state.familyPlanner.budgetBand = 'mid';
+        state.familyPlanner.resultLimit = '4';
+        setFamilyBudgetRadioValue('mid');
+        setFamilyLimitRadioValue('4');
+        renderFamilyPlannerRows([]);
+        try {
+          sessionStorage.removeItem(TP_FAMILY_SS_KEY);
+        } catch (e3) {}
+        var live = document.getElementById('tpFamilyLive');
+        if (live) live.textContent = '';
+        applyFilters();
+      });
+    }
+
     function applyFilters() {
       syncSelectedFlagFromInput();
       var countryQ = (document.getElementById('countryFilter').value || '').trim().toLowerCase().normalize('NFKC');
@@ -2691,7 +3593,14 @@
 
       var quickSelected = document.querySelector('.tp-quick-chip[aria-pressed="true"]');
       var quickParkName = quickSelected ? String(quickSelected.getAttribute('data-park') || '').toLowerCase() : '';
-      var browseSpotlight = !state.hasUserInteracted && !countryQ && !quickParkName && mode === 'all';
+      /** Spotlight is only the 4 hero parks — skip it when family matcher runs so matching uses the full list. */
+      var familyPlannerOn = state.familyPlanner && state.familyPlanner.active;
+      var browseSpotlight =
+        !familyPlannerOn &&
+        !state.hasUserInteracted &&
+        !countryQ &&
+        !quickParkName &&
+        mode === 'all';
 
       if (browseSpotlight) {
         state.browseSpotlight = true;
@@ -2712,24 +3621,26 @@
         });
       }
 
+      state.familyPlannerTotalMatched = 0;
+      var preFamilyFilteredCount = state.filtered.length;
+      if (state.familyPlanner && state.familyPlanner.active) {
+        var fpp = state.familyPlanner;
+        state.filtered = state.filtered.filter(function (item) {
+          return parkPassesAgeGate(item, fpp.ages) && parkPassesBudgetGate(item, fpp.budgetBand);
+        });
+        state.familyPlannerTotalMatched = state.filtered.length;
+        var sliceCap = getFamilyResultSliceCap();
+        if (sliceCap != null && state.filtered.length > sliceCap) {
+          state.filtered = pickRandomDiverseParksByCountry(state.filtered, sliceCap);
+        }
+      }
+
+      state.filterCountBeforeFamily = preFamilyFilteredCount;
       state.shouldFitBounds = true;
       syncMap();
       renderCards();
       syncFlagStripPressed();
-      var el = document.getElementById('resultMeta');
-      if (state.browseSpotlight) {
-        el.className = 'tp-meta tp-meta--spotlight';
-        el.innerHTML = 'נבחרו עבורכם <strong>ארבעה פארקים מובילים</strong> — הקלידו <strong>שם מדינה</strong> כדי לראות את כל הפארקים במדינה.';
-      } else {
-        el.className = 'tp-meta';
-        var listItems = getListDisplayItems();
-        var base = state.filtered.length;
-        if (state.viewportListEnabled && !state.browseSpotlight && base > 0) {
-          el.innerHTML = escapeHtml(String(listItems.length)) + ' ברשימה לפי המפה · מתוך ' + escapeHtml(String(base)) + ' אחרי המסננים';
-        } else {
-          el.textContent = base + ' פארקים מוצגים';
-        }
-      }
+      writeThemeParksResultMeta();
     }
 
     function bindCardMapHover(cardsEl) {
@@ -2756,7 +3667,12 @@
         listHead.innerHTML = '';
         empty.hidden = false;
         if (emptyTitle) emptyTitle.textContent = 'לא נמצאו פארקים';
-        if (emptyHint) emptyHint.textContent = 'נסו שם מדינה אחר, או נקו את השדה ושינו את המסננים.';
+        if (emptyHint) {
+          emptyHint.textContent =
+            state.familyPlanner && state.familyPlanner.active
+              ? 'נסו „ללא הגבלה” בתקציב, מסנן „הכל”, שינוי גילאים, או הרחבת חיפוש המדינה. אפשר גם „נקה” לביטול התאמת המשפחה.'
+              : 'נסו שם מדינה אחר, או נקו את השדה ושינו את המסננים.';
+        }
         cards.innerHTML = '';
         return;
       }
@@ -2795,12 +3711,7 @@
       state.viewportTimer = setTimeout(function () {
         state.viewportTimer = null;
         renderCards();
-        var el = document.getElementById('resultMeta');
-        if (el && !state.browseSpotlight) {
-          var listItems = getListDisplayItems();
-          el.className = 'tp-meta';
-          el.innerHTML = escapeHtml(String(listItems.length)) + ' ברשימה לפי המפה · מתוך ' + escapeHtml(String(state.filtered.length)) + ' אחרי המסננים';
-        }
+        writeThemeParksResultMeta();
       }, 140);
     }
 
@@ -3117,7 +4028,7 @@
       if (isWaterOrResortComingSoon(p)) {
         parts.push('<div class="tp-modal__soon-banner" role="status"><strong>פארק מים / ריזורט</strong> — מידע מורחב יתווסף בהמשך. עד אז: קישורים רשמיים למטה.</div>');
       }
-      var pLevel = displayPriceLevel(p, item);
+      var pLevel = getPriceLevelLabel(item);
       var pDist = displayDistanceFromCity(p, item);
       parts.push('<div class="tp-modal__kpis">' +
         '<span class="tp-modal__kpi"><strong>דירוג</strong> · <span class="tp-modal__rating-row">' + ratingBlockHtml(p, id, true) + '</span></span>' +
@@ -3181,6 +4092,7 @@
           return;
         }
         state.hasUserInteracted = true;
+        deactivateFamilyPlannerForChipFilters();
         document.querySelectorAll('.tp-chip').forEach(function (b) {
           if (b.disabled) return;
           b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
@@ -3251,6 +4163,7 @@
     if (resetSearchBtn) {
       resetSearchBtn.addEventListener('click', function () {
         state.hasUserInteracted = true;
+        deactivateFamilyPlannerForChipFilters();
         countryEl.value = '';
         state.selectedFlagCode = '';
         quickChips.forEach(function (c) { c.setAttribute('aria-pressed', 'false'); });
@@ -3273,20 +4186,7 @@
       viewportCb.addEventListener('change', function () {
         state.viewportListEnabled = !!viewportCb.checked;
         renderCards();
-        var el = document.getElementById('resultMeta');
-        if (!el) return;
-        if (state.browseSpotlight) {
-          el.className = 'tp-meta tp-meta--spotlight';
-          el.innerHTML = 'נבחרו עבורכם <strong>ארבעה פארקים מובילים</strong> — הקלידו <strong>שם מדינה</strong> כדי לראות את כל הפארקים במדינה.';
-        } else {
-          var listItems = getListDisplayItems();
-          el.className = 'tp-meta';
-          if (state.viewportListEnabled && state.filtered.length > 0) {
-            el.innerHTML = escapeHtml(String(listItems.length)) + ' ברשימה לפי המפה · מתוך ' + escapeHtml(String(state.filtered.length)) + ' אחרי המסננים';
-          } else {
-            el.textContent = state.filtered.length + ' פארקים מוצגים';
-          }
-        }
+        writeThemeParksResultMeta();
       });
     }
 
@@ -3424,6 +4324,8 @@
     } catch (e) {}
 
     ensureLodgingData();
+
+    initFamilyPlannerUi();
 
     if (embedded) {
       ingestEmbedData(embedded);
