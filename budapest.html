@@ -361,6 +361,735 @@
     .article-section { margin-bottom: 52px; }
     .article-section__title { font-size: clamp(20px, 2.5vw, 26px); color: var(--teal); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--sand-dark); display: flex; align-items: center; gap: 10px; }
     .article-section__title-icon { font-size: 24px; }
+    .article-section__title .article-section__title-icon-svg {
+      display: inline-flex;
+      vertical-align: middle;
+      margin-inline-end: 6px;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+    .climate-block {
+      background: linear-gradient(165deg, #fff 0%, var(--sand) 100%);
+      border: 1px solid var(--sand-dark);
+      border-radius: 20px;
+      padding: 22px 18px 26px;
+      box-shadow: 0 6px 28px rgba(26, 107, 114, 0.08);
+      margin-bottom: 28px;
+      scroll-margin-top: calc(var(--nav-height) + 16px);
+    }
+    .climate-block__kicker {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      color: var(--teal-dark);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .climate-block__lead {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--charcoal);
+      margin-bottom: 18px;
+      max-width: 62ch;
+    }
+    .climate-chart-wrap {
+      direction: ltr;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(26, 107, 114, 0.12);
+      padding: 12px 8px 8px;
+    }
+    .climate-chart-wrap svg {
+      display: block;
+      width: 100%;
+      min-width: 580px;
+      height: auto;
+      vertical-align: middle;
+    }
+    .climate-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 28px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(26, 107, 114, 0.1);
+      font-size: 13px;
+      color: #4a4a4a;
+    }
+    .climate-legend__item { display: inline-flex; align-items: center; gap: 8px; }
+    .climate-legend__swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+    .climate-legend__swatch--line { height: 3px; width: 22px; border-radius: 2px; }
+    .climate-footnote { font-size: 13px; color: #5c5c5c; margin-top: 14px; line-height: 1.65; }
+    .climate-footnote a { color: var(--teal-dark); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+    .climate-source-note {
+      font-size: 13px;
+      line-height: 1.65;
+      color: #555;
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: rgba(245, 237, 216, 0.45);
+      border-radius: 10px;
+      border-right: 3px solid var(--amber-light);
+      max-width: 72ch;
+    }
+    .climate-table-wrap {
+      margin-top: 16px;
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--sand-dark);
+    }
+    .climate-table-wrap table {
+      width: 100%;
+      min-width: 520px;
+      border-collapse: collapse;
+      font-size: 12px;
+      background: #fff;
+    }
+    .climate-table-wrap th,
+    .climate-table-wrap td {
+      padding: 8px 6px;
+      text-align: center;
+      border-bottom: 1px solid var(--sand);
+    }
+    .climate-table-wrap thead th {
+      background: var(--sand);
+      font-weight: 600;
+      color: var(--teal-dark);
+    }
+    .climate-table-wrap tbody th {
+      background: rgba(253, 248, 242, 0.9);
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+    .climate-table-wrap caption {
+      caption-side: bottom;
+      padding: 10px 8px 6px;
+      font-size: 11px;
+      color: #777;
+      text-align: center;
+    }
+    .climate-table-wrap tr:last-child td { border-bottom: none; }
+    .climate-table-wrap tr.row--current td,
+    .climate-table-wrap tr.row--current th {
+      background: rgba(26, 107, 114, 0.09);
+      font-weight: 600;
+    }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .climate-details {
+      margin-top: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(26, 107, 114, 0.18);
+      background: rgba(255, 255, 255, 0.75);
+      overflow: hidden;
+    }
+    .climate-details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--teal-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      user-select: none;
+    }
+    .climate-details summary::-webkit-details-marker { display: none; }
+    .climate-details summary::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-left: 2px solid var(--teal);
+      border-bottom: 2px solid var(--teal);
+      transform: rotate(-45deg);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+    .climate-details[open] summary::after { transform: rotate(135deg); margin-top: 4px; }
+    .climate-details summary:hover,
+    .climate-details summary:focus-visible {
+      background: rgba(26, 107, 114, 0.06);
+      outline: none;
+    }
+    .climate-details .climate-table-wrap {
+      margin-top: 0;
+      border: none;
+      border-radius: 0;
+      border-top: 1px solid var(--sand-dark);
+    }
+    .beyond-block {
+      scroll-margin-top: calc(var(--nav-height) + 16px);
+      margin-bottom: 32px;
+      padding: 22px 20px 24px;
+      background: #fff;
+      border: 1px solid var(--sand-dark);
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+    .beyond-block__kicker {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--teal-dark);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .beyond-block__title {
+      font-family: var(--font-heading);
+      font-size: clamp(20px, 2.2vw, 24px);
+      color: var(--teal);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+    .beyond-block__lead {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--charcoal);
+      margin-bottom: 14px;
+      max-width: 72ch;
+    }
+    .beyond-block__note {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #666;
+      margin: 0 0 18px;
+      padding: 12px 14px;
+      background: rgba(26, 107, 114, 0.06);
+      border-radius: 12px;
+      border-right: 3px solid var(--teal);
+      max-width: 72ch;
+    }
+    .beyond-sub {
+      font-family: var(--font-heading);
+      font-size: 1.12rem;
+      color: var(--teal-dark);
+      margin: 22px 0 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--sand-dark);
+      line-height: 1.3;
+    }
+    .beyond-sub:first-of-type { margin-top: 8px; }
+    .beyond-block p { margin-bottom: 12px; color: #444; line-height: 1.75; max-width: 72ch; }
+    .beyond-block p:last-child { margin-bottom: 0; }
+    .beyond-block ul {
+      margin: 0 0 16px;
+      padding-right: 1.25em;
+      color: #444;
+      line-height: 1.72;
+    }
+    .beyond-block li { margin-bottom: 10px; }
+    .beyond-block li strong { color: var(--teal-dark); }
+    .beyond-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+      gap: 12px;
+      margin: 14px 0 18px;
+    }
+    .beyond-card {
+      border: 1px solid var(--sand-dark);
+      border-radius: 14px;
+      padding: 14px 14px 12px;
+      background: linear-gradient(165deg, #fff 0%, var(--cream) 100%);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+    .beyond-card__place {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      color: var(--teal-dark);
+      margin: 0 0 4px;
+      line-height: 1.3;
+    }
+    .beyond-card__meta {
+      font-size: 12px;
+      font-weight: 700;
+      color: #9a6b2d;
+      margin: 0 0 8px;
+      line-height: 1.35;
+    }
+    .beyond-card__text { font-size: 13px; line-height: 1.55; color: #444; margin: 0; }
+    .beyond-links {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--sand-dark);
+      font-size: 14px;
+      line-height: 1.65;
+      color: #444;
+    }
+    .beyond-links a {
+      color: var(--teal-dark);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Magazine strip: multi-day Hungary combos */
+    .beyond-mag {
+      margin: 16px 0 8px;
+    }
+    .beyond-mag__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--sand-dark);
+      border: 1px solid var(--sand-dark);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(26, 107, 114, 0.08);
+    }
+    .beyond-mag__card {
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      grid-template-areas: 'num body cta';
+      gap: 0 14px;
+      align-items: stretch;
+      padding: 18px 16px 18px 14px;
+      background: linear-gradient(165deg, #fffef9 0%, #fff 42%);
+      margin: 0;
+      border: none;
+      text-align: right;
+    }
+    .beyond-mag__card:nth-child(even) {
+      background: linear-gradient(165deg, #fbf9f4 0%, #fdfbf7 100%);
+    }
+    .beyond-mag__num {
+      grid-area: num;
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: rgba(26, 107, 114, 0.35);
+      line-height: 1.2;
+      padding-top: 2px;
+      letter-spacing: -0.02em;
+    }
+    .beyond-mag__body {
+      grid-area: body;
+      min-width: 0;
+    }
+    .beyond-mag__label {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      color: var(--teal-dark);
+      margin: 0 0 6px;
+      line-height: 1.25;
+    }
+    .beyond-mag__label-en {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+    .beyond-mag__deck {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.62;
+      color: #444;
+    }
+    .beyond-mag__cta-wrap {
+      grid-area: cta;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      align-self: center;
+    }
+    .beyond-mag__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 40px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      border: 1px solid rgba(26, 107, 114, 0.28);
+      background: var(--teal);
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(26, 107, 114, 0.25);
+      transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    }
+    .beyond-mag__btn:hover,
+    .beyond-mag__btn:focus-visible {
+      background: var(--teal-dark);
+      box-shadow: 0 4px 16px rgba(26, 107, 114, 0.32);
+      outline: none;
+    }
+    .beyond-mag__btn:active { transform: scale(0.98); }
+    .beyond-mag__btn--amber {
+      background: linear-gradient(135deg, #f9d98b, #e8a045);
+      color: #3a2a05;
+      border-color: rgba(196, 135, 46, 0.45);
+      box-shadow: 0 2px 12px rgba(232, 160, 69, 0.3);
+    }
+    .beyond-mag__btn--amber:hover,
+    .beyond-mag__btn--amber:focus-visible {
+      background: linear-gradient(135deg, #e8a045, #c4872e);
+      color: #1e1503;
+    }
+    .beyond-list-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 10px 0 18px;
+    }
+    .beyond-list-card {
+      background: linear-gradient(165deg, #fff 0%, #faf8f3 100%);
+      border: 1px solid var(--sand-dark);
+      border-radius: 14px;
+      padding: 14px 14px 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+    .beyond-list-card__title {
+      margin: 0 0 6px;
+      color: var(--teal-dark);
+      font-family: var(--font-heading);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+    .beyond-list-card__text {
+      margin: 0;
+      color: #4a4a4a;
+      font-size: 13.5px;
+      line-height: 1.62;
+    }
+    .beyond-list-card__link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 9px;
+      color: var(--teal-dark);
+      font-size: 12.5px;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .beyond-list-swipe-note {
+      display: none;
+      margin: 2px 0 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal-dark);
+    }
+    @media (max-width: 720px) {
+      .beyond-mag__card {
+        grid-template-columns: 1fr;
+        grid-template-areas: 'num' 'body' 'cta';
+        gap: 10px 0;
+        padding: 16px 14px;
+      }
+      .beyond-mag__num { font-size: 18px; padding-top: 0; }
+      .beyond-mag__cta-wrap { justify-content: stretch; }
+      .beyond-mag__btn { width: 100%; min-height: 44px; }
+      .beyond-list-grid {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(84%, 84%);
+        grid-template-columns: none;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        padding: 2px 2px 8px;
+        margin-inline: -2px;
+      }
+      .beyond-list-grid::-webkit-scrollbar { display: none; }
+      .beyond-list-card {
+        scroll-snap-align: start;
+        min-height: 100%;
+      }
+      .beyond-list-swipe-note { display: block; }
+    }
+
+    /* Near Budapest: swipe row (mobile) + flip cards */
+    .beyond-near { margin: 14px 0 22px; }
+    .beyond-near__swipe {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 0 10px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(26, 107, 114, 0.09) 0%, rgba(245, 237, 216, 0.65) 100%);
+      border: 1px solid rgba(26, 107, 114, 0.22);
+      box-shadow: 0 2px 10px rgba(26, 107, 114, 0.06);
+    }
+    .beyond-near__swipe-icon {
+      font-size: 20px;
+      line-height: 1;
+      flex-shrink: 0;
+      animation: beyondSwipeNudge 2.2s ease-in-out infinite;
+    }
+    .beyond-near__swipe-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--teal-dark);
+      line-height: 1.45;
+      text-align: center;
+    }
+    .beyond-near__swipe-text small {
+      display: block;
+      margin-top: 3px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #5a5a5a;
+    }
+    @keyframes beyondSwipeNudge {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-5px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .beyond-near__swipe-icon { animation: none; }
+    }
+    @media (max-width: 559px) {
+      .beyond-near__swipe { display: flex; }
+    }
+    .beyond-near-hint {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--teal-dark);
+      margin: 0 0 10px;
+      line-height: 1.55;
+    }
+    .beyond-near-scroll-edge { position: relative; }
+    .beyond-near-scroll-edge .beyond-near-grid { position: relative; z-index: 2; }
+    @media (max-width: 559px) {
+      .beyond-near-scroll-edge::before,
+      .beyond-near-scroll-edge::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 10px;
+        width: 28px;
+        z-index: 1;
+        pointer-events: none;
+      }
+      .beyond-near-scroll-edge::before {
+        right: 0;
+        background: linear-gradient(to left, #fff, rgba(255, 255, 255, 0));
+      }
+      .beyond-near-scroll-edge::after {
+        left: 0;
+        background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+      }
+    }
+    .beyond-near-grid {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 4px;
+      padding-bottom: 8px;
+      margin: 0 -4px;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
+    }
+    .beyond-near-grid::-webkit-scrollbar { height: 6px; }
+    .beyond-near-grid::-webkit-scrollbar-thumb {
+      background: rgba(26, 107, 114, 0.25);
+      border-radius: 999px;
+    }
+    @media (min-width: 560px) {
+      .beyond-near-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        overflow: visible;
+        scroll-snap-type: none;
+        margin: 0;
+        padding-bottom: 0;
+      }
+    }
+    @media (min-width: 900px) {
+      .beyond-near-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    .beyond-flip {
+      flex: 0 0 min(88vw, 300px);
+      scroll-snap-align: start;
+      min-height: 300px;
+      perspective: 1100px;
+      border: none;
+      padding: 0;
+      background: none;
+      cursor: pointer;
+      text-align: right;
+      font: inherit;
+      -webkit-tap-highlight-color: transparent;
+      border-radius: 14px;
+    }
+    .beyond-flip:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 3px;
+    }
+    @media (min-width: 560px) {
+      .beyond-flip { flex: none; min-height: 0; }
+    }
+    .beyond-flip__inner {
+      position: relative;
+      width: 100%;
+      min-height: 300px;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: 14px;
+    }
+    .beyond-flip.is-flipped .beyond-flip__inner {
+      transform: rotateY(180deg);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .beyond-flip__inner { transition: none; }
+    }
+    .beyond-flip__face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--sand-dark);
+      background: linear-gradient(165deg, #fff 0%, var(--cream) 100%);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .beyond-flip__face--back {
+      transform: rotateY(180deg);
+      padding: 14px;
+      overflow-y: auto;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+    .beyond-flip__img-wrap {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background: #e8e4dc;
+      flex-shrink: 0;
+    }
+    .beyond-flip__img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .beyond-flip__finger {
+      position: absolute;
+      bottom: 10px;
+      left: 14px;
+      font-size: 30px;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+      animation: beyondFingerPoint 1.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .beyond-flip.is-flipped .beyond-flip__finger {
+      animation: none;
+      opacity: 0;
+    }
+    @keyframes beyondFingerPoint {
+      0%, 100% { transform: translate(0, 0) rotate(-8deg); }
+      35% { transform: translate(-6px, -8px) rotate(0deg) scale(1.06); }
+      60% { transform: translate(3px, 2px) rotate(-12deg) scale(0.96); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .beyond-flip__finger { animation: none; }
+    }
+    .beyond-flip__front-body {
+      padding: 12px 14px 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .beyond-flip__place {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      color: var(--teal-dark);
+      margin: 0 0 4px;
+      line-height: 1.3;
+    }
+    .beyond-flip__en {
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+      margin: 0 0 8px;
+    }
+    .beyond-flip__meta {
+      font-size: 12px;
+      font-weight: 700;
+      color: #9a6b2d;
+      margin: 0 0 6px;
+      line-height: 1.35;
+    }
+    .beyond-flip__tap {
+      margin-top: auto;
+      padding-top: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal-dark);
+    }
+    .beyond-flip__note {
+      display: block;
+      margin-top: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #8a8a8a;
+      line-height: 1.4;
+    }
+    .beyond-flip__text {
+      font-size: 13px;
+      line-height: 1.58;
+      color: #444;
+      margin: 0 0 10px;
+    }
+    .beyond-flip__text:last-child { margin-bottom: 0; }
+    .beyond-flip__back-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      color: var(--teal-dark);
+      margin: 0 0 8px;
+    }
+    .beyond-flip__hint-end {
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--teal-dark);
+    }
+    .beyond-card__photo { vertical-align: middle; }
+    .beyond-flip__close-btn {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(26, 107, 114, 0.45);
+      background: #fff;
+      color: var(--teal-dark);
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .beyond-flip__close-btn:hover,
+    .beyond-flip__close-btn:focus-visible {
+      background: rgba(26, 107, 114, 0.08);
+      border-color: var(--teal);
+      outline: none;
+    }
     .bu-tp-embed { margin-top: 8px; }
     .bu-tp-embed .article-section__title { justify-content: space-between; flex-wrap: wrap; row-gap: 10px; }
     .bu-tp-embed__title-main { display: inline-flex; align-items: center; gap: 10px; }
@@ -1482,13 +2211,15 @@
           <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
           <div class="toc__list">
             <a href="#intro" class="toc__link"><span class="toc__num">1</span> למה בודפשט עם ילדים?</a>
-            <a href="#route-map" class="toc__link"><span class="toc__num">2</span> המסלול על המפה</a>
-            <a href="#itinerary" class="toc__link"><span class="toc__num">3</span> מסלול יום-יום מומלץ</a>
-            <a href="#attractions" class="toc__link"><span class="toc__num">4</span> אטרקציות מומלצות</a>
-            <a href="#theme-parks-budapest" class="toc__link"><span class="toc__num">5</span> פארקי שעשועים בהונגריה</a>
-            <a href="#accommodation" class="toc__link"><span class="toc__num">6</span> המלצות לינה</a>
-            <a href="#airport-stay" class="toc__link"><span class="toc__num">7</span> המלצת לינה ליד שדה התעופה</a>
-            <a href="#tips" class="toc__link"><span class="toc__num">8</span> טיפים חשובים</a>
+            <a href="#climate-bu" class="toc__link"><span class="toc__num">2</span> אקלים ועונה מומלצת</a>
+            <a href="#budapest-beyond" class="toc__link"><span class="toc__num">3</span> מעבר לבודפשט: ימי טיול פלוס המשך</a>
+            <a href="#route-map" class="toc__link"><span class="toc__num">4</span> המסלול על המפה</a>
+            <a href="#itinerary" class="toc__link"><span class="toc__num">5</span> מסלול יום-יום מומלץ</a>
+            <a href="#attractions" class="toc__link"><span class="toc__num">6</span> אטרקציות מומלצות</a>
+            <a href="#theme-parks-budapest" class="toc__link"><span class="toc__num">7</span> פארקי שעשועים בהונגריה</a>
+            <a href="#accommodation" class="toc__link"><span class="toc__num">8</span> המלצות לינה</a>
+            <a href="#airport-stay" class="toc__link"><span class="toc__num">9</span> המלצת לינה ליד שדה התעופה</a>
+            <a href="#tips" class="toc__link"><span class="toc__num">10</span> טיפים חשובים</a>
           </div>
         </div>
 
@@ -1519,6 +2250,362 @@
             <p class="countdown-cta__tag">הדפסתם? תייגו את עצמכם בפייסבוק של מתי טסים כדי שאראה איך אתם מתכוננים! <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;color:var(--teal-dark);font-weight:600;text-decoration:none;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true" style="transform:translateY(1px);"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg><span>לדף הפייסבוק</span></a></p>
           </div>
         </div>
+
+        <div class="article-section climate-block" id="climate-bu" aria-labelledby="climate-bu-heading">
+          <h2 class="article-section__title" id="climate-bu-heading">
+            <svg class="article-section__title-icon-svg" xmlns="http://www.w3.org/2000/svg" width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            אקלים בבודפשט - מתי נוח לטייל?
+          </h2>
+          <p class="climate-block__kicker">ממוצעים חודשיים · מעלות צלזיוס וימי משקע (מספרים שלמים, מעוגלים)</p>
+          <p class="climate-block__lead">הגרף מציג נורמות חודשיות לאזור בודפשט (עיר מישורית על הדנובה): ממוצע טמפרטורה יומית (קו) וממוצע ימים עם משקע של לפחות 1 מ״מ (עמודות). באגם בלטון או בהרים הצפוניים יכול להיות פער משמעותי - קריר יותר ליד המים, חמים/קרים יותר בגובה. בחורף שכבת ערפל וקר קיצוני לסירוגין; בקיץ סופות רוגש לעיתים.</p>
+          <div class="climate-chart-wrap" role="img" aria-labelledby="climate-chart-summary-bu climate-bu-heading">
+            <span id="climate-chart-summary-bu" class="visually-hidden">תרשים משולב: טמפרטורה ממוצעת וימי גשם לכל חודש בשנה.</span>
+            <div id="climate-chart-svg-host-bu"></div>
+          </div>
+          <div class="climate-legend" aria-hidden="true">
+            <span class="climate-legend__item"><span class="climate-legend__swatch" style="background:linear-gradient(180deg,#3d9ca8,#1A6B72);"></span> ימים עם משקע ≥1 מ״מ (ממוצע לחודש)</span>
+            <span class="climate-legend__item"><span class="climate-legend__swatch climate-legend__swatch--line" style="background:var(--amber);"></span> טמפרטורה ממוצעת (°C)</span>
+          </div>
+          <p class="climate-footnote">הנתונים משקפים ממוצעים ארוכי טווח (לא תחזית לטיסה הקרובה). לתחזית עדכנית צעדו ל<a href="weather.html">דף מזג האוויר</a> וחפשו Budapest.</p>
+          <p class="climate-source-note">לפני יציאה לטיול יום או לכבישים הרריים עדכנו לפי <a href="weather.html">תחזית חיה</a> - במיוחד בחורף ובאזור אגם בלטון.</p>
+          <details class="climate-details">
+            <summary>הצגת טבלת מספרים מלאה לפי חודש</summary>
+            <div class="climate-table-wrap">
+              <table id="climate-data-table-bu">
+                <caption class="visually-hidden">ממוצע חודשי: טמפרטורה וימי גשם בבודפשט</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">חודש</th>
+                    <th scope="col">טמפ. ממוצע (°C)</th>
+                    <th scope="col">ימי משקע ≥1 מ״מ (ממוצע)</th>
+                  </tr>
+                </thead>
+                <tbody id="climate-table-body-bu"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+
+        <section class="beyond-block" id="budapest-beyond" aria-labelledby="budapest-beyond-heading">
+          <p class="beyond-block__kicker">מסלולים מורחבים</p>
+          <h2 class="beyond-block__title" id="budapest-beyond-heading">מעבר לבודפשט: ימי טיול פלוס המשך בהונגריה</h2>
+          <p class="beyond-block__lead">בודפשט ממוקמת על נתיבי רכבות, אוטובוסים בין-עירוניים וכבישים מהירים - אפשר לצאת ליום טיול בלי להרגיש שעוזבים את אירופה, או לשרשר כמה לילות באזור אחר ולחזור לטיסה מאותו שדה. למטה ריכוז של יעדים מעשיים למשפחות: קודם קרוב לבירה, אחר כך רעיונות לכמה ימים באותה הונגריה, ולבסוף מעברי גבול קצרים לאוסטריה, סלובקיה וסביבה.</p>
+          <p class="beyond-block__note"><strong>חשוב לדעת:</strong> זמני הנסיעה הם הערכה בכביש/רכבת בשעות שקטות יחסית; ילדים, עצירות ותורים בגבול מאריכים. לפני סופי שבוע וחגים בבלטון וביעדי ספא - שווה להזמין לינה מראש.</p>
+
+          <h3 class="beyond-sub">קרוב לבודפשט (בערך עד שעתיים נסיעה)</h3>
+          <p>אלה בין הקלאסיקות של תושבי הבירה ושל מבקרים - מתאים ליום טיול עם רכב או רכבת לכיוון הצפון או המערב.</p>
+          <!-- תמונות: ויקיפדיה / קומונס (גיבוי). להחלפת תמונה מ-Google Places הוסיפו data-google-place-id מחיפוש Place ID במפות Google (מצב מפתח באתר זה). -->
+          <div class="beyond-near" id="budapest-near-daytrips">
+            <div class="beyond-near__swipe" aria-hidden="true">
+              <span class="beyond-near__swipe-icon">↔</span>
+              <p class="beyond-near__swipe-text">
+                החליקו לצדדים לעוד כרטיסים
+                <small>6 כרטיסים · גלילה אופקית בטלפון</small>
+              </p>
+              <span class="beyond-near__swipe-icon">↔</span>
+            </div>
+            <p class="beyond-near-hint" id="beyond-near-hint">לחצו על כרטיס כדי לפתוח הסבר מלא · לחיצה שנייה או &quot;סגור&quot; לחזרה</p>
+            <div class="beyond-near-scroll-edge">
+              <div class="beyond-near-grid" role="group" aria-describedby="beyond-near-hint">
+
+                <div class="beyond-flip" role="button" tabindex="0" aria-expanded="false" aria-label="סנטנדרה – פתיחת פרטים">
+                  <div class="beyond-flip__inner">
+                    <span class="beyond-flip__face beyond-flip__face--front">
+                      <span class="beyond-flip__img-wrap">
+                        <img class="beyond-card__photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Szentendre_montage1.jpg/330px-Szentendre_montage1.jpg" alt="סנטנדרה, הונגריה" width="330" height="220" loading="lazy" decoding="async">
+                        <span class="beyond-flip__finger" aria-hidden="true">👆</span>
+                      </span>
+                      <span class="beyond-flip__front-body">
+                        <span class="beyond-flip__place">סנטנדרה</span>
+                        <span class="beyond-flip__en">Szentendre</span>
+                        <span class="beyond-flip__meta">בערך 40 דק׳ ברכב · רכבת פרברים HÉV מהמרכז</span>
+                        <span class="beyond-flip__tap">לחצו לפרטים מלאים</span>
+                      </span>
+                    </span>
+                    <div class="beyond-flip__face beyond-flip__face--back">
+                      <span class="beyond-flip__back-title">סנטנדרה · Szentendre</span>
+                      <p class="beyond-flip__text">עיירה צבעונית על גדות הדנובה, ידועה במוזיאונים, גלריות ואמנים. סמטאות ציוריות, בתי קפה וגלידה.</p>
+                      <p class="beyond-flip__text">ניתן לשלב עם <strong>המוזיאון הפתוח לנוף העם</strong> (<strong>Skanzen</strong>) הסמוך – מוזיאון פתוח עם בתים מכל רחבי הונגריה; מתאים במיוחד למשפחות.</p>
+                      <p class="beyond-flip__hint-end">לחצו על הכרטיס שוב או &quot;סגור&quot; למטה</p>
+                      <button type="button" class="beyond-flip__close-btn">סגור</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="beyond-flip" role="button" tabindex="0" aria-expanded="false" aria-label="פיתול הדנובה – פתיחת פרטים">
+                  <div class="beyond-flip__inner">
+                    <span class="beyond-flip__face beyond-flip__face--front">
+                      <span class="beyond-flip__img-wrap">
+                        <img class="beyond-card__photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Budapest_parliament_from_the_river.jpg/320px-Budapest_parliament_from_the_river.jpg" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Visegrad_Upper_Castle_01.jpg/320px-Visegrad_Upper_Castle_01.jpg';" alt="נהר הדנובה באזור בודפשט" width="320" height="213" loading="lazy" decoding="async">
+                        <span class="beyond-flip__finger" aria-hidden="true">👆</span>
+                      </span>
+                      <span class="beyond-flip__front-body">
+                        <span class="beyond-flip__place">פיתול הדנובה</span>
+                        <span class="beyond-flip__en">Danube Bend · Visegrád &amp; Esztergom</span>
+                        <span class="beyond-flip__meta">בערך שעה עד שעה ורבע נהיגה לאורך הנהר</span>
+                        <span class="beyond-flip__tap">לחצו לפרטים מלאים</span>
+                        <span class="beyond-flip__note">תמונה מייצגת · וישגרד / אסטרגום</span>
+                      </span>
+                    </span>
+                    <div class="beyond-flip__face beyond-flip__face--back">
+                      <span class="beyond-flip__back-title">וישגרד · Visegrád</span>
+                      <p class="beyond-flip__text"><strong>וישגרד</strong> (Visegrád) – טירה על רכס הדנובה ונוף רחב על פיתול הנהר. במדריך שלנו מופיע גם פארק הבובסלד בוישגרד.</p>
+                      <span class="beyond-flip__back-title" style="margin-top:12px;">אסטרגום · Esztergom</span>
+                      <p class="beyond-flip__text"><strong>אסטרגום</strong> – הבזיליקה (אחת הגדולות באירופה) וגשר מריה ולריה לעבר <strong>שטורובו</strong> (Štúrovo) בסלובקיה.</p>
+                      <p class="beyond-flip__text">חלופה לנהיגה: סיורים מאורגנים או שייט בדנובה מהעיר.</p>
+                      <p class="beyond-flip__hint-end">לחיצה על הכרטיס או &quot;סגור&quot;</p>
+                      <button type="button" class="beyond-flip__close-btn">סגור</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="beyond-flip" role="button" tabindex="0" aria-expanded="false" aria-label="גודולו – פתיחת פרטים">
+                  <div class="beyond-flip__inner">
+                    <span class="beyond-flip__face beyond-flip__face--front">
+                      <span class="beyond-flip__img-wrap">
+                        <img class="beyond-card__photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Grassalkovich-kast%C3%A9ly_%287051._sz%C3%A1m%C3%BA_m%C5%B1eml%C3%A9k%29_6.jpg/330px-Grassalkovich-kast%C3%A9ly_%287051._sz%C3%A1m%C3%BA_m%C5%B1eml%C3%A9k%29_6.jpg" alt="ארמון גראסלקוביץ׳ בגודולו" width="330" height="220" loading="lazy" decoding="async">
+                        <span class="beyond-flip__finger" aria-hidden="true">👆</span>
+                      </span>
+                      <span class="beyond-flip__front-body">
+                        <span class="beyond-flip__place">הארמון המלכותי בגודולו</span>
+                        <span class="beyond-flip__en">Royal Palace of Gödöllő</span>
+                        <span class="beyond-flip__meta">בערך 35–45 דק׳ מזרחית לבודפשט</span>
+                        <span class="beyond-flip__tap">לחצו לפרטים מלאים</span>
+                      </span>
+                    </span>
+                    <div class="beyond-flip__face beyond-flip__face--back">
+                      <span class="beyond-flip__back-title">גודולו · Gödöllő</span>
+                      <p class="beyond-flip__text">ארמון בארוק (ארמון גראסלקוביץ׳) שנבנה במאה ה-18; מאוחר יותר נקשר גם ל<strong>הקיסרית אליזבת (סיסי)</strong>. סיורים מודרכים וגנים רחבים – מתאים למי שרוצה טירה מלכותית בלי יום נסיעה ארוך.</p>
+                      <p class="beyond-flip__hint-end">לחיצה על הכרטיס או &quot;סגור&quot;</p>
+                      <button type="button" class="beyond-flip__close-btn">סגור</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="beyond-flip" role="button" tabindex="0" aria-expanded="false" aria-label="אגם ולנסה – פתיחת פרטים">
+                  <div class="beyond-flip__inner">
+                    <span class="beyond-flip__face beyond-flip__face--front">
+                      <span class="beyond-flip__img-wrap">
+                        <img class="beyond-card__photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Ag%C3%A1rd_009.jpg/330px-Ag%C3%A1rd_009.jpg" alt="אגם ולנסה ליד אגארד" width="330" height="220" loading="lazy" decoding="async">
+                        <span class="beyond-flip__finger" aria-hidden="true">👆</span>
+                      </span>
+                      <span class="beyond-flip__front-body">
+                        <span class="beyond-flip__place">אגם ולנסה</span>
+                        <span class="beyond-flip__en">Lake Velence (Velencei-tó)</span>
+                        <span class="beyond-flip__meta">בערך 45 דק׳ דרומית לבודפשט</span>
+                        <span class="beyond-flip__tap">לחצו לפרטים מלאים</span>
+                      </span>
+                    </span>
+                    <div class="beyond-flip__face beyond-flip__face--back">
+                      <span class="beyond-flip__back-title">אגם ולנסה · Velencei-tó</span>
+                      <p class="beyond-flip__text">אגם רדוד יחסית – במים מתחממים מהר בקיץ; מתאים לרחצה קלה, טיילת ופעילות מים משפחתית. קרוב לבודפשט מבלטון (Lake Balaton).</p>
+                      <p class="beyond-flip__hint-end">לחיצה על הכרטיס או &quot;סגור&quot;</p>
+                      <button type="button" class="beyond-flip__close-btn">סגור</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="beyond-flip" role="button" tabindex="0" aria-expanded="false" aria-label="טאטא – פתיחת פרטים">
+                  <div class="beyond-flip__inner">
+                    <span class="beyond-flip__face beyond-flip__face--front">
+                      <span class="beyond-flip__img-wrap">
+                        <img class="beyond-card__photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Tatai_v%C3%A1r-_az_%C3%96reg_t%C3%B3_fel%C5%91l.JPG/330px-Tatai_v%C3%A1r-_az_%C3%96reg_t%C3%B3_fel%C5%91l.JPG" alt="טירת טאטא ואגם אורג" width="330" height="220" loading="lazy" decoding="async">
+                        <span class="beyond-flip__finger" aria-hidden="true">👆</span>
+                      </span>
+                      <span class="beyond-flip__front-body">
+                        <span class="beyond-flip__place">טאטא</span>
+                        <span class="beyond-flip__en">Tata</span>
+                        <span class="beyond-flip__meta">בערך שעה מערבית לבודפשט</span>
+                        <span class="beyond-flip__tap">לחצו לפרטים מלאים</span>
+                      </span>
+                    </span>
+                    <div class="beyond-flip__face beyond-flip__face--back">
+                      <span class="beyond-flip__back-title">טאטא · Tata</span>
+                      <p class="beyond-flip__text">עיר קומפקטית ליד <strong>אגם אורג</strong> (Öreg-tó): טירה, פארקים ומסלולי הליכה קלים – יום רגוע עם ילדים קטנים.</p>
+                      <p class="beyond-flip__text">נוח כחיבור להמשך נסיעה לכיוון <strong>גיור</strong> (Győr) בצפון-מערב.</p>
+                      <p class="beyond-flip__hint-end">לחיצה על הכרטיס או &quot;סגור&quot;</p>
+                      <button type="button" class="beyond-flip__close-btn">סגור</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="beyond-flip" role="button" tabindex="0" aria-expanded="false" aria-label="אתייק – פתיחת פרטים">
+                  <div class="beyond-flip__inner">
+                    <span class="beyond-flip__face beyond-flip__face--front">
+                      <span class="beyond-flip__img-wrap">
+                        <img class="beyond-card__photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Etyek%2C_H%C5%91s%C3%B6k_tere%2C_l%C3%A9gifot%C3%B33.jpg/330px-Etyek%2C_H%C5%91s%C3%B6k_tere%2C_l%C3%A9gifot%C3%B33.jpg" alt="אתייק ממעוף ציפור" width="330" height="220" loading="lazy" decoding="async">
+                        <span class="beyond-flip__finger" aria-hidden="true">👆</span>
+                      </span>
+                      <span class="beyond-flip__front-body">
+                        <span class="beyond-flip__place">אתייק – כרמים</span>
+                        <span class="beyond-flip__en">Etyek wine region</span>
+                        <span class="beyond-flip__meta">בערך 45 דק׳ נסיעה</span>
+                        <span class="beyond-flip__tap">לחצו לפרטים מלאים</span>
+                      </span>
+                    </span>
+                    <div class="beyond-flip__face beyond-flip__face--back">
+                      <span class="beyond-flip__back-title">אתייק · Etyek</span>
+                      <p class="beyond-flip__text">כפר כרמים ליד בודפשט – יקבים קטנים, נקודות תצפית ומסעדות. מתאים בעיקר למבוגרים; חלק מהמקומות מתאימים גם לעצירת צהריים עם ילדים.</p>
+                      <p class="beyond-flip__hint-end">לחיצה על הכרטיס או &quot;סגור&quot;</p>
+                      <button type="button" class="beyond-flip__close-btn">סגור</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <h3 class="beyond-sub" id="beyond-hu-multi">כמה ימים בהונגריה - שילובים חכמים</h3>
+          <div class="beyond-mag" role="list" aria-labelledby="beyond-hu-multi">
+            <div class="beyond-mag__grid">
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">01</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">אגם בלטון</h4>
+                  <span class="beyond-mag__label-en">Lake Balaton · Tihany, Badacsony, Keszthely, Siófok</span>
+                  <p class="beyond-mag__deck">ה&quot;ים ההונגרי&quot;: טיהאני לכיכר מצודה ונוף, באדאסוןי לגבעות געש קטנות, קסטהיי לחופים ואטרקציות מערביות, שיופוק לקיץ תוסס. שווה לילה אחד לפחות כדי לא לנהוג פעמיים אותו קטע ארוך מבודפשט.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn beyond-mag__btn--amber" href="theme-parks.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_balaton">למדריך פארקים ומים ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">02</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">אגר</h4>
+                  <span class="beyond-mag__label-en">Eger</span>
+                  <p class="beyond-mag__deck">כארבע שעות צפון־מזרח: טירה, רובע טורקי, יין אגר והמרחצאות התרמיים באזור – מתאים לסופ&quot;ש קצר או לשני לילות.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn" href="tips.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_eger">למרכז הטיפים ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">03</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">הורטובאג׳</h4>
+                  <span class="beyond-mag__label-en">Hortobágy National Park</span>
+                  <p class="beyond-mag__deck">מישור הפושטה: סוסים ושמורת טבע שונה לגמרי מהדנובה; נסיעה ארוכה – בעיקר לחובבי צילום וטבע פתוח.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn beyond-mag__btn--amber" href="tips.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_hortobagy">למרכז הטיפים ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">04</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">אגטלאק</h4>
+                  <span class="beyond-mag__label-en">Aggtelek Karst · UNESCO</span>
+                  <p class="beyond-mag__deck">מערות קארסט מוכרות – מתאים למי שמתכנן סיור מודרך במערה (גילאים ומשך הליכה לפי האתר).</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn" href="tips.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_aggtelek">למרכז הטיפים ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">05</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">הולוקו</h4>
+                  <span class="beyond-mag__label-en">Hollókő · כפר מורשת</span>
+                  <p class="beyond-mag__deck">כפר מסורתי שמור – טיול צהריים ציורי וצילומים.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn beyond-mag__btn--amber" href="tips.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_holloko">למרכז הטיפים ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">06</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">גיור ופנונהלמה</h4>
+                  <span class="beyond-mag__label-en">Győr · Pannonhalma Abbey</span>
+                  <p class="beyond-mag__deck">כיוון מערב: עיר נוחה ומנזר היסטורי על גבעה; מתאים לשביל חזרה שונה מבודפשט.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn" href="destinations.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_gyor">עוד יעדים באתר ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">07</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">פץ׳</h4>
+                  <span class="beyond-mag__label-en">Pécs</span>
+                  <p class="beyond-mag__deck">דרומית, כארבע שעות ומעלה: ניחוח ים־תיכוני, קטקומבות ועיר אוניברסיטאית – יותר טיול של כמה ימים מאשר יום אחד.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn beyond-mag__btn--amber" href="tips.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_pecs">למרכז הטיפים ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">08</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">דברצן ו־Hajdúszoboszló</h4>
+                  <span class="beyond-mag__label-en">Debrecen · thermal baths</span>
+                  <p class="beyond-mag__deck">צפון־מזרח: משפחות שאוהבות ספא ופארקי מים מרוכזים באזור.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn" href="theme-parks.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_debrecen_spas">למדריך פארקים ומים ←</a>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <h3 class="beyond-sub">מעבר גבול קצר (רכבת או רכב)</h3>
+          <p>מבודפשט יוצאות רכבות ישירות ומהירות לכמה בירות שכנות - אפשר עדיין לחזור ללילה בעיר אם לא טוענים יותר מדי.</p>
+          <p class="beyond-list-swipe-note">החליקו עם האצבע ימינה/שמאלה כדי לראות עוד כרטיסים.</p>
+          <div class="beyond-list-grid" role="list" aria-label="יעדי מעבר גבול קצרים">
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">ברטיסלבה (סלובקיה)</h4>
+              <p class="beyond-list-card__text">בערך שעתיים וחצי ברכבת או כשעתיים ברכב; כיכר מרכזית, טירה וטיילת דנובה.</p>
+              <a class="beyond-list-card__link" href="slovakia.html?utm_source=budapest_guide&utm_medium=beyond_budapest&utm_campaign=sk">למדריך סלובקיה ←</a>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">וינה (אוסטריה)</h4>
+              <p class="beyond-list-card__text">כשעה וחצי עד שעתיים ברכבת מהמרכז; מוזיאונים, פארק פרטר ושוקי חורף.</p>
+              <a class="beyond-list-card__link" href="austria.html?utm_source=budapest_guide&utm_medium=beyond_budapest&utm_campaign=at">למדריך אוסטריה ←</a>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">ברנו / דרום מוראביה (צ׳כיה)</h4>
+              <p class="beyond-list-card__text">כ־2.5 שעות נהיגה; מתאים לחיבור לטיול רב-ימים עם פראג והסביבה.</p>
+              <a class="beyond-list-card__link" href="czechia.html?utm_source=budapest_guide&utm_medium=beyond_budapest&utm_campaign=cz">למדריך צ׳כיה ←</a>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">גראץ או לינץ (אוסטריה)</h4>
+              <p class="beyond-list-card__text">כיוון דרום־מערב / מערב; מתאים אם ממשיכים ברכב לאלפים או לאיטליה.</p>
+            </article>
+          </div>
+
+          <h3 class="beyond-sub">רעיונות נוספים שלא תמיד מופיעים ברשימות קצרות</h3>
+          <p class="beyond-list-swipe-note">החליקו עם האצבע ימינה/שמאלה כדי לראות עוד כרטיסים.</p>
+          <div class="beyond-list-grid" role="list" aria-label="רעיונות משלימים למסלול ארוך">
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">קושיצה (Košice, סלובקיה)</h4>
+              <p class="beyond-list-card__text">מזרחית, יותר מארבע שעות; מתאים בעיקר כחלק ממסלול מורחב במזרח אירופה.</p>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">טימישוארה (רומניה)</h4>
+              <p class="beyond-list-card__text">נסיעה ארוכה; למטיילים שממשיכים ל&quot;טיול גדול&quot; אחרי בודפשט.</p>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">זגרב (קרואטיה)</h4>
+              <p class="beyond-list-card__text">יום נהיגה מלא; לא יום טיול קלאסי, אבל קישור טוב במסלול חופשה ארוך.</p>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">קריניצה (Krynica) / דרום פולין</h4>
+              <p class="beyond-list-card__text">רלוונטי אם חוזרים צפונה עם רכב ובונים לולאה רחבה יותר.</p>
+              <a class="beyond-list-card__link" href="poland-south.html?utm_source=budapest_guide&utm_medium=beyond_budapest&utm_campaign=pl">למדריך דרום פולין ←</a>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">שייט נושא על הדנובה</h4>
+              <p class="beyond-list-card__text">קטעים בין ערים (למשל לכיוון וינה) כחלופה רגועה לרכב ליום אחד.</p>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">אזור אורשג (Őrség)</h4>
+              <p class="beyond-list-card__text">טבע גבולי הונגריה–אוסטריה–סלובניה; מתאים למי שאוהב כפרים ושקט.</p>
+            </article>
+          </div>
+
+        </section>
 
         <!-- Car rental promo -->
         <aside style="margin:8px 0 20px;background:#fff;border:1px solid #d7e7e9;border-radius:16px;padding:14px 16px;box-shadow:0 4px 14px rgba(17,72,78,0.08);">
@@ -1886,18 +2973,6 @@
           </div>
           <p class="attractions-grid__attrib">תמונות ממוזערות: גיבוי מ-Wikimedia; כשמוגדר מפתח Google Maps והדפדפן מאפשרים, נטענת תמונה מ-Google Places לפי מזהה המקום (לפי תנאי Google).</p>
 
-          <!-- DISCOVER BANNER -->
-          <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:16px;padding:18px 24px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;display:none;">
-            <div style="display:flex;align-items:center;gap:12px;">
-              <div style="font-size:22px;">🔍</div>
-              <div>
-                <div style="font-family:var(--font-heading);font-size:15px;color:var(--charcoal);margin-bottom:2px;">רוצים לגלות עוד מקומות?</div>
-                <div style="font-size:13px;color:#888;">חפשו מסעדות, אטרקציות ומקומות מוסתרים לפי מיקום - מבוסס AI</div>
-              </div>
-            </div>
-            <a href="tips.html#tab-recommend" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:20px;padding:9px 20px;font-family:var(--font-body);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">חפש מקומות</a>
-          </div>
-
         </div>
 
         <div class="cta-card cta-card--accommodation-mobile" aria-label="תכנון מסלול אישי לבודפשט">
@@ -2053,31 +3128,113 @@
         <div class="cta-card">
           <div class="cta-card__title">רוצים מסלול מותאם? <span class="flag-icon flag-hu" style="width:22px;height:15px;vertical-align:middle;border-radius:3px;"></span></div>
           <div class="cta-card__text">אבנה לכם מסלול מלא לבודפשט - יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.</div>
-          <a href="packages.html" class="cta-card__btn">לחבילות תכנון</a>
-          <a href="https://wa.me/972546758145?text=אני מתעניין בתכנון טיול לבודפשט עם ילדים" class="cta-card__wa" target="_blank">
+          <a href="packages.html" class="cta-card__btn">לחבילות תכנון ←</a>
+          <a href="https://wa.me/972546758145?text=%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%98%D7%99%D7%95%D7%9C%20%D7%9C%D7%91%D7%95%D7%93%D7%A4%D7%A9%D7%98%20%D7%A2%D7%9D%20%D7%99%D7%9C%D7%93%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" class="cta-card__wa">
             <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            שלחו הודעה
+            וואטסאפ
           </a>
         </div>
-
       </aside>
 
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
-    <p>מתי טסים &copy; 2026 - <a href="services.html">דף הבית</a> | <a href="tips.html">טיפים</a> | <a href="destinations.html">יעדים</a> | <a href="terms.html">תנאי שימוש</a> · <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" aria-label="עמוד הפייסבוק של מתי טסים" style="display:inline-flex;align-items:center;vertical-align:middle;"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;"><circle cx="16" cy="16" r="16" fill="#1877F2"/><path d="M21.5 16H18v-2c0-.828.672-1 1-1h2V10h-2.5C16.015 10 15 11.79 15 13.5V16h-2.5v3H15v8h3v-8h2l.5-3z" fill="#FFFFFF"/></svg></a></p>
+    <p>מתי טסים &copy; 2026 · <a href="services.html">דף הבית</a> · <a href="destinations.html">יעדים</a> · <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" aria-label="עמוד הפייסבוק של מתי טסים" style="display:inline-flex;align-items:center;vertical-align:middle;"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;"><circle cx="16" cy="16" r="16" fill="#1877F2"/><path d="M21.5 16H18v-2c0-.828.672-1 1-1h2V10h-2.5C16.015 10 15 11.79 15 13.5V16h-2.5v3H15v8h3v-8h2l.5-3z" fill="#FFFFFF"/></svg></a></p>
     <p style="margin-top:12px;font-size:12px;opacity:0.6;">* חלק מהקישורים באתר הם קישורי שותפים. אם תזמינו דרכם, אקבל עמלה קטנה - ללא עלות נוספת עבורכם. ההמלצות תמיד מבוססות על ניסיון אישי בלבד.</p>
   </div>
 </footer>
 
-<a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;" target="_blank" aria-label="וואטסאפ">
-  <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  (function () {
+    var BU = {
+      temps: [-1, 1, 6, 12, 16, 20, 22, 21, 16, 10, 5, 0],
+      rainDays: [12, 11, 11, 11, 12, 11, 10, 10, 10, 11, 12, 13]
+    };
+    var months = ['ינו', 'פבר', 'מרץ', 'אפר', 'מאי', 'יונ', 'יול', 'אוג', 'ספט', 'אוק', 'נוב', 'דצמ'];
+    var host = document.getElementById('climate-chart-svg-host-bu');
+    var tbody = document.getElementById('climate-table-body-bu');
+    if (!host) return;
+    var W = 720;
+    var H = 268;
+    var padL = 52;
+    var padR = 20;
+    var padT = 24;
+    var padB = 46;
+    var plotW = W - padL - padR;
+    var plotH = H - padT - padB;
+    var tMin = -6;
+    var tMax = 28;
+    var baseY = padT + plotH;
+    var barMaxH = plotH * 0.4;
+    function yTemp(t) {
+      return padT + ((tMax - t) / (tMax - tMin)) * plotH;
+    }
+    function barHeight(d) {
+      return (d / 15) * barMaxH;
+    }
+    var cur = new Date().getMonth();
+    var colW = plotW / 12;
+    var bw = Math.min(27, colW - 5);
+
+    var defs = '<defs><linearGradient id="buRainGrad" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#124d52"/><stop offset="100%" stop-color="#3d9ea8"/></linearGradient></defs>';
+
+    var gridLines = '';
+    [0, 10, 20].forEach(function (mark) {
+      if (mark < tMin || mark > tMax) return;
+      var gy = yTemp(mark);
+      gridLines += '<line x1="' + padL + '" y1="' + gy + '" x2="' + (padL + plotW) + '" y2="' + gy + '" stroke="#e5dfd4" stroke-width="1" stroke-dasharray="5 7"/>';
+      gridLines += '<text x="' + (padL - 10) + '" y="' + (gy + 4) + '" text-anchor="end" font-size="11" fill="#888" font-family="Rubik,Arial,sans-serif">' + mark + '°</text>';
+    });
+
+    var bars = BU.rainDays.map(function (d, i) {
+      var cx = padL + (i + 0.5) * colW;
+      var h = barHeight(d);
+      var stroke = i === cur ? '#1A6B72' : 'none';
+      var sw = i === cur ? 2 : 0;
+      return '<rect x="' + (cx - bw / 2) + '" y="' + (baseY - h) + '" width="' + bw + '" height="' + h + '" rx="4" fill="url(#buRainGrad)" opacity="' + (i === cur ? '1' : '0.9') + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>';
+    }).join('');
+
+    var pts = BU.temps.map(function (t, i) {
+      var cx = padL + (i + 0.5) * colW;
+      return cx + ',' + yTemp(t);
+    }).join(' ');
+
+    var monthLabels = BU.temps.map(function (_, i) {
+      var cx = padL + (i + 0.5) * colW;
+      var fw = i === cur ? '700' : '500';
+      var fill = i === cur ? '#124d52' : '#5a5a5a';
+      return '<text x="' + cx + '" y="' + (H - 12) + '" text-anchor="middle" font-size="11" font-weight="' + fw + '" fill="' + fill + '" font-family="Rubik,Arial,sans-serif">' + months[i] + '</text>';
+    }).join('');
+
+    var circles = BU.temps.map(function (t, i) {
+      var cx = padL + (i + 0.5) * colW;
+      var cy = yTemp(t);
+      var r = i === cur ? 5 : 4;
+      return '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="#fff" stroke="#c4872e" stroke-width="2.5"/>';
+    }).join('');
+
+    host.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet">' +
+      defs + gridLines + bars +
+      '<polyline fill="none" stroke="#E8A045" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="' + pts + '"/>' +
+      circles + monthLabels +
+      '</svg>';
+
+    if (tbody) {
+      tbody.innerHTML = BU.temps
+        .map(function (t, i) {
+          var rowClass = i === cur ? ' class="row--current"' : '';
+          return '<tr' + rowClass + '><th scope="row">' + months[i] + '</th><td>' + t + '</td><td>' + BU.rainDays[i] + '</td></tr>';
+        })
+        .join('');
+    }
+  })();
+</script>
 <script>
 (function() {
   'use strict';
@@ -2213,8 +3370,7 @@
   function hydrateBudapestAttractionThumbs() {
     var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
     if (!key) return;
-    var root = document.getElementById('attractions');
-    if (!root) return;
+    if (!document.getElementById('attractions') && !document.getElementById('budapest-near-daytrips')) return;
     if (!window.google || !google.maps) {
       if (!hydrateBudapestAttractionThumbs._wait) hydrateBudapestAttractionThumbs._wait = 0;
       if (++hydrateBudapestAttractionThumbs._wait < 120) {
@@ -2224,7 +3380,9 @@
     }
     if (hydrateBudapestAttractionThumbs._started) return;
     hydrateBudapestAttractionThumbs._started = true;
-    var imgs = root.querySelectorAll('img.attraction-card__thumb[data-google-place-id]');
+    var imgs = document.querySelectorAll(
+      '#attractions img.attraction-card__thumb[data-google-place-id], #budapest-near-daytrips img.beyond-card__photo[data-google-place-id]'
+    );
     var jobs = [];
     for (var j = 0; j < imgs.length; j++) {
       var img = imgs[j];
@@ -2269,6 +3427,36 @@
   } else {
     hydrateBudapestAttractionThumbs();
   }
+})();
+</script>
+<script>
+(function () {
+  var root = document.getElementById('budapest-near-daytrips');
+  if (!root) return;
+  function setFlipped(card, on) {
+    card.classList.toggle('is-flipped', on);
+    card.setAttribute('aria-expanded', on ? 'true' : 'false');
+  }
+  root.querySelectorAll('.beyond-flip').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('.beyond-flip__close-btn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        setFlipped(card, false);
+        return;
+      }
+      if (card.classList.contains('is-flipped')) {
+        setFlipped(card, false);
+        return;
+      }
+      setFlipped(card, true);
+    });
+    card.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      setFlipped(card, !card.classList.contains('is-flipped'));
+    });
+  });
 })();
 </script>
 
@@ -3011,5 +4199,42 @@ document.getElementById('gyg-modal').addEventListener('click', function(e) {
   </script>
   <div class="gtk-drawer" id="gtkDrawerRoot" hidden><div class="gtk-drawer__backdrop" id="gtkDrawerBackdrop" aria-hidden="true"></div><div class="gtk-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="gtkDrawerTitle" id="gtkDrawerDialog"><div class="gtk-drawer__head"><h2 class="gtk-drawer__title" id="gtkDrawerTitle">טוב לדעת</h2><button type="button" class="gtk-drawer__close" id="gtkDrawerClose" aria-label="סגור">×</button></div><div class="gtk-drawer__body" id="gtkDrawerBody"><p class="gtk-drawer__lead" id="gtkDrawerLead">טוען…</p><ul class="gtk-drawer__list" id="gtkDrawerList" role="list" aria-live="polite"></ul><button type="button" class="gtk-drawer__more-toggle" id="gtkDrawerMoreBtn" hidden aria-expanded="false">הצג עוד טיפים</button><p class="gtk-drawer__error" id="gtkDrawerError" hidden></p></div><div class="gtk-drawer__foot"><a href="tips.html" class="gtk-drawer__cta" id="gtkDrawerCta">לדף הטיפים המלא</a></div></div></div>
   <script>(function(){var r=document.getElementById('gtkDrawerRoot'),b=document.getElementById('gtkDrawerBackdrop'),d=document.getElementById('gtkDrawerDialog'),o=document.getElementById('gtkOpenBtn'),c=document.getElementById('gtkDrawerClose'),t=document.getElementById('gtkDrawerTitle'),l=document.getElementById('gtkDrawerLead'),s=document.getElementById('gtkDrawerList'),m=document.getElementById('gtkDrawerMoreBtn'),a=document.getElementById('gtkDrawerCta'),e=document.getElementById('gtkDrawerError');if(!r||!d||!o||!t||!l||!s)return;var k=(document.body.getAttribute('data-good-to-know-country')||'').trim()||'HU',op=0,pf=null,j='good-to-know-by-country.json',C=4,x=false;function g(i){var id=(i&&i.id?i.id:'').toLowerCase();if(id.includes('etias')||id.includes('entry')||id.includes('schengen'))return{icon:'🛂',chip:'כניסה'};if(id.includes('esim')||id.includes('sim')||id.includes('internet'))return{icon:'📶',chip:'קישוריות'};if(id.includes('transport')||id.includes('drive')||id.includes('road'))return{icon:'🚗',chip:'תחבורה'};if(id.includes('weather')||id.includes('season'))return{icon:'🌦️',chip:'מזג אוויר'};if(id.includes('budget')||id.includes('money')||id.includes('cost'))return{icon:'💶',chip:'תקציב'};if(id.includes('packing')||id.includes('gear')||id.includes('bag'))return{icon:'🎒',chip:'ציוד'};return{icon:'💡',chip:'תכנון'};}function col(){var it=s.querySelectorAll('.gtk-drawer__item');if(!it.length){if(m)m.hidden=true;return;}var n=it.length>C;for(var i=0;i<it.length;i++)it[i].hidden=n&&!x&&i>=C;if(m){m.hidden=!n;m.setAttribute('aria-expanded',x?'true':'false');m.textContent=x?'הצג פחות':'הצג עוד טיפים';}}function er(msg){if(!e)return;if(msg){e.textContent=msg;e.hidden=false;}else{e.textContent='';e.hidden=true;}}function ren(en){er('');t.textContent=en.title_he||'טוב לדעת';l.textContent=en.lead_he||'';s.innerHTML='';x=false;(en.items||[]).forEach(function(it){if(!it||!it.tips_url)return;var meta=g(it),li=document.createElement('li');li.className='gtk-drawer__item';var A=document.createElement('a');A.className='gtk-drawer__card';A.href=it.tips_url;A.dataset.cardId=it.id||'';A.dataset.cardTitle=it.title_he||'';A.dataset.cardCategory=meta.chip||'';A.dataset.cardPosition=String(s.children.length+1);var hr=document.createElement('span');hr.className='gtk-drawer__headrow';var ic=document.createElement('span');ic.className='gtk-drawer__icon';ic.textContent=meta.icon;var tt=document.createElement('span');tt.className='gtk-drawer__card-title';tt.textContent=it.title_he||'';var cp=document.createElement('span');cp.className='gtk-drawer__chip';cp.textContent=meta.chip;var sm=document.createElement('span');sm.className='gtk-drawer__card-summary';sm.textContent=it.summary_he||'';var mr=document.createElement('span');mr.className='gtk-drawer__card-more';mr.textContent='להמשך קריאה ←';hr.appendChild(ic);hr.appendChild(tt);hr.appendChild(cp);A.appendChild(hr);A.appendChild(sm);A.appendChild(mr);li.appendChild(A);s.appendChild(li);});col();if(!s.children.length)er('אין פריטים מוגדרים ליעד זה.');}function lo(){fetch(j,{credentials:'same-origin'}).then(function(R){if(!R.ok)throw new Error();return R.json();}).then(function(data){var en=data&&data[k];if(!en){er('לא נמצאה רשימה למפתח '+k);return;}ren(en);}).catch(function(){er('לא ניתן לטעון את הרשימה כרגע.');});}lo();s.addEventListener('click',function(ev){var A=ev.target.closest('a.gtk-drawer__card');if(!A||!s.contains(A))return;if(window.plausible)try{plausible('GoodToKnow-CardClick',{props:{country:k,href:A.getAttribute('href')||'',card_id:A.dataset.cardId||'',card_title:A.dataset.cardTitle||'',card_category:A.dataset.cardCategory||'',card_position:A.dataset.cardPosition||'',total_cards:String(s.querySelectorAll('.gtk-drawer__card').length||0)}});}catch(_){}});if(a)a.addEventListener('click',function(){if(window.plausible)try{plausible('GoodToKnow-CTA',{props:{country:k,href:a.getAttribute('href')||'tips.html',total_cards:String(s.querySelectorAll('.gtk-drawer__card').length||0),expanded_items:x?'1':'0'}});}catch(_){}});if(m)m.addEventListener('click',function(){x=!x;col();if(window.plausible)try{plausible('GoodToKnow-ToggleMore',{props:{country:k,expanded:x?'1':'0'}});}catch(_){}});function lock(v){var em=document.getElementById('emailPopupOverlay');if(v){if(!(em&&em.classList.contains('open')))document.body.style.overflow='hidden';}else{if(!(em&&em.classList.contains('open')))document.body.style.overflow='';}}function foc(){return Array.prototype.slice.call(d.querySelectorAll('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])')).filter(function(n){var st=getComputedStyle(n);return st.visibility!=='hidden'&&st.display!=='none';});}function trap(ev){if(ev.key!=='Tab'||!r.classList.contains('is-open'))return;var f=foc();if(!f.length)return;var fi=f[0],la=f[f.length-1];if(ev.shiftKey&&document.activeElement===fi){ev.preventDefault();la.focus();}else if(!ev.shiftKey&&document.activeElement===la){ev.preventDefault();fi.focus();}}function open(){pf=document.activeElement;r.hidden=false;requestAnimationFrame(function(){r.classList.add('is-open');lock(true);op=Date.now();o.setAttribute('aria-expanded','true');if(window.plausible)try{plausible('GoodToKnow-Open',{props:{country:k}});}catch(_){} if(c)c.focus();});}function close(){r.classList.remove('is-open');lock(false);o.setAttribute('aria-expanded','false');var z=pf;pf=null;if(z&&typeof z.focus==='function')z.focus();setTimeout(function(){if(!r.classList.contains('is-open'))r.hidden=true;},320);}o.addEventListener('click',open);if(c)c.addEventListener('click',close);if(b)b.addEventListener('click',function(){if(Date.now()-op>350)close();});document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&r.classList.contains('is-open')){ev.preventDefault();close();}},true);d.addEventListener('keydown',trap);  })();</script>
+<script>
+(function () {
+  function hasOpenOverlay() {
+    return !!document.querySelector('.gtk-drawer.is-open, .gtk-drawer.open, .drawer.open, .email-popup-overlay.open, .modal-overlay.active, .overlay.open, .place-sheet.open');
+  }
+  function refreshBodyScrollLock() {
+    document.body.style.overflow = hasOpenOverlay() ? 'hidden' : '';
+  }
+  window.__mtRefreshBodyScrollLock = refreshBodyScrollLock;
+  function forceCloseGoodToKnowDrawer() {
+    var root = document.getElementById('gtkDrawerRoot');
+    if (!root) return;
+    root.classList.remove('is-open', 'open');
+    root.hidden = true;
+    var backdrop = document.getElementById('gtkDrawerBackdrop');
+    if (backdrop) backdrop.classList.remove('is-open', 'open');
+    var openBtn = document.getElementById('gtkOpenBtn');
+    if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+    refreshBodyScrollLock();
+  }
+  document.addEventListener('click', function () {
+    window.setTimeout(refreshBodyScrollLock, 0);
+  }, true);
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      forceCloseGoodToKnowDrawer();
+      window.setTimeout(refreshBodyScrollLock, 0);
+    }
+  }, true);
+  window.addEventListener('pageshow', refreshBodyScrollLock);
+  window.addEventListener('load', refreshBodyScrollLock);
+  var observer = new MutationObserver(function () {
+    refreshBodyScrollLock();
+  });
+  observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class', 'hidden', 'style', 'aria-hidden'] });
+})();
+</script>
 </body>
 </html>
