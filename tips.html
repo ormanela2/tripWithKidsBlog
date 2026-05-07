@@ -160,6 +160,263 @@
     .mob-nav-community__title { display: block; font-family: 'Assistant', sans-serif; font-size: 16px; font-weight: 600; }
     .mob-nav-community__sub { display: block; font-family: 'Assistant', sans-serif; font-size: 12px; opacity: 0.85; margin-top: 1px; }
 
+    /* ===== SCROLL-TO-TOP BUTTON ===== */
+    .scroll-to-top {
+      position: fixed;
+      left: 24px;
+      bottom: 24px;
+      width: 50px;
+      height: 50px;
+      background: var(--teal);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      z-index: 999;
+      box-shadow: var(--shadow-md);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .scroll-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .scroll-to-top:hover {
+      background: var(--teal-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .scroll-to-top:active {
+      transform: translateY(0);
+    }
+
+    /* ===== NAVIGATION PILLS ===== */
+    .nav-pills {
+      position: fixed;
+      top: var(--nav-height);
+      right: 0;
+      left: 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--sand-dark);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    /* ===== NAVIGATION PILLS ===== */
+    .nav-pills {
+      position: fixed;
+      top: var(--nav-height);
+      right: 0;
+      left: 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--sand-dark);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    .nav-pills.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      max-height: 180px;
+    }
+
+    .nav-pills__container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      gap: 6px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      overflow-x: visible;
+    }
+
+    .nav-pills__container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-pills__pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 5px 10px;
+      background: var(--white);
+      border: 1px solid var(--sand-dark);
+      border-radius: 16px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--charcoal);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Assistant', sans-serif;
+      min-height: 26px;
+      line-height: 1;
+      flex: 0 1 calc(25% - 4.5px);
+    }
+
+    .nav-pills__pill:hover {
+      background: var(--teal);
+      color: var(--white);
+      border-color: var(--teal);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(26, 107, 114, 0.15);
+    }
+
+    .nav-pills__pill.active {
+      background: var(--teal);
+      color: var(--white);
+      border-color: var(--teal);
+      font-weight: 600;
+    }
+
+    /* ===== DESKTOP VERTICAL PILLS SIDEBAR ===== */
+    .nav-pills-sidebar {
+      display: none;
+      position: fixed;
+      right: 24px;
+      top: calc(var(--nav-height) + 100px);
+      flex-direction: column;
+      gap: 8px;
+      z-index: 997;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(20px);
+      transition: all 0.4s ease;
+    }
+
+    .nav-pills-sidebar.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    @media (min-width: 1200px) {
+      .nav-pills {
+        display: none !important;
+      }
+
+      .nav-pills-sidebar {
+        display: flex;
+      }
+
+      .nav-pills-sidebar__pill {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 14px;
+        background: var(--white);
+        border: 1.5px solid var(--sand-dark);
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--charcoal);
+        text-decoration: none;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Assistant', sans-serif;
+        min-height: 40px;
+        flex-direction: column;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+      }
+
+      .nav-pills-sidebar__pill:hover {
+        background: var(--teal);
+        color: var(--white);
+        border-color: var(--teal);
+        transform: translateX(-4px);
+        box-shadow: 0 4px 12px rgba(26, 107, 114, 0.2);
+      }
+
+      .nav-pills-sidebar__pill.active {
+        background: var(--teal);
+        color: var(--white);
+        border-color: var(--teal);
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(26, 107, 114, 0.25);
+      }
+    }
+
+    /* ===== CARD HOVER ANIMATION ===== */
+    .hub-card {
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .hub-card.highlight {
+      transform: scale(1.02) translateY(-8px);
+      box-shadow: 0 12px 32px rgba(26, 107, 114, 0.25) !important;
+    }
+
+    @media (max-width: 768px) {
+      .nav-pills.visible {
+        max-height: 180px;
+      }
+
+      .nav-pills__container {
+        padding: 8px 12px;
+        gap: 5px;
+      }
+
+      .nav-pills__pill {
+        padding: 4px 8px;
+        font-size: 9px;
+        min-height: 24px;
+        flex: 0 1 calc(25% - 3.75px);
+        gap: 2px;
+      }
+    }
+
+      .scroll-to-top {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+        left: 16px;
+        bottom: 16px;
+      }
+    }
+
+    .hub-card {
+      scroll-margin-top: calc(var(--nav-height) + 80px);
+    }
+
+    @media (max-width: 768px) {
+      .hub-card {
+        scroll-margin-top: calc(var(--nav-height) + 140px);
+      }
+    }
+
     @media (max-width: 900px) {
       .nav__links { display: none; }
       .nav__mobile-actions { display: flex; }
@@ -343,6 +600,45 @@
   </style>
 </head>
 <body>
+
+    <!-- SCROLL TO TOP BUTTON -->
+    <button class="scroll-to-top" id="scrollToTopBtn" aria-label="חזור לראש העמוד" title="חזור לראש העמוד">
+      ↑
+    </button>
+
+    <!-- NAVIGATION PILLS -->
+    <nav class="nav-pills" id="navPills">
+      <div class="nav-pills__container" id="navPillsContainer">
+        <a href="#hub-card-title-planning" class="nav-pills__pill" data-card="planning">📋 תכנון</a>
+        <a href="#hub-card-title-flightgen" class="nav-pills__pill" data-card="flightgen">✈️ טיסה</a>
+        <a href="#hub-card-title-weather" class="nav-pills__pill" data-card="weather">🌤️ מזג אוויר</a>
+        <a href="#hub-card-title-calendar" class="nav-pills__pill" data-card="calendar">📅 אירועים</a>
+        <a href="#hub-card-title-esim" class="nav-pills__pill" data-card="esim">📱 eSIM</a>
+        <a href="#hub-card-title-packing" class="nav-pills__pill" data-card="packing">🎒 ציוד</a>
+        <a href="#hub-card-title-budget" class="nav-pills__pill" data-card="budget">💰 תקציב</a>
+        <a href="#hub-card-title-transport" class="nav-pills__pill" data-card="transport">🚗 תחבורה</a>
+        <a href="#hub-card-title-airport-hotels" class="nav-pills__pill" data-card="airport-hotels">🏨 מלונות</a>
+        <a href="#hub-card-title-car-rental-partners" class="nav-pills__pill" data-card="car-rental">🚙 השכרה</a>
+        <a href="#hub-card-title-theme-parks" class="nav-pills__pill" data-card="theme-parks">🎡 פארקים</a>
+        <a href="#hub-auth-entry" class="nav-pills__pill" data-card="approvals">📄 אישורים</a>
+      </div>
+    </nav>
+
+    <!-- DESKTOP VERTICAL SIDEBAR PILLS -->
+    <nav class="nav-pills-sidebar" id="navPillsSidebar">
+      <a href="#hub-card-title-planning" class="nav-pills-sidebar__pill" data-card="planning" title="תכנון">📋</a>
+      <a href="#hub-card-title-flightgen" class="nav-pills-sidebar__pill" data-card="flightgen" title="מחולל טיסה">✈️</a>
+      <a href="#hub-card-title-weather" class="nav-pills-sidebar__pill" data-card="weather" title="מזג אוויר">🌤️</a>
+      <a href="#hub-card-title-calendar" class="nav-pills-sidebar__pill" data-card="calendar" title="לוח אירועים">📅</a>
+      <a href="#hub-card-title-esim" class="nav-pills-sidebar__pill" data-card="esim" title="eSIM">📱</a>
+      <a href="#hub-card-title-packing" class="nav-pills-sidebar__pill" data-card="packing" title="רשימת ציוד">🎒</a>
+      <a href="#hub-card-title-budget" class="nav-pills-sidebar__pill" data-card="budget" title="תקציב">💰</a>
+      <a href="#hub-card-title-transport" class="nav-pills-sidebar__pill" data-card="transport" title="כבישים ותחבורה">🚗</a>
+      <a href="#hub-card-title-airport-hotels" class="nav-pills-sidebar__pill" data-card="airport-hotels" title="מלונות">🏨</a>
+      <a href="#hub-card-title-car-rental-partners" class="nav-pills-sidebar__pill" data-card="car-rental" title="השכרת רכב">🚙</a>
+      <a href="#hub-card-title-theme-parks" class="nav-pills-sidebar__pill" data-card="theme-parks" title="פארקי שעשועים">🎡</a>
+      <a href="#hub-auth-entry" class="nav-pills-sidebar__pill" data-card="approvals" title="אישורים">📄</a>
+    </nav>
 
     <nav class="nav" id="nav" role="navigation" aria-label="ניווט ראשי">
     <div class="container nav__inner">
@@ -652,44 +948,12 @@
               <div class="auth-card__row"><strong>סטטוס 2026:</strong> המערכת פעילה. מומלץ להגיש בקשה לפחות 96 שעות לפני הטיסה.</div>
               <div class="auth-card__row"><strong>עלות:</strong> 7 יורו (פטור מתשלום מתחת לגיל 18 ומעל גיל 70).</div>
             </div>
-            <a href="https://travel-europe.europa.eu/etias_en" target="_blank" rel="noopener" class="auth-card__link" onclick="plausible('Card Click', {props: {card: 'ETIAS אירופה'}})">European Union - Official ETIAS ←</a>
-            <div class="auth-card__warning">⚠️ הלינק הרשמי והזול ביותר – היזהרו מאתרי תיווך שגובים עמלות מיותרות.</div>
-          </div>
-
-          <div class="auth-card auth-card--full">
-            <div class="auth-card__header">
-              <span class="auth-card__flag">🛃</span>
-              <div>
-                <div class="auth-card__title">מערכת ה-EES - Entry/Exit System</div>
-                <div class="auth-card__subtitle">חדש! רישום ביומטרי בנמלי תעופה באירופה</div>
-              </div>
-              <span class="auth-card__badge">שימו לב</span>
-            </div>
-            <div class="auth-card__rows">
-              <div class="auth-card__row"><strong>מה זה:</strong> רישום ביומטרי בנמלי התעופה - טביעות אצבע וסריקת פנים.</div>
-              <div class="auth-card__row"><strong>חשוב לדעת:</strong> אין טופס למלא מראש באינטרנט, אבל בנחיתה הראשונה שלכם באירופה תצטרכו לעבור בעמדות ייעודיות (Kiosks). זה עשוי להאריך את זמן ההמתנה בביקורת הדרכונים.</div>
-            </div>
-            <a href="https://travel-europe.europa.eu/ees/what-is-the-ees" target="_blank" rel="noopener" class="auth-card__link" onclick="plausible('Card Click', {props: {card: 'EES אירופה'}})">European Union - מידע רשמי על EES ←</a>
-            <div class="auth-card__warning">🗓️ Full implementation by 10 April 2026.</div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container">
-      <p>© מתי טסים · <a href="destinations.html">יעדים</a> · <a href="packages.html">חבילות תכנון</a> · <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" aria-label="עמוד הפייסבוק של מתי טסים" style="display:inline-flex;align-items:center;vertical-align:middle;"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;"><circle cx="16" cy="16" r="16" fill="#1877F2"/><path d="M21.5 16H18v-2c0-.828.672-1 1-1h2V10h-2.5C16.015 10 15 11.79 15 13.5V16h-2.5v3H15v8h3v-8h2l.5-3z" fill="#FFFFFF"/></svg></a></p>
+</p>
       <p class="footer__disclosure">* חלק מהקישורים באתר הם קישורי שותפים. ההמלצות תמיד מבוססות על ניסיון אישי בלבד.</p>
     </div>
   </footer>
 
-  <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21"
-     style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:998;" target="_blank" rel="noopener noreferrer" aria-label="וואטסאפ">
-    <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
-
-  <script>
+<script>
     (function () {
       'use strict';
       var nav = document.getElementById('nav');
@@ -755,6 +1019,162 @@
         }
       }
       document.querySelectorAll('.hub-card__preview iframe').forEach(lockHubPreviewDoc);
+    })();
+
+    // ===== SCROLL TO TOP & NAVIGATION PILLS FUNCTIONALITY =====
+    (function() {
+      const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+      const navPills = document.getElementById('navPills');
+      const navPillsSidebar = document.getElementById('navPillsSidebar');
+      const navPillLinks = document.querySelectorAll('.nav-pills__pill');
+      const sidebarPillLinks = document.querySelectorAll('.nav-pills-sidebar__pill');
+      const allPillLinks = document.querySelectorAll('.nav-pills__pill, .nav-pills-sidebar__pill');
+      
+      const cardTitles = {
+        'planning': 'hub-card-title-planning',
+        'flightgen': 'hub-card-title-flightgen',
+        'weather': 'hub-card-title-weather',
+        'calendar': 'hub-card-title-calendar',
+        'esim': 'hub-card-title-esim',
+        'packing': 'hub-card-title-packing',
+        'budget': 'hub-card-title-budget',
+        'transport': 'hub-card-title-transport',
+        'airport-hotels': 'hub-card-title-airport-hotels',
+        'car-rental': 'hub-card-title-car-rental-partners',
+        'theme-parks': 'hub-card-title-theme-parks',
+        'approvals': 'hub-auth-entry'
+      };
+
+      // Show/hide scroll-to-top button and nav pills on scroll
+      window.addEventListener('scroll', function() {
+        // Show scroll-to-top button after scrolling 300px
+        if (window.scrollY > 300) {
+          scrollToTopBtn.classList.add('visible');
+        } else {
+          scrollToTopBtn.classList.remove('visible');
+        }
+
+        // Show nav pills after scrolling 400px (mobile)
+        if (window.scrollY > 400) {
+          navPills.classList.add('visible');
+        } else {
+          navPills.classList.remove('visible');
+        }
+
+        // Show sidebar pills after scrolling 400px (desktop)
+        if (window.scrollY > 400) {
+          navPillsSidebar.classList.add('visible');
+        } else {
+          navPillsSidebar.classList.remove('visible');
+        }
+
+        // Update active pill based on current section
+        updateActivePill();
+      }, { passive: true });
+
+      // Scroll to top on button click
+      scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Update active pill based on scroll position
+      function updateActivePill() {
+        let currentCard = '';
+        const cards = document.querySelectorAll('.hub-card, .hub-auth');
+        
+        cards.forEach(card => {
+          const cardTop = card.getBoundingClientRect().top;
+          if (cardTop <= 250) {
+            // Get ID from card
+            if (card.classList.contains('hub-auth')) {
+              currentCard = 'approvals';
+            } else {
+              const title = card.querySelector('.hub-card__title');
+              if (title) {
+                const titleId = title.getAttribute('id');
+                if (titleId) {
+                  // Map title ID back to card type
+                  for (let [cardType, titleId2] of Object.entries(cardTitles)) {
+                    if (titleId === titleId2) {
+                      currentCard = cardType;
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        });
+
+        // Update active state for all pills
+        allPillLinks.forEach(pill => {
+          pill.classList.remove('active');
+          if (pill.getAttribute('data-card') === currentCard) {
+            pill.classList.add('active');
+          }
+        });
+
+        // Remove highlight from all cards
+        document.querySelectorAll('.hub-card.highlight, .hub-auth.highlight').forEach(card => {
+          card.classList.remove('highlight');
+        });
+      }
+
+      // Handle pill click - Desktop sidebar
+      sidebarPillLinks.forEach(pill => {
+        pill.addEventListener('click', function(e) {
+          e.preventDefault();
+          const href = this.getAttribute('href');
+          const target = document.querySelector(href);
+          if (target) {
+            // Find the card container
+            let cardContainer = target.closest('.hub-card, .hub-auth');
+            
+            // Scroll to card
+            cardContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Highlight animation
+            setTimeout(() => {
+              cardContainer.classList.add('highlight');
+              setTimeout(() => {
+                cardContainer.classList.remove('highlight');
+              }, 2000);
+            }, 500);
+            
+            // Update active state
+            allPillLinks.forEach(p => p.classList.remove('active'));
+            this.classList.add('active');
+          }
+        });
+      });
+
+      // Handle pill click - Mobile
+      navPillLinks.forEach(pill => {
+        pill.addEventListener('click', function(e) {
+          e.preventDefault();
+          const href = this.getAttribute('href');
+          const target = document.querySelector(href);
+          if (target) {
+            // Find the card container
+            let cardContainer = target.closest('.hub-card, .hub-auth');
+            
+            // Scroll to card
+            cardContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Highlight animation
+            setTimeout(() => {
+              cardContainer.classList.add('highlight');
+              setTimeout(() => {
+                cardContainer.classList.remove('highlight');
+              }, 2000);
+            }, 500);
+            
+            // Update active state
+            allPillLinks.forEach(p => p.classList.remove('active'));
+            this.classList.add('active');
+          }
+        });
+      });
     })();
   </script>
   <!-- EMAIL POPUP: מצטרפים לקהילה (#newsletter) opens this modal -->
