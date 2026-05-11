@@ -524,13 +524,82 @@
   .float-nav.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
   .float-nav__btn { display: flex; align-items: center; justify-content: center; gap: 6px; height: 44px; border-radius: 22px; border: none; cursor: pointer; font-family: var(--font-body); font-size: 14px; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.15); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; white-space: nowrap; }
   .float-nav__btn:hover { transform: scale(1.06); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
-  .float-nav__btn--destinations { background: var(--teal); color: white; padding: 0 18px; }
+  .float-nav__btn--destinations { background: var(--teal); color: white; width: 44px; padding: 0; }
   .float-nav__btn--top { background: white; color: var(--teal); border: 2px solid var(--teal); width: 44px; padding: 0; }
   @media (max-width: 600px) {
     .float-nav__btn { height: 36px; font-size: 12px; }
-    .float-nav__btn--destinations { padding: 0 12px; gap: 4px; }
+    .float-nav__btn--destinations { width: 36px; }
     .float-nav__btn--top { width: 36px; }
   }
+
+  /* ── Sidebar scrollable ── */
+  .sidebar { max-height: calc(100vh - var(--nav-height) - 40px); overflow-y: auto; scrollbar-width: none; }
+
+  /* ── Hero actions wrapper ── */
+  .article-hero__actions { display: flex; flex-direction: column; gap: 14px; margin-top: 6px; align-items: flex-start; }
+  .article-hero__actions .gtk-trigger { margin-top: 0; width: auto; max-width: 100%; box-sizing: border-box; justify-content: flex-start; }
+  @media (max-width: 900px) { .article-hero__actions { gap: 12px; align-items: stretch; } .article-hero__actions .gtk-trigger { order: -1; width: 100%; } .article-hero__actions .article-hero__meta { order: 0; } }
+
+  /* ── Hero gift CTA ── */
+  .hero-gift-cta { display: inline-flex; align-items: center; gap: 11px; padding: 13px 20px 13px 16px; border-radius: 16px; background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%); color: #fff; font-family: var(--font-body); text-decoration: none; box-shadow: 0 4px 22px rgba(249,115,22,0.38), inset 0 1px 0 rgba(255,255,255,0.22); transition: transform 0.2s ease, box-shadow 0.2s ease; position: relative; overflow: hidden; }
+  .hero-gift-cta::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.14) 0%, transparent 60%); pointer-events: none; }
+  .hero-gift-cta:hover, .hero-gift-cta:focus-visible { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(249,115,22,0.5), inset 0 1px 0 rgba(255,255,255,0.22); outline: none; }
+  .hero-gift-cta__icon { font-size: 22px; flex-shrink: 0; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2)); }
+  .hero-gift-cta__text { display: flex; flex-direction: column; align-items: flex-start; }
+  .hero-gift-cta__label { font-size: 11px; font-weight: 600; opacity: 0.88; text-transform: uppercase; letter-spacing: 0.07em; }
+  .hero-gift-cta__sub { font-size: 15px; font-weight: 700; line-height: 1.2; }
+  .hero-gift-cta__arrow { font-size: 17px; margin-right: 4px; opacity: 0.85; }
+  @media (max-width: 600px) { .hero-gift-cta { padding: 12px 16px 12px 14px; width: 100%; box-sizing: border-box; } .hero-gift-cta__sub { font-size: 14px; } }
+
+  /* ── Trust badge ── */
+  .article-hero__badge--trust { background: rgba(34,197,94,0.16); border-color: rgba(34,197,94,0.38); color: #fff; }
+  .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 0 rgba(74,222,128,0.5); animation: badgePulse 2.4s ease-in-out infinite; flex-shrink: 0; }
+  @keyframes badgePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.5); } 50% { box-shadow: 0 0 0 5px rgba(74,222,128,0); } }
+
+  /* ── Mobile TOC FAB + bottom-sheet ── */
+  .stoc-fab { display: none; position: fixed; bottom: 24px; inset-inline-end: 18px; z-index: 210; width: 50px; height: 50px; border-radius: 50%; background: var(--teal); color: #fff; border: none; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 4px 18px rgba(26,107,114,0.42); transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s; font-size: 21px; opacity: 0; pointer-events: none; }
+  .stoc-fab.stoc-fab--visible { opacity: 1; pointer-events: auto; }
+  .stoc-fab:hover { transform: scale(1.08); box-shadow: 0 6px 22px rgba(26,107,114,0.54); }
+  .stoc-fab__badge { position: absolute; top: -3px; inset-inline-start: -3px; background: var(--amber-dark, #d97706); color: #fff; border-radius: 10px; font-size: 10px; font-weight: 700; padding: 1px 5px; min-width: 17px; text-align: center; line-height: 1.5; border: 2px solid var(--white); }
+  .stoc-sheet { display: none; position: fixed; inset: 0; z-index: 300; pointer-events: none; }
+  .stoc-sheet__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0); transition: background 0.3s ease; }
+  .stoc-sheet__panel { position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 22px 22px 0 0; padding-bottom: max(env(safe-area-inset-bottom, 0px), 16px); transform: translateY(100%); transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1); box-shadow: 0 -8px 40px rgba(0,0,0,0.15); max-height: 72vh; overflow-y: auto; }
+  .stoc-sheet--open { pointer-events: auto; }
+  .stoc-sheet--open .stoc-sheet__backdrop { background: rgba(0,0,0,0.38); }
+  .stoc-sheet--open .stoc-sheet__panel { transform: translateY(0); }
+  .stoc-sheet__handle { display: flex; justify-content: center; padding: 14px 0 4px; }
+  .stoc-sheet__handle::before { content: ''; width: 38px; height: 4px; border-radius: 2px; background: #ddd; }
+  .stoc-sheet__header { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px 12px; border-bottom: 1px solid var(--sand-dark); }
+  .stoc-sheet__title { font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--teal); }
+  .stoc-sheet__close { width: 30px; height: 30px; border-radius: 50%; border: none; background: var(--sand); color: #666; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .stoc-sheet__list { list-style: none; margin: 0; padding: 8px 14px 8px; display: flex; flex-direction: column; gap: 2px; }
+  .stoc-sheet__link { display: flex; align-items: center; gap: 10px; padding: 13px 10px; border-radius: 10px; font-size: 15px; color: #333; text-decoration: none; transition: background 0.15s; border-right: 3px solid transparent; }
+  .stoc-sheet__link:active { background: var(--sand); }
+  .stoc-sheet__link.stoc--active { background: rgba(26,107,114,0.08); color: var(--teal); font-weight: 600; border-right-color: var(--teal); }
+  .stoc-sheet__num { font-size: 11px; background: var(--sand-dark); color: var(--teal-dark); border-radius: 4px; padding: 2px 6px; font-weight: 700; flex-shrink: 0; }
+  .stoc-sheet__link.stoc--active .stoc-sheet__num { background: var(--teal); color: #fff; }
+  @media (max-width: 900px) { .stoc-fab { display: flex; } .stoc-sheet { display: block; } }
+
+  /* ── Desktop sticky TOC ── */
+  .stoc { background: var(--white); border: 1px solid var(--sand-dark); border-radius: 14px; padding: 16px 16px 12px; margin-bottom: 18px; opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; pointer-events: none; }
+  .stoc.stoc--visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .stoc__header { font-family: var(--font-heading); font-size: 11px; font-weight: 400; color: var(--teal); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--sand-dark); }
+  .stoc__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+  .stoc__link { display: flex; align-items: center; gap: 8px; padding: 6px 8px 6px 6px; border-radius: 8px; font-size: 13px; color: #444; text-decoration: none; transition: background 0.15s, color 0.15s, border-color 0.15s; border-right: 2.5px solid transparent; line-height: 1.35; }
+  .stoc__link:hover { background: var(--sand); color: var(--teal); }
+  .stoc__link.stoc--active { background: rgba(26,107,114,0.08); color: var(--teal); font-weight: 600; border-right-color: var(--teal); }
+  .stoc__num { font-size: 10px; background: var(--sand-dark); color: var(--teal-dark); border-radius: 4px; padding: 1px 5px; font-weight: 700; flex-shrink: 0; min-width: 18px; text-align: center; transition: background 0.15s, color 0.15s; }
+  .stoc__link.stoc--active .stoc__num { background: var(--teal); color: var(--white); }
+  @media (min-width: 901px) { .toc { display: none; } }
+  @media (max-width: 900px) { .stoc { display: none; } }
+
+  /* ── Collapsible section toggle ── */
+  .climate-toggle { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 14px 18px; gap: 12px; user-select: none; -webkit-tap-highlight-color: transparent; border: 1.5px solid var(--sand-dark); border-radius: 14px; background: var(--white); transition: background 0.2s, border-color 0.2s; }
+  .climate-toggle:hover { background: var(--sand); border-color: #c8d8da; }
+  .climate-toggle[aria-expanded="true"] { border-color: var(--teal); }
+  .climate-toggle__chevron { font-size: 20px; color: var(--teal); transition: transform 0.3s ease; flex-shrink: 0; line-height: 1; }
+  .climate-toggle[aria-expanded="true"] .climate-toggle__chevron { transform: rotate(180deg); }
+  #logisticsBody { padding-top: 4px; }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"מתי טסים","item":"https://mataytasim.co.il"},{"@type":"ListItem","position":2,"name":"יעדים","item":"https://mataytasim.co.il/destinations.html"},{"@type":"ListItem","position":3,"name":"וורשה","item":"https://mataytasim.co.il/warsaw.html"}]}
@@ -660,12 +729,14 @@
         <h1 class="article-hero__title">טיול לוורשה עם ילדים</h1>
         <p class="article-hero__subtitle">עיר שמחברת היסטוריה עמוקה עם כיף אמיתי לילדים - מוזיאוני מדע, פארקי שעשועים, גנים מרהיבים ואוכל טעים בכל פינה</p>
         </div>
-        <div class="article-hero__meta">
-          <span class="article-hero__badge">🟢 קל עם ילדים</span>
-          <span class="article-hero__badge">📅 7-9 ימים מומלץ</span>
-          <span class="article-hero__badge">🍂 ספטמבר-אוקטובר</span>
+        <div class="article-hero__actions">
+          <div class="article-hero__meta">
+            <span class="article-hero__badge article-hero__badge--trust"><span class="badge-dot"></span> קל עם ילדים</span>
+            <span class="article-hero__badge">📅 7-9 ימים מומלץ</span>
+            <span class="article-hero__badge">🍂 ספטמבר-אוקטובר</span>
+          </div>
+          <button type="button" class="gtk-trigger" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog"><span class="gtk-trigger__icon" aria-hidden="true">🧭</span><span class="gtk-trigger__label"><span class="gtk-trigger__title">טוב לדעת לפני הטיול</span><span class="gtk-trigger__sub">טיפים ממוקדים ליעד הזה</span></span></button>
         </div>
-        <button type="button" class="gtk-trigger" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog"><span class="gtk-trigger__icon" aria-hidden="true">🧭</span><span class="gtk-trigger__label"><span class="gtk-trigger__title">טוב לדעת לפני הטיול</span><span class="gtk-trigger__sub">טיפים ממוקדים ליעד הזה</span></span></button>
       </div>
       <p class="article-hero__attr">מפת סטטית · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></p>
     </div>
@@ -696,7 +767,7 @@
 
           <div class="article-section" id="intro">
             <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> למה וורשה עם ילדים?</h2>
-            <p>וורשה מפתיעה כל פעם מחדש. מצד אחד עיר עם היסטוריה כבדה ומרגשת, מצד שני - מלאה באנרגיה, פארקים ירוקים ואינסוף פעילויות לילדים. מרכז המדע קופרניקוס הוא אחד המקומות הכי טובים שביקרנו בו עם ילדים בכל אירופה.</p>
+            <p id="intro-view-start">וורשה מפתיעה כל פעם מחדש. מצד אחד עיר עם היסטוריה כבדה ומרגשת, מצד שני - מלאה באנרגיה, פארקים ירוקים ואינסוף פעילויות לילדים. מרכז המדע קופרניקוס הוא אחד המקומות הכי טובים שביקרנו בו עם ילדים בכל אירופה.</p>
             <p>אתם אולי תופתעו אבל יש הרבה מה לעשות מחוץ לוורשה, פארקים ירוקים, טיולי טבע ביערות, נחלים זורמים, אפילו מצאנו פארק חבלים בתוך היער.</p>
             <p>אוקטובר הוא עונה מצוינת - פחות תיירים, מחירים נוחים, ואוויר סתווי נעים. הילדים ייהנו מהעלים הצהובים בפארקים לא פחות מהאטרקציות עצמן.</p>
             <p>לא הייתי מוותר על נסיעה ללודז׳ - הפארק שעשועים שם באמת אחד היפים שהיינו, והילדים עד היום זוכרים את המתקנים. יש גם את גן החיות המפורסם, אבל לשם לא הגענו.</p>
@@ -705,7 +776,7 @@
           <div class="article-section" id="route-map">
             <h2 class="article-section__title"><span class="article-section__title-icon">🗺️</span> המסלול על המפה</h2>
             <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות את המיקום במפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
-            <div id="trip-map" style="height:420px;border-radius:16px;overflow:hidden;border:2px solid var(--sand-dark);box-shadow:0 4px 20px rgba(0,0,0,0.1);"></div>
+            <div id="trip-map" style="height:420px;border-radius:16px;overflow:hidden;border:2px solid var(--sand-dark);box-shadow:0 4px 20px rgba(0,0,0,0.1);isolation:isolate;"></div>
             <div id="map-day-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;"></div>
           </div>
 
@@ -926,7 +997,11 @@
         </div>
 
 <div class="article-section" id="logistics">
-            <h2 class="article-section__title"><span class="article-section__title-icon">🚗</span> טיפים לוגיסטיים</h2>
+          <div class="climate-toggle" id="logisticsToggle" onclick="toggleLogistics()" role="button" tabindex="0" aria-expanded="false" aria-controls="logisticsBody" onkeydown="if(event.key==='Enter'||event.key===' ')toggleLogistics()">
+            <h2 class="article-section__title" style="margin:0;pointer-events:none;"><span class="article-section__title-icon">🚗</span> טיפים לוגיסטיים</h2>
+            <span class="climate-toggle__chevron" aria-hidden="true">▾</span>
+          </div>
+          <div id="logisticsBody" style="max-height:0;overflow:hidden;transition:max-height 0.42s ease;">
             <div class="tips-list">
               <div class="tip-item"><span class="tip-item__icon">✈️</span><div class="tip-item__text"><strong>הגעה:</strong> טיסות ישירות מתל אביב לוורשה - שדה התעופה Chopin קרוב למרכז העיר, כ-20 דקות ברכבת.</div></div>
               <div class="tip-item"><span class="tip-item__icon">🚘</span><div class="tip-item__text"><strong>רכב:</strong> בתוך העיר אין צורך ברכב - תחבורה ציבורית מצוינת. לטיולים מחוץ לעיר (Czersk, Kampinos, Suntago) - כדאי לשכור.</div></div>
@@ -948,6 +1023,7 @@
                 לכל מה שצריך לדעת לפני שטסים ←
               </a>
             </div>
+          </div><!-- /logisticsBody -->
           </div>
 
           <!-- GALLERY -->
@@ -975,10 +1051,21 @@
         </main>
 
         <aside class="sidebar">
+          <nav class="stoc" id="stoc" aria-label="תוכן עניינים">
+            <div class="stoc__header">📖 תוכן עניינים</div>
+            <ol class="stoc__list">
+              <li><a class="stoc__link" href="#intro" data-stoc="intro"><span class="stoc__num">1</span><span>למה וורשה?</span></a></li>
+              <li><a class="stoc__link" href="#route-map" data-stoc="route-map"><span class="stoc__num">2</span><span>המסלול על המפה</span></a></li>
+              <li><a class="stoc__link" href="#itinerary" data-stoc="itinerary"><span class="stoc__num">3</span><span>מסלול יום-יום</span></a></li>
+              <li><a class="stoc__link" href="#theme-parks-warsaw" data-stoc="theme-parks-warsaw"><span class="stoc__num">4</span><span>פארקי שעשועים</span></a></li>
+              <li><a class="stoc__link" href="#accommodation" data-stoc="accommodation"><span class="stoc__num">5</span><span>לינה (+ שדה התעופה)</span></a></li>
+              <li><a class="stoc__link" href="#logistics" data-stoc="logistics"><span class="stoc__num">6</span><span>טיפים לוגיסטיים</span></a></li>
+            </ol>
+          </nav>
           <div class="cta-card">
             <div class="cta-card__title">רוצים מסלול מותאם?</div>
             <div class="cta-card__text">אבנה לכם מסלול מלא לוורשה - יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.</div>
-            <a href="packages.html" class="cta-card__btn">לחבילות תכנון ←</a>
+            <a href="questionnaire_form.html" class="cta-card__btn">מלאו שאלון קצר ←</a>
             <a href="https://wa.me/972546758145?text=אני מתעניין בתכנון טיול לוורשה עם ילדים" class="cta-card__wa" target="_blank">
               <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               שלחו הודעה
@@ -989,6 +1076,148 @@
     </div>
   </section>
 
+<!-- FEEDBACK WIDGET -->
+<section class="feedback-section">
+  <div class="feedback-widget" id="feedbackWidget">
+
+    <div class="feedback-widget__header">
+      <span class="feedback-widget__icon">🗺️</span>
+      <p class="feedback-widget__question">מצאתם מה שחיפשתם?</p>
+      <p class="feedback-widget__sub">הפידבק שלכם עוזר לנו לשפר את המדריך</p>
+    </div>
+
+    <div class="feedback-widget__btns" id="feedbackBtns">
+      <button class="feedback-widget__btn feedback-widget__btn--yes" onclick="openFeedbackBox('yes')">
+        <svg class="feedback-widget__btn-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V12C3 11.4696 3.21071 10.9609 3.58579 10.5858C3.96086 10.2107 4.46957 10 5 10H7M7 22L13 22C13.9071 21.9999 14.7822 21.665 15.4607 21.0583C16.1392 20.4515 16.5721 19.6134 16.674 18.712L17.374 12.712C17.4303 12.2017 17.3779 11.6851 17.2206 11.1971C17.0633 10.7091 16.8048 10.2613 16.4626 9.88372C16.1204 9.50611 15.7026 9.20764 15.2373 9.00812C14.772 8.8086 14.2699 8.71287 13.764 8.728L11 8.728V5C11 4.46957 10.7893 3.96086 10.4142 3.58579C10.0391 3.21071 9.53043 3 9 3C8.73478 3 8.48043 3.10536 8.29289 3.29289C8.10536 3.48043 8 3.73478 8 4V8.728L7 10M7 22V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>כן, בהחלט!</span>
+      </button>
+      <button class="feedback-widget__btn feedback-widget__btn--no" onclick="openFeedbackBox('no')">
+        <svg class="feedback-widget__btn-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 2H19C19.5304 2 20.0391 2.21071 20.4142 2.58579C20.7893 2.96086 21 3.46957 21 4V12C21 12.5304 20.7893 13.0391 20.4142 13.4142C20.0391 13.7893 19.5304 14 19 14H17M17 2L11 2C10.0929 2.00012 9.21776 2.33499 8.53927 2.94174C7.86078 3.54848 7.42788 4.38663 7.326 5.288L6.626 11.288C6.56975 11.7983 6.62212 12.3149 6.77944 12.8029C6.93675 13.2909 7.19524 13.7387 7.53741 14.1163C7.87958 14.4939 8.29738 14.7924 8.76268 14.9919C9.22798 15.1913 9.73013 15.2871 10.236 15.272L13 15.272V19C13 19.5304 13.2107 20.0391 13.5858 20.4142C13.9609 20.7893 14.4696 21 15 21C15.2652 21 15.5196 20.8946 15.7071 20.7071C15.8946 20.5196 16 20.2652 16 20V15.272L17 14M17 2V14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>לא ממש</span>
+      </button>
+    </div>
+
+    <div class="feedback-box" id="feedbackBox">
+      <p class="feedback-box__title" id="feedbackBoxTitle"></p>
+      <textarea class="feedback-box__textarea" id="feedbackText" placeholder="כתבו לנו כאן..." rows="3"></textarea>
+      <button class="feedback-box__send" id="feedbackSendBtn" onclick="sendFeedback()">שליחה ←</button>
+      <p class="feedback-box__thanks" id="feedbackThanks">תודה! קיבלנו את המשוב
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;vertical-align:middle;display:inline-block;margin-right:4px;">
+          <path d="M12 21C12 21 3 15.5 3 9C3 6.23858 5.23858 4 8 4C9.65685 4 11.1068 4.7835 12 6C12.8932 4.7835 14.3431 4 16 4C18.7614 4 21 6.23858 21 9C21 15.5 12 21 12 21Z" fill="#e85d7a" stroke="#e85d7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .feedback-section { padding: 48px 24px 56px; background: var(--cream); display: flex; justify-content: center; }
+  .feedback-widget { background: #fff; border: 1.5px solid var(--sand-dark, #e8ddc4); border-radius: 24px; padding: 36px 36px 32px; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04); position: relative; overflow: hidden; }
+  .feedback-widget::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--teal, #1A6B72), #0d8a8f); border-radius: 24px 24px 0 0; }
+  .feedback-widget__header { margin-bottom: 28px; }
+  .feedback-widget__icon { display: block; font-size: 36px; margin-bottom: 12px; line-height: 1; }
+  .feedback-widget__icon img.emoji, .feedback-box__thanks img.emoji { width: 32px !important; height: 32px !important; vertical-align: middle; }
+  .feedback-widget__question { font-family: var(--font-heading); font-size: 20px; color: var(--charcoal, #2c2c2c); margin: 0 0 8px; line-height: 1.3; }
+  .feedback-widget__sub { font-size: 13px; color: #999; margin: 0; font-family: var(--font-body); }
+  .feedback-widget__btns { display: flex; gap: 12px; justify-content: center; }
+  .feedback-widget__btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 28px; border-radius: 40px; border: 2px solid transparent; font-size: 15px; font-family: var(--font-body); font-weight: 600; cursor: pointer; transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); flex: 1; max-width: 180px; }
+  .feedback-widget__btn-svg { width: 20px; height: 20px; flex-shrink: 0; transition: transform 0.2s ease; }
+  .feedback-widget__btn--yes { background: linear-gradient(135deg, var(--teal, #1A6B72), #0d8a8f); color: #fff; box-shadow: 0 4px 14px rgba(26,107,114,0.25); }
+  .feedback-widget__btn--yes:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(26,107,114,0.35); }
+  .feedback-widget__btn--yes:hover .feedback-widget__btn-svg { transform: rotate(-15deg) scale(1.15); }
+  .feedback-widget__btn--no { background: #fff; color: var(--charcoal, #2c2c2c); border-color: #e0d9cc; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .feedback-widget__btn--no:hover { border-color: #bbb; transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+  .feedback-widget__btn--no:hover .feedback-widget__btn-svg { transform: rotate(15deg) scale(1.15); }
+  .feedback-widget__btn.dimmed { opacity: 0.35; transform: scale(0.97); }
+  .feedback-box { display: none; margin-top: 24px; padding-top: 24px; border-top: 1.5px solid #f0ebe1; text-align: right; direction: rtl; }
+  .feedback-box.open { display: block; animation: feedbackSlideIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  @keyframes feedbackSlideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+  .feedback-box__title { font-size: 14px; color: #555; margin: 0 0 12px; font-family: var(--font-body); line-height: 1.5; font-weight: 500; }
+  .feedback-box__textarea { width: 100%; border: 1.5px solid #e0d9cc; border-radius: 14px; padding: 13px 15px; font-family: var(--font-body); font-size: 15px; color: var(--charcoal, #2c2c2c); resize: none; outline: none; box-sizing: border-box; direction: rtl; transition: border-color 0.2s, box-shadow 0.2s; background: #fdfaf6; }
+  .feedback-box__textarea:focus { border-color: var(--teal, #1A6B72); box-shadow: 0 0 0 3px rgba(26,107,114,0.1); background: #fff; }
+  .feedback-box__send { margin-top: 12px; width: 100%; background: linear-gradient(135deg, var(--teal, #1A6B72), #0d8a8f); color: #fff; border: none; border-radius: 40px; padding: 13px 24px; font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; box-shadow: 0 4px 14px rgba(26,107,114,0.25); }
+  .feedback-box__send:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(26,107,114,0.35); }
+  .feedback-box__thanks { display: none; margin-top: 16px; font-size: 16px; color: var(--teal, #1A6B72); font-weight: 600; text-align: center; font-family: var(--font-body); }
+  @media (max-width: 480px) { .feedback-widget { padding: 28px 22px 26px; } .feedback-widget__btn { padding: 12px 16px; font-size: 14px; } }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var widget = document.getElementById('feedbackWidget');
+    if (widget && window.twemoji) {
+      twemoji.parse(widget, { folder: 'svg', ext: '.svg', base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/' });
+    }
+  });
+</script>
+
+<script>
+(function() {
+  var _sentiment = '';
+
+  window.openFeedbackBox = function(type) {
+    _sentiment = type;
+    var box    = document.getElementById('feedbackBox');
+    var title  = document.getElementById('feedbackBoxTitle');
+    var btnYes = document.querySelector('.feedback-widget__btn--yes');
+    var btnNo  = document.querySelector('.feedback-widget__btn--no');
+
+    if (window.plausible) plausible('Feedback', { props: { type: type === 'yes' ? 'like' : 'dislike', page: 'warsaw' } });
+
+    title.textContent = type === 'yes'
+      ? 'תודה רבה על הפידבק, אשמח לשמוע מה אהבת'
+      : 'תודה רבה על הפידבק, אשמח לדעת במה נוכל להשתפר באתר';
+
+    box.classList.add('open');
+
+    if (window.twemoji) {
+      twemoji.parse(title, { folder: 'svg', ext: '.svg', base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/' });
+    }
+
+    btnYes.classList.toggle('dimmed', type !== 'yes');
+    btnNo.classList.toggle('dimmed',  type !== 'no');
+
+    setTimeout(function() { box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+  };
+
+  window.sendFeedback = function() {
+    var text = document.getElementById('feedbackText').value.trim();
+    var btn  = document.getElementById('feedbackSendBtn');
+
+    btn.textContent = 'שולח...';
+    btn.disabled = true;
+
+    fetch('https://formspree.io/f/mrejrqea', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        sentiment: _sentiment === 'yes' ? '👍 חיובי' : '👎 שלילי',
+        message:   text || '(ללא הודעה)',
+        page:      'warsaw'
+      })
+    })
+    .then(function(res) {
+      if (!res.ok) throw new Error('שגיאה');
+      if (window.plausible) plausible('Feedback Sent', { props: { type: _sentiment === 'yes' ? 'like' : 'dislike', page: 'warsaw' } });
+      document.getElementById('feedbackSendBtn').style.display  = 'none';
+      document.getElementById('feedbackText').style.display     = 'none';
+      document.getElementById('feedbackBoxTitle').style.display = 'none';
+      document.getElementById('feedbackThanks').style.display   = 'block';
+    })
+    .catch(function() {
+      btn.textContent = 'שליחה ←';
+      btn.disabled = false;
+      alert('אירעה שגיאה, נסו שוב.');
+    });
+  };
+})();
+</script>
+
   <footer class="footer">
     <div class="container">
       <p>מתי טסים &copy; 2026 - <a href="services.html">דף הבית</a> | <a href="tips.html">טיפים</a> | <a href="destinations.html">יעדים</a> | <a href="terms.html">תנאי שימוש</a> · <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" aria-label="עמוד הפייסבוק של מתי טסים" style="display:inline-flex;align-items:center;vertical-align:middle;"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;"><circle cx="16" cy="16" r="16" fill="#1877F2"/><path d="M21.5 16H18v-2c0-.828.672-1 1-1h2V10h-2.5C16.015 10 15 11.79 15 13.5V16h-2.5v3H15v8h3v-8h2l.5-3z" fill="#FFFFFF"/></svg></a></p>
@@ -996,9 +1225,6 @@
     </div>
   </footer>
 
-  <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;" target="_blank" aria-label="וואטסאפ">
-    <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
 
   <!-- Leaflet JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -1565,9 +1791,8 @@
 </script>
 
 <div class="float-nav" id="floatNav">
-  <a href="destinations.html" class="float-nav__btn float-nav__btn--destinations">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    יעדים
+  <a href="destinations.html" class="float-nav__btn float-nav__btn--destinations" aria-label="כל היעדים" title="כל היעדים">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
   </a>
   <button class="float-nav__btn float-nav__btn--top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="חזור למעלה">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
@@ -1694,5 +1919,81 @@
     window.openEmailPopup = function() { openPopup(true); };
   })();
   </script>
+
+<!-- Mobile TOC: Floating Action Button + Bottom Sheet -->
+<button class="stoc-fab" id="stocFab" aria-label="תוכן עניינים" aria-expanded="false" aria-controls="stocSheet">📖<span class="stoc-fab__badge" id="stocFabBadge">1</span></button>
+
+<div class="stoc-sheet" id="stocSheet" role="dialog" aria-modal="true" aria-labelledby="stocSheetTitle">
+  <div class="stoc-sheet__backdrop" id="stocSheetBackdrop"></div>
+  <div class="stoc-sheet__panel">
+    <div class="stoc-sheet__handle"></div>
+    <div class="stoc-sheet__header">
+      <span class="stoc-sheet__title" id="stocSheetTitle">📖 תוכן עניינים</span>
+      <button class="stoc-sheet__close" id="stocSheetClose" aria-label="סגור">✕</button>
+    </div>
+    <ol class="stoc-sheet__list">
+      <li><a class="stoc-sheet__link" href="#intro" data-stoc-m="intro"><span class="stoc-sheet__num">1</span>למה וורשה עם ילדים?</a></li>
+      <li><a class="stoc-sheet__link" href="#route-map" data-stoc-m="route-map"><span class="stoc-sheet__num">2</span>המסלול על המפה</a></li>
+      <li><a class="stoc-sheet__link" href="#itinerary" data-stoc-m="itinerary"><span class="stoc-sheet__num">3</span>מסלול יום-יום מומלץ</a></li>
+      <li><a class="stoc-sheet__link" href="#theme-parks-warsaw" data-stoc-m="theme-parks-warsaw"><span class="stoc-sheet__num">4</span>פארקי שעשועים</a></li>
+      <li><a class="stoc-sheet__link" href="#accommodation" data-stoc-m="accommodation"><span class="stoc-sheet__num">5</span>לינה (+ שדה התעופה)</a></li>
+      <li><a class="stoc-sheet__link" href="#logistics" data-stoc-m="logistics"><span class="stoc-sheet__num">6</span>טיפים לוגיסטיים</a></li>
+    </ol>
+  </div>
+</div>
+
+<script>
+/* ── Collapsible logistics ── */
+function toggleLogistics() {
+  var b=document.getElementById('logisticsBody'), t=document.getElementById('logisticsToggle'), o=t.getAttribute('aria-expanded')==='true';
+  b.style.maxHeight=o?'0':b.scrollHeight+'px'; t.setAttribute('aria-expanded',o?'false':'true');
+}
+
+/* ── Sticky TOC + Mobile FAB ── */
+(function () {
+  var sectionIds = ['intro','route-map','itinerary','theme-parks-warsaw','accommodation','airport-stay','logistics'];
+  var activeId = null;
+
+  var stoc = document.getElementById('stoc');
+  var desktopLinks = {};
+  if (stoc) {
+    sectionIds.forEach(function(id){ var el=stoc.querySelector('[data-stoc="'+id+'"]'); if(el) desktopLinks[id]=el; });
+    function checkDesktopVisible(){ if(window.scrollY>300){ stoc.classList.add('stoc--visible'); window.removeEventListener('scroll',checkDesktopVisible); } }
+    window.addEventListener('scroll',checkDesktopVisible,{passive:true});
+    checkDesktopVisible();
+  }
+
+  var fab=document.getElementById('stocFab'), sheet=document.getElementById('stocSheet'), fabBadge=document.getElementById('stocFabBadge');
+  var mobileLinks={};
+  if(fab){ function checkFab(){ if(window.scrollY>280){ fab.classList.add('stoc-fab--visible'); window.removeEventListener('scroll',checkFab); } } window.addEventListener('scroll',checkFab,{passive:true}); checkFab(); }
+  if(sheet){
+    sectionIds.forEach(function(id){ var el=sheet.querySelector('[data-stoc-m="'+id+'"]'); if(el) mobileLinks[id]=el; });
+    function openSheet(){ sheet.classList.add('stoc-sheet--open'); if(fab) fab.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+    function closeSheet(){ sheet.classList.remove('stoc-sheet--open'); if(fab) fab.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+    if(fab) fab.addEventListener('click',openSheet);
+    var btnClose=document.getElementById('stocSheetClose'), backdrop=document.getElementById('stocSheetBackdrop');
+    if(btnClose) btnClose.addEventListener('click',closeSheet);
+    if(backdrop) backdrop.addEventListener('click',closeSheet);
+    sheet.querySelectorAll('.stoc-sheet__link').forEach(function(l){ l.addEventListener('click',function(){ setTimeout(closeSheet,120); }); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&sheet.classList.contains('stoc-sheet--open')) closeSheet(); });
+  }
+
+  function setActive(id){
+    if(id===activeId) return;
+    if(activeId&&desktopLinks[activeId]) desktopLinks[activeId].classList.remove('stoc--active');
+    if(id&&desktopLinks[id]) desktopLinks[id].classList.add('stoc--active');
+    if(activeId&&mobileLinks[activeId]) mobileLinks[activeId].classList.remove('stoc--active');
+    if(id&&mobileLinks[id]) mobileLinks[id].classList.add('stoc--active');
+    var idx=sectionIds.indexOf(id); if(fabBadge&&idx!==-1) fabBadge.textContent=idx+1;
+    activeId=id;
+  }
+  var observer=new IntersectionObserver(function(entries){
+    var visible=entries.filter(function(e){return e.isIntersecting;});
+    if(visible.length){ visible.sort(function(a,b){return a.boundingClientRect.top-b.boundingClientRect.top;}); setActive(visible[0].target.id); }
+  },{rootMargin:'-10% 0px -60% 0px',threshold:0});
+  sectionIds.forEach(function(id){ var el=document.getElementById(id); if(el) observer.observe(el); });
+})();
+</script>
+
 </body>
 </html>
