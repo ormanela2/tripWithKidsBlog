@@ -177,8 +177,6 @@
     .article-hero__flag { font-size: 56px; margin-bottom: 16px; display: block; }
     .article-hero__title { font-size: clamp(28px, 4.5vw, 50px); margin-bottom: 18px; text-shadow: 0 1px 18px rgba(0,0,0,0.35); }
     .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.92; margin-bottom: 32px; max-width: 600px; line-height: 1.7; text-shadow: 0 1px 14px rgba(0,0,0,0.3); }
-    .article-hero__meta { display: flex; flex-wrap: wrap; gap: 12px; }
-    .article-hero__badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 7px 16px; font-size: 14px; font-weight: 500; }
     .article-hero__attr { margin: 0; padding-top: 16px; font-size: 11px; opacity: 0.62; line-height: 1.4; max-width: 780px; }
     .article-hero__attr a { color: rgba(255,255,255,0.78); text-decoration: underline; text-underline-offset: 2px; }
     @media (max-width: 600px) {
@@ -186,7 +184,6 @@
       .article-hero__title { font-size: clamp(26px, 7vw, 38px); line-height: 1.18; margin-bottom: 12px; }
       .article-hero__subtitle { margin-bottom: 20px; line-height: 1.65; }
       .article-hero__flag { font-size: 44px; margin-bottom: 12px; }
-      .article-hero__badge { font-size: 13px; padding: 8px 14px; }
       .article-hero__attr { padding-top: 12px; }
     }
     /* ── Good to know drawer ── */
@@ -688,12 +685,57 @@
   /* ── Hero actions wrapper ── */
   .article-hero__actions { display: flex; flex-direction: column; gap: 14px; margin-top: 6px; align-items: flex-start; }
   .article-hero__actions .gtk-trigger { margin-top: 0; width: auto; max-width: 100%; box-sizing: border-box; justify-content: flex-start; }
-  @media (max-width: 900px) { .article-hero__actions { gap: 12px; align-items: stretch; } .article-hero__actions .gtk-trigger { order: -1; width: 100%; } .article-hero__actions .article-hero__meta { order: 0; } }
-
-  /* ── Trust badge ── */
-  .article-hero__badge--trust { background: rgba(34,197,94,0.16); border-color: rgba(34,197,94,0.38); color: #fff; }
-  .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 0 rgba(74,222,128,0.5); animation: badgePulse 2.4s ease-in-out infinite; flex-shrink: 0; }
-  @keyframes badgePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.5); } 50% { box-shadow: 0 0 0 5px rgba(74,222,128,0); } }
+  .article-hero__cta-rent-wrap { margin-top: 2px; }
+  .article-hero__cta-rent {
+    display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 12px 18px; border-radius: 14px;
+    background: linear-gradient(135deg, #d42432 0%, #1b4b7a 100%);
+    color: #fff; font-weight: 700; font-size: 15px; line-height: 1.35;
+    border: 1px solid rgba(255,255,255,0.38);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+  }
+  .article-hero__cta-rent:hover, .article-hero__cta-rent:focus-visible {
+    transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.34); outline: none;
+  }
+  .article-hero__cta-rent img { height: 22px; width: auto; display: block; flex-shrink: 0; }
+  .article-hero__cta-rent span:last-child { opacity: 0.92; font-weight: 600; font-size: 13px; }
+  @media (max-width: 900px) {
+    .article-hero__actions { gap: 8px; align-items: center; }
+    .article-hero__actions .article-hero__cta-rent-wrap {
+      order: -2;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .article-hero__actions .gtk-trigger {
+      order: -1;
+      width: 100%;
+      max-width: 420px;
+      align-self: center;
+      box-sizing: border-box;
+      padding: 7px 14px;
+      border-radius: 13px;
+      gap: 10px;
+    }
+    .article-hero__actions .gtk-trigger .gtk-trigger__icon {
+      width: 28px;
+      height: 28px;
+      font-size: 15px;
+    }
+    .article-hero__cta-rent {
+      width: auto;
+      max-width: min(100%, 420px);
+      box-sizing: border-box;
+      justify-content: center;
+      text-align: center;
+      padding: 7px 16px;
+      border-radius: 13px;
+      gap: 10px;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.22);
+    }
+  }
 
   /* ── Mobile TOC FAB + bottom-sheet ── */
   .stoc-fab { display: none; position: fixed; bottom: 24px; inset-inline-end: 18px; z-index: 210; width: 50px; height: 50px; border-radius: 50%; background: var(--teal); color: #fff; border: none; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 4px 18px rgba(26,107,114,0.42); transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s; font-size: 21px; opacity: 0; pointer-events: none; }
@@ -868,11 +910,11 @@
         <p class="article-hero__subtitle">טירת דרקולה, הרי הקרפטים, Dino Park וטבע מדהים - הפתעה אמיתית לטיול משפחתי שלא שוכחים</p>
         </div>
         <div class="article-hero__actions">
-          <div class="article-hero__meta">
-            <span class="article-hero__badge article-hero__badge--trust"><span class="badge-dot"></span> קל עם ילדים</span>
-            <span class="article-hero__badge">📅 7 ימים מומלץ</span>
-            <span class="article-hero__badge">🌸 אפריל-מאי</span>
-            <span class="article-hero__badge">🏰 טרנסילבניה</span>
+          <div class="article-hero__cta-rent-wrap">
+            <a class="article-hero__cta-rent" href="car-rental-klasswagen.html" aria-label="השכרת רכב עם Klass Wagen ברומניה - קוד MATAY ל-10% הנחה על תוספות כולל Klass Total Cover" onclick="if(window.plausible){plausible('Romania-Hero-Klasswagen-CTA',{props:{source:'romania-hero',target:'car-rental-klasswagen',code:'MATAY'}});}">
+              <img src="klasswagen-logo.png" alt="" width="120" height="22" loading="lazy" decoding="async" aria-hidden="true">
+              <span>השכרת רכב · קוד MATAY · 10% על תוספות</span>
+            </a>
           </div>
           <button type="button" class="gtk-trigger" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog">
             <span class="gtk-trigger__icon" aria-hidden="true">🧭</span>
@@ -1050,7 +1092,7 @@
             </h2>
             <p class="ro-tp-embed__intro">מפה אינטראקטיבית של פארקי מים, פארקי דינוזאורים ואטרקציות ייחודיות ברומניה - כולל בוקרשט, טרנסילבניה ואזורי טבע מובילים למשפחות.</p>
             <div class="ro-tp-embed__frame">
-              <iframe src="theme-parks.html?cc=RO&embed=map" title="פארקי שעשועים ברומניה — מפה אינטראקטיבית" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe src="theme-parks.html?cc=RO&embed=map" title="פארקי שעשועים ברומניה - מפה אינטראקטיבית" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
 
