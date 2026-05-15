@@ -292,6 +292,325 @@
     .article-hero__inner { position: relative; max-width: 780px; }
     .article-hero__breadcrumb { font-size: 13px; opacity: 0.7; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
     .article-hero__breadcrumb a { opacity: 0.8; transition: opacity 0.2s; }
+    /* Flag + hero weather (same pattern as austria.html) */
+    .article-hero__flag-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .article-hero__flag-row .article-hero__flag { margin-bottom: 0; display: flex; align-items: center; }
+    .at-weather {
+      flex: 0 0 auto;
+      width: auto;
+      min-width: 0;
+      max-width: none;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+    }
+    .at-weather__today {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      box-sizing: border-box;
+      background: transparent;
+    }
+    .at-weather--failed .at-weather__today {
+      opacity: 0.88;
+    }
+    .at-weather__icon-btn {
+      background: rgba(241, 245, 249, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 4px;
+      width: 56px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .at-weather__icon-btn:hover,
+    .at-weather__icon-btn:focus-visible {
+      background: rgba(226, 232, 240, 0.95);
+      border-color: rgba(26, 107, 114, 0.35);
+      outline: none;
+    }
+    .at-weather__icon-btn:focus-visible {
+      box-shadow: 0 0 0 2px rgba(26, 107, 114, 0.35);
+    }
+    .at-weather--failed .at-weather__icon-btn {
+      pointer-events: none;
+      opacity: 0.55;
+      cursor: default;
+    }
+    .at-weather:not(.at-weather--ready) .at-weather__icon-btn {
+      pointer-events: none;
+      cursor: default;
+      opacity: 0.82;
+    }
+    .at-weather__icon {
+      font-size: 22px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .at-weather__fine {
+      margin: 10px 0 0;
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.42;
+    }
+    .at-weather__wear {
+      margin-top: 12px;
+      padding: 11px 12px;
+      border-radius: 10px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 0.92));
+      border: 1px solid rgba(148, 163, 184, 0.38);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+    }
+    .at-weather__wear-head {
+      font-size: 11px;
+      font-weight: 700;
+      color: #334155;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      line-height: 1.25;
+    }
+    .at-weather__wear-icon { font-size: 15px; line-height: 1; flex-shrink: 0; }
+    .at-weather__wear-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .at-weather__wear-item {
+      position: relative;
+      padding-inline-start: 14px;
+    }
+    .at-weather__wear-item::before {
+      content: "-";
+      position: absolute;
+      inset-inline-start: 0;
+      top: 1px;
+      font-weight: 700;
+      font-size: 13px;
+      color: #64748b;
+    }
+    .at-weather__wear-li-main {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+      line-height: 1.45;
+    }
+    .at-weather__wear-li-hint {
+      display: block;
+      margin-top: 3px;
+      font-size: 11px;
+      font-weight: 400;
+      color: #64748b;
+      line-height: 1.42;
+    }
+    .at-weather-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 1400;
+      pointer-events: none;
+      visibility: hidden;
+    }
+    .at-weather-drawer.at-weather-drawer--open {
+      pointer-events: auto;
+      visibility: visible;
+    }
+    .at-weather-drawer__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.42);
+      opacity: 0;
+      transition: opacity 0.22s ease;
+      cursor: pointer;
+    }
+    .at-weather-drawer--open .at-weather-drawer__backdrop {
+      opacity: 1;
+    }
+    .at-weather-drawer__sheet {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: min(100vw - 44px, 392px);
+      max-width: 100%;
+      background: linear-gradient(180deg, #f8fafc 0%, #fff 28%);
+      box-shadow: 10px 0 48px rgba(15, 23, 42, 0.22);
+      border-inline-end: 1px solid rgba(148, 163, 184, 0.35);
+      transform: translateX(-104%);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      font-family: var(--font-body);
+    }
+    .at-weather-drawer--open .at-weather-drawer__sheet {
+      transform: translateX(0);
+    }
+    .at-weather-drawer__header {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 14px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      background: rgba(255, 255, 255, 0.92);
+      direction: ltr;
+    }
+    .at-weather-drawer__head-text {
+      flex: 1;
+      min-width: 0;
+      direction: rtl;
+      text-align: right;
+    }
+    .at-weather-drawer__close {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(241, 245, 249, 0.95);
+      color: #475569;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s ease;
+    }
+    .at-weather-drawer__close:hover,
+    .at-weather-drawer__close:focus-visible {
+      background: #e2e8f0;
+      outline: none;
+    }
+    .at-weather-drawer__close:focus-visible {
+      box-shadow: 0 0 0 2px rgba(26, 107, 114, 0.35);
+    }
+    .at-weather-drawer__title {
+      margin: 0;
+      padding: 0;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+      line-height: 1.25;
+    }
+    .at-weather-drawer__lead {
+      margin: 8px 0 0;
+      padding: 0;
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748b;
+      line-height: 1.45;
+    }
+    .at-weather-drawer__scroll {
+      flex: 1;
+      overflow: auto;
+      padding: 14px 14px 22px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .at-drawer-fc-block {
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 1) inset;
+    }
+    .at-drawer-fc-block--today {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 14px;
+    }
+    .at-drawer-fc-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+      width: 100%;
+    }
+    .at-drawer-fc-icon {
+      font-size: 34px;
+      line-height: 1;
+    }
+    .at-drawer-fc-temps {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      font-variant-numeric: tabular-nums;
+    }
+    .at-drawer-fc-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      font-size: 12px;
+    }
+    .at-drawer-fc-row-date {
+      flex: 1;
+      min-width: 0;
+      font-weight: 700;
+      color: #334155;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .at-drawer-fc-row-icon {
+      font-size: 22px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .at-drawer-fc-row-temp {
+      font-weight: 700;
+      color: #0f172a;
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+    }
+    .at-drawer-fc-row-rain {
+      font-size: 11px;
+      font-weight: 700;
+      color: #0369a1;
+      background: #e0f2fe;
+      border-radius: 999px;
+      padding: 3px 8px;
+      flex-shrink: 0;
+      margin-inline-start: auto;
+    }
+    .at-weather__wear--drawer {
+      margin-top: 14px;
+    }
+    .at-weather__fine--drawer {
+      margin-top: 14px;
+      margin-bottom: 0;
+    }
     .article-hero__flag { font-size: 56px; margin-bottom: 16px; display: block; }
     .article-hero__title { font-size: clamp(28px, 4.5vw, 50px); margin-bottom: 18px; text-shadow: 0 1px 18px rgba(0,0,0,0.35); }
     .article-hero__subtitle { font-size: clamp(15px, 1.8vw, 18px); font-weight: 300; opacity: 0.92; margin-bottom: 32px; max-width: 600px; line-height: 1.7; text-shadow: 0 1px 14px rgba(0,0,0,0.3); }
@@ -318,22 +637,240 @@
     .article-hero__actions .gtk-trigger { margin-top: 0; width: auto; max-width: 100%; box-sizing: border-box; justify-content: flex-start; }
     .article-hero__partner-lead { margin: 0; font-size: 13px; line-height: 1.45; opacity: 0.9; }
 
-    /* ── Hero gift CTA button ── */
-    .hero-gift-cta {
-      display: inline-flex; align-items: center; gap: 11px;
-      padding: 13px 20px 13px 16px; border-radius: 16px;
-      background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-      color: #fff; font-family: var(--font-body); text-decoration: none;
-      box-shadow: 0 4px 22px rgba(249,115,22,0.38), inset 0 1px 0 rgba(255,255,255,0.22);
-      transition: transform 0.2s ease, box-shadow 0.2s ease; position: relative; overflow: hidden;
+    /* Budapest hero: SaaS-style tool card (matches austria.html toolbar) */
+    .article-hero--budapest-toolbar .at-hero-toolbar {
+      width: 100%;
+      max-width: 720px;
     }
-    .hero-gift-cta::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.14) 0%,transparent 60%); pointer-events:none; }
-    .hero-gift-cta:hover, .hero-gift-cta:focus-visible { transform:translateY(-2px); box-shadow:0 8px 30px rgba(249,115,22,0.5),inset 0 1px 0 rgba(255,255,255,0.22); outline:none; }
-    .hero-gift-cta__icon { font-size:22px; flex-shrink:0; filter:drop-shadow(0 1px 2px rgba(0,0,0,0.2)); }
-    .hero-gift-cta__text { display:flex; flex-direction:column; align-items:flex-start; }
-    .hero-gift-cta__label { font-size:11px; font-weight:600; opacity:0.88; text-transform:uppercase; letter-spacing:0.07em; }
-    .hero-gift-cta__sub { font-size:15px; font-weight:700; line-height:1.2; }
-    .hero-gift-cta__arrow { font-size:17px; margin-right:4px; opacity:0.85; }
+    .article-hero--budapest-toolbar .at-hero-toolcard {
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      background: rgba(15, 23, 42, 0.55);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__eyebrow {
+      margin: 0 0 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.2;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      align-items: stretch;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__primary {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      text-align: center;
+      width: 100%;
+      box-sizing: border-box;
+      text-decoration: none;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__primary-label {
+      position: relative;
+      z-index: 2;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__primary-sub {
+      position: relative;
+      z-index: 2;
+      font-size: 11px;
+      font-weight: 500;
+      color: #64748b;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .article-hero--budapest-toolbar .article-hero__badge {
+      border-radius: 10px;
+      min-height: 44px;
+      padding: 10px 14px;
+      box-sizing: border-box;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: rgba(255, 255, 255, 0.95);
+    }
+    .article-hero--budapest-toolbar .article-hero__badge--cta {
+      font-family: inherit;
+      background: #fff;
+      color: #0f172a;
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 4px 14px rgba(0, 0, 0, 0.08);
+    }
+    .article-hero--budapest-toolbar .article-hero__badge--cta:hover,
+    .article-hero--budapest-toolbar .article-hero__badge--cta:focus-visible {
+      background: #f1f5f9;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14);
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__primary.article-hero__badge {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      min-height: 48px;
+      padding: 8px 14px;
+    }
+    /* Hungarian tricolor (blurred) under frosted glass — hero PDF CTA only */
+    .article-hero--budapest-toolbar .at-hero-toolcard__primary.article-hero__badge--cta {
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.55);
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__primary.article-hero__badge--cta::before {
+      content: '';
+      position: absolute;
+      inset: -40%;
+      z-index: 0;
+      background: linear-gradient(
+        180deg,
+        #cd212a 0%,
+        #cd212a 33.333%,
+        #ffffff 33.333%,
+        #ffffff 66.666%,
+        #436f4d 66.666%,
+        #436f4d 100%
+      );
+      filter: blur(22px);
+      transform: rotate(-5deg) scale(1.15);
+      opacity: 0.92;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__primary.article-hero__badge--cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        165deg,
+        rgba(255, 255, 255, 0.93) 0%,
+        rgba(248, 250, 252, 0.86) 45%,
+        rgba(255, 255, 255, 0.94) 100%
+      );
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__primary.article-hero__badge--cta:hover,
+    .article-hero--budapest-toolbar .at-hero-toolcard__primary.article-hero__badge--cta:focus-visible {
+      background: transparent;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14);
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__primary.article-hero__badge--cta:focus-visible {
+      box-shadow: 0 0 0 3px rgba(232, 160, 69, 0.38), 0 4px 18px rgba(0, 0, 0, 0.14);
+      outline: none;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__primary.article-hero__badge--cta:hover::after,
+    .article-hero--budapest-toolbar .at-hero-toolcard__primary.article-hero__badge--cta:focus-visible::after {
+      background: linear-gradient(
+        165deg,
+        rgba(241, 245, 249, 0.95) 0%,
+        rgba(226, 232, 240, 0.88) 50%,
+        rgba(248, 250, 252, 0.96) 100%
+      );
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard .gtk-trigger {
+      margin-top: 0;
+      width: 100%;
+      justify-content: flex-start;
+      border-radius: 10px;
+      min-height: 44px;
+      padding: 10px 12px;
+      gap: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.06);
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: none;
+      line-height: 1.2;
+      text-align: right;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard .gtk-trigger:hover,
+    .article-hero--budapest-toolbar .at-hero-toolcard .gtk-trigger:focus-visible {
+      background: rgba(255, 255, 255, 0.11);
+      border-color: rgba(255, 255, 255, 0.26);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+      outline: none;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard .gtk-trigger:focus-visible {
+      box-shadow: 0 0 0 3px rgba(232, 160, 69, 0.35);
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard .gtk-trigger__icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard .gtk-trigger__title {
+      font-size: 13px;
+      letter-spacing: -0.01em;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard .gtk-trigger__sub {
+      font-size: 11px;
+      font-weight: 500;
+      opacity: 0.88;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__partner {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__partner-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px 14px;
+      row-gap: 8px;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__partner-kicker {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+      line-height: 1;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__partner-link.hero-partner-badge {
+      flex: 1 1 auto;
+      min-width: min(100%, 260px);
+      justify-content: center;
+      margin: 0;
+      padding: 8px 14px;
+      min-height: 38px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-style: solid;
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 13px;
+      font-weight: 600;
+      gap: 10px;
+    }
+    .article-hero--budapest-toolbar .at-hero-toolcard__partner-link.hero-partner-badge:hover,
+    .article-hero--budapest-toolbar .at-hero-toolcard__partner-link.hero-partner-badge:focus-visible {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    @media (max-width: 520px) {
+      .article-hero--budapest-toolbar .at-hero-toolcard__actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Trust badge */
     .article-hero__badge--trust { background:rgba(34,197,94,0.16); border-color:rgba(34,197,94,0.38); color:#fff; }
     .badge-dot { width:8px; height:8px; border-radius:50%; background:#4ade80; box-shadow:0 0 0 0 rgba(74,222,128,0.5); animation:badgePulse 2.4s ease-in-out infinite; flex-shrink:0; }
@@ -428,7 +965,9 @@
       .article-hero::after { height: 48px; }
       .article-hero__title { font-size: clamp(26px, 7vw, 38px); line-height: 1.18; margin-bottom: 12px; }
       .article-hero__subtitle { margin-bottom: 20px; line-height: 1.65; }
+      .article-hero__flag-row { gap: 10px; margin-bottom: 12px; }
       .article-hero__flag { font-size: 44px; margin-bottom: 12px; }
+      .at-weather__icon { font-size: 20px; }
       .article-hero__badge { font-size: 13px; padding: 8px 14px; }
       .article-hero__badge--cta {
         font-size: 12px;
@@ -436,12 +975,22 @@
         border-radius: 16px;
       }
       .article-hero__attr { padding-top: 12px; }
-      .article-hero__actions { gap: 10px; flex-direction: row; flex-wrap: wrap; align-items: center; }
-      .hero-gift-cta       { order: 1; width: 100%; justify-content: center; }
-      .article-hero__actions .gtk-trigger { order: 2; width: 100%; margin-top: 0; }
-      .article-hero__meta  { order: 3; flex: 0 0 auto; }
-      .hero-partner-badge  { order: 4; flex: 0 0 auto; }
-      .hero-gift-cta { padding: 12px 16px 12px 14px; width: 100%; box-sizing: border-box; }
+      .article-hero__actions { gap: 12px; align-items: stretch; }
+      .article-hero--budapest-toolbar.article-hero {
+        padding-bottom: max(88px, calc(env(safe-area-inset-bottom, 0px) + 72px));
+      }
+      .article-hero--budapest-toolbar .article-hero__subtitle {
+        margin-bottom: 24px;
+      }
+      .article-hero--budapest-toolbar .article-hero__actions {
+        margin-top: 6px;
+      }
+      .article-hero--budapest-toolbar .at-hero-toolcard {
+        padding: 12px 12px 10px;
+      }
+      .article-hero--budapest-toolbar .at-hero-toolcard__eyebrow {
+        margin-bottom: 10px;
+      }
       .article-hero__copilot-lead { width: 100%; }
       .article-hero__copilot-btn { width: 100%; box-sizing: border-box; text-align: center; }
     }
@@ -1590,6 +2139,9 @@
       margin: 14px 0 8px;
       box-shadow: 0 8px 22px rgba(18,77,82,0.08);
     }
+    #budapest-pdf-cta {
+      scroll-margin-top: calc(var(--nav-height) + 16px);
+    }
     .countdown-cta__kicker {
       display: inline-flex;
       align-items: center;
@@ -2273,7 +2825,7 @@
   </nav>
 
 
-<section class="article-hero article-hero--destination article-hero--mapglass">
+<section class="article-hero article-hero--destination article-hero--mapglass article-hero--budapest-toolbar">
   <div class="article-hero__bg" aria-hidden="true">
     <picture>
       <source srcset="budapest.webp" type="image/webp">
@@ -2290,7 +2842,17 @@
         <span>›</span>
         <span>בודפשט</span>
       </nav>
-      <span class="article-hero__flag"><span class="flag-icon flag-hu flag-icon-hero"></span></span>
+      <div class="article-hero__flag-row">
+        <span class="article-hero__flag"><span class="flag-icon flag-hu flag-icon-hero" aria-hidden="true"></span></span>
+        <!-- data-wear-note: משפט עורך אופציונלי (עברית) בסוף טיפ הלבוש; ריק = רק טקסט מהתחזית -->
+        <div class="at-weather" id="atWeatherRoot" data-wear-note="">
+          <div class="at-weather__today" id="atWeatherTodayWrap">
+            <button type="button" class="at-weather__icon-btn" id="atWeatherTodayIconBtn" aria-label="תחזית וטיפ לבוש · פתיחת פרטים">
+              <span class="at-weather__icon" id="atWeatherTodayIcon" aria-hidden="true">…</span>
+            </button>
+          </div>
+        </div>
+      </div>
       <h1 class="article-hero__title">טיול לבודפשט עם ילדים</h1>
       <p class="article-hero__subtitle">עיר מלאת קסם על גדות הדנובה - רחובות מלאי חיים, מסעדות טעימות, פארק מים מטורף ואטרקציות לכל גיל</p>
       <p class="article-hero__copilot-lead" hidden>
@@ -2298,27 +2860,60 @@
       </p>
       </div>
       <div class="article-hero__actions">
-        <div class="article-hero__meta">
-          <span class="article-hero__badge article-hero__badge--trust"><span class="badge-dot"></span> קל עם ילדים</span>
-          <span class="article-hero__badge">✈️ טיסה לבודפשט</span>
+        <div class="at-hero-toolbar">
+          <div class="at-hero-toolcard">
+            <p class="at-hero-toolcard__eyebrow">במדריך הזה</p>
+            <div class="at-hero-toolcard__actions" role="toolbar" aria-label="עזרים מהירים במדריך בודפשט">
+              <a href="#budapest-pdf-cta" class="article-hero__badge article-hero__badge--cta at-hero-toolcard__primary"><span class="at-hero-toolcard__primary-label">לוח ספירה לבודפשט</span><span class="at-hero-toolcard__primary-sub">חינם להורדה</span></a>
+              <button type="button" class="gtk-trigger at-hero-toolcard__secondary" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog">
+                <span class="gtk-trigger__icon" aria-hidden="true">🧭</span>
+                <span class="gtk-trigger__label">
+                  <span class="gtk-trigger__title">טוב לדעת לפני הטיול</span>
+                  <span class="gtk-trigger__sub">טיפים ממוקדים ליעד הזה</span>
+                </span>
+              </button>
+            </div>
+            <div class="at-hero-toolcard__partner" role="region" aria-label="הטבת שותף">
+              <div class="at-hero-toolcard__partner-inner">
+                <span class="at-hero-toolcard__partner-kicker">שותף</span>
+                <a href="car-rental-partners.html" class="hero-partner-badge at-hero-toolcard__partner-link" onclick="plausible('PartnerCarRental-Click', {props: {partner: 'barkro', code: 'MATAY6', source: 'budapest-hero-text'}})">
+                  השכרת רכב BARKRO
+                  <span class="hero-partner-code">MATAY6 −6%</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-        <a href="javascript:void(0)" class="hero-gift-cta" onclick="document.getElementById('intro-view-start').scrollIntoView({behavior:'smooth'})">
-          <span class="hero-gift-cta__icon">🎁</span>
-          <span class="hero-gift-cta__text">
-            <span class="hero-gift-cta__label">מתנה בחינם</span>
-            <span class="hero-gift-cta__sub">לוח ספירה לאחור לבודפשט</span>
-          </span>
-          <span class="hero-gift-cta__arrow">←</span>
-        </a>
-        <button type="button" class="gtk-trigger" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog"><span class="gtk-trigger__icon" aria-hidden="true">🧭</span><span class="gtk-trigger__label"><span class="gtk-trigger__title">טוב לדעת לפני הטיול</span><span class="gtk-trigger__sub">טיפים ממוקדים ליעד הזה</span></span></button>
-        <a href="car-rental-partners.html" class="hero-partner-badge" onclick="plausible('PartnerCarRental-Click', {props: {partner: 'barkro', code: 'MATAY6', source: 'budapest-hero-text'}})">
-          🚗 השכרת רכב BARKRO <span class="hero-partner-code">MATAY6 −6%</span>
-        </a>
       </div>
     </div>
     <p class="article-hero__attr">מפת סטטית · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></p>
   </div>
 </section>
+
+<!-- Weather drawer: תחזית בודפשט + טיפ לבוש (אייקון בהירו) -->
+<div class="at-weather-drawer" id="atWeatherDrawer" aria-hidden="true">
+  <div class="at-weather-drawer__backdrop" id="atWeatherDrawerBackdrop" aria-hidden="true"></div>
+  <aside class="at-weather-drawer__sheet" role="dialog" aria-modal="true" aria-labelledby="atWeatherDrawerTitle" tabindex="-1" dir="rtl">
+    <div class="at-weather-drawer__header">
+      <button type="button" class="at-weather-drawer__close" id="atWeatherDrawerClose" aria-label="סגור">✕</button>
+      <div class="at-weather-drawer__head-text">
+        <h2 id="atWeatherDrawerTitle" class="at-weather-drawer__title">תחזית ולבוש</h2>
+        <p class="at-weather-drawer__lead">סיכום יומי, טיפים מה להביא.</p>
+      </div>
+    </div>
+    <div class="at-weather-drawer__scroll">
+      <div id="atWeatherDrawerForecast" class="at-weather-drawer__forecast"></div>
+      <div class="at-weather__wear at-weather__wear--drawer" id="atWeatherWearWrap" aria-live="polite">
+        <div class="at-weather__wear-head">
+          <span class="at-weather__wear-icon" aria-hidden="true">🧥</span>
+          מה לקחת לארבעת הימים הקרובים?
+        </div>
+        <ul class="at-weather__wear-list" id="atWeatherWearList"></ul>
+      </div>
+      <p class="at-weather__fine at-weather__fine--drawer" id="atWeatherFine">מודל חיזוי ציבורי · סיכוי גשם יומי מקסימלי אינו אומר שיווצר גשם בפועל · ליציאה לאגם בלטון או לאזורים הרריים בדקו תחזית נפרדת</p>
+    </div>
+  </aside>
+</div>
 
 <section class="article-body">
   <div class="container">
@@ -4950,6 +5545,336 @@ document.getElementById('gyg-modal').addEventListener('click', function(e) {
     refreshBodyScrollLock();
   });
   observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class', 'hidden', 'style', 'aria-hidden'] });
+})();
+</script>
+
+<script>
+/* ── Hero weather: Budapest · icon opens left drawer (Open-Meteo) ── */
+(function () {
+  var LAT = 47.4979;
+  var LNG = 19.0402;
+  var TZ = "Europe/Budapest";
+
+  function wmoIcon(c) {
+    var n = Number(c);
+    if (n === 0) return "☀️";
+    if (n <= 3) return "⛅";
+    if (n <= 48) return "🌫";
+    if (n <= 57) return "🌦";
+    if (n <= 67) return "🌧";
+    if (n <= 77) return "❄️";
+    if (n <= 82) return "🌧";
+    return "⛈";
+  }
+
+  function fmtDateParts(iso) {
+    try {
+      var d = new Date(iso + "T12:00:00");
+      return {
+        wk: d.toLocaleDateString("he-IL", { weekday: "short" }),
+        dm: d.toLocaleDateString("he-IL", { day: "numeric", month: "short" }),
+      };
+    } catch (e) {
+      return { wk: "", dm: iso };
+    }
+  }
+
+  function fetchJSON(url, ms) {
+    var ctrl = new AbortController();
+    var t = setTimeout(function () {
+      ctrl.abort();
+    }, ms);
+    return fetch(url, { signal: ctrl.signal })
+      .then(function (r) {
+        return r.json();
+      })
+      .finally(function () {
+        clearTimeout(t);
+      });
+  }
+
+  /** טיפ לבוש; משפט עורך אופציונלי מ־data-wear-note על #atWeatherRoot */
+  function wearBulletsHe(days, editorialRaw) {
+    if (!days || !days.length) return [];
+    var editorial = String(editorialRaw || "").trim();
+    var n = days.length;
+    var minMin = Math.min.apply(
+      null,
+      days.map(function (d) {
+        return d.min;
+      })
+    );
+    var maxMax = Math.max.apply(
+      null,
+      days.map(function (d) {
+        return d.max;
+      })
+    );
+    var maxRain = Math.max.apply(
+      null,
+      days.map(function (d) {
+        return d.rain;
+      })
+    );
+    var avgSpread =
+      days.reduce(function (acc, d) {
+        return acc + (d.max - d.min);
+      }, 0) / n;
+    var rainyDays45 = days.filter(function (d) {
+      return d.rain >= 45;
+    }).length;
+    var hasSnow = days.some(function (d) {
+      var c = d.code;
+      return (c >= 71 && c <= 77) || c === 85 || c === 86;
+    });
+    var stormLikely = days.some(function (d) {
+      return d.code >= 95;
+    });
+    var spreadWide = avgSpread >= 9 || maxMax - minMin >= 15;
+
+    var bullets = [];
+
+    if (hasSnow || minMin <= -2) {
+      bullets.push({
+        main: "מעיל חם, כובע, כפפות ונעליים אטומות למים - מתאים לקור חזק ואולי תנאים שלגיים.",
+        hint: "כדאי במיוחד לטיולים קצרים בחוץ עם ילדים; בהרים ובגובה זה קורה מהר יותר מאשר בעיר.",
+      });
+    } else if (minMin <= 5) {
+      bullets.push({
+        main: "שכבה חמה (ג׳קט או פליז), צעיף או צווארון ומכנסיים ארוכים - דגש על בוקר וערב.",
+        hint: "בטווח הזה יש ימים שיורדים עד כ-" + minMin + "° לפחות פעם אחת.",
+      });
+    } else if (maxMax <= 14 && minMin <= 10) {
+      bullets.push({
+        main: "מעיל עירוני חם, סווטשירט ונעלי הליכה סגורות - החלון הקריר שולט ברוב הימים.",
+        hint: "נוח למוזיאונים ולעיר; אם יוצאים לאגם או להר תוסיפו שכבה.",
+      });
+    } else if (maxMax >= 28 && minMin >= 14) {
+      bullets.push({
+        main: "ביגוד קל ונושם, כובע לשמש וקרם הגנה - ימים חמימים יחסית.",
+        hint: "עדיין כדאי ג׳קט דק למיזוג או לערב קריר.",
+      });
+    } else if (maxMax >= 22 && minMin >= 8) {
+      bullets.push({
+        main: "חולצות קלות וג׳קט דק בתיק - טמפרטורות נעימות אבל משתנות.",
+        hint:
+          "התחזית ל-" +
+          n +
+          " ימים — נקודת ייחוס עירונית; באזור בלטון ובצפון לעיתים קריר או חם אחרת מהעיר.",
+      });
+    } else {
+      bullets.push({
+        main:
+          "שכבות שאפשר לפשוט בצהריים ולהתעטף בערב - טווח בערך בין " +
+          minMin +
+          "° ל-" +
+          maxMax +
+          "°.",
+        hint:
+          "התחזית ל-" +
+          n +
+          " ימים; באזור בלטון או בהרים צפוניים תכננו לבוש מחמם או שונה מהעיר.",
+      });
+    }
+
+    if (spreadWide && bullets.length && bullets[0].main.indexOf("שכבות") === -1) {
+      bullets[0].hint =
+        ((bullets[0].hint || "") +
+          " הפרש יום-לילה משמעותי בתחזית - עדיף כמה שכבות דקות מפריט אחד כבד.").trim();
+    }
+
+    if (maxRain >= 70 || rainyDays45 >= 3) {
+      bullets.push({
+        main: "מעיל דוחה מים או גשם עם קפוצ׳ון, ומטריה קומפקטית בתיק.",
+        hint:
+          "כמה ימים עם סיכוי גבוה; האחוז הוא המקסימום היומי מהמודל - לא אומר גשם רציף כל היום.",
+      });
+    } else if (maxRain >= 38 || rainyDays45 >= 1) {
+      bullets.push({
+        main: "קילוי גשם קל או מטריה צפה - לטיפטוף או לממטר קצר.",
+        hint: "לא חייבים להסתובב עם מעיל כבד כל הזמן, אבל בתיק זה משכך הפתעות עם ילדים.",
+      });
+    }
+
+    if (stormLikely) {
+      bullets.push({
+        main: "תכננו גם פעילות מקורה חלופית לילדים.",
+        hint: "לפי המודל ייתכנו ברקים או סופות - כדאי לעקוב אחר התראות מקומיות באותו יום.",
+      });
+    }
+
+    if (editorial) {
+      bullets.push({
+        main: editorial,
+        hint: "",
+      });
+    }
+
+    return bullets;
+  }
+
+  function renderWearBullets(listEl, bullets) {
+    listEl.innerHTML = "";
+    if (!bullets.length) return;
+    bullets.forEach(function (b) {
+      var li = document.createElement("li");
+      li.className = "at-weather__wear-item";
+      var mainEl = document.createElement("span");
+      mainEl.className = "at-weather__wear-li-main";
+      mainEl.textContent = b.main;
+      li.appendChild(mainEl);
+      if (b.hint) {
+        var hintEl = document.createElement("span");
+        hintEl.className = "at-weather__wear-li-hint";
+        hintEl.textContent = b.hint;
+        li.appendChild(hintEl);
+      }
+      listEl.appendChild(li);
+    });
+  }
+
+  function renderDrawerForecast(containerEl, today, gridDays) {
+    if (!containerEl) return;
+    var html =
+      '<div class="at-drawer-fc-block at-drawer-fc-block--today">' +
+      '<div class="at-drawer-fc-kicker">היום</div>' +
+      '<div class="at-drawer-fc-icon" aria-hidden="true">' +
+      today.icon +
+      "</div>" +
+      '<div class="at-drawer-fc-temps" dir="ltr">' +
+      today.max +
+      "° / " +
+      today.min +
+      "° · גשם " +
+      today.rain +
+      "%</div></div>";
+    gridDays.forEach(function (day) {
+      var fd = fmtDateParts(day.date);
+      html +=
+        '<div class="at-drawer-fc-row">' +
+        '<span class="at-drawer-fc-row-date">' +
+        fd.wk +
+        " · " +
+        fd.dm +
+        '</span><span class="at-drawer-fc-row-icon" aria-hidden="true">' +
+        day.icon +
+        '</span><span class="at-drawer-fc-row-temp" dir="ltr">' +
+        day.max +
+        "°/" +
+        day.min +
+        '</span><span class="at-drawer-fc-row-rain">' +
+        day.rain +
+        "%</span></div>";
+    });
+    containerEl.innerHTML = html;
+  }
+
+  var iconEl = document.getElementById("atWeatherTodayIcon");
+  var wearWrap = document.getElementById("atWeatherWearWrap");
+  var wearListEl = document.getElementById("atWeatherWearList");
+  var weatherRoot = document.getElementById("atWeatherRoot");
+  var drawerEl = document.getElementById("atWeatherDrawer");
+  var drawerBackdrop = document.getElementById("atWeatherDrawerBackdrop");
+  var drawerClose = document.getElementById("atWeatherDrawerClose");
+  var drawerForecastEl = document.getElementById("atWeatherDrawerForecast");
+
+  if (!weatherRoot) return;
+
+  function closeWeatherDrawer() {
+    if (!drawerEl) return;
+    drawerEl.classList.remove("at-weather-drawer--open");
+    drawerEl.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  function openWeatherDrawer(trackProps) {
+    if (!drawerEl || weatherRoot.classList.contains("at-weather--failed")) return;
+    if (!weatherRoot.classList.contains("at-weather--ready")) return;
+    drawerEl.classList.add("at-weather-drawer--open");
+    drawerEl.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    if (drawerClose && typeof drawerClose.focus === "function") drawerClose.focus();
+    if (trackProps && window.plausible) {
+      try {
+        plausible("Budapest-Weather-Drawer-Open", { props: trackProps });
+      } catch (ex) {}
+    }
+  }
+
+  if (drawerBackdrop) drawerBackdrop.addEventListener("click", closeWeatherDrawer);
+  if (drawerClose) drawerClose.addEventListener("click", closeWeatherDrawer);
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    if (drawerEl && drawerEl.classList.contains("at-weather-drawer--open")) closeWeatherDrawer();
+  });
+
+  var todayIconBtn = document.getElementById("atWeatherTodayIconBtn");
+  if (todayIconBtn) {
+    todayIconBtn.addEventListener("click", function () {
+      openWeatherDrawer({ page: "budapest", trigger: "today" });
+    });
+  }
+
+  var url =
+    "https://api.open-meteo.com/v1/forecast?latitude=" +
+    LAT +
+    "&longitude=" +
+    LNG +
+    "&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode" +
+    "&forecast_days=5&timezone=" +
+    encodeURIComponent(TZ);
+
+  fetchJSON(url, 9000)
+    .then(function (data) {
+      weatherRoot.classList.remove("at-weather--failed");
+      weatherRoot.classList.add("at-weather--ready");
+      var d = data && data.daily;
+      if (!d || !d.time || !d.time.length) throw new Error("nodata");
+      var days = d.time.map(function (date, i) {
+        return {
+          date: date,
+          max: Math.round(d.temperature_2m_max[i] ?? 0),
+          min: Math.round(d.temperature_2m_min[i] ?? 0),
+          rain: Math.round(d.precipitation_probability_max[i] ?? 0),
+          icon: wmoIcon(d.weathercode[i] ?? 0),
+          code: Number(d.weathercode[i] ?? 0),
+        };
+      });
+      var today = days[0];
+      if (iconEl) iconEl.textContent = today.icon;
+      if (todayIconBtn) {
+        todayIconBtn.setAttribute(
+          "aria-label",
+          "תחזית היום: מקסימום " +
+            today.max +
+            " מעלות, מינימום " +
+            today.min +
+            " מעלות, סיכוי גשם " +
+            today.rain +
+            "% · פתיחת פרטים וטיפ לבוש"
+        );
+      }
+      var editorialNote =
+        weatherRoot && typeof weatherRoot.getAttribute === "function"
+          ? weatherRoot.getAttribute("data-wear-note") || ""
+          : "";
+      var gridDays = days.slice(1, 5);
+      if (wearListEl && wearWrap) {
+        renderWearBullets(wearListEl, wearBulletsHe(days, editorialNote));
+      }
+      renderDrawerForecast(drawerForecastEl, today, gridDays);
+    })
+    .catch(function () {
+      if (weatherRoot) {
+        weatherRoot.classList.add("at-weather--failed");
+        weatherRoot.classList.remove("at-weather--ready");
+      }
+      closeWeatherDrawer();
+      if (iconEl) iconEl.textContent = "\u2014";
+      if (todayIconBtn) todayIconBtn.setAttribute("aria-label", "לא ניתן לטעון תחזית כרגע");
+      if (wearListEl) wearListEl.innerHTML = "";
+      if (drawerForecastEl) drawerForecastEl.innerHTML = "";
+    });
 })();
 </script>
 

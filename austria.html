@@ -748,12 +748,27 @@
     }
     .article-hero--austria-toolbar .at-hero-toolcard__primary {
       display: inline-flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 2px;
       text-align: center;
       width: 100%;
       box-sizing: border-box;
       text-decoration: none;
+    }
+    .article-hero--austria-toolbar .at-hero-toolcard__primary-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    .article-hero--austria-toolbar .at-hero-toolcard__primary-sub {
+      font-size: 11px;
+      font-weight: 500;
+      color: #64748b;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
     }
     .article-hero--austria-toolbar .article-hero__badge {
       border-radius: 10px;
@@ -778,6 +793,10 @@
       background: #f1f5f9;
       transform: translateY(-1px);
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14);
+    }
+    .article-hero--austria-toolbar .at-hero-toolcard__primary.article-hero__badge {
+      min-height: 48px;
+      padding: 8px 14px;
     }
     .article-hero--austria-toolbar .at-hero-toolcard .gtk-trigger {
       margin-top: 0;
@@ -2215,7 +2234,7 @@
           <div class="at-hero-toolcard">
             <p class="at-hero-toolcard__eyebrow">במדריך הזה</p>
             <div class="at-hero-toolcard__actions" role="toolbar" aria-label="עזרים מהירים במדריך אוסטריה">
-              <a href="#austria-drive-bonus" class="article-hero__badge article-hero__badge--cta at-hero-toolcard__primary">משחקי דרך לאוסטריה</a>
+              <a href="#austria-drive-bonus" class="article-hero__badge article-hero__badge--cta at-hero-toolcard__primary"><span class="at-hero-toolcard__primary-label">משחקי דרך לאוסטריה</span><span class="at-hero-toolcard__primary-sub">חינם להורדה</span></a>
               <button type="button" class="gtk-trigger at-hero-toolcard__secondary" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog">
                 <span class="gtk-trigger__icon" aria-hidden="true">🧭</span>
                 <span class="gtk-trigger__label">
