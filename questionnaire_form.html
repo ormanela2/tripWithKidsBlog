@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>שאלון טיול משפחתי | מתי טסים</title>
+<meta name="description" content="שאלון קצר לתכנון טיול משפחתי — מתי טסים חוזרים אליכם עם הצעה מותאמת.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"דף הבית","item":"https://mataytasim.co.il/services.html"},
+  {"@type":"ListItem","position":2,"name":"שאלון תכנון חופשה","item":"https://mataytasim.co.il/questionnaire_form.html"}
+]}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -152,6 +159,20 @@
   .page-header__title{font-family:var(--font-heading);font-size:clamp(26px,4vw,42px);color:white;margin-bottom:10px}
   .page-header__sub{font-size:16px;color:rgba(255,255,255,0.85);max-width:480px;margin:0 auto;line-height:1.7}
   .page-header__package{max-width:520px;margin-left:auto;margin-right:auto;padding:0 8px;line-height:1.5}
+  /* Breadcrumb ("פירורי לחם") — חזרה לדף הבית + מסלול ל־SEO */
+  .page-header__breadcrumb{
+    position:absolute;top:max(14px, env(safe-area-inset-top));right:max(20px, env(safe-area-inset-right));left:auto;
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;
+    font-family:'Assistant',sans-serif;font-size:13px;font-weight:400;text-align:right;
+    max-width:min(100% - 40px, 320px);z-index:2;line-height:1.35;
+  }
+  .page-header__breadcrumb a{color:rgba(255,255,255,.9);text-decoration:none;transition:color .2s,opacity .2s}
+  .page-header__breadcrumb a:hover,.page-header__breadcrumb a:focus-visible{color:#fff;outline:none;text-decoration:underline;text-underline-offset:3px}
+  .page-header__breadcrumb-sep{color:rgba(255,255,255,.45);user-select:none}
+  .page-header__breadcrumb-current{color:rgba(255,255,255,.72)}
+  @media(max-width:480px){
+    .page-header__breadcrumb{font-size:12px;max-width:min(100% - 32px, 260px)}
+  }
   /* Repeat under the hero on small screens so the choice stays visible while scrolling the form */
   .form-package-banner{display:none;text-align:center;font-size:15px;font-weight:600;color:var(--teal-dark);background:rgba(26,107,114,0.08);border:1px solid rgba(26,107,114,0.2);border-radius:12px;padding:12px 16px;margin:0 0 20px;line-height:1.45}
   @media (min-width:769px){.form-package-banner{display:none!important}}
@@ -379,6 +400,11 @@
 
 
 <div class="page-header">
+  <nav class="page-header__breadcrumb" aria-label="breadcrumb">
+    <a href="services.html">דף הבית</a>
+    <span class="page-header__breadcrumb-sep" aria-hidden="true">›</span>
+    <span class="page-header__breadcrumb-current">שאלון תכנון חופשה</span>
+  </nav>
   <div class="page-header__badge">⏱️ 2 דקות בלבד</div>
   <h1 class="page-header__title">ספרו לי על הטיול שלכם</h1>
   <p class="page-header__sub">3 שאלות קצרות ואחזור אליכם עד 24 שעות</p>
