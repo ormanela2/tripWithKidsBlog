@@ -221,124 +221,6 @@
     .map-container{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.09)}
     #map{height:560px;width:100%}
     @media(max-width:768px){#map{height:360px}}
-    
-    /* ===== STICKY FOOTER CTA ===== */
-    .cta-sticky-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to top, rgba(26,107,114,0.98), rgba(26,107,114,0.95));
-      border-top: 1px solid rgba(255,255,255,0.15);
-      padding: 16px 24px;
-      z-index: 899;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(100px);
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    
-    .cta-sticky-footer.visible {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-    
-    .cta-sticky-footer__inner {
-      max-width: 1140px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    
-    .cta-sticky-footer__text {
-      color: #fff;
-      flex: 1;
-      min-width: 0;
-    }
-    
-    .cta-sticky-footer__text-title {
-      font-weight: 600;
-      font-size: 15px;
-      margin-bottom: 4px;
-    }
-    
-    .cta-sticky-footer__text-sub {
-      font-size: 13px;
-      color: rgba(255,255,255,0.85);
-    }
-    
-    .cta-sticky-footer__actions {
-      display: flex;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-    
-    .cta-sticky-footer__btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 20px;
-      background: #fff;
-      color: #1A6B72;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-      gap: 6px;
-    }
-    
-    .cta-sticky-footer__btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-    
-    .cta-sticky-footer__close {
-      background: rgba(255,255,255,0.2);
-      color: #fff;
-      width: 32px;
-      height: 32px;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      transition: all 0.2s ease;
-      flex-shrink: 0;
-    }
-    
-    .cta-sticky-footer__close:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    
-    @media (max-width: 768px) {
-      .cta-sticky-footer__inner {
-        flex-direction: column;
-        gap: 12px;
-        align-items: stretch;
-      }
-      
-      .cta-sticky-footer__text {
-        text-align: center;
-      }
-      
-      .cta-sticky-footer__actions {
-        flex-direction: column;
-      }
-      
-      .cta-sticky-footer__btn {
-        flex: 1;
-      }
-    }
 
     /* LEAFLET */
     .leaflet-control-zoom.leaflet-bar{border:none!important;box-shadow:0 4px 18px rgba(0,0,0,.1),0 0 0 1px rgba(0,0,0,.06)!important;border-radius:14px!important;overflow:hidden;background:var(--white)}
@@ -491,6 +373,14 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"מתי טסים","item":"https://mataytasim.co.il"},{"@type":"ListItem","position":2,"name":"יעדים","item":"https://mataytasim.co.il/destinations.html"}]}
 </script>
+  <!-- Microsoft Clarity: heatmaps, session replay, UX insights (project wrt3m0l4ow) -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wrt3m0l4ow");
+  </script>
 </head>
 <body>
 
@@ -601,7 +491,7 @@
     <div class="page-hero__label">🗺️ יעדים מומלצים</div>
     <h1 class="page-hero__title">לאן טסים הפעם?</h1>
     <p class="page-hero__subtitle">בחרו יעד מהמפה או מהרשימה - כל מה שצריך לדעת לפני הטיסה</p>
-    <p style="margin-top:14px;font-size:15px;opacity:.9"><a href="theme-parks.html" style="color:#fff;text-decoration:underline;text-underline-offset:3px;font-weight:600">פארקי שעשועים באירופה</a> — מפה, מסננים ומידע לכל פארק</p>
+    <p style="margin-top:14px;font-size:15px;opacity:.9"><a href="theme-parks.html" style="color:#fff;text-decoration:underline;text-underline-offset:3px;font-weight:600">פארקי שעשועים באירופה</a> - מפה, מסננים ומידע לכל פארק</p>
     <a href="#family-articles" class="page-hero__jump">
       <span class="page-hero__jump-text">תדלגו למטה לקרוא על החוויות שלנו</span>
       <svg class="page-hero__jump-arrow" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
@@ -1214,47 +1104,5 @@
   }
 })();
 </script>
-<!-- STICKY FOOTER CTA -->
-<div class="cta-sticky-footer" id="ctaStickyFooter">
-  <div class="cta-sticky-footer__inner">
-    <div class="cta-sticky-footer__text">
-      <div class="cta-sticky-footer__text-title">בחרתם יעד? בואו לתכנן את הטיול!</div>
-      <div class="cta-sticky-footer__text-sub">תכנון מלא עד 7 ימים - ₪790</div>
-    </div>
-    <div class="cta-sticky-footer__actions">
-      <a href="https://wa.me/972546758145?text=היי%2C%20אני%20רוצה%20לתכנן%20טיול%20משפחתי%20אל%20יעד%20שבחרתי" class="cta-sticky-footer__btn" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span>וואטסאפ</span>
-      </a>
-    </div>
-    <button class="cta-sticky-footer__close" id="ctaStickyFooterClose" aria-label="סגור">×</button>
-  </div>
-</div>
-
-<script>
-(function() {
-  const footer = document.getElementById('ctaStickyFooter');
-  const closeBtn = document.getElementById('ctaStickyFooterClose');
-  
-  if (!footer) return;
-  
-  // Show sticky footer after scrolling 600px down
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 600) {
-      footer.classList.add('visible');
-    } else {
-      footer.classList.remove('visible');
-    }
-  }, { passive: true });
-  
-  // Close button
-  if (closeBtn) {
-    closeBtn.addEventListener('click', function() {
-      footer.classList.remove('visible');
-    });
-  }
-})();
-</script>
-
 </body>
 </html>
