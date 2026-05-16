@@ -939,12 +939,226 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
     }
 
+    a.value-prop-flag {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    a.value-prop-flag:hover,
+    a.value-prop-flag:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(26, 107, 114, 0.14);
+      border-color: rgba(26, 107, 114, 0.28);
+      outline: none;
+    }
+
     .value-prop-flag img {
       width: 22px;
       height: auto;
       border-radius: 3px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
       display: block;
+    }
+
+    /* פולין — תפריט קומפקטי (dropdown בסגנון SaaS) */
+    .value-prop-flag-expand {
+      position: relative;
+      flex: 0 1 auto;
+      z-index: 2;
+    }
+    .value-prop-flag-expand[open] {
+      z-index: 1200;
+    }
+    summary.value-prop-flag--expand {
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--charcoal);
+      padding: 6px 11px;
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      font-family: inherit;
+    }
+    summary.value-prop-flag--expand::-webkit-details-marker {
+      display: none;
+    }
+    summary.value-prop-flag--expand::marker {
+      content: "";
+    }
+    summary.value-prop-flag--expand:hover,
+    summary.value-prop-flag--expand:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(26, 107, 114, 0.14);
+      border-color: rgba(26, 107, 114, 0.28);
+      outline: none;
+    }
+    .value-prop-flag-expand[open] summary.value-prop-flag--expand {
+      border-color: rgba(26, 107, 114, 0.22);
+      box-shadow: 0 2px 10px rgba(26, 107, 114, 0.1);
+    }
+    .value-prop-flag-expand__hint {
+      font-size: 9px;
+      opacity: 0.5;
+      line-height: 1;
+      transition: transform 0.2s ease;
+      margin-inline-start: 2px;
+    }
+    .value-prop-flag-expand[open] .value-prop-flag-expand__hint {
+      transform: rotate(-180deg);
+    }
+    .value-prop-flag-expand__menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(288px, calc(100vw - 40px));
+      padding: 4px;
+      margin: 0;
+      background: #fff;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 12px;
+      box-shadow:
+        0 18px 50px rgba(15, 23, 42, 0.12),
+        0 4px 14px rgba(15, 23, 42, 0.06);
+      box-sizing: border-box;
+    }
+    .value-prop-flag-expand__menu::before {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(1px);
+      border: 7px solid transparent;
+      border-bottom-color: rgba(15, 23, 42, 0.07);
+      pointer-events: none;
+    }
+    .value-prop-flag-expand__menu::after {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(3px);
+      border: 6px solid transparent;
+      border-bottom-color: #fff;
+      pointer-events: none;
+    }
+    .value-prop-flag-expand__item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 9px;
+      text-decoration: none;
+      box-sizing: border-box;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
+      text-align: right;
+      transition:
+        background 0.14s ease,
+        box-shadow 0.14s ease,
+        transform 0.14s ease;
+    }
+    .value-prop-flag-expand__item + .value-prop-flag-expand__item {
+      border-top: 1px solid rgba(15, 23, 42, 0.055);
+    }
+    .value-prop-flag-expand__item-glyph {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, rgba(26, 107, 114, 0.11), rgba(26, 107, 114, 0.04));
+      color: var(--teal);
+      transition: background 0.14s ease, color 0.14s ease, transform 0.14s ease;
+    }
+    .value-prop-flag-expand__item-glyph svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+    .value-prop-flag-expand__item-text {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3px;
+    }
+    .value-prop-flag-expand__item-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--charcoal);
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      transition: color 0.14s ease;
+    }
+    .value-prop-flag-expand__item-meta {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(44, 44, 44, 0.52);
+      line-height: 1.35;
+      transition: color 0.14s ease;
+    }
+    .value-prop-flag-expand__item-arrow {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      opacity: 0.38;
+      color: var(--charcoal);
+      transition: opacity 0.14s ease, transform 0.14s ease, color 0.14s ease;
+    }
+    .value-prop-flag-expand__item:hover,
+    .value-prop-flag-expand__item:focus-visible {
+      background: rgba(26, 107, 114, 0.06);
+      outline: none;
+      box-shadow: inset 0 0 0 1px rgba(26, 107, 114, 0.12);
+    }
+    .value-prop-flag-expand__item:hover .value-prop-flag-expand__item-title,
+    .value-prop-flag-expand__item:focus-visible .value-prop-flag-expand__item-title {
+      color: var(--teal);
+    }
+    .value-prop-flag-expand__item:hover .value-prop-flag-expand__item-meta,
+    .value-prop-flag-expand__item:focus-visible .value-prop-flag-expand__item-meta {
+      color: rgba(26, 107, 114, 0.72);
+    }
+    .value-prop-flag-expand__item:hover .value-prop-flag-expand__item-glyph,
+    .value-prop-flag-expand__item:focus-visible .value-prop-flag-expand__item-glyph {
+      background: linear-gradient(160deg, rgba(26, 107, 114, 0.18), rgba(26, 107, 114, 0.08));
+      transform: scale(1.03);
+    }
+    .value-prop-flag-expand__item:hover .value-prop-flag-expand__item-arrow,
+    .value-prop-flag-expand__item:focus-visible .value-prop-flag-expand__item-arrow {
+      opacity: 0.85;
+      color: var(--teal);
+      transform: translateX(-3px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .value-prop-flag-expand__item,
+      .value-prop-flag-expand__item-arrow,
+      .value-prop-flag-expand__item-glyph {
+        transition: none;
+      }
+      .value-prop-flag-expand__item:hover .value-prop-flag-expand__item-arrow,
+      .value-prop-flag-expand__item:focus-visible .value-prop-flag-expand__item-arrow,
+      .value-prop-flag-expand__item:hover .value-prop-flag-expand__item-glyph,
+      .value-prop-flag-expand__item:focus-visible .value-prop-flag-expand__item-glyph {
+        transform: none;
+      }
     }
 
     .value-prop-dest-actions {
@@ -3079,15 +3293,43 @@
           <span class="value-prop-dest-kicker__title">מצאו את היעד הבא שלכם</span>
           <span class="value-prop-dest-kicker__deck">מדריכים חינמיים עם מסלולים, טיפים והמלצות שנכתבו עם ילדים ברקע</span>
         </p>
-        <div class="value-prop-flags" aria-hidden="true">
-          <span class="value-prop-flag"><img src="https://flagcdn.com/sk.svg" width="28" height="19" alt="">סלובקיה</span>
-          <span class="value-prop-flag"><img src="https://flagcdn.com/hu.svg" width="28" height="19" alt="">הונגריה</span>
-          <span class="value-prop-flag"><img src="https://flagcdn.com/ro.svg" width="28" height="19" alt="">רומניה</span>
-          <span class="value-prop-flag"><img src="https://flagcdn.com/pl.svg" width="28" height="19" alt="">פולין</span>
-          <span class="value-prop-flag"><img src="https://flagcdn.com/at.svg" width="28" height="19" alt="">אוסטריה</span>
-          <span class="value-prop-flag"><img src="https://flagcdn.com/gr.svg" width="28" height="19" alt="">יוון</span>
-          <span class="value-prop-flag"><img src="https://flagcdn.com/cz.svg" width="28" height="19" alt="">צ׳כיה</span>
-          <span class="value-prop-flag"><img src="https://flagcdn.com/si.svg" width="28" height="19" alt="">סלובניה</span>
+        <div class="value-prop-flags">
+          <a class="value-prop-flag" href="slovakia.html" aria-label="סלובקיה — מדריך טיול למשפחות"><img src="https://flagcdn.com/sk.svg" width="28" height="19" alt="" decoding="async">סלובקיה</a>
+          <a class="value-prop-flag" href="budapest.html" aria-label="הונגריה — מדריך בודפשט למשפחות"><img src="https://flagcdn.com/hu.svg" width="28" height="19" alt="" decoding="async">הונגריה</a>
+          <a class="value-prop-flag" href="romania.html" aria-label="רומניה — מדריך טיול למשפחות"><img src="https://flagcdn.com/ro.svg" width="28" height="19" alt="" decoding="async">רומניה</a>
+          <details class="value-prop-flag-expand">
+            <summary class="value-prop-flag--expand" aria-haspopup="menu" aria-label="פולין — בחירת מדריך לאזור">
+              <img src="https://flagcdn.com/pl.svg" width="28" height="19" alt="" decoding="async">
+              פולין
+              <span class="value-prop-flag-expand__hint" aria-hidden="true">▼</span>
+            </summary>
+            <div class="value-prop-flag-expand__menu" role="menu" aria-label="אזורים בפולין">
+              <a role="menuitem" class="value-prop-flag-expand__item" href="warsaw.html" aria-label="סובב וורשה — מדריך משפחות בעיר ובסביבה">
+                <span class="value-prop-flag-expand__item-glyph" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M6 21V10l6-4 6 4v11"/><path d="M9 21v-6h6v6"/><path d="M9 10h6"/></svg>
+                </span>
+                <span class="value-prop-flag-expand__item-text">
+                  <span class="value-prop-flag-expand__item-title">סובב וורשה</span>
+                  <span class="value-prop-flag-expand__item-meta">עיר הבירה · פארקים, מדע ופארקי מים ליד</span>
+                </span>
+                <svg class="value-prop-flag-expand__item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+              </a>
+              <a role="menuitem" class="value-prop-flag-expand__item" href="poland-south.html" aria-label="זקופנה ודרום פולין — מדריך הרים וטבע">
+                <span class="value-prop-flag-expand__item-glyph" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16l-5-8-3 4-4-7-4 11z"/><path d="M8 20l3-5"/></svg>
+                </span>
+                <span class="value-prop-flag-expand__item-text">
+                  <span class="value-prop-flag-expand__item-title">זקופנה · דרום פולין</span>
+                  <span class="value-prop-flag-expand__item-meta">הרי הטטרה · טבע, מגלשות ומכרות מלח</span>
+                </span>
+                <svg class="value-prop-flag-expand__item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+              </a>
+            </div>
+          </details>
+          <a class="value-prop-flag" href="austria.html" aria-label="אוסטריה — מדריך טיול למשפחות"><img src="https://flagcdn.com/at.svg" width="28" height="19" alt="" decoding="async">אוסטריה</a>
+          <a class="value-prop-flag" href="athens.html" aria-label="יוון — מדריך טיול לאתונה עם ילדים"><img src="https://flagcdn.com/gr.svg" width="28" height="19" alt="" decoding="async">יוון</a>
+          <a class="value-prop-flag" href="czechia.html" aria-label="צ׳כיה — מדריך טיול למשפחות"><img src="https://flagcdn.com/cz.svg" width="28" height="19" alt="" decoding="async">צ׳כיה</a>
+          <a class="value-prop-flag" href="slovenia.html" aria-label="סלובניה — מדריך טיול למשפחות"><img src="https://flagcdn.com/si.svg" width="28" height="19" alt="" decoding="async">סלובניה</a>
         </div>
         <div class="value-prop-dest-actions">
           <a href="destinations.html" class="value-prop-dest-link">
