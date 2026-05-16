@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -416,7 +416,7 @@
     }
     .tp-quick-chip:hover, .tp-quick-chip:focus-visible { background: rgba(26,107,114,.08); border-color: var(--teal); }
     .tp-quick-chip[aria-pressed="true"] { background: var(--teal); color: #fff; border-color: var(--teal); }
-    /* Destination inspiration — full-width grid (replaces cramped horizontal peek) */
+    /* Destination inspiration - full-width grid (replaces cramped horizontal peek) */
     .tp-inspo {
       width: 100%;
       padding: 14px 14px 16px;
@@ -885,7 +885,7 @@
       border: 2px solid rgba(255,255,255,.9);
     }
 
-    /* Custom map pins (branded colors + coaster glyph — no hotlinked logos) */
+    /* Custom map pins (branded colors + coaster glyph - no hotlinked logos) */
     .tp-map-pin-wrap { background: transparent !important; border: none !important; }
     .tp-map-pin {
       position: relative;
@@ -947,7 +947,7 @@
       50% { transform: translateY(-7px) scale(1.1); }
     }
 
-    /* Split: LTR so list = visual right (RTL text), map = left — swap for RTL reading: we want map on LEFT in screen coords for "dual view" */
+    /* Split: LTR so list = visual right (RTL text), map = left - swap for RTL reading: we want map on LEFT in screen coords for "dual view" */
     .tp-split { direction: ltr; display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 46%); gap: 0; max-width: 1200px; margin: 24px auto 48px; min-height: 560px; border-radius: 16px; overflow: hidden; border: 1px solid var(--sand-dark); background: #fff; box-shadow: var(--shadow); position: relative; }
     .tp-split__list { direction: rtl; overflow-y: auto; max-height: min(78vh, 900px); padding: 10px 12px; background: var(--cream); }
     .tp-split__map { position: relative; min-height: 400px; background: linear-gradient(160deg, #eaf2f4 0%, #f8fafc 100%); }
@@ -981,7 +981,7 @@
       direction: rtl;
       text-align: right;
       border: 1px solid rgba(15,23,42,.08);
-      /* Desktop: allow scrolling tall tips. Mobile: none — otherwise the card sits under the finger/cursor and steals hover/touch from the marker (open/close flicker). */
+      /* Desktop: allow scrolling tall tips. Mobile: none - otherwise the card sits under the finger/cursor and steals hover/touch from the marker (open/close flicker). */
       pointer-events: auto;
     }
     .tp-split__map .leaflet-tooltip-pane { z-index: 800 !important; }
@@ -1071,8 +1071,8 @@
     .tp-map-tip__dist { font-size: 11px; color: #475569; margin: 5px 0 0; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .tp-map-tip__hint { margin: 5px 0 0; font-size: 10px; font-weight: 600; color: #0f766e; opacity: 0.95; }
     @media (max-width: 960px) {
-      /* מובייל: רק מפה — ללא מעבר לרשימה */
-      /* Leaflet + .tp-split משתמשים ב-overflow:hidden — כרטיס ה-tooltip למעלה מהסימן נחתך ונשאר רק השורה התחתונה */
+      /* מובייל: רק מפה - ללא מעבר לרשימה */
+      /* Leaflet + .tp-split משתמשים ב-overflow:hidden - כרטיס ה-tooltip למעלה מהסימן נחתך ונשאר רק השורה התחתונה */
       .tp-split { grid-template-columns: 1fr; min-height: unset; overflow: visible; }
       .tp-split__list {
         display: none !important;
@@ -1135,7 +1135,7 @@
     @media (max-width: 640px) {
       .tp-card { margin-bottom: 10px; border-radius: 14px; }
       .tp-card__row { flex-direction: column; align-items: stretch; }
-      /* טקסט ופעולות למעלה — תמונה קומפקטית למטה כדי לקצר את הכרטיס */
+      /* טקסט ופעולות למעלה - תמונה קומפקטית למטה כדי לקצר את הכרטיס */
       .tp-card__body { order: -1; padding: 10px 12px 8px; gap: 4px; }
       .tp-card__thumb {
         flex: none;
@@ -1210,7 +1210,7 @@
 
     .tp-meta { font-size: 12px; color: #6b7280; text-align: center; padding: 8px; max-width: 720px; margin-left: auto; margin-right: auto; line-height: 1.5; }
     .tp-meta--spotlight { color: var(--teal-dark); font-weight: 500; }
-    /* היה מחוץ לקופסה הלבנה — המפה (אח DOM מאוחר יותר) ציירה מעליו והטקסט „נשבע” על המפה */
+    /* היה מחוץ לקופסה הלבנה - המפה (אח DOM מאוחר יותר) ציירה מעליו והטקסט „נשבע” על המפה */
     .tp-toolbar__inner > .tp-meta {
       margin: 12px 0 0;
       padding: 12px 4px 4px;
@@ -1319,7 +1319,7 @@
     .tp-card__btn { flex-shrink: 0; padding: 5px 10px; background: transparent; color: var(--teal-dark); border: 1px solid rgba(26,107,114,.35); border-radius: 999px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: var(--font-body); }
     .tp-card__btn:hover { background: rgba(26,107,114,.08); border-color: var(--teal); color: var(--teal); }
 
-    /* Park experience — food + typical waits */
+    /* Park experience - food + typical waits */
     @keyframes tpXpFadeUp {
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
@@ -1500,7 +1500,7 @@
       .tp-xp-food:hover { transition: none; }
     }
 
-    /* Modal — dense: fits one screen without scroll on typical viewports */
+    /* Modal - dense: fits one screen without scroll on typical viewports */
     .tp-modal { position: fixed; inset: 0; z-index: 5000; display: none; align-items: center; justify-content: center; padding: 12px; background: rgba(18, 24, 32, .48); backdrop-filter: blur(4px); overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
     .tp-modal.open { display: flex; }
     .tp-modal__box { direction: rtl; background: #fff; border-radius: 14px; max-width: 400px; width: 100%; overflow: auto; max-height: min(88vh, calc(100dvh - 24px)); padding: 12px 14px 10px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,.22); border: 1px solid rgba(0,0,0,.06); -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
@@ -1663,7 +1663,7 @@
     }
     .tp-lead__btn:hover { background: var(--teal-dark); }
 
-    /* Editorial guide below map — theme-parks page only */
+    /* Editorial guide below map - theme-parks page only */
     .tp-guide {
       max-width: 900px;
       margin: 0 auto;
@@ -1744,6 +1744,14 @@
       .tp-guide__plans { grid-template-columns: 1fr; }
     }
   </style>
+  <!-- Microsoft Clarity: heatmaps, session replay, UX insights (project wrt3m0l4ow) -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wrt3m0l4ow");
+  </script>
 </head>
 <body>
 
@@ -1830,7 +1838,7 @@
   </nav>
 
   <header class="tp-hero">
-    <p id="tpFileBanner" class="tp-hero__file-hint" hidden role="status">מופיעה בקונסולה אזהרת <strong>Unsafe attempt… file://</strong>? זה קורה כשדף <code style="background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px">file://</code> רץ <strong>בתוך מסגרת</strong> (תצוגה מקדימה). זו מגבלת אבטחה של Chrome — לא באג בקוד האתר. פתרון: לפתוח את הקובץ בדפדפן רגיל, או <code style="background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px">npm start</code> → <code style="background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px">http://localhost:3000/data/theme-parks.html</code>.<br><button type="button" class="tp-filecta" id="tpBreakFrame">פתיחה בחלון עליון / לשונית</button></p>
+    <p id="tpFileBanner" class="tp-hero__file-hint" hidden role="status">מופיעה בקונסולה אזהרת <strong>Unsafe attempt… file://</strong>? זה קורה כשדף <code style="background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px">file://</code> רץ <strong>בתוך מסגרת</strong> (תצוגה מקדימה). זו מגבלת אבטחה של Chrome - לא באג בקוד האתר. פתרון: לפתוח את הקובץ בדפדפן רגיל, או <code style="background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px">npm start</code> → <code style="background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px">http://localhost:3000/data/theme-parks.html</code>.<br><button type="button" class="tp-filecta" id="tpBreakFrame">פתיחה בחלון עליון / לשונית</button></p>
     <h1>פארקי שעשועים באירופה</h1>
     <p>הפארקים הכי טובים באירופה מחכים לכם. בחרו מדינה על המפה כדי להתחיל.</p>
   </header>
@@ -1889,7 +1897,7 @@
           <option value="קרואטיה"></option>
           <option value="אירלנד"></option>
         </datalist>
-        <p class="tp-suggest-note">הרשימה בעברית בלבד כדי למנוע כפילויות בתפריט. עדיין אפשר להקליד גם באנגלית (Poland, Germany…) — הסינון מזהה את שני השמות.</p>
+        <p class="tp-suggest-note">הרשימה בעברית בלבד כדי למנוע כפילויות בתפריט. עדיין אפשר להקליד גם באנגלית (Poland, Germany…) - הסינון מזהה את שני השמות.</p>
         <div class="tp-quick-picks" role="toolbar" aria-label="בחירה מהירה של פארקים פופולריים">
           <button type="button" class="tp-quick-chip" data-park="Gardaland">Gardaland</button>
           <button type="button" class="tp-quick-chip" data-park="Efteling">Efteling</button>
@@ -1897,13 +1905,13 @@
           <button type="button" class="tp-quick-chip" data-park="Energylandia">Energylandia</button>
         </div>
       </div>
-      <section class="tp-inspo" aria-label="השראה לפי יעד — לחיצה מסננת את הרשימה והמפה">
+      <section class="tp-inspo" aria-label="השראה לפי יעד - לחיצה מסננת את הרשימה והמפה">
         <div class="tp-inspo__head">
           <span class="tp-inspo__kicker">השראה מהיעד</span>
-          <p class="tp-inspo__title">ארבעה אזורים שמשפחות אוהבות — לחצו כדי לסנן לפי המדינה</p>
+          <p class="tp-inspo__title">ארבעה אזורים שמשפחות אוהבות - לחצו כדי לסנן לפי המדינה</p>
         </div>
         <div class="tp-inspo__grid">
-          <button type="button" class="tp-inspo__card tp-inspo__card--de" data-country-filter="גרמניה" aria-label="סינון פארקים בגרמניה — היער השחור ואירופה־פארק">
+          <button type="button" class="tp-inspo__card tp-inspo__card--de" data-country-filter="גרמניה" aria-label="סינון פארקים בגרמניה - היער השחור ואירופה־פארק">
             <img class="tp-inspo__img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Europa-Park_Silver_Star.jpg/500px-Europa-Park_Silver_Star.jpg" width="500" height="375" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer">
             <span class="tp-inspo__veil" aria-hidden="true"></span>
             <span class="tp-inspo__body">
@@ -1911,7 +1919,7 @@
               <span class="tp-inspo__hint">גרמניה · אירופה־פארק והסביבה</span>
             </span>
           </button>
-          <button type="button" class="tp-inspo__card tp-inspo__card--nl" data-country-filter="הולנד" aria-label="סינון פארקים בהולנד — אפטלינג והסביבה">
+          <button type="button" class="tp-inspo__card tp-inspo__card--nl" data-country-filter="הולנד" aria-label="סינון פארקים בהולנד - אפטלינג והסביבה">
             <img class="tp-inspo__img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Droomvlucht_entrance_Efteling.jpg/500px-Droomvlucht_entrance_Efteling.jpg" width="500" height="333" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer">
             <span class="tp-inspo__veil" aria-hidden="true"></span>
             <span class="tp-inspo__body">
@@ -1919,7 +1927,7 @@
               <span class="tp-inspo__hint">אפטלינג ויעדים נוספים</span>
             </span>
           </button>
-          <button type="button" class="tp-inspo__card tp-inspo__card--it" data-country-filter="איטליה" aria-label="סינון פארקים באיטליה — אגם גארדה">
+          <button type="button" class="tp-inspo__card tp-inspo__card--it" data-country-filter="איטליה" aria-label="סינון פארקים באיטליה - אגם גארדה">
             <img class="tp-inspo__img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Blue_Tornado_%28Gardaland%29.JPG/500px-Blue_Tornado_%28Gardaland%29.JPG" width="500" height="341" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer">
             <span class="tp-inspo__veil" aria-hidden="true"></span>
             <span class="tp-inspo__body">
@@ -1927,7 +1935,7 @@
               <span class="tp-inspo__hint">איטליה · גארדה־לנד ועוד</span>
             </span>
           </button>
-          <button type="button" class="tp-inspo__card tp-inspo__card--es" data-country-filter="ספרד" aria-label="סינון פארקים בספרד — חוף הזהב">
+          <button type="button" class="tp-inspo__card tp-inspo__card--es" data-country-filter="ספרד" aria-label="סינון פארקים בספרד - חוף הזהב">
             <img class="tp-inspo__img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Shambhala_lift_hill.JPG/500px-Shambhala_lift_hill.JPG" width="500" height="375" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer">
             <span class="tp-inspo__veil" aria-hidden="true"></span>
             <span class="tp-inspo__body">
@@ -1946,7 +1954,7 @@
         <details class="tp-family-planner__details">
           <summary class="tp-family-planner__details-sum">איך זה עובד ומה חשוב לדעת</summary>
           <p class="tp-family-planner__details-body">
-            ההתאמה חלה על הפארקים שנשארו אחרי המסננים שלמעלה. הסיווג הוא כללי (לא מחיר כניסה מדויק). גובה, גיל ומחירים — תמיד באתר הרשמי של כל פארק.
+            ההתאמה חלה על הפארקים שנשארו אחרי המסננים שלמעלה. הסיווג הוא כללי (לא מחיר כניסה מדויק). גובה, גיל ומחירים - תמיד באתר הרשמי של כל פארק.
           </p>
         </details>
         <div class="tp-family-planner__ages-wrap">
@@ -1964,7 +1972,7 @@
               <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyBudget" value="any"> ללא הגבלה</label>
             </div>
             <p class="tp-family-planner__budget-hint" id="tpFamilyBudgetHint">
-              לא מחיר כניסה — לפני רכישה בודקים באתר הפארק.
+              לא מחיר כניסה - לפני רכישה בודקים באתר הפארק.
             </p>
           </fieldset>
           <fieldset class="tp-family-planner__limit">
@@ -1997,7 +2005,7 @@
         <button type="button" class="tp-chip" data-filter="hotel" aria-pressed="false">מלון באתר</button>
         <button type="button" class="tp-chip" data-filter="resort" aria-pressed="false">ריזורט</button>
       </div>
-      <p class="tp-filter-help">המסננים מבוססים על תגיות בעורך הנתונים — מתאימים לחיפושים נפוצים של הורים (גילאים, מים, מקורה, חיות, לימוד חווייתי). לפרטים מדויקים תמיד באתר הרשמי של כל פארק.</p>
+      <p class="tp-filter-help">המסננים מבוססים על תגיות בעורך הנתונים - מתאימים לחיפושים נפוצים של הורים (גילאים, מים, מקורה, חיות, לימוד חווייתי). לפרטים מדויקים תמיד באתר הרשמי של כל פארק.</p>
       <div class="tp-viewport-toggle">
         <label><input type="checkbox" id="tpViewportList" checked> <span>הרשימה מתעדכנת לפי שטח המפה (הזיזו או זום)</span></label>
       </div>
@@ -2010,7 +2018,7 @@
       <div class="tp-embed-map-bar" id="tpEmbedMapBar" aria-label="מפת פארקים">
         <span class="tp-embed-map-bar__text">ריחוף או לחיצה על סימון לפרטים מהירים</span>
       </div>
-      <p class="tp-map-mobile-hint" id="tpMapMobileHint">לוחצים על סימון במפה כדי לבחור פארק ולפתוח פרטים — סינון וחיפוש למעלה</p>
+      <p class="tp-map-mobile-hint" id="tpMapMobileHint">לוחצים על סימון במפה כדי לבחור פארק ולפתוח פרטים - סינון וחיפוש למעלה</p>
       <div class="tp-map-actions" id="tpMapActions" hidden>
         <button type="button" class="tp-map-reset-home" id="tpMapResetHome">חזור למפה הכללית</button>
         <a class="tp-map-destinations-pill" id="tpMapDestinationsPill" href="destinations.html" onclick="if(window.plausible){plausible('ThemeParks-CTA-Click',{props:{source:'theme-parks-map-pill',country:'ALL',target:'destinations'}});}">יעדים</a>
@@ -2073,7 +2081,7 @@
     </ul>
     <p class="tp-guide__intro" style="margin-bottom:0;">במפה למעלה אפשר לסנן גם לפי „מים” ולפי מדינה. שעות ועונות משתנות - תמיד מאמתים באתר הרשמי של הפארק לפני הזמנה.</p>
 
-    <p class="tp-guide__note">הגילאים כאן הם המלצה כללית בלבד — כל ילד שונה, וגבולות גובה בכל אטרקציה הם הקובעים בשטח.</p>
+    <p class="tp-guide__note">הגילאים כאן הם המלצה כללית בלבד - כל ילד שונה, וגבולות גובה בכל אטרקציה הם הקובעים בשטח.</p>
   </section>
 
   <div class="tp-modal" id="tpModal" role="dialog" aria-modal="true" aria-labelledby="tpModalTitle">
@@ -2151,7 +2159,7 @@
       SK: 'Bratislava', RO: 'Bucharest', FI: 'Helsinki', HR: 'Zagreb', IE: 'Dublin'
     };
 
-    /** מדינות שבהן מוצג קישור השכרה (קוד MATAY6) — העמוד המרכזי לשותף */
+    /** מדינות שבהן מוצג קישור השכרה (קוד MATAY6) - העמוד המרכזי לשותף */
     var CAR_RENTAL_MATAY6_PARTNER_HREF = 'car-rental-partners.html';
     var CAR_RENTAL_MATAY6_COUNTRIES = { AT: true, CZ: true, SK: true, HU: true };
 
@@ -2230,7 +2238,7 @@
       /** Parks matching age+budget before the map cap (family planner). */
       familyPlannerTotalMatched: 0
     };
-    /** Generic map embed (per Stay22 docs) — lat/lng must be on /embed/gm, not a fixed Hub embed id. */
+    /** Generic map embed (per Stay22 docs) - lat/lng must be on /embed/gm, not a fixed Hub embed id. */
     var STAY22_THEME_PARKS_AFFILIATE_ID = '69c0491c51844e7588a7882e';
 
     var COASTER_SVG = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M2 15v2h2v-2H2zm2-2h2l1-4h2l1 4h2l-1-6h2l1 6h2l1-4h2l1 4h2v-2h-1.5L17 7h-2l-1 4-1-4h-2l-1 5-1-5H8L7 9 6 7H4l-1.5 4H2v2zm16 2v2h4v-2h-4z"/></svg>';
@@ -2321,9 +2329,9 @@
     }
 
     var SPOTLIGHT_PICKS = [
-      { code: 'PL', name: 'Energylandia', lines: ['אחד הפארקים הגדולים באירופה — רכבות ענק ובתי מלון בשטח.', 'בשיא הקיץ: לרוב פתוח עד הערב; לוח מדויק באתר המפעיל.'] },
-      { code: 'NL', name: 'Efteling', lines: ['חוויה סיפורית ויער קסום בהולנד — מתאים במיוחד למשפחות.', 'שעות משתנות לפי עונה; תמיד כדאי לוודא ביום הביקור באתר הרשמי.'] },
-      { code: 'IT', name: 'Gardaland Resort', lines: ['ליד אגם גארדה — פארק גדול עם אזורי מים נפרדים בעונה.', 'שילוב לינה ופארק זמין לעיתים קרובות — פרטים ועדכונים באתר.'] },
+      { code: 'PL', name: 'Energylandia', lines: ['אחד הפארקים הגדולים באירופה - רכבות ענק ובתי מלון בשטח.', 'בשיא הקיץ: לרוב פתוח עד הערב; לוח מדויק באתר המפעיל.'] },
+      { code: 'NL', name: 'Efteling', lines: ['חוויה סיפורית ויער קסום בהולנד - מתאים במיוחד למשפחות.', 'שעות משתנות לפי עונה; תמיד כדאי לוודא ביום הביקור באתר הרשמי.'] },
+      { code: 'IT', name: 'Gardaland Resort', lines: ['ליד אגם גארדה - פארק גדול עם אזורי מים נפרדים בעונה.', 'שילוב לינה ופארק זמין לעיתים קרובות - פרטים ועדכונים באתר.'] },
       { code: 'DE', name: 'Europa-Park', lines: ['פארק ענק בדרום גרמניה עם „אזורים” לפי מדינות וריזורט במקום.', 'שעות פתיחה לפי מזג ועונה; לוח מלא וכרטיסים באתר הרשמי.'] }
     ];
 
@@ -2334,20 +2342,20 @@
     })();
 
     var KIND_TEASER_HE = {
-      theme_park: 'אטרקציות לכל המשפחה — לוח וכרטיסים באתר.',
-      theme_park_resort: 'פארק וריזורט — חבילות לפי עונה באתר.',
-      water_park: 'מים וגלים — לבדוק עונה ומזג.',
-      urban_funfair: 'מתחם שעשועים עירוני — שעות לפי יום.',
-      urban_theme_park: 'פארק עירוני נגיש — פרטים באתר.',
-      outdoor_adventure: 'אתר הרפתקאות בטבע — ציוד ולוח לפי עונה.',
-      nature_edutainment: 'טבע וחוויה חינוכית — לבדוק לפני הגעה.',
-      show_park: 'מופעים ואטרקציות — לוח מלא באתר.',
-      science_media_park: 'מדע ומדיה אינטראקטיבית — לכרטיסים באתר.',
-      marine_zoo_rides: 'ים, בעלי חיים ורכבות — לפי האתר הרשמי.',
-      urban_amusement_park: 'פארק עירוני — שעות לפי יום.',
-      theme_park_zoo: 'פארק וגן חיות — לשעות נפרדות באתר.',
-      miniature_railway_park: 'רכבת זעירה ונוף — בעונה.',
-      urban_garden_rides: 'גן שעשועים — מתאים למשפחות.'
+      theme_park: 'אטרקציות לכל המשפחה - לוח וכרטיסים באתר.',
+      theme_park_resort: 'פארק וריזורט - חבילות לפי עונה באתר.',
+      water_park: 'מים וגלים - לבדוק עונה ומזג.',
+      urban_funfair: 'מתחם שעשועים עירוני - שעות לפי יום.',
+      urban_theme_park: 'פארק עירוני נגיש - פרטים באתר.',
+      outdoor_adventure: 'אתר הרפתקאות בטבע - ציוד ולוח לפי עונה.',
+      nature_edutainment: 'טבע וחוויה חינוכית - לבדוק לפני הגעה.',
+      show_park: 'מופעים ואטרקציות - לוח מלא באתר.',
+      science_media_park: 'מדע ומדיה אינטראקטיבית - לכרטיסים באתר.',
+      marine_zoo_rides: 'ים, בעלי חיים ורכבות - לפי האתר הרשמי.',
+      urban_amusement_park: 'פארק עירוני - שעות לפי יום.',
+      theme_park_zoo: 'פארק וגן חיות - לשעות נפרדות באתר.',
+      miniature_railway_park: 'רכבת זעירה ונוף - בעונה.',
+      urban_garden_rides: 'גן שעשועים - מתאים למשפחות.'
     };
 
     function parkKey(code, parkName) {
@@ -2477,7 +2485,7 @@
 
     /**
      * Canonical price tier for filtering (A2). Uses Google Places when cached, else JSON price_level.
-     * Returns null when unknown — family planner treats null as "pass budget" (see theme-parks-family-planner-design.md).
+     * Returns null when unknown - family planner treats null as "pass budget" (see theme-parks-family-planner-design.md).
      * Does not use the hash fallback from displayPriceLevel (that fallback is display-only).
      */
     function getEffectivePriceLevel(item) {
@@ -2496,7 +2504,7 @@
 
     /** Label shown on cards, map tip, modal: real data when present, else editorial/hash fallback. */
     function getPriceLevelLabel(item) {
-      if (!item || !item.park) return '—';
+      if (!item || !item.park) return '-';
       var eff = getEffectivePriceLevel(item);
       if (eff) return eff;
       return displayPriceLevel(item.park, item);
@@ -2636,7 +2644,7 @@
         if (sl && sl.length) return sl.join(' ');
       }
       var he = COUNTRY_HE[item.countryCode] || item.countryName;
-      var tail = KIND_TEASER_HE[p.kind] || 'יעד פופולרי — פרטים באתר הרשמי.';
+      var tail = KIND_TEASER_HE[p.kind] || 'יעד פופולרי - פרטים באתר הרשמי.';
       return he + ' · ' + tail;
     }
 
@@ -2685,7 +2693,7 @@
     function parkWeatherSearchQuery(item) {
       var p = item.park;
       var loc = String(p && p.location || '').trim();
-      if (loc && loc !== '—') return loc + ',' + item.countryCode;
+      if (loc && loc !== '-') return loc + ',' + item.countryCode;
       var hub = MAJOR_CITY_BY_COUNTRY[item.countryCode];
       if (hub) return hub + ',' + item.countryCode;
       var cn = String(item.countryName || '').trim();
@@ -2839,7 +2847,7 @@
         '<p class="tp-xp-extra"><strong>דילוג תור:</strong> ' + skipLine + '</p>' +
         '<p class="tp-xp-extra"><strong>הנחות:</strong> ' + discount + '</p>' +
         '</div></div>' +
-        '<p class="tp-modal__xp-foot">מדד עומס הוא הערכה לפי סוג פארק ועונה — בזמן אמת ובאתר המפעיל יש לעיתים אפליקציה או דילוג בתור.</p>' +
+        '<p class="tp-modal__xp-foot">מדד עומס הוא הערכה לפי סוג פארק ועונה - בזמן אמת ובאתר המפעיל יש לעיתים אפליקציה או דילוג בתור.</p>' +
         quick;
       return (
         '<div class="tp-modal__section tp-modal__section--flush">' +
@@ -2864,7 +2872,7 @@
           '</div></div>';
       var kind = KIND_HE[p.kind] || p.kind;
       var countryHe = COUNTRY_HE[item.countryCode] || item.countryName;
-      var city = p.location || '—';
+      var city = p.location || '-';
       var locShort = item.countryFlag + ' ' + countryHe;
       var sl = state.browseSpotlight ? spotlightLinesFor(item) : null;
       var cardClass = 'tp-card' + (sl ? ' tp-card--spotlight' : '');
@@ -2904,7 +2912,7 @@
     function mapTooltipHtml(item) {
       var p = item.park;
       var countryHe = COUNTRY_HE[item.countryCode] || item.countryName;
-      var city = localizeCityForHe(p.location || '—');
+      var city = localizeCityForHe(p.location || '-');
       var googleInfo = state.placesCache[item.id] || null;
       var score = googleInfo && googleInfo.rating != null ? googleInfo.rating : displayRatingScore(p, item.id);
       var reviewsCount = googleInfo && googleInfo.reviews_total != null ? String(googleInfo.reviews_total) : String(displayReviewCount(p, item.id));
@@ -3160,7 +3168,7 @@
       if (state.browseSpotlight) {
         el.className = 'tp-meta tp-meta--spotlight';
         var spotlightHtml =
-          'נבחרו עבורכם <strong>ארבעה פארקים מובילים</strong> — הקלידו <strong>שם מדינה</strong> כדי לראות את כל הפארקים במדינה.';
+          'נבחרו עבורכם <strong>ארבעה פארקים מובילים</strong> - הקלידו <strong>שם מדינה</strong> כדי לראות את כל הפארקים במדינה.';
         if (state.familyPlanner && state.familyPlanner.active) {
           spotlightHtml +=
             ' <span class="tp-meta__family-note">· מתוך ארבעת הפארקים המוצגים כאן <strong>' +
@@ -3444,7 +3452,7 @@
 
     /**
      * Optional family matcher off: browse by country/chips only (no age/budget gate).
-     * Used when picking quick category chips or full toolbar reset — not when changing country alone.
+     * Used when picking quick category chips or full toolbar reset - not when changing country alone.
      */
     function deactivateFamilyPlannerForChipFilters() {
       if (!state.familyPlanner || !state.familyPlanner.active) return;
@@ -3593,7 +3601,7 @@
 
       var quickSelected = document.querySelector('.tp-quick-chip[aria-pressed="true"]');
       var quickParkName = quickSelected ? String(quickSelected.getAttribute('data-park') || '').toLowerCase() : '';
-      /** Spotlight is only the 4 hero parks — skip it when family matcher runs so matching uses the full list. */
+      /** Spotlight is only the 4 hero parks - skip it when family matcher runs so matching uses the full list. */
       var familyPlannerOn = state.familyPlanner && state.familyPlanner.active;
       var browseSpotlight =
         !familyPlannerOn &&
@@ -3683,7 +3691,7 @@
         listHead.innerHTML = '';
         empty.hidden = false;
         if (emptyTitle) emptyTitle.textContent = 'אין פארקים בשטח המפה';
-        if (emptyHint) emptyHint.textContent = 'הזיזו את המפה או התקרבו/התרחקו — או בטלו את „לפי שטח המפה” כדי לראות את כל הרשימה.';
+        if (emptyHint) emptyHint.textContent = 'הזיזו את המפה או התקרבו/התרחקו - או בטלו את „לפי שטח המפה” כדי לראות את כל הרשימה.';
         cards.innerHTML = '';
         return;
       }
@@ -3864,18 +3872,18 @@
 
     function modalHoursHtml(schedule) {
       if (!schedule || !schedule.opening_periods || !schedule.opening_periods.length) {
-        return '<div class="tp-modal__section tp-modal__section--flush"><div class="tp-modal__section-title">שעות</div><p class="tp-modal__hint">לפי עונה ואתר — לוודא בלוח הרשמי.</p></div>';
+        return '<div class="tp-modal__section tp-modal__section--flush"><div class="tp-modal__section-title">שעות</div><p class="tp-modal__hint">לפי עונה ואתר - לוודא בלוח הרשמי.</p></div>';
       }
       var bodyRows = schedule.opening_periods.slice(0, 4).map(function (period) {
         var lab = heScheduleLabel(period.label || 'תקופה');
-        var op = period.opens || '—';
-        var cl = period.closes || '—';
-        var daysHe = heDaysToken(period.days) || '—';
+        var op = period.opens || '-';
+        var cl = period.closes || '-';
+        var daysHe = heDaysToken(period.days) || '-';
         return '<tr><td>' + escapeHtml(lab) + '</td><td class="tp-modal__hours-time">' + escapeHtml(op) + ' – ' + escapeHtml(cl) + '</td><td>' + escapeHtml(daysHe) + '</td></tr>';
       }).join('');
       return '<div class="tp-modal__section tp-modal__section--flush">' +
         '<div class="tp-modal__section-title">שעות אופייניות</div>' +
-        '<p class="tp-modal__hint tp-modal__hint--inline">דוגמאות מהלוח — המקור המעודכן בכפתור למעלה.</p>' +
+        '<p class="tp-modal__hint tp-modal__hint--inline">דוגמאות מהלוח - המקור המעודכן בכפתור למעלה.</p>' +
         '<table class="tp-modal__hours-table" role="grid"><thead><tr><th scope="col">תקופה</th><th scope="col">שעות</th><th scope="col">ימים</th></tr></thead><tbody>' +
         bodyRows + '</tbody></table></div>';
     }
@@ -3887,7 +3895,7 @@
       if (!lod && !pk) return '';
       var bits = [];
       if (lod) {
-        if (lod.sleep_inside_park_or_resort === true) bits.push('לינה במתחם או ליד הכניסה — לפי האתר.');
+        if (lod.sleep_inside_park_or_resort === true) bits.push('לינה במתחם או ליד הכניסה - לפי האתר.');
         else if (lod.sleep_inside_park_or_resort === false) bits.push('ביקור יומי נפוץ; לינה באזור לפי האתר.');
         else bits.push('לינה: לעדכון באתר.');
       }
@@ -3938,10 +3946,10 @@
       var whyPick =
         '<p class="tp-near-lodging__why" dir="rtl">' +
         '<strong>למה המלון הזה?</strong> ' +
-        'בחרנו עבורכם המלצה אחת בלבד — לא רשימה ארוכה — כדי לחסוך זמן ולבלבול. ' +
+        'בחרנו עבורכם המלצה אחת בלבד - לא רשימה ארוכה - כדי לחסוך זמן ולבלבול. ' +
         'המקום עומד בסף מחמיר: <strong>דירוג גבוה בגוגל</strong> (מוצג בסולם 0–10 בסגנון דף מלון), ' +
         '<strong>יותר מאלף ביקורות אמיתיות</strong> בגוגל (אמון קהילתי), ' +
-        'ו<strong>נסיעה קצרה עד 10 ק״מ</strong> מהפארק — כדי שתדעו במה להסתמך לפני שאתם בודקים מחיר וזמינות במפה למטה.' +
+        'ו<strong>נסיעה קצרה עד 10 ק״מ</strong> מהפארק - כדי שתדעו במה להסתמך לפני שאתם בודקים מחיר וזמינות במפה למטה.' +
         '</p>';
       return whyPick + hotels.map(function (h) {
         var img = h.image
@@ -3959,7 +3967,7 @@
             '<span class="tp-near-lodging__score-src">דירוג לפי גוגל' +
             (g5 ? ' (' + escapeHtml(g5) + '/5)' : '') +
             (h.reviews != null ? ' · ' + escapeHtml(String(h.reviews)) + ' ביקורות בגוגל' : '') +
-            ' — לא דירוג Booking</span></div>';
+            ' - לא דירוג Booking</span></div>';
         } else if (h.rating != null) {
           ratingLine =
             '<div class="tp-near-lodging__rating"><span class="tp-near-lodging__rating-star" aria-hidden="true">★</span> ' +
@@ -3991,7 +3999,7 @@
         : '';
       return '<div class="tp-modal__section tp-modal__section--flush">' +
         '<div class="tp-modal__section-title">מלונות ליד הפארק</div>' +
-        '<p class="tp-modal__hint">מפת Stay22 לפי מיקום הפארק. מתחת למפה תופיע לכל היותר המלצה אחת בלבד, ורק אם נמצא מלון שעומד בסף מחמיר: דירוג גוגל גבוה (מוצג בסולם 0–10 בסגנון דף מלון), לפחות 1000 ביקורות בגוגל, ונסיעה עד 10 ק״מ מהפארק. אם אין התאמה חזקה — מוצגת רק המפה.</p>' +
+        '<p class="tp-modal__hint">מפת Stay22 לפי מיקום הפארק. מתחת למפה תופיע לכל היותר המלצה אחת בלבד, ורק אם נמצא מלון שעומד בסף מחמיר: דירוג גוגל גבוה (מוצג בסולם 0–10 בסגנון דף מלון), לפחות 1000 ביקורות בגוגל, ונסיעה עד 10 ק״מ מהפארק. אם אין התאמה חזקה - מוצגת רק המפה.</p>' +
         '<div style="margin-top:8px;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;background:#fff;">' +
         '<iframe title="Stay22 - מלונות ליד ' + escapeAttr(parkName) + '" width="100%" height="320" src="' + escapeAttr(src) + '" frameborder="0" loading="lazy"></iframe>' +
         '</div>' +
@@ -4014,7 +4022,7 @@
       titleEl.textContent = p.name;
       titleEl.setAttribute('dir', 'ltr');
       titleEl.style.textAlign = 'right';
-      document.getElementById('tpModalSub').textContent = item.countryFlag + ' ' + countryHe + ' · ' + (p.location || '—');
+      document.getElementById('tpModalSub').textContent = item.countryFlag + ' ' + countryHe + ' · ' + (p.location || '-');
       var links = document.getElementById('tpModalLinks');
       var cta = '<div class="tp-modal__cta-row">' +
         '<a href="' + escapeAttr(p.website) + '" class="tp-modal__btn tp-modal__btn--primary" target="_blank" rel="noopener">לאתר הרשמי</a>';
@@ -4026,14 +4034,14 @@
       var body = document.getElementById('tpModalBody');
       var parts = [];
       if (isWaterOrResortComingSoon(p)) {
-        parts.push('<div class="tp-modal__soon-banner" role="status"><strong>פארק מים / ריזורט</strong> — מידע מורחב יתווסף בהמשך. עד אז: קישורים רשמיים למטה.</div>');
+        parts.push('<div class="tp-modal__soon-banner" role="status"><strong>פארק מים / ריזורט</strong> - מידע מורחב יתווסף בהמשך. עד אז: קישורים רשמיים למטה.</div>');
       }
       var pLevel = getPriceLevelLabel(item);
       var pDist = displayDistanceFromCity(p, item);
       parts.push('<div class="tp-modal__kpis">' +
         '<span class="tp-modal__kpi"><strong>דירוג</strong> · <span class="tp-modal__rating-row">' + ratingBlockHtml(p, id, true) + '</span></span>' +
         '<span class="tp-modal__kpi"><strong>סוג</strong> · ' + escapeHtml(KIND_HE[p.kind] || p.kind) + '</span>' +
-        '<span class="tp-modal__kpi"><strong>עיר</strong> · ' + escapeHtml(p.location || '—') + '</span>' +
+        '<span class="tp-modal__kpi"><strong>עיר</strong> · ' + escapeHtml(p.location || '-') + '</span>' +
         '<span class="tp-modal__kpi"><strong>מחיר</strong> · ' + escapeHtml(pLevel) + '</span>' +
         '<span class="tp-modal__kpi"><strong>גישה</strong> · ' + escapeHtml(pDist) + '</span>' +
         '</div>');
