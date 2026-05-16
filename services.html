@@ -917,12 +917,41 @@
     }
 
     .value-prop-flags {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 8px 10px;
       margin-bottom: 18px;
+    }
+    /* שורתיים מאוזנים (4×2), במובייל 2×4 — בלי שורה של 5 ושורה של 3 */
+    .value-prop-flags__grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px 12px;
+      width: 100%;
+      max-width: 540px;
+      margin-inline: auto;
+      justify-items: center;
+      align-items: start;
+    }
+    /* יעד עם תפריט משנה — להחליף יעד: להחליף את תוכן .value-prop-flags__cell--expand */
+    .value-prop-flags__cell--expand {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      min-width: 0;
+    }
+    .value-prop-flags__cell--expand .value-prop-flag-expand {
+      flex: 0 0 auto;
+    }
+    .value-prop-flags__cell--expand summary.value-prop-flag--expand {
+      border-color: rgba(26, 107, 114, 0.18);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 2px 14px rgba(26, 107, 114, 0.09);
+    }
+
+    @media (max-width: 520px) {
+      .value-prop-flags__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 340px;
+        gap: 10px;
+      }
     }
 
     .value-prop-flag {
@@ -1158,6 +1187,26 @@
       .value-prop-flag-expand__item:hover .value-prop-flag-expand__item-glyph,
       .value-prop-flag-expand__item:focus-visible .value-prop-flag-expand__item-glyph {
         transform: none;
+      }
+    }
+
+    /* מובייל: תפריט מתחת לכפתור המרכזי — יישור מרכזי */
+    @media (max-width: 640px) {
+      .value-prop-flags__cell--expand .value-prop-flag-expand__menu {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        width: min(300px, calc(100vw - max(16px, env(safe-area-inset-left, 0px)) - max(16px, env(safe-area-inset-right, 0px))));
+      }
+      .value-prop-flags__cell--expand .value-prop-flag-expand__menu::before {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%) translateY(1px);
+      }
+      .value-prop-flags__cell--expand .value-prop-flag-expand__menu::after {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%) translateY(3px);
       }
     }
 
@@ -3293,43 +3342,48 @@
           <span class="value-prop-dest-kicker__title">מצאו את היעד הבא שלכם</span>
           <span class="value-prop-dest-kicker__deck">מדריכים חינמיים עם מסלולים, טיפים והמלצות שנכתבו עם ילדים ברקע</span>
         </p>
-        <div class="value-prop-flags">
-          <a class="value-prop-flag" href="slovakia.html" aria-label="סלובקיה — מדריך טיול למשפחות"><img src="https://flagcdn.com/sk.svg" width="28" height="19" alt="" decoding="async">סלובקיה</a>
-          <a class="value-prop-flag" href="budapest.html" aria-label="הונגריה — מדריך בודפשט למשפחות"><img src="https://flagcdn.com/hu.svg" width="28" height="19" alt="" decoding="async">הונגריה</a>
-          <a class="value-prop-flag" href="romania.html" aria-label="רומניה — מדריך טיול למשפחות"><img src="https://flagcdn.com/ro.svg" width="28" height="19" alt="" decoding="async">רומניה</a>
-          <details class="value-prop-flag-expand">
-            <summary class="value-prop-flag--expand" aria-haspopup="menu" aria-label="פולין — בחירת מדריך לאזור">
-              <img src="https://flagcdn.com/pl.svg" width="28" height="19" alt="" decoding="async">
-              פולין
-              <span class="value-prop-flag-expand__hint" aria-hidden="true">▼</span>
-            </summary>
-            <div class="value-prop-flag-expand__menu" role="menu" aria-label="אזורים בפולין">
-              <a role="menuitem" class="value-prop-flag-expand__item" href="warsaw.html" aria-label="סובב וורשה — מדריך משפחות בעיר ובסביבה">
-                <span class="value-prop-flag-expand__item-glyph" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M6 21V10l6-4 6 4v11"/><path d="M9 21v-6h6v6"/><path d="M9 10h6"/></svg>
-                </span>
-                <span class="value-prop-flag-expand__item-text">
-                  <span class="value-prop-flag-expand__item-title">סובב וורשה</span>
-                  <span class="value-prop-flag-expand__item-meta">עיר הבירה · פארקים, מדע ופארקי מים ליד</span>
-                </span>
-                <svg class="value-prop-flag-expand__item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-              </a>
-              <a role="menuitem" class="value-prop-flag-expand__item" href="poland-south.html" aria-label="זקופנה ודרום פולין — מדריך הרים וטבע">
-                <span class="value-prop-flag-expand__item-glyph" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16l-5-8-3 4-4-7-4 11z"/><path d="M8 20l3-5"/></svg>
-                </span>
-                <span class="value-prop-flag-expand__item-text">
-                  <span class="value-prop-flag-expand__item-title">זקופנה · דרום פולין</span>
-                  <span class="value-prop-flag-expand__item-meta">הרי הטטרה · טבע, מגלשות ומכרות מלח</span>
-                </span>
-                <svg class="value-prop-flag-expand__item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-              </a>
+        <div class="value-prop-flags" aria-label="יעדי מדריכים חינמיים">
+          <div class="value-prop-flags__grid">
+            <a class="value-prop-flag" href="slovakia.html" aria-label="סלובקיה — מדריך טיול למשפחות"><img src="https://flagcdn.com/sk.svg" width="28" height="19" alt="" decoding="async">סלובקיה</a>
+            <a class="value-prop-flag" href="budapest.html" aria-label="הונגריה — מדריך בודפשט למשפחות"><img src="https://flagcdn.com/hu.svg" width="28" height="19" alt="" decoding="async">הונגריה</a>
+            <!-- יעד עם תפריט משנה. להחלפת יעד (לא רק פולין): החליפו את הבלוק בתוך .value-prop-flags__cell--expand -->
+            <div class="value-prop-flags__cell--expand">
+              <details class="value-prop-flag-expand">
+                <summary class="value-prop-flag--expand" aria-haspopup="menu" aria-label="פולין — בחירת מדריך לאזור">
+                  <img src="https://flagcdn.com/pl.svg" width="28" height="19" alt="" decoding="async">
+                  פולין
+                  <span class="value-prop-flag-expand__hint" aria-hidden="true">▼</span>
+                </summary>
+                <div class="value-prop-flag-expand__menu" role="menu" aria-label="אזורים בפולין">
+                  <a role="menuitem" class="value-prop-flag-expand__item" href="warsaw.html" aria-label="סובב וורשה — מדריך משפחות בעיר ובסביבה">
+                    <span class="value-prop-flag-expand__item-glyph" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M6 21V10l6-4 6 4v11"/><path d="M9 21v-6h6v6"/><path d="M9 10h6"/></svg>
+                    </span>
+                    <span class="value-prop-flag-expand__item-text">
+                      <span class="value-prop-flag-expand__item-title">סובב וורשה</span>
+                      <span class="value-prop-flag-expand__item-meta">עיר הבירה · פארקים, מדע ופארקי מים ליד</span>
+                    </span>
+                    <svg class="value-prop-flag-expand__item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+                  </a>
+                  <a role="menuitem" class="value-prop-flag-expand__item" href="poland-south.html" aria-label="זקופנה ודרום פולין — מדריך הרים וטבע">
+                    <span class="value-prop-flag-expand__item-glyph" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16l-5-8-3 4-4-7-4 11z"/><path d="M8 20l3-5"/></svg>
+                    </span>
+                    <span class="value-prop-flag-expand__item-text">
+                      <span class="value-prop-flag-expand__item-title">זקופנה · דרום פולין</span>
+                      <span class="value-prop-flag-expand__item-meta">הרי הטטרה · טבע, מגלשות ומכרות מלח</span>
+                    </span>
+                    <svg class="value-prop-flag-expand__item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+                  </a>
+                </div>
+              </details>
             </div>
-          </details>
-          <a class="value-prop-flag" href="austria.html" aria-label="אוסטריה — מדריך טיול למשפחות"><img src="https://flagcdn.com/at.svg" width="28" height="19" alt="" decoding="async">אוסטריה</a>
-          <a class="value-prop-flag" href="athens.html" aria-label="יוון — מדריך טיול לאתונה עם ילדים"><img src="https://flagcdn.com/gr.svg" width="28" height="19" alt="" decoding="async">יוון</a>
-          <a class="value-prop-flag" href="czechia.html" aria-label="צ׳כיה — מדריך טיול למשפחות"><img src="https://flagcdn.com/cz.svg" width="28" height="19" alt="" decoding="async">צ׳כיה</a>
-          <a class="value-prop-flag" href="slovenia.html" aria-label="סלובניה — מדריך טיול למשפחות"><img src="https://flagcdn.com/si.svg" width="28" height="19" alt="" decoding="async">סלובניה</a>
+            <a class="value-prop-flag" href="romania.html" aria-label="רומניה — מדריך טיול למשפחות"><img src="https://flagcdn.com/ro.svg" width="28" height="19" alt="" decoding="async">רומניה</a>
+            <a class="value-prop-flag" href="austria.html" aria-label="אוסטריה — מדריך טיול למשפחות"><img src="https://flagcdn.com/at.svg" width="28" height="19" alt="" decoding="async">אוסטריה</a>
+            <a class="value-prop-flag" href="athens.html" aria-label="יוון — מדריך טיול לאתונה עם ילדים"><img src="https://flagcdn.com/gr.svg" width="28" height="19" alt="" decoding="async">יוון</a>
+            <a class="value-prop-flag" href="czechia.html" aria-label="צ׳כיה — מדריך טיול למשפחות"><img src="https://flagcdn.com/cz.svg" width="28" height="19" alt="" decoding="async">צ׳כיה</a>
+            <a class="value-prop-flag" href="slovenia.html" aria-label="סלובניה — מדריך טיול למשפחות"><img src="https://flagcdn.com/si.svg" width="28" height="19" alt="" decoding="async">סלובניה</a>
+          </div>
         </div>
         <div class="value-prop-dest-actions">
           <a href="destinations.html" class="value-prop-dest-link">
