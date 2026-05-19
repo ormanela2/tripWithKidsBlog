@@ -41,16 +41,7 @@
   {"@context":"https://schema.org","@type":"ItemList","name":"שדות תעופה עם מלונות מומלצים","itemListElement":[{"@type":"ListItem","position":1,"name":"בודפשט · BUD"},{"@type":"ListItem","position":2,"name":"וורשה · WAW"},{"@type":"ListItem","position":3,"name":"וינה · VIE"},{"@type":"ListItem","position":4,"name":"פראג · PRG"},{"@type":"ListItem","position":5,"name":"קרקוב · KRK"},{"@type":"ListItem","position":6,"name":"בוקרשט · OTP"},{"@type":"ListItem","position":7,"name":"לובליאנה · LJU"}]}
   </script>
   <script>window.GOOGLE_MAPS_API_KEY = 'AIzaSyAIpRqCBJr4vL5CiH0dHh1GSfyyjE2w-XI';</script>
-  <script>
-  (function(){
-    var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
-    if (!key || (window.google && window.google.maps)) return;
-    var s = document.createElement('script');
-    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(key) + '&libraries=places&v=quarterly';
-    s.async = true;
-    document.head.appendChild(s);
-  })();
-  </script>
+  <script src="matay-gmaps-frugal.js"></script>
   <style>
     :root{
       --teal:#1A6B72;--teal-dark:#124d52;--cream:#FDF8F2;--sand:#F5EDD8;--sand-dark:#e8ddc4;
@@ -1189,72 +1180,28 @@
       });
 
       function initAirportPhotos() {
-        var attempts = 0;
-        var maxAttempts = 25;
-        var retryMs = 400;
-
-        function tryLoad() {
-          if (!(window.google && window.google.maps && window.google.maps.places && window.google.maps.places.Place)) {
-            attempts += 1;
-            if (attempts <= maxAttempts) {
-              setTimeout(tryLoad, retryMs);
-            }
-            return;
-          }
-
-          document.querySelectorAll('.airport-card__photo[data-place-id]').forEach(function (img) {
-            var placeId = (img.getAttribute('data-place-id') || '').trim();
-            if (!placeId) return;
-
-            (async function () {
-              try {
-                var place = new google.maps.places.Place({
-                  id: placeId,
-                  requestedLanguage: 'he'
-                });
-                await place.fetchFields({ fields: ['photos'] });
-                if (!place.photos || !place.photos.length || typeof place.photos[0].getURI !== 'function') {
-                  return;
-                }
-                var uri = place.photos[0].getURI({ maxWidth: 1280, maxHeight: 720 });
-                if (uri) img.src = uri;
-              } catch (err) {
-                /* keep placeholder gradient if photo lookup fails */
-              }
-            })();
-          });
-
-          document.querySelectorAll('.hotel-block__photo-img[data-place-id]').forEach(function (img) {
-            var placeId = (img.getAttribute('data-place-id') || '').trim();
-            if (!placeId) return;
+        if (!window.MatayGmapsFrugal) return;
+        var m = MatayGmapsFrugal;
+        m.hydratePlaceIdImages({
+          root: document,
+          selector: '.airport-card__photo[data-place-id]',
+          fields: ['photos'],
+          maxWidth: 1280,
+          maxHeight: 720
+        });
+        m.hydratePlaceIdImages({
+          root: document,
+          selector: '.hotel-block__photo-img[data-place-id]',
+          fields: ['photos', 'displayName'],
+          maxWidth: 720,
+          maxHeight: 480,
+          onApplied: function (img, payload) {
+            if (payload && payload.displayName) img.alt = '\u05e6\u05d9\u05dc\u05d5\u05dd: ' + payload.displayName;
+            img.removeAttribute('hidden');
             var wrap = img.closest('.hotel-block__photo-wrap');
-
-            (async function () {
-              try {
-                var place = new google.maps.places.Place({
-                  id: placeId,
-                  requestedLanguage: 'he'
-                });
-                await place.fetchFields({ fields: ['photos', 'displayName'] });
-                if (!place.photos || !place.photos.length || typeof place.photos[0].getURI !== 'function') {
-                  return;
-                }
-                var uri = place.photos[0].getURI({ maxWidth: 720, maxHeight: 480 });
-                if (!uri) return;
-                img.src = uri;
-                var dn = place.displayName;
-                var nameText = typeof dn === 'string' ? dn : dn && dn.text ? dn.text : '';
-                if (nameText) img.alt = '\u05e6\u05d9\u05dc\u05d5\u05dd: ' + nameText;
-                img.removeAttribute('hidden');
-                if (wrap) wrap.classList.remove('hotel-block__photo-wrap--ph');
-              } catch (err) {
-                /* keep placeholder if hotel photo lookup fails */
-              }
-            })();
-          });
-        }
-
-        tryLoad();
+            if (wrap) wrap.classList.remove('hotel-block__photo-wrap--ph');
+          }
+        });
       }
 
       initAirportPhotos();

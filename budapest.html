@@ -47,18 +47,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&family=Heebo:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
   <link rel="stylesheet" href="destination-hero-glass.css"/>
-  <!-- Maps JavaScript API + Places (same key as austria.html - restrict by domain). -->
+  <!-- Maps + Places load on demand via matay-gmaps-frugal.js (fewer sessions hit Google). -->
   <script>window.GOOGLE_MAPS_API_KEY = 'AIzaSyAIpRqCBJr4vL5CiH0dHh1GSfyyjE2w-XI';</script>
-  <script>
-  (function (k) {
-    k = (window.GOOGLE_MAPS_API_KEY || '').trim();
-    if (!k) return;
-    var s = document.createElement('script');
-    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(k) + '&libraries=places&v=quarterly';
-    s.async = true;
-    document.head.appendChild(s);
-  })();
-  </script>
+  <script src="matay-gmaps-frugal.js"></script>
   <style>
     .flag-hu { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 600'%3E%3Crect width='900' height='200' fill='%23ce2939'/%3E%3Crect y='200' width='900' height='200' fill='%23fff'/%3E%3Crect y='400' width='900' height='200' fill='%23477050'/%3E%3C/svg%3E"); }
     .flag-icon { display: inline-block; background-size: cover; background-repeat: no-repeat; border-radius: 4px; }
@@ -4669,75 +4660,15 @@
 </script>
 <script>
 (function () {
-  /** כרטיסי אטרקציות בודפשט: תמונת גיבוי מ-Wikimedia → תמונה מ-Google Places (אותו מפתח כמו austria.html) */
-  var CACHE_PREFIX = 'budapestPlaceSheet:v1:';
-  var CACHE_MAX_MS = 7 * 24 * 60 * 60 * 1000;
-  function readPlaceCache(placeId) {
-    try {
-      var raw = localStorage.getItem(CACHE_PREFIX + placeId);
-      if (!raw) return null;
-      var wrap = JSON.parse(raw);
-      if (!wrap || wrap.v !== 1 || !wrap.savedAt || !wrap.payload) return null;
-      if (Date.now() - wrap.savedAt > CACHE_MAX_MS) return null;
-      return wrap.payload;
-    } catch (e) {
-      return null;
-    }
-  }
+  /** כרטיסי אטרקציות: Wikimedia גיבוי + Places רק כשנכנסים לאזור התצוגה (מטמון 45 יום, משותף ליעדים). */
   function hydrateBudapestAttractionThumbs() {
-    var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
-    if (!key) return;
+    if (!window.MatayGmapsFrugal) return;
     if (!document.getElementById('attractions') && !document.getElementById('budapest-near-daytrips')) return;
-    if (!window.google || !google.maps) {
-      if (!hydrateBudapestAttractionThumbs._wait) hydrateBudapestAttractionThumbs._wait = 0;
-      if (++hydrateBudapestAttractionThumbs._wait < 120) {
-        setTimeout(hydrateBudapestAttractionThumbs, 100);
-      }
-      return;
-    }
-    if (hydrateBudapestAttractionThumbs._started) return;
-    hydrateBudapestAttractionThumbs._started = true;
-    var imgs = document.querySelectorAll(
-      '#attractions img.attraction-card__thumb[data-google-place-id], #budapest-near-daytrips img.beyond-card__photo[data-google-place-id]'
-    );
-    var jobs = [];
-    for (var j = 0; j < imgs.length; j++) {
-      var img = imgs[j];
-      var pid = (img.getAttribute('data-google-place-id') || '').trim();
-      if (!pid) continue;
-      jobs.push({ img: img, placeId: pid });
-    }
-    if (!jobs.length) return;
-    google.maps
-      .importLibrary('places')
-      .then(function (lib) {
-        var Place = lib.Place;
-        jobs.forEach(function (job) {
-          var cached = readPlaceCache(job.placeId);
-          if (cached && cached.photoURI) {
-            job.img.src = cached.photoURI;
-            return;
-          }
-          var place = new Place({ id: job.placeId });
-          place
-            .fetchFields({ fields: ['photos'] })
-            .then(function () {
-              if (!place.photos || !place.photos.length || typeof place.photos[0].getURI !== 'function') return;
-              try {
-                var uri = place.photos[0].getURI({ maxWidth: 480, maxHeight: 360 });
-                if (uri) job.img.src = uri;
-              } catch (e) {
-                /* נשארת תמונת גיבוי */
-              }
-            })
-            .catch(function () {
-              /* נשארת תמונת גיבוי */
-            });
-        });
-      })
-      .catch(function () {
-        /* נשארת תמונת גיבוי */
-      });
+    var m = MatayGmapsFrugal;
+    var att = document.getElementById('attractions');
+    var day = document.getElementById('budapest-near-daytrips');
+    if (att) m.hydrateGooglePlaceThumbs({ root: att, selector: 'img.attraction-card__thumb[data-google-place-id]' });
+    if (day) m.hydrateGooglePlaceThumbs({ root: day, selector: 'img.beyond-card__photo[data-google-place-id]' });
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', hydrateBudapestAttractionThumbs);

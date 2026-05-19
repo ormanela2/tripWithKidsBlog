@@ -2088,19 +2088,9 @@
     .place-sheet__photo-wrap { max-height: 190px; }
   }
 </style>
-<!-- הגדירו מפתח Maps JavaScript API (עם Places). הגבילו לדומיין האתר. -->
+<!-- הגדירו מפתח Maps JavaScript API (עם Places). הגבילו לדומיין האתר. טעינה רק כשצריך — matay-gmaps-frugal.js -->
 <script>window.GOOGLE_MAPS_API_KEY = 'AIzaSyAIpRqCBJr4vL5CiH0dHh1GSfyyjE2w-XI';</script>
-<script>
-(function(){
-  var k = (window.GOOGLE_MAPS_API_KEY || '').trim();
-  if (!k) return;
-  var s = document.createElement('script');
-  /* v=quarterly: fewer script churns than weekly. Place details cached 7d in localStorage (see PLACE_SHEET_*). */
-  s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(k) + '&libraries=places&v=quarterly';
-  s.async = true;
-  document.head.appendChild(s);
-})();
-</script>
+<script src="matay-gmaps-frugal.js"></script>
 <!-- Privacy-friendly analytics by Plausible -->
 <script async src="https://plausible.io/js/pa-nFr2Tp1qjwr_0EXB175vP.js"></script>
 <script>
@@ -3532,92 +3522,24 @@
       document.body.style.overflow = lock ? 'hidden' : '';
     };
 
-    /** Place Details (fetchFields) - נשמר ב-localStorage 7 ימים כדי לא לבזבז קריאות ל-Google Places */
-    var PLACE_SHEET_CACHE_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
-    var PLACE_SHEET_CACHE_KEY_PREFIX = 'austriaPlaceSheet:v1:';
-
-    function placeSheetCacheStorageKey(placeId) {
-      return PLACE_SHEET_CACHE_KEY_PREFIX + placeId;
-    }
-
+    /** Place Details (fetchFields) — מטמון shared 45 יום ב־matay-gmaps-frugal.js (פחות קריאות ל־Places). */
     function readPlaceSheetCache(placeId) {
-      try {
-        var raw = localStorage.getItem(placeSheetCacheStorageKey(placeId));
-        if (!raw) return null;
-        var wrap = JSON.parse(raw);
-        if (!wrap || wrap.v !== 1 || !wrap.savedAt || !wrap.payload) return null;
-        if (Date.now() - wrap.savedAt > PLACE_SHEET_CACHE_MAX_AGE_MS) return null;
-        return wrap.payload;
-      } catch (e) {
-        return null;
-      }
+      return window.MatayGmapsFrugal ? MatayGmapsFrugal.readPlacePayload(placeId) : null;
     }
 
     function writePlaceSheetCache(placeId, payload) {
-      try {
-        localStorage.setItem(
-          placeSheetCacheStorageKey(placeId),
-          JSON.stringify({ v: 1, savedAt: Date.now(), payload: payload })
-        );
-      } catch (e) {
-        /* quota / private mode */
-      }
+      if (window.MatayGmapsFrugal) MatayGmapsFrugal.writeFull(placeId, payload);
     }
 
-    /** כרטיסי אטרקציות זלצבורג: החלפת תמונת גיבוי ב-URL מ-Google Places (אותו מפתח + מטמון כמו חלון המקום) */
+    /** כרטיסי אטרקציות זלצבורג: מטמון + טעינה רק בקרבת מסך (matay-gmaps-frugal.js). */
     function hydrateSalzburgAttractionThumbs() {
-      var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
-      if (!key) return;
+      if (!window.MatayGmapsFrugal) return;
       var root = document.getElementById('salzburg-attractions');
       if (!root) return;
-      if (!window.google || !google.maps) {
-        if (!hydrateSalzburgAttractionThumbs._wait) hydrateSalzburgAttractionThumbs._wait = 0;
-        if (++hydrateSalzburgAttractionThumbs._wait < 120) {
-          setTimeout(hydrateSalzburgAttractionThumbs, 100);
-        }
-        return;
-      }
-      if (hydrateSalzburgAttractionThumbs._started) return;
-      hydrateSalzburgAttractionThumbs._started = true;
-      var imgs = root.querySelectorAll('img.attraction-card__thumb[data-google-place-id]');
-      var jobs = [];
-      for (var j = 0; j < imgs.length; j++) {
-        var img = imgs[j];
-        var pid = (img.getAttribute('data-google-place-id') || '').trim();
-        if (!pid) continue;
-        jobs.push({ img: img, placeId: pid });
-      }
-      if (!jobs.length) return;
-      google.maps
-        .importLibrary('places')
-        .then(function(lib) {
-          var Place = lib.Place;
-          jobs.forEach(function(job) {
-            var cached = readPlaceSheetCache(job.placeId);
-            if (cached && cached.photoURI) {
-              job.img.src = cached.photoURI;
-              return;
-            }
-            var place = new Place({ id: job.placeId });
-            place
-              .fetchFields({ fields: ['photos'] })
-              .then(function() {
-                if (!place.photos || !place.photos.length || typeof place.photos[0].getURI !== 'function') return;
-                try {
-                  var uri = place.photos[0].getURI({ maxWidth: 480, maxHeight: 360 });
-                  if (uri) job.img.src = uri;
-                } catch (e) {
-                  /* נשארת תמונת גיבוי */
-                }
-              })
-              .catch(function() {
-                /* נשארת תמונת גיבוי */
-              });
-          });
-        })
-        .catch(function() {
-          /* נשארת תמונת גיבוי */
-        });
+      MatayGmapsFrugal.hydrateGooglePlaceThumbs({
+        root: root,
+        selector: 'img.attraction-card__thumb[data-google-place-id]'
+      });
     }
 
     function mapEscAttr(s) {
@@ -3857,14 +3779,12 @@
       window.__mtRefreshBodyScrollLock();
 
       var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
-      if (!key || !window.google || !google.maps) {
+      if (!key) {
         document.getElementById('placeSheetTitle').textContent = entries[subIndex].label || day.title;
         setPlaceSheetMeta(
           'placeSheetAddress',
           'placeSheetAddressText',
-          !key
-            ? 'כדי לטעון שעות, תמונה ודירוג: הגדירו את GOOGLE_MAPS_API_KEY בראש הקובץ (מפתח עם Maps JavaScript API + Places).'
-            : 'טוען את ספריית המפות… נסו שוב בעוד רגע.'
+          'כדי לטעון שעות, תמונה ודירוג: הגדירו את GOOGLE_MAPS_API_KEY בראש הקובץ (מפתח עם Maps JavaScript API + Places).'
         );
         setPlaceSheetMeta('placeSheetRating', 'placeSheetRatingText', '');
         setPlaceSheetMeta('placeSheetHours', 'placeSheetHoursText', '');
@@ -3874,6 +3794,29 @@
         var _plKey = document.getElementById('placeSheetPhoneLabel');
         if (_plKey) _plKey.textContent = '';
         document.getElementById('placeSheetWeb').hidden = true;
+        return;
+      }
+      if (!window.google || !google.maps) {
+        if (window.MatayGmapsFrugal) {
+          window.MatayGmapsFrugal.ensureGoogleMaps(function () {
+            openPlaceSheet(day, subIndex);
+          });
+        } else {
+          document.getElementById('placeSheetTitle').textContent = entries[subIndex].label || day.title;
+          setPlaceSheetMeta(
+            'placeSheetAddress',
+            'placeSheetAddressText',
+            'טוען את ספריית המפות… רעננו את הדף אם זה נמשך.'
+          );
+          setPlaceSheetMeta('placeSheetRating', 'placeSheetRatingText', '');
+          setPlaceSheetMeta('placeSheetHours', 'placeSheetHoursText', '');
+          document.getElementById('placeSheetSummary').hidden = true;
+          document.getElementById('placeSheetPhoto').hidden = true;
+          document.getElementById('placeSheetPhone').hidden = true;
+          var _plKey2 = document.getElementById('placeSheetPhoneLabel');
+          if (_plKey2) _plKey2.textContent = '';
+          document.getElementById('placeSheetWeb').hidden = true;
+        }
         return;
       }
 

@@ -176,6 +176,8 @@
     document.head.appendChild(s);
   })();
   </script>
+  <script>window.GOOGLE_MAPS_API_KEY = 'AIzaSyAIpRqCBJr4vL5CiH0dHh1GSfyyjE2w-XI';</script>
+  <script src="matay-gmaps-frugal.js"></script>
   <style>
     :root {
       --amber: #E8A045; --amber-dark: #c4872e;
@@ -2946,19 +2948,16 @@
           resolve(window.google);
           return;
         }
-        var key = window.GOOGLE_MAPS_API_KEY || 'AIzaSyAIpRqCBJr4vL5CiH0dHh1GSfyyjE2w-XI';
-        if (!key) { reject(new Error('no-google-key')); return; }
-        var cb = '__tpGooglePlacesReady__';
-        window[cb] = function () {
-          try { delete window[cb]; } catch (e) {}
-          state.placesReady = true;
-          resolve(window.google);
-        };
-        var s = document.createElement('script');
-        s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(key) + '&libraries=places&v=quarterly&language=iw&callback=' + cb;
-        s.async = true;
-        s.onerror = function () { reject(new Error('google-load-failed')); };
-        document.head.appendChild(s);
+        if (!window.MatayGmapsFrugal) {
+          reject(new Error('no-frugal'));
+          return;
+        }
+        window.MatayGmapsFrugal.ensureGoogleMaps(function () {
+          if (window.google && window.google.maps && window.google.maps.places) {
+            state.placesReady = true;
+            resolve(window.google);
+          } else reject(new Error('google-load-failed'));
+        });
       });
       return state.placesReadyPromise;
     }
@@ -2975,6 +2974,13 @@
 
     function enrichParkFromGoogle(item) {
       if (!item || state.placesCache[item.id]) return Promise.resolve(state.placesCache[item.id] || null);
+      if (window.MatayGmapsFrugal) {
+        var disk = MatayGmapsFrugal.readThemeParkGoogle(item.id);
+        if (disk) {
+          state.placesCache[item.id] = disk;
+          return Promise.resolve(disk);
+        }
+      }
       return loadGooglePlacesApi()
         .then(function () {
           var service = ensurePlacesService();
@@ -2998,6 +3004,7 @@
                 photo_url: photo
               };
               state.placesCache[item.id] = out;
+              if (window.MatayGmapsFrugal) MatayGmapsFrugal.writeThemeParkGoogle(item.id, out);
               resolve(out);
             });
           });

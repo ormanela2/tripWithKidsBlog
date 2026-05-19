@@ -658,16 +658,7 @@
   <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
   <!-- הגדירו מפתח Maps JavaScript API (עם Places). הגבילו לדומיין האתר. -->
   <script>window.GOOGLE_MAPS_API_KEY = 'AIzaSyAIpRqCBJr4vL5CiH0dHh1GSfyyjE2w-XI';</script>
-  <script>
-  (function(){
-    var k = (window.GOOGLE_MAPS_API_KEY || '').trim();
-    if (!k) return;
-    var s = document.createElement('script');
-    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(k) + '&libraries=places&v=quarterly';
-    s.async = true;
-    document.head.appendChild(s);
-  })();
-  </script>
+  <script src="matay-gmaps-frugal.js"></script>
 <style>
   .float-nav { position: fixed; bottom: max(24px, env(safe-area-inset-bottom) + 12px); right: 24px; z-index: 996; display: flex; flex-direction: column; gap: 10px; opacity: 0; transform: translateY(12px); transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
   .float-nav.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
@@ -1753,8 +1744,6 @@
 <script>
 (function () {
   'use strict';
-  var PLACE_SHEET_CACHE_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
-  var PLACE_SHEET_CACHE_KEY_PREFIX = 'polandSouthPlaceSheet:v1:';
   var ZAKOPANE_STUB_DAY = { title: '', lat: 49.2992, lng: 19.9496 };
   var _placeSheetDay = null;
 
@@ -1771,77 +1760,22 @@
     document.body.style.overflow = lock ? 'hidden' : '';
   };
 
-  function placeSheetCacheStorageKey(placeId) {
-    return PLACE_SHEET_CACHE_KEY_PREFIX + placeId;
-  }
   function readPlaceSheetCache(placeId) {
-    try {
-      var raw = localStorage.getItem(placeSheetCacheStorageKey(placeId));
-      if (!raw) return null;
-      var wrap = JSON.parse(raw);
-      if (!wrap || wrap.v !== 1 || !wrap.savedAt || !wrap.payload) return null;
-      if (Date.now() - wrap.savedAt > PLACE_SHEET_CACHE_MAX_AGE_MS) return null;
-      return wrap.payload;
-    } catch (e) {
-      return null;
-    }
+    return window.MatayGmapsFrugal ? MatayGmapsFrugal.readPlacePayload(placeId) : null;
   }
+
   function writePlaceSheetCache(placeId, payload) {
-    try {
-      localStorage.setItem(
-        placeSheetCacheStorageKey(placeId),
-        JSON.stringify({ v: 1, savedAt: Date.now(), payload: payload })
-      );
-    } catch (e) {}
+    if (window.MatayGmapsFrugal) MatayGmapsFrugal.writeFull(placeId, payload);
   }
 
   function hydratePolandAttractionThumbs() {
-    var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
-    if (!key) return;
+    if (!window.MatayGmapsFrugal) return;
     var root = document.getElementById('attractions');
     if (!root) return;
-    if (!window.google || !google.maps) {
-      if (!hydratePolandAttractionThumbs._wait) hydratePolandAttractionThumbs._wait = 0;
-      if (++hydratePolandAttractionThumbs._wait < 120) {
-        setTimeout(hydratePolandAttractionThumbs, 100);
-      }
-      return;
-    }
-    if (hydratePolandAttractionThumbs._started) return;
-    hydratePolandAttractionThumbs._started = true;
-    var imgs = root.querySelectorAll('img.attraction-card__thumb[data-google-place-id]');
-    var jobs = [];
-    for (var j = 0; j < imgs.length; j++) {
-      var img = imgs[j];
-      var pid = (img.getAttribute('data-google-place-id') || '').trim();
-      if (!pid) continue;
-      jobs.push({ img: img, placeId: pid });
-    }
-    if (!jobs.length) return;
-    google.maps
-      .importLibrary('places')
-      .then(function (lib) {
-        var Place = lib.Place;
-        jobs.forEach(function (job) {
-          var cached = readPlaceSheetCache(job.placeId);
-          if (cached && cached.photoURI) {
-            job.img.src = cached.photoURI;
-            return;
-          }
-          var place = new Place({ id: job.placeId });
-          place
-            .fetchFields({ fields: ['photos'] })
-            .then(function () {
-              if (!place.photos || !place.photos.length || typeof place.photos[0].getURI !== 'function') return;
-              try {
-                var uri = place.photos[0].getURI({ maxWidth: 480, maxHeight: 360 });
-                if (uri) job.img.src = uri;
-              } catch (e) {}
-            })
-            .catch(function () {});
-        });
-      })
-      .catch(function () {});
+    MatayGmapsFrugal.hydrateGooglePlaceThumbs({
+      root: root,
+      selector: 'img.attraction-card__thumb[data-google-place-id]'
+    });
   }
 
   function placeDisplayNameText(place) {
@@ -1974,15 +1908,28 @@
     mapsLink.href = 'https://www.google.com/maps?q=' + day.lat + ',' + day.lng;
 
     var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
-    if (!key || !window.google || !google.maps) {
+    if (!key) {
       titleEl.textContent = day.title || 'מקום';
       setPlaceSheetMeta(
         'placeSheetAddress',
         'placeSheetAddressText',
-        !key
-          ? 'כדי לטעון שעות, תמונה ודירוג: הגדירו את GOOGLE_MAPS_API_KEY בראש הקובץ (מפתח עם Maps JavaScript API + Places).'
-          : 'טוען את ספריית המפות… נסו שוב בעוד רגע.'
+        'כדי לטעון שעות, תמונה ודירוג: הגדירו את GOOGLE_MAPS_API_KEY בראש הקובץ (מפתח עם Maps JavaScript API + Places).'
       );
+      return;
+    }
+    if (!window.google || !google.maps) {
+      if (window.MatayGmapsFrugal) {
+        window.MatayGmapsFrugal.ensureGoogleMaps(function () {
+          loadPlaceIntoSheet(placeId, day);
+        });
+      } else {
+        titleEl.textContent = day.title || 'מקום';
+        setPlaceSheetMeta(
+          'placeSheetAddress',
+          'placeSheetAddressText',
+          'טוען את ספריית המפות… רעננו את הדף אם זה נמשך.'
+        );
+      }
       return;
     }
 

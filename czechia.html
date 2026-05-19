@@ -1373,16 +1373,7 @@
   </style>
   <link rel="icon" type="image/png" href="logo.png">
   <script>window.GOOGLE_MAPS_API_KEY = 'AIzaSyAIpRqCBJr4vL5CiH0dHh1GSfyyjE2w-XI';</script>
-  <script>
-  (function(){
-    var k = (window.GOOGLE_MAPS_API_KEY || '').trim();
-    if (!k) return;
-    var s = document.createElement('script');
-    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(k) + '&libraries=places&v=quarterly';
-    s.async = true;
-    document.head.appendChild(s);
-  })();
-  </script>
+  <script src="matay-gmaps-frugal.js"></script>
   <script>
   (function (s, t, a, y, twenty, two) {
     s.Stay22 = s.Stay22 || {};
@@ -3344,55 +3335,14 @@
 <script>
 (function () {
   function run() {
-    var key = (window.GOOGLE_MAPS_API_KEY || '').trim();
-    if (!key) return;
+    if (!window.MatayGmapsFrugal) return;
     var root = document.getElementById('lipno');
     if (!root) return;
-    if (!window.google || !google.maps) {
-      if (!run._wait) run._wait = 0;
-      if (++run._wait < 120) setTimeout(run, 100);
-      return;
-    }
-    if (run._started) return;
-    run._started = true;
-
-    var imgs = root.querySelectorAll('img.attraction-card__thumb[data-google-place-id]');
-    var jobs = [];
-    for (var i = 0; i < imgs.length; i++) {
-      var img = imgs[i];
-      var pid = (img.getAttribute('data-google-place-id') || '').trim();
-      if (!pid) continue;
-      jobs.push({ img: img, placeId: pid });
-    }
-    if (!jobs.length) return;
-
-    google.maps
-      .importLibrary('places')
-      .then(function (lib) {
-        var Place = lib.Place;
-        jobs.forEach(function (job) {
-          var place = new Place({ id: job.placeId });
-          place
-            .fetchFields({ fields: ['photos'] })
-            .then(function () {
-              if (!place.photos || !place.photos.length || typeof place.photos[0].getURI !== 'function') return;
-              try {
-                var uri = place.photos[0].getURI({ maxWidth: 480, maxHeight: 360 });
-                if (uri) job.img.src = uri;
-              } catch (e) {
-                /* Keep fallback src image */
-              }
-            })
-            .catch(function () {
-              /* Keep fallback src image */
-            });
-        });
-      })
-      .catch(function () {
-        /* Keep fallback src image */
-      });
+    MatayGmapsFrugal.hydrateGooglePlaceThumbs({
+      root: root,
+      selector: 'img.attraction-card__thumb[data-google-place-id]'
+    });
   }
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', run, { once: true });
   } else {
