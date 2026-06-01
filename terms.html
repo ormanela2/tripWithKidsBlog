@@ -6,9 +6,25 @@
   <title>תנאי שימוש ומדיניות פרטיות - מתי טסים</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="nav-shared.css">
   <style>
-    :root { --white:#FFFFFF; --font-heading:"Secular One",sans-serif; --font-body:"Rubik",sans-serif; }
+    :root {
+      --white:#FFFFFF;
+      --font-heading:"Secular One",sans-serif;
+      --font-body:"Rubik",sans-serif;
+      --amber:#e8a045;
+      --amber-dark:#c4872e;
+      --teal:#1a6b72;
+      --teal-dark:#124d52;
+      --cream:#fdf8f2;
+      --charcoal:#1e2328;
+      --sand:#f5edd8;
+      --sand-dark:#e8ddc4;
+      --border:rgba(0,0,0,0.08);
+      --nav-height:72px;
+      --ease:0.22s cubic-bezier(0.4,0,0.2,1);
+      --radius-md:12px;
+      --radius-xl:28px;
+    }
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
     body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);line-height:1.7;}
 
@@ -24,6 +40,463 @@
     .section ul li{font-size:15px;color:#555;margin-bottom:6px;}
     .footer{background:var(--charcoal);color:#aaa;text-align:center;padding:28px 24px;font-size:14px;}
     .footer a{color:var(--amber);text-decoration:none;}
+
+    /* Site nav (inlined — upload nav-shared.css to repo root for other pages) */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1200;
+  background: rgba(253, 248, 242, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  height: var(--nav-height);
+  transition: box-shadow var(--ease);
+}
+
+.nav.scrolled {
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+}
+
+.nav__inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+}
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav__link {
+  white-space: nowrap;
+  padding: 8px 13px;
+  border-radius: 8px;
+  font-family: "Assistant", sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  color: var(--charcoal);
+  text-decoration: none;
+  transition: background var(--ease), color var(--ease);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.nav__link:hover,
+.nav__link:focus-visible {
+  background: var(--sand);
+  color: var(--teal);
+}
+
+.nav__link:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.nav__link[aria-current="page"] {
+  background: var(--teal);
+  color: #fff;
+  animation: none;
+  transition: none;
+}
+
+.nav__link[aria-current="page"]:hover,
+.nav__link[aria-current="page"]:focus-visible {
+  background: var(--teal-dark);
+  color: #fff;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav__mobile-actions {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav__hamburger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  position: relative;
+  z-index: 1200;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav__hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--charcoal);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.nav__hamburger[aria-expanded="true"] span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav__hamburger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav__hamburger[aria-expanded="true"] span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.nav__whatsapp-mobile {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #25d366;
+}
+
+.nav__facebook-mobile {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1877f2;
+  font-size: 22px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav__facebook-mobile:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+.icon-fb {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+.nav__whatsapp-mobile svg,
+.nav__facebook-mobile svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.nav__mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--nav-height);
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: var(--cream);
+  padding: 24px 20px max(32px, env(safe-area-inset-bottom));
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1200;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav__mobile-menu.open {
+  display: flex;
+}
+
+.nav__link--packages {
+  gap: 8px;
+  font-weight: 500;
+  position: relative;
+  padding-inline: 14px;
+}
+
+.nav__link--packages .nav__packages-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  opacity: 0.95;
+}
+
+.nav__link--packages .nav__packages-badge {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--teal-dark);
+  background: var(--sand);
+  border: 1px solid var(--sand-dark);
+  border-radius: 999px;
+  padding: 4px 7px;
+  margin-right: 4px;
+}
+
+.nav__link--packages[aria-current="page"] .nav__packages-badge {
+  color: var(--teal-dark);
+  background: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.nav__link--community {
+  background: transparent;
+  color: #0f4a50 !important;
+  font-size: 15px;
+  border-radius: 22px;
+  padding: 8px 18px;
+  min-height: 44px;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  gap: 10px;
+}
+
+.nav__link--community:hover,
+.nav__link--community:focus-visible {
+  background: #145960 !important;
+  color: #fff !important;
+  box-shadow: 0 2px 10px rgba(15, 74, 80, 0.3);
+}
+
+.nav__link--community .nav__community-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  opacity: 0.95;
+  margin-left: 4px;
+}
+
+.mob-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 14px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--charcoal);
+  transition: background 0.18s ease;
+  gap: 14px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mob-nav-item:active,
+.mob-nav-item:hover {
+  background: var(--sand);
+}
+
+.mob-nav-item[aria-current="page"] {
+  background: rgba(26, 107, 114, 0.08);
+}
+
+.mob-nav-item__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(26, 107, 114, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--teal);
+  transition: background 0.18s, color 0.18s;
+}
+
+.mob-nav-item:hover .mob-nav-item__icon {
+  background: var(--teal);
+  color: #fff;
+}
+
+.mob-nav-item[aria-current="page"] .mob-nav-item__icon {
+  background: var(--teal);
+  color: #fff;
+}
+
+.mob-nav-item__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.mob-nav-item__body {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+}
+
+.mob-nav-item__title {
+  display: block;
+  font-family: "Assistant", sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--charcoal);
+  line-height: 1.3;
+}
+
+.mob-nav-item__sub {
+  display: block;
+  font-family: "Assistant", sans-serif;
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+.mob-nav-item--tips:hover .mob-nav-item__icon {
+  background: #fef9c3;
+  color: #ca8a04;
+}
+
+.mob-nav-sep {
+  height: 1px;
+  background: var(--sand-dark);
+  margin: 8px 0;
+  flex-shrink: 0;
+}
+
+.mob-nav-calendar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 18px;
+  background: var(--teal);
+  color: #fff;
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+  font-family: "Assistant", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  box-shadow: 0 4px 14px rgba(26, 107, 114, 0.3);
+  transition: background 0.18s, box-shadow 0.18s;
+  -webkit-tap-highlight-color: transparent;
+  margin-top: 4px;
+}
+
+.mob-nav-calendar:active,
+.mob-nav-calendar:hover {
+  background: var(--teal-dark);
+  box-shadow: 0 6px 18px rgba(26, 107, 114, 0.4);
+}
+
+.mob-nav-calendar svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.mob-nav-community {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--amber);
+  color: #fff;
+  border-radius: var(--radius-md);
+  border: none;
+  width: 100%;
+  text-align: right;
+  cursor: pointer;
+  font-family: "Rubik", sans-serif;
+  text-decoration: none;
+  transition: background 0.18s;
+  -webkit-tap-highlight-color: transparent;
+  margin-top: 6px;
+}
+
+.mob-nav-community:active,
+.mob-nav-community:hover {
+  background: var(--amber-dark);
+}
+
+.mob-nav-community__icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mob-nav-community__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.mob-nav-community__body {
+  flex: 1;
+  text-align: right;
+}
+
+.mob-nav-community__title {
+  display: block;
+  font-family: "Assistant", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.mob-nav-community__sub {
+  display: block;
+  font-family: "Assistant", sans-serif;
+  font-size: 12px;
+  opacity: 0.85;
+  margin-top: 1px;
+}
+
+@media (max-width: 900px) {
+  .nav__links {
+    display: none;
+  }
+  .nav__mobile-actions {
+    display: flex;
+  }
+  .nav__hamburger {
+    display: flex;
+  }
+  .nav__logo img {
+    height: 44px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav__link--community {
+    transition: none !important;
+  }
+}
   </style>
   <link rel="icon" type="image/png" href="logo.png">
 </head>
@@ -248,7 +721,92 @@
   <p>&copy; 2026 מתי טסים | כל הזכויות שמורות &nbsp;&middot;&nbsp; <a href="services.html">דף הבית</a> &nbsp;&middot;&nbsp; <a href="terms.html">תנאי שימוש</a> &nbsp;&middot;&nbsp; <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" aria-label="עמוד הפייסבוק של מתי טסים" style="display:inline-flex;align-items:center;vertical-align:middle;"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;"><circle cx="16" cy="16" r="16" fill="#1877F2"/><path d="M21.5 16H18v-2c0-.828.672-1 1-1h2V10h-2.5C16.015 10 15 11.79 15 13.5V16h-2.5v3H15v8h3v-8h2l.5-3z" fill="#FFFFFF"/></svg></a></p>
 </footer>
 
-<script src="nav-shared.js" defer></script>
+<script>
+(function () {
+  "use strict";
+
+  var nav = document.getElementById("nav");
+  var hamburger = document.getElementById("hamburgerBtn");
+  var mobileMenu = document.getElementById("mobileMenu");
+
+  if (nav) {
+    window.addEventListener(
+      "scroll",
+      function () {
+        nav.classList.toggle("scrolled", window.scrollY > 10);
+      },
+      { passive: true }
+    );
+  }
+
+  var WEATHER_CITIES = [
+    { name: "לונדון", lat: 51.51, lon: -0.12 },
+    { name: "בודפשט", lat: 47.5, lon: 19.04 },
+    { name: "וינה", lat: 48.21, lon: 16.37 },
+    { name: "אתונה", lat: 37.98, lon: 23.73 },
+    { name: "פראג", lat: 50.08, lon: 14.44 },
+    { name: "ורשה", lat: 52.23, lon: 21.01 },
+  ];
+  var weatherCityIndex = Math.floor(Math.random() * WEATHER_CITIES.length);
+
+  function fetchMenuWeather() {
+    var el = document.getElementById("menuWeatherSnippet");
+    if (!el) return;
+    weatherCityIndex = (weatherCityIndex + 1) % WEATHER_CITIES.length;
+    var city = WEATHER_CITIES[weatherCityIndex];
+    el.textContent = city.name + "...";
+    fetch(
+      "https://api.open-meteo.com/v1/forecast?latitude=" +
+        city.lat +
+        "&longitude=" +
+        city.lon +
+        "&current_weather=true"
+    )
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (d) {
+        var t = Math.round(d.current_weather.temperature);
+        var code = d.current_weather.weathercode;
+        var icon = code <= 1 ? "☀️" : code <= 3 ? "⛅" : code <= 67 ? "🌧" : "❄️";
+        el.textContent = city.name + " עכשיו " + t + "°C " + icon;
+      })
+      .catch(function () {
+        el.textContent = "מזג אוויר באירופה";
+      });
+  }
+
+  if (!hamburger || !mobileMenu) return;
+
+  hamburger.addEventListener("click", function () {
+    var isOpen = mobileMenu.classList.toggle("open");
+    hamburger.setAttribute("aria-expanded", isOpen.toString());
+    hamburger.setAttribute("aria-label", isOpen ? "סגור תפריט" : "פתח תפריט");
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    if (isOpen) fetchMenuWeather();
+  });
+
+  mobileMenu.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      if (link.getAttribute("href") === "#newsletter") return;
+      mobileMenu.classList.remove("open");
+      hamburger.setAttribute("aria-expanded", "false");
+      hamburger.setAttribute("aria-label", "פתח תפריט");
+      document.body.style.overflow = "";
+    });
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && mobileMenu.classList.contains("open")) {
+      mobileMenu.classList.remove("open");
+      hamburger.setAttribute("aria-expanded", "false");
+      hamburger.setAttribute("aria-label", "פתח תפריט");
+      document.body.style.overflow = "";
+      hamburger.focus();
+    }
+  });
+})();
+</script>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
 <!-- EMAIL POPUP (same as services.html) -->
