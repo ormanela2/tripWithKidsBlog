@@ -5,133 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>תנאי שימוש ומדיניות פרטיות - מתי טסים</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Secular+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="nav-shared.css">
   <style>
-    :root { --teal:#1A6B72; --teal-dark:#124d52; --amber:#E8A045; --cream:#FDF8F2; --charcoal:#2C2C2C; --sand:#F5EDD8; --sand-dark:#e8ddc4; --white:#FFFFFF; --font-heading:"Secular One",sans-serif; --font-body:"Rubik",sans-serif; --nav-height:72px; }
+    :root { --white:#FFFFFF; --font-heading:"Secular One",sans-serif; --font-body:"Rubik",sans-serif; }
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
     body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);line-height:1.7;}
-    /* ── NAV ─────────────────────────────── */
-    .nav { position:fixed; top:0; right:0; left:0; z-index:1000; background:var(--cream); border-bottom:1px solid var(--sand-dark); height:var(--nav-height); transition:box-shadow 0.3s ease; }
-    .nav.scrolled { box-shadow:0 4px 16px rgba(0,0,0,0.1); }
-    .nav__inner { max-width:1140px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:100%; position:relative; }
-    .nav__logo { display:flex; align-items:center; gap:8px; text-decoration:none; flex-shrink:0; }
-    .nav__logo-text { font-family:'Secular One',sans-serif; font-size:28px; color:var(--teal); font-weight:700; }
-    .nav__links { display:flex; align-items:center; gap:4px; list-style:none; margin:0; padding:0; position:absolute; left:50%; transform:translateX(-50%); }
-    .nav__link { white-space:nowrap; padding:8px 13px; border-radius:8px; font-family:'Rubik',sans-serif; font-weight:600; font-size:15px; color:var(--charcoal); text-decoration:none; transition:background 0.2s ease, color 0.2s ease; min-height:44px; display:flex; align-items:center; }
-    .nav__link:hover, .nav__link:focus-visible { background:var(--sand); color:var(--teal); }
-    .nav__link.active, .nav__link[aria-current="page"] { background:var(--teal); color:#fff; }
-    .nav__link.active:hover { background:var(--teal-dark); color:#fff; }
-    .nav__mobile-actions { display:none; align-items:center; gap:4px; }
-    .nav__hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px; position:relative; z-index:1001; }
-    .nav__hamburger span { display:block; width:24px; height:2px; background:var(--charcoal); border-radius:2px; transition:all 0.3s ease; }
-    .nav__hamburger[aria-expanded="true"] span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
-    .nav__hamburger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
-    .nav__hamburger[aria-expanded="true"] span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
-    .nav__whatsapp-mobile { width:44px; height:44px; display:flex; align-items:center; justify-content:center; color:#25D366; }
-    .nav__facebook-mobile {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #1877f2;
-      font-size: 22px;
-      -webkit-tap-highlight-color: transparent;
-    }
 
-    .nav__facebook-mobile:focus-visible {
-      outline: 2px solid var(--teal);
-      outline-offset: 2px;
-      border-radius: 10px;
-    }
-
-    .icon-fb {
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      vertical-align: middle;
-    }
-    .nav__whatsapp-mobile svg,
-    .nav__facebook-mobile svg {
-      width: 22px;
-      height: 22px;
-      display: block;
-      flex-shrink: 0;
-    }
-
-
-
-    .nav__mobile-menu { display:none; position:fixed; top:var(--nav-height); right:0; left:0; bottom:0; background:var(--cream); padding:24px 20px 32px; flex-direction:column; gap:4px; z-index:999; overflow-y:auto; }
-    .nav__mobile-menu.open { display:flex; }
-
-    /* ── Rich mobile menu items ── */
-    .mob-nav-item {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 13px 14px; border-radius: var(--radius-md);
-      text-decoration: none; color: var(--charcoal);
-      transition: background 0.18s ease; gap: 14px;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .mob-nav-item:active, .mob-nav-item:hover { background: var(--sand); }
-    .mob-nav-item[aria-current="page"] { background: rgba(26,107,114,0.08); }
-    .mob-nav-item__icon {
-      flex-shrink: 0; width: 40px; height: 40px; border-radius: 10px;
-      background: rgba(26,107,114,0.1); display: flex;
-      align-items: center; justify-content: center;
-      color: var(--teal); transition: background 0.18s, color 0.18s;
-    }
-    .mob-nav-item:hover .mob-nav-item__icon { background: var(--teal); color: #fff; }
-    .mob-nav-item[aria-current="page"] .mob-nav-item__icon { background: var(--teal); color: #fff; }
-    .mob-nav-item__icon svg { width: 20px; height: 20px; }
-    .mob-nav-item__icon--solid { color: var(--teal); }
-    .mob-nav-item__body { flex: 1; min-width: 0; text-align: right; }
-    .mob-nav-item__title {
-      display: block; font-family: 'Assistant', sans-serif;
-      font-size: 17px; font-weight: 400; color: var(--charcoal); line-height: 1.3;
-    }
-    .mob-nav-item__sub {
-      display: block; font-family: 'Assistant', sans-serif;
-      font-size: 12px; color: #aaa; margin-top: 2px; line-height: 1.3;
-    }
-    .mob-nav-item--tips:hover .mob-nav-item__icon { background: #fef9c3; color: #ca8a04; }
-    .mob-nav-item--destinations .mob-nav-item__icon { background: rgba(26,107,114,0.14); }
-    .mob-nav-sep { height: 1px; background: var(--sand-dark); margin: 8px 0; flex-shrink: 0; }
-    .mob-nav-calendar {
-      display: flex; align-items: center; justify-content: center;
-      gap: 10px; padding: 13px 18px; background: var(--teal); color: #fff;
-      border-radius: var(--radius-xl); text-decoration: none;
-      font-family: 'Assistant', sans-serif; font-size: 16px; font-weight: 400;
-      box-shadow: 0 4px 14px rgba(26,107,114,0.3);
-      transition: background 0.18s, box-shadow 0.18s;
-      -webkit-tap-highlight-color: transparent; margin-top: 4px;
-    }
-    .mob-nav-calendar:active, .mob-nav-calendar:hover {
-      background: var(--teal-dark); box-shadow: 0 6px 18px rgba(26,107,114,0.4);
-    }
-    .mob-nav-calendar svg { width: 18px; height: 18px; flex-shrink: 0; }
-    .mob-nav-community {
-      display: flex; align-items: center; gap: 14px; padding: 14px 16px;
-      background: var(--amber); color: #fff; border-radius: var(--radius-md);
-      border: none; width: 100%; text-align: right; cursor: pointer;
-      font-family: var(--font-body); text-decoration: none;
-      transition: background 0.18s; -webkit-tap-highlight-color: transparent; margin-top: 6px;
-    }
-    .mob-nav-community:active, .mob-nav-community:hover { background: var(--amber-dark); }
-    .mob-nav-community__icon { flex-shrink: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
-    .mob-nav-community__icon svg { width: 28px; height: 28px; }
-    .mob-nav-community__body { flex: 1; text-align: right; }
-    .mob-nav-community__title { display: block; font-family: 'Assistant', sans-serif; font-size: 16px; font-weight: 600; }
-    .mob-nav-community__sub { display: block; font-family: 'Assistant', sans-serif; font-size: 12px; opacity: 0.85; margin-top: 1px; }
-    @media(max-width:900px) {
-      .nav__links { display:none; }
-      .nav__mobile-actions { display:flex; }
-      .nav__hamburger { display:flex; }
-      .nav__logo img { height:44px !important; }
-      .nav__logo-text { font-size:18px !important; }
-    }
-    /* ── END NAV ─────────────────────────── */
-
-    .hero{background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);padding:60px 24px;text-align:center;}
+    .hero{background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);padding:calc(var(--nav-height) + 48px) 24px 60px;text-align:center;}
     .hero h1{font-family:var(--font-heading);font-size:36px;color:white;margin-bottom:10px;}
     .hero p{color:rgba(255,255,255,0.75);font-size:15px;}
     .content{max-width:800px;margin:0 auto;padding:50px 24px;}
@@ -155,9 +36,8 @@
     </a>
 
     <ul class="nav__links" role="menubar">
-      <li role="none"><a href="tips.html" class="nav__link" role="menuitem">טיפים</a></li>
-      <li role="none"><a href="destinations.html" class="nav__link" role="menuitem" aria-current="page">יעדים</a></li>
-      <li role="none"><a href="weather.html" class="nav__link" role="menuitem">מזג אוויר</a></li>
+      <li role="none"><a href="tips.html" class="nav__link" role="menuitem">טיפים וכלים</a></li>
+      <li role="none"><a href="destinations.html" class="nav__link" role="menuitem">יעדים</a></li>
       <li role="none">
         <a href="packages.html" class="nav__link nav__link--packages" role="menuitem">
           <svg class="nav__packages-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
@@ -166,11 +46,10 @@
             <path d="M3 16.5L12 21l9-4.5"/>
           </svg>
           <span>חבילות תכנון</span>
-          <span class="nav__packages-badge">3 חבילות</span>
+          <span class="nav__packages-badge">חבילה אחת</span>
         </a>
       </li>
       <li role="none"><a href="about.html" class="nav__link" role="menuitem">אודות</a></li>
-      <li role="none"><a href="calendar.html" class="nav__link" role="menuitem">מתי קורה</a></li>
       <li role="none">
         <a href="#newsletter" class="nav__link nav__link--community" role="menuitem">
           <svg class="nav__community-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
@@ -198,104 +77,49 @@
   </div>
 
   <div class="nav__mobile-menu" id="mobileMenu" role="menu" aria-label="תפריט נייד">
-
-    <!-- טיפים -->
     <a href="tips.html" class="mob-nav-item mob-nav-item--tips" role="menuitem">
       <div class="mob-nav-item__icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 4 12.74V17H8v-2.26A7 7 0 0 1 12 2z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 4 12.74V17H8v-2.26A7 7 0 0 1 12 2z"/></svg>
       </div>
       <div class="mob-nav-item__body">
-        <span class="mob-nav-item__title">טיפים</span>
-        <span class="mob-nav-item__sub">איך לתכנן נכון טיול משפחתי</span>
+        <span class="mob-nav-item__title">טיפים וכלים</span>
+        <span class="mob-nav-item__sub">מרכז תכנון הטיול</span>
       </div>
     </a>
-
-
-    <!-- יעדים -->
-    <a href="destinations.html" class="mob-nav-item mob-nav-item--destinations" role="menuitem" aria-current="page">
+    <a href="destinations.html" class="mob-nav-item mob-nav-item--destinations" role="menuitem">
       <div class="mob-nav-item__icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-          <circle cx="12" cy="9" r="2.5"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
       </div>
       <div class="mob-nav-item__body">
         <span class="mob-nav-item__title">יעדים</span>
-        <span class="mob-nav-item__sub">לאן הכי מתאים לטוס בעונה הזאת</span>
+        <span class="mob-nav-item__sub">לאן הכי מתאים לטוס</span>
       </div>
     </a>
-
-    <!-- מזג אוויר -->
-    <a href="weather.html" class="mob-nav-item mob-nav-item--weather" role="menuitem">
-      <div class="mob-nav-item__icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="8" r="3"/>
-          <path d="M12 2v1M12 13v1M4.93 4.93l.7.7M18.37 4.93l-.7.7M2 8h1M21 8h-1M6.5 17a4.5 4.5 0 0 1 0-9H8a5 5 0 0 1 9.9 1H18a3.5 3.5 0 0 1 0 7H6.5z"/>
-        </svg>
-      </div>
-      <div class="mob-nav-item__body">
-        <span class="mob-nav-item__title">מזג אוויר</span>
-        <span class="mob-nav-item__sub" id="menuWeatherSnippet">טוען...</span>
-      </div>
-    </a>
-
-    <!-- חבילות -->
     <a href="packages.html" class="mob-nav-item mob-nav-item--packages" role="menuitem">
-      <div class="mob-nav-item__icon mob-nav-item__icon--solid">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20 7h-2.5V5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-9.5-2h7v2h-7V5zm1 11v-2h5v2h-5z"/>
-        </svg>
+      <div class="mob-nav-item__icon" style="background:rgba(26,107,114,0.14);">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 7h-2.5V5a2 2 0 0 0-2-2h-7a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-9.5-2h7v2h-7V5zm1 11v-2h5v2h-5z"/></svg>
       </div>
       <div class="mob-nav-item__body">
         <span class="mob-nav-item__title">חבילות תכנון</span>
-        <span class="mob-nav-item__sub">3 מסלולי ליווי לפי סגנון הטיול שלכם</span>
+        <span class="mob-nav-item__sub">חבילה אחת</span>
       </div>
     </a>
-
-    <!-- separator -->
     <div class="mob-nav-sep" role="separator"></div>
-
-    <!-- אודות -->
     <a href="about.html" class="mob-nav-item mob-nav-item--about" role="menuitem">
       <div class="mob-nav-item__icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="12" y1="16" x2="12" y2="12"/>
-          <line x1="12" y1="8" x2="12.01" y2="8"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
       </div>
-      <div class="mob-nav-item__body">
-        <span class="mob-nav-item__title">אודות</span>
-      </div>
+      <div class="mob-nav-item__body"><span class="mob-nav-item__title">אודות</span></div>
     </a>
-
-    <!-- מתי קורה - teal pill -->
-    <a href="calendar.html" class="mob-nav-calendar" role="menuitem">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="4" width="18" height="18" rx="2"/>
-        <line x1="16" y1="2" x2="16" y2="6"/>
-        <line x1="8" y1="2" x2="8" y2="6"/>
-        <line x1="3" y1="10" x2="21" y2="10"/>
-      </svg>
-      מתי קורה
-    </a>
-
-    <!-- מצטרפים לקהילה - קישור #newsletter (אותו מודול פופאפ כמו בדסקטופ) -->
     <a href="#newsletter" class="mob-nav-community" id="mobNavCommunityBtn" role="menuitem">
       <div class="mob-nav-community__icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-          <polyline points="22,6 12,13 2,6"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </div>
       <div class="mob-nav-community__body">
         <span class="mob-nav-community__title">מצטרפים לקהילה</span>
-        <span class="mob-nav-community__sub">עדכונים על יעדים חדשים, טיפים מהשטח ופינות נסתרות</span>
+        <span class="mob-nav-community__sub">עדכונים וטיפים מהשטח</span>
       </div>
     </a>
-
   </div>
 </nav>
 
@@ -362,7 +186,7 @@
     התכנון החכם נשען בעיקר על אחסון מקומי בדפדפן לטיוטה ולמצב ההתחברות. בעת ההתחברות דרך Google, ייתכן ש-Google יציב עוגיות בדומיין של Google, מחוץ לשליטתנו. באתר השיווקי של מתי טסים נעשה שימוש ב-Plausible Analytics ללא מעקב אישי; אם יופעלו כלי מדידה נוספים באפליקציית התכנון, נעדכן סעיף זה.</p>
 
     <p><strong>זכויותיכם</strong><br>
-    באפשרותכם לבקש לעיין במידע האישי שלכם או למחוק אותו, וכן למחוק טיולים שמורים דרך הגדרות השירות (כאשר מחוברים). לפניות: <a href="mailto:mataytasim@gmail.com" style="color:var(--teal);">mataytasim@gmail.com</a> או בוואטסאפ, כמפורט בסוף הדף.</p>
+    באפשרותכם לבקש לעיין במידע האישי שלכם או למחוק אותו, וכן למחוק טיולים שמורים דרך הגדרות השירות (כאשר מחוברים). לפניות: <a href="mailto:info@mataytasim.co.il" style="color:var(--teal);">info@mataytasim.co.il</a> או בוואטסאפ, כמפורט בסוף הדף.</p>
   </div>
 
   <div class="section" id="privacy">
@@ -400,7 +224,7 @@
       <li>לעולם לא אמליץ על שירות שאני לא מאמין בו, גם אם קיימת שותפות</li>
       <li>האתר עומד בדרישות גילוי נאות בהתאם לתקנות הפרסום הרלוונטיות</li>
     </ul>
-    <p>לשאלות בנוגע לשותפויות: <a href="mailto:mataytasim@gmail.com" style="color:var(--teal);">mataytasim@gmail.com</a></p>
+    <p>לשאלות בנוגע לשותפויות: <a href="mailto:info@mataytasim.co.il" style="color:var(--teal);">info@mataytasim.co.il</a></p>
   </div>
 
   <div class="section">
@@ -413,7 +237,7 @@
     <h2>📬 שאלות?</h2>
     <p>לכל שאלה בנוגע לתנאים אלה ניתן לפנות אלינו:</p>
     <p><strong>וואטסאפ:</strong> <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21" target="_blank" style="color:var(--teal);">לחץ כאן לשיחה</a><br>
-    <strong>מייל:</strong> <a href="mailto:mataytasim@gmail.com" style="color:var(--teal);">mataytasim@gmail.com</a></p>
+    <strong>מייל:</strong> <a href="mailto:info@mataytasim.co.il" style="color:var(--teal);">info@mataytasim.co.il</a></p>
   </div>
 
 </div>
@@ -424,76 +248,8 @@
   <p>&copy; 2026 מתי טסים | כל הזכויות שמורות &nbsp;&middot;&nbsp; <a href="services.html">דף הבית</a> &nbsp;&middot;&nbsp; <a href="terms.html">תנאי שימוש</a> &nbsp;&middot;&nbsp; <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" aria-label="עמוד הפייסבוק של מתי טסים" style="display:inline-flex;align-items:center;vertical-align:middle;"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;"><circle cx="16" cy="16" r="16" fill="#1877F2"/><path d="M21.5 16H18v-2c0-.828.672-1 1-1h2V10h-2.5C16.015 10 15 11.79 15 13.5V16h-2.5v3H15v8h3v-8h2l.5-3z" fill="#FFFFFF"/></svg></a></p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  (function () {
-    'use strict';
-    var nav = document.getElementById('nav');
-    var hamburger = document.getElementById('hamburgerBtn');
-    var mobileMenu = document.getElementById('mobileMenu');
-
-    // Rotating live weather in menu
-    var WEATHER_CITIES = [
-      { name: 'לונדון',    lat: 51.51, lon: -0.12 },
-      { name: 'בודפשט',   lat: 47.50, lon: 19.04 },
-      { name: 'וינה',      lat: 48.21, lon: 16.37 },
-      { name: 'אתונה',     lat: 37.98, lon: 23.73 },
-      { name: 'פראג',      lat: 50.08, lon: 14.44 },
-      { name: 'ורשה',      lat: 52.23, lon: 21.01 },
-      { name: 'ברטיסלבה', lat: 48.15, lon: 17.11 },
-      { name: 'ברצלונה',  lat: 41.39, lon:  2.17 },
-      { name: 'אמסטרדם',  lat: 52.37, lon:  4.90 },
-      { name: 'רומא',      lat: 41.90, lon: 12.49 },
-    ];
-    var weatherCityIndex = Math.floor(Math.random() * WEATHER_CITIES.length);
-
-    function fetchMenuWeather() {
-      var el = document.getElementById('menuWeatherSnippet');
-      if (!el) return;
-      weatherCityIndex = (weatherCityIndex + 1) % WEATHER_CITIES.length;
-      var city = WEATHER_CITIES[weatherCityIndex];
-      el.textContent = city.name + '...';
-      fetch('https://api.open-meteo.com/v1/forecast?latitude=' + city.lat + '&longitude=' + city.lon + '&current_weather=true')
-        .then(function(r) { return r.json(); })
-        .then(function(d) {
-          var t = Math.round(d.current_weather.temperature);
-          var code = d.current_weather.weathercode;
-          var icon = code <= 1 ? '☀️' : code <= 3 ? '⛅' : code <= 67 ? '🌧' : '❄️';
-          el.textContent = city.name + ' עכשיו ' + t + '°C ' + icon;
-        })
-        .catch(function() { el.textContent = 'מזג אוויר באירופה'; });
-    }
-
-    if (!hamburger || !mobileMenu) return;
-    hamburger.addEventListener('click', function () {
-      var isOpen = mobileMenu.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen.toString());
-      hamburger.setAttribute('aria-label', isOpen ? 'סגור תפריט' : 'פתח תפריט');
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-      if (isOpen) fetchMenuWeather();
-    });
-    mobileMenu.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        if (link.getAttribute('href') === '#newsletter') return;
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.setAttribute('aria-label', 'פתח תפריט');
-        document.body.style.overflow = '';
-      });
-    });
-    if (nav) window.addEventListener('scroll', function () {
-      nav.classList.toggle('scrolled', window.scrollY > 10);
-    }, { passive: true });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        hamburger.setAttribute('aria-label', 'פתח תפריט');
-        document.body.style.overflow = '';
-        hamburger.focus();
-      }
-    });
-  })();
-</script>
+<script src="nav-shared.js" defer></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
 <!-- EMAIL POPUP (same as services.html) -->
 <style>
@@ -606,7 +362,7 @@
     <button type="button" class="email-popup__close" id="emailPopupClose" aria-label="סגור">×</button>
     <h2 class="email-popup__title">הטיול הבא שלכם מתחיל כאן</h2>
     <p class="email-popup__subtitle">כל הטיפים, היעדים והמסלולים לטיול הבא שלכם - בואו להיות חלק מקהילת מתי טסים</p>
-    <form class="email-popup__form" action="https://formsubmit.co/mataytasim@gmail.com" method="POST" id="emailPopupForm">
+    <form class="email-popup__form" action="https://formsubmit.co/info@mataytasim.co.il" method="POST" id="emailPopupForm">
       <input type="hidden" name="_subject" value="הרשמה לעדכונים - תנאי שימוש | מתי טסים">
       <input type="hidden" name="_next" value="https://mataytasim.co.il/terms.html?subscribed=1#newsletter">
       <input type="hidden" name="_captcha" value="false">
