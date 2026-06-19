@@ -809,7 +809,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      align-items: center;
+      align-items: stretch;
       justify-content: flex-start;
       direction: rtl;
       margin-bottom: 12px;
@@ -824,32 +824,57 @@
       margin-bottom: 2px;
     }
     .tp-flag-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
+      min-width: 68px;
+      max-width: 88px;
+      min-height: 56px;
+      border-radius: 12px;
       border: 2px solid var(--sand-dark);
       background: #fff;
-      font-size: 22px;
-      line-height: 1;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 0;
+      gap: 5px;
+      padding: 7px 8px 8px;
       transition: transform .15s, border-color .2s, box-shadow .2s;
       -webkit-tap-highlight-color: transparent;
+      font-family: var(--font-body);
+    }
+    .tp-flag-btn__img {
+      display: block;
+      width: 28px;
+      height: 21px;
+      object-fit: cover;
+      border-radius: 3px;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
+    }
+    .tp-flag-btn__name {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--teal-dark);
+      line-height: 1.2;
+      text-align: center;
+      word-break: break-word;
     }
     .tp-flag-btn:hover, .tp-flag-btn:focus-visible {
       border-color: var(--teal);
       box-shadow: 0 4px 12px rgba(26,107,114,.2);
-      transform: scale(1.06);
+      transform: translateY(-1px);
       outline: none;
     }
     .tp-flag-btn[aria-pressed="true"] {
       border-color: var(--teal);
       box-shadow: 0 0 0 3px rgba(26,107,114,.2);
+      background: rgba(26, 107, 114, 0.06);
     }
-    .tp-flag-btn--all { font-size: 13px; font-weight: 800; color: var(--teal-dark); font-family: var(--font-body); }
+    .tp-flag-btn--all {
+      min-width: 52px;
+      max-width: none;
+      padding: 10px 14px;
+    }
+    .tp-flag-btn__name--all { font-size: 13px; font-weight: 800; color: var(--teal-dark); }
 
     .tp-viewport-toggle {
       display: flex;
@@ -3445,6 +3470,10 @@
       });
     }
 
+    function flagStripImgUrl(code) {
+      return 'https://flagcdn.com/24x18/' + String(code || '').toLowerCase() + '.png';
+    }
+
     function buildFlagStrip() {
       var strip = document.getElementById('tpFlagStrip');
       if (!strip) return;
@@ -3453,7 +3482,6 @@
         if (!byCode[it.countryCode]) {
           byCode[it.countryCode] = {
             code: it.countryCode,
-            flag: it.countryFlag || '🏳',
             name: COUNTRY_HE[it.countryCode] || it.countryName
           };
         }
@@ -3467,7 +3495,7 @@
       allBtn.className = 'tp-flag-btn tp-flag-btn--all';
       allBtn.setAttribute('data-country-code', '');
       allBtn.setAttribute('aria-label', 'כל המדינות');
-      allBtn.textContent = 'הכל';
+      allBtn.innerHTML = '<span class="tp-flag-btn__name tp-flag-btn__name--all">הכל</span>';
       allBtn.addEventListener('click', function () {
         state.hasUserInteracted = true;
         state.selectedFlagCode = '';
@@ -3486,7 +3514,13 @@
         btn.className = 'tp-flag-btn';
         btn.setAttribute('data-country-code', code);
         btn.setAttribute('aria-label', 'סינון: ' + info.name);
-        btn.textContent = info.flag;
+        btn.innerHTML =
+          '<img class="tp-flag-btn__img" src="' +
+          escapeAttr(flagStripImgUrl(code)) +
+          '" width="28" height="21" alt="" loading="lazy" decoding="async">' +
+          '<span class="tp-flag-btn__name">' +
+          escapeHtml(info.name) +
+          '</span>';
         btn.addEventListener('click', function () {
           state.hasUserInteracted = true;
           state.selectedFlagCode = code;
