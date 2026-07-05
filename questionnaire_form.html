@@ -297,6 +297,9 @@
     box-shadow:0 1px 2px rgba(15,23,42,0.03);
   }
   input::placeholder{color:#cbd5e1}
+  input.input-invalid{border-color:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,0.12)}
+  .field-error{font-size:12px;font-weight:600;color:#dc2626;margin-top:-4px;display:none}
+  .field-error.show{display:block}
   input:focus,select:focus{
     outline:none;border-color:rgba(26,107,114,0.45);
     box-shadow:0 0 0 3px rgba(26,107,114,0.12);
@@ -705,8 +708,9 @@
             <input type="text" name="שם" id="f_name" required placeholder="ישראל">
           </div>
           <div class="field">
-            <label>וואטסאפ <span class="req">*</span></label>
-            <input type="tel" name="וואטסאפ" id="f_wa" required placeholder="05X-XXXXXXX">
+            <label for="f_wa">וואטסאפ <span class="req">*</span></label>
+            <input type="tel" name="וואטסאפ" id="f_wa" required placeholder="0546758145" inputmode="numeric" autocomplete="tel" maxlength="12" aria-describedby="f_wa_error">
+            <span class="field-error" id="f_wa_error" role="alert">נא להזין מספר עם ספרות בלבד (10 ספרות, מתחיל ב-05)</span>
           </div>
         </div>
 
@@ -880,6 +884,87 @@
   var currentStep = 1;
   var totalSteps = 3;
 
+  function waDigitsOnly(val) {
+    return String(val || '').replace(/\D/g, '');
+  }
+
+  function showWaError(msg) {
+    var wa = document.getElementById('f_wa');
+    var err = document.getElementById('f_wa_error');
+    if (err) {
+      err.textContent = msg;
+      err.classList.add('show');
+    }
+    if (wa) wa.classList.add('input-invalid');
+  }
+
+  function clearWaError() {
+    var wa = document.getElementById('f_wa');
+    var err = document.getElementById('f_wa_error');
+    if (err) err.classList.remove('show');
+    if (wa) wa.classList.remove('input-invalid');
+  }
+
+  function validateWhatsAppField() {
+    var wa = document.getElementById('f_wa');
+    if (!wa) return false;
+    var raw = wa.value.trim();
+    if (!raw) {
+      showWaError('נא להזין מספר וואטסאפ');
+      return false;
+    }
+    if (/[a-zA-Z\u0590-\u05FF]/.test(raw)) {
+      showWaError('רק ספרות — לא ניתן להזין אותיות');
+      return false;
+    }
+    var digits = waDigitsOnly(raw);
+    if (!digits) {
+      showWaError('נא להזין מספר עם ספרות בלבד');
+      return false;
+    }
+    if (digits.startsWith('972')) {
+      if (digits.length !== 12 || digits.charAt(3) !== '5') {
+        showWaError('מספר עם קידומת 972: 12 ספרות (9725XXXXXXXX)');
+        return false;
+      }
+    } else if (digits.startsWith('0')) {
+      if (digits.length !== 10 || digits.substring(0, 2) !== '05') {
+        showWaError('מספר ישראלי: 10 ספרות, מתחיל ב-05');
+        return false;
+      }
+    } else if (digits.startsWith('5')) {
+      if (digits.length !== 9) {
+        showWaError('מספר נייד: 9 ספרות (5XXXXXXXX) או 10 עם 0 בהתחלה');
+        return false;
+      }
+    } else {
+      showWaError('מספר לא תקין — השתמשו בפורמט 05XXXXXXXX');
+      return false;
+    }
+    wa.value = digits;
+    clearWaError();
+    return true;
+  }
+
+  (function initWhatsAppField() {
+    var wa = document.getElementById('f_wa');
+    if (!wa) return;
+    wa.addEventListener('input', function() {
+      var cleaned = waDigitsOnly(this.value).slice(0, 12);
+      if (this.value !== cleaned) this.value = cleaned;
+      if (cleaned) clearWaError();
+    });
+    wa.addEventListener('paste', function(e) {
+      e.preventDefault();
+      var pasted = (e.clipboardData || window.clipboardData).getData('text') || '';
+      this.value = waDigitsOnly(pasted).slice(0, 12);
+      clearWaError();
+    });
+    wa.addEventListener('blur', function() {
+      if (this.value.trim()) validateWhatsAppField();
+    });
+  })();
+
   function updateStepper(n) {
     var stepper = document.getElementById('stepper');
     if (!stepper) return;
@@ -897,11 +982,14 @@
       var name = document.getElementById('f_name');
       var wa   = document.getElementById('f_wa');
       var ok = true;
-      [name, wa].forEach(function(f) {
-        if (!f.value.trim()) { f.style.borderColor = '#e55'; ok = false; }
-        else f.style.borderColor = '';
-      });
-      if (!ok) { name.focus(); return; }
+      if (!name.value.trim()) { name.style.borderColor = '#e55'; ok = false; }
+      else name.style.borderColor = '';
+      if (!validateWhatsAppField()) ok = false;
+      if (!ok) {
+        if (!name.value.trim()) name.focus();
+        else wa.focus();
+        return;
+      }
     }
     // validate step 2
     if (currentStep === 2 && n > 2) {
@@ -1091,6 +1179,11 @@
   // Submit
   document.getElementById('tripForm').addEventListener('submit', async function(e) {
     e.preventDefault();
+    if (!validateWhatsAppField()) {
+      goStep(1);
+      document.getElementById('f_wa').focus();
+      return;
+    }
     var btn = this.querySelector('.btn-submit');
     btn.textContent = '⏳ שולח...';
     btn.disabled = true;
