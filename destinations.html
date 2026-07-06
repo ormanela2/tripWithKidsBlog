@@ -321,6 +321,55 @@
       line-height:1.3;word-break:break-word;
     }
     .stat-val .stat-emoji{font-style:normal}
+    a.stat-box.stat-box--link{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-decoration:none;color:inherit;cursor:pointer;
+      background:linear-gradient(145deg,rgba(26,107,114,.09),rgba(232,160,69,.07));
+      border:1.5px solid rgba(26,107,114,.32);
+      box-shadow:0 2px 8px rgba(26,107,114,.1);
+      transition:border-color .2s,box-shadow .2s,transform .2s,background .2s;
+      position:relative;overflow:hidden;
+    }
+    a.stat-box.stat-box--link::after{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,transparent 55%,rgba(26,107,114,.06));
+      pointer-events:none;
+    }
+    a.stat-box.stat-box--link:hover{
+      background:linear-gradient(145deg,rgba(26,107,114,.16),rgba(232,160,69,.1));
+      border-color:var(--teal);
+      box-shadow:0 8px 20px rgba(26,107,114,.2);
+      transform:translateY(-2px);
+    }
+    a.stat-box.stat-box--link:active{
+      transform:translateY(0);
+      box-shadow:0 2px 8px rgba(26,107,114,.14);
+    }
+    a.stat-box.stat-box--link:focus-visible{
+      outline:2px solid var(--teal);outline-offset:2px;
+    }
+    a.stat-box.stat-box--link .stat-lbl{
+      text-transform:none;font-size:9px;letter-spacing:0;line-height:1.35;
+      color:var(--teal-dark);font-weight:700;position:relative;z-index:1;
+    }
+    a.stat-box.stat-box--link .stat-val{
+      color:var(--teal);font-weight:700;position:relative;z-index:1;
+    }
+    .stat-val--cta{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:5px;flex-wrap:wrap;
+    }
+    .stat-arrow{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:16px;height:16px;border-radius:50%;
+      background:rgba(26,107,114,.14);color:var(--teal-dark);
+      font-size:11px;line-height:1;font-weight:700;
+      transition:transform .2s,background .2s;
+    }
+    a.stat-box.stat-box--link:hover .stat-arrow{
+      transform:translateX(-3px);
+      background:rgba(26,107,114,.24);
+    }
 
     /* tags */
     .drawer-section-label{font-size:10px;font-weight:600;color:var(--gray-mid);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px}
@@ -491,7 +540,11 @@
     <div class="page-hero__label">🗺️ יעדים מומלצים</div>
     <h1 class="page-hero__title">לאן טסים הפעם?</h1>
     <p class="page-hero__subtitle">בחרו יעד מהמפה או מהרשימה - כל מה שצריך לדעת לפני הטיסה</p>
-    <p style="margin-top:14px;font-size:15px;opacity:.9"><a href="theme-parks.html" style="color:#fff;text-decoration:underline;text-underline-offset:3px;font-weight:600">פארקי שעשועים באירופה</a> - מפה, מסננים ומידע לכל פארק</p>
+    <p style="margin-top:14px;font-size:15px;opacity:.9">
+      <a href="theme-parks.html" style="color:#fff;text-decoration:underline;text-underline-offset:3px;font-weight:600">פארקי שעשועים באירופה</a> - מפה, מסננים ומידע לכל פארק
+      <span style="opacity:.5;margin:0 8px">·</span>
+      <a href="family-top-attractions.html" style="color:#fff;text-decoration:underline;text-underline-offset:3px;font-weight:600">מגלה האטרקציות למשפחות</a> - Top 5 בכל יעד, סינון ורשימה אישית
+    </p>
     <a href="#family-articles" class="page-hero__jump">
       <span class="page-hero__jump-text">תדלגו למטה לקרוא על החוויות שלנו</span>
       <svg class="page-hero__jump-arrow" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
@@ -792,7 +845,10 @@
     /* stats */
     document.getElementById('drawerStats').innerHTML =
       '<div class="stat-box"><div class="stat-lbl">משך טיול</div><div class="stat-val"><span class="stat-emoji" aria-hidden="true">\uD83D\uDCC5</span> ' + d.days + '</div></div>' +
-      '<div class="stat-box"><div class="stat-lbl">עונה מומלצת</div><div class="stat-val">' + d.season + '</div></div>' +
+      '<a href="family-top-attractions.html#dest-' + d.id + '" class="stat-box stat-box--link" aria-label="5 המקומות הכי שווים ב' + d.name + ' - לצפייה">' +
+        '<div class="stat-lbl">5 המקומות הכי שווים</div>' +
+        '<div class="stat-val stat-val--cta"><span class="stat-emoji" aria-hidden="true">⭐</span> Top 5 <span class="stat-arrow" aria-hidden="true">←</span></div>' +
+      '</a>' +
       '<div class="stat-box"><div class="stat-lbl">\u2708\uFE0F זמן טיסה</div><div class="stat-val">' + flightTimeLabel(d) + '</div></div>';
 
     /* desc */
