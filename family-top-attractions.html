@@ -1071,6 +1071,7 @@
     <div class="fav-panel__list" id="favList"></div>
   </div>
 
+  <script src="family-top-attractions.embed.js"></script>
   <script>
   (function () {
     'use strict';
@@ -1594,20 +1595,32 @@
       }, 200);
     });
 
-    fetch('data/family-top-attractions.json')
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        DATA = data;
-        var hashId = destIdFromHash();
-        if (isValidDestId(hashId)) state.dest = hashId;
-        document.getElementById('statDest').textContent = String((data.destinations || []).length);
-        renderFilters();
-        renderAppContent();
-        updateFavUI();
-        if (hashId) scrollToDestSection(hashId);
-      })
+    function loadAttractionsData() {
+      if (window.__FAMILY_TOP_ATTRACTIONS__) {
+        return Promise.resolve(window.__FAMILY_TOP_ATTRACTIONS__);
+      }
+      return fetch('data/family-top-attractions.json', { cache: 'no-cache' })
+        .then(function (r) {
+          if (!r.ok) throw new Error('data fetch failed');
+          return r.json();
+        });
+    }
+
+    function bootAttractions(data) {
+      DATA = data;
+      var hashId = destIdFromHash();
+      if (isValidDestId(hashId)) state.dest = hashId;
+      document.getElementById('statDest').textContent = String((data.destinations || []).length);
+      renderFilters();
+      renderAppContent();
+      updateFavUI();
+      if (hashId) scrollToDestSection(hashId);
+    }
+
+    loadAttractionsData()
+      .then(bootAttractions)
       .catch(function () {
-        document.getElementById('app').innerHTML = '<p class="empty">שגיאה בטעינת הנתונים - פתחו דרך שרת מקומי (npm run start:static)</p>';
+        document.getElementById('app').innerHTML = '<p class="empty">שגיאה בטעינת הנתונים - רעננו את הדף או נסו שוב מאוחר יותר</p>';
       });
 
     window.addEventListener('hashchange', applyHashDest);
