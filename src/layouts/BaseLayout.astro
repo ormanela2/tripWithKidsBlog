@@ -10,8 +10,8 @@ import Icon from "../components/Icon.astro";
 import Seo, { type SeoProps } from "../components/Seo.astro";
 import { site, whatsappLink } from "../config/site";
 
-type Props = SeoProps;
-const seo = Astro.props;
+type Props = SeoProps & { readProgress?: boolean };
+const { readProgress, ...seo } = Astro.props;
 ---
 <!doctype html>
 <html lang="he" dir="rtl">
@@ -28,9 +28,10 @@ const seo = Astro.props;
   </head>
   <body>
     <a class="skip-link" href="#main">דילוג לתוכן</a>
-    <Nav />
+    <Nav readProgress={readProgress} />
     <main id="main"><slot /></main>
     <Footer />
+    <slot name="after" />
     <a href={whatsappLink("היי, אני רוצה לשמוע על תכנון טיול!")} class="wa-float" aria-label="שלחו לנו הודעת וואטסאפ"><Icon name="whatsapp" /></a>
     <button type="button" class="to-top" id="toTop" aria-label="חזרה לראש העמוד"><Icon name="up" /></button>
     <script>

@@ -55,8 +55,8 @@ export const site = {
 
   partners: {
     getYourGuide: { partnerId: "GL1NS3P" },
-    /** TODO(owner): Stay22 partner id is missing on the live site (empty lmaID). Add it here. */
-    stay22: { partnerId: null as string | null },
+    /** Stay22 "Let me allez" partner id, as set on the live guide pages. */
+    stay22: { partnerId: "69c0491c51844e7588a7882e" as string | null },
     esim: {
       airalo: "https://airalo.tpk.mx/jjDTppVR",
       saily: "https://saily.tpk.mx/O4VLYoZD",

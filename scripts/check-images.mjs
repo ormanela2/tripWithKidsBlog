@@ -26,7 +26,8 @@ for (const file of files.filter(f => f.endsWith(".html"))) {
   const html = readFileSync(file, "utf8");
   for (const [tag] of html.matchAll(/<img\b[^>]*>/gi)) {
     const where = `${relative(DIST, file)}: ${tag.slice(0, 90)}…`;
-    if (!/\salt=/.test(tag)) problems.push(`missing alt    ${where}`);
+    // A bare `alt` (decorative image) equals alt="".
+    if (!/\salt(=|\s|\/?>)/.test(tag)) problems.push(`missing alt    ${where}`);
     if (!/\swidth=/.test(tag) || !/\sheight=/.test(tag)) problems.push(`missing size   ${where}`);
   }
 }

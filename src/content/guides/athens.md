@@ -2,34 +2,64 @@
 title: "טיול לאתונה עם ילדים"
 seoTitle: "טיול לאתונה עם ילדים 2026 | מדריך, מסלול ואטרקציות למשפחות | מתי טסים"
 description: "מדריך מלא לטיול לאתונה עם ילדים: אקרופוליס, שכונות, מוזיאונים, לינה ומסלול יום־יום מהשטח. טיפים למשפחות ומסלולים מומלצים · מתי טסים 2026"
+name: "אתונה"
 country: "GR"
 hub: "athens"
-color: "#0d5eaf"
+color: "#1565C0"
+colorDark: "#0D47A1"
 hero:
   image: "../../assets/photos/athens.webp"
-  alt: "נוף של אתונה"
+  subtitle: "5 ימים של אטרקציות, היסטוריה ואי אגינה - מסלול מלא מהניסיון האישי שלנו עם 3 ילדים."
+  osmCredit: true
+bestMonths: [5, 6, 7, 8, 9]
+highlights: ["Allou! Fun Park", "האי אגינה", "XPLORE", "מונסטירקי", "ליקאבטוס"]
 trip:
   dates: "29/4 - 3/5/2025"
   days: 5
   base: "Athens Ikon"
   flight: "טיסה ישירה"
-bestMonths: [5, 6, 7, 8, 9]
-highlights:
-  - "Allou! Fun Park"
-  - "האי אגינה"
-  - "XPLORE"
-  - "מונסטירקי"
-  - "ליקאבטוס"
+headings:
+  intro:
+    icon: "💡"
+    title: "למה אתונה עם ילדים?"
+  map:
+    icon: "🗺️"
+    title: "המסלול על המפה"
+  itinerary:
+    icon: "🗓️"
+    title: "מסלול יום-יום"
+  stays:
+    icon: "🏨"
+    title: "המלצות לינה"
+  attractions:
+    icon: "🏛️"
+    title: "מה לעשות עם ילדים באתונה"
+    toc: "מה לעשות עם ילדים"
+  tips:
+    icon: "💡"
+    title: "טיפים חשובים"
+map:
+  center:
+    lat: 37.97
+    lng: 23.73
+  zoom: 10
 days:
   - title: "הגעה לאתונה"
     icon: "✈️"
     date: "29.04 שלישי"
     where: "Athens Ikon, מונסטירקי"
     badge: "יום הגעה"
+    badgeStyle:
+      bg: "rgba(21,101,192,0.12)"
+      color: "#0D47A1"
+    band: ["var(--dest)", "var(--dest-dark)"]
     map:
       lat: 37.9755
       lng: 23.7348
       label: "Athens Ikon - מונסטירקי"
+      short: "הגעה לאתונה"
+      date: "29.4"
+      color: "#1565C0"
     stops:
       - title: "טיסה לאתונה"
         time: "12:55"
@@ -40,18 +70,24 @@ days:
       - title: "Ovio - ארוחת ערב"
         time: "19:00"
         text: "ארוחת ערב ראשונה באתונה. מקום מומלץ לפתיחת הטיול."
-    tips:
-      - "מונסטירקי הוא אחד האזורים הכי כיפיים לטיול ערב עם ילדים - שוק, מסעדות ואווירה."
+    tips: ["מונסטירקי הוא אחד האזורים הכי כיפיים לטיול ערב עם ילדים - שוק, מסעדות ואווירה."]
     stay: "Athens Ikon - Mitropoleos 21, מונסטירקי"
   - title: "Allou! Fun Park + גבעת ליקאבטוס"
     icon: "🎢"
     date: "30.04 רביעי"
     where: "אתונה"
     badge: "❤️ הכי שווה"
+    badgeStyle:
+      bg: "rgba(233,30,99,0.12)"
+      color: "#c2185b"
+    band: ["#e91e63", "#c2185b"]
     map:
       lat: 37.9932
       lng: 23.6785
       label: "Allou! Fun Park + Kidom + גבעת ליקאבטוס"
+      short: "Allou! Fun Park + ליקאבטוס"
+      date: "30.4"
+      color: "#e91e63"
     stops:
       - title: "ארוחת בוקר - The Makers Athens"
         time: "בוקר"
@@ -62,18 +98,24 @@ days:
       - title: "גבעת ליקאבטוס"
         time: "ערב"
         text: "נוף פנורמי מרהיב על אתונה בשקיעה. אפשר לעלות ברכבל."
-    tips:
-      - "Allou! Fun Park פתוח מאוחר, תכננו לבלות שם רוב היום ולעלות לליקאבטוס בסיום."
+    tips: ["Allou! Fun Park פתוח מאוחר, תכננו לבלות שם רוב היום ולעלות לליקאבטוס בסיום."]
     stay: "Athens Ikon - Mitropoleos 21, מונסטירקי"
   - title: "XPLORE + מוזיאון אשליות"
     icon: "🎮"
     date: "01.05 חמישי"
     where: "אתונה"
     badge: "⭐ חובה"
+    badgeStyle:
+      bg: "rgba(156,39,176,0.12)"
+      color: "#6a1b9a"
+    band: ["#9c27b0", "#6a1b9a"]
     map:
       lat: 37.9742
       lng: 23.7285
       label: "XPLORE Entertainment + Museum of Illusions"
+      short: "XPLORE + מוזיאון אשליות"
+      date: "1.5"
+      color: "#9c27b0"
     stops:
       - title: "ארוחת בוקר - Brunchers"
         time: "בוקר"
@@ -87,18 +129,24 @@ days:
       - title: "Museum of Illusions Athens"
         time: "ערב"
         text: "מוזיאון האשליות - אטרקציה אהובה במיוחד על ילדים. תמונות מטורפות ואשליות אופטיות."
-    tips:
-      - "Museum of Illusions כדאי לאחר שעה 17:00 כשקצת פחות עמוס."
+    tips: ["Museum of Illusions כדאי לאחר שעה 17:00 כשקצת פחות עמוס."]
     stay: "Athens Ikon - Mitropoleos 21, מונסטירקי"
   - title: "האי אגינה + Ancient Agora"
     icon: "⛵"
     date: "02.05 שישי"
     where: "פיראוס → אגינה → אתונה"
     badge: "❤️ הכי שווה"
+    badgeStyle:
+      bg: "rgba(0,137,123,0.12)"
+      color: "#00695c"
+    band: ["#00897b", "#00695c"]
     map:
       lat: 37.748
       lng: 23.427
       label: "אגינה + Ancient Agora + Mani Mani"
+      short: "האי אגינה"
+      date: "2.5"
+      color: "#00897b"
     stops:
       - title: "האי אגינה 🏝️"
         time: "בוקר"
@@ -112,18 +160,24 @@ days:
       - title: "🍽️ Dinner - Mani Mani"
         time: "ערב"
         text: "מסעדה מומלצת מאוד לארוחת ערב - מטבח יווני מסורתי ברמה גבוהה."
-    tips:
-      - "מעבורת לאגינה - כדאי להזמין כרטיסים מראש דרך האתר Hellenic Seaways. הגיעו לנמל 30 דקות לפחות לפני."
+    tips: ["מעבורת לאגינה - כדאי להזמין כרטיסים מראש דרך האתר Hellenic Seaways. הגיעו לנמל 30 דקות לפחות לפני."]
     stay: "Athens Ikon - Mitropoleos 21, מונסטירקי"
   - title: "יום אחרון וטיסה הביתה"
     icon: "🇮🇱"
     date: "03.05 שבת"
     where: "אתונה → נתב\"ג"
     badge: "יום חזרה"
+    badgeStyle:
+      bg: "rgba(232,160,69,0.15)"
+      color: "#b07020"
+    band: ["var(--amber)", "var(--amber-dark)"]
     map:
       lat: 37.9364
       lng: 23.9445
       label: "שדה התעופה אתונה"
+      short: "טיסה הביתה"
+      date: "3.5"
+      color: "#E8A045"
     stops:
       - title: "בוקר פנוי"
         time: "בוקר"
@@ -131,8 +185,8 @@ days:
       - title: "טיסה חזרה לתל אביב ✈️"
         time: "10:00"
         text: "יציאה לשדה התעופה - כדאי לצאת שעתיים לפחות לפני הטיסה."
-    tips:
-      - "Little Kook היא מסעדה/בית קפה מרהיבה עם עיצוב שמשגע ילדים - תורים ארוכים בסופי שבוע, הגיעו מוקדם!"
+    tips: ["Little Kook היא מסעדה/בית קפה מרהיבה עם עיצוב שמשגע ילדים - תורים ארוכים בסופי שבוע, הגיעו מוקדם!"]
+staysIntro: "אתונה מציעה מגוון רחב של אפשרויות לינה - ממלונות בוטיק יפים דרך צימרים משפחתיים ועד פנסיונים כפריים."
 stays:
   - icon: "🏨"
     name: "Athens Ikon"
@@ -174,7 +228,8 @@ tips:
 phrasebook:
   title: "מילון יווני"
   groups:
-    - name: "בסיסי"
+    - id: "basic"
+      name: "בסיסי"
       phrases:
         - he: "שלום"
           say: "יה סאס / יה"
@@ -194,7 +249,8 @@ phrasebook:
         - he: "לא מבין"
           say: "דֶן קטאלאבֶנו"
           local: "Δεν καταλαβαίνω"
-    - name: "אוכל"
+    - id: "food"
+      name: "אוכל"
       phrases:
         - he: "חשבון בבקשה"
           say: "טון לוגאריאסמו, פאראקאלו"
@@ -208,7 +264,8 @@ phrasebook:
         - he: "ילדים"
           say: "פֶּדיה"
           local: "Παιδιά"
-    - name: "כיוונים"
+    - id: "nav"
+      name: "כיוונים"
       phrases:
         - he: "איפה...?"
           say: "פו אינאי?"
@@ -222,7 +279,8 @@ phrasebook:
         - he: "כניסה / יציאה"
           say: "אִיסודוס / אֶקסודוס"
           local: "Είσοδος / Έξοδος"
-    - name: "מספרים"
+    - id: "numbers"
+      name: "מספרים"
       phrases:
         - he: "1, 2, 3, 4, 5"
           say: "אֶנה, דיו, טריה, טֶסֶרה, פֶּנדֶה"
@@ -230,7 +288,8 @@ phrasebook:
         - he: "6, 7, 8, 9, 10"
           say: "אֶקסי, אֶפטה, אוֹקטו, אֶנֶאה, דֶקה"
           local: "Έξι, Επτά, Οκτώ, Εννέα, Δέκα"
-    - name: "חירום"
+    - id: "emergency"
+      name: "חירום"
       phrases:
         - he: "עזרה!"
           say: "בוֹאיתֶיה!"
@@ -238,9 +297,12 @@ phrasebook:
         - he: "צריך רופא"
           say: "חריאזומֶה יאטרו"
           local: "Χρειάζομαι γιατρό"
+      note: "🚑 166 · 🚔 100 · 🆘 112"
+sidebar:
+  title: "רוצים מסלול מותאם? 🇬🇷"
+  text: "אבנה לכם מסלול מלא לאתונה - יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם."
 partners:
   staysMap: "https://stay22.com/embed/69c0ca409c6197233b39c7bb?featuredhcids=4467377&zoom=16&freezeviewport=false"
-  esim: false
 ---
 
 אתונה היא אחת הערים שהכי הפתיעו אותי. ציפיתי לעיר היסטורית שהילדים ישתעממו בה אחרי שעה - וקיבלתי עיר שהייתה מלאה בהפתעות לכל הגילאים.
