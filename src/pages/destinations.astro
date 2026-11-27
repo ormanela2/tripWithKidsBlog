@@ -6,6 +6,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { destinations, articles } from "../data/destinations";
 import { site, whatsappLink } from "../config/site";
+import { breadcrumb, itemList } from "../lib/schema";
 
 const MAX_H = 4.5;
 const flightLabel = (h: number) => (h === 1.5 ? "כשעה וחצי" : `כ-${h} שעות`);
@@ -13,15 +14,17 @@ const byHours = [...new Set(destinations.map(d => d.flightHours))].sort((a, b) =
   .map(h => ({ h, left: (h / MAX_H) * 100, items: destinations.filter(d => d.flightHours === h) }));
 const ticks = [0, 1, 2, 3, 4].map(h => ({ h, left: (h / MAX_H) * 100, label: h === 0 ? "תל אביב" : h === 1 ? "שעה" : h === 2 ? "שעתיים" : `${h} שעות` }));
 const data = JSON.stringify(destinations.map(d => ({ ...d, flight: flightLabel(d.flightHours) }))).replace(/</g, "\\u003c");
-const jsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  name: "יעדים לטיול משפחתי באירופה",
-  itemListElement: destinations.map((d, i) => ({ "@type": "ListItem", position: i + 1, name: `${d.name} עם ילדים`, url: `${site.url}${d.url}` })),
-}).replace(/</g, "\\u003c");
+const schema = [
+  breadcrumb([{ name: site.name, path: "/" }, { name: "יעדים", path: "/destinations.html" }]),
+  itemList("יעדים לטיול משפחתי באירופה", destinations.map(d => ({ name: `${d.name} עם ילדים`, path: d.url }))),
+];
 ---
-<BaseLayout title="יעדים לטיול עם ילדים - מתי טסים" description="9 יעדים לטיול משפחתי באירופה: כמה ימים, מתי הכי כדאי, כמה זמן טיסה מתל אביב ומה לא לפספס. מדריכים מלאים מטיולים אמיתיים.">
-  <script type="application/ld+json" slot="head" set:html={jsonLd} />
+<BaseLayout
+  title="יעדים לטיול עם ילדים - מתי טסים"
+  description="9 יעדים לטיול משפחתי באירופה: כמה ימים, מתי הכי כדאי, כמה זמן טיסה מתל אביב ומה לא לפספס. מדריכים מלאים מטיולים אמיתיים."
+  imageAlt="יעדים לטיול משפחתי באירופה - מתי טסים"
+  schema={schema}
+>
 
   <section class="hero">
     <div class="container hero__inner">

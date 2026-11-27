@@ -42,6 +42,17 @@ export const site = {
     plausibleDomain: "mataytasim.co.il",
   },
 
+  seo: {
+    ogLocale: "he_IL",
+    /** 1200x630 share image used when a page has none of its own. */
+    defaultImage: "/og-image.png",
+    logo: "/logo.png",
+    /** Pages left out of the sitemap (redirects, test pages). Paths as served, ".html" form. */
+    sitemapExclude: ["/layout-check.html", "/404.html"],
+    /** Public files that are not pages but should be in the sitemap (added as they move into public/). */
+    sitemapExtra: [] as string[],
+  },
+
   partners: {
     getYourGuide: { partnerId: "GL1NS3P" },
     /** TODO(owner): Stay22 partner id is missing on the live site (empty lmaID). Add it here. */

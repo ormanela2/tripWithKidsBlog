@@ -1,0 +1,54 @@
+---
+/**
+ * Every page's search and sharing tags: title, description, canonical, robots,
+ * Open Graph, Twitter card and JSON-LD. Used by BaseLayout; pages set it through BaseLayout props.
+ */
+import { site } from "../config/site";
+import { absoluteUrl, organization, website, graph } from "../lib/schema";
+
+export interface SeoProps {
+  title: string;
+  description?: string;
+  /** Path or absolute URL of a 1200x630 share image. Defaults to the site image. */
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article";
+  /** Keep the page out of search results (test pages, redirects). */
+  noindex?: boolean;
+  /** Extra schema.org nodes from src/lib/schema.ts. */
+  schema?: Record<string, unknown>[];
+}
+
+const { title, description, image, imageAlt, type = "website", noindex = false, schema = [] } = Astro.props as SeoProps;
+
+// Canonical: the clean public URL of this page (".html" form, matching the live site and the sitemap).
+const path = Astro.url.pathname;
+const canonical = absoluteUrl(path === "/index.html" ? "/" : path);
+const img = image ? absoluteUrl(image) : absoluteUrl(site.seo.defaultImage);
+const isDefaultImage = !image;
+const alt = imageAlt ?? title;
+const ld = graph([organization(), website(), ...schema]);
+---
+<title>{title}</title>
+{description && <meta name="description" content={description} />}
+<link rel="canonical" href={canonical} />
+<meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:locale" content={site.seo.ogLocale} />
+<meta property="og:title" content={title} />
+{description && <meta property="og:description" content={description} />}
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={img} />
+{isDefaultImage && <meta property="og:image:width" content="1200" />}
+{isDefaultImage && <meta property="og:image:height" content="630" />}
+<meta property="og:image:alt" content={alt} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+{description && <meta name="twitter:description" content={description} />}
+<meta name="twitter:image" content={img} />
+<meta name="twitter:image:alt" content={alt} />
+
+<script type="application/ld+json" set:html={ld} />
