@@ -88,3 +88,30 @@ const isCurrent = (href: string) => href.split("#")[0] === current;
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 </script>
+
+{readProgress && (
+  <script is:inline>
+    // Reading progress plane (as on the live guide pages).
+    (function () {
+      var fill = document.getElementById("readProgressFill"), plane = document.getElementById("readProgressPlane"), icon = plane ? plane.querySelector("svg") : null;
+      if (!fill) return;
+      var ticking = false, lastTop = window.scrollY, lastTime = performance.now(), angle = -8;
+      function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
+      function update(now) {
+        var doc = document.documentElement, top = window.scrollY, max = doc.scrollHeight - doc.clientHeight;
+        var pct = clamp(Math.round((max <= 0 ? 0 : top / max) * 1000) / 10, 0, 100);
+        fill.style.transform = "translate3d(0, -50%, 0) scaleX(" + pct / 100 + ")";
+        if (plane) plane.style.left = 100 - pct + "%";
+        if (icon) {
+          var dt = Math.max(1, now - lastTime), delta = top - lastTop, speed = clamp(Math.abs(delta) / dt / 2.2, 0, 1);
+          angle += ((delta >= 0 ? -8 - 20 * speed : -4 + 14 * speed) - angle) * 0.2;
+          icon.style.transform = "rotate(" + angle.toFixed(2) + "deg)";
+        }
+        lastTop = top; lastTime = now;
+      }
+      function onScroll() { if (ticking) return; ticking = true; requestAnimationFrame(function (now) { ticking = false; update(now); }); }
+      ["scroll", "resize", "orientationchange"].forEach(function (ev) { window.addEventListener(ev, onScroll, { passive: true }); });
+      onScroll();
+    })();
+  </script>
+)}

@@ -1,0 +1,461 @@
+---
+/**
+ * Structured destination guide (src/content/guides/<slug>.md), rendered by src/pages/[guide].astro.
+ * Markup and class names mirror the live guide pages (legacy/athens.html) and the styles come from
+ * them (src/styles/guide.css), so the guides look exactly as they do today.
+ * Everything shown comes from the guide's content file; nothing is fetched in the browser.
+ */
+import { render, type CollectionEntry } from "astro:content";
+import { getImage } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Photo from "../Photo.astro";
+import PartnerNote from "../PartnerNote.astro";
+import { site, whatsappLink } from "../../config/site";
+import { breadcrumb, article, faq as faqSchema } from "../../lib/schema";
+import goodToKnowData from "../../data/good-to-know.json";
+import "../../styles/guide.css";
+
+type Props = { entry: CollectionEntry<"guides"> };
+const { entry } = Astro.props;
+const g = entry.data;
+const { Content } = await render(entry);
+const path = `/${entry.id}.html`;
+const h = g.headings;
+
+type GoodToKnow = { title_he: string; lead_he?: string; items: { id: string; title_he: string; summary_he: string; tips_url?: string }[] };
+const goodToKnow = (goodToKnowData as Record<string, GoodToKnow>)[g.country];
+const localUrl = (u: string) => (/^https?:/.test(u) ? u : `/${u.replace(/^\//, "")}`);
+// Same icon + label per tip type as the live drawer.
+const gtkMeta = (id: string) => {
+  const s = id.toLowerCase();
+  if (/etias|entry|schengen/.test(s)) return { icon: "🛂", chip: "כניסה" };
+  if (/esim|sim|internet/.test(s)) return { icon: "📶", chip: "קישוריות" };
+  if (/transport|drive|road/.test(s)) return { icon: "🚗", chip: "תחבורה" };
+  if (/weather|season/.test(s)) return { icon: "🌦️", chip: "מזג אוויר" };
+  if (/budget|money|cost/.test(s)) return { icon: "💶", chip: "תקציב" };
+  if (/packing|gear|bag/.test(s)) return { icon: "🎒", chip: "ציוד" };
+  return { icon: "💡", chip: "תכנון" };
+};
+
+const mapDays = g.days.flatMap((d, i) => d.map ? [{ id: `card${i + 1}`, day: i + 1, date: d.map.date ?? d.date ?? "", label: d.map.short ?? d.title, emoji: d.icon ?? "📍", lat: d.map.lat, lng: d.map.lng, color: d.map.color ?? g.color, title: d.map.label ?? d.title }] : []);
+const showMap = mapDays.length > 0;
+const mapData = JSON.stringify({ center: g.map?.center ?? { lat: mapDays[0]?.lat ?? 0, lng: mapDays[0]?.lng ?? 0 }, zoom: g.map?.zoom ?? 10, days: mapDays }).replace(/</g, "\\u003c");
+
+const sections = [
+  { id: "intro", h: h.intro },
+  showMap && { id: "route-map", h: h.map },
+  g.days.length && { id: "itinerary", h: h.itinerary },
+  (g.stays.length || g.partners.staysMap) && { id: "accommodation", h: h.stays },
+  g.attractions.length && { id: "attractions", h: h.attractions },
+  g.tips.length && { id: "tips", h: h.tips },
+].filter(Boolean) as { id: string; h: { icon?: string; title: string; toc?: string } }[];
+
+const share = await getImage({ src: g.hero.image, width: 1200, height: 630, fit: "cover", format: "jpg" });
+const schema = [
+  breadcrumb([{ name: site.name, path: "/" }, { name: "יעדים", path: "/destinations.html" }, { name: g.name, path }]),
+  article({ headline: g.title, path, description: g.description, image: share.src, datePublished: g.datePublished?.toISOString().slice(0, 10), dateModified: g.dateModified?.toISOString().slice(0, 10) }),
+  ...(g.faq.length ? [faqSchema(g.faq)] : []),
+];
+const destStyle = `--dest:${g.color};--dest-dark:${g.colorDark ?? g.color}`;
+---
+<BaseLayout title={g.seoTitle ?? g.title} description={g.description} image={share.src} imageAlt={g.title} type="article" schema={schema} readProgress stay22>
+  {showMap && <link slot="head" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />}
+
+  <div class="guide-page" style={destStyle} data-good-to-know-country={g.country}>
+    <section class="article-hero article-hero--destination article-hero--mapglass">
+      <div class="article-hero__bg" aria-hidden="true">
+        <Photo src={g.hero.image} alt="" decorative widths={[640, 960, 1280, 1600]} sizes="100vw" priority />
+      </div>
+      <div class="container">
+        <div class="article-hero__inner">
+          <div class="article-hero__glass">
+            <nav class="article-hero__breadcrumb" aria-label="breadcrumb"><a href="/services.html">{site.name}</a><span>›</span><a href="/destinations.html">יעדים</a><span>›</span><span>{g.name}</span></nav>
+            <span class="article-hero__flag"><span class={`flag-icon flag-${g.country.toLowerCase()} flag-icon-hero`}></span></span>
+            <h1 class="article-hero__title">{g.title}</h1>
+            {g.hero.subtitle && <p class="article-hero__subtitle">{g.hero.subtitle}</p>}
+          </div>
+          <div class="article-hero__meta">
+            {g.trip.dates && <span class="article-hero__badge">📅 {g.trip.dates}</span>}
+            <span class="article-hero__badge">👨‍👩‍👧‍👦 {g.trip.days} ימים</span>
+            {g.trip.base && <span class="article-hero__badge">🏨 {g.trip.base}</span>}
+            {g.trip.flight && <span class="article-hero__badge">✈️ {g.trip.flight}</span>}
+          </div>
+          {goodToKnow && (
+            <button type="button" class="gtk-trigger" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog">
+              <span class="gtk-trigger__icon" aria-hidden="true">🧭</span>
+              <span class="gtk-trigger__label"><span class="gtk-trigger__title">טוב לדעת לפני הטיול</span><span class="gtk-trigger__sub">טיפים ממוקדים ליעד הזה</span></span>
+            </button>
+          )}
+        </div>
+        {g.hero.osmCredit && <p class="article-hero__attr">מפת סטטית · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></p>}
+      </div>
+    </section>
+
+    <section class="article-body">
+      <div class="container">
+        <div class="article-layout">
+          <div class="article-content">
+            <div class="toc">
+              <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
+              <div class="toc__list">
+                {sections.map((s, i) => <a href={`#${s.id}`} class="toc__link"><span class="toc__num">{i + 1}</span> {s.h.toc ?? s.h.title}</a>)}
+              </div>
+            </div>
+
+            <div class="article-section" id="intro">
+              <h2 class="article-section__title"><span>{h.intro.icon}</span> {h.intro.title}</h2>
+              <Content />
+            </div>
+
+            {showMap && (
+              <div class="article-section" id="route-map">
+                <h2 class="article-section__title"><span>{h.map.icon}</span> {h.map.title}</h2>
+                <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות את המיקום במפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
+                <div id="trip-map" style="height:420px;border-radius:16px;overflow:hidden;border:2px solid var(--sand-dark);box-shadow:0 4px 20px rgba(0,0,0,0.1);"></div>
+                <div id="map-day-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;"></div>
+              </div>
+            )}
+
+            {g.days.length > 0 && (
+              <div class="article-section" id="itinerary">
+                <h2 class="article-section__title"><span>{h.itinerary.icon}</span> {h.itinerary.title}</h2>
+                <div class="timeline">
+                  {g.days.map((d, i) => {
+                    const band = d.band ?? ["var(--dest)", "var(--dest-dark)"];
+                    return (
+                      <div class={`tl-item ${i % 2 === 0 ? "tl-odd" : "tl-even"}`}>
+                        <div class="tl-item__label">יום {i + 1}{d.date && <><br /><span style="font-size:11px;color:#ccc;">{d.date}</span></>}</div>
+                        <div class="tl-item__node"><div class="tl-item__icon">{d.icon}</div><span class="tl-item__day-label">יום {i + 1}</span></div>
+                        <div class="tl-item__card tl-card" id={`card${i + 1}`}>
+                          <div class="tl-card__band" style={`background:linear-gradient(90deg,${band[0]},${band[1]})`}></div>
+                          <div class="tl-card__header">
+                            <div>
+                              <div class="tl-card__title">{d.title}</div>
+                              {d.where && <div class="tl-card__where">📍 {d.where}</div>}
+                            </div>
+                            {d.badge && <span class="tl-card__star" style={d.badgeStyle ? `background:${d.badgeStyle.bg};color:${d.badgeStyle.color};` : undefined}>{d.badge}</span>}
+                          </div>
+                          <div class="tl-card__body">
+                            {d.stops.map(s => (
+                              <div class="tl-activity">
+                                <div class="tl-activity__time">{s.time}</div>
+                                <div><div class="tl-activity__name">{s.title}</div>{s.text && <div class="tl-activity__desc">{s.text}</div>}</div>
+                              </div>
+                            ))}
+                            {d.tips.map(t => <div class="tl-tip"><strong>💡 טיפ:</strong> {t}</div>)}
+                            {d.stay && <div class="tl-tip"><strong>לינה:</strong> {d.stay}</div>}
+                          </div>
+                          <button type="button" class="tl-card__toggle" data-card={`card${i + 1}`} aria-expanded="false"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {(g.stays.length > 0 || g.partners.staysMap) && (
+              <div class="article-section" id="accommodation">
+                <h2 class="article-section__title"><span>{h.stays.icon}</span> {h.stays.title}</h2>
+                {g.staysIntro && <p style="color:#444;font-size:15px;margin-bottom:20px;">{g.staysIntro}</p>}
+                {g.partners.staysMap && <iframe id="stay22-widget" width="100%" height="428" src={g.partners.staysMap} title={`מפת מלונות: ${g.name}`} loading="lazy" frameborder="0"></iframe>}
+                {g.stays.map(s => (
+                  <div style="display:inline-flex;flex-direction:column;align-items:flex-start;background:white;border-radius:12px;border:2px solid var(--sand-dark);padding:12px 16px;margin-top:12px;gap:8px;max-width:100%;box-sizing:border-box;">
+                    <div style="font-weight:700;font-size:14px;">{s.icon ?? "🏨"} {s.name}</div>
+                    {s.text && <div style="font-size:12px;color:#888;">📍 {s.text}</div>}
+                    {s.url && <a href={s.url} target="_blank" rel={s.partner ? "sponsored noopener" : "noopener"} style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:7px 14px;font-size:13px;font-weight:600;">להזמנה ←</a>}
+                  </div>
+                ))}
+                {(g.stays.some(s => s.partner) || g.partners.staysMap) && <PartnerNote class="guide-partner-note" />}
+              </div>
+            )}
+
+            {g.attractions.length > 0 && (
+              <div class="article-section" id="attractions">
+                <h2 class="article-section__title"><span>{h.attractions.icon}</span> {h.attractions.title}</h2>
+                <div class="tips-list">
+                  {g.attractions.map(a => (
+                    <div class="tip-item">
+                      {a.icon && <span class="tip-item__icon">{a.icon}</span>}
+                      <div class="tip-item__text"><strong>{a.url ? <a href={a.url}>{a.name}</a> : a.name}</strong>{a.text && <><br />{a.text}</>}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {g.tips.length > 0 && (
+              <div class="article-section" id="tips">
+                <h2 class="article-section__title"><span>{h.tips.icon}</span> {h.tips.title}</h2>
+                <div class="tips-list">
+                  {g.tips.map(t => <div class="tip-item"><span class="tip-item__icon">{t.icon}</span><span>{t.text}</span></div>)}
+                </div>
+              </div>
+            )}
+
+            {g.faq.length > 0 && (
+              <div class="article-section" id="faq">
+                <h2 class="article-section__title"><span>❓</span> שאלות נפוצות</h2>
+                <div class="tips-list">
+                  {g.faq.map(f => <div class="tip-item"><div class="tip-item__text"><strong>{f.q}</strong><br />{f.a}</div></div>)}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <aside class="sidebar">
+            <div class="cta-card">
+              <div class="cta-card__title">{g.sidebar?.title ?? "רוצים מסלול מותאם?"}</div>
+              <div class="cta-card__text">{g.sidebar?.text ?? `אבנה לכם מסלול מלא ל${g.name} - יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.`}</div>
+              <a href="/packages.html" class="cta-card__btn">לחבילות תכנון ←</a>
+              <a href={whatsappLink(`אני מתעניין בטיול ל${g.name} עם ילדים`)} target="_blank" rel="noopener" class="cta-card__wa">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>וואטסאפ
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Fragment slot="after">
+    {g.phrasebook && (
+      <>
+        <button type="button" class="pb-float-btn" id="pbOpenBtn" aria-label={`פתח ${g.phrasebook.title}`} title={g.phrasebook.title}><span class="pb-float-btn__icon" aria-hidden="true">🗣️</span></button>
+        <div class="pb-drawer-overlay" id="pbOverlay"></div>
+        <div class="pb-drawer" id="pbDrawer" role="dialog" aria-label={g.phrasebook.title}>
+          <div class="pb-drawer-head"><h3>🗣️ {g.phrasebook.title}</h3><button type="button" class="pb-drawer-close" id="pbCloseBtn" aria-label="סגירה">✕</button></div>
+          <div class="pb-drawer-cats">
+            <button type="button" class="pb-dcat active" data-cat="all">הכל</button>
+            {g.phrasebook.groups.map(grp => <button type="button" class="pb-dcat" data-cat={grp.id}>{grp.name}</button>)}
+          </div>
+          <div class="pb-drawer-body">
+            {g.phrasebook.groups.map(grp => (
+              <>
+                <div class="pb-section-label" data-cat={grp.id}>{grp.name}</div>
+                {grp.phrases.map(p => (
+                  <div class="pb-item" data-cat={grp.id}>
+                    <div class="pb-item-he-col"><span class="pb-item-he">{p.he}</span><span class="pb-item-pron">{p.say}</span></div>
+                    <div class="pb-item-sk">{p.local}</div>
+                  </div>
+                ))}
+                {grp.note && <div class="pb-emergency-note" data-cat={grp.id}><strong>מספרי חירום:</strong><br />{grp.note}</div>}
+              </>
+            ))}
+          </div>
+        </div>
+      </>
+    )}
+
+    {goodToKnow && (
+      <div class="gtk-drawer" id="gtkDrawerRoot" hidden>
+        <div class="gtk-drawer__backdrop" id="gtkDrawerBackdrop"></div>
+        <div class="gtk-drawer__panel" id="gtkDrawerDialog" role="dialog" aria-modal="true" aria-labelledby="gtkDrawerTitle">
+          <div class="gtk-drawer__head">
+            <h2 class="gtk-drawer__title" id="gtkDrawerTitle">{goodToKnow.title_he}</h2>
+            <button type="button" class="gtk-drawer__close" id="gtkDrawerClose" aria-label="סגירה">✕</button>
+          </div>
+          <div class="gtk-drawer__body" id="gtkDrawerBody">
+            {goodToKnow.lead_he && <p class="gtk-drawer__lead" id="gtkDrawerLead">{goodToKnow.lead_he}</p>}
+            <ul class="gtk-drawer__list" id="gtkDrawerList">
+              {goodToKnow.items.filter(it => it.tips_url).map((it, i) => {
+                const meta = gtkMeta(it.id);
+                return (
+                  <li class="gtk-drawer__item" hidden={i >= 4}>
+                    <a class="gtk-drawer__card" href={localUrl(it.tips_url!)} data-card-id={it.id} data-card-title={it.title_he} data-card-category={meta.chip} data-card-position={String(i + 1)}>
+                      <span class="gtk-drawer__headrow"><span class="gtk-drawer__icon">{meta.icon}</span><span class="gtk-drawer__card-title">{it.title_he}</span><span class="gtk-drawer__chip">{meta.chip}</span></span>
+                      <span class="gtk-drawer__card-summary">{it.summary_he}</span>
+                      <span class="gtk-drawer__card-more">להמשך קריאה ←</span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+            {goodToKnow.items.length > 4 && <button type="button" class="gtk-drawer__more-toggle" id="gtkDrawerMoreBtn" aria-expanded="false">הצג עוד טיפים</button>}
+          </div>
+          <div class="gtk-drawer__foot"><a href="/tips.html" class="gtk-drawer__cta" id="gtkDrawerCta">לדף הטיפים המלא</a></div>
+        </div>
+      </div>
+    )}
+
+    {showMap && <script type="application/json" id="tripMapData" set:html={mapData} />}
+  </Fragment>
+</BaseLayout>
+
+<script>
+  // Behaviour copied from the live guide pages: card toggle, reading progress, route map,
+  // phrasebook drawer (draggable button), good-to-know drawer. Same Plausible event names.
+  type Plausible = (name: string, opts?: { props: Record<string, string> }) => void;
+  const track = (name: string, props: Record<string, string>) => { try { (window as unknown as { plausible?: Plausible }).plausible?.(name, { props }); } catch { /* analytics never breaks the page */ } };
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T | null;
+
+  // ---- day cards ----
+  function toggleCard(id: string) {
+    const card = $(id); if (!card) return;
+    const isOpen = card.classList.toggle("open");
+    const chevron = card.querySelector(".tl-card__chevron"); if (chevron) chevron.textContent = isOpen ? "▲" : "▾";
+    card.querySelector(".tl-card__toggle")?.setAttribute("aria-expanded", String(isOpen));
+  }
+  document.querySelectorAll<HTMLButtonElement>(".tl-card__toggle").forEach(b => b.addEventListener("click", () => toggleCard(b.dataset.card || "")));
+
+  // ---- route map (Leaflet, loaded when the map comes near the screen) ----
+  (() => {
+    const el = $("trip-map"), dataEl = $("tripMapData");
+    if (!el || !dataEl) return;
+    type Day = { id: string; day: number; date: string; label: string; emoji: string; lat: number; lng: number; color: string; title: string };
+    const data = JSON.parse(dataEl.textContent || "{}") as { center: { lat: number; lng: number }; zoom: number; days: Day[] };
+    const esc = (s: string) => s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+    const loadLeaflet = () => new Promise<void>((resolve, reject) => {
+      if ((window as unknown as { L?: unknown }).L) return resolve();
+      const s = document.createElement("script");
+      s.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+      s.onload = () => resolve(); s.onerror = reject;
+      document.head.appendChild(s);
+    });
+    const start = () => loadLeaflet().then(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const L = (window as any).L;
+      const map = L.map(el, { center: [data.center.lat, data.center.lng], zoom: data.zoom, scrollWheelZoom: false });
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", { attribution: "© OpenStreetMap © CARTO", maxZoom: 18 }).addTo(map);
+      L.polyline(data.days.map(d => [d.lat, d.lng]), { color: "#E8A045", weight: 2.5, dashArray: "6,5", opacity: 0.7 }).addTo(map);
+      const markers: Record<string, any> = {};
+      let active: string | null = null;
+      const makeIcon = (d: Day, on: boolean) => {
+        const size = on ? 46 : 38;
+        return L.divIcon({ className: "", iconSize: [size, size], iconAnchor: [size / 2, size / 2], popupAnchor: [0, -(size / 2 + 4)],
+          html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${on ? d.color : "#fff"};border:2.5px solid ${on ? "#fff" : d.color};display:flex;align-items:center;justify-content:center;font-size:${on ? 20 : 16}px;box-shadow:0 3px 12px rgba(0,0,0,0.22);cursor:pointer;"><span style="line-height:1;">${esc(d.emoji)}</span></div>` });
+      };
+      const setActive = (id: string) => {
+        if (active === id) return; active = id;
+        data.days.forEach(d => markers[d.id]?.setIcon(makeIcon(d, d.id === id)));
+        document.querySelectorAll<HTMLElement>(".map-pill").forEach(p => {
+          const on = p.dataset.id === id;
+          p.style.background = on ? "var(--teal)" : "var(--white)"; p.style.color = on ? "#fff" : "var(--charcoal)"; p.style.borderColor = on ? "var(--teal)" : "var(--sand-dark)";
+        });
+      };
+      const flyTo = (d: Day) => { map.flyTo([d.lat, d.lng], 12, { duration: 0.8 }); markers[d.id]?.openPopup(); setActive(d.id); };
+      const goToDay = (id: string) => {
+        map.closePopup();
+        const card = $(id); if (!card) return;
+        if (!card.classList.contains("open")) toggleCard(id);
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+      };
+      data.days.forEach(d => {
+        const popup = document.createElement("div");
+        popup.dir = "rtl"; popup.style.cssText = "font-family:Rubik,sans-serif;min-width:160px;padding:4px 2px;";
+        popup.innerHTML = `<div style="font-size:11px;color:#aaa;margin-bottom:2px;">יום ${d.day}${d.date ? " · " + esc(d.date) : ""}</div><div style="font-size:15px;font-weight:600;color:${d.color};margin-bottom:4px;">${esc(d.emoji)} ${esc(d.label)}</div><div style="font-size:13px;color:#555;margin-bottom:8px;">${esc(d.title)}</div>`;
+        const btn = document.createElement("button");
+        btn.type = "button"; btn.textContent = "לפרטי היום ↓";
+        btn.style.cssText = `width:100%;background:${d.color};color:#fff;border:none;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:600;cursor:pointer;font-family:Rubik,sans-serif;`;
+        btn.addEventListener("click", () => goToDay(d.id));
+        popup.appendChild(btn);
+        markers[d.id] = L.marker([d.lat, d.lng], { icon: makeIcon(d, false) }).addTo(map).bindPopup(popup).on("click", () => setActive(d.id));
+      });
+      const pills = $("map-day-pills");
+      data.days.forEach(d => {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "map-pill"; b.dataset.id = d.id;
+        b.innerHTML = `<span>${esc(d.emoji)}</span><span style="font-size:12px;">יום ${d.day}</span>`;
+        b.style.cssText = "display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;border:1.5px solid var(--sand-dark);background:var(--white);cursor:pointer;font-family:Rubik,sans-serif;font-size:13px;transition:all 0.2s;";
+        b.addEventListener("click", () => flyTo(d));
+        pills?.appendChild(b);
+      });
+      data.days.forEach(d => {
+        const header = $(d.id)?.querySelector<HTMLElement>(".tl-card__header");
+        if (header) { header.style.cursor = "pointer"; header.addEventListener("click", () => flyTo(d)); }
+      });
+    }).catch(() => { el.textContent = "המפה לא נטענה כרגע."; });
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) { io.disconnect(); start(); } }, { rootMargin: "400px" });
+      io.observe(el);
+    } else start();
+  })();
+
+  // ---- phrasebook drawer (draggable floating button, as on the live pages) ----
+  (() => {
+    const openBtn = $("pbOpenBtn"), closeBtn = $("pbCloseBtn"), drawer = $("pbDrawer"), overlay = $("pbOverlay");
+    if (!openBtn || !drawer || !overlay) return;
+    const openPb = () => { drawer.classList.add("open"); overlay.classList.add("open"); document.body.style.overflow = "hidden"; closeBtn?.focus(); };
+    const closePb = () => { drawer.classList.remove("open"); overlay.classList.remove("open"); document.body.style.overflow = ""; };
+    let dragging = false, moved = false, sx = 0, sy = 0, sl = 0, st = 0;
+    const point = (e: MouseEvent | TouchEvent) => ("touches" in e ? e.touches[0]! : e);
+    const onStart = (e: MouseEvent | TouchEvent) => {
+      const p = point(e), r = openBtn.getBoundingClientRect();
+      sx = p.clientX; sy = p.clientY; sl = r.left; st = r.top; dragging = true; moved = false;
+      openBtn.classList.add("dragging"); openBtn.style.animation = "none"; openBtn.style.bottom = "auto";
+      openBtn.style.left = `${sl}px`; openBtn.style.top = `${st}px`;
+      e.preventDefault();
+    };
+    const onMove = (e: MouseEvent | TouchEvent) => {
+      if (!dragging) return;
+      const p = point(e), dx = p.clientX - sx, dy = p.clientY - sy;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) moved = true;
+      openBtn.style.left = `${Math.max(8, Math.min(window.innerWidth - openBtn.offsetWidth - 8, sl + dx))}px`;
+      openBtn.style.top = `${Math.max(8, Math.min(window.innerHeight - openBtn.offsetHeight - 8, st + dy))}px`;
+      e.preventDefault();
+    };
+    const onEnd = () => { if (!dragging) return; dragging = false; openBtn.classList.remove("dragging"); if (!moved) { openPb(); openBtn.style.animation = ""; } };
+    openBtn.addEventListener("mousedown", onStart);
+    openBtn.addEventListener("touchstart", onStart, { passive: false });
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("touchmove", onMove, { passive: false });
+    document.addEventListener("mouseup", onEnd);
+    document.addEventListener("touchend", onEnd);
+    openBtn.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPb(); } });
+    closeBtn?.addEventListener("click", closePb);
+    overlay.addEventListener("click", closePb);
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && drawer.classList.contains("open")) closePb(); });
+    drawer.querySelectorAll<HTMLButtonElement>(".pb-dcat").forEach(btn => btn.addEventListener("click", () => {
+      drawer.querySelectorAll(".pb-dcat").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const cat = btn.dataset.cat;
+      drawer.querySelectorAll<HTMLElement>(".pb-item, .pb-section-label, .pb-emergency-note").forEach(el => { el.style.display = cat === "all" || el.dataset.cat === cat ? "" : "none"; });
+    }));
+  })();
+
+  // ---- good-to-know drawer (items are in the page; no fetch) ----
+  (() => {
+    const root = $("gtkDrawerRoot"), panel = $("gtkDrawerDialog"), openBtn = $("gtkOpenBtn"), closeBtn = $("gtkDrawerClose"), backdrop = $("gtkDrawerBackdrop"), list = $("gtkDrawerList"), more = $("gtkDrawerMoreBtn"), cta = $("gtkDrawerCta");
+    if (!root || !panel || !openBtn || !list) return;
+    const country = document.querySelector<HTMLElement>("[data-good-to-know-country]")?.dataset.goodToKnowCountry || "";
+    const items = [...list.querySelectorAll<HTMLElement>(".gtk-drawer__item")];
+    const total = () => String(list.querySelectorAll(".gtk-drawer__card").length);
+    let expanded = false, openedAt = 0, prevFocus: HTMLElement | null = null;
+    const collapse = () => {
+      items.forEach((it, i) => { it.hidden = items.length > 4 && !expanded && i >= 4; });
+      if (more) { more.setAttribute("aria-expanded", String(expanded)); more.textContent = expanded ? "הצג פחות" : "הצג עוד טיפים"; }
+    };
+    const open = () => {
+      prevFocus = document.activeElement as HTMLElement | null;
+      root.hidden = false;
+      requestAnimationFrame(() => { root.classList.add("is-open"); document.body.style.overflow = "hidden"; openedAt = Date.now(); openBtn.setAttribute("aria-expanded", "true"); track("GoodToKnow-Open", { country }); closeBtn?.focus(); });
+    };
+    const close = () => {
+      root.classList.remove("is-open"); document.body.style.overflow = ""; openBtn.setAttribute("aria-expanded", "false");
+      prevFocus?.focus(); prevFocus = null;
+      setTimeout(() => { if (!root.classList.contains("is-open")) root.hidden = true; }, 320);
+    };
+    openBtn.addEventListener("click", open);
+    closeBtn?.addEventListener("click", close);
+    backdrop?.addEventListener("click", () => { if (Date.now() - openedAt > 350) close(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && root.classList.contains("is-open")) { e.preventDefault(); close(); } }, true);
+    panel.addEventListener("keydown", e => {
+      if (e.key !== "Tab" || !root.classList.contains("is-open")) return;
+      const f = [...panel.querySelectorAll<HTMLElement>("a[href],button:not([disabled])")].filter(n => n.offsetParent !== null);
+      if (!f.length) return;
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1]!.focus(); }
+      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0]!.focus(); }
+    });
+    more?.addEventListener("click", () => { expanded = !expanded; collapse(); track("GoodToKnow-ToggleMore", { country, expanded: expanded ? "1" : "0" }); });
+    list.addEventListener("click", e => {
+      const a = (e.target as HTMLElement).closest<HTMLAnchorElement>("a.gtk-drawer__card"); if (!a) return;
+      track("GoodToKnow-CardClick", { country, href: a.getAttribute("href") || "", card_id: a.dataset.cardId || "", card_title: a.dataset.cardTitle || "", card_category: a.dataset.cardCategory || "", card_position: a.dataset.cardPosition || "", total_cards: total() });
+    });
+    cta?.addEventListener("click", () => track("GoodToKnow-CTA", { country, href: cta.getAttribute("href") || "/tips.html", total_cards: total(), expanded_items: expanded ? "1" : "0" }));
+    collapse();
+  })();
+</script>
+
+<style is:global>
+  .guide-partner-note { margin-top: 12px; }
+</style>

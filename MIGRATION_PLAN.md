@@ -18,7 +18,7 @@
 | W3 ✅ | **SEO kit** | `Seo` component (title, description, canonical, Open Graph, Twitter); JSON-LD helpers (Organization, Article, Breadcrumb, FAQ); sitemap generated automatically; robots.txt | 1 d | Claude |
 | W4 ✅ | **Image pipeline** | Move photos into `src/assets` (replace the Google Places photo thumbnails with our own or Wikimedia Commons images, credited); automatic WebP/AVIF in the right sizes with width/height; lazy loading; alt text required; compress PDFs | 1 d | Claude |
 | W5 ✅ | **Content model** | Content collection for destination guides (frontmatter: title, country, hero, best months, kids' ages, highlights, FAQ, partner blocks); guide page template | 1 d | Claude |
-| W6 | **Migrate destination guides (11)** | austria, czechia, poland-south, poland-three-experiences, warsaw, slovakia, slovakia-advanced, budapest, romania, slovenia, athens; plus `destinations` hub | 3 d | Claude |
+| W6 ✅ | **Migrate destination guides (11)** | austria, czechia, poland-south, poland-three-experiences, warsaw, slovakia, slovakia-advanced, budapest, romania, slovenia, athens; plus `destinations` hub | 3 d | Claude |
 | W7 | **Migrate tool pages** | weather, calendar, budget, packing, quiz, planning, transport-europe, questionnaire_form, family_questionnaire, austria_trivia_game: keep their behaviour as small scripts on the page | 2 d | Claude |
 | W8 | **Partner pages + disclosure** | esim, airport-hotels, car-rental-partners, car-rental-klasswagen, packages, theme-parks, family-top-attractions, tips, services, about, terms; one `PartnerLink` component that always shows the disclosure | 1.5 d | Claude |
 | W9 | **Maps** | One Leaflet map component (pinned versions, loads only when visible); "Open in Google Maps" links without a key. **No Google Maps API** (owner decision) | 0.5 d | Claude |
@@ -33,3 +33,10 @@
 
 ## Done means
 Every old URL works; Lighthouse performance and accessibility at least 90 on mobile for the guides; no key or email address in any page; images total a fraction of today's 21 MB; adding a destination = one new content file.
+
+## W6 notes (how the guides were migrated)
+- **Athens** is a structured guide (src/content/guides/athens.md) rendered by `StructuredGuide` with the live look.
+- **The other 10** (austria, czechia, poland-south, warsaw, slovakia, budapest, romania, slovenia, poland-three-experiences, slovakia-advanced) use newer and differing layouts, so they are **carried over as they are** (owner: "exactly like today"): `src/guide-html/<slug>/` holds the page body, its own CSS and scripts; `HtmlGuide` puts them in the shared layout. Written by `scripts/migrate-guide-html.mjs`.
+- Removed from those pages: the Google Maps key and matay-gmaps-frugal.js (owner decision). The Google "place card" now shows the place name and a keyless Google Maps link (no photo, hours or rating). Twemoji pinned to 17.0.3 (was @latest). Photos are compressed WebP with real sizes.
+- Kept as live: Microsoft Clarity, Stay22, Leaflet maps, GetYourGuide widget (Budapest), the feedback widget, galleries.
+- Follow-ups: **W8** must build `theme-parks.html` (embedded as an iframe in 6 guides) and the other linked pages; **W9** can give the attraction cards their own or Commons photos in place of the Google ones; any guide can later be moved onto the structured template one at a time.

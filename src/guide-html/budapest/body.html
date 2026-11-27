@@ -1,0 +1,1241 @@
+<section class="article-hero article-hero--destination article-hero--mapglass article-hero--budapest-toolbar">
+  <div class="article-hero__bg" aria-hidden="true">
+    <picture>
+      <source srcset="budapest.webp" type="image/webp">
+      <img src="budapest.webp" alt="" width="880" height="360" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.style.display='none'">
+    </picture>
+  </div>
+  <div class="container">
+    <div class="article-hero__inner">
+      <div class="article-hero__glass">
+      <nav class="article-hero__breadcrumb" aria-label="breadcrumb">
+        <a href="services.html">מתי טסים</a>
+        <span>›</span>
+        <a href="destinations.html">יעדים</a>
+        <span>›</span>
+        <span>בודפשט</span>
+      </nav>
+      <div class="article-hero__flag-row">
+        <span class="article-hero__flag"><span class="flag-icon flag-hu flag-icon-hero" aria-hidden="true"></span></span>
+        
+        <div class="at-weather" id="atWeatherRoot" data-wear-note="">
+          <div class="at-weather__today" id="atWeatherTodayWrap">
+            <button type="button" class="at-weather__icon-btn" id="atWeatherTodayIconBtn" aria-label="תחזית וטיפ לבוש · פתיחת פרטים">
+              <span class="at-weather__icon" id="atWeatherTodayIcon" aria-hidden="true">…</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <h1 class="article-hero__title">טיול לבודפשט עם ילדים</h1>
+      <p class="article-hero__subtitle">עיר מלאת קסם על גדות הדנובה - רחובות מלאי חיים, מסעדות טעימות, פארק מים מטורף ואטרקציות לכל גיל</p>
+      <p class="article-hero__copilot-lead" hidden>
+        <a href="copilot-budapest.html?utm_source=budapest_guide&amp;utm_medium=hero&amp;utm_campaign=copilot_cta" class="article-hero__copilot-btn" data-mt-track="budapest_copilot_hero" onclick="if(window.plausible){plausible('Copilot-CTA-Click',{props:{source:'budapest-hero',dest:'budapest'}});}">בנו מסלול חכם לפי גילאי הילדים · כ־5 דקות</a>
+      </p>
+      </div>
+      <div class="article-hero__actions">
+        <div class="at-hero-toolbar">
+          <div class="at-hero-toolcard">
+            <p class="at-hero-toolcard__eyebrow">במדריך הזה</p>
+            <div class="at-hero-toolcard__actions" role="toolbar" aria-label="עזרים מהירים במדריך בודפשט">
+              <a href="#budapest-pdf-cta" class="article-hero__badge article-hero__badge--cta at-hero-toolcard__primary"><span class="at-hero-toolcard__primary-label">לוח ספירה לבודפשט</span><span class="at-hero-toolcard__primary-sub">חינם להורדה</span></a>
+              <button type="button" class="gtk-trigger at-hero-toolcard__secondary" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog">
+                <span class="gtk-trigger__icon" aria-hidden="true">🧭</span>
+                <span class="gtk-trigger__label">
+                  <span class="gtk-trigger__title">טוב לדעת לפני הטיול</span>
+                  <span class="gtk-trigger__sub">טיפים ממוקדים ליעד הזה</span>
+                </span>
+              </button>
+            </div>
+            <div class="at-hero-toolcard__partner" role="region" aria-label="הטבת שותף">
+              <div class="at-hero-toolcard__partner-inner">
+                <span class="at-hero-toolcard__partner-kicker">שותף</span>
+                <a href="car-rental-partners.html" class="hero-partner-badge at-hero-toolcard__partner-link" onclick="plausible('PartnerCarRental-Click', {props: {partner: 'barkro', code: 'MATAY6', source: 'budapest-hero-text'}})">
+                  השכרת רכב BARKRO
+                  <span class="hero-partner-code">MATAY6 −6%</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="article-hero__attr">מפת סטטית · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></p>
+  </div>
+</section>
+
+
+<div class="at-weather-drawer" id="atWeatherDrawer" aria-hidden="true">
+  <div class="at-weather-drawer__backdrop" id="atWeatherDrawerBackdrop" aria-hidden="true"></div>
+  <aside class="at-weather-drawer__sheet" role="dialog" aria-modal="true" aria-labelledby="atWeatherDrawerTitle" tabindex="-1" dir="rtl">
+    <div class="at-weather-drawer__header">
+      <button type="button" class="at-weather-drawer__close" id="atWeatherDrawerClose" aria-label="סגור">✕</button>
+      <div class="at-weather-drawer__head-text">
+        <h2 id="atWeatherDrawerTitle" class="at-weather-drawer__title">תחזית ולבוש</h2>
+        <p class="at-weather-drawer__lead">סיכום יומי, טיפים מה להביא.</p>
+      </div>
+    </div>
+    <div class="at-weather-drawer__scroll">
+      <div id="atWeatherDrawerForecast" class="at-weather-drawer__forecast"></div>
+      <div class="at-weather__wear at-weather__wear--drawer" id="atWeatherWearWrap" aria-live="polite">
+        <div class="at-weather__wear-head">
+          <span class="at-weather__wear-icon" aria-hidden="true">🧥</span>
+          מה לקחת לארבעת הימים הקרובים?
+        </div>
+        <ul class="at-weather__wear-list" id="atWeatherWearList"></ul>
+      </div>
+      <p class="at-weather__fine at-weather__fine--drawer" id="atWeatherFine">מודל חיזוי ציבורי · סיכוי גשם יומי מקסימלי אינו אומר שיווצר גשם בפועל · ליציאה לאגם בלטון או לאזורים הרריים בדקו תחזית נפרדת</p>
+    </div>
+  </aside>
+</div>
+
+<section class="article-body">
+  <div class="container">
+    <div class="article-layout">
+      <main class="article-content">
+
+        
+        <div class="toc">
+          <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
+          <div class="toc__list">
+            <a href="#intro" class="toc__link"><span class="toc__num">1</span> למה בודפשט עם ילדים?</a>
+            <a href="#climate-bu" class="toc__link"><span class="toc__num">2</span> אקלים ועונה מומלצת</a>
+            <a href="#budapest-beyond" class="toc__link"><span class="toc__num">3</span> מעבר לבודפשט: ימי טיול פלוס המשך</a>
+            <a href="#route-map" class="toc__link"><span class="toc__num">4</span> המסלול על המפה</a>
+            <a href="#itinerary" class="toc__link"><span class="toc__num">5</span> מסלול יום-יום מומלץ</a>
+            <a href="#attractions" class="toc__link"><span class="toc__num">6</span> אטרקציות מומלצות</a>
+            <a href="#theme-parks-budapest" class="toc__link"><span class="toc__num">7</span> פארקי שעשועים בהונגריה</a>
+            <a href="#accommodation" class="toc__link"><span class="toc__num">8</span> המלצות לינה</a>
+            <a href="#airport-stay" class="toc__link"><span class="toc__num">9</span> המלצת לינה ליד שדה התעופה</a>
+            <a href="#tips" class="toc__link"><span class="toc__num">10</span> טיפים חשובים</a>
+          </div>
+        </div>
+
+        
+        <div class="article-section" id="intro">
+          <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> למה בודפשט עם ילדים?</h2>
+          <p>בודפשט היא אחת מהערים היפות של אירופה ויעד מצוין לטיול משפחתי עם ילדים. רחובות נקיים, מסעדות טעימות ומזמינות, אטרקציות כיפיות, שהות זולה ואנשים נחמדים - קיבלנו הכל במקום אחד.</p>
+          <p>פארק מים ענק שעובד בכל עונה, מגלשות על הרים ירוקים ושייט על הדנובה - בודפשט בהחלט עונה לקטגוריות שיש להציע לכל גיל.</p>
+          <p id="intro-view-start">מה שמייחד את בודפשט הוא הצפיפות המדהימה של אטרקציות: הפרלמנט, טירת בודה, מגדל הדייגים, כיכר הגיבורים, האי מרגיט - כולן נמצאות במרחק קצר זו מזו, מה שחוסך נסיעות ארוכות ומייגעות עם ילדים. כמו כן, מחירים נוחים משמעותית ממערב אירופה מאפשרים חופשה מפנקת בלי לרוקן את הארנק.</p>
+
+          <div class="countdown-cta" id="budapest-pdf-cta">
+            <div class="countdown-cta__kicker">🎁 בונוס למשפחות שטסות לבודפשט</div>
+            <h3 class="countdown-cta__title">לוח "מתי טסים" לבודפשט: סופרים לאחור ומתכוננים להרפתקה!</h3>
+            <p class="countdown-cta__lead">הכנתי לכם לוח "ספירה לאחור" מיוחד לבודפשט. 24 ימים של משימות, עובדות מגניבות והרבה התרגשות.</p>
+            <div class="countdown-cta__hooks">
+              <div class="countdown-cta__hook"><strong>הופכים את ההמתנה לחוויה:</strong> משימה יומית קטנה שתכניס את הילדים לאווירה.</div>
+              <div class="countdown-cta__hook"><strong>לומדים בכיף:</strong> בכל יום מגלים פרט מרתק על בודפשט.</div>
+              <div class="countdown-cta__hook"><strong>מורידים:</strong> קובץ PDF מעוצב ל-24 ימים של הרפתקה, שכיף להדפיס ולתלות על המקרר!</div>
+            </div>
+            <div class="countdown-cta__download-row">
+              <div class="countdown-cta__actions">
+                <a href="MatayTasim-Budapest-Countdown.pdf" target="_blank" rel="noopener noreferrer" class="countdown-cta__btn" onclick="return window.handleBudapestPdfCta ? window.handleBudapestPdfCta(event,'cta-button') : true;">
+                  אני מוריד/ה את הלוח שנה עכשיו
+                </a>
+                <div class="countdown-cta__micro">PDF חינם • 24 ימים • מוכן להדפסה • קובץ: MatayTasim-Budapest-Countdown.pdf</div>
+              </div>
+            </div>
+            <p class="countdown-cta__tag">הדפסתם? תייגו את עצמכם בפייסבוק של מתי טסים כדי שאראה איך אתם מתכוננים! <a href="https://www.facebook.com/profile.php?id=61582155200249" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;color:var(--teal-dark);font-weight:600;text-decoration:none;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true" style="transform:translateY(1px);"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg><span>לדף הפייסבוק</span></a></p>
+          </div>
+        </div>
+
+        <div class="article-section climate-block" id="climate-bu" aria-labelledby="climate-bu-heading">
+          <div class="climate-toggle" id="climateBuToggle" onclick="toggleClimateBu()" role="button" tabindex="0" aria-expanded="false" aria-controls="climateBodyBu" onkeydown="if(event.key==='Enter'||event.key===' ')toggleClimateBu()">
+            <h2 class="article-section__title" id="climate-bu-heading" style="margin:0;pointer-events:none;">
+              <svg class="article-section__title-icon-svg" xmlns="http://www.w3.org/2000/svg" width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              אקלים בבודפשט - מתי נוח לטייל?
+            </h2>
+            <span class="climate-toggle__chevron" aria-hidden="true">▾</span>
+          </div>
+          <div id="climateBodyBu" style="max-height:0;overflow:hidden;transition:max-height 0.42s ease;">
+          <p class="climate-block__kicker">ממוצעים חודשיים · מעלות צלזיוס וימי משקע (מספרים שלמים, מעוגלים)</p>
+          <p class="climate-block__lead">הגרף מציג נורמות חודשיות לאזור בודפשט (עיר מישורית על הדנובה): ממוצע טמפרטורה יומית (קו) וממוצע ימים עם משקע של לפחות 1 מ״מ (עמודות). באגם בלטון או בהרים הצפוניים יכול להיות פער משמעותי - קריר יותר ליד המים, חמים/קרים יותר בגובה. בחורף שכבת ערפל וקר קיצוני לסירוגין; בקיץ סופות רוגש לעיתים.</p>
+          <div class="climate-chart-wrap" role="img" aria-labelledby="climate-chart-summary-bu climate-bu-heading">
+            <span id="climate-chart-summary-bu" class="visually-hidden">תרשים משולב: טמפרטורה ממוצעת וימי גשם לכל חודש בשנה.</span>
+            <div id="climate-chart-svg-host-bu"></div>
+          </div>
+          <div class="climate-legend" aria-hidden="true">
+            <span class="climate-legend__item"><span class="climate-legend__swatch" style="background:linear-gradient(180deg,#3d9ca8,#1A6B72);"></span> ימים עם משקע ≥1 מ״מ (ממוצע לחודש)</span>
+            <span class="climate-legend__item"><span class="climate-legend__swatch climate-legend__swatch--line" style="background:var(--amber);"></span> טמפרטורה ממוצעת (°C)</span>
+          </div>
+          <p class="climate-footnote">הנתונים משקפים ממוצעים ארוכי טווח (לא תחזית לטיסה הקרובה). לתחזית עדכנית צעדו ל<a href="weather.html">דף מזג האוויר</a> וחפשו Budapest.</p>
+          <p class="climate-source-note">לפני יציאה לטיול יום או לכבישים הרריים עדכנו לפי <a href="weather.html">תחזית חיה</a> - במיוחד בחורף ובאזור אגם בלטון.</p>
+          <details class="climate-details">
+            <summary>הצגת טבלת מספרים מלאה לפי חודש</summary>
+            <div class="climate-table-wrap">
+              <table id="climate-data-table-bu">
+                <caption class="visually-hidden">ממוצע חודשי: טמפרטורה וימי גשם בבודפשט</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">חודש</th>
+                    <th scope="col">טמפ. ממוצע (°C)</th>
+                    <th scope="col">ימי משקע ≥1 מ״מ (ממוצע)</th>
+                  </tr>
+                </thead>
+                <tbody id="climate-table-body-bu"></tbody>
+              </table>
+            </div>
+          </details>
+          </div>
+        </div>
+
+        <section class="beyond-block" id="budapest-beyond" aria-labelledby="budapest-beyond-heading">
+          <div class="climate-toggle" id="beyondToggle" onclick="toggleBeyond()" role="button" tabindex="0" aria-expanded="false" aria-controls="beyondBody" onkeydown="if(event.key==='Enter'||event.key===' ')toggleBeyond()">
+            <div style="pointer-events:none;">
+              <p class="beyond-block__kicker" style="margin:0 0 4px;">מסלולים מורחבים</p>
+              <h2 class="beyond-block__title" id="budapest-beyond-heading" style="margin:0;">מעבר לבודפשט: ימי טיול פלוס המשך בהונגריה</h2>
+            </div>
+            <span class="climate-toggle__chevron" aria-hidden="true">▾</span>
+          </div>
+          <div id="beyondBody" style="max-height:0;overflow:hidden;transition:max-height 0.42s ease;">
+          <p class="beyond-block__lead">בודפשט ממוקמת על נתיבי רכבות, אוטובוסים בין-עירוניים וכבישים מהירים - אפשר לצאת ליום טיול בלי להרגיש שעוזבים את אירופה, או לשרשר כמה לילות באזור אחר ולחזור לטיסה מאותו שדה. למטה ריכוז של יעדים מעשיים למשפחות: קודם קרוב לבירה, אחר כך רעיונות לכמה ימים באותה הונגריה, ולבסוף מעברי גבול קצרים לאוסטריה, סלובקיה וסביבה.</p>
+          <p class="beyond-block__note"><strong>חשוב לדעת:</strong> זמני הנסיעה הם הערכה בכביש/רכבת בשעות שקטות יחסית; ילדים, עצירות ותורים בגבול מאריכים. לפני סופי שבוע וחגים בבלטון וביעדי ספא - שווה להזמין לינה מראש.</p>
+
+          <h3 class="beyond-sub">קרוב לבודפשט (בערך עד שעתיים נסיעה)</h3>
+          <p>אלה בין הקלאסיקות של תושבי הבירה ושל מבקרים - מתאים ליום טיול עם רכב או רכבת לכיוון הצפון או המערב.</p>
+          
+          <div class="beyond-near" id="budapest-near-daytrips">
+            <div class="beyond-near__swipe" aria-hidden="true">
+              <span class="beyond-near__swipe-icon">↔</span>
+              <p class="beyond-near__swipe-text">
+                החליקו לצדדים לעוד כרטיסים
+                <small>6 כרטיסים · גלילה אופקית בטלפון</small>
+              </p>
+              <span class="beyond-near__swipe-icon">↔</span>
+            </div>
+            <p class="beyond-near-hint" id="beyond-near-hint">לחצו על כרטיס כדי לפתוח הסבר מלא · לחיצה שנייה או &quot;סגור&quot; לחזרה</p>
+            <div class="beyond-near-scroll-edge">
+              <div class="beyond-near-grid" role="group" aria-describedby="beyond-near-hint">
+
+                <div class="beyond-flip" role="button" tabindex="0" aria-expanded="false" aria-label="סנטנדרה – פתיחת פרטים">
+                  <div class="beyond-flip__inner">
+                    <span class="beyond-flip__face beyond-flip__face--front">
+                      <span class="beyond-flip__img-wrap">
+                        <img class="beyond-card__photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Szentendre_montage1.jpg/330px-Szentendre_montage1.jpg" alt="סנטנדרה, הונגריה" width="330" height="220" loading="lazy" decoding="async">
+                        <span class="beyond-flip__finger" aria-hidden="true">👆</span>
+                      </span>
+                      <span class="beyond-flip__front-body">
+                        <span class="beyond-flip__place">סנטנדרה</span>
+                        <span class="beyond-flip__en">Szentendre</span>
+                        <span class="beyond-flip__meta">בערך 40 דק׳ ברכב · רכבת פרברים HÉV מהמרכז</span>
+                        <span class="beyond-flip__tap">לחצו לפרטים מלאים</span>
+                      </span>
+                    </span>
+                    <div class="beyond-flip__face beyond-flip__face--back">
+                      <span class="beyond-flip__back-title">סנטנדרה · Szentendre</span>
+                      <p class="beyond-flip__text">עיירה צבעונית על גדות הדנובה, ידועה במוזיאונים, גלריות ואמנים. סמטאות ציוריות, בתי קפה וגלידה.</p>
+                      <p class="beyond-flip__text">ניתן לשלב עם <strong>המוזיאון הפתוח לנוף העם</strong> (<strong>Skanzen</strong>) הסמוך – מוזיאון פתוח עם בתים מכל רחבי הונגריה; מתאים במיוחד למשפחות.</p>
+                      <p class="beyond-flip__hint-end">לחצו על הכרטיס שוב או &quot;סגור&quot; למטה</p>
+                      <button type="button" class="beyond-flip__close-btn">סגור</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="beyond-flip" role="button" tabindex="0" aria-expanded="false" aria-label="פיתול הדנובה – פתיחת פרטים">
+                  <div class="beyond-flip__inner">
+                    <span class="beyond-flip__face beyond-flip__face--front">
+                      <span class="beyond-flip__img-wrap">
+                        <img class="beyond-card__photo" data-google-place-id="ChIJeQyBfCndQUcRmDtxQ7q7Qxs" data-google-query="Crociera get yourguide Budapest" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Budapest_parliament_from_the_river.jpg/320px-Budapest_parliament_from_the_river.jpg" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Visegrad_Upper_Castle_01.jpg/320px-Visegrad_Upper_Castle_01.jpg';" alt="שיט בדנובה - Budapest Jane Haining rakpart" width="320" height="213" loading="lazy" decoding="async">
+                        <span class="beyond-flip__finger" aria-hidden="true">👆</span>
+                      </span>
+                      <span class="beyond-flip__front-body">
+                        <span class="beyond-flip__place">פיתול הדנובה</span>
+                        <span class="beyond-flip__en">Danube Bend · Visegrád &amp; Esztergom</span>
+                        <span class="beyond-flip__meta">בערך שעה עד שעה ורבע נהיגה לאורך הנהר</span>
+                        <span class="beyond-flip__tap">לחצו לפרטים מלאים</span>
+                        <span class="beyond-flip__note">תמונה מייצגת · וישגרד / אסטרגום</span>
+                      </span>
+                    </span>
+                    <div class="beyond-flip__face beyond-flip__face--back">
+                      <span class="beyond-flip__back-title">וישגרד · Visegrád</span>
+                      <p class="beyond-flip__text"><strong>וישגרד</strong> (Visegrád) – טירה על רכס הדנובה ונוף רחב על פיתול הנהר. במדריך שלנו מופיע גם פארק הבובסלד בוישגרד.</p>
+                      <span class="beyond-flip__back-title" style="margin-top:12px;">אסטרגום · Esztergom</span>
+                      <p class="beyond-flip__text"><strong>אסטרגום</strong> – הבזיליקה (אחת הגדולות באירופה) וגשר מריה ולריה לעבר <strong>שטורובו</strong> (Štúrovo) בסלובקיה.</p>
+                      <p class="beyond-flip__text">חלופה לנהיגה: סיורים מאורגנים או שייט בדנובה מהעיר.</p>
+                      <p class="beyond-flip__hint-end">לחיצה על הכרטיס או &quot;סגור&quot;</p>
+                      <button type="button" class="beyond-flip__close-btn">סגור</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="beyond-flip" role="button" tabindex="0" aria-expanded="false" aria-label="גודולו – פתיחת פרטים">
+                  <div class="beyond-flip__inner">
+                    <span class="beyond-flip__face beyond-flip__face--front">
+                      <span class="beyond-flip__img-wrap">
+                        <img class="beyond-card__photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Grassalkovich-kast%C3%A9ly_%287051._sz%C3%A1m%C3%BA_m%C5%B1eml%C3%A9k%29_6.jpg/330px-Grassalkovich-kast%C3%A9ly_%287051._sz%C3%A1m%C3%BA_m%C5%B1eml%C3%A9k%29_6.jpg" alt="ארמון גראסלקוביץ׳ בגודולו" width="330" height="220" loading="lazy" decoding="async">
+                        <span class="beyond-flip__finger" aria-hidden="true">👆</span>
+                      </span>
+                      <span class="beyond-flip__front-body">
+                        <span class="beyond-flip__place">הארמון המלכותי בגודולו</span>
+                        <span class="beyond-flip__en">Royal Palace of Gödöllő</span>
+                        <span class="beyond-flip__meta">בערך 35–45 דק׳ מזרחית לבודפשט</span>
+                        <span class="beyond-flip__tap">לחצו לפרטים מלאים</span>
+                      </span>
+                    </span>
+                    <div class="beyond-flip__face beyond-flip__face--back">
+                      <span class="beyond-flip__back-title">גודולו · Gödöllő</span>
+                      <p class="beyond-flip__text">ארמון בארוק (ארמון גראסלקוביץ׳) שנבנה במאה ה-18; מאוחר יותר נקשר גם ל<strong>הקיסרית אליזבת (סיסי)</strong>. סיורים מודרכים וגנים רחבים – מתאים למי שרוצה טירה מלכותית בלי יום נסיעה ארוך.</p>
+                      <p class="beyond-flip__hint-end">לחיצה על הכרטיס או &quot;סגור&quot;</p>
+                      <button type="button" class="beyond-flip__close-btn">סגור</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="beyond-flip" role="button" tabindex="0" aria-expanded="false" aria-label="אגם ולנסה – פתיחת פרטים">
+                  <div class="beyond-flip__inner">
+                    <span class="beyond-flip__face beyond-flip__face--front">
+                      <span class="beyond-flip__img-wrap">
+                        <img class="beyond-card__photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Ag%C3%A1rd_009.jpg/330px-Ag%C3%A1rd_009.jpg" alt="אגם ולנסה ליד אגארד" width="330" height="220" loading="lazy" decoding="async">
+                        <span class="beyond-flip__finger" aria-hidden="true">👆</span>
+                      </span>
+                      <span class="beyond-flip__front-body">
+                        <span class="beyond-flip__place">אגם ולנסה</span>
+                        <span class="beyond-flip__en">Lake Velence (Velencei-tó)</span>
+                        <span class="beyond-flip__meta">בערך 45 דק׳ דרומית לבודפשט</span>
+                        <span class="beyond-flip__tap">לחצו לפרטים מלאים</span>
+                      </span>
+                    </span>
+                    <div class="beyond-flip__face beyond-flip__face--back">
+                      <span class="beyond-flip__back-title">אגם ולנסה · Velencei-tó</span>
+                      <p class="beyond-flip__text">אגם רדוד יחסית – במים מתחממים מהר בקיץ; מתאים לרחצה קלה, טיילת ופעילות מים משפחתית. קרוב לבודפשט מבלטון (Lake Balaton).</p>
+                      <p class="beyond-flip__hint-end">לחיצה על הכרטיס או &quot;סגור&quot;</p>
+                      <button type="button" class="beyond-flip__close-btn">סגור</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="beyond-flip" role="button" tabindex="0" aria-expanded="false" aria-label="טאטא – פתיחת פרטים">
+                  <div class="beyond-flip__inner">
+                    <span class="beyond-flip__face beyond-flip__face--front">
+                      <span class="beyond-flip__img-wrap">
+                        <img class="beyond-card__photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Tatai_v%C3%A1r-_az_%C3%96reg_t%C3%B3_fel%C5%91l.JPG/330px-Tatai_v%C3%A1r-_az_%C3%96reg_t%C3%B3_fel%C5%91l.JPG" alt="טירת טאטא ואגם אורג" width="330" height="220" loading="lazy" decoding="async">
+                        <span class="beyond-flip__finger" aria-hidden="true">👆</span>
+                      </span>
+                      <span class="beyond-flip__front-body">
+                        <span class="beyond-flip__place">טאטא</span>
+                        <span class="beyond-flip__en">Tata</span>
+                        <span class="beyond-flip__meta">בערך שעה מערבית לבודפשט</span>
+                        <span class="beyond-flip__tap">לחצו לפרטים מלאים</span>
+                      </span>
+                    </span>
+                    <div class="beyond-flip__face beyond-flip__face--back">
+                      <span class="beyond-flip__back-title">טאטא · Tata</span>
+                      <p class="beyond-flip__text">עיר קומפקטית ליד <strong>אגם אורג</strong> (Öreg-tó): טירה, פארקים ומסלולי הליכה קלים – יום רגוע עם ילדים קטנים.</p>
+                      <p class="beyond-flip__text">נוח כחיבור להמשך נסיעה לכיוון <strong>גיור</strong> (Győr) בצפון-מערב.</p>
+                      <p class="beyond-flip__hint-end">לחיצה על הכרטיס או &quot;סגור&quot;</p>
+                      <button type="button" class="beyond-flip__close-btn">סגור</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="beyond-flip" role="button" tabindex="0" aria-expanded="false" aria-label="אתייק – פתיחת פרטים">
+                  <div class="beyond-flip__inner">
+                    <span class="beyond-flip__face beyond-flip__face--front">
+                      <span class="beyond-flip__img-wrap">
+                        <img class="beyond-card__photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Etyek%2C_H%C5%91s%C3%B6k_tere%2C_l%C3%A9gifot%C3%B33.jpg/330px-Etyek%2C_H%C5%91s%C3%B6k_tere%2C_l%C3%A9gifot%C3%B33.jpg" alt="אתייק ממעוף ציפור" width="330" height="220" loading="lazy" decoding="async">
+                        <span class="beyond-flip__finger" aria-hidden="true">👆</span>
+                      </span>
+                      <span class="beyond-flip__front-body">
+                        <span class="beyond-flip__place">אתייק – כרמים</span>
+                        <span class="beyond-flip__en">Etyek wine region</span>
+                        <span class="beyond-flip__meta">בערך 45 דק׳ נסיעה</span>
+                        <span class="beyond-flip__tap">לחצו לפרטים מלאים</span>
+                      </span>
+                    </span>
+                    <div class="beyond-flip__face beyond-flip__face--back">
+                      <span class="beyond-flip__back-title">אתייק · Etyek</span>
+                      <p class="beyond-flip__text">כפר כרמים ליד בודפשט – יקבים קטנים, נקודות תצפית ומסעדות. מתאים בעיקר למבוגרים; חלק מהמקומות מתאימים גם לעצירת צהריים עם ילדים.</p>
+                      <p class="beyond-flip__hint-end">לחיצה על הכרטיס או &quot;סגור&quot;</p>
+                      <button type="button" class="beyond-flip__close-btn">סגור</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <h3 class="beyond-sub" id="beyond-hu-multi">כמה ימים בהונגריה - שילובים חכמים</h3>
+          <div class="beyond-mag" role="list" aria-labelledby="beyond-hu-multi">
+            <div class="beyond-mag__grid">
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">01</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">אגם בלטון</h4>
+                  <span class="beyond-mag__label-en">Lake Balaton · Tihany, Badacsony, Keszthely, Siófok</span>
+                  <p class="beyond-mag__deck">ה&quot;ים ההונגרי&quot;: טיהאני לכיכר מצודה ונוף, באדאסוןי לגבעות געש קטנות, קסטהיי לחופים ואטרקציות מערביות, שיופוק לקיץ תוסס. שווה לילה אחד לפחות כדי לא לנהוג פעמיים אותו קטע ארוך מבודפשט.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn beyond-mag__btn--amber" href="theme-parks.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_balaton">למדריך פארקים ומים ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">02</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">אגר</h4>
+                  <span class="beyond-mag__label-en">Eger</span>
+                  <p class="beyond-mag__deck">כארבע שעות צפון־מזרח: טירה, רובע טורקי, יין אגר והמרחצאות התרמיים באזור – מתאים לסופ&quot;ש קצר או לשני לילות.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn" href="tips.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_eger">למרכז הטיפים ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">03</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">הורטובאג׳</h4>
+                  <span class="beyond-mag__label-en">Hortobágy National Park</span>
+                  <p class="beyond-mag__deck">מישור הפושטה: סוסים ושמורת טבע שונה לגמרי מהדנובה; נסיעה ארוכה – בעיקר לחובבי צילום וטבע פתוח.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn beyond-mag__btn--amber" href="tips.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_hortobagy">למרכז הטיפים ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">04</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">אגטלאק</h4>
+                  <span class="beyond-mag__label-en">Aggtelek Karst · UNESCO</span>
+                  <p class="beyond-mag__deck">מערות קארסט מוכרות – מתאים למי שמתכנן סיור מודרך במערה (גילאים ומשך הליכה לפי האתר).</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn" href="tips.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_aggtelek">למרכז הטיפים ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">05</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">הולוקו</h4>
+                  <span class="beyond-mag__label-en">Hollókő · כפר מורשת</span>
+                  <p class="beyond-mag__deck">כפר מסורתי שמור – טיול צהריים ציורי וצילומים.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn beyond-mag__btn--amber" href="tips.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_holloko">למרכז הטיפים ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">06</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">גיור ופנונהלמה</h4>
+                  <span class="beyond-mag__label-en">Győr · Pannonhalma Abbey</span>
+                  <p class="beyond-mag__deck">כיוון מערב: עיר נוחה ומנזר היסטורי על גבעה; מתאים לשביל חזרה שונה מבודפשט.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn" href="destinations.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_gyor">עוד יעדים באתר ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">07</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">פץ׳</h4>
+                  <span class="beyond-mag__label-en">Pécs</span>
+                  <p class="beyond-mag__deck">דרומית, כארבע שעות ומעלה: ניחוח ים־תיכוני, קטקומבות ועיר אוניברסיטאית – יותר טיול של כמה ימים מאשר יום אחד.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn beyond-mag__btn--amber" href="tips.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_pecs">למרכז הטיפים ←</a>
+                </div>
+              </article>
+              <article class="beyond-mag__card" role="listitem">
+                <span class="beyond-mag__num" aria-hidden="true">08</span>
+                <div class="beyond-mag__body">
+                  <h4 class="beyond-mag__label">דברצן ו־Hajdúszoboszló</h4>
+                  <span class="beyond-mag__label-en">Debrecen · thermal baths</span>
+                  <p class="beyond-mag__deck">צפון־מזרח: משפחות שאוהבות ספא ופארקי מים מרוכזים באזור.</p>
+                </div>
+                <div class="beyond-mag__cta-wrap">
+                  <a class="beyond-mag__btn" href="theme-parks.html?utm_source=budapest_guide&amp;utm_medium=beyond_magazine&amp;utm_campaign=hu_debrecen_spas">למדריך פארקים ומים ←</a>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <h3 class="beyond-sub">מעבר גבול קצר (רכבת או רכב)</h3>
+          <p>מבודפשט יוצאות רכבות ישירות ומהירות לכמה בירות שכנות - אפשר עדיין לחזור ללילה בעיר אם לא טוענים יותר מדי.</p>
+          <p class="beyond-list-swipe-note">החליקו עם האצבע ימינה/שמאלה כדי לראות עוד כרטיסים.</p>
+          <div class="beyond-list-grid" role="list" aria-label="יעדי מעבר גבול קצרים">
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">ברטיסלבה (סלובקיה)</h4>
+              <p class="beyond-list-card__text">בערך שעתיים וחצי ברכבת או כשעתיים ברכב; כיכר מרכזית, טירה וטיילת דנובה.</p>
+              <a class="beyond-list-card__link" href="slovakia.html?utm_source=budapest_guide&utm_medium=beyond_budapest&utm_campaign=sk">למדריך סלובקיה ←</a>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">וינה (אוסטריה)</h4>
+              <p class="beyond-list-card__text">כשעה וחצי עד שעתיים ברכבת מהמרכז; מוזיאונים, פארק פרטר ושוקי חורף.</p>
+              <a class="beyond-list-card__link" href="austria.html?utm_source=budapest_guide&utm_medium=beyond_budapest&utm_campaign=at">למדריך אוסטריה ←</a>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">ברנו / דרום מוראביה (צ׳כיה)</h4>
+              <p class="beyond-list-card__text">כ־2.5 שעות נהיגה; מתאים לחיבור לטיול רב-ימים עם פראג והסביבה.</p>
+              <a class="beyond-list-card__link" href="czechia.html?utm_source=budapest_guide&utm_medium=beyond_budapest&utm_campaign=cz">למדריך צ׳כיה ←</a>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">גראץ או לינץ (אוסטריה)</h4>
+              <p class="beyond-list-card__text">כיוון דרום־מערב / מערב; מתאים אם ממשיכים ברכב לאלפים או לאיטליה.</p>
+            </article>
+          </div>
+
+          <h3 class="beyond-sub">רעיונות נוספים שלא תמיד מופיעים ברשימות קצרות</h3>
+          <p class="beyond-list-swipe-note">החליקו עם האצבע ימינה/שמאלה כדי לראות עוד כרטיסים.</p>
+          <div class="beyond-list-grid" role="list" aria-label="רעיונות משלימים למסלול ארוך">
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">קושיצה (Košice, סלובקיה)</h4>
+              <p class="beyond-list-card__text">מזרחית, יותר מארבע שעות; מתאים בעיקר כחלק ממסלול מורחב במזרח אירופה.</p>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">טימישוארה (רומניה)</h4>
+              <p class="beyond-list-card__text">נסיעה ארוכה; למטיילים שממשיכים ל&quot;טיול גדול&quot; אחרי בודפשט.</p>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">זגרב (קרואטיה)</h4>
+              <p class="beyond-list-card__text">יום נהיגה מלא; לא יום טיול קלאסי, אבל קישור טוב במסלול חופשה ארוך.</p>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">קריניצה (Krynica) / דרום פולין</h4>
+              <p class="beyond-list-card__text">רלוונטי אם חוזרים צפונה עם רכב ובונים לולאה רחבה יותר.</p>
+              <a class="beyond-list-card__link" href="poland-south.html?utm_source=budapest_guide&utm_medium=beyond_budapest&utm_campaign=pl">למדריך דרום פולין ←</a>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">שייט נושא על הדנובה</h4>
+              <p class="beyond-list-card__text">קטעים בין ערים (למשל לכיוון וינה) כחלופה רגועה לרכב ליום אחד.</p>
+            </article>
+            <article class="beyond-list-card" role="listitem">
+              <h4 class="beyond-list-card__title">אזור אורשג (Őrség)</h4>
+              <p class="beyond-list-card__text">טבע גבולי הונגריה–אוסטריה–סלובניה; מתאים למי שאוהב כפרים ושקט.</p>
+            </article>
+          </div>
+          </div>
+        </section>
+
+        
+        <aside style="margin:8px 0 20px;background:#fff;border:1px solid #d7e7e9;border-radius:16px;padding:14px 16px;box-shadow:0 4px 14px rgba(17,72,78,0.08);">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div style="min-width:0;">
+              <div style="display:inline-flex;align-items:center;gap:6px;background:#eef7f8;color:#155c63;border:1px solid #d2e7e9;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:600;margin-bottom:7px;">בשיתוף BARKRO</div>
+              <div style="font-family:var(--font-heading);font-size:clamp(18px,2.2vw,24px);line-height:1.2;margin:0 0 4px;color:#155c63;">השכרת רכב BARKRO - קוד MATAY6 (6%)</div>
+              <p style="margin:0;font-size:13.5px;line-height:1.5;color:#4b5563;">בצ'ק-אאוט מזינים את הקוד ומקבלים 6% הנחה.</p>
+            </div>
+            <a href="car-rental-partners.html" target="_blank" rel="noopener" onclick="plausible('PartnerCarRental-Click', {props: {partner: 'barkro', code: 'MATAY6', source: 'budapest-map-promo'}})" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:8px 14px;border-radius:10px;background:#f8fbfb;color:#155c63;border:1px solid #d2e7e9;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;">לפרטי ההטבה <span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+
+        
+        <div class="article-section" id="route-map" style="scroll-margin-top:calc(var(--nav-height) + 16px);">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🗺️</span> המסלול על המפה</h2>
+          <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות את המיקום במפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
+          <div id="trip-map" style="height:420px;border-radius:16px;overflow:hidden;border:2px solid var(--sand-dark);box-shadow:0 4px 20px rgba(0,0,0,0.1);isolation:isolate;"></div>
+          <div id="map-day-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;"></div>
+
+          
+          <p style="margin-top:18px;font-size:14px;color:#666;line-height:1.6;">
+            למרות ש-Google Maps עובד מצוין בבודפשט, לרכישה ולתיקוף דיגיטלי יש שתי דרכים רשמיות עיקריות: <strong style="color:var(--teal);">BudapestGO</strong> – אפליקציה אחת לכל הרשת – ו-<strong style="color:#156b73;">Pay&amp;GO</strong> של BKK, תשלום במגע בקוראים צהובים (בלי אפליקציה), בהיקף מוגבל לפי מה שהמפעיל מפרסם.
+          </p>
+
+          <div class="bcgo-paygo-row">
+          <div class="bcgo-paygo-row__main">
+          
+          <div class="bcgo-ticket-panel">
+
+            
+            <div style="background:linear-gradient(135deg,#1A6B72 0%,#25919a 100%);padding:20px 24px;display:flex;align-items:center;gap:16px;">
+              <div style="width:52px;height:52px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.15);">
+                <img src="budapestGO.png" alt="BudapestGO" style="width:48px;height:48px;object-fit:cover;border-radius:12px;" onerror="this.parentElement.innerHTML='🚌'">
+              </div>
+              <div>
+                <div style="font-family:var(--font-heading);font-size:19px;color:#fff;font-weight:700;">BudapestGO</div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.8);margin-top:2px;">האפליקציה הרשמית לתחבורה ציבורית בבודפשט</div>
+              </div>
+              <div style="margin-right:auto;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);border-radius:20px;padding:5px 14px;font-size:12px;color:#fff;font-weight:600;white-space:nowrap;">חינם להורדה</div>
+            </div>
+
+            
+            <div class="bcgo-app-panel__body">
+              <p style="font-size:14.5px;color:#555;line-height:1.7;margin-bottom:20px;">האפליקציה מרכזת את כל פתרונות התחבורה בעיר תחת קורת גג אחת – החל מתכנון מסלול ועד רכישת כרטיסים דיגיטליים.</p>
+
+              
+              <div class="bcgo-features">
+                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="כרטיסים דיגיטליים - מעבר להורדת האפליקציה">
+                  <div class="bcgo-feature-card__sidebar">
+                    <span class="bcgo-feature-card__badge" aria-hidden="true">🎫</span>
+                  </div>
+                  <div class="bcgo-feature-card__main">
+                    <div class="bcgo-feature-card__title">כרטיסים דיגיטליים</div>
+                    <p class="bcgo-feature-card__desc">כרטיסים בודדים, יומיים, שבועיים או חודשיים עם חידוש אוטומטי</p>
+                    <span class="bcgo-feature-card__arrow" aria-hidden="true">→</span>
+                  </div>
+                </a>
+                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="תכנון מסלול חכם - מעבר להורדת האפליקציה">
+                  <div class="bcgo-feature-card__sidebar">
+                    <span class="bcgo-feature-card__badge" aria-hidden="true">🗺️</span>
+                  </div>
+                  <div class="bcgo-feature-card__main">
+                    <div class="bcgo-feature-card__title">תכנון מסלול חכם</div>
+                    <p class="bcgo-feature-card__desc">לוחות זמנים בזמן אמת לאוטובוס, חשמלית ומטרו</p>
+                    <span class="bcgo-feature-card__arrow" aria-hidden="true">→</span>
+                  </div>
+                </a>
+                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="עדכוני תנועה שוטפים - מעבר להורדת האפליקציה">
+                  <div class="bcgo-feature-card__sidebar">
+                    <span class="bcgo-feature-card__badge" aria-hidden="true">🔔</span>
+                  </div>
+                  <div class="bcgo-feature-card__main">
+                    <div class="bcgo-feature-card__title">עדכוני תנועה שוטפים</div>
+                    <p class="bcgo-feature-card__desc">התראות על שינויי מסלול ועיכובים בלייב</p>
+                    <span class="bcgo-feature-card__arrow" aria-hidden="true">→</span>
+                  </div>
+                </a>
+                <a class="bcgo-feature-card" href="#bcgo-download" aria-label="MOL Bubi אופניים - מעבר להורדת האפליקציה">
+                  <div class="bcgo-feature-card__sidebar">
+                    <span class="bcgo-feature-card__badge" aria-hidden="true">🚲</span>
+                  </div>
+                  <div class="bcgo-feature-card__main">
+                    <div class="bcgo-feature-card__title">MOL Bubi אופניים</div>
+                    <p class="bcgo-feature-card__desc">תמיכה מלאה בשירות האופניים השיתופיים ברחבי העיר</p>
+                    <span class="bcgo-feature-card__arrow" aria-hidden="true">→</span>
+                  </div>
+                </a>
+              </div>
+
+              
+              <div class="bcgo-validation-alert" role="alert">
+                <div class="bcgo-validation-alert__icon-wrap" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="bcgoValTri" x1="24" y1="4" x2="24" y2="44" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#fffbeb"/>
+                        <stop offset="1" stop-color="#fde68a"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M24 5L43.5 38.5c.7 1.2-.2 2.7-1.6 2.7H6.1c-1.4 0-2.3-1.5-1.6-2.7L24 5z" fill="url(#bcgoValTri)" stroke="#78350f" stroke-width="2.25" stroke-linejoin="round"/>
+                    <path d="M24 17v13" stroke="#451a03" stroke-width="3.25" stroke-linecap="round"/>
+                    <circle cx="24" cy="35.5" r="2.5" fill="#451a03"/>
+                  </svg>
+                </div>
+                <div class="bcgo-validation-alert__content">
+                  <div class="bcgo-validation-alert__headline">שימו לב - חובת תיקוף (Validation)!</div>
+                  <p class="bcgo-validation-alert__body">לאחר רכישת כרטיס דיגיטלי, חובה לתקף אותו בכל נסיעה מחדש באמצעות סריקת קוד QR בפתח כלי התחבורה או בכניסה לתחנות המטרו. ללא סריקה – הכרטיס אינו בתוקף ואתם עלולים לספוג קנס.</p>
+                </div>
+              </div>
+
+              
+              <div id="bcgo-download" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;scroll-margin-top:calc(var(--nav-height) + 12px);">
+                <a href="https://apps.apple.com/us/app/budapestgo/id916193835" target="_blank" rel="noopener noreferrer" style="display:inline-block;text-decoration:none;transition:transform 0.2s,opacity 0.2s;" onmouseover="this.style.transform='scale(1.05)';this.style.opacity='0.9'" onmouseout="this.style.transform='scale(1)';this.style.opacity='1'">
+                  <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download on the App Store" style="height:44px;width:auto;display:block;" onerror="this.parentElement.innerHTML='<span style=\'display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:600;font-family:sans-serif;\'>🍎 App Store</span>'">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=hu.webvalto.bkkfutar" target="_blank" rel="noopener noreferrer" style="display:inline-block;text-decoration:none;transition:transform 0.2s,opacity 0.2s;" onmouseover="this.style.transform='scale(1.05)';this.style.opacity='0.9'" onmouseout="this.style.transform='scale(1)';this.style.opacity='1'">
+                  <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height:64px;width:auto;display:block;margin-top:-10px;" onerror="this.parentElement.innerHTML='<span style=\'display:inline-flex;align-items:center;gap:8px;background:#1A6B72;color:#fff;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:600;font-family:sans-serif;\'>▶ Google Play</span>'">
+                </a>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <aside class="bcgo-paygo-aside">
+            <article class="bcgo-ticket-panel bcgo-paygo-panel bcgo-paygo-panel--compact" aria-label="Pay&amp;GO BKK">
+              <div class="bcgo-paygo-panel__header">
+                <div class="bcgo-paygo-panel__header-icon">
+                  <img src="paygo-payment-strip.png" width="185" height="109" alt="אמצעי תשלום: טלפון, שעון, כרטיס, ויסה ומאסטרקארד" decoding="async" loading="eager">
+                </div>
+                <div>
+                  <div class="bcgo-paygo-panel__header-title">Pay&amp;GO - BKK</div>
+                  <div class="bcgo-paygo-panel__header-sub">מגע בקורא הצהוב - ללא אפליקציה</div>
+                </div>
+                <div class="bcgo-paygo-panel__header-pill">רשמי</div>
+              </div>
+              <div class="bcgo-paygo-panel__compact">
+                <div class="bcgo-paygo-panel__thumb">
+                  <img src="pay-and-go-bkk.png" width="452" height="209" alt="קורא צהוב לתשלום ללא מגע: רכישה ותיקוף עם כרטיס או טלפון" loading="lazy" decoding="async">
+                </div>
+                <div>
+                  <p class="bcgo-paygo-panel__tagline">רכישה ותיקוף בכרטיס או בטלפון - מחיר רגיל; היקף מוגבל (פרטים אצל BKK).</p>
+                  <ul class="bcgo-paygo-panel__points bcgo-paygo-panel__points--compact">
+                    <li>Apple Pay / Google Pay או כרטיס בנק על הקורא הצהוב.</li>
+                    <li>בביקורת: אותו אמצעי תשלום בו שילמתם.</li>
+                  </ul>
+                  <a class="bcgo-paygo-panel__btn--inline" href="https://bkk.hu/jegyek-es-berletek/pay-and-go/" target="_blank" rel="noopener noreferrer">עמוד Pay&amp;GO ב־BKK<span aria-hidden="true"> ↗</span></a>
+                </div>
+              </div>
+            </article>
+          </aside>
+          </div>
+
+        </div>
+
+        
+        <div class="article-section" id="budapest-card">
+          <div class="bc-promo">
+            <div class="bc-promo__img-wrap">
+              <img class="bc-promo__img"
+                src="https://officialbudapestcard.com/wp-content/uploads/2019/10/72-hour-Budapest-Card.jpg"
+                onerror="this.src='https://officialbudapestcard.com/wp-content/uploads/2020/01/Official-Budapest-Card.jpg';this.onerror=function(){this.parentElement.style.display='none'};"
+                alt="Budapest Card 72 שעות"
+              >
+            </div>
+            <div class="bc-promo__content">
+              <div class="bc-promo__badge">כרטיס העיר הרשמי</div>
+              <h2 class="bc-promo__title">Budapest Card</h2>
+              <p class="bc-promo__text">רוצים לחסוך זמן וכסף בבודפשט? הכרטיס הרשמי של העיר נותן לכם "הכל כלול" אמיתי: מתחבורה ציבורית ללא הגבלה ועד כניסה חופשית לאטרקציות המרכזיות ולמרחצאות. זה הפתרון המושלם למשפחות ומטיילים שרוצים ראש שקט, נסיעות חופשיות וגישה לכל מה שיפה בעיר בלי לעמוד בתור לקופות.</p>
+              <p class="bc-promo__note">⚠️ לא כולל את קו 100E לשדה התעופה</p>
+              <a href="https://www.tiqets.com/en/things-to-do-in-budapest-c68199/tickets-for-budapest-card-free-entrance-to-szt-lukacs-thermal-bath-and-pool-p974576/?partner=mataytasim" target="_blank" rel="noopener noreferrer sponsored" class="bc-promo__btn">
+                לרכישת Budapest Card
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px;flex-shrink:0;"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="article-section" id="itinerary">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🗓️</span> המסלול המלא - 6 ימים</h2>
+          <div class="timeline">
+
+            
+            <div class="tl-item tl-item--visegrad">
+              <div class="tl-item__label">יום 1<br><span style="font-size:11px;color:#ccc;">הגעה + Visegrad</span></div>
+              <div class="tl-item__node"><div class="tl-item__icon">✈️</div><span class="tl-item__day-label">יום 1</span></div>
+              <div class="tl-item__card tl-card open" id="tl1">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">הגעה לבודפשט + Visegrad Bobsled</div><div class="tl-card__where">📍 שדה התעופה ← Visegrad</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl1" aria-label="המפה המלאה - יום 1" title="המפה המלאה - יום 1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div></div>
+                <div class="tl-card__body">
+                  <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">נחיתה בבודפשט ✈️</div><div class="tl-activity__desc">נחיתה בשדה התעופה Budapest Ferenc Liszt - כ-20 דקות מהמרכז. איסוף רכב ועזיבה לכיוון Visegrad.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">מגלשת הבוב Visegrad Bobsled 🛷</div><div class="tl-activity__desc">עיירה קטנה על גדות הדנובה, 45 דקות מהעיר. מגלשת מתכת ענקית על הגבעה - מהירה, כיפית, מתאים מגיל 4+. הילדים ביקשו לחזור פעמיים.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">האי מרגיט 🌿</div><div class="tl-activity__desc">טיול נינוח באי מרגיט - מזרקות מנגנות, שבילים ירוקים וילדים שפשוט נהנים מכל רגע.</div>
+                  </div></div>
+                  <div class="tl-tip"><strong>לינה:</strong> NEW &amp; Central - Fresh Design</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl1')"><span>פרטי היום</span><span class="tl-card__chevron">▲</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--buda">
+              <div class="tl-item__label">יום 2<br><span style="font-size:11px;color:#ccc;">טירת בודה</span></div>
+              <div class="tl-item__node"><div class="tl-item__icon">🏰</div><span class="tl-item__day-label">יום 2</span></div>
+              <div class="tl-item__card tl-card" id="tl2">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">טירת בודה + מגדל הדייגים + גשר השרשרות</div><div class="tl-card__where">📍 בודה ← פשט</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl2" aria-label="המפה המלאה - יום 2" title="המפה המלאה - יום 2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--must">⭐ חובה</span></div></div>
+                <div class="tl-card__body">
+                  <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">טירת בודה + פוניקולר 🏰</div><div class="tl-activity__desc">הגיעו מוקדם לפני ההמונים. עלייה בפוניקולר ההיסטורי - הילדים מתים עליו. נוף מדהים על פשט מלמעלה. חומות, גנים ותצפיות.</div><a href="https://www.headout.com/r/wwwrecommends-ylJ9N/" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;background:#1A6B72;color:#fff;border-radius:20px;padding:7px 16px;font-family:'Rubik',sans-serif;font-size:13px;font-weight:500;text-decoration:none;">🎫 הזמנת כרטיסים</a></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">צהריים</span><div><div class="tl-activity__name">מגדל הדייגים (Halászbástya) 🗼</div><div class="tl-activity__desc">ממש ליד הטירה - ארכיטקטורה פנטסטית, פסגות מגדלים ותמונות מעולות. אחת הנקודות היפות בבודפשט.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">גשר השרשרות + שוק מרכזי</div><div class="tl-activity__desc">ירידה לרגל לגשר האייקוני ומעבר לצד פשט. ביקור בשוק המרכזי (Nagy Vásárcsarnok) - שוק קומות מרשים עם פריקי ומזכרות.</div></div></div>
+                  <div class="tl-tip"><strong>טיפ:</strong> תגיעו לטירה לפני השעה 9:00 כי אחרי זה מגיעות קבוצות ענקיות של תיירים.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> NEW &amp; Central - Fresh Design</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl2')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--heroes">
+              <div class="tl-item__label">יום 3<br><span style="font-size:11px;color:#ccc;">כיכר הגיבורים + סצ'ניי</span></div>
+              <div class="tl-item__node"><div class="tl-item__icon">♨️</div><span class="tl-item__day-label">יום 3</span></div>
+              <div class="tl-item__card tl-card" id="tl3">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">כיכר הגיבורים + פארק העיר + מרחצאות סצ'ניי</div><div class="tl-card__where">📍 Heroes' Square ← Széchenyi Baths</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl3" aria-label="המפה המלאה - יום 3" title="המפה המלאה - יום 3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div></div>
+                <div class="tl-card__body">
+                  <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">כיכר הגיבורים + פארק העיר 🏛️</div><div class="tl-activity__desc">כיכר מרשימה עם פסלים ועמוד ניצחון. פארק העיר הצמוד - אגם מלאכותי שבקיץ הופך לבריכה, נחמד לילדים.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">מרחצאות סצ'ניי (Széchenyi) ♨️</div><div class="tl-activity__desc">חווית חיים! בניין מפואר מהמאה ה-19, בריכות חמות בפנים ובחוץ. לילדים יש בריכה רדודה ומגלשות מים קטנות. להביא בגד ים ומגבת.</div><a href="https://www.headout.com/r/wwwrecommends-ya8gj/" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;background:#1A6B72;color:#fff;border-radius:20px;padding:7px 16px;font-family:'Rubik',sans-serif;font-size:13px;font-weight:500;text-decoration:none;">🎫 הזמנת כרטיסים</a></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">רחוב Váci + קניות</div><div class="tl-activity__desc">הרחוב המסחרי הצבעוני של בודפשט - מסעדות, קפה ומזכרות.</div></div></div>
+                  <div class="tl-tip"><strong>טיפ:</strong> מרחצאות סצ'ניי - מומלץ להזמין מראש. כניסה ב-10 בבוקר הכי נוחה.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> NEW &amp; Central - Fresh Design</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl3')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--parliament">
+              <div class="tl-item__label">יום 4<br><span style="font-size:11px;color:#ccc;">הפרלמנט + שיט</span></div>
+              <div class="tl-item__node"><div class="tl-item__icon">🏛️</div><span class="tl-item__day-label">יום 4</span></div>
+              <div class="tl-item__card tl-card" id="tl4">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">הפרלמנט + שיט בדנובה + רובע יהודי</div><div class="tl-card__where">📍 Parliament ← Danube Cruise ← Jewish Quarter</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl4" aria-label="המפה המלאה - יום 4" title="המפה המלאה - יום 4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--must">⭐ חובה</span></div></div>
+                <div class="tl-card__body">
+                  <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">הפרלמנט ההונגרי 🏛️</div><div class="tl-activity__desc">אחד הבניינים היפים בעולם - מבחוץ מרהיב, מבפנים עוד יותר. טיול מודרך של כשעה מסביר על ההיסטוריה ההונגרית. חובה להזמין כרטיסים מראש!</div><a href="https://www.headout.com/r/wwwrecommends-yabXn/" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;background:#1A6B72;color:#fff;border-radius:20px;padding:7px 16px;font-family:'Rubik',sans-serif;font-size:13px;font-weight:500;text-decoration:none;">🎫 הזמנת כרטיסים</a></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">אחה״צ</span><div><div class="tl-activity__name">שיט בדנובה בשעת שקיעה ⛵</div><div class="tl-activity__desc">הנוף על הפרלמנט, טירת בודה וגשרי הדנובה מהמים - לא יישכח. שיטות קצרות של שעה מספיקות בדיוק.</div><a href="https://www.headout.com/r/wwwrecommends-yaqlr/" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;background:#1A6B72;color:#fff;border-radius:20px;padding:7px 16px;font-family:'Rubik',sans-serif;font-size:13px;font-weight:500;text-decoration:none;">🎫 הזמנת כרטיסים</a></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">ערב</span><div><div class="tl-activity__name">רובע יהודי + Ruin Bars 🕍</div><div class="tl-activity__desc">ערב בבתי המרזח הייחודיים של הרובע היהודי - אדריכלות מיוחדת, אוכל טוב ואווירה מטורפת.</div></div></div>
+                  <div class="tl-tip"><strong>טיפ:</strong> כרטיסי הפרלמנט נגמרים מהר - הזמינו שבוע מראש באתר הרשמי.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> NEW &amp; Central - Fresh Design</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl4')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--aqua">
+              <div class="tl-item__label">יום 5<br><span style="font-size:11px;color:#ccc;">Aquaworld</span></div>
+              <div class="tl-item__node"><div class="tl-item__icon">🌊</div><span class="tl-item__day-label">יום 5</span></div>
+              <div class="tl-item__card tl-card" id="tl5">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">כל היום ב-Aquaworld</div><div class="tl-card__where">📍 Aquaworld Budapest</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl5" aria-label="המפה המלאה - יום 5" title="המפה המלאה - יום 5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--rec">⭐ מומלץ</span></div></div>
+                <div class="tl-card__body">
+                  <div class="tl-activity"><span class="tl-activity__time">כל היום</span><div><div class="tl-activity__name">Aquaworld 🌊</div><div class="tl-activity__desc">פארק המים הגדול ביותר בהונגריה - פנימי לחלוטין, עובד בכל עונה. מגלשות ענק, גלים, בריכות לכל גיל. הגיעו ב-9 בבוקר לפני ההמונים.</div></div></div>
+                  <div class="tl-tip"><strong>טיפ:</strong> Aquaworld כדאי להזמין מראש. חנייה בחינם בשטח.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> NEW &amp; Central - Fresh Design</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl5')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--visegrad">
+              <div class="tl-item__label">יום 6<br><span style="font-size:11px;color:#ccc;">טיסה חזרה</span></div>
+              <div class="tl-item__node"><div class="tl-item__icon">✈️</div><span class="tl-item__day-label">יום 6</span></div>
+              <div class="tl-item__card tl-card" id="tl6">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header"><div><div class="tl-card__title">ארוחת בוקר + קניות + טיסה חזרה</div><div class="tl-card__where">📍 בודפשט ← נתב"ג</div></div><div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl6" aria-label="המפה המלאה - יום 6" title="המפה המלאה - יום 6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div></div>
+                <div class="tl-card__body">
+                  <div class="tl-activity"><span class="tl-activity__time">בוקר</span><div><div class="tl-activity__name">ארוחת בוקר טעימה ☕</div><div class="tl-activity__desc">ארוחת בוקר אחרונה בעיר - קפה, מאפים הונגריים ואווירה נינוחה לפני הדרך.</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">לפני טיסה</span><div><div class="tl-activity__name">סיבוב קניות בסופר המקומי 🛒</div><div class="tl-activity__desc">עצירה בסופר לקנות דברים טעימים הביתה - שוקולדים הונגריים, פאפריקה, ממרחים ועוד. המקומיים יודעים מה טוב!</div></div></div>
+                  <div class="tl-activity"><span class="tl-activity__time">צהריים</span><div><div class="tl-activity__name">טיסה חזרה לישראל ✈️</div><div class="tl-activity__desc">שדה התעופה Budapest Ferenc Liszt - כ-20 דקות מהמרכז. מסלול מושלם לסיום חופשה מוצלחת.</div></div></div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl6')"><span>פרטי היום</span><span class="tl-card__chevron">▼</span></button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        
+        <div class="article-section" id="attractions">
+          <h2 class="article-section__title"><span class="article-section__title-icon">⭐</span> אטרקציות מומלצות</h2>
+          <div class="attractions-grid">
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">טירה</span>
+                <div class="attraction-card__name">טירת בודה ומגדל הדייגים</div>
+                <div class="attraction-card__desc">הפנינה של בודה. עלייה בפוניקולר, נוף מושלם ואדריכלות מהפנטת. להגיע מוקדם בבוקר לפני הצפיפות.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJDw826jzcQUcRdiUBqV86zj0" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Budapest_Castle_from_the_chain_bridge_01.jpg/320px-Budapest_Castle_from_the_chain_bridge_01.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">אדריכלות</span>
+                <div class="attraction-card__name">הפרלמנט ההונגרי</div>
+                <div class="attraction-card__desc">אחד הבניינים היפים בעולם. כרטיסים חובה להזמין מראש באתר הרשמי. הטיול המודרך אורך כשעה ומרתק לכל הגילאים.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJPaPURhDcQUcRbg-P_7giITQ" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Budapest_Hungarian_Parliament_2016.jpg/320px-Budapest_Hungarian_Parliament_2016.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">מרחצאות</span>
+                <div class="attraction-card__name">מרחצאות סצ'ניי</div>
+                <div class="attraction-card__desc">חוויה תרבותית-היסטורית ייחודית. מתאים גם לילדים - יש בריכה רדודה ומגלשות קטנות. להביא בגד ים ומגבת.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJd1VnBYbbQUcREiSNtgjDwMs" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Budapest_Sz%C3%A9chenyi_f%C3%BCrd%C5%91_2013.jpg/320px-Budapest_Sz%C3%A9chenyi_f%C3%BCrd%C5%91_2013.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">הרפתקה</span>
+                <div class="attraction-card__name">Visegrad Bobsled</div>
+                <div class="attraction-card__desc">כ-45 דקות מהעיר - שווה כל דקה! מגלשת בוב על גבעה עם נוף לדנובה. מתאים מגיל 4+, ילדים מתים עליה.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJPWTVprWAakcRqOKdrn40jx8" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Visegr%C3%A1d_Castle_2019.jpg/320px-Visegr%C3%A1d_Castle_2019.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">פארק מים</span>
+                <div class="attraction-card__name">Aquaworld</div>
+                <div class="attraction-card__desc">פארק מים פנימי ענק - עובד בכל מזג אוויר. מושלם ליום אחרון לפני הטיסה. כניסה מומלצת ב-9 בבוקר לפני ההמונים.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJuf_4gJbRQUcRg4Is70-FJ0s" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Aquaworld_Resort_Budapest.jpg/320px-Aquaworld_Resort_Budapest.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">שייט</span>
+                <div class="attraction-card__name">שיט בדנובה</div>
+                <div class="attraction-card__desc">שיט בשעת שקיעה הוא חוויה בלתי נשכחת. הנוף על הפרלמנט וטירת בודה מהמים - אחד הרגעים הכי יפים בטיול.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJ2dSGoUDcQUcRQPIqeDUNig8" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Budapest_parliament_from_the_river.jpg/320px-Budapest_parliament_from_the_river.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">טירה</span>
+                <div class="attraction-card__name">מבצר Visegrad</div>
+                <div class="attraction-card__desc">ממש ליד הבוב - מבצר רנסנסי עם נוף פנורמי על נהר הדנובה. כניסה בתשלום סמלי, שווה לעצור.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJ-_fvCa6AakcReKkEH_bHgnE" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Visegrad_Upper_Castle_01.jpg/320px-Visegrad_Upper_Castle_01.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </div>
+          <p class="attractions-grid__attrib">תמונות ממוזערות: גיבוי מ-Wikimedia; כשמוגדר מפתח Google Maps והדפדפן מאפשרים, נטענת תמונה מ-Google Places לפי מזהה המקום (לפי תנאי Google).</p>
+
+        </div>
+
+        <div class="cta-card cta-card--accommodation-mobile" aria-label="תכנון מסלול אישי לבודפשט">
+          <div class="cta-card__title">מתכננים טיול לבודפשט? 🇭🇺</div>
+          <div class="cta-card__text">אעזור לכם לבנות מסלול מותאם אישית עם כל הפרטים – לינה, אטרקציות וטיפים מניסיון אמיתי.</div>
+          <a href="questionnaire_form.html" class="cta-card__btn">מלאו שאלון קצר ←</a>
+          <a href="https://wa.me/972546758145?text=אני מתעניין בתכנון טיול לבודפשט עם ילדים" class="cta-card__wa" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            וואטסאפ
+          </a>
+        </div>
+
+        <div class="article-section bu-tp-embed" id="theme-parks-budapest">
+          <h2 class="article-section__title">
+            <span class="bu-tp-embed__title-main"><span class="article-section__title-icon">🎢</span> פארקי שעשועים בהונגריה</span>
+            <a class="bu-tp-embed__cta" href="theme-parks.html?cc=HU" aria-label="פתיחת מדריך פארקי אירופה המלא" onclick="if(window.plausible){plausible('ThemeParks-CTA-Click',{props:{source:'budapest-embed-title',country:'HU',target:'theme-parks'}});}">מדריך פארקי אירופה המלא</a>
+          </h2>
+          <p class="bu-tp-embed__intro">מפה אינטראקטיבית של פארקי מים, פארקי הרפתקה ואטרקציות משפחתיות בהונגריה - כולל בודפשט, אגם בלטון ויעדי אקסטרים מחוץ לעיר.</p>
+          <div class="bu-tp-embed__frame">
+            <iframe src="theme-parks.html?cc=HU&embed=map" title="פארקי שעשועים בהונגריה — מפה אינטראקטיבית" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+
+        
+        <div class="article-section" id="accommodation">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🏨</span> המלצות לינה</h2>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <iframe width="100%" height="428" src="https://stay22.com/embed/69c0f0dfe3b92594135ae000" frameborder="0" loading="lazy" style="display:block;border-radius:12px;"></iframe>
+            <div style="background:white;border-radius:12px;border:2px solid var(--sand-dark);align-self:flex-start;max-width:100%;box-sizing:border-box;overflow:hidden;">
+              <div style="padding:12px 16px;pointer-events:none;">
+                <div style="font-weight:700;font-size:14px;">🏙️ NEW &amp; Central - Fresh Design</div>
+                <div style="font-size:12px;color:#888;margin-top:4px;">📍 Budapest, הונגריה</div>
+              </div>
+              <div style="padding:8px 16px 12px;border-top:1px solid var(--sand);">
+                <a href="https://www.airbnb.hu/rooms/779716297747954074" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:600;font-family:var(--font-body);text-decoration:none;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">להזמנה ←</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-section" id="airport-stay">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🛬</span> המלצת לינה ליד שדה התעופה</h2>
+          <p>לטיסה מוקדמת או נחיתה מאוחרת בבודפשט, לילה ליד שדה התעופה BUD יכול לחסוך לחץ, זמן נסיעה ועייפות מיותרת למשפחה.</p>
+          <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:14px;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;">
+            <span style="font-size:14px;color:#4b5563;">ריכזנו את ההמלצות לעמוד מלונות ליד שדות תעופה (קטע בודפשט):</span>
+            <a href="airport-hotels.html#airport-bud" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:999px;padding:9px 14px;font-size:13px;font-weight:600;text-decoration:none;">למלונות ליד BUD ←</a>
+          </div>
+        </div>
+
+        
+        <div class="article-section" id="tips">
+          <div class="climate-toggle" id="tipsBuToggle" onclick="toggleTipsBu()" role="button" tabindex="0" aria-expanded="false" aria-controls="tipsBuBody" onkeydown="if(event.key==='Enter'||event.key===' ')toggleTipsBu()">
+            <h2 class="article-section__title" style="margin:0;pointer-events:none;">
+              <svg class="article-section__title-icon-svg" xmlns="http://www.w3.org/2000/svg" width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.88 1.35-2.6A6.98 6.98 0 0 0 18 8a7 7 0 1 0-12 0c0 1.24.33 2.44.96 3.41.69.72 1.17 1.62 1.35 2.6"/></svg>
+              טיפים חשובים לטיול
+            </h2>
+            <span class="climate-toggle__chevron" aria-hidden="true">▾</span>
+          </div>
+          <div id="tipsBuBody" style="max-height:0;overflow:hidden;transition:max-height 0.42s ease;">
+          <div class="tips-pro-wrap">
+            <section class="tips-pro-group" aria-labelledby="tips-cat-logistics">
+              <h3 class="tips-pro-group__title" id="tips-cat-logistics">לוגיסטיקה ונסיעות</h3>
+              <p class="tips-pro-group__sub">טיסה, רכב ותנועה בתוך העיר</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">הגעה</span>
+                    <p class="tip-pro__text">טיסות ישירות מתל אביב לבודפשט - שדה התעופה Budapest Ferenc Liszt. זמן טיסה כשלוש שעות. השדה נמצא כ-20 דקות מהמרכז.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3.3A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">רכב</span>
+                    <p class="tip-pro__text">בתוך העיר אין צורך - תחבורה ציבורית מצוינת. לטיולים מחוץ לעיר (Visegrad, Aquaworld) - כדאי לשכור. Alamo ו-Europcar בשדה התעופה.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tips-pro-group" aria-labelledby="tips-cat-money">
+              <h3 class="tips-pro-group__title" id="tips-cat-money">כסף, שפה ומזג אוויר</h3>
+              <p class="tips-pro-group__sub">מה לדעת לפני ובמהלך הביקור</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-5.5A3.5 3.5 0 0 0 7 11.5 3.5 3.5 0 0 0 10.5 15H16"/><path d="M7 12h9.5"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">כסף</span>
+                    <p class="tip-pro__text">הונגריה לא בגוש האירו - פורינט הונגרי (HUF). כרטיסי אשראי מקובלים בכל מקום, אך כדאי להמיר מעט מזומן לשווקים ולכניסות.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">שפה</span>
+                    <p class="tip-pro__text">הונגרית - שפה מורכבת שאין קשר לאף שפה אירופאית אחרת. אנגלית מדוברת היטב בכל אזורי התיירות.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">מזג אוויר</span>
+                    <p class="tip-pro__text">קיץ נעים (24-32 מעלות), אביב וסתיו מתונים. בחורף קר מאוד - 0 עד 5 מעלות. Aquaworld מצוין גם בחורף - פנימי לחלוטין.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tips-pro-group" aria-labelledby="tips-cat-booking">
+              <h3 class="tips-pro-group__title" id="tips-cat-booking">הזמנות מראש</h3>
+              <p class="tips-pro-group__sub">מה כדאי לסגור לפני שמגיעים</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">הזמנות מראש</span>
+                    <p class="tip-pro__text">הפרלמנט וה-Aquaworld - חובה להזמין מראש. מרחצאות סצ'ניי - מומלץ. הפוניקולר - שווה לרכוש מראש בפיק.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:16px;padding:18px 24px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="font-size:22px;line-height:1;flex-shrink:0;" aria-hidden="true">🧭</div>
+              <div>
+                <div style="font-family:var(--font-heading);font-size:15px;color:var(--charcoal);margin-bottom:2px;">טיפים וכלים לתכנון חכם</div>
+                <div style="font-size:13px;color:#888;">מרכז הידע שלנו לתכנון חופשה: תקציב, מזג אוויר, רשימות אריזה, תקשורת בחו"ל וכל מה שצריך כדי לסגור טיול במקום אחד.</div>
+              </div>
+            </div>
+            <a href="tips.html?utm_source=budapest_guide&utm_medium=article&utm_campaign=internal_tips_cta&utm_content=tips_section_card" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:20px;padding:9px 20px;font-family:var(--font-body);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">
+              לכל מה שצריך לדעת לפני שטסים ←
+            </a>
+          </div>
+          </div>
+        </div>
+
+
+      </main>
+
+      <aside class="sidebar">
+          
+          <nav class="stoc" id="stoc" aria-label="תוכן עניינים">
+            <div class="stoc__header">📖 תוכן עניינים</div>
+            <ol class="stoc__list">
+              <li><a class="stoc__link" href="#intro" data-stoc="intro"><span class="stoc__num">1</span><span>למה בודפשט?</span></a></li>
+              <li><a class="stoc__link" href="#climate-bu" data-stoc="climate-bu"><span class="stoc__num">2</span><span>אקלים ועונה</span></a></li>
+              <li><a class="stoc__link" href="#budapest-beyond" data-stoc="budapest-beyond"><span class="stoc__num">3</span><span>מעבר לבודפשט</span></a></li>
+              <li><a class="stoc__link" href="#route-map" data-stoc="route-map"><span class="stoc__num">4</span><span>המסלול על המפה</span></a></li>
+              <li><a class="stoc__link" href="#itinerary" data-stoc="itinerary"><span class="stoc__num">5</span><span>מסלול יום-יום</span></a></li>
+              <li><a class="stoc__link" href="#attractions" data-stoc="attractions"><span class="stoc__num">6</span><span>אטרקציות</span></a></li>
+              <li><a class="stoc__link" href="#theme-parks-budapest" data-stoc="theme-parks-budapest"><span class="stoc__num">7</span><span>פארקי שעשועים</span></a></li>
+              <li><a class="stoc__link" href="#accommodation" data-stoc="accommodation"><span class="stoc__num">8</span><span>לינה (+ שדה התעופה)</span></a></li>
+              <li><a class="stoc__link" href="#tips" data-stoc="tips"><span class="stoc__num">9</span><span>טיפים חשובים</span></a></li>
+            </ol>
+          </nav>
+        <div class="cta-card">
+          <div class="cta-card__title">רוצים מסלול מותאם? <span class="flag-icon flag-hu" style="width:22px;height:15px;vertical-align:middle;border-radius:3px;"></span></div>
+          <div class="cta-card__text">אבנה לכם מסלול מלא לבודפשט - יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.</div>
+          <a href="questionnaire_form.html" class="cta-card__btn">מלאו שאלון קצר ←</a>
+          <a href="https://wa.me/972546758145?text=%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%20%D7%91%D7%98%D7%99%D7%95%D7%9C%20%D7%9C%D7%91%D7%95%D7%93%D7%A4%D7%A9%D7%98%20%D7%A2%D7%9D%20%D7%99%D7%9C%D7%93%D7%99%D7%9D" target="_blank" rel="noopener noreferrer" class="cta-card__wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            וואטסאפ
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="feedback-section">
+  <div class="feedback-widget" id="feedbackWidget">
+
+    <div class="feedback-widget__header">
+      <span class="feedback-widget__icon">🗺️</span>
+      <p class="feedback-widget__question">מצאתם מה שחיפשתם?</p>
+      <p class="feedback-widget__sub">הפידבק שלכם עוזר לנו לשפר את המדריך</p>
+    </div>
+
+    <div class="feedback-widget__btns" id="feedbackBtns">
+      <button class="feedback-widget__btn feedback-widget__btn--yes" onclick="openFeedbackBox('yes')">
+        
+        <svg class="feedback-widget__btn-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V12C3 11.4696 3.21071 10.9609 3.58579 10.5858C3.96086 10.2107 4.46957 10 5 10H7M7 22L13 22C13.9071 21.9999 14.7822 21.665 15.4607 21.0583C16.1392 20.4515 16.5721 19.6134 16.674 18.712L17.374 12.712C17.4303 12.2017 17.3779 11.6851 17.2206 11.1971C17.0633 10.7091 16.8048 10.2613 16.4626 9.88372C16.1204 9.50611 15.7026 9.20764 15.2373 9.00812C14.772 8.8086 14.2699 8.71287 13.764 8.728L11 8.728V5C11 4.46957 10.7893 3.96086 10.4142 3.58579C10.0391 3.21071 9.53043 3 9 3C8.73478 3 8.48043 3.10536 8.29289 3.29289C8.10536 3.48043 8 3.73478 8 4V8.728L7 10M7 22V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>כן, בהחלט!</span>
+      </button>
+      <button class="feedback-widget__btn feedback-widget__btn--no" onclick="openFeedbackBox('no')">
+        
+        <svg class="feedback-widget__btn-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 2H19C19.5304 2 20.0391 2.21071 20.4142 2.58579C20.7893 2.96086 21 3.46957 21 4V12C21 12.5304 20.7893 13.0391 20.4142 13.4142C20.0391 13.7893 19.5304 14 19 14H17M17 2L11 2C10.0929 2.00012 9.21776 2.33499 8.53927 2.94174C7.86078 3.54848 7.42788 4.38663 7.326 5.288L6.626 11.288C6.56975 11.7983 6.62212 12.3149 6.77944 12.8029C6.93675 13.2909 7.19524 13.7387 7.53741 14.1163C7.87958 14.4939 8.29738 14.7924 8.76268 14.9919C9.22798 15.1913 9.73013 15.2871 10.236 15.272L13 15.272V19C13 19.5304 13.2107 20.0391 13.5858 20.4142C13.9609 20.7893 14.4696 21 15 21C15.2652 21 15.5196 20.8946 15.7071 20.7071C15.8946 20.5196 16 20.2652 16 20V15.272L17 14M17 2V14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>לא ממש</span>
+      </button>
+    </div>
+
+    
+    <div class="feedback-box" id="feedbackBox">
+      <p class="feedback-box__title" id="feedbackBoxTitle"></p>
+      <textarea class="feedback-box__textarea" id="feedbackText" placeholder="כתבו לנו כאן..." rows="3"></textarea>
+      <button class="feedback-box__send" id="feedbackSendBtn" onclick="sendFeedback()">שליחה ←</button>
+      <p class="feedback-box__thanks" id="feedbackThanks">תודה! קיבלנו את המשוב
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;vertical-align:middle;display:inline-block;margin-right:4px;">
+          <path d="M12 21C12 21 3 15.5 3 9C3 6.23858 5.23858 4 8 4C9.65685 4 11.1068 4.7835 12 6C12.8932 4.7835 14.3431 4 16 4C18.7614 4 21 6.23858 21 9C21 15.5 12 21 12 21Z" fill="#e85d7a" stroke="#e85d7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button type="button" class="pb-float-btn" id="pbOpenBtn" aria-label="פתח מילון הונגרי" title="מילון הונגרי">
+  <span class="pb-float-btn__icon" aria-hidden="true">&#x1F5E3;&#xFE0F;</span>
+</button>
+
+
+<div class="pb-drawer-overlay" id="pbOverlay"></div>
+
+
+<div class="pb-drawer" id="pbDrawer" role="dialog" aria-label="מילון שימושי להונגרית">
+  <div class="pb-drawer-head">
+    <h3>🗣️ מילון הונגרי</h3>
+    <button type="button" class="pb-drawer-close" id="pbCloseBtn" aria-label="סגור מילון">✕</button>
+  </div>
+
+  <div class="pb-drawer-cats">
+    <button class="pb-dcat active" onclick="pbFilter('all',this)">הכל</button>
+    <button class="pb-dcat" onclick="pbFilter('basic',this)">בסיסי</button>
+    <button class="pb-dcat" onclick="pbFilter('food',this)">אוכל</button>
+    <button class="pb-dcat" onclick="pbFilter('nav',this)">כיוונים</button>
+    <button class="pb-dcat" onclick="pbFilter('numbers',this)">מספרים</button>
+    <button class="pb-dcat" onclick="pbFilter('emergency',this)">חירום</button>
+  </div>
+
+  <div class="pb-drawer-body">
+
+    <div class="pb-section-label" data-cat="basic">בסיסי</div>
+    <div class="pb-item" data-cat="basic"><div class="pb-item-he-col"><span class="pb-item-he">שלום</span><span class="pb-item-pron">סיה / יו נאפוט</span></div><div class="pb-item-sk">Szia / Jó napot</div></div>
+    <div class="pb-item" data-cat="basic"><div class="pb-item-he-col"><span class="pb-item-he">תודה</span><span class="pb-item-pron">קֶסֶנֶם</span></div><div class="pb-item-sk">Köszönöm</div></div>
+    <div class="pb-item" data-cat="basic"><div class="pb-item-he-col"><span class="pb-item-he">בבקשה / סליחה</span><span class="pb-item-pron">קרֶם / אלנֶזשט</span></div><div class="pb-item-sk">Kérem / Elnézést</div></div>
+    <div class="pb-item" data-cat="basic"><div class="pb-item-he-col"><span class="pb-item-he">כן / לא</span><span class="pb-item-pron">איגֶן / נֶם</span></div><div class="pb-item-sk">Igen / Nem</div></div>
+    <div class="pb-item" data-cat="basic"><div class="pb-item-he-col"><span class="pb-item-he">כמה זה עולה?</span><span class="pb-item-pron">מֶניבֶ קֶרֶל?</span></div><div class="pb-item-sk">Mennyibe kerül?</div></div>
+    <div class="pb-item" data-cat="basic"><div class="pb-item-he-col"><span class="pb-item-he">לא מבין</span><span class="pb-item-pron">נֶם אֶרטֶם</span></div><div class="pb-item-sk">Nem értem</div></div>
+
+    <div class="pb-section-label" data-cat="food">אוכל</div>
+    <div class="pb-item" data-cat="food"><div class="pb-item-he-col"><span class="pb-item-he">חשבון בבקשה</span><span class="pb-item-pron">סאמלאט קֶרֶק</span></div><div class="pb-item-sk">Számlát kérek</div></div>
+    <div class="pb-item" data-cat="food"><div class="pb-item-he-col"><span class="pb-item-he">טעים!</span><span class="pb-item-pron">פינום!</span></div><div class="pb-item-sk">Finom!</div></div>
+    <div class="pb-item" data-cat="food"><div class="pb-item-he-col"><span class="pb-item-he">מים</span><span class="pb-item-pron">ויז</span></div><div class="pb-item-sk">Víz</div></div>
+    <div class="pb-item" data-cat="food"><div class="pb-item-he-col"><span class="pb-item-he">ילדים</span><span class="pb-item-pron">דיֶרֶקֶק</span></div><div class="pb-item-sk">Gyerekek</div></div>
+
+    <div class="pb-section-label" data-cat="nav">כיוונים</div>
+    <div class="pb-item" data-cat="nav"><div class="pb-item-he-col"><span class="pb-item-he">איפה...?</span><span class="pb-item-pron">הול ון?</span></div><div class="pb-item-sk">Hol van...?</div></div>
+    <div class="pb-item" data-cat="nav"><div class="pb-item-he-col"><span class="pb-item-he">ימין / שמאל</span><span class="pb-item-pron">יובּרה / בּולרה</span></div><div class="pb-item-sk">Jobbra / Balra</div></div>
+    <div class="pb-item" data-cat="nav"><div class="pb-item-he-col"><span class="pb-item-he">שירותים</span><span class="pb-item-pron">וה-צה / מוֹשׁדוֹ</span></div><div class="pb-item-sk">WC / Mosdó</div></div>
+    <div class="pb-item" data-cat="nav"><div class="pb-item-he-col"><span class="pb-item-he">כניסה / יציאה</span><span class="pb-item-pron">בֶּיארט / קייארט</span></div><div class="pb-item-sk">Bejárat / Kijárat</div></div>
+
+    <div class="pb-section-label" data-cat="numbers">מספרים</div>
+    <div class="pb-item" data-cat="numbers"><div class="pb-item-he-col"><span class="pb-item-he">1 - 5</span><span class="pb-item-pron">אֶד, קֶטֶה, הארום, נֶד, אֶט</span></div><div class="pb-item-sk">Egy, Kettő, Három, Négy, Öt</div></div>
+    <div class="pb-item" data-cat="numbers"><div class="pb-item-he-col"><span class="pb-item-he">6 - 10</span><span class="pb-item-pron">הט, הֶט, ניולץ, קילֶנץ, טיז</span></div><div class="pb-item-sk">Hat, Hét, Nyolc, Kilenc, Tíz</div></div>
+
+    <div class="pb-section-label" data-cat="emergency">חירום</div>
+    <div class="pb-item" data-cat="emergency"><div class="pb-item-he-col"><span class="pb-item-he">עזרה!</span><span class="pb-item-pron">שֶׁגיטשֶׁג!</span></div><div class="pb-item-sk">Segítség!</div></div>
+    <div class="pb-item" data-cat="emergency"><div class="pb-item-he-col"><span class="pb-item-he">צריך רופא</span><span class="pb-item-pron">אורווֹשרה ון סוּקשֶׁגֶם</span></div><div class="pb-item-sk">Orvosra van szükségem</div></div>
+
+    <div class="pb-emergency-note" data-cat="emergency">
+      <strong>מספרי חירום בהונגריה:</strong><br>
+      🚑 104 &nbsp;·&nbsp; 🚔 107 &nbsp;·&nbsp; 🆘 112
+    </div>
+
+  </div>
+</div>
+
+
+
+<div id="gyg-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:3000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;border-radius:20px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;position:relative;padding:28px 24px 24px;">
+    <button onclick="closeGygModal()" style="position:absolute;top:14px;left:16px;font-size:22px;cursor:pointer;color:#aaa;background:none;border:none;line-height:1;font-family:sans-serif;">✕</button>
+    <div style="font-family:'Secular One',sans-serif;font-size:18px;color:#1A6B72;margin-bottom:16px;text-align:right;">האי מרגיט 🌿 - פעילויות</div>
+    <div data-gyg-href="https://widget.getyourguide.com/default/activities.frame" data-gyg-locale-code="en-US" data-gyg-widget="activities" data-gyg-number-of-items="3" data-gyg-partner-id="GL1NS3P" data-gyg-tour-ids=""><span>Powered by <a target="_blank" rel="sponsored" href="https://www.getyourguide.com/">GetYourGuide</a></span></div>
+  </div>
+</div>
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+  <div class="gtk-drawer" id="gtkDrawerRoot" hidden><div class="gtk-drawer__backdrop" id="gtkDrawerBackdrop" aria-hidden="true"></div><div class="gtk-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="gtkDrawerTitle" id="gtkDrawerDialog"><div class="gtk-drawer__head"><h2 class="gtk-drawer__title" id="gtkDrawerTitle">טוב לדעת</h2><button type="button" class="gtk-drawer__close" id="gtkDrawerClose" aria-label="סגור">×</button></div><div class="gtk-drawer__body" id="gtkDrawerBody"><p class="gtk-drawer__lead" id="gtkDrawerLead">טוען…</p><ul class="gtk-drawer__list" id="gtkDrawerList" role="list" aria-live="polite"></ul><button type="button" class="gtk-drawer__more-toggle" id="gtkDrawerMoreBtn" hidden aria-expanded="false">הצג עוד טיפים</button><p class="gtk-drawer__error" id="gtkDrawerError" hidden></p></div><div class="gtk-drawer__foot"><a href="tips.html" class="gtk-drawer__cta" id="gtkDrawerCta">לדף הטיפים המלא</a></div></div></div>
+  
+
+
+
+
+
+<button class="stoc-fab" id="stocFab" aria-label="תוכן עניינים" aria-expanded="false" aria-controls="stocSheet">📖<span class="stoc-fab__badge" id="stocFabBadge">1</span></button>
+
+<div class="stoc-sheet" id="stocSheet" role="dialog" aria-modal="true" aria-labelledby="stocSheetTitle">
+  <div class="stoc-sheet__backdrop" id="stocSheetBackdrop"></div>
+  <div class="stoc-sheet__panel">
+    <div class="stoc-sheet__handle"></div>
+    <div class="stoc-sheet__header">
+      <span class="stoc-sheet__title" id="stocSheetTitle">📖 תוכן עניינים</span>
+      <button class="stoc-sheet__close" id="stocSheetClose" aria-label="סגור">✕</button>
+    </div>
+    <ol class="stoc-sheet__list">
+      <li><a class="stoc-sheet__link" href="#intro" data-stoc-m="intro"><span class="stoc-sheet__num">1</span>למה בודפשט עם ילדים?</a></li>
+      <li><a class="stoc-sheet__link" href="#climate-bu" data-stoc-m="climate-bu"><span class="stoc-sheet__num">2</span>אקלים ועונה מומלצת</a></li>
+      <li><a class="stoc-sheet__link" href="#budapest-beyond" data-stoc-m="budapest-beyond"><span class="stoc-sheet__num">3</span>מעבר לבודפשט</a></li>
+      <li><a class="stoc-sheet__link" href="#route-map" data-stoc-m="route-map"><span class="stoc-sheet__num">4</span>המסלול על המפה</a></li>
+      <li><a class="stoc-sheet__link" href="#itinerary" data-stoc-m="itinerary"><span class="stoc-sheet__num">5</span>מסלול יום-יום מומלץ</a></li>
+      <li><a class="stoc-sheet__link" href="#attractions" data-stoc-m="attractions"><span class="stoc-sheet__num">6</span>אטרקציות מומלצות</a></li>
+      <li><a class="stoc-sheet__link" href="#theme-parks-budapest" data-stoc-m="theme-parks-budapest"><span class="stoc-sheet__num">7</span>פארקי שעשועים</a></li>
+      <li><a class="stoc-sheet__link" href="#accommodation" data-stoc-m="accommodation"><span class="stoc-sheet__num">8</span>לינה (+ שדה התעופה)</a></li>
+      <li><a class="stoc-sheet__link" href="#tips" data-stoc-m="tips"><span class="stoc-sheet__num">9</span>טיפים חשובים</a></li>
+    </ol>
+  </div>
+</div>

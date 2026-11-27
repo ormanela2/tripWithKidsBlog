@@ -146,4 +146,28 @@ const guides = defineCollection({
     }),
 });
 
-export const collections = { guides };
+/**
+ * Guides carried over as they are (W6): the page body, styles and scripts live in src/guide-html/<slug>/,
+ * written by scripts/migrate-guide-html.mjs. Only the facts the shared layout needs are here.
+ */
+const htmlGuides = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/html-guides" }),
+  schema: ({ image }) =>
+    z.object({
+      title: text,
+      seoTitle: text.optional(),
+      description: text.max(200),
+      name: text.optional(),
+      country: z.string().regex(/^[A-Z]{2}$/).optional(),
+      hub: z.string().optional(),
+      /** Share image (1200x630 crop); the site default when missing. */
+      shareImage: image().optional(),
+      /** Load Microsoft Clarity, as the live page does. */
+      clarity: z.boolean().default(false),
+      /** Load the Stay22 "Let me allez" script, as the live page does. */
+      stay22: z.boolean().default(false),
+      draft: z.boolean().default(false),
+    }),
+});
+
+export const collections = { guides, htmlGuides };

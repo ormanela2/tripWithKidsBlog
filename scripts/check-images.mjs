@@ -9,7 +9,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, extname, relative } from "node:path";
 
 const DIST = "dist";
-const MAX_KB = 300; // per image file; the share image (og-image.png, 193 KB) fits
+const MAX_KB = 350; // per image file: room for a detailed full-screen gallery photo; catches 1-2 MB originals
 const IMAGE_EXT = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif", ".svg"]);
 
 function walk(dir) {
@@ -28,7 +28,10 @@ for (const file of files.filter(f => f.endsWith(".html"))) {
     const where = `${relative(DIST, file)}: ${tag.slice(0, 90)}…`;
     // A bare `alt` (decorative image) equals alt="".
     if (!/\salt(=|\s|\/?>)/.test(tag)) problems.push(`missing alt    ${where}`);
-    if (!/\swidth=/.test(tag) || !/\sheight=/.test(tag)) problems.push(`missing size   ${where}`);
+    // Size rule applies to our own images (third-party icons and empty script-filled slots are skipped).
+    const src = tag.match(/\ssrc="([^"]*)"/)?.[1] ?? "";
+    const ours = src.startsWith("/") && !src.startsWith("//");
+    if (ours && (!/\swidth=/.test(tag) || !/\sheight=/.test(tag))) problems.push(`missing size   ${where}`);
   }
 }
 

@@ -1,0 +1,1285 @@
+<section class="article-hero article-hero--destination article-hero--mapglass article-hero--austria-toolbar">
+  <div class="article-hero__bg" aria-hidden="true">
+    <picture>
+      <img src="austria-hero-gemini.png" alt="" width="1200" height="675" loading="eager" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.style.display='none'">
+    </picture>
+  </div>
+  <div class="container">
+    <div class="article-hero__inner">
+      <div class="article-hero__glass">
+      <nav class="article-hero__breadcrumb" aria-label="breadcrumb">
+        <a href="services.html">מתי טסים</a>
+        <span>›</span>
+        <a href="destinations.html">יעדים</a>
+        <span>›</span>
+        <span>אוסטריה</span>
+      </nav>
+      <div class="article-hero__flag-row">
+        <span class="article-hero__flag"><span class="flag-icon flag-at flag-icon-hero" aria-hidden="true"></span></span>
+        
+        <div class="at-weather" id="atWeatherRoot" data-wear-note="">
+          <div class="at-weather__today" id="atWeatherTodayWrap">
+            <button type="button" class="at-weather__icon-btn" id="atWeatherTodayIconBtn" aria-label="תחזית וטיפ לבוש · פתיחת פרטים">
+              <span class="at-weather__icon" id="atWeatherTodayIcon" aria-hidden="true">…</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <h1 class="article-hero__title">טיול לאוסטריה עם ילדים</h1>
+      <p class="article-hero__subtitle">פסגת הדאכשטיין עם ה-Skywalk שממנה רואים את כל האלפים, מכרה המלח של ברכטסגאדן שהילדים גולשים בו בשקיות, פארק המים של וואגריין עם מגלשות אינסופיות, טירה עם מופע נשרים בלייב, מקומות שממש לקוחים מגלויות - ווינה שמחכה לכם בסוף עם שטרודל אפל ומוזיאונים שילדים אוהבים. אוסטריה היא יעד שמפתיע בכל פינה.</p>
+      </div>
+      <div class="article-hero__actions">
+        <div class="at-hero-toolbar">
+          <div class="at-hero-toolcard">
+            <p class="at-hero-toolcard__eyebrow">במדריך הזה</p>
+            <div class="at-hero-toolcard__actions" role="toolbar" aria-label="עזרים מהירים במדריך אוסטריה">
+              <a href="#austria-drive-bonus" class="article-hero__badge article-hero__badge--cta at-hero-toolcard__primary"><span class="at-hero-toolcard__primary-label">משחקי דרך לאוסטריה</span><span class="at-hero-toolcard__primary-sub">חינם להורדה</span></a>
+              <button type="button" class="gtk-trigger at-hero-toolcard__secondary" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog">
+                <span class="gtk-trigger__icon" aria-hidden="true">🧭</span>
+                <span class="gtk-trigger__label">
+                  <span class="gtk-trigger__title">טוב לדעת לפני הטיול</span>
+                  <span class="gtk-trigger__sub">טיפים ממוקדים ליעד הזה</span>
+                </span>
+              </button>
+            </div>
+            <div class="at-hero-toolcard__partner" role="region" aria-label="הטבת שותף">
+              <div class="at-hero-toolcard__partner-inner">
+                <span class="at-hero-toolcard__partner-kicker">שותף</span>
+                <a href="car-rental-partners.html" class="hero-partner-badge at-hero-toolcard__partner-link" onclick="plausible('PartnerCarRental-Click', {props: {partner: 'barkro', code: 'MATAY6', source: 'austria-hero-text'}})">
+                  השכרת רכב BARKRO
+                  <span class="hero-partner-code">MATAY6 −6%</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="at-weather-drawer" id="atWeatherDrawer" aria-hidden="true">
+  <div class="at-weather-drawer__backdrop" id="atWeatherDrawerBackdrop" aria-hidden="true"></div>
+  <aside class="at-weather-drawer__sheet" role="dialog" aria-modal="true" aria-labelledby="atWeatherDrawerTitle" tabindex="-1" dir="rtl">
+    <div class="at-weather-drawer__header">
+      <button type="button" class="at-weather-drawer__close" id="atWeatherDrawerClose" aria-label="סגור">✕</button>
+      <div class="at-weather-drawer__head-text">
+        <h2 id="atWeatherDrawerTitle" class="at-weather-drawer__title">תחזית ולבוש</h2>
+        <p class="at-weather-drawer__lead">סיכום יומי, טיפים מה להביא.</p>
+      </div>
+    </div>
+    <div class="at-weather-drawer__scroll">
+      <div id="atWeatherDrawerForecast" class="at-weather-drawer__forecast"></div>
+      <div class="at-weather__wear at-weather__wear--drawer" id="atWeatherWearWrap" aria-live="polite">
+        <div class="at-weather__wear-head">
+          <span class="at-weather__wear-icon" aria-hidden="true">🧥</span>
+          מה לקחת לארבעת הימים הקרובים?
+        </div>
+        <ul class="at-weather__wear-list" id="atWeatherWearList"></ul>
+      </div>
+      <p class="at-weather__fine at-weather__fine--drawer" id="atWeatherFine">מודל חיזוי ציבורי · סיכוי גשם יומי מקסימלי אינו אומר שיווצר גשם בפועל · לכיסוי כל האזור בדקו גם זלצבורג לפני יציאה</p>
+    </div>
+  </aside>
+</div>
+
+
+<section class="article-body">
+  <div class="container">
+    <div class="article-layout">
+
+      
+      <main class="article-content">
+
+        
+        <div class="toc">
+          <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
+          <div class="toc__list">
+            <a href="#intro" class="toc__link"><span class="toc__num">1</span> למה אוסטריה עם ילדים?</a>
+            <a href="#route-map" class="toc__link"><span class="toc__num">2</span> המסלול על המפה</a>
+            <a href="#itinerary" class="toc__link"><span class="toc__num">3</span> מסלול יום-יום מומלץ</a>
+            <a href="#salzburg-attractions" class="toc__link"><span class="toc__num">4</span> אטרקציות באזור זלצבורג</a>
+            <a href="#theme-parks-austria" class="toc__link"><span class="toc__num">5</span> פארקי שעשועים באוסטריה</a>
+            <a href="#vienna-attractions" class="toc__link"><span class="toc__num">6</span> מה לעשות עם ילדים בווינה</a>
+            <a href="#accommodation" class="toc__link"><span class="toc__num">7</span> המלצות לינה</a>
+            <a href="#airport-stay" class="toc__link"><span class="toc__num">8</span> המלצת לינה ליד שדה התעופה</a>
+            <a href="#tips" class="toc__link"><span class="toc__num">9</span> טיפים חשובים</a>
+          </div>
+        </div>
+
+        
+        <div class="article-section" id="intro">
+          <h2 class="article-section__title"><span class="article-section__title-icon">💡</span> למה אוסטריה עם ילדים?</h2>
+          <p>אוסטריה הייתה בשבילנו הפתעה ענקית. אנחנו ידענו שיהיה יפה - אבל לא ידענו כמה הילדים יתאהבו ביעד הזה. השילוב בין הרים מדהימים, אטרקציות ייחודיות ואנשים ידידותיים עבד בצורה מושלמת.</p>
+          <p><strong>אזור זלצבורגר לנד</strong> הוא הלב של הטיול. בסיס מעולה בעיירה Altenmarkt-Wagrain מאפשר להגיע בקלות לכל האטרקציות.</p>
+          <p><strong>Festung Hohenwerfen</strong> - טירת וורפן היא אחת הטירות הדרמטיות ביותר שראינו, ממש על קרן סלע מעל העמק. מופע הנשרים הלייב בשעה 11:15 הוא חובה - הנשרים טסים מעל הראשים של הקהל בצורה מרהיבה. הילדים לא יכלו להפסיק לדבר על זה.</p>
+          <p><strong>Salzbergwerk Berchtesgaden</strong> (מכרה מלח) - אחת החוויות הכי ייחודיות של הטיול. לובשים חליפה אפורה וגולשים על מגלשות עץ לתוך המכרה. ילדים פשוט מתים על זה, ומבוגרים גם כן.</p>
+          <p><strong>פארק המים Wagrainis Grafenberg</strong> - ראינו צילום ולא האמנו עד שהגענו. פארק מים תלוי על ההר עם נוף לכל העמק. הילדים לא הסכימו לצאת. מגיעים עד 9:30 בבוקר כדי לתפוס מקומות טובים.</p>
+          <p id="intro-view-start"><strong>ווינה</strong> ממתינה בסוף הטיול - עיר מלכותית עם מופע שטרודל בשונברון, פארק פארטר, מוזיאון הטבע והמדע, ו-LEOPARK שהילדים נוגעים בחיות. סיום מושלם לטיול.</p>
+
+          <aside id="austria-drive-bonus" style="scroll-margin-top:calc(var(--nav-height) + 16px);margin-top:22px;padding:20px 22px;background:linear-gradient(145deg,#fbfefd 0%,#eef8f5 48%,#fff9f0 100%);border:1px solid #b8dfd8;border-radius:18px;box-shadow:0 8px 28px rgba(26,107,114,0.12),0 1px 0 rgba(255,255,255,0.9) inset;">
+            <div style="display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:10px;">
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;color:#0f766e;background:rgba(20,184,166,0.12);border:1px solid rgba(20,184,166,0.35);padding:5px 11px;border-radius:999px;">🎁 בונוס למשפחות</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:#9a3412;background:rgba(251,146,60,0.15);border:1px solid rgba(234,88,12,0.28);padding:5px 11px;border-radius:999px;">בלי מסכים בנסיעה</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:#155c63;background:rgba(255,255,255,0.85);border:1px dashed rgba(21,92,99,0.35);padding:5px 11px;border-radius:999px;">חינם · מוכן תוך דקה</span>
+            </div>
+            <h3 style="font-family:var(--font-heading);font-size:clamp(19px,2.6vw,24px);color:#0d3d42;margin:0 0 8px;line-height:1.2;">משחקי דרך לאוסטריה - כיף שמלווה אתכם עד ליעד</h3>
+            <p style="margin:0 0 12px;font-size:15px;line-height:1.6;color:#374151;font-weight:500;">רוצים שהנסיעה תרגיש קצרה יותר והילדים (וגם המבוגרים) יישארו מעורבים? שילוב קלאסי של <strong>בינגו להדפסה לחלון הרכב</strong> ו<strong>טריוויה חכמה בעברית</strong> - עם עובדות קצרות אחרי כל שאלה.</p>
+            <ul style="margin:0 0 16px;padding:12px 14px 12px 0;list-style:none;border-inline-start:3px solid var(--amber);background:rgba(255,251,235,0.65);border-radius:0 12px 12px 0;line-height:1.55;">
+              <li style="margin-bottom:8px;padding-inline-start:8px;font-size:14px;color:#3d5456;"><strong style="color:#134f55;">בינגו PDF:</strong> לחלק כרטיסים - כל הנוסעים מחפשים מהחלון מה מופיע על הלוח.</li>
+              <li style="margin:0;padding-inline-start:8px;font-size:14px;color:#3d5456;"><strong style="color:#134f55;">טריוויה באתר:</strong> מסלול לילדים או להורים, ניקוד, רמזים לנסיעה ועובדות קצרות אחרי כל תשובה.</li>
+            </ul>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:stretch;">
+              <a href="MatayTasim-Austria-Bingo.pdf" download="MatayTasim-Austria-Bingo.pdf" target="_blank" rel="noopener noreferrer" onclick="if(window.plausible){plausible('Austria-Bingo-PDF-Download',{props:{page:'austria',source:'austria-drive-bonus',file:'MatayTasim-Austria-Bingo.pdf'}});}" style="flex:1 1 200px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(180deg,#fbbf24 0%,var(--amber) 100%);color:#1c1917;font-weight:800;font-size:14px;padding:14px 22px;border-radius:999px;text-decoration:none;box-shadow:0 6px 20px rgba(232,160,69,0.45);border:1px solid rgba(180,83,9,0.25);">📄 הורידו בינגו (PDF)</a>
+              <a href="austria_trivia_game.html" onclick="if(window.plausible){plausible('Austria-Trivia-Game-Click',{props:{page:'austria',source:'austria-drive-bonus',target:'austria_trivia_game'}});}" style="flex:1 1 200px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(180deg,#1a6b72 0%,var(--teal) 100%);color:#fff;font-weight:800;font-size:14px;padding:14px 22px;border-radius:999px;text-decoration:none;box-shadow:0 6px 22px rgba(26,107,114,0.38);border:1px solid rgba(15,77,82,0.35);">🧠 טריוויה אינטראקטיבית - שחקו עכשיו</a>
+            </div>
+            <p style="margin:12px 0 0;font-size:12.5px;line-height:1.45;color:#64748b;text-align:center;">מומלץ להוריד את ה-PDF לפני יציאה לדרך · הקובץ נשמר בשם <strong style="color:#475569;">MatayTasim-Austria-Bingo.pdf</strong></p>
+          </aside>
+        </div>
+
+        
+        <aside style="margin:8px 0 20px;background:#fff;border:1px solid #d7e7e9;border-radius:16px;padding:14px 16px;box-shadow:0 4px 14px rgba(17,72,78,0.08);">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div style="min-width:0;">
+              <div style="display:inline-flex;align-items:center;gap:6px;background:#eef7f8;color:#155c63;border:1px solid #d2e7e9;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:600;margin-bottom:7px;">בשיתוף BARKRO</div>
+              <div style="font-family:var(--font-heading);font-size:clamp(18px,2.2vw,24px);line-height:1.2;margin:0 0 4px;color:#155c63;">השכרת רכב BARKRO - קוד MATAY6 (6%)</div>
+              <p style="margin:0;font-size:13.5px;line-height:1.5;color:#4b5563;">בצ'ק-אאוט מזינים את הקוד ומקבלים 6% הנחה.</p>
+            </div>
+            <a href="car-rental-partners.html" target="_blank" rel="noopener" onclick="plausible('PartnerCarRental-Click', {props: {partner: 'barkro', code: 'MATAY6', source: 'austria-map-promo'}})" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:8px 14px;border-radius:10px;background:#f8fbfb;color:#155c63;border:1px solid #d2e7e9;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;">לפרטי ההטבה <span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+
+        
+        <div class="article-section" id="route-map">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🗺️</span> המסלול על המפה</h2>
+          <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בשורה מתחת למפה כדי לקפוץ ליום המתאים במסלול המלא ולעדכן את המפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
+          <div id="trip-map" style="isolation:isolate;"></div>
+          <div id="map-day-pills"></div>
+        </div>
+
+        
+        <div class="article-section" id="itinerary">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🗓️</span> המסלול המלא</h2>
+          <div class="timeline">
+
+            
+            <div class="tl-item tl-item--flight" id="tl1" data-tl-layout="odd">
+              <div class="tl-item__label">יום 1<br><span style="font-size:11px;color:#ccc;">16.08 שישי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">✈️</div>
+                <span class="tl-item__day-label">יום 1</span>
+              </div>
+              <div class="tl-item__card tl-card open">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">טיסה לווינה + הגעה לזלצבורגר לנד</div>
+                    <div class="tl-card__where">📍 תל אביב → ווינה → Hornergut, Altenmarkt</div>
+                  </div>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl1" aria-label="המפה המלאה - יום 1" title="המפה המלאה - יום 1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--arrival">יום הגעה</span></div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">15:20</span>
+                    <div>
+                      <div class="tl-activity__name">המראה מתל אביב ✈️</div>
+                      <div class="tl-activity__desc">טיסה TLV - Vienna. נחיתה בשעה 18:05. זמן טיסה כ-3:45 שעות.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">18:30</span>
+                    <div>
+                      <div class="tl-activity__name">קבלת רכבים 🚗</div>
+                      <div class="tl-activity__desc">קבלת שני רכבים מהאוטו בשדה התעופה של ווינה. נסיעה של כ-3.5 שעות לאזור זלצבורגר לנד. מומלץ להזמין אוכל מראש לדרך.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">לילה</span>
+                    <div>
+                      <div class="tl-activity__name">הגעה לאלטנמרקט 🏡</div>
+                      <div class="tl-activity__desc">הגעה לבית הנופש Hornergut in Altenmarkt - בית פרטי יפהפה עם גינה, נוף להרים ואווירה אוסטרית אמיתית.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt - בית נופש משפחתי באמצע הטבע.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl1')"><span>פרטי היום</span><span class="tl-card__chevron">▲</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--mountain" id="tl2" data-tl-layout="even">
+              <div class="tl-item__label">יום 2<br><span style="font-size:11px;color:#ccc;">17.08 שבת</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🐾</div>
+                <span class="tl-item__day-label">יום 2</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">Der Wild Berg - פארק חיות הבר</div>
+                    <div class="tl-card__where">
+                      <span>📍 Wild Berg, Mauterndorf</span>
+                    </div>
+                  </div>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl2" aria-label="המפה המלאה - יום 2" title="המפה המלאה - יום 2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--highlight">❤️ ממליצים</span></div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Der Wild Berg 🦌</div>
+                      <div class="tl-activity__desc">פארק חיות בר מרהיב שבו הולכים בין האיילים, החזירי הבר בטבע החופשי. חיות לא בכלובים - ממש בטבע. חוויה לגמרי שונה מגן חיות רגיל.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">ארוחה בהר 🏔️</div>
+                      <div class="tl-activity__desc">יש מסעדה בתוך הפארק עם נוף נפלא להרים. אוכל ביתי אוסטרי - שניצל וספגטי.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl2')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--mountain" id="tl3" data-tl-layout="odd">
+              <div class="tl-item__label">יום 3<br><span style="font-size:11px;color:#ccc;">18.08 ראשון</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🏔️</div>
+                <span class="tl-item__day-label">יום 3</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">פסגת דאכשטיין - Skywalk + ארמון הקרח</div>
+                    <div class="tl-card__where">📍 Dachstein, Ramsau</div>
+                  </div>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl3" aria-label="המפה המלאה - יום 3" title="המפה המלאה - יום 3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--best">⭐ חובה</span></div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Skywalk Dachstein 🌅</div>
+                      <div class="tl-activity__desc">גשר זכוכית תלוי בחלל שממנו נשקפים כל האלפים האוסטריים. אחד הדברים הכי מרהיבים שראינו בחיים. לקחת מעיל - קר שם גם בקיץ.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Skyline Walk + "המדרגות לשום מקום" 🪜</div>
+                      <div class="tl-activity__desc">מסלול הליכה על שפת ההר עם גשרים ומצפורים, והאטרקציה המיוחדת - מדרגות שיורדות ישר אל האוויר מעל העמק. פוטוגני ואחד הדברים הכי ייחודיים.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">ארמון הקרח 🧊</div>
+                      <div class="tl-activity__desc">מערת קרח ענקית בתוך הגלאצ'ר עם פסלים עשויי קרח ותאורה מרהיבה. כ-10 מעלות בפנים - להביא לבוש חם.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">מגלשת ההרים של רמסאו ⛷️</div>
+                      <div class="tl-activity__desc">בדרך חזרה - מגלשת הרים קצרה ומהנה בכפר רמסאו. מושלמת לאחרי יום ארוך בפסגה.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>חשוב:</strong> להזמין כרטיסים מראש לדאכשטיין - ובמיוחד לארמון הקרח שמתמלא מהר.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl3')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--castle" id="tl4" data-tl-layout="even">
+              <div class="tl-item__label">יום 4<br><span style="font-size:11px;color:#ccc;">19.08 שני</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🦅</div>
+                <span class="tl-item__day-label">יום 4</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">טירת וורפן + נקיק ליכטנשטיין</div>
+                    <div class="tl-card__where">📍 Festung Hohenwerfen + Liechtensteinklamm</div>
+                  </div>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl4" aria-label="המפה המלאה - יום 4" title="המפה המלאה - יום 4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--castle">🏰 טירה</span></div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">11:15</span>
+                    <div>
+                      <div class="tl-activity__name">מופע הנשרים בטירת וורפן 🦅</div>
+                      <div class="tl-activity__desc">טירה מרשימה על קרן סלע. מופע הנשרים הלייב - נשרים, עיטים ובזים טסים מעל הקהל. יש מופע גם ב-15:15. להגיע מוקדם לתפוס מקום.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">Liechtensteinklamm - נקיק מרהיב 🏞️</div>
+                      <div class="tl-activity__desc">נקיק סלעים מרהיב עם שבילים ומשולבות. כ-30 דקות נסיעה מהטירה. מרשים במיוחד. ניתן לשלב גם עם Lammerklam.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>טיפ:</strong> כרטיסי הטירה כוללים גם את מופע הנשרים - לא לשלם פעמיים.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl4')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--mine" id="tl5" data-tl-layout="odd">
+              <div class="tl-item__label">יום 5<br><span style="font-size:11px;color:#ccc;">20.08 שלישי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">⛏️</div>
+                <span class="tl-item__day-label">יום 5</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">מכרה מלח + מפל גולינגר + Lucky Flitzer</div>
+                    <div class="tl-card__where">📍 ברכטסגאדן (DE) · גולינג · פלכאו</div>
+                  </div>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl5" aria-label="המפה המלאה - יום 5" title="המפה המלאה - יום 5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--highlight">❤️ הכי ייחודי</span></div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Salzbergwerk Berchtesgaden ⛏️</div>
+                      <div class="tl-activity__desc">לובשים חליפה אפורה של כורים וגולשים על מגלשות עץ לתוך המכרה. רכבת מיניאטורית, אגמי מלח ותאורה מיוחדת. חוויה לכל הגילאים - ילדים שוב ושוב מבקשים לגלוש שוב. כתובת: Parkplatz Salzburger Straße 24 (Gästeeinfahrt), Bergwerkstraße 83, 83471 Berchtesgaden, Germany.</div>
+                    </div>
+                  </div>
+                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כ-30 דקות נסיעה ממכרה המלח למפל גולינגר (מסלול רגיל במפות).</div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">Gollinger Wasserfall 💧</div>
+                      <div class="tl-activity__desc">מפל מרהיב עם מסלול הליכה קצר. Wasserfallstraße 23, 5440 Golling an der Salzach, Austria.</div>
+                    </div>
+                  </div>
+                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כ-45 דקות נסיעה מהמפל ל-Rodelbahn Lucky Flitzer בפלאכאו (מסלול רגיל במפות).</div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">Rodelbahn Lucky Flitzer 🎢</div>
+                      <div class="tl-activity__desc">מגלשת הרים ופעילות לסיום היום. Unterberggasse 172, 5542 Flachau, Austria.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>חשוב:</strong> מכרה ברכטסגאדן נמצא בגרמניה - לא לשכוח דרכונים. להזמין מראש!</div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl5')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--waterpark" id="tl6" data-tl-layout="even">
+              <div class="tl-item__label">יום 6<br><span style="font-size:11px;color:#ccc;">21.08 רביעי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🌊</div>
+                <span class="tl-item__day-label">יום 6</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">פארק המים Wagrainis Grafenberg</div>
+                    <div class="tl-card__where">📍 Wagrain-Kleinarl</div>
+                  </div>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl6" aria-label="המפה המלאה - יום 6" title="המפה המלאה - יום 6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--best">⭐ חובה</span></div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">09:30</span>
+                    <div>
+                      <div class="tl-activity__name">Kraftwerk Grafenberg – פארק המים 💦</div>
+                      <div class="tl-activity__desc">פארק המים על ההר (Wagrainis). Grafenbergweg 14, 5602 Wagrain. להגיע עד 9:30 בבוקר לתפוס מקום. הילדים לא הסכימו לצאת.</div>
+                    </div>
+                  </div>
+                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כ-15 דקות נסיעה מ-Kraftwerk Grafenberg ל-Soccerpark באזור וואגריין-קליינארל.</div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">Soccerpark Wagrain-Kleinarl ⚽</div>
+                      <div class="tl-activity__desc">כדורגל גולף. Moadörfl 65, 5602 Schwaighof, Austria.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>מסעדות:</strong> Berggasthof Sattelbauer, Paularei, ו-Restaurant Tauernblick - כולן עם נוף הרים מדהים.</div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl6')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--adventure" id="tl7" data-tl-layout="odd">
+              <div class="tl-item__label">יום 7<br><span style="font-size:11px;color:#ccc;">22.08 חמישי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🛷</div>
+                <span class="tl-item__day-label">יום 7</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">Karkogel אבנטאו + Vorderer Gosausee</div>
+                    <div class="tl-card__where">📍 Abtenau · אגם גוסאו הקדמי</div>
+                  </div>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl7" aria-label="המפה המלאה - יום 7" title="המפה המלאה - יום 7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">Karkogel | Abtenauer Bergbahnen 🛷</div>
+                      <div class="tl-activity__desc">מגלשות ורכבלים באזור אבנטאו. Au 99, 5441 Abtenau.</div>
+                    </div>
+                  </div>
+                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כ-40 דקות נסיעה מאבנטאו ל-Vorderer Gosausee בגוסאו (מסלול רגיל במפות).</div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">Vorderer Gosausee 🚤</div>
+                      <div class="tl-activity__desc">האגם הקדמי של גוסאו, רכס דאכשטיין ברקע. Vorderer Gosausee, 4825 Gosau.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>לינה:</strong> Hornergut in Altenmarkt.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl7')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--vienna" id="tl8" data-tl-layout="even">
+              <div class="tl-item__label">יום 8<br><span style="font-size:11px;color:#ccc;">23.08 שישי</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🏙️</div>
+                <span class="tl-item__day-label">יום 8</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">נסיעה לווינה - LEOPARK + מפל</div>
+                    <div class="tl-card__where">📍 מפל Salza · LEOPARK · ARCOTEL Wimberger, Wien</div>
+                  </div>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl8" aria-label="המפה המלאה - יום 8" title="המפה המלאה - יום 8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star" style="background:rgba(136,14,79,0.12);color:#880e4f;">ווינה</span></div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">מפל מים קטן בדרך 💧</div>
+                      <div class="tl-activity__desc">Salza-Wasserfall Parking – עצירה בדרך. Salzaweg, 8954, Austria.</div>
+                    </div>
+                  </div>
+                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כשעה נסיעה ממפל Salza ל-LEOPARK בסנט מיכאל (מסלול רגיל במפות).</div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">LEOPARK GmbH 🐾</div>
+                      <div class="tl-activity__desc">פארק חיות עם מגע בבעלי חיים. Eisenbichl 13, 8770 St. Michael in Obersteiermark.</div>
+                    </div>
+                  </div>
+                  <div class="tl-drive">
+                    <span class="tl-drive__ic" aria-hidden="true">&#128663;</span>
+                    <div class="tl-drive__text">כ-2 שעות ו-15 דקות נסיעה מ-LEOPARK למרכז וינה (ARCOTEL) - תלוי מסלול ועומס.</div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">ערב</span>
+                    <div>
+                      <div class="tl-activity__name">הגעה לווינה + טיול ראשון 🌆</div>
+                      <div class="tl-activity__desc">לינת לילה ב-ARCOTEL Wimberger Wien – Neubaugürtel 34–36, 1070 Wien. טיול קצר ברובע.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>לינה:</strong> ARCOTEL Wimberger Wien · Neubaugürtel 34–36, Wien - לילה ראשון בווינה; אותו מלון גם ביום 9.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl8')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--vienna" id="tl9" data-tl-layout="odd">
+              <div class="tl-item__label">יום 9<br><span style="font-size:11px;color:#ccc;">24.08 שבת</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">🎂</div>
+                <span class="tl-item__day-label">יום 9</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">מופע שטרודל · Prater · מוזיאון הטבע · Time Travel</div>
+                    <div class="tl-card__where">📍 ווינה</div>
+                  </div>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl9" aria-label="המפה המלאה - יום 9" title="המפה המלאה - יום 9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a></div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-tip" style="margin-top:0;margin-bottom:14px;background:rgba(26,107,114,0.08);border-right-color:var(--teal);"><strong>ניידות:</strong> ביום הזה אפשר להסתדר בהליכה ובתחבורה ציבורית בין האטרקציות - לא חייבים רכב בין שונברון, הפראטר, המוזיאון ו-Time Travel.</div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">מופע השטרודל של וינה</div>
+                      <div class="tl-activity__desc">Gerstner K. u. K. Hofzuckerbäcker Show בארמון שונברון - הדגמת שטרודל. Schloss Schönbrunn, Schönbrunner Schloßstraße 47, 1130 Wien. להזמין מראש.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">צהריים</span>
+                    <div>
+                      <div class="tl-activity__name">Prater + Riesenrad 🎡</div>
+                      <div class="tl-activity__desc">Prater ו-Riesenrad. 1020 Vienna.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">אחה"צ</span>
+                    <div>
+                      <div class="tl-activity__name">Museum of Natural History Vienna 🔬</div>
+                      <div class="tl-activity__desc">מוזיאון הטבע של וינה. Burgring 7, 1010 Wien.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">ערב</span>
+                    <div>
+                      <div class="tl-activity__name">Time Travel Vienna ⏰</div>
+                      <div class="tl-activity__desc">חוויה אינטראקטיבית על וינה. Habsburgergasse 10A, 1010 Wien.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>לינה:</strong> ARCOTEL Wimberger Wien - המשך הלילה השני בווינה (אותו מלון).</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl9')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+            
+            <div class="tl-item tl-item--flight" id="tl10" data-tl-layout="even">
+              <div class="tl-item__label">יום 10<br><span style="font-size:11px;color:#ccc;">25.08 ראשון</span></div>
+              <div class="tl-item__node">
+                <div class="tl-item__icon">✈️</div>
+                <span class="tl-item__day-label">יום 10</span>
+              </div>
+              <div class="tl-item__card tl-card">
+                <div class="tl-card__band"></div>
+                <div class="tl-card__header">
+                  <div>
+                    <div class="tl-card__title">טיסה חזרה לתל אביב</div>
+                    <div class="tl-card__where">📍 Vienna International Airport → נתב"ג</div>
+                  </div>
+                  <div class="tl-card__header-actions"><a href="#route-map" class="tl-card__map-link" data-day="tl10" aria-label="המפה המלאה - יום 10" title="המפה המלאה - יום 10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></a><span class="tl-card__star tl-card__star--arrival">יום חזרה</span></div>
+                </div>
+                <div class="tl-card__body">
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">בוקר</span>
+                    <div>
+                      <div class="tl-activity__name">בוקר חופשי בווינה ☕</div>
+                      <div class="tl-activity__desc">ארוחת בוקר בבית קפה וינאי, קצת קניות בנמל התעופה, ריכוז זיכרונות מהטיול.</div>
+                    </div>
+                  </div>
+                  <div class="tl-activity">
+                    <span class="tl-activity__time">10:00</span>
+                    <div>
+                      <div class="tl-activity__name">טיסה Vienna - TLV ✈️</div>
+                      <div class="tl-activity__desc">המראה בחזרה לישראל. נחיתה בשעות אחר הצהריים בנתב"ג.</div>
+                    </div>
+                  </div>
+                  <div class="tl-tip"><strong>המלצה אחרונה:</strong> לקנות שוקולד Mozartkugeln מנמל התעופה - מזכרת אוסטרית קלאסית.</div>
+                </div>
+                <button class="tl-card__toggle" onclick="toggleTl('tl10')"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        
+        <div class="article-section" id="salzburg-attractions">
+          <div class="cta-card cta-card--timeline-mobile" aria-label="תכנון מסלול אישי">
+            <div class="cta-card__title">רוצים מסלול מותאם? 🇦🇹</div>
+            <div class="cta-card__text">אבנה לכם מסלול מלא לאוסטריה – יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.</div>
+            <a href="questionnaire_form.html" class="cta-card__btn">מלאו שאלון קצר ←</a>
+            <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לאוסטריה עם ילדים" target="_blank" rel="noopener noreferrer" class="cta-card__wa">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              שלחו הודעה
+            </a>
+          </div>
+          <h2 class="article-section__title"><span class="article-section__title-icon">🏔️</span> אטרקציות באזור זלצבורגר לנד</h2>
+          <div class="attractions-grid">
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">טבע</span>
+                <div class="attraction-card__name">Skywalk Dachstein</div>
+                <div class="attraction-card__desc">גשר הזכוכית הנפלא. נוף של 360 מעלות על האלפים האוסטריים. אחד הדברים הכי מרהיבים בארץ.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJlxzaQXYxcUcRv3c8jodyHq0" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Dachstein_Skywalk%2C_Austria_%281%29.jpg/320px-Dachstein_Skywalk%2C_Austria_%281%29.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">מערות</span>
+                <div class="attraction-card__name">ארמון הקרח - Dachstein</div>
+                <div class="attraction-card__desc">מערת קרח ענקית עם פסלי קרח ותאורה קסומה. להביא מעיל!</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJBaG0wSsycUcRCwG6Vrx_sYU" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Eish%C3%B6hle_Dachstein_01.jpg/320px-Eish%C3%B6hle_Dachstein_01.jpg" alt="" width="320" height="240" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">טירה</span>
+                <div class="attraction-card__name">Festung Hohenwerfen</div>
+                <div class="attraction-card__desc">טירת וורפן עם מופע נשרים בלייב. נשרים טסים ישר מעל הראש. חובה!</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJCymTk7PEdkcRk2e9_wpDY8k" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Burg_Hohenwerfen_S%C3%BCdansicht_02.jpg/320px-Burg_Hohenwerfen_S%C3%BCdansicht_02.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">חוויה</span>
+                <div class="attraction-card__name">מכרה מלח Berchtesgaden</div>
+                <div class="attraction-card__desc">גלישה על מגלשות עץ לתוך המכרה בחליפת כורים. חוויה ייחודית ומרתקת.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJ0WP8i6LsdkcRgCrR9D8Gzys" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Salzbergwerk_Berchtesgaden_Eingang.jpg/320px-Salzbergwerk_Berchtesgaden_Eingang.jpg" alt="" width="320" height="240" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">פארק מים</span>
+                <div class="attraction-card__name">Wagrainis Grafenberg</div>
+                <div class="attraction-card__desc">פארק מים על ההר עם נוף לעמק. מגלשות מים, בריכות וכדורגל גולף.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJ2aPuIW_WdkcRufHYEzFMr24" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Pongau_Wagrain_Luftbild.jpg/320px-Pongau_Wagrain_Luftbild.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">טבע</span>
+                <div class="attraction-card__name">אגם גוסאו</div>
+                <div class="attraction-card__desc">אגם צלול עם נוף לגלאצ'ר. שיט שקט ורגוע - אחת הנקודות הכי יפות.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJoZE_V1LLdkcR4M2vAchh8ZY" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Gosausee_mit_Dachstein.jpg/320px-Gosausee_mit_Dachstein.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">חיות בר</span>
+                <div class="attraction-card__name">Der Wild Berg</div>
+                <div class="attraction-card__desc">פארק חיות בר שבו הולכים בין האיילים ועיזי הסלע בטבע חופשי.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJZ0RJqBYlcUcR6Tw7RZq3Wys" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Red_deer_%28Cervus_elaphus%29_stag.jpg/320px-Red_deer_%28Cervus_elaphus%29_stag.jpg" alt="" width="320" height="213" loading="lazy" decoding="async">
+              </div>
+            </div>
+            <div class="attraction-card">
+              <div class="attraction-card__body">
+                <span class="attraction-card__badge">הרפתקאות</span>
+                <div class="attraction-card__name">מגלשות ההרים</div>
+                <div class="attraction-card__desc">מגלשת הרים באבנטאו ו-Lucky Flitzer - שעות של כיף לכל הגילאים.</div>
+              </div>
+              <div class="attraction-card__thumb-wrap" aria-hidden="true">
+                <img class="attraction-card__thumb" data-google-place-id="ChIJPR17J93IdkcRMyFaHISYmtU" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Sommerrodelbahn-Mauterndorf-1.jpg/320px-Sommerrodelbahn-Mauterndorf-1.jpg" alt="" width="320" height="240" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </div>
+          <p class="attractions-grid__attrib">תמונות ממוזערות: נטענות מ-Google Places כשהמפתח והדפדפן מאפשרים (אחרת נשארת תמונת גיבוי מ-Wikimedia). שימוש בתמונות Places בהתאם לתנאי Google.</p>
+        </div>
+
+        <div class="article-section austria-tp-embed" id="theme-parks-austria">
+          <h2 class="article-section__title">
+            <span class="austria-tp-embed__title-main"><span class="article-section__title-icon">🎢</span> פארקי שעשועים באוסטריה</span>
+            <a class="austria-tp-embed__cta" href="theme-parks.html" aria-label="פתיחת מדריך פארקי אירופה המלא" onclick="if(window.plausible){plausible('ThemeParks-CTA-Click',{props:{source:'austria-embed-title',country:'AT',target:'theme-parks'}});}">מדריך פארקי אירופה המלא</a>
+          </h2>
+          <p class="austria-tp-embed__intro">מפה אינטראקטיבית של הפארקים המומלצים באוסטריה למשפחות - קלאסיים, אלפיניים ופארקי מים. אפשר להתקרב, ללחוץ על כל סימון ולקבל במהירות שעות, דירוגים ותובנות לפני שבוחרים מה לשלב במסלול.</p>
+          <div class="austria-tp-embed__frame">
+            <iframe src="theme-parks.html?cc=AT&embed=map" title="פארקי שעשועים באוסטריה - מפה אינטראקטיבית" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+
+        
+        <div class="article-section" id="vienna-attractions">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🏛️</span> מה לעשות עם ילדים בווינה</h2>
+          <div class="vienna-attractions-layout">
+            <div class="vienna-grid__group">
+              <h3 class="vienna-grid__group-title">חובה לראות</h3>
+              <div class="vienna-grid__cells">
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🏰</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">ארמון שונברון</div>
+                    <p class="tip-item__desc">ארמון המלוכה האוסטרי. גנים מהממים וחדרים היסטוריים מרשימים.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🎡</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">Prater + Riesenrad</div>
+                    <p class="tip-item__desc">הגלגל הפנורמי ההיסטורי מ-1897. פארק ענק עם אטרקציות לכל גיל.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🥐</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">מופע השטרודל של וינה</div>
+                    <p class="tip-item__desc">הדגמת הכנת שטרודל מסורתי עם טעימה. הזמינו מראש - מתמלא מהר מאוד.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🔬</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">מוזיאון הטבע והמדע</div>
+                    <p class="tip-item__desc">אחד הגדולים באירופה. דינוזאורים, אבנים חן, אנושות קדומה. ילדים מתחרטים שיצאו.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="vienna-grid__group">
+              <h3 class="vienna-grid__group-title">פארקים ופעילות</h3>
+              <div class="vienna-grid__cells">
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🦁</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">LEOPARK GmbH</div>
+                    <p class="tip-item__desc">פארק חיות שנוגעים בבעלי חיים. מרוחק כשעה מווינה אבל שווה את הנסיעה.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">⛵</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">האי הדנובה (Donauinsel)</div>
+                    <p class="tip-item__desc">פארק מים ענק, חופים חוליים ואפשרות להשכרת סירות פדלים - מושלם לפריקת אנרגיה בקיץ.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="vienna-grid__group">
+              <h3 class="vienna-grid__group-title">מוזיאונים ולמידה</h3>
+              <div class="vienna-grid__cells">
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">⏰</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">מעלית הזמן (Zeittunnel)</div>
+                    <p class="tip-item__desc">מוזיאון אינטראקטיבי על ווינה ההיסטורית. חוויה מיוחדת לכל הגילאים.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🌀</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">מוזיאון האשליות (Museum of Illusions)</div>
+                    <p class="tip-item__desc">חדרים שהופכים את הילדים לענקים, מנהרות אורות ומשחקי מוח מרתקים. חוויה אינטראקטיבית ומהנה במרכז העיר.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🦋</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">בית הפרפרים (Schmetterlinghaus)</div>
+                    <p class="tip-item__desc">חממה טרופית קסומה עם מאות פרפרים צבעוניים שעפים מסביבכם בחופשיות.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">👑</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">מוזיאון הילדים בארמון שנברון</div>
+                    <p class="tip-item__desc">הילדים יכולים להתחפש לנסיכים ונסיכות וללמוד על חיי המלוכה בצורה חווייתית.</p>
+                  </div>
+                </div>
+                <div class="tip-item">
+                  <span class="tip-item__icon" aria-hidden="true">🎨</span>
+                  <div class="tip-item__body">
+                    <div class="tip-item__title">מוזיאון הזום (ZOOM Kindermuseum)</div>
+                    <p class="tip-item__desc">אחד ממוזיאוני הילדים הטובים באירופה עם סדנאות אמנות, יצירת סרטים ומתחמי משחק.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:16px;padding:18px 24px;margin-bottom:52px;display:none;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="font-size:22px;">🔍</div>
+            <div>
+              <div style="font-family:var(--font-heading);font-size:15px;color:var(--charcoal);margin-bottom:2px;">רוצים לגלות עוד מקומות באוסטריה?</div>
+              <div style="font-size:13px;color:#888;">חפשו מסעדות, אטרקציות ומקומות מוסתרים לפי מיקום - מבוסס AI</div>
+            </div>
+          </div>
+          <a href="tips.html#tab-recommend" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:20px;padding:9px 20px;font-family:var(--font-body);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'">
+            חפש מקומות ←
+          </a>
+        </div>
+
+        <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:16px;padding:18px 24px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:36px;height:36px;flex-shrink:0;"><img src="https://www.google.com/s2/favicons?domain=ticketmaster.com&sz=64" alt="Ticketmaster" style="width:36px;height:36px;object-fit:contain;" onerror="this.style.display='none'"></div>
+            <div>
+              <div style="font-family:var(--font-heading);font-size:15px;color:var(--charcoal);margin-bottom:2px;">אירועים באוסטריה - Ticketmaster</div>
+              <div style="font-size:13px;color:#888;">קונצרטים, הצגות ואירועי ספורט - חפשו מה קורה באוסטריה בתאריכי הטיול שלכם</div>
+            </div>
+          </div>
+          <a href="https://ticketmaster.tpk.mx/ChfkNmIH" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:20px;padding:9px 20px;font-family:var(--font-body);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">
+            חפש אירועים ←
+          </a>
+        </div>
+
+        
+        <div class="article-section" id="accommodation">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🏨</span> המלצות לינה</h2>
+          <p style="color:#555;margin-bottom:20px;">אוסטריה מציעה מגוון רחב של אפשרויות לינה - מבתי נופש משפחתיים בטבע ועד מלונות מרכזיים בווינה.</p>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px;">
+
+            
+            <div style="border-radius:12px;border:2px solid var(--sand-dark);overflow:hidden;background:white;">
+              <div onclick="toggleHotelMap('map-hornergut','chevron-hornergut')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='white'">
+                <div style="display:flex;flex-direction:column;gap:4px;pointer-events:none;">
+                  <div style="font-weight:700;font-size:14px;">🏡 Hornergut in Altenmarkt</div>
+                  <div style="font-size:12px;color:#888;">📍 Altenmarkt-Wagrain, אוסטריה</div>
+                  <div style="font-size:12px;color:#666;margin-top:2px;">אם אתם מחפשים מלון על ההר עם אווירה כפרית, פינות ליטוף עם מספר חיות, עצי תפוחים מסביב אז זה המקום</div>
+                </div>
+                <span id="chevron-hornergut" style="font-size:18px;color:var(--teal);transition:transform 0.3s;pointer-events:none;transform:rotate(180deg)">▾</span>
+              </div>
+              <div id="map-hornergut" style="max-height:400px;overflow:hidden;transition:max-height 0.4s ease;">
+                <iframe width="100%" height="400" src="https://stay22.com/embed/69c172fd51844e7588aa2afd" frameborder="0" style="display:block;" loading="lazy"></iframe>
+              </div>
+            </div>
+
+            
+            <div style="border-radius:12px;border:2px solid var(--sand-dark);overflow:hidden;background:white;">
+              <div onclick="toggleHotelMap('map-arcotel','chevron-arcotel')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='white'">
+                <div style="display:flex;flex-direction:column;gap:4px;pointer-events:none;">
+                  <div style="font-weight:700;font-size:14px;">🏙️ ARCOTEL Wimberger Wien</div>
+                  <div style="font-size:12px;color:#888;">📍 Neubaugürtel 34–36, 1070 Wien</div>
+                  <div style="font-size:12px;color:#666;margin-top:2px;">מיקום מרכזי בוינה, קרוב לבתי קפה ומסעדות</div>
+                </div>
+                <span id="chevron-arcotel" style="font-size:18px;color:var(--teal);transition:transform 0.3s;pointer-events:none;transform:rotate(180deg)">▾</span>
+              </div>
+              <div id="map-arcotel" style="max-height:400px;overflow:hidden;transition:max-height 0.4s ease;">
+                <iframe width="100%" height="400" src="https://stay22.com/embed/69c1738fe3b92594135cc38d" frameborder="0" style="display:block;" loading="lazy"></iframe>
+              </div>
+            </div>
+
+            
+            <div style="border-radius:12px;border:2px solid var(--sand-dark);overflow:hidden;background:white;">
+              <div onclick="toggleHotelMap('map-matteo','chevron-matteo')" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='white'">
+                <div style="display:flex;flex-direction:column;gap:4px;pointer-events:none;">
+                  <div style="font-weight:700;font-size:14px;">🏨 Hotel Matteo</div>
+                  <div style="font-size:12px;color:#888;">📍 Flachau, אוסטריה</div>
+                  <div style="font-size:12px;color:#666;margin-top:2px;">מלון מרכזי בעיירה פלכאו, מסעדה במלון עצמו וקרובה לאטרקציות מסביב - מלון ברמה אחרת!</div>
+                </div>
+                <span id="chevron-matteo" style="font-size:18px;color:var(--teal);transition:transform 0.3s;pointer-events:none;transform:rotate(180deg)">▾</span>
+              </div>
+              <div id="map-matteo" style="max-height:428px;overflow:hidden;transition:max-height 0.4s ease;">
+                <iframe width="100%" height="428" src="https://stay22.com/embed/69d2873431f29079785add0d" frameborder="0" style="display:block;" loading="lazy"></iframe>
+              </div>
+            </div>
+
+          </div>
+          
+        </div>
+
+        <div class="article-section" id="airport-stay">
+          <h2 class="article-section__title"><span class="article-section__title-icon">🛬</span> המלצת לינה ליד שדה התעופה</h2>
+          <p>כשיש טיסה מוקדמת או נחיתה מאוחרת באזור וינה, לינה ליד שדה התעופה VIE יכולה להפוך את תחילת/סיום הטיול לנוחים הרבה יותר.</p>
+          <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:14px;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;">
+            <span style="font-size:14px;color:#4b5563;">ריכזנו את ההמלצות לעמוד מלונות ליד שדות תעופה (קטע אוסטריה):</span>
+            <a href="airport-hotels.html#airport-vie" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:999px;padding:9px 14px;font-size:13px;font-weight:600;text-decoration:none;">למלונות ליד VIE ←</a>
+          </div>
+        </div>
+
+        
+        <div class="article-section" id="tips">
+          <div class="climate-toggle" id="tipsAtToggle" onclick="toggleTipsAt()" role="button" tabindex="0" aria-expanded="false" aria-controls="tipsAtBody" onkeydown="if(event.key==='Enter'||event.key===' ')toggleTipsAt()">
+            <h2 class="article-section__title" style="margin:0;pointer-events:none;">
+              <svg class="article-section__title-icon-svg" xmlns="http://www.w3.org/2000/svg" width="1.15em" height="1.15em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.88 1.35-2.6A6.98 6.98 0 0 0 18 8a7 7 0 1 0-12 0c0 1.24.33 2.44.96 3.41.69.72 1.17 1.62 1.35 2.6"/></svg>
+              טיפים חשובים לטיול
+            </h2>
+            <span class="climate-toggle__chevron" aria-hidden="true">▾</span>
+          </div>
+          <div id="tipsAtBody" style="max-height:0;overflow:hidden;transition:max-height 0.42s ease;">
+          <div class="tips-pro-wrap">
+            <section class="tips-pro-group" aria-labelledby="tips-cat-logistics">
+              <h3 class="tips-pro-group__title" id="tips-cat-logistics">לוגיסטיקה ונסיעות</h3>
+              <p class="tips-pro-group__sub">רכב, גבולות ומסמכים, מטבע ולינה בסיס</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3.3A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">השכרת רכבים</span>
+                    <p class="tip-pro__text">הכרחי - ולמשפחה גדולה מומלץ שני רכבים. משדה התעופה ישר לאלטנמרקט נסיעה של כ-3.5 שעות.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">מכרה ברכטסגאדן</span>
+                    <p class="tip-pro__text">נמצא בגרמניה. לא לשכוח דרכונים. להזמין כרטיסים מראש - זה מתמלא מהר!</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-5.5A3.5 3.5 0 0 0 7 11.5 3.5 3.5 0 0 0 10.5 15H16"/><path d="M7 12h9.5"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">מטבע</span>
+                    <p class="tip-pro__text">אוסטריה משתמשת ביורו. כרטיסי אשראי מתקבלים בכל מקום. כספומטים נפוצים.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">לינה</span>
+                    <p class="tip-pro__text">Hornergut in Altenmarkt - בית פרטי עם גינה. מרגיש כמו בית שני. מומלץ מאוד לשבוע הראשון.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tips-pro-group" aria-labelledby="tips-cat-packing">
+              <h3 class="tips-pro-group__title" id="tips-cat-packing">הכנה ואריזה</h3>
+              <p class="tips-pro-group__sub">מה לקחת בתיק ומה לסגור לפני שיוצאים</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">לבוש</span>
+                    <p class="tip-pro__text">גם באוגוסט - להביא מעיל לפסגות. ארמון הקרח ~5 מעלות, Skywalk קר וסוחף. ילדים מתקפאים מהר.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">הזמנות מראש</span>
+                    <p class="tip-pro__text">דאכשטיין, ארמון הקרח, מכרה מלח - לכולם מומלץ להזמין לפחות שבוע מראש בקיץ.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="tips-pro-group" aria-labelledby="tips-cat-onsite">
+              <h3 class="tips-pro-group__title" id="tips-cat-onsite">בזמן הביקור</h3>
+              <p class="tips-pro-group__sub">טיימינג וחווייה ביום הביקור עצמו</p>
+              <div class="tips-pro-grid">
+                <div class="tip-pro tip-pro--warm" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">פארק המים Wagrainis</span>
+                    <p class="tip-pro__text">להגיע עד 9:30 בבוקר - אחרי זה מלא ומחכים בתור. מהאחד הכי שווה בטיול.</p>
+                  </div>
+                </div>
+                <div class="tip-pro tip-pro--cool" dir="ltr">
+                  <div class="tip-pro__icon-wrap" aria-hidden="true">
+                    <svg class="tip-pro__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
+                  </div>
+                  <div class="tip-pro__body" dir="rtl">
+                    <span class="tip-pro__subject">מופע הנשרים בטירת וורפן</span>
+                    <p class="tip-pro__text">מופע ב-11:15 וב-15:15. כדאי לתכנן את היום סביב אחד מהם. ספטקולרי!</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <div style="background:var(--sand);border:2px solid var(--sand-dark);border-radius:16px;padding:18px 24px;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="font-size:22px;line-height:1;flex-shrink:0;" aria-hidden="true">🧭</div>
+              <div>
+                <div style="font-family:var(--font-heading);font-size:15px;color:var(--charcoal);margin-bottom:2px;">טיפים וכלים לתכנון חכם</div>
+                <div style="font-size:13px;color:#888;">מרכז הידע שלנו לתכנון חופשה: תקציב, מזג אוויר, רשימות אריזה, תקשורת בחו"ל וכל מה שצריך כדי לסגור טיול במקום אחד.</div>
+              </div>
+            </div>
+            <a href="tips.html?utm_source=austria_guide&utm_medium=article&utm_campaign=internal_tips_cta&utm_content=tips_section_card" style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;border-radius:20px;padding:9px 20px;font-family:var(--font-body);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 2px 8px rgba(26,107,114,0.3);" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(26,107,114,0.45)';this.style.background='var(--teal-dark)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 2px 8px rgba(26,107,114,0.3)';this.style.background='var(--teal)'" ontouchstart="this.style.transform='scale(1.08)';this.style.background='var(--teal-dark)'" ontouchend="this.style.transform='scale(1)';this.style.background='var(--teal)'">
+              לכל מה שצריך לדעת לפני שטסים ←
+            </a>
+          </div>
+          </div>
+        </div>
+
+      </main>
+
+      
+      <aside class="sidebar">
+        <nav class="stoc" id="stoc" aria-label="תוכן עניינים">
+          <div class="stoc__header">📖 תוכן עניינים</div>
+          <ol class="stoc__list">
+            <li><a class="stoc__link" href="#intro" data-stoc="intro"><span class="stoc__num">1</span><span>למה אוסטריה?</span></a></li>
+            <li><a class="stoc__link" href="#route-map" data-stoc="route-map"><span class="stoc__num">2</span><span>המסלול על המפה</span></a></li>
+            <li><a class="stoc__link" href="#itinerary" data-stoc="itinerary"><span class="stoc__num">3</span><span>מסלול יום-יום</span></a></li>
+            <li><a class="stoc__link" href="#salzburg-attractions" data-stoc="salzburg-attractions"><span class="stoc__num">4</span><span>זלצבורג - אטרקציות</span></a></li>
+            <li><a class="stoc__link" href="#theme-parks-austria" data-stoc="theme-parks-austria"><span class="stoc__num">5</span><span>פארקי שעשועים</span></a></li>
+            <li><a class="stoc__link" href="#vienna-attractions" data-stoc="vienna-attractions"><span class="stoc__num">6</span><span>וינה - אטרקציות</span></a></li>
+            <li><a class="stoc__link" href="#accommodation" data-stoc="accommodation"><span class="stoc__num">7</span><span>לינה (+ שדה התעופה)</span></a></li>
+            <li><a class="stoc__link" href="#tips" data-stoc="tips"><span class="stoc__num">8</span><span>טיפים חשובים</span></a></li>
+          </ol>
+        </nav>
+        <div class="cta-card">
+          <div class="cta-card__title">מתכננים טיול לאוסטריה? 🇦🇹</div>
+          <div class="cta-card__text">אעזור לכם לבנות מסלול מותאם אישית עם כל הפרטים - לינה, אטרקציות וטיפים מניסיון אמיתי.</div>
+          <a href="questionnaire_form.html" class="cta-card__btn">מלאו שאלון קצר ←</a>
+          <a href="https://wa.me/972546758145?text=אני מתעניין בטיול לאוסטריה עם ילדים" target="_blank" class="cta-card__wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            וואטסאפ
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="feedback-section">
+  <div class="feedback-widget" id="feedbackWidget">
+    <div class="feedback-widget__header">
+      <span class="feedback-widget__icon">🗺️</span>
+      <p class="feedback-widget__question">מצאתם מה שחיפשתם?</p>
+      <p class="feedback-widget__sub">הפידבק שלכם עוזר לנו לשפר את המדריך</p>
+    </div>
+    <div class="feedback-widget__btns" id="feedbackBtns">
+      <button class="feedback-widget__btn feedback-widget__btn--yes" onclick="openFeedbackBox('yes')">
+        <svg class="feedback-widget__btn-svg" viewBox="0 0 24 24" fill="none"><path d="M7 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V12C3 11.4696 3.21071 10.9609 3.58579 10.5858C3.96086 10.2107 4.46957 10 5 10H7M7 22L13 22C13.9071 21.9999 14.7822 21.665 15.4607 21.0583C16.1392 20.4515 16.5721 19.6134 16.674 18.712L17.374 12.712C17.4303 12.2017 17.3779 11.6851 17.2206 11.1971C17.0633 10.7091 16.8048 10.2613 16.4626 9.88372C16.1204 9.50611 15.7026 9.20764 15.2373 9.00812C14.772 8.8086 14.2699 8.71287 13.764 8.728L11 8.728V5C11 4.46957 10.7893 3.96086 10.4142 3.58579C10.0391 3.21071 9.53043 3 9 3C8.73478 3 8.48043 3.10536 8.29289 3.29289C8.10536 3.48043 8 3.73478 8 4V8.728L7 10M7 22V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>כן, בהחלט!</span>
+      </button>
+      <button class="feedback-widget__btn feedback-widget__btn--no" onclick="openFeedbackBox('no')">
+        <svg class="feedback-widget__btn-svg" viewBox="0 0 24 24" fill="none"><path d="M17 2H19C19.5304 2 20.0391 2.21071 20.4142 2.58579C20.7893 2.96086 21 3.46957 21 4V12C21 12.5304 20.7893 13.0391 20.4142 13.4142C20.0391 13.7893 19.5304 14 19 14H17M17 2L11 2C10.0929 2.00012 9.21776 2.33499 8.53927 2.94174C7.86078 3.54848 7.42788 4.38663 7.326 5.288L6.626 11.288C6.56975 11.7983 6.62212 12.3149 6.77944 12.8029C6.93675 13.2909 7.19524 13.7387 7.53741 14.1163C7.87958 14.4939 8.29738 14.7924 8.76268 14.9919C9.22798 15.1913 9.73013 15.2871 10.236 15.272L13 15.272V19C13 19.5304 13.2107 20.0391 13.5858 20.4142C13.9609 20.7893 14.4696 21 15 21C15.2652 21 15.5196 20.8946 15.7071 20.7071C15.8946 20.5196 16 20.2652 16 20V15.272L17 14M17 2V14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>לא ממש</span>
+      </button>
+    </div>
+    <div class="feedback-box" id="feedbackBox">
+      <p class="feedback-box__title" id="feedbackBoxTitle"></p>
+      <textarea class="feedback-box__textarea" id="feedbackText" placeholder="כתבו לנו כאן..." rows="3"></textarea>
+      <button class="feedback-box__send" id="feedbackSendBtn" onclick="sendFeedback()">שליחה ←</button>
+      <p class="feedback-box__thanks" id="feedbackThanks">תודה! קיבלנו את המשוב <svg viewBox="0 0 24 24" fill="none" style="width:20px;height:20px;vertical-align:middle;display:inline-block;margin-right:4px;"><path d="M12 21C12 21 3 15.5 3 9C3 6.23858 5.23858 4 8 4C9.65685 4 11.1068 4.7835 12 6C12.8932 4.7835 14.3431 4 16 4C18.7614 4 21 6.23858 21 9C21 15.5 12 21 12 21Z" fill="#e85d7a" stroke="#e85d7a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<div id="placeSheet" class="place-sheet" aria-hidden="true">
+  <div class="place-sheet__backdrop" data-place-sheet-close></div>
+  <div class="place-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="placeSheetTitle" dir="rtl">
+    <button type="button" class="place-sheet__close" data-place-sheet-close aria-label="סגור">×</button>
+    <div class="place-sheet__grab" aria-hidden="true"></div>
+    <div class="place-sheet__photo-wrap">
+      <img id="placeSheetPhoto" alt="" class="place-sheet__photo" width="1200" height="750" hidden decoding="async" fetchpriority="high">
+    </div>
+    <div class="place-sheet__scroll">
+      <div id="placeSheetPills" class="place-sheet__pills" hidden></div>
+      <h3 id="placeSheetTitle" class="place-sheet__title"></h3>
+      <p id="placeSheetSummary" class="place-sheet__summary" hidden></p>
+      <p id="placeSheetAddress" class="place-sheet__meta-row" hidden>
+        <span class="place-sheet__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-7-9.5a7 7 0 1114 0c0 5.15-7 9.5-7 9.5z"/><circle cx="12" cy="11.5" r="2.5"/></svg></span>
+        <span id="placeSheetAddressText" class="place-sheet__meta-text"></span>
+      </p>
+      <p id="placeSheetRating" class="place-sheet__meta-row" hidden>
+        <span class="place-sheet__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+        <span id="placeSheetRatingText" class="place-sheet__meta-text"></span>
+      </p>
+      <p id="placeSheetHours" class="place-sheet__meta-row" hidden>
+        <span class="place-sheet__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <span id="placeSheetHoursText" class="place-sheet__meta-text"></span>
+      </p>
+      <div class="place-sheet__actions">
+        <a id="placeSheetMapsLink" class="place-sheet__btn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>פתיחה ב-Google Maps</a>
+        <a id="placeSheetPhone" class="place-sheet__btn place-sheet__btn--secondary" href="#" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.86.3 1.7.54 2.5a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.58-1.11a2 2 0 012.11-.45c.8.24 1.64.42 2.5.54A2 2 0 0122 16.92z"/></svg><span id="placeSheetPhoneLabel"></span></a>
+        <a id="placeSheetWeb" class="place-sheet__btn place-sheet__btn--secondary" href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>אתר רשמי</a>
+      </div>
+      <p class="place-sheet__attr">נתוני מקום מסופקים על ידי Google · <a href="https://policies.google.com/terms" target="_blank" rel="noopener">תנאים</a></p>
+    </div>
+  </div>
+</div>
+
+
+<div class="daymap-overlay" id="daymapOverlay" onclick="closeDayMap2(event)">
+  <div class="daymap-modal" role="dialog" aria-label="מפה אינטראקטיבית יום 2">
+    <div class="daymap-modal__head">
+      <div>
+        <div class="daymap-modal__title">🐾 יום 2 · Der Wild Berg</div>
+        <div class="daymap-modal__subtitle">17.08 שבת · Mauterndorf, אוסטריה</div>
+      </div>
+      <button class="daymap-modal__close" onclick="closeDayMap2()" aria-label="סגור מפה">✕</button>
+    </div>
+    <div class="daymap-modal__mapbox">
+      <div id="daymap-leaflet"></div>
+    </div>
+    <div class="daymap-modal__footer">
+      <span class="daymap-chip">🏨 Hornergut, Altenmarkt</span>
+      <span class="daymap-chip">🦌 Der Wild Berg, Mauterndorf</span>
+      <span class="daymap-chip">⏱️ ~1 שעה 34 דק׳ נסיעה</span>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button type="button" class="pb-float-btn" id="pbOpenBtn" aria-label="פתח מילון אוסטרי" title="מילון אוסטרי">
+  <span class="pb-float-btn__icon" aria-hidden="true">&#x1F5E3;&#xFE0F;</span>
+</button>
+
+
+<div class="pb-drawer-overlay" id="pbOverlay"></div>
+
+
+<div class="pb-drawer" id="pbDrawer" role="dialog" aria-label="מילון שימושי לאוסטרית">
+  <div class="pb-drawer-head">
+    <h3>🗣️ מילון אוסטרי</h3>
+    <button type="button" class="pb-drawer-close" id="pbCloseBtn" aria-label="סגור מילון">✕</button>
+  </div>
+
+  <div class="pb-drawer-cats">
+    <button class="pb-dcat active" onclick="pbFilter('all',this)">הכל</button>
+    <button class="pb-dcat" onclick="pbFilter('basic',this)">בסיסי</button>
+    <button class="pb-dcat" onclick="pbFilter('food',this)">אוכל</button>
+    <button class="pb-dcat" onclick="pbFilter('nav',this)">כיוונים</button>
+    <button class="pb-dcat" onclick="pbFilter('numbers',this)">מספרים</button>
+    <button class="pb-dcat" onclick="pbFilter('emergency',this)">חירום</button>
+  </div>
+
+  <div class="pb-drawer-body">
+
+    <div class="pb-section-label" data-cat="basic">בסיסי</div>
+    <div class="pb-item" data-cat="basic"><div class="pb-item-he-col"><span class="pb-item-he">שלום</span><span class="pb-item-pron">האלו / גוטן טאג</span></div><div class="pb-item-sk">Hallo / Guten Tag</div></div>
+    <div class="pb-item" data-cat="basic"><div class="pb-item-he-col"><span class="pb-item-he">תודה</span><span class="pb-item-pron">דאנקֶה</span></div><div class="pb-item-sk">Danke</div></div>
+    <div class="pb-item" data-cat="basic"><div class="pb-item-he-col"><span class="pb-item-he">בבקשה / סליחה</span><span class="pb-item-pron">ביטֶה / אֶנטשולדיגונג</span></div><div class="pb-item-sk">Bitte / Entschuldigung</div></div>
+    <div class="pb-item" data-cat="basic"><div class="pb-item-he-col"><span class="pb-item-he">כן / לא</span><span class="pb-item-pron">יה / ניין</span></div><div class="pb-item-sk">Ja / Nein</div></div>
+    <div class="pb-item" data-cat="basic"><div class="pb-item-he-col"><span class="pb-item-he">כמה זה עולה?</span><span class="pb-item-pron">ואס קוסטֶט דאס?</span></div><div class="pb-item-sk">Was kostet das?</div></div>
+    <div class="pb-item" data-cat="basic"><div class="pb-item-he-col"><span class="pb-item-he">לא מבין</span><span class="pb-item-pron">איך פֶרשטֶהֶה ניכט</span></div><div class="pb-item-sk">Ich verstehe nicht</div></div>
+
+    <div class="pb-section-label" data-cat="food">אוכל</div>
+    <div class="pb-item" data-cat="food"><div class="pb-item-he-col"><span class="pb-item-he">חשבון בבקשה</span><span class="pb-item-pron">די רֶכנונג, ביטֶה</span></div><div class="pb-item-sk">Die Rechnung, bitte</div></div>
+    <div class="pb-item" data-cat="food"><div class="pb-item-he-col"><span class="pb-item-he">טעים!</span><span class="pb-item-pron">לֶקֶר!</span></div><div class="pb-item-sk">Lecker!</div></div>
+    <div class="pb-item" data-cat="food"><div class="pb-item-he-col"><span class="pb-item-he">מים</span><span class="pb-item-pron">ואסֶר</span></div><div class="pb-item-sk">Wasser</div></div>
+    <div class="pb-item" data-cat="food"><div class="pb-item-he-col"><span class="pb-item-he">ילדים</span><span class="pb-item-pron">קינדֶר</span></div><div class="pb-item-sk">Kinder</div></div>
+
+    <div class="pb-section-label" data-cat="nav">כיוונים</div>
+    <div class="pb-item" data-cat="nav"><div class="pb-item-he-col"><span class="pb-item-he">איפה...?</span><span class="pb-item-pron">וו איסט?</span></div><div class="pb-item-sk">Wo ist...?</div></div>
+    <div class="pb-item" data-cat="nav"><div class="pb-item-he-col"><span class="pb-item-he">ימין / שמאל</span><span class="pb-item-pron">רֶכטס / לינקס</span></div><div class="pb-item-sk">Rechts / Links</div></div>
+    <div class="pb-item" data-cat="nav"><div class="pb-item-he-col"><span class="pb-item-he">שירותים</span><span class="pb-item-pron">טואלֶטֶה / וה-צה</span></div><div class="pb-item-sk">Toilette / WC</div></div>
+    <div class="pb-item" data-cat="nav"><div class="pb-item-he-col"><span class="pb-item-he">כניסה / יציאה</span><span class="pb-item-pron">איינגאנג / אאוסגאנג</span></div><div class="pb-item-sk">Eingang / Ausgang</div></div>
+
+    <div class="pb-section-label" data-cat="numbers">מספרים</div>
+    <div class="pb-item" data-cat="numbers"><div class="pb-item-he-col"><span class="pb-item-he">1, 2, 3, 4, 5</span><span class="pb-item-pron">איינס, צוויי, דריי, פיר, פינף</span></div><div class="pb-item-sk">Eins, Zwei, Drei, Vier, Fünf</div></div>
+    <div class="pb-item" data-cat="numbers"><div class="pb-item-he-col"><span class="pb-item-he">6, 7, 8, 9, 10</span><span class="pb-item-pron">זֶקס, זיבֶן, אכט, נוין, צֶהן</span></div><div class="pb-item-sk">Sechs, Sieben, Acht, Neun, Zehn</div></div>
+
+    <div class="pb-section-label" data-cat="emergency">חירום</div>
+    <div class="pb-item" data-cat="emergency"><div class="pb-item-he-col"><span class="pb-item-he">עזרה!</span><span class="pb-item-pron">הילפֶה!</span></div><div class="pb-item-sk">Hilfe!</div></div>
+    <div class="pb-item" data-cat="emergency"><div class="pb-item-he-col"><span class="pb-item-he">צריך רופא</span><span class="pb-item-pron">איך בראוכֶה איינֶן ארצט</span></div><div class="pb-item-sk">Ich brauche einen Arzt</div></div>
+
+    <div class="pb-emergency-note" data-cat="emergency">
+      <strong>מספרי חירום:</strong><br>
+      🚑 144 &nbsp;·&nbsp; 🚔 133 &nbsp;·&nbsp; 🆘 112
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+  
+  <div class="gtk-drawer" id="gtkDrawerRoot" hidden>
+    <div class="gtk-drawer__backdrop" id="gtkDrawerBackdrop" aria-hidden="true"></div>
+    <div class="gtk-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="gtkDrawerTitle" id="gtkDrawerDialog">
+      <div class="gtk-drawer__head">
+        <h2 class="gtk-drawer__title" id="gtkDrawerTitle">טוב לדעת</h2>
+        <button type="button" class="gtk-drawer__close" id="gtkDrawerClose" aria-label="סגור">×</button>
+      </div>
+      <div class="gtk-drawer__body" id="gtkDrawerBody">
+        <p class="gtk-drawer__lead" id="gtkDrawerLead">טוען…</p>
+        <ul class="gtk-drawer__list" id="gtkDrawerList" role="list" aria-live="polite"></ul>
+        <button type="button" class="gtk-drawer__more-toggle" id="gtkDrawerMoreBtn" hidden aria-expanded="false">הצג עוד טיפים</button>
+        <p class="gtk-drawer__error" id="gtkDrawerError" hidden></p>
+      </div>
+      <div class="gtk-drawer__foot">
+        <a href="tips.html" class="gtk-drawer__cta" id="gtkDrawerCta">לדף הטיפים המלא</a>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+<button class="stoc-fab" id="stocFab" aria-label="תוכן עניינים" aria-expanded="false" aria-controls="stocSheet">📖<span class="stoc-fab__badge" id="stocFabBadge">1</span></button>
+
+<div class="stoc-sheet" id="stocSheet" role="dialog" aria-modal="true" aria-labelledby="stocSheetTitle">
+  <div class="stoc-sheet__backdrop" id="stocSheetBackdrop"></div>
+  <div class="stoc-sheet__panel">
+    <div class="stoc-sheet__handle"></div>
+    <div class="stoc-sheet__header">
+      <span class="stoc-sheet__title" id="stocSheetTitle">📖 תוכן עניינים</span>
+      <button class="stoc-sheet__close" id="stocSheetClose" aria-label="סגור">✕</button>
+    </div>
+    <ol class="stoc-sheet__list">
+      <li><a class="stoc-sheet__link" href="#intro" data-stoc-m="intro"><span class="stoc-sheet__num">1</span>למה אוסטריה עם ילדים?</a></li>
+      <li><a class="stoc-sheet__link" href="#route-map" data-stoc-m="route-map"><span class="stoc-sheet__num">2</span>המסלול על המפה</a></li>
+      <li><a class="stoc-sheet__link" href="#itinerary" data-stoc-m="itinerary"><span class="stoc-sheet__num">3</span>מסלול יום-יום מומלץ</a></li>
+      <li><a class="stoc-sheet__link" href="#salzburg-attractions" data-stoc-m="salzburg-attractions"><span class="stoc-sheet__num">4</span>זלצבורג - אטרקציות</a></li>
+      <li><a class="stoc-sheet__link" href="#theme-parks-austria" data-stoc-m="theme-parks-austria"><span class="stoc-sheet__num">5</span>פארקי שעשועים</a></li>
+      <li><a class="stoc-sheet__link" href="#vienna-attractions" data-stoc-m="vienna-attractions"><span class="stoc-sheet__num">6</span>וינה - אטרקציות</a></li>
+      <li><a class="stoc-sheet__link" href="#accommodation" data-stoc-m="accommodation"><span class="stoc-sheet__num">7</span>לינה (+ שדה התעופה)</a></li>
+      <li><a class="stoc-sheet__link" href="#tips" data-stoc-m="tips"><span class="stoc-sheet__num">8</span>טיפים חשובים</a></li>
+    </ol>
+  </div>
+</div>

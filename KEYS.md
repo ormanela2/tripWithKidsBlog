@@ -25,3 +25,6 @@ Inventory from the live site (27 Nov 2026). **Values are not copied here.** In t
 
 ## Update (W5): Stay22 is in use on the guides
 The guides embed a Stay22 hotel map (`stay22.com/embed/<id>`) and use affiliate booking links (`booking.stay22.com/mataytasim/...`). These are kept per guide in the content files (`partners.staysMap`, `stays[].url` with `partner: true`) and always shown with the partner disclosure. The Stay22 partner id (`lmaID` `69c0491c51844e7588a7882e`) **is set** on all 8 live guide pages (the earlier "missing" note came from a page with an empty copy). It is now in `src/config/site.ts` and loaded on every guide. **Stay22: nothing needed from the owner.**
+
+## Update (W6): Microsoft Clarity
+Project id `wrt3m0l4ow` (public; on 17 live pages, the guides among them). Now in `src/config/site.ts` (`analytics.clarityId`), added per page with the `clarity` option. Decide in W11 whether to keep it site-wide, per page, or drop it (it records visitor sessions; mention it in the privacy text if kept).

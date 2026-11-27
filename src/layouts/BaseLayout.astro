@@ -10,8 +10,10 @@ import Icon from "../components/Icon.astro";
 import Seo, { type SeoProps } from "../components/Seo.astro";
 import { site, whatsappLink } from "../config/site";
 
-type Props = SeoProps & { readProgress?: boolean };
-const { readProgress, ...seo } = Astro.props;
+type Props = SeoProps & { readProgress?: boolean; clarity?: boolean; stay22?: boolean };
+const { readProgress, clarity, stay22, ...seo } = Astro.props;
+const clarityId = clarity ? site.analytics.clarityId : null;
+const stay22Id = stay22 ? site.partners.stay22.partnerId : null;
 ---
 <!doctype html>
 <html lang="he" dir="rtl">
@@ -24,6 +26,8 @@ const { readProgress, ...seo } = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" />
     <script defer data-domain={site.analytics.plausibleDomain} src="https://plausible.io/js/script.js"></script>
+    {clarityId && <script is:inline define:vars={{ clarityId }}>(function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); }; t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(window, document, "clarity", "script", clarityId);</script>}
+    {stay22Id && <script is:inline define:vars={{ stay22Id }}>(function (s, t, a, y) { s.Stay22 = s.Stay22 || {}; s.Stay22.params = { lmaID: stay22Id }; var e = t.createElement(a), f = t.getElementsByTagName(a)[0]; e.async = 1; e.src = y; f.parentNode.insertBefore(e, f); })(window, document, "script", "https://scripts.stay22.com/letmeallez.js");</script>}
     <slot name="head" />
   </head>
   <body>
