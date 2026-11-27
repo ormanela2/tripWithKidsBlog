@@ -1,0 +1,294 @@
+---
+/**
+ * Destinations hub. Fully static: no API calls (the old page fetched live currency rates).
+ * Filters, the flight strip and the quick-look dialog run on the page's own data.
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { destinations, articles } from "../data/destinations";
+import { site, whatsappLink } from "../config/site";
+
+const MAX_H = 4.5;
+const flightLabel = (h: number) => (h === 1.5 ? "כשעה וחצי" : `כ-${h} שעות`);
+const byHours = [...new Set(destinations.map(d => d.flightHours))].sort((a, b) => a - b)
+  .map(h => ({ h, left: (h / MAX_H) * 100, items: destinations.filter(d => d.flightHours === h) }));
+const ticks = [0, 1, 2, 3, 4].map(h => ({ h, left: (h / MAX_H) * 100, label: h === 0 ? "תל אביב" : h === 1 ? "שעה" : h === 2 ? "שעתיים" : `${h} שעות` }));
+const data = JSON.stringify(destinations.map(d => ({ ...d, flight: flightLabel(d.flightHours) }))).replace(/</g, "\\u003c");
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "יעדים לטיול משפחתי באירופה",
+  itemListElement: destinations.map((d, i) => ({ "@type": "ListItem", position: i + 1, name: `${d.name} עם ילדים`, url: `${site.url}${d.url}` })),
+}).replace(/</g, "\\u003c");
+---
+<BaseLayout title="יעדים לטיול עם ילדים - מתי טסים" description="9 יעדים לטיול משפחתי באירופה: כמה ימים, מתי הכי כדאי, כמה זמן טיסה מתל אביב ומה לא לפספס. מדריכים מלאים מטיולים אמיתיים.">
+  <script type="application/ld+json" slot="head" set:html={jsonLd} />
+
+  <section class="hero">
+    <div class="container hero__inner">
+      <span class="hero__eyebrow">{destinations.length} יעדים · טיולים משפחתיים באירופה</span>
+      <h1>לאן טסים הפעם?</h1>
+      <p class="hero__lede">יעדים שטיילנו בהם עם הילדים, עם כל מה שצריך כדי להחליט: כמה ימים, מתי הכי כדאי, כמה זמן באוויר, ומה לא לפספס.</p>
+    </div>
+  </section>
+
+  <section class="container finder">
+    <figure class="flight" aria-labelledby="flight-title">
+      <figcaption>
+        <h2 id="flight-title">כמה זמן באוויר מתל אביב?</h2>
+        <p>זמני טיסה ישירה משוערים. לחצו על יעד להצצה מהירה.</p>
+      </figcaption>
+      <div class="flight__scroll">
+        <div class="flight__track">
+          <svg class="flight__path" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 990 100 C 760 20, 300 20, 10 100" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="6 8" vector-effect="non-scaling-stroke" />
+          </svg>
+          <span class="flight__plane" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>
+          </span>
+          {ticks.map(t => <span class="flight__tick" style={`right:${t.left}%`}><span>{t.label}</span></span>)}
+          {byHours.map(g => (
+            <div class="flight__stop" style={`right:${g.left}%`}>
+              {g.items.map(d => (
+                <button type="button" class="pin" data-id={d.id} style={`--c:${d.color}`} aria-label={`${d.name}, ${flightLabel(d.flightHours)} טיסה. הצצה מהירה`}>
+                  <span class="pin__dot" aria-hidden="true"></span>{d.name}
+                </button>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </figure>
+
+    <ul class="tiles" id="destGrid">
+      {destinations.map((d, i) => (
+        <li class="tile" data-id={d.id} style={`--c:${d.color}`}>
+          <a class="tile__link" href={d.url}>
+            <img src={d.image} alt={d.imageAlt} width="640" height="480" loading={i < 3 ? "eager" : "lazy"} decoding="async" />
+            <span class="tile__shade" aria-hidden="true"></span>
+            <span class="tile__flight">✈ {flightLabel(d.flightHours)}</span>
+            <span class="tile__text">
+              <span class="tile__name">{d.name}</span>
+              <span class="tile__meta">{d.region} · {d.days}</span>
+            </span>
+          </a>
+          <button type="button" class="tile__peek" data-quick={d.id} aria-label={`הצצה מהירה: ${d.name}`}>הצצה</button>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="articles" id="family-articles">
+    <div class="container">
+      <div class="section-head">
+        <h2>המדריכים של מתי טסים: עושים סדר ביעדים</h2>
+        <p>חוויות אמיתיות מטיולים משפחתיים באירופה - עם דגשים פרקטיים להורים.</p>
+      </div>
+      <div class="articles__grid">
+        {articles.map(a => a.url ? (
+          <a class="article" href={a.url} data-article-card={a.id}>
+            <span class="article__read">⏱ {a.read}</span>
+            <h3>{a.title}</h3>
+            <p>{a.text}</p>
+            <span class="article__more">לקריאת הכתבה המלאה ←</span>
+          </a>
+        ) : (
+          <div class="article article--soon" data-article-card={a.id}>
+            <span class="article__read">בקרוב באתר</span>
+            <h3>{a.title}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container cta__inner">
+      <h2>הטיול הבא שלכם מתחיל כאן</h2>
+      <p>לא בטוחים איזה יעד מתאים לגילאים ולתקציב? נשמח לעזור לבחור ולתכנן.</p>
+      <div class="cta__actions">
+        <a class="btn btn--amber" href="/packages.html">לחבילות התכנון</a>
+        <a class="btn btn--light" href={whatsappLink("היי, אשמח לעזרה בבחירת יעד לטיול עם ילדים")}>שאלה? כתבו לי בוואטסאפ</a>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="quick" id="quick" aria-labelledby="quickName">
+    <form method="dialog" class="quick__close-form"><button class="quick__close" aria-label="סגירה">✕</button></form>
+    <img class="quick__img" id="quickImg" alt="" width="640" height="360" />
+    <div class="quick__body">
+      <p class="quick__region" id="quickRegion"></p>
+      <h2 id="quickName"></h2>
+      <dl class="quick__stats" id="quickStats"></dl>
+      <p id="quickDesc"></p>
+      <ul class="card__tags" id="quickTags"></ul>
+      <div class="quick__actions" id="quickActions"></div>
+    </div>
+  </dialog>
+
+  <script type="application/json" id="destData" set:html={data} />
+</BaseLayout>
+
+<script>
+  type D = { id: string; name: string; region: string; url: string; image: string; imageAlt: string; days: string; season: string; flight: string; currency: { code: string; symbol: string }; desc: string; tags: string[]; wa: string };
+  const plausible = (name: string, props: Record<string, string>) => { const p = (window as unknown as { plausible?: (n: string, o: object) => void }).plausible; if (p) p(name, { props }); };
+  const all: D[] = JSON.parse(document.getElementById("destData")?.textContent || "[]");
+  const byId = new Map(all.map(d => [d.id, d]));
+  const cards = [...document.querySelectorAll<HTMLElement>(".tile")];
+  const pins = [...document.querySelectorAll<HTMLElement>(".pin")];
+
+  // Link the flight strip and the tiles: hover or focus one, highlight the other.
+  const highlight = (id: string | null) => {
+    pins.forEach(p => p.classList.toggle("is-active", p.dataset.id === id));
+    cards.forEach(c => c.classList.toggle("is-active", c.dataset.id === id));
+  };  for (const el of [...cards, ...pins]) {
+    el.addEventListener("mouseenter", () => highlight(el.dataset.id || null));
+    el.addEventListener("mouseleave", () => highlight(null));
+    el.addEventListener("focusin", () => highlight(el.dataset.id || null));
+    el.addEventListener("focusout", () => highlight(null));
+  }
+
+  // Quick look
+  const dialog = document.getElementById("quick") as HTMLDialogElement | null;
+  const setText = (id: string, t: string) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+  function openQuick(id: string, opener?: HTMLElement) {
+    const d = byId.get(id); if (!d || !dialog) return;
+    const img = document.getElementById("quickImg") as HTMLImageElement; img.src = d.image; img.alt = d.imageAlt;
+    setText("quickName", d.name); setText("quickRegion", d.region); setText("quickDesc", d.desc);
+    const stats = document.getElementById("quickStats")!; stats.replaceChildren();
+    for (const [k, v] of [["משך הטיול", d.days], ["מתי הכי כדאי", d.season], ["זמן טיסה", d.flight], ["מטבע", `${d.currency.symbol} ${d.currency.code}`]]) {
+      const box = document.createElement("div"), dt = document.createElement("dt"), dd = document.createElement("dd");
+      dt.textContent = k; dd.textContent = v; box.append(dt, dd); stats.append(box);
+    }
+    const tags = document.getElementById("quickTags")!; tags.replaceChildren(...d.tags.map(t => { const li = document.createElement("li"); li.textContent = t; return li; }));
+    const actions = document.getElementById("quickActions")!; actions.replaceChildren();
+    const link = (href: string, text: string, cls: string, ext = false) => { const a = document.createElement("a"); a.href = href; a.textContent = text; a.className = `btn ${cls}`; if (ext) { a.target = "_blank"; a.rel = "noopener"; } actions.append(a); };
+    link(d.url, "למדריך המלא ←", "btn--primary");
+    link(`/family-top-attractions.html#dest-${d.id}`, "5 המקומות הכי שווים", "btn--ghost");
+    link(`https://wa.me/972546758145?text=${encodeURIComponent(`היי, אני מתעניין בטיול ל${d.wa} עם ילדים`)}`, "שאלה בוואטסאפ", "btn--wa", true);
+    link("/calendar.html", "אירועים קרובים ביעד", "btn--ghost");
+    dialog.showModal();
+    dialog.addEventListener("close", () => opener?.focus(), { once: true });
+    plausible("Destinations-Quick-Look", { destination: d.id });
+  }
+  document.addEventListener("click", e => {
+    const t = (e.target as HTMLElement).closest<HTMLElement>("[data-quick], .pin");
+    if (t) openQuick(t.dataset.quick || t.dataset.id || "", t);
+  });
+  dialog?.addEventListener("click", e => { if (e.target === dialog) dialog.close(); });
+
+  // Same Plausible event as the old page for article cards.
+  document.querySelectorAll<HTMLElement>("[data-article-card]").forEach(a => a.addEventListener("click", () => plausible("Destinations-Family-Article-Card-Click", { article: a.dataset.articleCard || "" })));
+</script>
+
+<style>
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; color: var(--charcoal); text-wrap: balance; line-height: 1.2; }
+
+  .hero { background: radial-gradient(120% 140% at 85% 0%, rgba(26,107,114,.14), transparent 55%), radial-gradient(90% 120% at 0% 100%, rgba(232,160,69,.16), transparent 60%), var(--cream); padding-block: clamp(40px, 7vw, 84px) clamp(28px, 4vw, 44px); }
+  .hero__inner { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+  .hero__eyebrow { align-self: flex-start; font-size: 14px; font-weight: 600; color: var(--teal); background: rgba(26,107,114,.1); border-radius: 999px; padding: 4px 14px; }
+  .hero h1 { font-size: clamp(2.3rem, 6vw, 3.6rem); color: var(--teal-dark); }
+  .hero__lede { font-size: 1.12rem; color: #4a4a4a; max-width: 62ch; }
+
+  .finder { display: flex; flex-direction: column; gap: 22px; padding-bottom: 56px; }
+
+  .flight { background: linear-gradient(180deg, #fff, #fdfaf4); border: 1px solid var(--sand-dark); border-radius: var(--radius-lg); padding: 18px 20px 10px; }
+  .flight figcaption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+  .flight h2 { font-size: 1.35rem; color: var(--teal-dark); }
+  .flight figcaption p { font-size: 14px; color: #666; }
+  .flight__scroll { overflow-x: auto; padding-bottom: 8px; }
+  .flight__track { position: relative; min-width: 640px; height: 210px; margin: 8px 34px 0 60px; }
+  .flight__path { position: absolute; inset: 70px 0 auto 0; width: 100%; height: 90px; color: rgba(26,107,114,.45); }
+  .flight__plane { position: absolute; right: -26px; top: 140px; width: 34px; height: 34px; border-radius: 50%; background: var(--teal); color: #fff; display: grid; place-items: center; box-shadow: var(--shadow-md); transform: rotate(-90deg); }
+  .flight__plane svg { width: 18px; height: 18px; }
+  .flight__tick { position: absolute; bottom: 0; transform: translateX(50%); height: 28px; border-right: 1px solid var(--sand-dark); }
+  .flight__tick span { position: absolute; bottom: -2px; right: 6px; font-size: 12px; color: #777; white-space: nowrap; }
+  .flight__stop { position: absolute; bottom: 36px; transform: translateX(50%); display: flex; flex-direction: column-reverse; align-items: center; gap: 6px; }
+  .pin { display: inline-flex; align-items: center; gap: 7px; background: #fff; border: 1.5px solid color-mix(in srgb, var(--c) 45%, var(--sand-dark)); color: var(--charcoal); border-radius: 999px; padding: 3px 12px 3px 10px; font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: var(--shadow-sm); transition: transform .18s, box-shadow .18s, opacity .25s, border-color .18s; }
+  .pin__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 20%, transparent); }
+  .pin:hover, .pin.is-active { transform: translateY(-2px); border-color: var(--c); box-shadow: var(--shadow-md); }
+  .pin.is-out { opacity: .28; }
+
+  /* Destination tiles: photo first, minimal text; details live in the quick look. */
+  .tiles { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .tile { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--sand); box-shadow: var(--shadow-sm); transition: transform .22s, box-shadow .22s; animation: rise .4s ease both; }
+  .tile:nth-child(2) { animation-delay: .04s; } .tile:nth-child(3) { animation-delay: .08s; } .tile:nth-child(n+4) { animation-delay: .12s; }
+  .tile:hover, .tile.is-active { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .tile__link { display: block; position: relative; aspect-ratio: 4 / 3; color: #fff; }
+  .tile__link img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .tile:hover .tile__link img { transform: scale(1.06); }
+  .tile__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 38%, rgba(0,0,0,.66)); }
+  .tile__shade::before { content: ""; position: absolute; inset: auto 0 0 0; height: 4px; background: var(--c); }
+  .tile__flight { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,.92); color: var(--teal-dark); font-size: 12.5px; font-weight: 600; border-radius: 999px; padding: 3px 10px; }
+  .tile__text { position: absolute; inset: auto 16px 16px 16px; display: flex; flex-direction: column; gap: 2px; }
+  .tile__name { font-family: var(--font-heading); font-size: clamp(1.4rem, 2.4vw, 1.75rem); line-height: 1.1; text-shadow: 0 1px 12px rgba(0,0,0,.35); }
+  .tile__meta { font-size: 14px; opacity: .92; }
+  .tile__peek { position: absolute; top: 10px; left: 10px; min-height: 36px; padding: 0 14px; border-radius: 999px; background: rgba(18,77,82,.78); color: #fff; font-size: 13px; font-weight: 600; backdrop-filter: blur(4px); transition: background .2s; }
+  .tile__peek:hover, .tile__peek:focus-visible { background: var(--teal); }
+  .card__tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+  .card__tags li { font-size: 12.5px; background: color-mix(in srgb, var(--teal) 9%, #fff); color: var(--charcoal); border: 1px solid color-mix(in srgb, var(--teal) 22%, #fff); border-radius: 999px; padding: 2px 10px; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border-radius: 999px; padding: 9px 18px; font-size: 15px; font-weight: 600; min-height: 44px; transition: background .2s, transform .15s, box-shadow .2s, border-color .2s; }
+  .btn:active { transform: scale(.97); }
+  .btn--primary { background: var(--teal); color: #fff; }
+  .btn--primary:hover { background: var(--teal-dark); }
+  .btn--ghost { border: 1.5px solid var(--sand-dark); color: var(--teal-dark); background: #fff; }
+  .btn--ghost:hover { border-color: var(--teal); }
+  .btn--wa { background: var(--whatsapp); color: #fff; }
+  .btn--amber { background: var(--amber); color: #2b1d07; }
+  .btn--amber:hover { background: var(--amber-light); }
+  .btn--light { background: rgba(255,255,255,.14); color: #fff; border: 1.5px solid rgba(255,255,255,.45); }
+  .btn--light:hover { background: rgba(255,255,255,.24); }
+
+
+  .articles { background: var(--sand); padding-block: clamp(44px, 7vw, 72px); }
+  .section-head { display: grid; gap: 6px; margin-bottom: 22px; }
+  .section-head h2 { font-size: clamp(1.5rem, 3vw, 2rem); color: var(--teal-dark); }
+  .section-head p { color: #555; }
+  .articles__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .article { background: #fff; border: 1.5px solid var(--sand-dark); border-radius: var(--radius-md); padding: 18px; display: flex; flex-direction: column; gap: 8px; transition: transform .2s, box-shadow .2s, border-color .2s; }
+  a.article:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--teal); }
+  .article h3 { font-size: 1.15rem; }
+  .article p { font-size: 15px; color: #555; line-height: 1.6; }
+  .article__read { font-size: 13px; color: var(--teal); font-weight: 600; }
+  .article__more { margin-top: auto; color: var(--teal); font-weight: 700; font-size: 14px; }
+  .article--soon { background: rgba(255,255,255,.55); border-style: dashed; justify-content: center; }
+
+  .cta { background: linear-gradient(135deg, var(--teal-dark), var(--teal)); color: #fff; padding-block: clamp(44px, 7vw, 72px); }
+  .cta__inner { display: grid; gap: 12px; justify-items: start; }
+  .cta h2 { color: #fff; font-size: clamp(1.6rem, 3.4vw, 2.3rem); }
+  .cta p { opacity: .9; max-width: 56ch; }
+  .cta__actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+
+  .quick { border: 0; padding: 0; border-radius: var(--radius-xl); width: min(560px, calc(100vw - 32px)); max-height: calc(100dvh - 48px); overflow: auto; box-shadow: var(--shadow-xl); margin: auto; }
+  .quick::backdrop { background: rgba(18,77,82,.45); backdrop-filter: blur(3px); }
+  .quick[open] { animation: pop .22s ease-out; }
+  @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
+  .quick__close-form { position: absolute; top: 12px; left: 12px; z-index: 2; }
+  .quick__close { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.92); font-size: 18px; color: var(--charcoal); box-shadow: var(--shadow-sm); }
+  .quick__img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .quick__body { padding: 16px 20px 22px; display: grid; gap: 12px; }
+  .quick__region { color: var(--teal); font-weight: 600; font-size: 14px; }
+  .quick h2 { font-size: 1.8rem; margin-top: -6px; }
+  .quick__stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .quick__stats div { background: var(--cream); border-radius: var(--radius-sm); padding: 8px 10px; }
+  .quick__stats dt { font-size: 12px; color: #777; }
+  .quick__stats dd { font-weight: 600; }
+  .quick__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 900px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) {
+    .tiles { gap: 10px; }
+    .tile__link { aspect-ratio: 3 / 4; }
+    .tile__text { inset: auto 10px 10px 10px; }
+    .tile__meta { font-size: 12.5px; }
+    .tile__flight { top: auto; bottom: auto; top: 8px; right: 8px; font-size: 11.5px; }
+    .tile__peek { top: 8px; left: 8px; min-height: 32px; padding: 0 10px; font-size: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tile, .quick[open] { animation: none; }
+    .tile:hover, .tile.is-active, .pin:hover, .pin.is-active { transform: none; }
+    .tile:hover .tile__link img { transform: none; }
+  }
+</style>

@@ -1,0 +1,22 @@
+{
+  "name": "mataytasim-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "mataytasim.co.il: Hebrew family-travel guides and tools, built with Astro as static pages for GitHub Pages",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "7.4.10"
+  },
+  "overrides": {
+    "vite": "8.3.7"
+  }
+}
