@@ -13,15 +13,15 @@
 | # | Task | Sub-tasks | Est. | Who |
 |---|---|---|---|---|
 | W0 | **Project setup** | Astro + TypeScript on branch `astro-migration`; folders `src/layouts`, `src/components`, `src/content`, `src/assets`, `public/`; GitHub Actions build-and-deploy workflow (not switched on yet); keep `CNAME`, `.nojekyll`, Search Console file | 0.5 d | Claude |
-| W1 | **Keys and config** | `src/config/site.ts` (site URL, WhatsApp, emails, Plausible domain, GetYourGuide partner, Stay22 id, eSIM links, Maps key); `.env.example`; **restrict the Google Maps key**; **find the Stay22 partner id**; pick one form provider | 0.5 d | Claude + **you** |
+| W1 | **Keys and config** | `src/config/site.ts` (site URL, WhatsApp, emails, Plausible domain, GetYourGuide partner, Stay22 id, eSIM links, Maps key); `.env.example`; **~~restrict the Google Maps key~~ (Google Maps removed)**; **find the Stay22 partner id**; pick one form provider | 0.5 d | Claude + **you** |
 | W2 | **Design system + layout** | Extract colours, fonts and spacing from the current CSS into one stylesheet; `BaseLayout` (RTL, head, fonts); shared `Nav` (incl. the iOS mobile-menu fix), `Footer`, email popup, WhatsApp button, scroll-to-top | 2 d | Claude |
 | W3 | **SEO kit** | `Seo` component (title, description, canonical, Open Graph, Twitter); JSON-LD helpers (Organization, Article, Breadcrumb, FAQ); sitemap generated automatically; robots.txt | 1 d | Claude |
-| W4 | **Image pipeline** | Move photos into `src/assets`; automatic WebP/AVIF in the right sizes with width/height; lazy loading; alt text required; compress PDFs | 1 d | Claude |
+| W4 | **Image pipeline** | Move photos into `src/assets` (replace the Google Places photo thumbnails with our own or Wikimedia Commons images, credited); automatic WebP/AVIF in the right sizes with width/height; lazy loading; alt text required; compress PDFs | 1 d | Claude |
 | W5 | **Content model** | Content collection for destination guides (frontmatter: title, country, hero, best months, kids' ages, highlights, FAQ, partner blocks); guide page template | 1 d | Claude |
 | W6 | **Migrate destination guides (11)** | austria, czechia, poland-south, poland-three-experiences, warsaw, slovakia, slovakia-advanced, budapest, romania, slovenia, athens; plus `destinations` hub | 3 d | Claude |
 | W7 | **Migrate tool pages** | weather, calendar, budget, packing, quiz, planning, transport-europe, questionnaire_form, family_questionnaire, austria_trivia_game: keep their behaviour as small scripts on the page | 2 d | Claude |
 | W8 | **Partner pages + disclosure** | esim, airport-hotels, car-rental-partners, car-rental-klasswagen, packages, theme-parks, family-top-attractions, tips, services, about, terms; one `PartnerLink` component that always shows the disclosure | 1.5 d | Claude |
-| W9 | **Maps** | One Leaflet map component (pinned versions, loads only when visible); one Google Maps loader using the key from config | 0.5 d | Claude |
+| W9 | **Maps** | One Leaflet map component (pinned versions, loads only when visible); "Open in Google Maps" links without a key. **No Google Maps API** (owner decision) | 0.5 d | Claude |
 | W10 | **Forms** | One form component (one provider, no email address in the page), honeypot against spam, short privacy line | 0.5 d | Claude |
 | W11 | **Analytics** | One Plausible snippet; keep the existing event names (e.g. article card clicks) | 0.25 d | Claude |
 | W12 | **URL parity + clean-up** | Every old URL still works; test pages (`test2_fixed`, `test3`) removed; decide on `smart_plan_budapest/`; fix the broken links found in the review | 0.5 d | Claude |

@@ -4,7 +4,7 @@ Inventory from the live site (27 Nov 2026). **Values are not copied here.** In t
 
 | Service | What | Found on the site | Status | Action |
 |---|---|---|---|---|
-| Google Maps JavaScript API | API key | 1 key, used on 7 pages | ⚠️ Visible in page code (normal for browser keys) | **Restrict it** in Google Cloud: HTTP referrers `mataytasim.co.il/*` and `*.mataytasim.co.il/*`; API restriction: Maps JavaScript API only. Then move it to config. |
+| Google Maps JavaScript API | API key | 1 key on 7 pages (place photos + info pop-ups, theme-parks map) | **Removed (owner decision, 27 Nov 2026)** | Not used in the new build: maps use Leaflet (no key), places link out to Google Maps without a key, photos are our own or Wikimedia Commons. The old script also cached Places data for 45 days, which Google terms do not allow. Delete or restrict the old key in Google Cloud. |
 | Stay22 (hotel maps) | Partner id (`lmaID` / `aid`) | Embeds present, one link with **empty `lmaID`** | ❌ **Missing** | Find your Stay22 partner id (Stay22 dashboard) so bookings are credited. |
 | GetYourGuide | Partner id | Present (`data-gyg-partner-id`) | ✅ | Move to config. One widget has an empty tour list: choose tours or remove it. |
 | Travelpayouts (Airalo, Saily, Yesim) | Short affiliate links (`*.tpk.mx`) | 3 links | ✅ | Move to config. |
@@ -20,5 +20,5 @@ Inventory from the live site (27 Nov 2026). **Values are not copied here.** In t
 
 ## Needed from the owner
 1. **Stay22 partner id.**
-2. **Confirm the Google Maps key is restricted** (or create a new restricted key and send it; it goes into config, not chat, if you prefer to paste it into the file yourself).
+2. ~~Google Maps key~~: not needed (removed). Optionally delete the old key in Google Cloud.
 3. Which forms should stay (newsletter, trip questionnaire, contact, partner leads).
