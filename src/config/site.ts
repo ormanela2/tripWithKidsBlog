@@ -16,6 +16,28 @@ export const site = {
     whatsapp: "972546758145",
   },
 
+  social: {
+    facebook: "https://www.facebook.com/profile.php?id=61582155200249",
+  },
+
+  /** Main navigation, used by the desktop menu, the mobile menu and the footer. */
+  nav: [
+    { href: "/tips.html", label: "טיפים וכלים", sub: "מרכז תכנון הטיול", icon: "tips" },
+    { href: "/destinations.html", label: "יעדים", sub: "לאן הכי מתאים לטוס", icon: "pin" },
+    { href: "/packages.html", label: "חבילות תכנון", sub: "תכנון מותאם משפחות", icon: "packages", badge: "חבילה אחת" },
+    { href: "/about.html", label: "אודות", icon: "info" },
+  ],
+  community: { href: "/tips.html#newsletter", label: "מצטרפים לקהילה", sub: "עדכונים וטיפים מהשטח" },
+
+  footer: {
+    tagline: "טיולים שמתחילים בשיחה אחת, ומסתיימים בזכרון שהילדים שלך יספרו לנכדים שלך.",
+    columns: [
+      { title: "ניווט", links: [["/services.html", "דף הבית"], ["/tips.html", "טיפים"], ["/destinations.html", "יעדים"], ["/about.html", "אודות"]] },
+      { title: "יעדים פופולריים", links: [["/slovakia.html", "סלובקיה עם ילדים"], ["/warsaw.html", "פולין - וורשה עם ילדים"], ["/romania.html", "רומניה עם ילדים"], ["/austria.html", "אוסטריה עם ילדים"]], more: ["/destinations.html", "לכל היעדים ←"] },
+      { title: "שירותים", links: [["/packages.html", "חבילות תכנון"], ["/weather.html", "מזג אוויר"], ["/tips.html#newsletter", "צור קשר"]] },
+    ],
+  },
+
   analytics: {
     plausibleDomain: "mataytasim.co.il",
   },

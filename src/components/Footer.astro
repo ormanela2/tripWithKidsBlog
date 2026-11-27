@@ -1,0 +1,32 @@
+---
+import Icon from "./Icon.astro";
+import { site } from "../config/site";
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="/services.html" class="nav__logo" aria-label={`${site.name} – עמוד ראשי`}>
+          <img src="/logo.png" alt={site.name} width="140" height="70" loading="lazy" />
+        </a>
+        <p class="footer__tagline">{site.footer.tagline}</p>
+        <a href={site.social.facebook} target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="עמוד הפייסבוק שלנו">
+          <Icon name="facebook" />עקבו אחרינו
+        </a>
+      </div>
+      {site.footer.columns.map(col => (
+        <div class="footer__col">
+          <h3 class="footer__col-title">{col.title}</h3>
+          <ul>
+            {col.links.map(([href, label]) => <li><a href={href}>{label}</a></li>)}
+            {col.more && <li><a href={col.more[0]} class="footer__all-link">{col.more[1]}</a></li>}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div class="footer__bottom">
+      <p>&copy; {year} {site.name} | כל הזכויות שמורות &nbsp;&middot;&nbsp; <a href="/terms.html">תנאי שימוש</a></p>
+    </div>
+  </div>
+</footer>
