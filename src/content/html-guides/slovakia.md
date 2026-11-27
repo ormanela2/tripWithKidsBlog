@@ -7,4 +7,5 @@ country: "SK"
 hub: "slovakia"
 clarity: true
 stay22: true
+floatNav: true
 ---

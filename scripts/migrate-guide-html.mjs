@@ -28,6 +28,7 @@ const bodyTag = html.match(/<body([^>]*)>/)?.[1] ?? "";
 const country = bodyTag.match(/data-good-to-know-country="([A-Z]{2})"/)?.[1];
 const h1 = text(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1]);
 const clarity = /"clarity",\s*"script",\s*"([a-z0-9]+)"/.exec(html)?.[1];
+const floatNav = /id="floatNav"/.test(html);
 const stay22 = /Stay22\.params\s*=\s*\{\s*lmaID:\s*'([a-z0-9]+)'/.exec(html)?.[1];
 
 // ---------- split out scripts and styles (document order) ----------
@@ -127,6 +128,7 @@ const fm = {
   ...(shareFile && existsSync(`src/assets/photos/${shareFile}`) && { shareImage: `../../assets/photos/${shareFile}` }),
   ...(clarity && { clarity: true }),
   ...(stay22 && { stay22: true }),
+  ...(floatNav && { floatNav: true }),
 };
 const yaml = Object.entries(fm).filter(([, v]) => v !== undefined).map(([k, v]) => `${k}: ${typeof v === "string" ? JSON.stringify(v) : v}`).join("\n");
 mkdirSync("src/content/html-guides", { recursive: true });

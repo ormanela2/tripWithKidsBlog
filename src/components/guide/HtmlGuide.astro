@@ -63,7 +63,7 @@ const schema = [
   article({ headline: g.title, path, description: g.description, ...(share && { image: share }) }),
 ];
 ---
-<BaseLayout title={g.seoTitle ?? g.title} description={g.description} image={share} imageAlt={g.title} type="article" schema={schema} readProgress clarity={g.clarity} stay22={g.stay22}>
+<BaseLayout title={g.seoTitle ?? g.title} description={g.description} image={share} imageAlt={g.title} type="article" schema={schema} readProgress floatNav={g.floatNav} clarity={g.clarity} stay22={g.stay22}>
   <style slot="head" is:inline set:html={css}></style>
   <style slot="head" is:inline>
     /* The live hero starts under the fixed menu; the shared layout pads <main>, so pull the hero back up. */

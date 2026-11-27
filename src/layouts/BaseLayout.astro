@@ -10,8 +10,16 @@ import Icon from "../components/Icon.astro";
 import Seo, { type SeoProps } from "../components/Seo.astro";
 import { site, whatsappLink } from "../config/site";
 
-type Props = SeoProps & { readProgress?: boolean; clarity?: boolean; stay22?: boolean };
-const { readProgress, clarity, stay22, ...seo } = Astro.props;
+type Props = SeoProps & {
+  readProgress?: boolean;
+  clarity?: boolean;
+  stay22?: boolean;
+  /** Bottom-right "all destinations" + "back to top" buttons, as on the live guides. */
+  floatNav?: boolean;
+  /** Floating WhatsApp button (live: packing page only). */
+  whatsappFloat?: boolean;
+};
+const { readProgress, clarity, stay22, floatNav = false, whatsappFloat = false, ...seo } = Astro.props;
 const clarityId = clarity ? site.analytics.clarityId : null;
 const stay22Id = stay22 ? site.partners.stay22.partnerId : null;
 ---
@@ -36,14 +44,30 @@ const stay22Id = stay22 ? site.partners.stay22.partnerId : null;
     <main id="main"><slot /></main>
     <Footer />
     <slot name="after" />
-    <a href={whatsappLink("היי, אני רוצה לשמוע על תכנון טיול!")} class="wa-float" aria-label="שלחו לנו הודעת וואטסאפ"><Icon name="whatsapp" /></a>
-    <button type="button" class="to-top" id="toTop" aria-label="חזרה לראש העמוד"><Icon name="up" /></button>
-    <script>
-      const toTop = document.getElementById("toTop");
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      window.addEventListener("scroll", () => toTop?.classList.toggle("visible", window.scrollY > 600), { passive: true });
-      toTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }));
-    </script>
+    {whatsappFloat && <a href={whatsappLink("היי, אני רוצה לשמוע על תכנון טיול!")} class="wa-float" aria-label="שלחו לנו הודעת וואטסאפ"><Icon name="whatsapp" /></a>}
+    {floatNav && (
+      <div class="float-nav" id="floatNav">
+        <a href="/destinations.html" class="float-nav__btn float-nav__btn--destinations" aria-label="כל היעדים" title="כל היעדים">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </a>
+        <button type="button" class="float-nav__btn float-nav__btn--top" id="floatNavTop" aria-label="חזור למעלה">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        </button>
+      </div>
+    )}
+    {floatNav && (
+      <script is:inline>
+        (function () {
+          var nav = document.getElementById("floatNav"), top = document.getElementById("floatNavTop");
+          if (!nav) return;
+          window.addEventListener("scroll", function () { nav.classList.toggle("visible", window.scrollY > 400); }, { passive: true });
+          if (top) top.addEventListener("click", function () {
+            var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+          });
+        })();
+      </script>
+    )}
   </body>
 </html>
 

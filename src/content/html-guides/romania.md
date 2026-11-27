@@ -7,4 +7,5 @@ country: "RO"
 hub: "romania"
 clarity: true
 stay22: true
+floatNav: true
 ---

@@ -7,4 +7,5 @@ country: "PL"
 hub: "warsaw"
 clarity: true
 stay22: true
+floatNav: true
 ---

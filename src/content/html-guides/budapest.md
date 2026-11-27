@@ -7,4 +7,5 @@ country: "HU"
 hub: "budapest"
 clarity: true
 stay22: true
+floatNav: true
 ---

@@ -58,7 +58,7 @@ const schema = [
 ];
 const destStyle = `--dest:${g.color};--dest-dark:${g.colorDark ?? g.color}`;
 ---
-<BaseLayout title={g.seoTitle ?? g.title} description={g.description} image={share.src} imageAlt={g.title} type="article" schema={schema} readProgress stay22>
+<BaseLayout title={g.seoTitle ?? g.title} description={g.description} image={share.src} imageAlt={g.title} type="article" schema={schema} readProgress floatNav stay22>
   {showMap && <link slot="head" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />}
 
   <div class="guide-page" style={destStyle} data-good-to-know-country={g.country}>

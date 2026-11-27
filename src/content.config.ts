@@ -166,6 +166,8 @@ const htmlGuides = defineCollection({
       clarity: z.boolean().default(false),
       /** Load the Stay22 "Let me allez" script, as the live page does. */
       stay22: z.boolean().default(false),
+      /** Bottom-right "all destinations" + "back to top" buttons, as the live page has. */
+      floatNav: z.boolean().default(false),
       draft: z.boolean().default(false),
     }),
 });

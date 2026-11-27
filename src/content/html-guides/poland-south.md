@@ -7,4 +7,5 @@ country: "PL"
 hub: "poland-south"
 clarity: true
 stay22: true
+floatNav: true
 ---

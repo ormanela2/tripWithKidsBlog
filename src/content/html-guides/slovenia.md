@@ -6,4 +6,5 @@ name: "סלובניה"
 country: "SI"
 hub: "slovenia"
 clarity: true
+floatNav: true
 ---
