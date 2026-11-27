@@ -1,0 +1,187 @@
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container">
+    <nav class="hero__breadcrumb" aria-label="breadcrumb">
+      <a href="services.html">מתי טסים</a>
+      <span>›</span>
+      <span>מתי קורה</span>
+    </nav>
+    <span class="hero__emoji" aria-hidden="true">🗓️</span>
+    <h1 class="hero__title" id="hero-title">לוח ארועים 2026</h1>
+    <p class="hero__subtitle">חגים לאומיים, פסטיבלים, שווקים ואטרקציות לילדים - כל מה שצריך לדעת לפני שטסים</p>
+  </div>
+</section>
+
+
+<div class="filters-wrap" role="region" aria-label="סינון אירועים">
+  <div class="container">
+    <div class="filters" id="filtersBar">
+      
+      <div class="filters__group" role="group" aria-label="סינון לפי מדינה">
+        <span class="filters__label">מדינה:</span>
+        <button class="filter-pill active" data-country="all" aria-pressed="true">הכל</button>
+        <button class="filter-pill" data-country="england" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/gb.png" alt="אנגליה"> אנגליה</button>
+        <button class="filter-pill" data-country="hungary" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/hu.png" alt="הונגריה"> הונגריה</button>
+        <button class="filter-pill" data-country="austria" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/at.png" alt="אוסטריה"> אוסטריה</button>
+        <button class="filter-pill" data-country="slovakia" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/sk.png" alt="סלובקיה"> סלובקיה</button>
+        <button class="filter-pill" data-country="slovenia" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/si.png" alt="סלובניה"> סלובניה</button>
+        <button class="filter-pill" data-country="greece" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/gr.png" alt="יוון"> יוון</button>
+        <button class="filter-pill" data-country="czechia" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/cz.png" alt="צ'כיה"> צ'כיה</button>
+        <button class="filter-pill" data-country="poland" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/pl.png" alt="פולין"> פולין</button>
+        <button class="filter-pill" data-country="romania" aria-pressed="false"><img class="flag-img" src="https://flagcdn.com/w40/ro.png" alt="רומניה"> רומניה</button>
+      </div>
+
+      
+      <div class="filters__group" role="group" aria-label="סינון לפי סוג">
+        <span class="filters__label">סוג:</span>
+        <button class="filter-pill filter-pill--holiday active" data-type="holiday" aria-pressed="true">🚫 חגים</button>
+        <button class="filter-pill filter-pill--festival active" data-type="festival" aria-pressed="true">🎭 פסטיבלים</button>
+        <button class="filter-pill filter-pill--market active" data-type="market" aria-pressed="true">🛍️ שווקים</button>
+        <button class="filter-pill filter-pill--kids active" data-type="kids" aria-pressed="true">🎡 לילדים</button>
+      </div>
+
+      
+      <div class="filters__view-toggle" role="group" aria-label="בחירת תצוגה">
+        <button class="view-btn active" id="viewCalendar" aria-pressed="true">📅 לוח חודשי</button>
+        <button class="view-btn" id="viewList" aria-pressed="false">📋 רשימה</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<main>
+  <div class="container">
+
+    
+    <div class="month-nav" role="navigation" aria-label="ניווט חודשים">
+      <button class="month-nav__btn" id="prevMonthBtn" aria-label="חודש קודם">&#8594;</button>
+      <div class="month-nav__center">
+        <div class="month-nav__title" id="monthTitle" aria-live="polite"></div>
+        <div class="month-nav__year" id="monthYear"></div>
+        <button class="month-nav__back-btn" id="backToTodayBtn" aria-label="חזרה לחודש הנוכחי">
+          &#8593; חזרה לחודש הנוכחי
+        </button>
+      </div>
+      <button class="month-nav__btn" id="nextMonthBtn" aria-label="חודש הבא">&#8592;</button>
+    </div>
+
+    
+    <section class="calendar-section" aria-label="לוח אירועים">
+
+      
+      <div class="calendar-grid-wrap" id="calendarGridWrap" aria-label="לוח חודשי">
+        <div class="calendar-grid" id="calendarGrid" role="grid">
+          
+        </div>
+      </div>
+
+      
+      <div id="mobileCalendar" class="mobile-cal" aria-label="לוח אירועים נייד">
+        <div id="mobFullGrid" class="mob-full-grid"></div>
+        <div id="mobWeekStrip" class="mob-week-strip"></div>
+        <div id="mobDayFeed" class="mob-day-feed"></div>
+      </div>
+
+      
+      <div class="list-view" id="listView" aria-label="רשימת אירועים">
+        <div class="list-events" id="listEvents">
+          
+        </div>
+      </div>
+
+      
+      <div class="empty-state" id="emptyState" role="status" aria-live="polite">
+        <div class="empty-state__icon">🔍</div>
+        <h3 class="empty-state__title">לא נמצאו אירועים</h3>
+        <p class="empty-state__text">נסו לשנות את פילטרי הסינון או לנווט לחודש אחר</p>
+      </div>
+
+    </section>
+
+    
+    <div class="weather-strip" id="weatherStrip" aria-label="מזג אוויר חודשי">
+      <div class="weather-strip__title">🌤 מזג אוויר ממוצע לחודש זה</div>
+      <div class="weather-strip__grid" id="weatherGrid">
+        
+      </div>
+    </div>
+
+  </div>
+</main>
+
+  
+  <div style="text-align:center;padding:32px 24px;background:var(--cream);">
+    <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%99%D7%A9%20%D7%90%D7%99%D7%A8%D7%95%D7%A2%20%D7%A9%D7%9B%D7%93%D7%90%D7%99%20%D7%9C%D7%94%D7%95%D7%A1%D7%99%D7%A3%20%D7%9C%D7%9C%D7%95%D7%97%3A" target="_blank"
+       style="display:inline-flex;align-items:center;gap:8px;background:transparent;border:1.5px solid var(--sand-dark);border-radius:30px;padding:10px 22px;font-family:var(--font-body);font-size:14px;color:#888;text-decoration:none;transition:all 0.2s;"
+       onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)';this.style.background='white'"
+       onmouseout="this.style.borderColor='var(--sand-dark)';this.style.color='#888';this.style.background='transparent'">
+      💡 מכירים אירוע שפספסנו? ספרו לנו
+    </a>
+  </div>
+
+
+  
+
+  <section id="newsletter" style="background:linear-gradient(135deg,#1a6b72 0%,#0f4a50 100%);padding:64px 24px;text-align:center;position:relative;overflow:hidden;">
+
+    
+    <div style="position:absolute;inset:0;pointer-events:none;user-select:none;">
+      <span style="position:absolute;top:12%;right:8%;font-size:28px;opacity:0.18;animation:nlFloat1 5s ease-in-out infinite;">✈️</span>
+      <span style="position:absolute;top:20%;left:10%;font-size:22px;opacity:0.15;animation:nlFloat2 6.5s ease-in-out infinite;">🗺️</span>
+      <span style="position:absolute;bottom:18%;right:14%;font-size:20px;opacity:0.15;animation:nlFloat3 7s ease-in-out infinite;">📍</span>
+      <span style="position:absolute;bottom:25%;left:8%;font-size:24px;opacity:0.13;animation:nlFloat1 8s ease-in-out infinite 1s;">⭐</span>
+      <span style="position:absolute;top:55%;right:5%;font-size:18px;opacity:0.12;animation:nlFloat2 9s ease-in-out infinite 2s;">🏔️</span>
+    </div>
+
+    <div class="nl-hidden" id="nlContent" style="max-width:520px;margin:0 auto;position:relative;z-index:1;">
+
+      
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:40px;padding:6px 16px;margin-bottom:20px;">
+        <span style="font-size:13px;">👨‍👩‍👧‍👦</span>
+        <span style="font-size:13px;color:rgba(255,255,255,0.9);font-weight:600;">הצטרפו כבר <span id="nlCounter">0</span>+ משפחות</span>
+      </div>
+
+      <div style="font-size:36px;margin-bottom:14px;">📬</div>
+      <h2 style="font-family:var(--font-heading);font-size:28px;color:white;margin-bottom:10px;">מצטרפים לקהילה שלנו</h2>
+      <p style="color:rgba(255,255,255,0.8);font-size:15px;line-height:1.7;margin-bottom:32px;">יעדים חדשים, טיפים מהשטח ופינות נסתרות - ישירות למייל שלכם. בחינם, תמיד.</p>
+
+      <form action="https://formsubmit.co/mataytasim@gmail.com" method="POST"
+            style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <input type="hidden" name="_subject" value="הרשמה לניוזלטר - לוח אירועים">
+        <input type="hidden" name="_next" value="https://www.mataytasim.co.il/calendar.html?subscribed=1#newsletter">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="email" name="email" required placeholder="המייל שלכם"
+               style="flex:1;min-width:220px;max-width:300px;padding:13px 18px;border:2px solid rgba(255,255,255,0.3);border-radius:40px;font-family:var(--font-body);font-size:15px;background:rgba(255,255,255,0.12);color:white;outline:none;text-align:right;transition:border-color 0.2s,background 0.2s;"
+               onfocus="this.style.borderColor='white';this.style.background='rgba(255,255,255,0.2)'"
+               onblur="this.style.borderColor='rgba(255,255,255,0.3)';this.style.background='rgba(255,255,255,0.12)'"
+               placeholder="המייל שלכם">
+
+        
+        <div style="position:relative;display:inline-flex;align-items:center;flex-shrink:0;">
+          <div style="position:absolute;inset:0;border-radius:40px;background:rgba(255,255,255,0.4);animation:nlPulseRing 1.8s ease-out infinite;"></div>
+          <button type="submit"
+                  style="position:relative;background:white;color:var(--teal);border:none;border-radius:40px;padding:13px 28px;font-family:var(--font-body);font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px rgba(0,0,0,0.2);"
+                  onmouseover="this.style.transform='scale(1.06)';this.style.boxShadow='0 8px 28px rgba(0,0,0,0.3)'"
+                  onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.2)'">
+            אני מצטרף/ת ✈️
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+  
+
+
+
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal" id="modal">
+    <div class="modal__close">
+      <button class="modal__close-btn" id="modalCloseBtn" aria-label="סגור">&#x2715;</button>
+    </div>
+    <div class="modal__body" id="modalBody">
+      
+    </div>
+  </div>
+</div>

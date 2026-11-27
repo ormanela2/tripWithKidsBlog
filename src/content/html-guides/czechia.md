@@ -8,4 +8,5 @@ hub: "czechia"
 clarity: true
 stay22: true
 floatNav: true
+readProgress: true
 ---

@@ -1,0 +1,257 @@
+<div id="loadingOverlay" role="status" aria-live="polite">
+  <div class="loading-emoji">✈️</div>
+  <div class="loading-text">מחפשים את היעד המושלם...</div>
+  <div class="loading-sub">רגע אחד קטן</div>
+  <div class="loading-bar-track"><div class="loading-bar-fill" id="loadingBarFill"></div></div>
+</div>
+
+  
+  
+
+
+
+<header class="page-header">
+  <span class="page-header__emoji">✈️</span>
+  <h1 class="page-header__title">לאן נטוס?</h1>
+  <p class="page-header__sub">6 שאלות קצרות · 3 יעדים · בחינם וללא הרשמה</p>
+</header>
+
+
+<div class="quiz-wrap">
+
+  
+  <div class="progress-bar-wrap" id="progressWrap">
+    <div class="progress-dots" id="progressDots"></div>
+    <div class="progress-label" id="progressLabel">שאלה 1 מתוך 6</div>
+  </div>
+
+  
+  <div class="question-card active" data-step="0" id="q0">
+    <span class="question-emoji">💰</span>
+    <h2 class="question-title">מה התקציב המשפחתי לטיול?</h2>
+    <p class="question-hint">לכולם, כולל טיסות</p>
+    <div class="pills-grid pills-grid--3">
+      <button class="pill" data-value="budget">
+        <span class="pill__emoji">💸</span>
+        <span class="pill__label">חסכוני</span>
+        <span class="pill__sub">עד 22,000₪</span>
+      </button>
+      <button class="pill" data-value="mid">
+        <span class="pill__emoji">💳</span>
+        <span class="pill__label">בינוני</span>
+        <span class="pill__sub">22,000-45,000₪</span>
+      </button>
+      <button class="pill" data-value="premium">
+        <span class="pill__emoji">👑</span>
+        <span class="pill__label">פרימיום</span>
+        <span class="pill__sub">45,000₪+</span>
+      </button>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-next" id="next0">הבא ←</button>
+    </div>
+  </div>
+
+  
+  <div class="question-card" data-step="1" id="q1">
+    <span class="question-emoji">📅</span>
+    <h2 class="question-title">מתי אתם טסים?</h2>
+    <p class="question-hint">עונת הנסיעה משפיעה מאוד על היעד</p>
+    <div class="pills-grid">
+      <button class="pill" data-value="spring">
+        <span class="pill__emoji">🌸</span>
+        <span class="pill__label">אביב</span>
+        <span class="pill__sub">מרץ - מאי</span>
+      </button>
+      <button class="pill" data-value="summer">
+        <span class="pill__emoji">☀️</span>
+        <span class="pill__label">קיץ</span>
+        <span class="pill__sub">יוני - אוגוסט</span>
+      </button>
+      <button class="pill" data-value="fall">
+        <span class="pill__emoji">🍂</span>
+        <span class="pill__label">סתיו</span>
+        <span class="pill__sub">ספטמבר - נובמבר</span>
+      </button>
+      <button class="pill" data-value="winter">
+        <span class="pill__emoji">❄️</span>
+        <span class="pill__label">חורף</span>
+        <span class="pill__sub">דצמבר - פברואר</span>
+      </button>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-back" id="back1">← חזור</button>
+      <button class="btn-next" id="next1">הבא ←</button>
+    </div>
+  </div>
+
+  
+  <div class="question-card" data-step="2" id="q2">
+    <span class="question-emoji">📍</span>
+    <h2 class="question-title">איזה סוג יעד אתם מחפשים?</h2>
+    <p class="question-hint">איזה סוג סביבה הכי מתאים לכם</p>
+    <div class="pills-grid">
+      <button class="pill" data-value="city">
+        <span class="pill__emoji">🏙️</span>
+        <span class="pill__label">עיר גדולה</span>
+        <span class="pill__sub">שוקים, רחובות, חיי לילה</span>
+      </button>
+      <button class="pill" data-value="nature">
+        <span class="pill__emoji">🏔️</span>
+        <span class="pill__label">הרים וטבע</span>
+        <span class="pill__sub">יערות, נהרות, אוויר צח</span>
+      </button>
+      <button class="pill" data-value="beach">
+        <span class="pill__emoji">🏖️</span>
+        <span class="pill__label">חוף וים</span>
+        <span class="pill__sub">חול, שמש, מים</span>
+      </button>
+      <button class="pill" data-value="adventure">
+        <span class="pill__emoji">🏰</span>
+        <span class="pill__label">עיירת קסם</span>
+        <span class="pill__sub">טירות, כפרים, אגדות</span>
+      </button>
+      <button class="pill" data-value="mix">
+        <span class="pill__emoji">🌍</span>
+        <span class="pill__label">שילוב</span>
+        <span class="pill__sub">עיר + טבע ביחד</span>
+      </button>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-back" id="back2">← חזור</button>
+      <button class="btn-next" id="next2">הבא ←</button>
+    </div>
+  </div>
+
+  
+  <div class="question-card" data-step="3" id="q3">
+    <span class="question-emoji">🚶</span>
+    <h2 class="question-title">כמה אתם אוהבים ללכת ברגל?</h2>
+    <p class="question-hint">חשוב לדעת עם ילדים קטנים</p>
+    <div class="pills-grid pills-grid--3">
+      <button class="pill" data-value="low">
+        <span class="pill__emoji">🚗</span>
+        <span class="pill__label">מעט</span>
+        <span class="pill__sub">מעדיפים נסיעה</span>
+      </button>
+      <button class="pill" data-value="medium">
+        <span class="pill__emoji">🚶</span>
+        <span class="pill__label">בינוני</span>
+        <span class="pill__sub">כמה שעות ביום</span>
+      </button>
+      <button class="pill" data-value="high">
+        <span class="pill__emoji">🥾</span>
+        <span class="pill__label">הרבה</span>
+        <span class="pill__sub">אנחנו מהלכים</span>
+      </button>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-back" id="back3">← חזור</button>
+      <button class="btn-next" id="next3">הבא ←</button>
+    </div>
+  </div>
+
+  
+  <div class="question-card" data-step="4" id="q4">
+    <span class="question-emoji">👨‍👩‍👧‍👦</span>
+    <h2 class="question-title">מה גיל הילדים בטיול?</h2>
+    <p class="question-hint"><span>ניתן לבחור יותר מאחד</span> · או מבוגרים בלבד</p>
+    <div class="pills-grid">
+      <button class="pill" data-value="adults_only">
+        <span class="pill__emoji">🧑‍🤝‍🧑</span>
+        <span class="pill__label">מבוגרים בלבד</span>
+        <span class="pill__sub">בלי ילדים במסלול</span>
+      </button>
+      <button class="pill" data-value="baby">
+        <span class="pill__emoji">👶</span>
+        <span class="pill__label">תינוק/פעוט</span>
+        <span class="pill__sub">0 - 3 שנים</span>
+      </button>
+      <button class="pill" data-value="young">
+        <span class="pill__emoji">👧</span>
+        <span class="pill__label">ילד קטן</span>
+        <span class="pill__sub">4 - 7 שנים</span>
+      </button>
+      <button class="pill" data-value="child">
+        <span class="pill__emoji">👦</span>
+        <span class="pill__label">ילד</span>
+        <span class="pill__sub">8 - 12 שנים</span>
+      </button>
+      <button class="pill" data-value="teen">
+        <span class="pill__emoji">🧑</span>
+        <span class="pill__label">נוער</span>
+        <span class="pill__sub">13+ שנים</span>
+      </button>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-back" id="back4">← חזור</button>
+      <button class="btn-next" id="next4">הבא ←</button>
+    </div>
+  </div>
+
+  
+  <div class="question-card" data-step="5" id="q5">
+    <span class="question-emoji">🎯</span>
+    <h2 class="question-title">מה אתם רוצים לעשות שם?</h2>
+    <p class="question-hint"><span>ניתן לבחור יותר מאחד</span></p>
+    <p class="question-hint question-hint--soft" id="q5InterestSoft">לבחירה מדויקת יותר – בחרו לפחות תחום עניין אחד כדי להפעיל את כפתור ההמלצות.</p>
+    <div class="pills-grid">
+      <button class="pill" data-value="water">
+        <span class="pill__emoji">🏊</span>
+        <span class="pill__label">פארקי מים</span>
+      </button>
+      <button class="pill" data-value="amusement">
+        <span class="pill__emoji">🎡</span>
+        <span class="pill__label">פארקי שעשועים</span>
+      </button>
+      <button class="pill" data-value="nature_act">
+        <span class="pill__emoji">🦁</span>
+        <span class="pill__label">טבע וחיות</span>
+      </button>
+      <button class="pill" data-value="history">
+        <span class="pill__emoji">🏛️</span>
+        <span class="pill__label">היסטוריה</span>
+      </button>
+      <button class="pill" data-value="food">
+        <span class="pill__emoji">🍕</span>
+        <span class="pill__label">אוכל ותרבות</span>
+      </button>
+      <button class="pill" data-value="architecture">
+        <span class="pill__emoji">🎨</span>
+        <span class="pill__label">אדריכלות ואמנות</span>
+      </button>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-back" id="back5">← חזור</button>
+      <button type="button" class="btn-next btn-next--results" id="next5">🎯 הצג לי יעדים</button>
+    </div>
+  </div>
+
+
+</div>
+
+
+<div id="results-section">
+  <div class="results-inner">
+    <div class="results-header">
+      <h2 class="results-header__title" id="results-title">🎯 היעדים המושלמים בשבילכם</h2>
+      <p class="results-header__sub" id="results-sub">בחרנו עבורכם 3 יעדים שמתאימים בדיוק לסגנון שלכם</p>
+      <p class="results-header__score-note">אחוז ההתאמה מחושב לפי: תקציב, עונה, סוג יעד, רמת הליכה, גילאי הילדים ותחומי עניין</p>
+      <div class="results-share" id="resultsShareRow" aria-label="שיתוף תוצאות">
+        <button type="button" class="btn-share" id="btnCopyQuizLink">העתקת קישור לתוצאות</button>
+        <span class="share-feedback" id="shareLinkFeedback" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+    <div id="results-cards"></div>
+    <div class="restart-wrap">
+      <button class="btn-restart" id="btnRestart">🔄 תנסו שוב עם אופציות אחרות</button>
+    </div>
+  </div>
+</div>
+
+
+<a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21"
+   style="position:fixed;bottom:90px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;"
+   target="_blank" aria-label="וואטסאפ">
+  <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>

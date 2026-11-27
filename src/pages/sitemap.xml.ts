@@ -21,7 +21,11 @@ export const sitemapPaths = async (): Promise<string[]> => {
   const exclude = new Set(site.seo.sitemapExclude);
   const paths = pageFiles.map(toPath).filter((p): p is string => p !== null && !exclude.has(p));
   // Pages generated from content (dynamic routes are skipped above).
-  const guides = [...(await getCollection("guides", g => !g.data.draft)), ...(await getCollection("htmlGuides", g => !g.data.draft))].map(g => `/${g.id}.html`);
+  const guides = [
+    ...(await getCollection("guides", g => !g.data.draft)),
+    ...(await getCollection("htmlGuides", g => !g.data.draft)),
+    ...(await getCollection("htmlPages", g => !g.data.draft)),
+  ].map(g => `/${g.id}.html`);
   return [...new Set([...paths, ...guides, ...site.seo.sitemapExtra])].sort((a, b) => (a === "/" ? -1 : b === "/" ? 1 : a.localeCompare(b)));
 };
 

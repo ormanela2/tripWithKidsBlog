@@ -1,0 +1,96 @@
+<header class="game-top">
+  <div class="game-top__row">
+    <span class="game-top__brand">מתי טסים · טריוויה אוסטריה</span>
+    <a href="austria.html#austria-drive-bonus" class="btn-back-austria">🏔️ חזרה למדריך אוסטריה</a>
+  </div>
+  <div class="game-top__stats is-idle" id="headerStats">
+    <div class="progress-wrap">
+      <div class="progress-bar" id="roadTrack" style="--p: 0%;" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="התקדמות במשחק">
+        <div class="progress-bar__rail"></div>
+        <div class="progress-bar__fill"></div>
+        <span class="progress-bar__car" id="progressCar" aria-hidden="true">🚙</span>
+      </div>
+      <div class="progress-caption" id="progressCaption">קראו את ההנחיות ואז לחצו «בוחרים משחק»</div>
+    </div>
+    <div class="game-top__actions hidden" id="headerGameActions" aria-label="פעולות משחק">
+      <button type="button" class="game-action-btn" id="btnRestartRun" title="איפוס ניקוד ושאלות חדשות באותו מסלול">סיבוב מחדש</button>
+      <button type="button" class="game-action-btn game-action-btn--ghost" id="btnNewGameRun" title="חזרה לבחירת מסלול ילדים או הורים">משחק חדש</button>
+    </div>
+  </div>
+</header>
+
+<main class="game-main">
+  <div id="pickScreen" class="pick-screen">
+    <div id="pickInstructions">
+      <h1>🧠 טריוויה אוסטריה</h1>
+      <p class="pick-lead">משחק לנסיעה: הנוסעים משחקים והנהג נשאר עם העיניים על הכביש.</p>
+      <div class="pick-drive-tips">
+        <strong>איך הופכים את זה לכיף אמיתי בנסיעה (כמו שמומלץ במשחקי דרכים משפחתיים)</strong>
+        <ul>
+          <li>🛡️ <strong>בטיחות:</strong> הנהג לא נוגע במסך ולא קובע תשובות - רק הנוסעים.</li>
+          <li>🔄 <strong>משחק משפחתי:</strong> בכל שאלה מחליפים מי עונה בקול (ילדים ↔ מבוגרים).</li>
+          <li>💬 <strong>שיחה:</strong> העובדות הקצרות מזמינות «וואו, לא ידעתי!» - מזכירות טיולים ומה תראו בדרך לאוסטריה.</li>
+          <li>⭐ <strong>כיף בלי לחץ:</strong> רצף תשובות נכונות מקבל חגיגה קטנה; טעות פשוט מתחילה רצף חדש - בלי עונש.</li>
+        </ul>
+      </div>
+      <button type="button" class="pick-choose-game-btn" id="btnPickChooseGame">בוחרים משחק</button>
+    </div>
+    <div id="pickGameChoice" class="hidden">
+      <p class="pick-lead pick-lead--step2">בוחרים מסלול - השאלות והקושי משתנים.</p>
+      <p class="pick-choose-label" id="pickChooseLabel">בוחרים משחק:</p>
+      <div class="pick-grid">
+        <button type="button" class="pick-card" id="pickKids" aria-describedby="descKids">
+          <div class="pick-card__icon">🧒</div>
+          <div class="pick-card__badge">קל + בינוני</div>
+          <div class="pick-card__title">מסלול ילדים ונוער</div>
+          <div class="pick-card__desc" id="descKids">עובדות צבעוניות, גיאוגרפיה בסיסית ואוסטריה שמחה - בלי פינות היסטוריה כבדות.</div>
+        </button>
+        <button type="button" class="pick-card" id="pickParents" aria-describedby="descParents">
+          <div class="pick-card__icon">🧑‍🏫</div>
+          <div class="pick-card__badge pick-card__badge--parents">בינוני + מתקדם</div>
+          <div class="pick-card__title">מסלול הורים</div>
+          <div class="pick-card__desc" id="descParents">שאלות עומק יותר: היסטוריה, תרבות, ספורט ופרטים שמרגישים את השטח.</div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-intro hidden" id="gameIntro">
+    <h2 class="game-intro__title" id="introTitle">בהצלחה בדרך!</h2>
+    <p class="game-intro__lead">לוחצים על התשובה הנכונה לדעתכם. אחרי כל שאלה תופיע עובדה קצרצרה.</p>
+    <span class="mode-chip" id="modeChip"></span>
+  </div>
+
+  <div id="quizMount"></div>
+
+  <div class="game-end" id="gameEnd">
+    <div class="game-end__hero" aria-hidden="true">🏁</div>
+    <h2 id="endTitle">הגעתם לסוף המסלול!</h2>
+    <div class="game-end__mode" id="endModeChip"></div>
+    <div class="game-end__stars" id="endStars" aria-hidden="true"></div>
+    <div class="game-end__score-wrap">
+      <div class="game-end__score" id="finalScore">0/0</div>
+      <div class="game-end__score-label">תשובות נכונות</div>
+    </div>
+    <p class="game-end__msg" id="finalMsg"></p>
+    <p class="game-end__sub" id="finalSub"></p>
+    <div class="game-end__links">
+      <a href="austria.html#austria-drive-bonus" class="btn-back-austria">🏔️ חזרה למדריך אוסטריה</a>
+      <a href="austria.html#tips" class="game-end__tips">💡 טיפים וכלים</a>
+      <a href="#" class="secondary" id="replayBtn">משחק חדש / בחירת מסלול</a>
+    </div>
+  </div>
+</main>
+
+<div class="progress-dock hidden" id="progressDock" aria-hidden="true">
+  <div class="progress-dock__shell">
+    <div class="progress-bar progress-bar--dock" id="roadTrackDock" style="--p: 0%;">
+      <div class="progress-bar__rail"></div>
+      <div class="progress-bar__fill"></div>
+      <span class="progress-bar__car" aria-hidden="true">🚙</span>
+    </div>
+    <div class="progress-dock__caption" id="progressDockCaption"></div>
+  </div>
+</div>
+
+<div class="drive-toast" id="driveToast" role="status" aria-live="polite"></div>

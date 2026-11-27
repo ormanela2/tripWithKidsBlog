@@ -1,0 +1,702 @@
+<header class="page-header">
+    <nav class="page-header__breadcrumb" aria-label="breadcrumb">
+    <a href="services.html">מתי טסים</a>
+    <span aria-hidden="true">›</span>
+    <a href="tips.html">טיפים וכלים</a>
+    <span aria-hidden="true">›</span>
+    <span>תקציב</span>
+  </nav>
+  <span class="page-header__emoji">✈️</span>
+  <h1 class="page-header__title">מחשבון תקציב טיול משפחתי</h1>
+  <p class="page-header__sub">קבל הערכת עלות מפורטת לטיול שלך</p>
+  <div class="currency-bar" role="group" aria-label="בחר מטבע">
+    <button class="currency-btn active" data-currency="ILS" type="button">₪ שקל</button>
+    <button class="currency-btn" data-currency="EUR" type="button">€ יורו</button>
+    <button class="currency-btn" data-currency="USD" type="button">$ דולר</button>
+    <button class="currency-btn" data-currency="GBP" type="button">£ פאונד</button>
+  </div>
+  <div class="currency-loading" id="currency-loading">טוען שערי חליפין...</div>
+</header>
+
+<div class="page-wrap">
+
+  
+  <section class="card open" id="card-basics" aria-label="פרטי הטיול">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-basics">
+      <span class="card__header-icon">🗺️</span>
+      <span class="card__header-title">פרטי הטיול</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-basics">
+      <div class="form-row form-row--column">
+        <label class="form-label" for="country">יעד הטיול</label>
+        <select class="form-select form-select--full" id="country" aria-label="יעד הטיול">
+          <option value="budapest">בודפשט, הונגריה 🇭🇺</option>
+          <option value="paris">פריז, צרפת 🇫🇷</option>
+          <option value="rome">רומא, איטליה 🇮🇹</option>
+          <option value="amsterdam">אמסטרדם, הולנד 🇳🇱</option>
+          <option value="barcelona">ברצלונה, ספרד 🇪🇸</option>
+          <option value="prague">פראג, צ'כיה 🇨🇿</option>
+          <option value="vienna">וינה, אוסטריה 🇦🇹</option>
+          <option value="london">לונדון, בריטניה 🇬🇧</option>
+          <option value="athens">אתונה, יוון 🇬🇷</option>
+          <option value="lisbon">ליסבון, פורטוגל 🇵🇹</option>
+          <option value="berlin">ברלין, גרמניה 🇩🇪</option>
+          <option value="krakow">קרקוב, פולין 🇵🇱</option>
+          <option value="bucharest">בוקרשט, רומניה 🇷🇴</option>
+          <option value="dubai">דובאי, איחוד האמירויות 🇦🇪</option>
+          <option value="cyprus">קפריסין 🇨🇾</option>
+          <option value="croatia">קרואטיה 🇭🇷</option>
+          <option value="malta">מלטה 🇲🇹</option>
+          <option value="georgia">טביליסי, גאורגיה 🇬🇪</option>
+          <option value="albania">טיראנה, אלבניה 🇦🇱</option>
+          <option value="uzbekistan">סמרקנד ובוכרה, אוזבקיסטן 🇺🇿</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="days-val">מספר ימי הטיול</label>
+        <div class="stepper" role="group" aria-label="מספר ימים">
+          <button class="stepper__btn" id="days-minus" aria-label="הפחת יום" type="button">−</button>
+          <span class="stepper__val" id="days-val" aria-live="polite">7</span>
+          <button class="stepper__btn" id="days-plus" aria-label="הוסף יום" type="button">+</button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="adults-val">מבוגרים</label>
+        <div class="stepper" role="group" aria-label="מספר מבוגרים">
+          <button class="stepper__btn" id="adults-minus" aria-label="הפחת מבוגר" type="button">−</button>
+          <span class="stepper__val" id="adults-val" aria-live="polite">2</span>
+          <button class="stepper__btn" id="adults-plus" aria-label="הוסף מבוגר" type="button">+</button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="children-val">ילדים</label>
+        <div class="stepper" role="group" aria-label="מספר ילדים">
+          <button class="stepper__btn" id="children-minus" aria-label="הפחת ילד" type="button">−</button>
+          <span class="stepper__val" id="children-val" aria-live="polite">0</span>
+          <button class="stepper__btn" id="children-plus" aria-label="הוסף ילד" type="button">+</button>
+        </div>
+      </div>
+      <p class="form-note" style="margin-top:-10px;">ילדים עד גיל 2 טסים חינם, גיל 2–12 מחיר ילד</p>
+
+      
+      <div style="margin-top:22px;">
+        <p class="form-label" style="margin-bottom:10px;font-weight:600;">עונת הטיול</p>
+        <div class="season-tabs" role="group" aria-label="עונת הטיול">
+          <button class="season-tab" data-season="peak" type="button" aria-pressed="false">
+            <span>🌞</span>
+            <span class="season-name">עונת שיא</span>
+            <span class="season-dates">יולי–אוגוסט, חגים</span>
+          </button>
+          <button class="season-tab active" data-season="shoulder" type="button" aria-pressed="true">
+            <span>🍂</span>
+            <span class="season-name">עונת כתף</span>
+            <span class="season-dates">אפריל–יוני, ספט–אוקט</span>
+          </button>
+          <button class="season-tab" data-season="low" type="button" aria-pressed="false">
+            <span>❄️</span>
+            <span class="season-name">עונה שקטה</span>
+            <span class="season-dates">נובמבר–מרץ</span>
+          </button>
+        </div>
+        <p class="season-note">מחירים משתנים בהתאם לעונה - הערכים מתעדכנים אוטומטית</p>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="card open" id="card-flights" aria-label="טיסות">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-flights">
+      <span class="card__header-icon">✈️</span>
+      <span class="card__header-title">טיסות</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-flights">
+      <div class="form-row">
+        <label class="form-label">מחלקה</label>
+        <div class="toggle-group" role="radiogroup" aria-label="מחלקת טיסה">
+          <input type="radio" name="flight-class" id="fc-economy" value="economy" checked>
+          <label for="fc-economy">Economy</label>
+          <input type="radio" name="flight-class" id="fc-business" value="business">
+          <label for="fc-business">Business</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="flight-adult-price">מחיר למבוגר ($)</label>
+        <input type="number" class="num-input" id="flight-adult-price" min="0" step="10" placeholder="e.g. 400" aria-label="מחיר טיסה למבוגר">
+      </div>
+
+      <div class="form-row" id="child-price-row">
+        <label class="form-label" for="flight-child-price">מחיר לילד ($)</label>
+        <input type="number" class="num-input" id="flight-child-price" min="0" step="10" placeholder="e.g. 280" aria-label="מחיר טיסה לילד">
+      </div>
+
+      
+      <label class="check-row" style="margin-top:14px;" for="lowcost-check">
+        <input type="checkbox" id="lowcost-check" aria-label="טיסת Low Cost">
+        <div>
+          <div class="check-row__text">טיסת Low Cost (ויז אייר, ראיאנאייר וכו׳)</div>
+          <div class="check-row__saving">יש לשלם תוספת מזוודה לתא המטען</div>
+        </div>
+      </label>
+
+      <div class="luggage-details" id="luggage-details" style="margin-top:14px;">
+        <div class="form-row">
+          <label class="form-label" for="luggage-price">מחיר מזוודה לתא המטען לאדם (€)</label>
+          <input type="number" class="num-input" id="luggage-price" value="30" min="0" step="5" aria-label="מחיר מזוודה">
+        </div>
+        <p class="form-note">חל על מבוגרים בלבד. ילדים - בדקו עם חברת התעופה.</p>
+      </div>
+
+      
+      <div class="etias-row" id="etias-row" style="margin-top:14px;">
+        <label class="check-row" for="etias-check">
+          <input type="checkbox" id="etias-check" aria-label="דמי כניסה ETIAS">
+          <div>
+            <div class="check-row__text">דמי כניסה ETIAS לאירופה - €20 לאדם</div>
+            <div class="check-row__saving">חל על מבוגרים בין גיל 18 ל-70 בלבד</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="form-hint" id="flight-total-note" aria-live="polite"></div>
+    </div>
+  </section>
+
+  
+  <section class="card open" id="card-hotel" aria-label="לינה">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-hotel">
+      <span class="card__header-icon">🏨</span>
+      <span class="card__header-title">לינה</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-hotel">
+      <div class="form-row form-row--column">
+        <label class="form-label" for="hotel-type">סוג לינה</label>
+        <select class="form-select form-select--full" id="hotel-type" aria-label="סוג לינה">
+          <option value="2star">מלון 2★</option>
+          <option value="3star" selected>מלון 3★</option>
+          <option value="4star">מלון 4★</option>
+          <option value="5star">מלון 5★</option>
+          <option value="airbnb">Airbnb</option>
+          <option value="farm">בית כפרי</option>
+          <option value="motel">מוטל</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label">חדרים</label>
+        <div class="stepper" role="group" aria-label="מספר חדרים">
+          <button class="stepper__btn" id="rooms-minus" aria-label="הפחת חדר" type="button">−</button>
+          <span class="stepper__val" id="rooms-val" aria-live="polite">1</span>
+          <button class="stepper__btn" id="rooms-plus" aria-label="הוסף חדר" type="button">+</button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="hotel-price">מחיר לחדר ללילה ($)</label>
+        <input type="number" class="num-input" id="hotel-price" min="0" step="5" placeholder="e.g. 120" aria-label="מחיר לינה ללילה">
+      </div>
+
+      
+      <div style="margin-top:14px;">
+        <label class="check-row" for="citytax-check">
+          <input type="checkbox" id="citytax-check" checked aria-label="מס תיירות">
+          <div>
+            <div class="check-row__text" id="citytax-text">מס תיירות (City Tax)</div>
+            <div class="check-row__saving" id="citytax-note"></div>
+          </div>
+        </label>
+      </div>
+
+      <div class="form-hint" id="hotel-total-note" aria-live="polite"></div>
+    </div>
+  </section>
+
+  
+  <section class="card open" id="card-car" aria-label="השכרת רכב">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-car">
+      <span class="card__header-icon">🚗</span>
+      <span class="card__header-title">השכרת רכב</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-car">
+      <div class="form-row">
+        <label class="form-label">השכרת רכב?</label>
+        <div class="toggle-group" role="radiogroup" aria-label="השכרת רכב">
+          <input type="radio" name="car-toggle" id="car-no" value="no" checked>
+          <label for="car-no">לא</label>
+          <input type="radio" name="car-toggle" id="car-yes" value="yes">
+          <label for="car-yes">כן</label>
+        </div>
+      </div>
+
+      <div class="car-details" id="car-details">
+        <div class="form-row">
+          <label class="form-label">תיבת הילוכים</label>
+          <div class="toggle-group" role="radiogroup" aria-label="תיבת הילוכים">
+            <input type="radio" name="car-transmission" id="car-manual" value="manual" checked>
+            <label for="car-manual">ידני</label>
+            <input type="radio" name="car-transmission" id="car-auto" value="automatic">
+            <label for="car-auto">אוטומט (+35%)</label>
+          </div>
+        </div>
+
+        <div class="form-row form-row--column">
+          <label class="form-label" for="car-category">קטגוריה</label>
+          <select class="form-select form-select--full" id="car-category" aria-label="קטגוריית רכב">
+            <option value="economy">Economy</option>
+            <option value="compact" selected>Compact</option>
+            <option value="suv">SUV</option>
+            <option value="minivan">Minivan</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="car-days-val">ימי השכרה</label>
+          <div class="stepper" role="group" aria-label="ימי השכרת רכב">
+            <button class="stepper__btn" id="car-days-minus" aria-label="הפחת יום" type="button">−</button>
+            <span class="stepper__val" id="car-days-val" aria-live="polite">7</span>
+            <button class="stepper__btn" id="car-days-plus" aria-label="הוסף יום" type="button">+</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="car-price">מחיר בסיס ליום - ידני (€)</label>
+          <input type="number" class="num-input" id="car-price" min="0" step="5" aria-label="מחיר רכב ליום">
+        </div>
+
+        <div class="form-hint" id="car-total-note" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="card open transport-section" id="card-transport" aria-label="תחבורה מקומית">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-transport">
+      <span class="card__header-icon">🚌</span>
+      <span class="card__header-title">תחבורה מקומית</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-transport">
+      <div class="form-row form-row--column">
+        <label class="form-label">סוג תחבורה</label>
+        <div class="toggle-group" role="radiogroup" aria-label="סוג תחבורה מקומית">
+          <input type="radio" name="transport-type" id="trans-public" value="public" checked>
+          <label for="trans-public">תחבורה ציבורית</label>
+          <input type="radio" name="transport-type" id="trans-taxi" value="taxi">
+          <label for="trans-taxi">מוניות / אובר</label>
+          <input type="radio" name="transport-type" id="trans-mix" value="mix">
+          <label for="trans-mix">מיקס</label>
+        </div>
+      </div>
+      <div class="form-row" style="margin-top:16px;">
+        <label class="form-label" for="transport-price">מחיר ליום לכל הקבוצה (€)</label>
+        <input type="number" class="num-input" id="transport-price" min="0" step="1" aria-label="מחיר תחבורה מקומית ליום">
+      </div>
+      <div class="form-hint" id="transport-total-note" aria-live="polite"></div>
+    </div>
+  </section>
+
+  
+  <section class="card open" id="card-food" aria-label="אוכל">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-food">
+      <span class="card__header-icon">🍽️</span>
+      <span class="card__header-title">אוכל</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-food">
+      <div class="form-row form-row--column">
+        <label class="form-label">סגנון אכילה</label>
+        <div class="toggle-group" role="radiogroup" aria-label="סגנון אכילה" style="flex-wrap:wrap;">
+          <input type="radio" name="food-style" id="food-self" value="self" checked>
+          <label for="food-self">בישול עצמי</label>
+          <input type="radio" name="food-style" id="food-mix" value="mix">
+          <label for="food-mix">מיקס</label>
+          <input type="radio" name="food-style" id="food-restaurant" value="restaurant">
+          <label for="food-restaurant">מסעדות בלבד</label>
+        </div>
+      </div>
+
+      <div class="form-row" style="margin-top:16px;">
+        <label class="form-label" for="food-price">מחיר לאדם ליום (€)</label>
+        <input type="number" class="num-input" id="food-price" min="0" step="5" aria-label="מחיר אוכל לאדם ליום">
+      </div>
+
+      
+      <div style="margin-top:18px;">
+        <p class="form-label" style="margin-bottom:4px;">טיפים / שירות</p>
+        <p class="form-note" style="margin-bottom:10px;">בארה"ב 18–20%, באירופה 5–10%</p>
+        <div class="slider-wrap">
+          <div class="slider-labels">
+            <span>0%</span><span>10%</span><span>15%</span><span>20%</span>
+          </div>
+          <input type="range" id="tips-slider" min="0" max="20" step="5" value="10" aria-label="אחוז טיפים">
+          <div class="slider-value-display" id="tips-display" aria-live="polite">10%</div>
+        </div>
+      </div>
+
+      <div class="form-hint" id="food-total-note" aria-live="polite"></div>
+    </div>
+  </section>
+
+  
+  <section class="card open" id="card-activities" aria-label="פעילויות">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-activities">
+      <span class="card__header-icon">🎡</span>
+      <span class="card__header-title">פעילויות ואטרקציות</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-activities">
+      <div class="form-row form-row--column">
+        <label class="form-label">רמת פעילות</label>
+        <div class="toggle-group" role="radiogroup" aria-label="רמת פעילות" style="flex-wrap:wrap;">
+          <input type="radio" name="activity-level" id="act-light" value="light" checked>
+          <label for="act-light">קל</label>
+          <input type="radio" name="activity-level" id="act-medium" value="medium">
+          <label for="act-medium">בינוני</label>
+          <input type="radio" name="activity-level" id="act-heavy" value="heavy">
+          <label for="act-heavy">אינטנסיבי</label>
+        </div>
+        <p class="form-note">קל = הליכות ואתרים חינמיים | בינוני = 1-2 אטרקציות | אינטנסיבי = פארקים וסיורים</p>
+      </div>
+
+      <div class="form-row" style="margin-top:16px;">
+        <label class="form-label" for="activity-price">מחיר לאדם ליום (€)</label>
+        <input type="number" class="num-input" id="activity-price" min="0" step="5" aria-label="מחיר פעילויות לאדם ליום">
+      </div>
+
+      <div class="check-row check-row--hidden" id="discount-card-row" role="checkbox" aria-checked="false">
+        <input type="checkbox" id="discount-card-check" aria-label="כרטיס הנחות">
+        <div>
+          <div class="check-row__text" id="discount-card-text"></div>
+          <div class="check-row__saving" id="discount-card-saving"></div>
+        </div>
+      </div>
+
+      <div class="form-hint" id="activity-total-note" aria-live="polite"></div>
+    </div>
+  </section>
+
+  
+  <section class="card open" id="card-shopping" aria-label="קניות">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-shopping">
+      <span class="card__header-icon">🛍️</span>
+      <span class="card__header-title">קניות ומזכרות</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-shopping">
+      <div class="form-row">
+        <label class="form-label" for="shopping-price">תקציב קניות ומזכרות לאדם (€)</label>
+        <input type="number" class="num-input num-input--wide" id="shopping-price" value="50" min="0" step="10" aria-label="תקציב קניות לאדם">
+      </div>
+      <p class="form-note">סה"כ עבור כל המבוגרים בקבוצה</p>
+      <div class="form-hint" id="shopping-total-note" aria-live="polite"></div>
+    </div>
+  </section>
+
+  
+  <section class="card open" id="card-insurance" aria-label="ביטוח נסיעות">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-insurance">
+      <span class="card__header-icon">🛡️</span>
+      <span class="card__header-title">ביטוח נסיעות</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-insurance">
+      <div class="form-row">
+        <label class="form-label" for="insurance-price">מחיר לאדם ליום (€)</label>
+        <input type="number" class="num-input" id="insurance-price" value="3" min="0" step="0.5" aria-label="מחיר ביטוח לאדם ליום">
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="insurance-family">חבילה משפחתית
+          <span class="form-note">חיסכון של ~20%</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+          <input type="checkbox" id="insurance-family" style="width:22px;height:22px;accent-color:var(--teal);cursor:pointer;" aria-label="ביטוח משפחתי">
+        </label>
+      </div>
+
+      <div class="form-hint" id="insurance-total-note" aria-live="polite"></div>
+    </div>
+  </section>
+
+  
+  <section class="card open" id="card-comms" aria-label="תקשורת">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-comms">
+      <span class="card__header-icon">📱</span>
+      <span class="card__header-title">תקשורת</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-comms">
+      <div class="form-row form-row--column">
+        <label class="form-label">אפשרות תקשורת</label>
+        <div class="toggle-group" role="radiogroup" aria-label="אפשרות תקשורת" style="flex-wrap:wrap;">
+          <input type="radio" name="comms-type" id="comms-sim" value="sim" checked>
+          <label for="comms-sim">SIM מקומי</label>
+          <input type="radio" name="comms-type" id="comms-esim" value="esim">
+          <label for="comms-esim">eSIM</label>
+          <input type="radio" name="comms-type" id="comms-roaming" value="roaming">
+          <label for="comms-roaming">חבילת תקשורת מהארץ</label>
+        </div>
+      </div>
+
+      <div class="form-hint" id="comms-cost-note" aria-live="polite"></div>
+    </div>
+  </section>
+
+  
+  <section class="card open" id="card-airport" aria-label="נסיעות שדה תעופה">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-airport">
+      <span class="card__header-icon">🚕</span>
+      <span class="card__header-title">נסיעות שדה תעופה (הלוך וחזור)</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-airport">
+      <label class="check-row" for="airport-include-check" style="margin-top:0;margin-bottom:14px;">
+        <input type="checkbox" id="airport-include-check" checked aria-label="כולל נסיעות לשדה התעופה">
+        <div>
+          <div class="check-row__text">כולל נסיעות לשדה התעופה</div>
+        </div>
+      </label>
+      <div id="airport-price-wrap">
+        <div class="form-row">
+          <label class="form-label" for="airport-price">עלות הסעה הלוך וחזור (€)</label>
+          <input type="number" class="num-input num-input--wide" id="airport-price" min="0" step="5" aria-label="מחיר נסיעה לשדה תעופה">
+        </div>
+        <p class="form-note">מחיר לכל המשפחה, כולל שני הכיוונים</p>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="card open" id="card-parking" aria-label="חניה בנתב״ג">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-parking">
+      <span class="card__header-icon">🅿️</span>
+      <span class="card__header-title">חניה בנתב״ג</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-parking">
+      <div class="form-row">
+        <label class="form-label">ימי חניה</label>
+        <div class="stepper" role="group" aria-label="ימי חניה">
+          <button class="stepper__btn" id="parking-minus" aria-label="הפחת יום" type="button">−</button>
+          <span class="stepper__val" id="parking-val" aria-live="polite">7</span>
+          <button class="stepper__btn" id="parking-plus" aria-label="הוסף יום" type="button">+</button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="parking-price">מחיר ליום (₪)</label>
+        <input type="number" class="num-input" id="parking-price" value="80" min="0" step="5" aria-label="מחיר חניה ליום">
+      </div>
+
+      <div class="form-hint" id="parking-total-note" aria-live="polite"></div>
+    </div>
+  </section>
+
+  
+  <section class="card open" id="card-buffer" aria-label="חיץ ביטחון">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-buffer">
+      <span class="card__header-icon">📦</span>
+      <span class="card__header-title">חיץ ביטחון</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-buffer">
+      <p class="form-note" style="margin-bottom:16px;">הוסף אחוז עתודה להוצאות בלתי צפויות</p>
+      <div class="slider-wrap">
+        <div class="slider-labels">
+          <span>5%</span><span>10%</span><span>15%</span><span>20%</span>
+        </div>
+        <input type="range" id="buffer-slider" min="5" max="20" step="5" value="10" aria-label="אחוז חיץ ביטחון">
+        <div class="slider-value-display" id="buffer-display" aria-live="polite">10%</div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="card open" id="card-extras" aria-label="הוצאות נוספות">
+    <div class="card__header" role="button" tabindex="0" aria-expanded="true" aria-controls="body-extras">
+      <span class="card__header-icon">➕</span>
+      <span class="card__header-title">הוצאות נוספות</span>
+      <span class="card__chevron">▼</span>
+    </div>
+    <div class="card__body" id="body-extras">
+
+      
+      <div class="extras-item">
+        <div class="extras-item__left">
+          <input type="checkbox" id="clothing-check" aria-label="ביגוד וציוד לטיול">
+          <div>
+            <div class="extras-item__label">ביגוד וציוד לטיול</div>
+            <div class="extras-item__note">ביגוד מיוחד, ציוד ספורט, מזוודות חדשות וכו'</div>
+          </div>
+        </div>
+        <div class="extras-item__input" id="clothing-input-wrap">
+          <input type="number" class="num-input" id="clothing-price" value="0" min="0" step="10" aria-label="עלות ביגוד וציוד">
+          <span style="font-size:13px;color:var(--grey-text);">€</span>
+        </div>
+      </div>
+
+      
+      <div class="extras-item" id="tolls-row">
+        <div class="extras-item__left">
+          <input type="checkbox" id="tolls-check" aria-label="כבישי אגרה">
+          <div>
+            <div class="extras-item__label">כבישי אגרה</div>
+            <div class="extras-item__note">עלות ליום - ממוצע לפי יעד</div>
+          </div>
+        </div>
+        <div class="extras-item__input" id="tolls-input-wrap">
+          <input type="number" class="num-input" id="tolls-price" value="0" min="0" step="1" aria-label="עלות כבישי אגרה ליום">
+          <span style="font-size:13px;color:var(--grey-text);">€ / יום</span>
+        </div>
+      </div>
+
+      
+      <div class="extras-item" id="kids-row">
+        <div class="extras-item__left">
+          <input type="checkbox" id="kids-check" aria-label="בידור ילדים">
+          <div>
+            <div class="extras-item__label">בידור ילדים</div>
+            <div class="extras-item__note">פעילויות, מתנות, פינוקים - לילד ליום</div>
+          </div>
+        </div>
+        <div class="extras-item__input" id="kids-input-wrap">
+          <input type="number" class="num-input" id="kids-price" value="15" min="0" step="5" aria-label="עלות בידור ילדים לילד ליום">
+          <span style="font-size:13px;color:var(--grey-text);">€ / ילד / יום</span>
+        </div>
+      </div>
+
+      
+      <div class="extras-item" id="breakfast-row">
+        <div class="extras-item__left">
+          <input type="checkbox" id="breakfast-check" aria-label="ארוחת בוקר במלון">
+          <div>
+            <div class="extras-item__label">ארוחת בוקר במלון</div>
+            <div class="extras-item__note">$12 לאדם ליום - חל רק בלינה במלון</div>
+          </div>
+        </div>
+        <div class="extras-item__input" id="breakfast-input-wrap">
+          <input type="number" class="num-input" id="breakfast-price" value="12" min="0" step="1" aria-label="מחיר ארוחת בוקר לאדם ליום">
+          <span style="font-size:13px;color:var(--grey-text);">€ / אדם / יום</span>
+        </div>
+      </div>
+
+      <div class="form-hint" id="extras-total-note" style="margin-top:10px;" aria-live="polite"></div>
+    </div>
+  </section>
+
+  
+  <div class="results-full" id="results-full">
+    <div class="results-full__header">
+      <div class="results-full__header-title">סיכום תקציב</div>
+      <div class="results-full__header-sub" id="results-header-sub">כל הסכומים בשקלים (₪)</div>
+    </div>
+    <div class="results-full__body">
+
+      
+      <div class="results-currency-row" role="group" aria-label="בחר מטבע לתוצאות">
+        <span class="results-currency-row__label">הצג תוצאות ב:</span>
+        <button class="currency-btn active" data-currency="ILS" data-source="results" type="button">₪ שקל</button>
+        <button class="currency-btn" data-currency="EUR" data-source="results" type="button">€ יורו</button>
+        <button class="currency-btn" data-currency="USD" data-source="results" type="button">$ דולר</button>
+        <button class="currency-btn" data-currency="GBP" data-source="results" type="button">£ פאונד</button>
+      </div>
+
+      
+      <div class="results-disclaimer">
+        המחירים מבוססים על ממוצעים היסטוריים ועשויים להשתנות בהתאם לתאריך, זמינות ואתר ההזמנה. מומלץ לאמת מול אתרי ההזמנה.
+      </div>
+
+      
+      <div class="stacked-bar stacked-bar--full" id="stacked-bar-full" aria-hidden="true"></div>
+
+      
+      <div class="results-cards-grid">
+        <div class="results-sub-card">
+          <div class="results-sub-card__header">עוגת הוצאות</div>
+          <div class="results-sub-card__body">
+            <div class="pie-container">
+              <svg class="pie-svg" viewBox="0 0 64 64" role="img" aria-label="תרשים עוגה">
+                <circle cx="32" cy="32" r="16" fill="#f8f5ef" stroke="#f0ece4" stroke-width="32"/>
+                <g id="pie-slices"></g>
+              </svg>
+              <div class="pie-legend" id="pie-legend"></div>
+            </div>
+          </div>
+        </div>
+        <div class="results-sub-card">
+          <div class="results-sub-card__header">פירוט הוצאות</div>
+          <div class="results-sub-card__body">
+            <ul class="breakdown-list breakdown-list--full" id="breakdown-full" aria-label="פירוט הוצאות"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-grand">
+        <div class="results-grand__main" id="grand-total-main">₪0</div>
+        <div class="results-grand__sub">
+          <span>EUR: <span class="results-grand__per" id="grand-total-eur">€0</span></span>
+          <span>לאדם: <span class="results-grand__per" id="per-person">₪0</span></span>
+          <span>ליום: <span class="results-grand__per" id="per-day">₪0</span></span>
+          <span>ללילה: <span class="results-grand__per" id="per-night">₪0</span></span>
+        </div>
+      </div>
+
+      <div class="savings-note" id="savings-note"></div>
+
+      <div class="action-btns">
+        <button class="print-btn" type="button" onclick="window.print()" aria-label="הדפס או שמור PDF">
+          🖨️ הדפס / שמור
+        </button>
+        <button class="share-btn" type="button" id="share-btn" aria-label="שתף סיכום">
+          📋 שתף סיכום
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<button id="scroll-top-btn" type="button" aria-label="חזור לראש הדף">↑</button>
+
+
+<div class="results-sticky-wrap" id="results-sticky">
+  <div class="results-card">
+    <div class="results-card__toggle" role="button" tabindex="0" aria-expanded="false" aria-controls="sticky-body" id="sticky-toggle">
+      <span class="results-card__chevron">▲</span>
+      <span class="results-card__toggle-label">פירוט תקציב</span>
+      <span class="results-card__total-preview" id="sticky-total">₪0</span>
+    </div>
+    <div class="results-card__body" id="sticky-body">
+      <div class="drawer-handle"><div class="drawer-handle__pill"></div></div>
+      <div class="results-card__inner">
+        <ul class="breakdown-list" id="breakdown-sticky" aria-label="פירוט הוצאות"></ul>
+        <div class="stacked-bar" id="stacked-bar-sticky" aria-hidden="true"></div>
+        <div class="results-total-box">
+          <div class="results-total-box__main" id="sticky-total-box">₪0</div>
+          <div class="results-total-box__sub">
+            <span>EUR: <strong id="sticky-eur">€0</strong></span>
+            <span>לאדם: <strong id="sticky-per-person">₪0</strong></span>
+            <span>ליום: <strong id="sticky-per-day">₪0</strong></span>
+          </div>
+        </div>
+      </div>
+      <button class="drawer-close-btn" id="drawer-close-btn">✕ סגור פירוט</button>
+    </div>
+  </div>
+</div>
+
+
+
+<a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21"
+   style="position:fixed;bottom:90px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;"
+   target="_blank" aria-label="וואטסאפ">
+  <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>

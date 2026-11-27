@@ -146,30 +146,39 @@ const guides = defineCollection({
     }),
 });
 
+/** Options shared by every page carried over as it is (W6-W8). */
+const carriedFields = ({ image }: { image: () => z.ZodType }) => ({
+  title: text,
+  seoTitle: text.optional(),
+  /** Some live pages have no description; add one when the page is next edited. */
+  description: text.max(200).optional(),
+  name: text.optional(),
+  /** Share image (1200x630 crop); the site default when missing. */
+  shareImage: image().optional(),
+  /** Load Microsoft Clarity, as the live page does. */
+  clarity: z.boolean().default(false),
+  /** Load the Stay22 "Let me allez" script, as the live page does. */
+  stay22: z.boolean().default(false),
+  /** Bottom-right "all destinations" + "back to top" buttons, as the live page has. */
+  floatNav: z.boolean().default(false),
+  /** Reading-progress plane in the menu bar, as the live page has. */
+  readProgress: z.boolean().default(false),
+  draft: z.boolean().default(false),
+});
+
 /**
- * Guides carried over as they are (W6): the page body, styles and scripts live in src/guide-html/<slug>/,
- * written by scripts/migrate-guide-html.mjs. Only the facts the shared layout needs are here.
+ * Guides carried over as they are (W6): body, styles and scripts live in src/carried/<slug>/,
+ * written by scripts/carry-over.mjs. Only the facts the shared layout needs are here.
  */
 const htmlGuides = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/html-guides" }),
-  schema: ({ image }) =>
-    z.object({
-      title: text,
-      seoTitle: text.optional(),
-      description: text.max(200),
-      name: text.optional(),
-      country: z.string().regex(/^[A-Z]{2}$/).optional(),
-      hub: z.string().optional(),
-      /** Share image (1200x630 crop); the site default when missing. */
-      shareImage: image().optional(),
-      /** Load Microsoft Clarity, as the live page does. */
-      clarity: z.boolean().default(false),
-      /** Load the Stay22 "Let me allez" script, as the live page does. */
-      stay22: z.boolean().default(false),
-      /** Bottom-right "all destinations" + "back to top" buttons, as the live page has. */
-      floatNav: z.boolean().default(false),
-      draft: z.boolean().default(false),
-    }),
+  schema: ({ image }) => z.object({ ...carriedFields({ image }), country: z.string().regex(/^[A-Z]{2}$/).optional(), hub: z.string().optional() }),
 });
 
-export const collections = { guides, htmlGuides };
+/** Other pages carried over as they are (W7 tools, W8 partner pages), same mechanism. */
+const htmlPages = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/html-pages" }),
+  schema: ({ image }) => z.object(carriedFields({ image })),
+});
+
+export const collections = { guides, htmlGuides, htmlPages };

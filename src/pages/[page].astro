@@ -1,0 +1,38 @@
+---
+/**
+ * Every content page at /<slug>.html:
+ * - structured guides (src/content/guides) -> StructuredGuide
+ * - guides and other pages carried over as they are (src/content/html-guides, src/content/html-pages) -> CarriedPage
+ * Pages with their own file in src/pages (e.g. destinations.astro) take precedence over this route.
+ */
+import { getCollection, type CollectionEntry } from "astro:content";
+import StructuredGuide from "../components/guide/StructuredGuide.astro";
+import CarriedPage from "../components/guide/CarriedPage.astro";
+
+export async function getStaticPaths() {
+  const structured = await getCollection("guides", g => !g.data.draft);
+  const guides = await getCollection("htmlGuides", g => !g.data.draft);
+  const pages = await getCollection("htmlPages", g => !g.data.draft);
+  const seen = new Map<string, string>();
+  for (const [name, list] of [["guides", structured], ["html-guides", guides], ["html-pages", pages]] as const) {
+    for (const e of list) {
+      if (seen.has(e.id)) throw new Error(`"${e.id}" exists in both src/content/${seen.get(e.id)} and src/content/${name}. Keep one.`);
+      seen.set(e.id, name);
+    }
+  }
+  return [
+    ...structured.map(e => ({ params: { page: e.id }, props: { kind: "structured" as const, entry: e } })),
+    ...guides.map(e => ({ params: { page: e.id }, props: { kind: "guide" as const, entry: e } })),
+    ...pages.map(e => ({ params: { page: e.id }, props: { kind: "page" as const, entry: e } })),
+  ];
+}
+
+type Props =
+  | { kind: "structured"; entry: CollectionEntry<"guides"> }
+  | { kind: "guide"; entry: CollectionEntry<"htmlGuides"> }
+  | { kind: "page"; entry: CollectionEntry<"htmlPages"> };
+const props = Astro.props;
+---
+{props.kind === "structured" ? <StructuredGuide entry={props.entry} />
+  : props.kind === "guide" ? <CarriedPage kind="guide" entry={props.entry} />
+  : <CarriedPage kind="page" entry={props.entry} />}

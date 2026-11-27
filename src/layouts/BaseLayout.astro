@@ -34,6 +34,7 @@ const stay22Id = stay22 ? site.partners.stay22.partnerId : null;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" />
     <script defer data-domain={site.analytics.plausibleDomain} src="https://plausible.io/js/script.js"></script>
+    <script is:inline>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments); };</script>
     {clarityId && <script is:inline define:vars={{ clarityId }}>(function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); }; t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(window, document, "clarity", "script", clarityId);</script>}
     {stay22Id && <script is:inline define:vars={{ stay22Id }}>(function (s, t, a, y) { s.Stay22 = s.Stay22 || {}; s.Stay22.params = { lmaID: stay22Id }; var e = t.createElement(a), f = t.getElementsByTagName(a)[0]; e.async = 1; e.src = y; f.parentNode.insertBefore(e, f); })(window, document, "script", "https://scripts.stay22.com/letmeallez.js");</script>}
     <slot name="head" />

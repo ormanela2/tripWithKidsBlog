@@ -1,0 +1,5 @@
+[
+ {
+  "code": "function toggleTollCard(bodyId) {\r\n      var body = document.getElementById(bodyId);\r\n      if (!body) return;\r\n      var card = body.closest('.toll-card');\r\n      if (card) card.classList.toggle('toll-card--open');\r\n    }"
+ }
+]

@@ -1,0 +1,693 @@
+<div id="newsletter" tabindex="-1" style="scroll-margin-top:calc(var(--nav-height) + 12px);height:0;overflow:hidden;" aria-hidden="true"></div>
+
+
+<header class="page-header">
+    <nav class="page-header__breadcrumb" aria-label="breadcrumb">
+    <a href="services.html">מתי טסים</a>
+    <span aria-hidden="true">›</span>
+    <a href="tips.html">טיפים וכלים</a>
+    <span aria-hidden="true">›</span>
+    <span>רשימת ציוד</span>
+  </nav>
+  <span class="page-header__emoji">🧳</span>
+  <h1 class="page-header__title">רשימת ציוד לטיול משפחתי</h1>
+  <p class="page-header__sub">בחרו עונה, סוג טיול וגיל הילדים - הרשימה תתאים את עצמה</p>
+</header>
+
+
+<div class="filter-bar" id="filterBar">
+  <div class="filter-bar__inner">
+    <div class="filter-bar__filters">
+
+      <div class="filter-group">
+        <div class="filter-group__label">עונה</div>
+        <div class="filter-pills" id="seasonPills">
+          <button class="fpill fpill--season active" data-season="summer">☀️ קיץ</button>
+          <button class="fpill fpill--season" data-season="winter">❄️ חורף</button>
+          <button class="fpill fpill--season" data-season="spring">🌸 אביב/סתיו</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-group__label">סוג טיול</div>
+        <div class="filter-pills" id="typePills">
+          <button class="fpill" data-type="city">🏙️ עיר</button>
+          <button class="fpill" data-type="nature">🌲 טבע/הייקינג</button>
+          <button class="fpill" data-type="beach">🏖️ חוף</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-group__label">גיל ילדים</div>
+        <div class="filter-pills" id="agePills">
+          <button class="fpill" data-age="baby">👶 תינוק 0-2</button>
+          <button class="fpill" data-age="toddler">🐣 פעוט 3-5</button>
+          <button class="fpill" data-age="child">🧒 ילד 6-10</button>
+          <button class="fpill" data-age="teen">🧑 נער 11-16</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="filter-bar__bottom">
+      <div class="progress-wrap">
+        <div class="progress-label" id="progressLabel">0 מתוך 0 פריטים סומנו</div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      </div>
+      <div class="filter-actions">
+        <button class="btn-reset" id="btnReset">אפס הכל</button>
+        <button class="btn-print" id="btnPdf">📄 ייצוא PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="page-wrap" id="pageWrap">
+
+  
+  <div class="cat-card open" id="cat-clothing" data-cat="clothing">
+    <div class="cat-card__header" onclick="toggleCat(this)">
+      <span class="cat-card__emoji">👕</span>
+      <span class="cat-card__title">ביגוד והנעלה</span>
+      <span class="cat-card__count" id="cnt-clothing">0/0</span>
+      <span class="cat-card__chevron">▼</span>
+    </div>
+    <div class="cat-card__body">
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="all">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">חולצות</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">חולצות קצרות שרוול (4-5 יח')</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">חולצות ארוכות שרוול (3 יח')</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">חולצת יציאה/ערב (1-2 יח')</span></label>
+        </div>
+      </div>
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="all">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">מכנסיים</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">ג'ינס/מכנסי בד (2 יח')</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">מכנסיים קצרים (2 יח')</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">מכנסי טרנינג/פנאי (1 יח')</span></label>
+        </div>
+      </div>
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="all">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">הנעלה</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">נעלי הליכה/סניקרס נוחות</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">כפכפים/סנדלים</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">נעלי יציאה/ערב</span></label>
+        </div>
+      </div>
+
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">תחתונים וגרביים (7+ זוגות לכל אחד)</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">ג'קט קל / רוחסטופ</span></label>
+      </div>
+      <div class="item" data-seasons="winter,spring" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מעיל חורף כבד</span><span class="item__tag item__tag--season">חורף/אביב</span></label>
+      </div>
+      <div class="item" data-seasons="winter,spring" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">כובע חורף + כפפות + צעיף</span><span class="item__tag item__tag--season">חורף/אביב</span></label>
+      </div>
+      <div class="item" data-seasons="summer" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">כובע שמש לכל בני המשפחה</span><span class="item__tag item__tag--season">קיץ</span></label>
+      </div>
+      <div class="item" data-seasons="summer" data-types="city,beach,nature" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">בגדי ים (2 יח' לכל אחד)</span><span class="item__tag item__tag--season">קיץ</span></label>
+      </div>
+      <div class="item" data-seasons="summer" data-types="beach,nature" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">חולצת הגנה UV לילדים</span><span class="item__tag item__tag--type">חוף/טבע</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="nature" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מכנסיים ארוכים ייעודיים להייקינג</span><span class="item__tag item__tag--type">טבע</span></label>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="cat-card open" id="cat-baby" data-cat="baby" data-ages-required="baby,toddler">
+    <div class="cat-card__header" onclick="toggleCat(this)">
+      <span class="cat-card__emoji">👶</span>
+      <span class="cat-card__title">ציוד לתינוקות ופעוטות</span>
+      <span class="cat-card__count" id="cnt-baby">0/0</span>
+      <span class="cat-card__chevron">▼</span>
+    </div>
+    <div class="cat-card__body">
+
+      <div class="item" data-seasons="all" data-types="all" data-ages="baby">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">חיתולים - מספיק לכל הטיול + עודף</span><span class="item__tag item__tag--age">תינוק</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="baby,toddler">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מגבונים לחים (כמה אריזות)</span><span class="item__tag item__tag--age">0-5</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="baby">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">קרם החתלה / אבקת תינוקות</span><span class="item__tag item__tag--age">תינוק</span></label>
+      </div>
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="baby">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">ציוד האכלה</span>
+          <span class="item__tag item__tag--age">תינוק</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">בקבוקים (2-3 יח')</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">מוצצים (2-3 עודף)</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">פורמולה / מזון תינוקות</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">ביב (4-5 יח')</span></label>
+        </div>
+      </div>
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="baby,toddler">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">בגדי תינוק/פעוט</span>
+          <span class="item__tag item__tag--age">0-5</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">רומפרים / בגדי גוף (5-7 יח')</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">פיג'מות (3-4 יח')</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">גרביים קטנות (7+ זוגות)</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">כובע לתינוק</span></label>
+        </div>
+      </div>
+
+      <div class="item" data-seasons="all" data-types="all" data-ages="baby,toddler">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">חגורת נשיאה / מוביל</span><span class="item__tag item__tag--age">0-5</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="baby,toddler">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">עגלה קלה/מתקפלת</span><span class="item__tag item__tag--age">0-5</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="baby,toddler">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">צעצוע מנחם + שמיכה מוכרת</span><span class="item__tag item__tag--age">0-5</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="baby">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">שקית החתלה עם מחצלת ניידת</span><span class="item__tag item__tag--age">תינוק</span></label>
+      </div>
+      <div class="item" data-seasons="summer" data-types="beach" data-ages="baby,toddler">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">חיתולי ים</span><span class="item__tag item__tag--age">0-5</span></label>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="cat-card open" id="cat-health" data-cat="health">
+    <div class="cat-card__header" onclick="toggleCat(this)">
+      <span class="cat-card__emoji">🩹</span>
+      <span class="cat-card__title">בריאות, תרופות ועזרה ראשונה</span>
+      <span class="cat-card__count" id="cnt-health">0/0</span>
+      <span class="cat-card__chevron">▼</span>
+    </div>
+    <div class="cat-card__body">
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="all">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">תרופות לכאב וחום</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">פרצטמול לילדים (סירופ + קפסולות)</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">איבופרופן לילדים</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">מדחום דיגיטלי</span></label>
+        </div>
+      </div>
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="all">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">תרופות לנסיעה</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">טבליות/מדבקות לבחילות נסיעה</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">טיפות/תרסיס לאוזניים לטיסה</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">כדורי שלשול / עצירות</span></label>
+        </div>
+      </div>
+
+      
+      <div class="item item--expandable" data-seasons="summer,spring" data-types="all" data-ages="all">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">תרופות לאלרגיה</span>
+          <span class="item__tag item__tag--season">קיץ/אביב</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">אנטיהיסטמין (סירופ + טבליות)</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">אפי-פן (אם נדרש)</span></label>
+        </div>
+      </div>
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="all">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">ערכת עזרה ראשונה</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">פלסטרים (גדולים וקטנים)</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">גאזות וחבישות</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">קרם אנטיבקטריאלי</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">חומר חיטוי (אלכוהול/בטדין)</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">כפפות חד-פעמיות</span></label>
+        </div>
+      </div>
+
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">תרופות מרשם + צילום מרשמים</span></label>
+      </div>
+      <div class="item" data-seasons="summer,spring" data-types="nature,beach" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">תרסיס נגד חרקים (DEET-free לילדים)</span><span class="item__tag item__tag--type">חוף/טבע</span></label>
+      </div>
+      <div class="item" data-seasons="summer" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">קרם/ספריי לאחר שיזוף</span><span class="item__tag item__tag--season">קיץ</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="nature" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מלקחיים להסרת עלקים</span><span class="item__tag item__tag--type">טבע</span></label>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="cat-card open" id="cat-docs" data-cat="docs">
+    <div class="cat-card__header" onclick="toggleCat(this)">
+      <span class="cat-card__emoji">📄</span>
+      <span class="cat-card__title">מסמכים וכסף</span>
+      <span class="cat-card__count" id="cnt-docs">0/0</span>
+      <span class="cat-card__chevron">▼</span>
+    </div>
+    <div class="cat-card__body">
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="all">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">דרכונים - לכולם (תאריך תפוגה!)</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">דרכון הורה 1</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">דרכון הורה 2</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">דרכון ילד 1</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">דרכון ילד 2</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">צילומי גיבוי (שמורים בענן)</span></label>
+        </div>
+      </div>
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="all">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">כסף ואמצעי תשלום</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">כרטיס אשראי בינלאומי</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">מזומן מקומי (מט"ח)</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">כרטיס גיבוי נוסף</span></label>
+        </div>
+      </div>
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="all">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">אישורי הזמנות</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">כרטיסי טיסה (הלוך + חזור)</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">אישור מלון</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">אישור השכרת רכב</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">כרטיסים לפעילויות</span></label>
+        </div>
+      </div>
+
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">פוליסת ביטוח נסיעות</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">רשימת מספרי חירום (שגרירות, ביטוח)</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">ETIAS / ויזה (אם נדרש)</span></label>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="cat-card open" id="cat-tech" data-cat="tech">
+    <div class="cat-card__header" onclick="toggleCat(this)">
+      <span class="cat-card__emoji">🔌</span>
+      <span class="cat-card__title">טכנולוגיה ואלקטרוניקה</span>
+      <span class="cat-card__count" id="cnt-tech">0/0</span>
+      <span class="cat-card__chevron">▼</span>
+    </div>
+    <div class="cat-card__body">
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="all">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">מטענים</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">מטען USB-C / Lightning לטלפון</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">מטען לטאבלט</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">פאוור בנק (20,000mAh+)</span></label>
+        </div>
+      </div>
+
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מתאם חשמל בינלאומי</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="child,teen,toddler">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">טאבלט / קינדל לילדים (טעון מראש)</span><span class="item__tag item__tag--age">3+</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="child,teen">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">אוזניות לילדים (לטיסה)</span><span class="item__tag item__tag--age">ילד/נער</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מצלמה / GoPro (אופציונלי)</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">חבילת תקשורת מהארץ / SIM מקומי</span></label>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="cat-card open" id="cat-food" data-cat="food">
+    <div class="cat-card__header" onclick="toggleCat(this)">
+      <span class="cat-card__emoji">🍿</span>
+      <span class="cat-card__title">אוכל ושתייה לדרך</span>
+      <span class="cat-card__count" id="cnt-food">0/0</span>
+      <span class="cat-card__chevron">▼</span>
+    </div>
+    <div class="cat-card__body">
+
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">חטיפים מוכרים מהבית (ביסקוויטים, קרקרים)</span></label>
+      </div>
+
+      <div class="item" data-seasons="all" data-types="all" data-ages="child,teen,toddler">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">סוכריות / מסטיק לפיצוי לחץ בטיסה</span><span class="item__tag item__tag--age">3+</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="baby,toddler">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">פאוצ'ים / מחיות לתינוקות</span><span class="item__tag item__tag--age">0-5</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">בקבוקי מים ניתנים למילוי (לכל אחד)</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="nature" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">אוכל לטיולים/פיקניק ביום הייקינג</span><span class="item__tag item__tag--type">טבע</span></label>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="cat-card open" id="cat-fun" data-cat="fun">
+    <div class="cat-card__header" onclick="toggleCat(this)">
+      <span class="cat-card__emoji">🎲</span>
+      <span class="cat-card__title">בידור ופעילויות</span>
+      <span class="cat-card__count" id="cnt-fun">0/0</span>
+      <span class="cat-card__chevron">▼</span>
+    </div>
+    <div class="cat-card__body">
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="baby,toddler">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">בידור לתינוקות/פעוטות</span>
+          <span class="item__tag item__tag--age">0-5</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">צעצוע רעשן/טבעות</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">ספר דפדוף / ספר קרטון</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">שירים/פזמונים מוכנים בטלפון</span></label>
+        </div>
+      </div>
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="child,toddler">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">בידור לילדים</span>
+          <span class="item__tag item__tag--age">3-10</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">פנקס צביעה + עפרונות</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">ספר מדבקות</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">משחק נסיעה קומפקטי</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">פאזל קטן</span></label>
+        </div>
+      </div>
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="all" data-ages="teen">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">בידור לנערים</span>
+          <span class="item__tag item__tag--age">11-16</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">משחק כף יד / Nintendo Switch</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">ספר / קינדל</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">אוזניות + פלייליסט מוכן</span></label>
+        </div>
+      </div>
+
+      <div class="item" data-seasons="all" data-types="nature" data-ages="child,teen">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">משקפת + זכוכית מגדלת לטבע</span><span class="item__tag item__tag--type">טבע</span></label>
+      </div>
+      <div class="item" data-seasons="summer" data-types="beach" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">דלי, מגרפה וכדור ים</span><span class="item__tag item__tag--type">חוף</span></label>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="cat-card open" id="cat-transport" data-cat="transport">
+    <div class="cat-card__header" onclick="toggleCat(this)">
+      <span class="cat-card__emoji">🚗</span>
+      <span class="cat-card__title">נסיעות ותחבורה</span>
+      <span class="cat-card__count" id="cnt-transport">0/0</span>
+      <span class="cat-card__chevron">▼</span>
+    </div>
+    <div class="cat-card__body">
+
+      <div class="item" data-seasons="all" data-types="all" data-ages="baby,toddler,child">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">כיסא בטיחות / בוסטר (לרכב שכור)</span><span class="item__tag item__tag--age">0-10</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">כרית נסיעה לצוואר</span></label>
+      </div>
+      <div class="item" data-seasons="winter,spring" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">שמיכה קלה לנסיעות ארוכות</span><span class="item__tag item__tag--season">חורף/אביב</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">שקיות לאשפה / לבחילות ברכב</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">ארגן תיק גב / מזוודה לנסיעה</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="nature" data-ages="child,teen">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">תיק גב להייקינג</span><span class="item__tag item__tag--type">טבע</span></label>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="cat-card open" id="cat-toiletries" data-cat="toiletries">
+    <div class="cat-card__header" onclick="toggleCat(this)">
+      <span class="cat-card__emoji">🧴</span>
+      <span class="cat-card__title">טיפוח וניקיון</span>
+      <span class="cat-card__count" id="cnt-toiletries">0/0</span>
+      <span class="cat-card__chevron">▼</span>
+    </div>
+    <div class="cat-card__body">
+
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">שמפו + מרכך + סבון גוף</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מברשות שיניים + משחת שיניים</span></label>
+      </div>
+      <div class="item" data-seasons="summer" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">קרם/ספריי הגנה מהשמש SPF 50+</span><span class="item__tag item__tag--season">קיץ</span></label>
+      </div>
+      <div class="item" data-seasons="winter,spring" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">קרם לחות + שפתון מגן</span><span class="item__tag item__tag--season">חורף/אביב</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="child,teen">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">דאודורנט</span><span class="item__tag item__tag--age">ילד/נער</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">ממחטות נייר / מגבונים</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">ג'ל חיטוי ידיים</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מסיר כתמים (עט/ספריי)</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">חבל כביסה + 4-5 אטבים</span></label>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="cat-card open" id="cat-nature" data-cat="nature" data-types-required="nature">
+    <div class="cat-card__header" onclick="toggleCat(this)">
+      <span class="cat-card__emoji">🌲</span>
+      <span class="cat-card__title">ציוד טבע והייקינג</span>
+      <span class="cat-card__count" id="cnt-nature">0/0</span>
+      <span class="cat-card__chevron">▼</span>
+    </div>
+    <div class="cat-card__body">
+
+      <div class="item" data-seasons="all" data-types="nature" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מקלות הליכה (למבוגרים)</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="nature" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מפה / ניווט אופליין (Maps.me)</span></label>
+      </div>
+
+      
+      <div class="item item--expandable" data-seasons="all" data-types="nature" data-ages="all">
+        <div class="item__row" onclick="toggleExpand(this.parentElement)">
+          <input type="checkbox" class="item__check item__check--parent" onclick="event.stopPropagation();toggleParent(this)">
+          <span class="item__name">ציוד חירום בשבילים</span>
+          <span class="item__expand">▸</span>
+        </div>
+        <div class="item__subitems">
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">שריקה חירום</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">פנס/כלמפ עם סוללות</span></label>
+          <label class="subitem"><input type="checkbox" class="subitem__check"><span class="subitem__name">שמיכת הצלה (כסופה)</span></label>
+        </div>
+      </div>
+
+      <div class="item" data-seasons="summer,spring" data-types="nature" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">כובע שמש + הגנת שמש מוגברת</span><span class="item__tag item__tag--season">קיץ</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="nature" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">בגדים ירוקים/חומים (לא בהירים בטבע)</span></label>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="cat-card open" id="cat-beach" data-cat="beach" data-types-required="beach">
+    <div class="cat-card__header" onclick="toggleCat(this)">
+      <span class="cat-card__emoji">🏖️</span>
+      <span class="cat-card__title">ציוד חוף</span>
+      <span class="cat-card__count" id="cnt-beach">0/0</span>
+      <span class="cat-card__chevron">▼</span>
+    </div>
+    <div class="cat-card__body">
+
+      <div class="item" data-seasons="all" data-types="beach" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מגבות חוף (לכולם)</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="beach" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">שקיות עמידות למים</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="beach" data-ages="baby,toddler,child">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">גלגל ים לילדים</span><span class="item__tag item__tag--age">0-10</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="beach" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">נעלי גומי</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="beach" data-ages="child,teen">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">משקפי צלילה / שנורקל</span><span class="item__tag item__tag--age">ילד/נער</span></label>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="cat-card open" id="cat-safety" data-cat="safety">
+    <div class="cat-card__header" onclick="toggleCat(this)">
+      <span class="cat-card__emoji">🧯</span>
+      <span class="cat-card__title">בטיחות ונוחות</span>
+      <span class="cat-card__count" id="cnt-safety">0/0</span>
+      <span class="cat-card__chevron">▼</span>
+    </div>
+    <div class="cat-card__body">
+
+      <div class="item" data-seasons="all" data-types="all" data-ages="baby,toddler">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">עגינה/רצועת יד לפעוטות בשוק</span><span class="item__tag item__tag--age">0-5</span></label>
+      </div>
+
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מספרי חירום רשומים בטלפון + נייר</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="child,teen">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">כרטיס עם פרטי קשר לילד (בארנק)</span><span class="item__tag item__tag--age">ילד/נער</span></label>
+      </div>
+      <div class="item" data-seasons="all" data-types="all" data-ages="all">
+        <label class="item__row"><input type="checkbox" class="item__check"><span class="item__name">מנעול קטן לתיק / מזוודה</span></label>
+      </div>
+
+    </div>
+  </div>
+
+  <p style="text-align:center;font-size:12px;color:var(--grey-text);margin-top:32px;padding:0 16px;">הרשימה מבוססת על ניסיון ממשי בטיולים משפחתיים. התאם לפי הצרכים שלך.</p>
+
+</div>
+
+
+<a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21"
+   class="whatsapp-fab"
+   style="position:fixed;bottom:90px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:997;"
+   target="_blank" aria-label="וואטסאפ">
+  <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+
+<button id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="חזרה לראש הדף">↑</button>

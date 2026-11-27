@@ -1,0 +1,204 @@
+<div class="page-header">
+  <nav class="page-header__breadcrumb" aria-label="breadcrumb">
+    <a href="services.html">דף הבית</a>
+    <span class="page-header__breadcrumb-sep" aria-hidden="true">›</span>
+    <span class="page-header__breadcrumb-current">שאלון תכנון חופשה</span>
+  </nav>
+  <div class="page-header__badge">⏱️ 2 דקות בלבד</div>
+  <h1 class="page-header__title">ספרו לי על הטיול שלכם</h1>
+  <p class="page-header__sub">3 שאלות קצרות ואחזור אליכם עד 24 שעות</p>
+  <p id="packageBanner" class="page-header__package" style="display:none;margin-top:12px;font-size:15px;font-weight:600;color:rgba(255,255,255,0.95);" role="status" aria-live="polite">חבילה שנבחרה: <span id="packageBannerLabel"></span></p>
+</div>
+
+
+<div class="progress-wrap">
+  <div class="stepper" id="stepper" aria-label="התקדמות בשאלון">
+    <div class="stepper__item stepper__item--active" data-step="1">
+      <span class="stepper__dot">1</span>
+      <span class="stepper__label">עליכם</span>
+    </div>
+    <div class="stepper__item" data-step="2">
+      <span class="stepper__dot">2</span>
+      <span class="stepper__label">הטיול</span>
+    </div>
+    <div class="stepper__item" data-step="3">
+      <span class="stepper__dot">3</span>
+      <span class="stepper__label">העדפות</span>
+    </div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">שלב 1 מתוך 3</div>
+</div>
+
+<div class="form-shell">
+<div class="form-wrap">
+  <p id="formPackageBanner" class="form-package-banner" style="display:none;" role="status" aria-live="polite">חבילה שנבחרה: <span id="formPackageBannerLabel"></span></p>
+  <form id="tripForm" action="https://formspree.io/f/mwvrkdon" method="POST" novalidate>
+    
+    <input type="hidden" name="חבילת תכנון" id="f_package" value="">
+    <input type="hidden" name="_subject" id="f_subject" value="שאלון טיול משפחתי | מתי טסים">
+
+    
+    <div class="step active" id="step1">
+      <div class="step-card">
+        <div class="step-head">
+          <div class="step-icon-wrap" aria-hidden>👋</div>
+          <div class="step-head-text">
+            <span class="step-eyebrow">שלב 1</span>
+            <div class="step-title">קצת עליכם</div>
+            <div class="step-subtitle">רק הבסיס — כדי שאוכל לחזור אליכם</div>
+          </div>
+        </div>
+
+        <div class="field--row">
+          <div class="field">
+            <label>שם <span class="req">*</span></label>
+            <input type="text" name="שם" id="f_name" required placeholder="ישראל">
+          </div>
+          <div class="field">
+            <label for="f_wa">וואטסאפ <span class="req">*</span></label>
+            <input type="tel" name="וואטסאפ" id="f_wa" required placeholder="0546758145" inputmode="numeric" autocomplete="tel" maxlength="12" aria-describedby="f_wa_error">
+            <span class="field-error" id="f_wa_error" role="alert">נא להזין מספר עם ספרות בלבד (10 ספרות, מתחיל ב-05)</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>כמה ילדים נוסעים?</label>
+          <div class="pills">
+            <label class="pill"><input type="radio" name="כמה ילדים" value="1" checked><span>1 ילד</span></label>
+            <label class="pill"><input type="radio" name="כמה ילדים" value="2"><span>2 ילדים</span></label>
+            <label class="pill"><input type="radio" name="כמה ילדים" value="3"><span>3 ילדים</span></label>
+            <label class="pill"><input type="radio" name="כמה ילדים" value="4+"><span>4+</span></label>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:16px">
+          <label>גילאי הילדים <span>(בקירוב)</span></label>
+          <div class="kids-simple" id="kidsSimple">
+            <div class="kid-row-simple">
+              <div class="kid-badge">1</div>
+              <input type="text" name="ילד 1 גיל" placeholder="למשל: 7">
+            </div>
+          </div>
+          <button type="button" class="btn-add" id="addKidSimple">+ הוסיפו ילד</button>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-next" onclick="goStep(2)">הבא ←</button>
+      </div>
+    </div>
+
+    
+    <div class="step" id="step2">
+      <div class="step-card">
+        <div class="step-head">
+          <div class="step-icon-wrap" aria-hidden>🗺️</div>
+          <div class="step-head-text">
+            <span class="step-eyebrow">שלב 2</span>
+            <div class="step-title">לאן ומתי?</div>
+            <div class="step-subtitle">גם אם אין לכם יעד מוחלט — תכתבו מה מסקרן אתכם</div>
+          </div>
+        </div>
+
+        <div class="field--row">
+          <div class="field">
+            <label>עונה / תאריכים</label>
+            <input type="text" name="עונה" placeholder="קיץ 2026 / 15–22 אפריל…">
+          </div>
+          <div class="field">
+            <label>כמה ימים?</label>
+            <select name="משך">
+              <option value="">בחרו</option>
+              <option>עד 5 ימים</option>
+              <option>5-7 ימים</option>
+              <option>7-10 ימים</option>
+              <option>10+ ימים</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f_dest">יעדים <span class="req">*</span> <span>(אפשר כמה - מופרדים בפסיק)</span></label>
+          <input type="text" name="יעד" id="f_dest" required placeholder="למשל: סלובקיה, הונגריה" autocomplete="off">
+
+          <div class="dest-panel" id="destPanel">
+            <div class="dest-panel__head">
+              <span class="dest-panel__title">בחירה מהירה</span>
+              <span class="dest-panel__hint">לחצו על יעד — אפשר כמה</span>
+            </div>
+            <div class="dest-quicks" id="destQuicks" role="group" aria-label="בחירת יעדים">
+              <button type="button" class="dest-quick" data-dest="סלובקיה" aria-pressed="false"><img src="https://flagcdn.com/sk.svg" width="20" height="14" alt=""><span>סלובקיה</span></button>
+              <button type="button" class="dest-quick" data-dest="הונגריה" aria-pressed="false"><img src="https://flagcdn.com/hu.svg" width="20" height="14" alt=""><span>הונגריה</span></button>
+              <button type="button" class="dest-quick" data-dest="צ׳כיה" aria-pressed="false"><img src="https://flagcdn.com/cz.svg" width="20" height="14" alt=""><span>צ׳כיה</span></button>
+              <button type="button" class="dest-quick" data-dest="פולין" aria-pressed="false"><img src="https://flagcdn.com/pl.svg" width="20" height="14" alt=""><span>פולין</span></button>
+              <button type="button" class="dest-quick" data-dest="אוסטריה" aria-pressed="false"><img src="https://flagcdn.com/at.svg" width="20" height="14" alt=""><span>אוסטריה</span></button>
+              <button type="button" class="dest-quick" data-dest="יוון" aria-pressed="false"><img src="https://flagcdn.com/gr.svg" width="20" height="14" alt=""><span>יוון</span></button>
+              <button type="button" class="dest-quick" data-dest="רומניה" aria-pressed="false"><img src="https://flagcdn.com/ro.svg" width="20" height="14" alt=""><span>רומניה</span></button>
+              <button type="button" class="dest-quick" data-dest="קרואטיה" aria-pressed="false"><img src="https://flagcdn.com/hr.svg" width="20" height="14" alt=""><span>קרואטיה</span></button>
+              <button type="button" class="dest-quick" data-dest="סלובניה" aria-pressed="false"><img src="https://flagcdn.com/si.svg" width="20" height="14" alt=""><span>סלובניה</span></button>
+              <button type="button" class="dest-quick" data-dest="בולגריה" aria-pressed="false"><img src="https://flagcdn.com/bg.svg" width="20" height="14" alt=""><span>בולגריה</span></button>
+              <button type="button" class="dest-quick" data-dest="גרמניה" aria-pressed="false"><img src="https://flagcdn.com/de.svg" width="20" height="14" alt=""><span>גרמניה</span></button>
+              <button type="button" class="dest-quick" data-dest="שוויץ" aria-pressed="false"><img src="https://flagcdn.com/ch.svg" width="20" height="14" alt=""><span>שוויץ</span></button>
+              <button type="button" class="dest-quick" data-dest="איטליה" aria-pressed="false"><img src="https://flagcdn.com/it.svg" width="20" height="14" alt=""><span>איטליה</span></button>
+              <button type="button" class="dest-quick" data-dest="ספרד" aria-pressed="false"><img src="https://flagcdn.com/es.svg" width="20" height="14" alt=""><span>ספרד</span></button>
+              <button type="button" class="dest-quick" data-dest="פורטוגל" aria-pressed="false"><img src="https://flagcdn.com/pt.svg" width="20" height="14" alt=""><span>פורטוגל</span></button>
+              <button type="button" class="dest-quick" data-dest="צרפת" aria-pressed="false"><img src="https://flagcdn.com/fr.svg" width="20" height="14" alt=""><span>צרפת</span></button>
+              <button type="button" class="dest-quick" data-dest="הולנד" aria-pressed="false"><img src="https://flagcdn.com/nl.svg" width="20" height="14" alt=""><span>הולנד</span></button>
+              <button type="button" class="dest-quick" data-dest="בלגיה" aria-pressed="false"><img src="https://flagcdn.com/be.svg" width="20" height="14" alt=""><span>בלגיה</span></button>
+              <button type="button" class="dest-quick" data-dest="לונדון, בריטניה" aria-pressed="false"><img src="https://flagcdn.com/gb.svg" width="20" height="14" alt=""><span>לונדון / בריטניה</span></button>
+              <button type="button" class="dest-quick" data-dest="אירלנד" aria-pressed="false"><img src="https://flagcdn.com/ie.svg" width="20" height="14" alt=""><span>אירלנד</span></button>
+            </div>
+            <button type="button" class="dest-show-all" id="destShowAll">עוד יעדים</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-back" onclick="goStep(1)">← חזור</button>
+        <button type="button" class="btn-next" onclick="goStep(3)">הבא ←</button>
+      </div>
+    </div>
+
+    
+    <div class="step" id="step3">
+      <div class="step-card">
+        <div class="step-head">
+          <div class="step-icon-wrap" aria-hidden>❤️</div>
+          <div class="step-head-text">
+            <span class="step-eyebrow">שלב 3</span>
+            <div class="step-title">מה עושה לכם כיף?</div>
+            <div class="step-subtitle">סמנו כל מה שנשמע כיף - אפשר הרבה</div>
+          </div>
+        </div>
+
+        <div class="interests" id="interestsGrid">
+          <label class="interest"><input type="checkbox" name="העדפות" value="טירות והיסטוריה"><span class="interest-icon">🏰</span>טירות והיסטוריה</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="פארקי מים"><span class="interest-icon">💦</span>פארקי מים</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="טבע והרים"><span class="interest-icon">🏔️</span>טבע והרים</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="פארקי שעשועים"><span class="interest-icon">🎢</span>פארקי שעשועים</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="גני חיות"><span class="interest-icon">🦁</span>גני חיות</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="מוזיאוני מדע"><span class="interest-icon">🔬</span>מוזיאוני מדע</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="אגמים וחופים"><span class="interest-icon">🏊</span>אגמים וחופים</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="רכיבה ופעילות"><span class="interest-icon">🚴</span>פעילות גופנית</label>
+          <label class="interest"><input type="checkbox" name="העדפות" value="אוכל מקומי"><span class="interest-icon">🍽️</span>אוכל מקומי</label>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-back" onclick="goStep(2)">← חזור</button>
+        <button type="submit" class="btn-submit">שלחו 🚀</button>
+      </div>
+      <p class="submit-note">אחזור אליכם בוואטסאפ תוך 24 שעות</p>
+    </div>
+
+  </form>
+
+  
+  <div class="success-box" id="successBox">
+    <div class="success-box__icon" aria-hidden>🎉</div>
+    <h3>קיבלתי!</h3>
+    <p>תודה, אחזור אליכם בוואטסאפ עד 24 שעות.</p>
+  </div>
+</div>
+</div>

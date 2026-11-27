@@ -1,0 +1,215 @@
+<header class="hub-hero">
+    <div class="container">
+      <nav class="hub-hero__breadcrumb" aria-label="breadcrumb">
+        <a href="services.html">מתי טסים</a>
+        <span aria-hidden="true">›</span>
+        <a href="preprod-tips.html">טיפים וכלים</a>
+        <span aria-hidden="true">›</span>
+        <span>כבישים ותחבורה</span>
+      </nav>
+      <p style="font-size:36px;margin-bottom:8px;position:relative;z-index:1;">🛣️</p>
+      <h1 class="hub-hero__title">כבישים ותחבורה ציבורית באירופה</h1>
+      <p class="hub-hero__subtitle">שני נושאים שמכניסים הרבה הפתעות לתקציב וללו״ז: אגרות כבישים כששוכרים רכב, והתנהלות בתחבורה ציבורית עם ילדים ונוער. ריכזנו את מה שכדאי לבדוק לפני שסוגרים תכנית.</p>
+    </div>
+  </header>
+
+  <main class="transport-page" id="main">
+    <div class="container transport-wrap">
+      <p class="transport-jump">קפיצה מהירה: <a href="#tolls">אגרות כבישים לשוכרי רכב</a> · <a href="#public-transport">תחבורה ציבורית לילדים ונוער</a></p>
+      <p class="transport-p" style="font-size:15px;color:#555;">הטבלאות הבאות מסונכרנות עם <a href="tips.html" style="color:var(--teal);text-decoration:underline;text-underline-offset:3px;">עמוד הטיפים</a> (אותו תוכן). כאן הן מרוכזות בעמוד אחד לנוחות.</p>
+
+      <section class="transport-section" id="tolls" aria-labelledby="tolls-heading">
+        <h2 class="transport-h2" id="tolls-heading"><span class="transport-h2__tag">רכב שכור</span> אגרות כבישים לשוכרי רכב</h2>
+        <p class="transport-p">לפני שיוצאים לכביש: בדקו מול חברת השכירות מה כלול, והשוו למדינות בטבלאות - ויניטה לעומת תשלום במחסומים.</p>
+
+        <div class="transport-tables">
+          <div class="toll-card toll-card--open" id="card-vignette">
+            <div class="toll-card__header" role="button" tabindex="0" onclick="toggleTollCard('toll-vignette')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTollCard('toll-vignette');}">
+              <div class="toll-card__title">🪙 אגרת כבישים מהירים (Vignette)</div>
+              <span class="toll-card__chevron" aria-hidden="true">▾</span>
+            </div>
+            <div id="toll-vignette" class="toll-card__body">
+              <div class="toll-card__inner">
+                <div class="toll-card__alert">⚠️ במדינות אלו, אם עליתם על כביש מהיר ללא אגרה משולמת, תקבלו קנס אוטומטי דרך מצלמות.</div>
+                <div style="overflow-x:auto;">
+                  <table class="toll-table">
+                    <thead>
+                      <tr><th>מדינה</th><th>שם המערכת</th><th>אתר רשמי</th><th>הערות חשובות</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td><span class="fi fi-sk" style="border-radius:2px;margin-left:5px;"></span> סלובקיה</td><td>e-vignette</td><td><a href="https://eznamka.sk" target="_blank" rel="noopener">eznamka.sk</a></td><td>חובה לציין את מספר הרכב במדויק.</td></tr>
+                      <tr><td><span class="fi fi-hu" style="border-radius:2px;margin-left:5px;"></span> הונגריה</td><td>e-matrica</td><td><a href="https://ematrica.nemzetiutdij.hu/en/vignette-purchase/vehicle-data-vignette-selection" target="_blank" rel="noopener">ematrica.nemzetiutdij.hu</a></td><td>קיימת אגרה ל-10 ימים, חודש או שנה.</td></tr>
+                      <tr><td><span class="fi fi-cz" style="border-radius:2px;margin-left:5px;"></span> צ'כיה</td><td>e-dalnice</td><td><a href="https://edalnice.cz" target="_blank" rel="noopener">edalnice.cz</a></td><td>רכבים חשמליים פטורים (אך דורשים רישום מראש).</td></tr>
+                      <tr><td><span class="fi fi-at" style="border-radius:2px;margin-left:5px;"></span> אוסטריה</td><td>ASFINAG</td><td><a href="https://www.austria.info/en-gb/planning/toll-vignette-and-go-box/" target="_blank" rel="noopener">austria.info</a></td><td>זהירות: אגרה דיגיטלית לאדם פרטי נכנסת לתוקף רק אחרי 18 יום. אם אתם צריכים לעכשיו - קנו מדבקה פיזית בתחנת דלק.</td></tr>
+                      <tr><td><span class="fi fi-ch" style="border-radius:2px;margin-left:5px;"></span> שוויץ</td><td>E-Vignette</td><td><a href="https://via.admin.ch" target="_blank" rel="noopener">via.admin.ch</a></td><td>קיימת רק אגרה שנתית (40 פרנק).</td></tr>
+                      <tr><td><span class="fi fi-si" style="border-radius:2px;margin-left:5px;"></span> סלובניה</td><td>E-vinjeta</td><td><a href="https://www.telepass.com/en/privati/servizi/vignetta-autostrada/slovenia" target="_blank" rel="noopener">Telepass Slovenia e-vignette guide</a></td><td>אין מדבקות פיזיות יותר, הכל דיגיטלי.</td></tr>
+                      <tr><td><span class="fi fi-ro" style="border-radius:2px;margin-left:5px;"></span> רומניה</td><td>Rovinieta</td><td><a href="https://erovinieta.ro" target="_blank" rel="noopener">erovinieta.ro</a></td><td>חובה גם בכבישים בינ-עירוניים שאינם אוטוסטרדות.</td></tr>
+                      <tr><td><span class="fi fi-bg" style="border-radius:2px;margin-left:5px;"></span> בולגריה</td><td>BGTOLL</td><td><a href="https://bgtoll.bg" target="_blank" rel="noopener">bgtoll.bg</a></td><td>חובה לרכוש לפני הנסיעה מחוץ לעיר.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="toll-card toll-card--open" id="card-booths">
+            <div class="toll-card__header" role="button" tabindex="0" onclick="toggleTollCard('toll-booths')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTollCard('toll-booths');}">
+              <div class="toll-card__title">🚧 מדינות ללא מדבקה - תשלום במחסומים (Tolls)</div>
+              <span class="toll-card__chevron" aria-hidden="true">▾</span>
+            </div>
+            <div id="toll-booths" class="toll-card__body">
+              <div class="toll-card__inner">
+                <p style="font-size:13px;color:#666;">במדינות אלו אין טופס למלא מראש - משלמים בכל פעם שעוברים במחסום (במזומן או באשראי).</p>
+                <ul class="toll-list">
+                  <li><strong><span class="fi fi-it" style="border-radius:2px;margin-left:5px;"></span> איטליה</strong> (Autostrade) - משלמים לפי מרחק.</li>
+                  <li><strong><span class="fi fi-fr" style="border-radius:2px;margin-left:5px;"></span> צרפת</strong> (Péage) - מערכת מחסומים.</li>
+                  <li><strong><span class="fi fi-pl" style="border-radius:2px;margin-left:5px;"></span> פולין</strong> - חלק מהכבישים הם במחסומים, וחלק דורשים אפליקציית e-TOLL (מומלץ להוריד מראש).</li>
+                  <li><strong><span class="fi fi-gr" style="border-radius:2px;margin-left:5px;"></span> יוון</strong> - תשלום במחסומים לאורך הכבישים המהירים.</li>
+                  <li><strong><span class="fi fi-hr" style="border-radius:2px;margin-left:5px;"></span> קרואטיה</strong> - תשלום במחסומים (ניתן לקנות מכשיר ENC להנחה).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="transport-note" style="margin-top:18px;"><strong>שורה תחתונה:</strong> אל תסמכו רק על "הכל כלול" בהזמנת רכב. רשמו אילו מקטעים אתם מתכננים, ובדקו במקור הרשמי של המדינה או מול חברת השכירות מה חל על הרכב.</p>
+      </section>
+
+      <section class="transport-section" id="public-transport" aria-labelledby="pt-heading">
+        <h2 class="transport-h2" id="pt-heading"><span class="transport-h2__tag">התניידות</span> תחבורה ציבורית - ילדים ונוער</h2>
+        <p class="transport-p">כרטיסים, גילאים ואפליקציות משתנים בין ערים. הטבלה מתמקדת בתיירים; חלק מההטבות לתושבים בלבד - בודקים לפני הנסיעה.</p>
+
+        <div class="toll-card toll-card--open" id="card-transit">
+          <div class="toll-card__header" role="button" tabindex="0" onclick="toggleTollCard('transit-body')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTollCard('transit-body');}">
+            <div class="toll-card__title">🚌 כרטיסי תחבורה לילדים ונוער - לפי עיר</div>
+            <span class="toll-card__chevron" aria-hidden="true">▾</span>
+          </div>
+          <div id="transit-body" class="toll-card__body">
+            <div class="toll-card__inner">
+              <div class="toll-card__alert">💡 המידע מתייחס לתיירים - חלק מהטבות חינם ניתנות לתושבים בלבד. מומלץ לבדוק לפני הנסיעה.</div>
+              <div class="transit-legend">
+                <span><span class="tr-chip tr-free">עד גיל X</span> חינם לתיירים</span>
+                <span><span class="tr-chip tr-disc">הנחה</span> כרטיס מוזל</span>
+                <span><span class="tr-chip tr-new">חדש 2025</span> שינוי השנה</span>
+                <span><span class="tr-warn-icon">!</span> דורש תשומת לב</span>
+              </div>
+              <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+                <table class="toll-table" style="min-width:560px;">
+                  <thead>
+                    <tr>
+                      <th style="min-width:110px;">עיר</th>
+                      <th style="min-width:100px;">חינם לתיירים</th>
+                      <th style="min-width:120px;">הנחה</th>
+                      <th style="min-width:110px;">אפליקציה</th>
+                      <th style="min-width:180px;">טיפ לתייר</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="tr-region"><td colspan="5">מזרח אירופה</td></tr>
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-at" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">וינה</div><div class="tr-city-sub">אוסטריה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 6 תמיד</span><br><span class="tr-chip tr-free" style="margin-top:3px;">עד 15 בחגים</span></td>
+                      <td><span class="tr-chip tr-disc">6–14 כרטיס ילד</span></td>
+                      <td><span class="tr-app">WienMobil</span></td>
+                      <td class="tip-cell"><b>עד 6 חינם תמיד.</b> עד 15 חינם בימי ראשון, חגים וחופשות בית ספר וינאיות. עם Vienna City Card - ילד עד 15 נוסע חינם.</td>
+                    </tr>
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-hu" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">בודפשט</div><div class="tr-city-sub">הונגריה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 14</span></td>
+                      <td><span class="tr-chip tr-disc">סטודנטים ISIC</span></td>
+                      <td><span class="tr-app">BudapestGO</span></td>
+                      <td class="tip-cell"><b>עד 14 חינם לכולם - כולל תיירים.</b> אין צורך בכרטיס או מסמכים. מגיל 14 משלמים מחיר מלא.</td>
+                    </tr>
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-cz" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">פראג</div><div class="tr-city-sub">צ'כיה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 15 בעיר</span></td>
+                      <td><span class="tr-chip tr-disc">15–18 חצי מחיר</span></td>
+                      <td><span class="tr-app">PID Lítačka</span></td>
+                      <td class="tip-cell">עד 10: ללא מסמכים. <b>10–15: חובה דרכון</b> בביקורת. מחוץ לפראג - 50% הנחה בלבד.</td>
+                    </tr>
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-sk" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">ברטיסלבה</div><div class="tr-city-sub">סלובקיה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 6</span></td>
+                      <td><span class="tr-chip tr-disc">6–17 כרטיס מוזל</span></td>
+                      <td><span class="tr-app">IDS BK</span></td>
+                      <td class="tip-cell">עד יום ההולדת השישי חינם. עם Bratislava Card - ילד אחד נוסע חינם עם כל מבוגר.</td>
+                    </tr>
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-pl" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">ורשה</div><div class="tr-city-sub">פולין</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 7*</span></td>
+                      <td><span class="tr-chip tr-disc">7–15 חצי מחיר</span></td>
+                      <td><span class="tr-app">Jakdojade</span></td>
+                      <td class="tip-cell"><span class="tr-warn-icon">!</span> חינם עד 30 בספטמבר של שנת יום הולדת ה-7. <b>מגיל 7 חובה כרטיס מוזל</b> + הוכחת גיל. ללא כרטיס - קנס.</td>
+                    </tr>
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-pl" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">קרקוב</div><div class="tr-city-sub">פולין</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 7*</span></td>
+                      <td><span class="tr-chip tr-disc">7–16 חצי מחיר</span></td>
+                      <td><span class="tr-app">Jakdojade</span></td>
+                      <td class="tip-cell">אותו כלל כמו ורשה - חינם עד 30 בספטמבר של שנת יום הולדת ה-7. קפדנים יותר מורשה - <b>קחו דרכון.</b></td>
+                    </tr>
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-ro" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">בוקרשט</div><div class="tr-city-sub">רומניה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 7</span></td>
+                      <td>-</td>
+                      <td><span class="tr-app">24pay</span></td>
+                      <td class="tip-cell">חינם עד 7 בתחבורה עירונית (STB). מעל 7 - מחיר מלא, אין הנחת תייר. <span class="tr-warn-icon">!</span> אפליקציית 24pay דורשת אינטרנט רציף - QR מתחדש כל 12 שניות.</td>
+                    </tr>
+                    <tr class="tr-region"><td colspan="5">מערב אירופה</td></tr>
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-gb" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">לונדון</div><div class="tr-city-sub">אנגליה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 5 תמיד</span><br><span class="tr-chip tr-free" style="margin-top:3px;">5–10 עם מבוגר</span></td>
+                      <td><span class="tr-chip tr-disc">11–15 Young Visitor</span></td>
+                      <td><span class="tr-app">Oyster</span></td>
+                      <td class="tip-cell"><b>עד 5 חינם תמיד. עד 4 ילדים עם מבוגר משלם - חינם.</b> לגילאי 11–15: בקשו Young Visitor Discount בכל תחנת מטרו (50% הנחה, אין צורך בהזמנה מראש).</td>
+                    </tr>
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-de" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">גרמניה DB</div><div class="tr-city-sub">רכבות</div></div></div></td>
+                      <td><div style="display:flex;flex-direction:column;gap:3px;"><span class="tr-chip tr-free">עד 5 תמיד</span><span class="tr-chip tr-free">עד 14 עם מבוגר</span></div></td>
+                      <td><span class="tr-chip tr-disc">50% אזורי</span></td>
+                      <td><span class="tr-app">DB Navigator</span></td>
+                      <td class="tip-cell"><span class="tr-warn-icon">!</span> <b>חובה לרשום ילדים בעת הרכישה.</b> עד 4 ילדים לכרטיס אחד. Deutschlandticket לא כולל ילדים חינם.</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="tr-city"><span class="fi fi-es" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">מדריד</div><div class="tr-city-sub">ספרד</div></div></div>
+                        <span class="tr-chip tr-new" style="font-size:10px;margin-top:5px;">עדכון 2025</span>
+                      </td>
+                      <td><span class="tr-chip tr-free">עד 4</span></td>
+                      <td><span class="tr-chip tr-disc">15–25 Abono Joven</span></td>
+                      <td><span class="tr-app">Tarjeta Multi</span></td>
+                      <td class="tip-cell"><span class="tr-warn-icon">!</span> חינם 7–14 <b>רק לבעלי כרטיס מנוי חודשי</b> - לא חל על כרטיסים לתיירים. תיירים משלמים מגיל 4. נוער 15–25: Abono Joven <b>10€ לחודש.</b></td>
+                    </tr>
+                    <tr class="tr-region"><td colspan="5">דרום אירופה</td></tr>
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-gr" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">אתונה</div><div class="tr-city-sub">יוון</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 6</span></td>
+                      <td><span class="tr-chip tr-disc">7–18 כ-64% הנחה</span></td>
+                      <td><span class="tr-app">Ath.ena Card</span></td>
+                      <td class="tip-cell"><span class="tr-warn-icon">!</span> לכרטיס מוזל גילאי 7–18 <b>צריך כרטיס ATH.ENA אישי עם תמונה</b> - לקבל במשרדי OASA ביום ההגעה. ללא כרטיס - מחיר מלא. קנס: 72€.</td>
+                    </tr>
+                    <tr>
+                      <td><div class="tr-city"><span class="fi fi-it" style="border-radius:2px;flex-shrink:0;"></span><div><div class="tr-city-name">רומא</div><div class="tr-city-sub">איטליה</div></div></div></td>
+                      <td><span class="tr-chip tr-free">עד 10 (ATAC)</span></td>
+                      <td><span class="tr-chip tr-disc">4–14 50% ברכבות</span></td>
+                      <td><span class="tr-app">Trenitalia</span></td>
+                      <td class="tip-cell">אוטובוס/מטרו עירוני: <b>עד 10 חינם.</b> רכבות Trenitalia: 50% הנחה לגילאי 4–14. חפשו "FrecciaFAMILY" או "Bimbi Gratis" - חינם לילדים אבל <b>דורש הזמנה מראש.</b></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p class="transport-p" style="margin-top:8px;">רוצים לסגור תקציב לפני שסוגרים מסלול? <a href="budget.html" style="color:var(--teal);text-decoration:underline;text-underline-offset:3px;">מחשבון התקציב</a> · <a href="planning.html" style="color:var(--teal);text-decoration:underline;text-underline-offset:3px;">שלב התכנון</a></p>
+    </div>
+  </main>
+
+  
+
+  <a href="https://wa.me/972546758145?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%AA%D7%9B%D7%A0%D7%95%D7%9F%20%D7%98%D7%99%D7%95%D7%9C%21"
+     style="position:fixed;bottom:24px;left:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:998;" target="_blank" rel="noopener noreferrer" aria-label="וואטסאפ">
+    <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
