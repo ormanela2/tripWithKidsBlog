@@ -1,0 +1,16 @@
+---
+/**
+ * Affiliate disclosure, shown next to every partner link or widget.
+ * W8 turns this into the PartnerLink component; the wording lives here once.
+ */
+type Props = { class?: string };
+const { class: cls } = Astro.props;
+---
+<p class:list={["partner-note", cls]}>
+  <span aria-hidden="true">ⓘ</span>
+  קישור שותפים: אם תזמינו דרכו, נקבל עמלה קטנה. המחיר שלכם לא משתנה, וזה עוזר לנו להמשיך לכתוב מדריכים.
+</p>
+
+<style>
+  .partner-note { display: flex; gap: 6px; align-items: baseline; font-size: 12.5px; line-height: 1.5; color: #6b6b6b; }
+</style>

@@ -22,3 +22,6 @@ Inventory from the live site (27 Nov 2026). **Values are not copied here.** In t
 1. **Stay22 partner id.**
 2. ~~Google Maps key~~: not needed (removed). Optionally delete the old key in Google Cloud.
 3. Which forms should stay (newsletter, trip questionnaire, contact, partner leads).
+
+## Update (W5): Stay22 is in use on the guides
+The guides embed a Stay22 hotel map (`stay22.com/embed/<id>`) and use affiliate booking links (`booking.stay22.com/mataytasim/...`). These are kept per guide in the content files (`partners.staysMap`, `stays[].url` with `partner: true`) and always shown with the partner disclosure. The site-wide Stay22 partner id (`lmaID`) is still empty; only needed if we add Stay22's site-wide script.
