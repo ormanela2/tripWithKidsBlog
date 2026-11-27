@@ -4,7 +4,7 @@
  * Filters, the flight strip and the quick-look dialog run on the page's own data.
  */
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { destinations, seasonFilters, lengthFilters, styleFilters, articles } from "../data/destinations";
+import { destinations, articles } from "../data/destinations";
 import { site, whatsappLink } from "../config/site";
 
 const MAX_H = 4.5;
@@ -31,33 +31,7 @@ const jsonLd = JSON.stringify({
     </div>
   </section>
 
-  <section class="container finder" aria-labelledby="finder-title">
-    <h2 id="finder-title" class="visually-hidden">סינון יעדים</h2>
-    <div class="filters" role="group" aria-label="סינון יעדים">
-      <div class="filters__group">
-        <span class="filters__label">מתי טסים?</span>
-        <div class="chips" data-filter="season">
-          {seasonFilters.map((f, i) => <button type="button" class="chip" data-value={f.id} aria-pressed={i === 0 ? "true" : "false"}>{f.label}</button>)}
-        </div>
-      </div>
-      <div class="filters__group">
-        <span class="filters__label">כמה ימים?</span>
-        <div class="chips" data-filter="length">
-          {lengthFilters.map((f, i) => <button type="button" class="chip" data-value={f.id} aria-pressed={i === 0 ? "true" : "false"}>{f.label}</button>)}
-        </div>
-      </div>
-      <div class="filters__group">
-        <span class="filters__label">מה אוהבים?</span>
-        <div class="chips" data-filter="style" data-multi>
-          {styleFilters.map(f => <button type="button" class="chip" data-value={f.id} aria-pressed="false">{f.label}</button>)}
-        </div>
-      </div>
-      <div class="filters__foot">
-        <p class="filters__count" aria-live="polite"><b id="resultCount">{destinations.length}</b> יעדים מתאימים</p>
-        <button type="button" class="link-btn" id="resetFilters" hidden>ניקוי סינון</button>
-      </div>
-    </div>
-
+  <section class="container finder">
     <figure class="flight" aria-labelledby="flight-title">
       <figcaption>
         <h2 id="flight-title">כמה זמן באוויר מתל אביב?</h2>
@@ -85,34 +59,22 @@ const jsonLd = JSON.stringify({
       </div>
     </figure>
 
-    <ul class="grid" id="destGrid">
+    <ul class="tiles" id="destGrid">
       {destinations.map((d, i) => (
-        <li class="card" data-id={d.id} data-seasons={d.seasons.join(" ")} data-min-days={d.minDays} data-styles={d.styles.join(" ")} style={`--c:${d.color}`}>
-          <figure class="card__media">
-            <img src={d.image} alt={d.imageAlt} width="640" height="400" loading={i < 3 ? "eager" : "lazy"} decoding="async" />
-            <span class="card__flight">✈ {flightLabel(d.flightHours)}</span>
-            <figcaption class="card__title"><h3>{d.name}</h3><span>{d.region}</span></figcaption>
-          </figure>
-          <div class="card__body">
-            <dl class="card__stats">
-              <div><dt>משך</dt><dd>{d.days}</dd></div>
-              <div><dt>עונה</dt><dd>{d.season}</dd></div>
-              <div><dt>מטבע</dt><dd>{d.currency.symbol} {d.currency.code}</dd></div>
-            </dl>
-            <p class="card__desc">{d.desc}</p>
-            <ul class="card__tags">{d.tags.slice(0, 3).map(t => <li>{t}</li>)}</ul>
-            <div class="card__actions">
-              <a class="btn btn--primary" href={d.url}>למדריך המלא ←</a>
-              <button type="button" class="btn btn--ghost" data-quick={d.id}>הצצה מהירה</button>
-            </div>
-          </div>
+        <li class="tile" data-id={d.id} style={`--c:${d.color}`}>
+          <a class="tile__link" href={d.url}>
+            <img src={d.image} alt={d.imageAlt} width="640" height="480" loading={i < 3 ? "eager" : "lazy"} decoding="async" />
+            <span class="tile__shade" aria-hidden="true"></span>
+            <span class="tile__flight">✈ {flightLabel(d.flightHours)}</span>
+            <span class="tile__text">
+              <span class="tile__name">{d.name}</span>
+              <span class="tile__meta">{d.region} · {d.days}</span>
+            </span>
+          </a>
+          <button type="button" class="tile__peek" data-quick={d.id} aria-label={`הצצה מהירה: ${d.name}`}>הצצה</button>
         </li>
       ))}
     </ul>
-    <div class="empty" id="emptyState" hidden>
-      <p>אין יעד שמתאים לכל הבחירות.</p>
-      <button type="button" class="btn btn--ghost" data-reset>להסיר את הסינון</button>
-    </div>
   </section>
 
   <section class="articles" id="family-articles">
@@ -171,57 +133,14 @@ const jsonLd = JSON.stringify({
   const plausible = (name: string, props: Record<string, string>) => { const p = (window as unknown as { plausible?: (n: string, o: object) => void }).plausible; if (p) p(name, { props }); };
   const all: D[] = JSON.parse(document.getElementById("destData")?.textContent || "[]");
   const byId = new Map(all.map(d => [d.id, d]));
-  const cards = [...document.querySelectorAll<HTMLElement>(".card")];
+  const cards = [...document.querySelectorAll<HTMLElement>(".tile")];
   const pins = [...document.querySelectorAll<HTMLElement>(".pin")];
-  const state = { season: "any", length: "any", styles: new Set<string>() };
-  const LEN: Record<string, [number, number]> = { any: [0, 99], short: [0, 6], week: [7, 9], long: [10, 99] };
 
-  function apply() {
-    let n = 0;
-    for (const c of cards) {
-      const seasons = (c.dataset.seasons || "").split(" "), styles = (c.dataset.styles || "").split(" "), days = Number(c.dataset.minDays);
-      const [lo, hi] = LEN[state.length] ?? [0, 99];
-      const ok = (state.season === "any" || seasons.includes(state.season) || seasons.includes("all"))
-        && days >= lo && days <= hi
-        && (state.styles.size === 0 || [...state.styles].some(s => styles.includes(s)));
-      c.hidden = !ok;
-      pins.find(p => p.dataset.id === c.dataset.id)?.classList.toggle("is-out", !ok);
-      if (ok) n++;
-    }
-    const count = document.getElementById("resultCount"); if (count) count.textContent = String(n);
-    const empty = document.getElementById("emptyState"); if (empty) empty.hidden = n > 0;
-    const reset = document.getElementById("resetFilters"); if (reset) reset.hidden = state.season === "any" && state.length === "any" && state.styles.size === 0;
-  }
-
-  document.querySelectorAll<HTMLElement>(".chips").forEach(group => {
-    const key = group.dataset.filter as "season" | "length" | "style";
-    group.addEventListener("click", e => {
-      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".chip"); if (!btn) return;
-      const v = btn.dataset.value || "any";
-      if (key === "style") {
-        state.styles.has(v) ? state.styles.delete(v) : state.styles.add(v);
-        btn.setAttribute("aria-pressed", String(state.styles.has(v)));
-      } else {
-        state[key] = v;
-        group.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(c === btn)));
-      }
-      apply();
-    });
-  });
-  function resetAll() {
-    state.season = "any"; state.length = "any"; state.styles.clear();
-    document.querySelectorAll<HTMLElement>(".chips").forEach(g => g.querySelectorAll(".chip").forEach((c, i) => c.setAttribute("aria-pressed", String(g.dataset.filter !== "style" && i === 0))));
-    apply();
-  }
-  document.getElementById("resetFilters")?.addEventListener("click", resetAll);
-  document.querySelector("[data-reset]")?.addEventListener("click", resetAll);
-
-  // Link the flight strip and the cards: hover or focus one, highlight the other.
+  // Link the flight strip and the tiles: hover or focus one, highlight the other.
   const highlight = (id: string | null) => {
     pins.forEach(p => p.classList.toggle("is-active", p.dataset.id === id));
     cards.forEach(c => c.classList.toggle("is-active", c.dataset.id === id));
-  };
-  for (const el of [...cards, ...pins]) {
+  };  for (const el of [...cards, ...pins]) {
     el.addEventListener("mouseenter", () => highlight(el.dataset.id || null));
     el.addEventListener("mouseleave", () => highlight(null));
     el.addEventListener("focusin", () => highlight(el.dataset.id || null));
@@ -259,8 +178,6 @@ const jsonLd = JSON.stringify({
 
   // Same Plausible event as the old page for article cards.
   document.querySelectorAll<HTMLElement>("[data-article-card]").forEach(a => a.addEventListener("click", () => plausible("Destinations-Family-Article-Card-Click", { article: a.dataset.articleCard || "" })));
-
-  apply();
 </script>
 
 <style>
@@ -274,17 +191,6 @@ const jsonLd = JSON.stringify({
   .hero__lede { font-size: 1.12rem; color: #4a4a4a; max-width: 62ch; }
 
   .finder { display: flex; flex-direction: column; gap: 22px; padding-bottom: 56px; }
-  .filters { background: #fff; border: 1px solid var(--sand-dark); border-radius: var(--radius-lg); padding: 18px 20px; box-shadow: var(--shadow-sm); display: grid; gap: 12px; margin-top: -8px; }
-  .filters__group { display: grid; grid-template-columns: 96px 1fr; gap: 10px; align-items: center; }
-  .filters__label { font-weight: 600; font-size: 14px; color: var(--teal-dark); }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip { border: 1.5px solid var(--sand-dark); background: var(--cream); color: var(--charcoal); border-radius: 999px; padding: 5px 14px; font-size: 14px; font-weight: 500; transition: background .2s, border-color .2s, color .2s, transform .15s; }
-  .chip:hover { border-color: var(--teal); }
-  .chip[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
-  .chip:active { transform: scale(.96); }
-  .filters__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px dashed var(--sand-dark); padding-top: 10px; font-size: 14px; color: #555; }
-  .filters__count b { color: var(--teal); font-size: 1.1rem; }
-  .link-btn { color: var(--teal); font-weight: 600; text-decoration: underline; font-size: 14px; }
 
   .flight { background: linear-gradient(180deg, #fff, #fdfaf4); border: 1px solid var(--sand-dark); border-radius: var(--radius-lg); padding: 18px 20px 10px; }
   .flight figcaption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
@@ -303,27 +209,25 @@ const jsonLd = JSON.stringify({
   .pin:hover, .pin.is-active { transform: translateY(-2px); border-color: var(--c); box-shadow: var(--shadow-md); }
   .pin.is-out { opacity: .28; }
 
-  .grid { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-  .card { background: #fff; border: 1px solid var(--sand-dark); border-top: 4px solid var(--c); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: transform .22s, box-shadow .22s; animation: rise .35s ease both; }
-  .card:hover, .card.is-active { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  /* Destination tiles: photo first, minimal text; details live in the quick look. */
+  .tiles { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .tile { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--sand); box-shadow: var(--shadow-sm); transition: transform .22s, box-shadow .22s; animation: rise .4s ease both; }
+  .tile:nth-child(2) { animation-delay: .04s; } .tile:nth-child(3) { animation-delay: .08s; } .tile:nth-child(n+4) { animation-delay: .12s; }
+  .tile:hover, .tile.is-active { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
   @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-  .card__media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--sand); }
-  .card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-  .card:hover .card__media img { transform: scale(1.05); }
-  .card__media::after { content: ""; position: absolute; inset: 40% 0 0 0; background: linear-gradient(180deg, transparent, rgba(0,0,0,.62)); }
-  .card__title { position: absolute; z-index: 1; bottom: 12px; right: 16px; left: 16px; color: #fff; display: flex; align-items: baseline; gap: 10px; }
-  .card__title h3 { color: #fff; font-size: 1.6rem; }
-  .card__title span { font-size: 14px; opacity: .9; }
-  .card__flight { position: absolute; z-index: 1; top: 12px; left: 12px; background: rgba(255,255,255,.92); color: var(--teal-dark); font-size: 13px; font-weight: 600; border-radius: 999px; padding: 3px 10px; }
-  .card__body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
-  .card__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-  .card__stats div { background: var(--cream); border-radius: var(--radius-sm); padding: 6px 8px; }
-  .card__stats dt { font-size: 11px; color: #777; }
-  .card__stats dd { font-size: 13px; font-weight: 600; color: var(--charcoal); line-height: 1.35; }
-  .card__desc { font-size: 15px; line-height: 1.6; color: #4a4a4a; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .tile__link { display: block; position: relative; aspect-ratio: 4 / 3; color: #fff; }
+  .tile__link img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .tile:hover .tile__link img { transform: scale(1.06); }
+  .tile__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 38%, rgba(0,0,0,.66)); }
+  .tile__shade::before { content: ""; position: absolute; inset: auto 0 0 0; height: 4px; background: var(--c); }
+  .tile__flight { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,.92); color: var(--teal-dark); font-size: 12.5px; font-weight: 600; border-radius: 999px; padding: 3px 10px; }
+  .tile__text { position: absolute; inset: auto 16px 16px 16px; display: flex; flex-direction: column; gap: 2px; }
+  .tile__name { font-family: var(--font-heading); font-size: clamp(1.4rem, 2.4vw, 1.75rem); line-height: 1.1; text-shadow: 0 1px 12px rgba(0,0,0,.35); }
+  .tile__meta { font-size: 14px; opacity: .92; }
+  .tile__peek { position: absolute; top: 10px; left: 10px; min-height: 36px; padding: 0 14px; border-radius: 999px; background: rgba(18,77,82,.78); color: #fff; font-size: 13px; font-weight: 600; backdrop-filter: blur(4px); transition: background .2s; }
+  .tile__peek:hover, .tile__peek:focus-visible { background: var(--teal); }
   .card__tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
-  .card__tags li { font-size: 12.5px; background: color-mix(in srgb, var(--c, var(--teal)) 9%, #fff); color: var(--charcoal); border: 1px solid color-mix(in srgb, var(--c, var(--teal)) 22%, #fff); border-radius: 999px; padding: 2px 10px; }
-  .card__actions { margin-top: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+  .card__tags li { font-size: 12.5px; background: color-mix(in srgb, var(--teal) 9%, #fff); color: var(--charcoal); border: 1px solid color-mix(in srgb, var(--teal) 22%, #fff); border-radius: 999px; padding: 2px 10px; }
 
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border-radius: 999px; padding: 9px 18px; font-size: 15px; font-weight: 600; min-height: 44px; transition: background .2s, transform .15s, box-shadow .2s, border-color .2s; }
   .btn:active { transform: scale(.97); }
@@ -337,7 +241,6 @@ const jsonLd = JSON.stringify({
   .btn--light { background: rgba(255,255,255,.14); color: #fff; border: 1.5px solid rgba(255,255,255,.45); }
   .btn--light:hover { background: rgba(255,255,255,.24); }
 
-  .empty { text-align: center; padding: 36px 16px; border: 2px dashed var(--sand-dark); border-radius: var(--radius-lg); display: grid; gap: 12px; justify-items: center; color: #555; }
 
   .articles { background: var(--sand); padding-block: clamp(44px, 7vw, 72px); }
   .section-head { display: grid; gap: 6px; margin-bottom: 22px; }
@@ -374,12 +277,18 @@ const jsonLd = JSON.stringify({
   .quick__stats dd { font-weight: 600; }
   .quick__actions { display: flex; flex-wrap: wrap; gap: 8px; }
 
-  @media (max-width: 640px) {
-    .filters__group { grid-template-columns: 1fr; gap: 6px; }
-    .card__stats { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 900px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) {
+    .tiles { gap: 10px; }
+    .tile__link { aspect-ratio: 3 / 4; }
+    .tile__text { inset: auto 10px 10px 10px; }
+    .tile__meta { font-size: 12.5px; }
+    .tile__flight { top: auto; bottom: auto; top: 8px; right: 8px; font-size: 11.5px; }
+    .tile__peek { top: 8px; left: 8px; min-height: 32px; padding: 0 10px; font-size: 12px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .card, .quick[open] { animation: none; }
-    .card:hover, .card.is-active, .pin:hover, .pin.is-active { transform: none; }
+    .tile, .quick[open] { animation: none; }
+    .tile:hover, .tile.is-active, .pin:hover, .pin.is-active { transform: none; }
+    .tile:hover .tile__link img { transform: none; }
   }
 </style>
