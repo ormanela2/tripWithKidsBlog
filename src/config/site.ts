@@ -50,7 +50,7 @@ export const site = {
     /** Pages left out of the sitemap (redirects, test pages). Paths as served, ".html" form. */
     sitemapExclude: ["/layout-check.html", "/404.html"],
     /** Public files that are not pages but should be in the sitemap (added as they move into public/). */
-    sitemapExtra: [] as string[],
+    sitemapExtra: ["/MatayTasim-Budapest-Countdown.pdf", "/MatayTasim-Slovakia-Countdown.pdf"] as string[],
   },
 
   partners: {
