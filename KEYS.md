@@ -1,0 +1,24 @@
+# Keys, IDs and accounts used by mataytasim.co.il
+
+Inventory from the live site (27 Nov 2026). **Values are not copied here.** In the Astro build they live in `src/config/site.ts` (public IDs that browsers must see anyway) or `.env` (anything secret, never committed).
+
+| Service | What | Found on the site | Status | Action |
+|---|---|---|---|---|
+| Google Maps JavaScript API | API key | 1 key, used on 7 pages | ⚠️ Visible in page code (normal for browser keys) | **Restrict it** in Google Cloud: HTTP referrers `mataytasim.co.il/*` and `*.mataytasim.co.il/*`; API restriction: Maps JavaScript API only. Then move it to config. |
+| Stay22 (hotel maps) | Partner id (`lmaID` / `aid`) | Embeds present, one link with **empty `lmaID`** | ❌ **Missing** | Find your Stay22 partner id (Stay22 dashboard) so bookings are credited. |
+| GetYourGuide | Partner id | Present (`data-gyg-partner-id`) | ✅ | Move to config. One widget has an empty tour list: choose tours or remove it. |
+| Travelpayouts (Airalo, Saily, Yesim) | Short affiliate links (`*.tpk.mx`) | 3 links | ✅ | Move to config. |
+| Plausible | Site domain | 33 pages, **two script versions** | ⚠️ | Use one snippet; keep existing event names. |
+| Formspree | Form ids | **9 different forms** | ⚠️ Scattered | Decide which forms remain; one component. |
+| FormSubmit | Email addresses in form actions | business Gmail in 37 forms, **personal Gmail in 2** | ❌ Exposes emails (spam) | Replace with Formspree (hidden id) and remove all FormSubmit actions. |
+| Google Search Console | Verification file | `google101e12e27f44da03.html` | ✅ | Keep in `public/`. |
+| WhatsApp | Phone number | 65 links | ✅ (intentional) | One value in config. |
+| Contact emails | `info@` and Gmail in mailto links | Several pages | ⚠️ | Use `info@mataytasim.co.il` only, from config. |
+| Twemoji | CDN library | `@latest` (unpinned) | ⚠️ | Pin a version or self-host. |
+| Leaflet / markercluster | CDN libraries | Pinned versions | ✅ | Load only on pages with maps. |
+| Cloudflare email-decode | Leftover script | about, terms | ❌ Broken off Cloudflare | Remove; show the email plainly or via the form. |
+
+## Needed from the owner
+1. **Stay22 partner id.**
+2. **Confirm the Google Maps key is restricted** (or create a new restricted key and send it; it goes into config, not chat, if you prefer to paste it into the file yourself).
+3. Which forms should stay (newsletter, trip questionnaire, contact, partner leads).
