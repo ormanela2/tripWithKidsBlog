@@ -21,7 +21,7 @@
 | W6 ✅ | **Migrate destination guides (11)** | austria, czechia, poland-south, poland-three-experiences, warsaw, slovakia, slovakia-advanced, budapest, romania, slovenia, athens; plus `destinations` hub | 3 d | Claude |
 | W7 ✅ | **Migrate tool pages** | weather, calendar, budget, packing, quiz, planning, transport-europe, questionnaire_form, family_questionnaire, austria_trivia_game: keep their behaviour as small scripts on the page | 2 d | Claude |
 | W8 ✅ | **Partner pages + disclosure** | esim, airport-hotels, car-rental-partners, car-rental-klasswagen, packages, theme-parks, family-top-attractions, tips, services, about, terms; one `PartnerLink` component that always shows the disclosure | 1.5 d | Claude |
-| W9 | **Maps** | One Leaflet map component (pinned versions, loads only when visible); "Open in Google Maps" links without a key. **No Google Maps API** (owner decision) | 0.5 d | Claude |
+| W9 ✅ | **Maps** | No Google Maps anywhere on the site (owner decision, 28 Nov 2026): no key, no links, no texts. Maps are Leaflet (new guide design: loads when near the screen). Left for W12: check the map tile provider's terms for a commercial site | 0.5 d | Claude |
 | W10 | **Forms** | One form component (one provider, no email address in the page), honeypot against spam, short privacy line | 0.5 d | Claude |
 | W11 | **Analytics** | One Plausible snippet; keep the existing event names (e.g. article card clicks) | 0.25 d | Claude |
 | W12 | **URL parity + clean-up** | Every old URL still works; test pages (`test2_fixed`, `test3`) removed; decide on `smart_plan_budapest/`; fix the broken links found in the review | 0.5 d | Claude |
@@ -53,3 +53,8 @@ Every old URL works; Lighthouse performance and accessibility at least 90 on mob
 - Partner disclosure (PartnerNote) is added at the end of every page with affiliate links: the 8 guides with Stay22 links, esim, airport-hotels. car-rental-partners has no affiliate links (no note needed).
 - Fixed live bugs: dead Cloudflare email-decode script dropped (404 live); tips page logo pointed at the existing file (was broken live).
 - Open for W10: a script on packages and theme-parks posts to FormSubmit with the personal Gmail address.
+
+## W9 notes (28 Nov 2026)
+- Owner: remove any mention of Google Maps. Done with scripts/remove-google-maps.mjs plus two Austria popup texts ("נבדק ב-Google Maps" -> "זמן נסיעה ברכב", "פרטי מקום ב-Google Maps" -> "פרטי מקום").
+- Nothing a visitor can see mentions Google Maps. Dead code from the old Google setup remains inside the scripts of austria, poland-south (removed when they move to the new design, W16), airport-hotels, budapest and theme-parks (W12 clean-up).
+- Open question for the owner: theme-parks shows nearby hotels with a Google rating and review count (stored data from Google). Keep, replace or remove.

@@ -72,10 +72,6 @@ export const site = {
     ids: {} as Record<string, string>,
   },
 
-  /** Google Maps is not used for now (owner decision, 27 Nov 2026). Maps use Leaflet; places link out to Google Maps without a key. */
-  googleMaps: null,
 } as const;
 
-/** "Open in Google Maps" without any API key. */
-export const googleMapsLink = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 export const whatsappLink = (text?: string) => `https://wa.me/${site.contact.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
