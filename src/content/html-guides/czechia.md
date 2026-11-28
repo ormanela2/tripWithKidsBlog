@@ -5,7 +5,6 @@ description: "מדריך מלא לטיול לדרום צ'כיה עם ילדים:
 name: "דרום צ'כיה"
 country: "CZ"
 hub: "czechia"
-clarity: true
 stay22: true
 floatNav: true
 partnerNote: true

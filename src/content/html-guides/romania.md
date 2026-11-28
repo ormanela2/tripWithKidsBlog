@@ -5,7 +5,6 @@ description: "מדריך מלא לטיול לרומניה עם ילדים: טי�
 name: "רומניה"
 country: "RO"
 hub: "romania"
-clarity: true
 stay22: true
 floatNav: true
 partnerNote: true

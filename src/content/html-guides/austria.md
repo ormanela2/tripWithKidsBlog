@@ -5,7 +5,6 @@ description: "מדריך מלא לטיול לאוסטריה עם ילדים: ז�
 name: "אוסטריה"
 country: "AT"
 hub: "austria"
-clarity: true
 stay22: true
 floatNav: true
 partnerNote: true

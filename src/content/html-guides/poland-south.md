@@ -5,7 +5,6 @@ description: "מדריך מלא לטיול לדרום פולין עם ילדים
 name: "דרום פולין"
 country: "PL"
 hub: "poland-south"
-clarity: true
 stay22: true
 floatNav: true
 partnerNote: true

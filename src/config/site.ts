@@ -40,8 +40,6 @@ export const site = {
 
   analytics: {
     plausibleDomain: "mataytasim.co.il",
-    /** Microsoft Clarity project, as on 17 live pages (the guides among them). Added per page with the `clarity` prop. */
-    clarityId: "wrt3m0l4ow" as string | null,
   },
 
   seo: {

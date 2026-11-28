@@ -5,7 +5,6 @@ description: "מדריך מלא לטיול לסלובניה עם ילדים: מ�
 name: "סלובניה"
 country: "SI"
 hub: "slovenia"
-clarity: true
 floatNav: true
 partnerNote: true
 readProgress: true

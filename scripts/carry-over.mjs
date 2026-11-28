@@ -94,7 +94,7 @@ const css = filterCss(styles.join("\n")).replace(/\n\s*\n+/g, "\n");
 const DROP = [
   [/^\s*window\.GOOGLE_MAPS_API_KEY\s*=\s*'[^']*';?\s*$/, "Google Maps key (owner decision: no Google Maps API)"],
   [/^\s*window\.plausible\s*=\s*window\.plausible\s*\|\|/, "Plausible loader (layout adds analytics)"],
-  [/"clarity",\s*"script"/, "Microsoft Clarity snippet (layout adds it from config)"],
+  [/"clarity",\s*"script"/, "Microsoft Clarity snippet (removed: owner decision 28 Nov 2026)"],
   [/Stay22\.params/, "Stay22 snippet (layout adds it from config)"],
 ];
 // Scripts for the shared parts (menu, reading-progress plane, back-to-top, newsletter pop-up).
@@ -151,7 +151,6 @@ const fm = {
   title: h1 || title, seoTitle: title, description, name: text(body.match(/class="article-hero__breadcrumb"[\s\S]*?<span>([^<]+)<\/span>\s*<\/nav>/)?.[1]) || undefined,
   country, ...(opt("hub") && { hub: opt("hub") }),
   ...(shareFile && existsSync(`src/assets/photos/${shareFile}`) && { shareImage: `../../assets/photos/${shareFile}` }),
-  ...(clarity && { clarity: true }),
   ...(stay22 && { stay22: true }),
   ...(floatNav && { floatNav: true }),
   ...(hasAffiliate(body) && { partnerNote: true }),
@@ -172,7 +171,7 @@ const used = readdirSync("src/assets/photos").filter(n => /\.(jpe?g|png|webp)$/i
 writeFileSync(`src/carried/${slug}/photos.ts`, `// Photos this guide uses (written by scripts/carry-over.mjs).\n${used.map((n, i) => `import p${i} from "../../assets/photos/${n}";`).join("\n")}\nexport default { ${used.map((n, i) => `${JSON.stringify(n)}: p${i}`).join(", ")} };\n`);
 const missingPhotos = imgRefs.map(r => decodeURIComponent(r.split("/").pop())).filter(n => !/^https?:/.test(n) && !used.includes(n));
 
-console.log(`${slug}: body ${Math.round(body.length / 1024)}KB, css ${Math.round(css.length / 1024)}KB (from ${Math.round(styles.join("").length / 1024)}KB), scripts ${scripts.length} (${scripts.filter(s => s.src).map(s => s.src.split("/").pop()).join(", ") || "no external"}), country ${country ?? "?"}, clarity ${clarity ? "yes" : "no"}`);
+console.log(`${slug}: body ${Math.round(body.length / 1024)}KB, css ${Math.round(css.length / 1024)}KB (from ${Math.round(styles.join("").length / 1024)}KB), scripts ${scripts.length} (${scripts.filter(s => s.src).map(s => s.src.split("/").pop()).join(", ") || "no external"}), country ${country ?? "?"}, clarity removed`);
 console.log(`  images: ${imgRefs.length} | iframes: ${iframes.join(" ") || "-"}`);
 console.log(`  internal links: ${internalLinks.join(" ")}`);
 console.log(`  notes: ${[...new Set(notes)].join("; ")}`);

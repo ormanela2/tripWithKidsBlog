@@ -36,3 +36,6 @@ weather.html calls OpenWeatherMap with an API key written in the page (visible t
 - FormSubmit removed everywhere; no Gmail address in any page (info@mataytasim.co.il shown instead).
 - Formspree: website forms -> mwvrkdon (the questionnaire form; owner decision). Feedback widgets keep one form per guide (maqvdgna, xdablvpv, xjgljwaa, meenvgly, xeenvgaq, mzdoaqwz, mbdwqopk, mrejrqea). Formspree's free plan has a monthly submission limit per account: check it in the Formspree dashboard.
 - **Owner: make sure info@mataytasim.co.il receives mail** (it is now the only address shown on the site).
+
+## Update (W11): Microsoft Clarity removed
+Owner decision 28 Nov 2026: Clarity (session recording, project wrt3m0l4ow) is removed from every page. The setting, the layout option and the per-page flags are gone; the converter drops the old snippet. If wanted again later, it has to be added back deliberately (and mentioned in the privacy text).

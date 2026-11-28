@@ -5,7 +5,6 @@ description: "מדריך מלא לטיול לסלובקיה עם ילדים: ט�
 name: "סלובקיה"
 country: "SK"
 hub: "slovakia"
-clarity: true
 stay22: true
 floatNav: true
 partnerNote: true

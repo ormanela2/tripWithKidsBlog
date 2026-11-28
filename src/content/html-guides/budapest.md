@@ -5,7 +5,6 @@ description: "מדריך מלא לטיול לבודפשט עם ילדים: מר�
 name: "בודפשט"
 country: "HU"
 hub: "budapest"
-clarity: true
 stay22: true
 floatNav: true
 partnerNote: true

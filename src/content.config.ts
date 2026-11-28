@@ -175,8 +175,6 @@ const carriedFields = ({ image }: { image: () => z.ZodType }) => ({
   name: text.optional(),
   /** Share image (1200x630 crop); the site default when missing. */
   shareImage: image().optional(),
-  /** Load Microsoft Clarity, as the live page does. */
-  clarity: z.boolean().default(false),
   /** Load the Stay22 "Let me allez" script, as the live page does. */
   stay22: z.boolean().default(false),
   /** Bottom-right "all destinations" + "back to top" buttons, as the live page has. */
