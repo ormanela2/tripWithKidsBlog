@@ -130,7 +130,16 @@ const guides = defineCollection({
       stays: z.array(place).default([]),
       /** "What to do with kids". */
       attractions: z.array(place).default([]),
-      tips: z.array(z.object({ icon: text.optional(), text })).default([]),
+      /** Tips; `group` puts them under a heading (e.g. "לוגיסטיקה", "כסף"). */
+      tips: z.array(z.object({ icon: text.optional(), text, group: text.optional() })).default([]),
+      /** Theme parks map for this country (embeds /theme-parks.html?cc=XX&embed=map). */
+      themeParks: z.object({ cc: z.string().regex(/^[A-Z]{2}$/), intro: text.optional() }).optional(),
+      /** Hotels near the airport: short note + link (usually /airport-hotels.html#...). */
+      airport: z.object({ text, url: z.url().or(z.string().startsWith("/")), label: text }).optional(),
+      /** Extra useful links shown with the stays (events, local search...). */
+      links: z.array(z.object({ icon: text.optional(), title: text, text: text.optional(), url: z.url().or(z.string().startsWith("/")), label: text.default("לפרטים ←"), partner: z.boolean().default(false) })).default([]),
+      /** Our own trip photos (gallery with a full-screen view). */
+      gallery: z.array(z.object({ image: image(), alt: text })).default([]),
       phrasebook: z
         .object({
           title: text,

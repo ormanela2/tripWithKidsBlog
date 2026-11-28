@@ -31,7 +31,7 @@ function inner(s, cls, from = 0) {
   return null;
 }
 function all(s, cls) { const out = []; let pos = 0, r; while ((r = inner(s, cls, pos))) { out.push(r); pos = r.end; } return out; }
-const section = id => { const i = body.indexOf(`id="${id}"`); if (i < 0) return null; const j = body.indexOf('class="article-section"', i + 10); return body.slice(i, j > 0 ? j : i + 80000); };
+const section = id => { const i = body.indexOf(`id="${id}"`); if (i < 0) return null; const nx = body.slice(i + 10).search(/class="article-section[" ]/); const j = nx < 0 ? -1 : i + 10 + nx; return body.slice(i, j > 0 ? j : i + 80000); };
 const stripIcon = s => s.replace(/^[\p{Extended_Pictographic}️‍\s]+/u, "").trim();
 const styleOf = (open, prop) => open.match(new RegExp(`${prop}\\s*:\\s*([^;"]+)`))?.[1]?.trim();
 // The page's own destination variable (--athens, --budapest...) becomes --dest; shared ones (--amber...) stay.
@@ -82,7 +82,7 @@ if (!intro.length) review.push("intro text not found");
 
 // ---------- map (page script) ----------
 const mapPts = new Map();
-for (const m of html.matchAll(/\{\s*id:\s*'card(\d+)'([^}]*)\}/g)) {
+for (const m of html.matchAll(/\{\s*id:\s*'(?:card|tl)(\d+)'([^}]*)\}/g)) {
   const f = k => m[2].match(new RegExp(`${k}:\\s*'([^']*)'`))?.[1];
   const lat = Number(m[2].match(/lat:\s*([\d.-]+)/)?.[1]), lng = Number(m[2].match(/lng:\s*([\d.-]+)/)?.[1]);
   if (Number.isFinite(lat) && Number.isFinite(lng)) mapPts.set(Number(m[1]), { lat, lng, ...(f("title") && { label: f("title") }), ...(f("label") && { short: f("label") }), ...(f("date") && { date: f("date") }), ...(f("color") && { color: f("color") }) });
@@ -125,9 +125,11 @@ const accSec = section("accommodation") ?? "";
 const staysIntro = text(accSec.match(/<\/h2>\s*<p[^>]*>([\s\S]*?)<\/p>/)?.[1]) || undefined;
 const staysMap = accSec.match(/<iframe[^>]*src="(https:\/\/stay22\.com\/embed\/[^"]+)"/)?.[1];
 const stays = [];
-for (const m of accSec.matchAll(/<div[^>]*>\s*🏨\s*([^<]+)<\/div>\s*<div[^>]*>\s*📍\s*([^<]+)<\/div>(?:\s*<a href="([^"]+)")?/g)) {
-  const s = { icon: "🏨", name: decode(m[1]).trim(), text: decode(m[2]).trim() };
-  if (m[3]) { s.url = decode(m[3]); s.partner = /stay22|booking|tpk\.mx|getyourguide/i.test(s.url); }
+for (const m of accSec.matchAll(/<div[^>]*font-weight:\s*700[^>]*>\s*([\p{Extended_Pictographic}️‍]+)\s*([^<]+)<\/div>\s*<div[^>]*>\s*📍\s*([^<]+)<\/div>((?:(?!font-weight:\s*700)[\s\S]){0,1500}?<a href="[^"]+")?/gu)) {
+  // The booking link is the first link after the card, before the next card.
+  const link = (m[4] || "").match(/<a href="([^"]+)"/)?.[1];
+  const s = { icon: m[1], name: decode(m[2]).trim(), text: decode(m[3]).trim() };
+  if (link) { s.url = decode(link); s.partner = /stay22|booking|tpk\.mx|getyourguide/i.test(s.url); }
   stays.push(s);
 }
 
@@ -140,10 +142,30 @@ const attractions = tipItems("attractions").map(t => {
   const r = text(b.replace(/<strong>[\s\S]*?<\/strong>/, ""));
   return { ...(icon && { icon }), name: nm, ...(r && { text: r }) };
 }).filter(a => a.name);
-const tips = tipItems("tips").map(t => {
+const tips = (section("tips") ? tipItems("tips") : tipItems("logistics")).map(t => {
   const icon = text(inner(t, "tip-item__icon")?.html);
   return { ...(icon && { icon }), text: text(t.replace(/<span class="tip-item__icon">[\s\S]*?<\/span>/, "")) };
 }).filter(t => t.text);
+
+// ---------- extras ----------
+const tp = body.match(/<iframe[^>]*src="theme-parks\.html\?cc=([A-Z]{2})[^"]*"/);
+const themeParks = tp ? { cc: tp[1], ...(text((section(body.match(/id="(theme-parks[\w-]*)"/)?.[1] ?? "") ?? "").match(/<p[^>]*class="[^"]*tp-embed__intro[^"]*"[^>]*>([\s\S]*?)<\/p>/)?.[1]) && { intro: text((section(body.match(/id="(theme-parks[\w-]*)"/)?.[1] ?? "") ?? "").match(/<p[^>]*class="[^"]*tp-embed__intro[^"]*"[^>]*>([\s\S]*?)<\/p>/)?.[1]) }) } : undefined;
+const apSec = section("airport-stay");
+const apLink = apSec?.match(/<a[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/);
+const airport = apSec && apLink ? { text: text(apSec.match(/<\/h2>\s*<p[^>]*>([\s\S]*?)<\/p>/)?.[1]), url: "/" + decode(apLink[1]).replace(/^\//, ""), label: text(apLink[2]) } : undefined;
+const links = [];
+for (const m of body.matchAll(/<div style="background:var\(--sand\);border:2px solid var\(--sand-dark\);border-radius:16px;padding:18px 24px;([^"]*)">([\s\S]*?)<a href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)) {
+  if (/display:\s*none/.test(m[1])) continue; // hidden on the live page
+  const inner = m[2];
+  const title = text(inner.match(/font-family:var\(--font-heading\)[^>]*>([\s\S]*?)<\/div>/)?.[1]);
+  const sub = text(inner.match(/font-size:13px;color:#888;[^>]*>([\s\S]*?)<\/div>/)?.[1]);
+  const url = decode(m[3]);
+  if (title) links.push({ icon: /ticketmaster/i.test(inner + url) ? "🎫" : "🔗", title, ...(sub && { text: sub }), url: /^https?:/.test(url) ? url : "/" + url, label: text(m[4]) || "לפרטים ←", partner: /tpk\.mx|stay22|getyourguide|[?&](aid|ref)=/.test(url) });
+}
+const gallery = [...body.matchAll(/class="photo-gallery__item"[^>]*>\s*<img src="([^"]+)" alt="([^"]*)"/g)]
+  .map(m => ({ file: decodeURIComponent(m[1].split("/").pop()), alt: decode(m[2]) }))
+  .filter(p => existsSync(`src/assets/photos/${p.file}`))
+  .map(p => ({ image: `../../assets/photos/${p.file}`, alt: p.alt }));
 
 // ---------- phrasebook ----------
 let phrasebook;
@@ -177,6 +199,7 @@ const data = {
   country: opt("country") ?? "XX", ...(opt("hub") && { hub: opt("hub") }), ...(color && { color }), ...(colorDark && { colorDark }),
   hero: { image: `../../assets/photos/${heroSrc ?? "MISSING"}`, ...(subtitle && { subtitle }), ...(osmCredit && { osmCredit }) },
   trip, headings, ...(map && { map }), days, ...(staysIntro && { staysIntro }), stays, attractions, tips, ...(phrasebook && { phrasebook }),
+  ...(themeParks && { themeParks }), ...(airport && { airport }), links, gallery,
   ...(sidebar && { sidebar }), partners: { ...(staysMap && { staysMap: decode(staysMap) }) },
 };
 if (!opt("country")) review.push("pass --country (ISO code): flag and good-to-know tips");

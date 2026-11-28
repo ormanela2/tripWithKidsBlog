@@ -29,6 +29,9 @@ const localUrl = (u: string) => (/^https?:/.test(u) ? u : `/${u.replace(/^\//, "
 const stopsCount = g.days.reduce((n, d) => n + d.stops.length, 0);
 const bandOf = (d: (typeof g.days)[number]) => d.band ?? ["var(--dest)", "var(--dest-dark)"];
 const credits = g.days.flatMap((d, i) => (d.photo?.credit ? [{ day: i + 1, alt: d.photo.alt, ...d.photo.credit }] : []));
+const tipGroups = [...new Set(g.tips.map(t => t.group ?? ""))].map(name => ({ name, tips: g.tips.filter(t => (t.group ?? "") === name) }));
+const partnerLinks = g.links.filter(l => l.partner);
+const otherLinks = g.links.filter(l => !l.partner);
 const phraseCount = g.phrasebook?.groups.reduce((n, grp) => n + grp.phrases.length, 0) ?? 0;
 
 const mapDays = g.days.flatMap((d, i) => (d.map ? [{ id: `day-${i + 1}`, day: i + 1, label: d.map.short ?? d.title, emoji: d.icon ?? "📍", lat: d.map.lat, lng: d.map.lng, color: d.map.color ?? g.color, title: d.map.label ?? d.title }] : []));
@@ -38,12 +41,16 @@ const sections = [
   { id: "why", label: `למה ${g.name} עם ילדים` },
   g.days.length && { id: "days", label: "המסלול יום אחר יום" },
   g.attractions.length && { id: "todo", label: "מה לעשות עם ילדים" },
-  (g.stays.length || g.partners.staysMap) && { id: "stay", label: "איפה ישנו" },
+  (g.stays.length || g.partners.staysMap || g.airport || partnerLinks.length) && { id: "stay", label: "איפה ישנו" },
+  g.themeParks && { id: "parks", label: "פארקי שעשועים" },
   g.tips.length && { id: "tips", label: "טיפים חשובים" },
+  g.gallery.length && { id: "gallery", label: "גלריית תמונות" },
   gtk && { id: "know", label: gtk.title_he },
   g.faq.length && { id: "faq", label: "שאלות נפוצות" },
 ].filter(Boolean) as { id: string; label: string }[];
 
+// Full-screen copies: longest side 1200px (portrait photos too), never upscaled.
+const galleryFull = await Promise.all(g.gallery.map(async p => ({ src: (await getImage({ src: p.image, width: Math.round(p.image.width * Math.min(1, 1200 / Math.max(p.image.width, p.image.height))), format: "webp", quality: 66 })).src, alt: p.alt })));
 const share = await getImage({ src: g.hero.image, width: 1200, height: 630, fit: "cover", format: "jpg" });
 const schema = [
   breadcrumb([{ name: site.name, path: "/" }, { name: "יעדים", path: "/destinations.html" }, { name: g.name, path }]),
@@ -194,7 +201,7 @@ const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
             </section>
           )}
 
-          {(g.stays.length > 0 || g.partners.staysMap) && (
+          {(g.stays.length > 0 || g.partners.staysMap || g.airport || partnerLinks.length > 0) && (
             <section id="stay" class="section" aria-labelledby="stay-h">
               <h2 id="stay-h">איפה ישנו</h2>
               {g.staysIntro && <p class="lede">{g.staysIntro}</p>}
@@ -213,13 +220,62 @@ const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
                   {s.partner && <p class="disclose">ⓘ קישור שותפים: אם תזמינו דרכו נקבל עמלה קטנה. המחיר שלכם לא משתנה.</p>}
                 </div>
               ))}
+              {g.airport && (
+                <div class="stay stay--soft">
+                  <div class="stay__row">
+                    <div><h3>🛬 לינה ליד שדה התעופה</h3><p class="lede">{g.airport.text}</p></div>
+                    <a class="btn btn--ghost-teal" href={g.airport.url}>{g.airport.label}</a>
+                  </div>
+                </div>
+              )}
+              {partnerLinks.map(l => (
+                <div class="stay stay--soft">
+                  <div class="stay__row">
+                    <div><h3>{l.icon} {l.title}</h3>{l.text && <p class="lede">{l.text}</p>}</div>
+                    <a class="btn btn--ghost-teal" href={l.url} target={l.url.startsWith("http") ? "_blank" : undefined} rel={l.partner ? "sponsored noopener" : "noopener"}>{l.label}</a>
+                  </div>
+                  {l.partner && <p class="disclose">ⓘ קישור שותפים: אם תזמינו דרכו נקבל עמלה קטנה. המחיר שלכם לא משתנה.</p>}
+                </div>
+              ))}
+            </section>
+          )}
+
+          {g.themeParks && (
+            <section id="parks" class="section" aria-labelledby="parks-h">
+              <h2 id="parks-h">🎢 פארקי שעשועים</h2>
+              {g.themeParks.intro && <p class="lede">{g.themeParks.intro}</p>}
+              <div class="parksmap"><iframe src={`/theme-parks.html?cc=${g.themeParks.cc}&embed=map`} title={`מפת פארקי שעשועים: ${g.name}`} loading="lazy"></iframe></div>
+              <a class="more" href="/theme-parks.html">למדריך פארקי אירופה המלא ←</a>
             </section>
           )}
 
           {g.tips.length > 0 && (
             <section id="tips" class="section" aria-labelledby="tips-h">
               <h2 id="tips-h">טיפים חשובים</h2>
-              <ul class="tips">{g.tips.map(t => <li><span aria-hidden="true">{t.icon ?? "•"}</span><span>{t.text}</span></li>)}</ul>
+              {tipGroups.map(grp => (
+                <div class="tipgroup">
+                  {grp.name && <h3>{grp.name}</h3>}
+                  <ul class="tips">{grp.tips.map(t => <li><span aria-hidden="true">{t.icon ?? "•"}</span><span>{t.text}</span></li>)}</ul>
+                </div>
+              ))}
+              {otherLinks.map(l => (
+                <a class="linkcard" href={l.url}>
+                  <span class="linkcard__icon" aria-hidden="true">{l.icon}</span>
+                  <span><b>{l.title}</b>{l.text && <span class="linkcard__text">{l.text}</span>}</span>
+                  <span class="linkcard__go">{l.label}</span>
+                </a>
+              ))}
+            </section>
+          )}
+
+          {g.gallery.length > 0 && (
+            <section id="gallery" class="section" aria-labelledby="gallery-h">
+              <h2 id="gallery-h">📸 גלריית תמונות</h2>
+              <ul class="gallery">
+                {g.gallery.map((p, i) => (
+                  <li><button type="button" class="gallery__item" data-index={i} aria-label={`הגדלת תמונה: ${p.alt}`}><Photo src={p.image} alt={p.alt} widths={[320, 480, 640]} sizes="(max-width: 600px) 50vw, 240px" /></button></li>
+                ))}
+              </ul>
             </section>
           )}
 
@@ -288,6 +344,15 @@ const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
           </div>
         </div>
       </>
+    )}
+    {g.gallery.length > 0 && (
+      <div class="gd-lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="גלריית תמונות">
+        <button type="button" class="gd-lightbox__close" id="lbClose" aria-label="סגירה">✕</button>
+        <button type="button" class="gd-lightbox__nav gd-lightbox__prev" id="lbPrev" aria-label="התמונה הקודמת">›</button>
+        <img id="lbImg" alt="" />
+        <button type="button" class="gd-lightbox__nav gd-lightbox__next" id="lbNext" aria-label="התמונה הבאה">‹</button>
+        <script type="application/json" id="galleryData" set:html={JSON.stringify(galleryFull).replace(/</g, "\\u003c")} />
+      </div>
     )}
     {mapDays.length > 0 && <script type="application/json" id="tripMapData" set:html={mapData} />}
   </Fragment>
@@ -384,6 +449,27 @@ const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
     }).catch(() => { el.textContent = "המפה לא נטענה כרגע."; });
     if ("IntersectionObserver" in window) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); start(); } }, { rootMargin: "400px" }); io.observe(el); }
     else start();
+  })();
+
+  // ---- gallery lightbox ----
+  (() => {
+    const box = $("lightbox"), img = $<HTMLImageElement>("lbImg"), dataEl = $("galleryData");
+    if (!box || !img || !dataEl) return;
+    const items = JSON.parse(dataEl.textContent || "[]") as { src: string; alt: string }[];
+    let at = 0, opener: HTMLElement | null = null;
+    const show = (i: number) => { at = (i + items.length) % items.length; img.src = items[at]!.src; img.alt = items[at]!.alt; };
+    const close = () => { box.hidden = true; document.body.style.overflow = ""; opener?.focus(); };
+    document.querySelectorAll<HTMLButtonElement>(".gallery__item").forEach(b => b.addEventListener("click", () => { opener = b; show(Number(b.dataset.index)); box.hidden = false; document.body.style.overflow = "hidden"; $("lbClose")?.focus(); }));
+    $("lbClose")?.addEventListener("click", close);
+    $("lbPrev")?.addEventListener("click", () => show(at - 1));
+    $("lbNext")?.addEventListener("click", () => show(at + 1));
+    box.addEventListener("click", e => { if (e.target === box) close(); });
+    document.addEventListener("keydown", e => {
+      if (box.hidden) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") show(at + 1);
+      else if (e.key === "ArrowRight") show(at - 1);
+    });
   })();
 
   // ---- phrasebook sheet ----
@@ -520,6 +606,22 @@ const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
   .gd .stay h3 { font-size: 1.15rem; color: var(--charcoal); }
   .disclose { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
 
+  .stay--soft { background: var(--cream); }
+  .gd .btn--ghost-teal { background: #fff; color: var(--teal); border: 1.5px solid var(--teal); }
+  .parksmap { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--sand-dark); background: var(--sand); }
+  .parksmap iframe { width: 100%; height: 460px; border: 0; display: block; }
+  .tipgroup { display: grid; gap: 8px; }
+  .linkcard { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: center; background: var(--sand); border: 1px solid var(--sand-dark); border-radius: var(--r-md); padding: 14px 16px; text-decoration: none; color: var(--charcoal); }
+  .linkcard__icon { font-size: 24px; grid-row: span 2; }
+  .linkcard b { display: block; }
+  .linkcard__text { display: block; font-size: 14.5px; color: var(--muted); }
+  .gd .linkcard__go { color: var(--teal); font-weight: 600; font-size: 14.5px; }
+  .linkcard:hover { border-color: var(--teal); }
+  .gd .tipgroup h3 { font-size: 1.05rem; color: var(--teal-dark); margin-top: 6px; }
+  .gallery { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+  .gallery__item { display: block; width: 100%; aspect-ratio: 4 / 3; padding: 0; border: 0; border-radius: 12px; overflow: hidden; cursor: zoom-in; background: var(--sand); }
+  .gallery__item :global(picture), .gallery__item :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+  .gallery__item:hover :global(img) { transform: scale(1.05); }
   .tips { list-style: none; padding: 0; display: grid; gap: 8px; }
   .tips li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 8px; background: #fff; border: 1px solid var(--sand-dark); border-radius: var(--r-sm); padding: 10px 14px; }
 
@@ -567,6 +669,13 @@ const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
   .gd-cats button { border: 1.5px solid var(--sand-dark); background: #fff; border-radius: 999px; padding: 4px 12px; min-height: 36px; cursor: pointer; font: inherit; }
   .gd-cats button[aria-pressed="true"] { background: var(--teal); color: #fff; border-color: var(--teal); }
   .gd-pbgroup[hidden] { display: none; }
+  .gd-lightbox { position: fixed; inset: 0; z-index: 1200; background: rgba(0,0,0,.9); display: grid; place-items: center; padding: 16px; }
+  .gd-lightbox[hidden] { display: none; }
+  .gd-lightbox img { max-width: 92vw; max-height: 86vh; object-fit: contain; border-radius: 8px; }
+  .gd-lightbox__close { position: absolute; top: max(16px, env(safe-area-inset-top, 0px)); left: 16px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.15); color: #fff; font-size: 20px; cursor: pointer; }
+  .gd-lightbox__nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 0; background: rgba(255,255,255,.15); color: #fff; font-size: 28px; cursor: pointer; }
+  .gd-lightbox__prev { right: 16px; }
+  .gd-lightbox__next { left: 16px; }
   .gd-pbgroup h3 { font-size: 1rem; margin-top: 8px; color: var(--teal-dark); }
   .gd-phr { display: grid; grid-template-columns: 1fr 1.2fr; gap: 10px; padding: 8px 0; border-top: 1px solid var(--sand-dark); }
   .gd-phr span:last-child { color: var(--teal-dark); }

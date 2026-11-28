@@ -1,0 +1,17 @@
+{
+  "hub": {
+    "color": "#C0392B",
+    "bestMonths": [9, 10],
+    "highlights": ["קופרניקוס", "Suntago", "Majaland", "Łazienki Park"]
+  },
+  "days": {
+    "1": { "file": "warsaw5.jpg", "alt": "מרכז קופרניקוס" },
+    "2": { "file": "warsaw1.jpg", "alt": "ייצור סוכריות" },
+    "3": { "file": "warsaw7.jpg", "alt": "תפוח ענק במטע" },
+    "4": { "file": "commons/warsaw-day4.jpg", "alt": "Suntago", "credit": { "author": "MOs810", "license": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Suntago_hol.jpg" } },
+    "5": { "file": "warsaw4.jpg", "alt": "ילד עם סנאי בפארק" },
+    "6": { "file": "commons/warsaw-day6.jpg", "alt": "יער קמפינוס", "credit": { "author": "Aga Viburno", "license": "CC BY-SA 3.0", "url": "https://commons.wikimedia.org/wiki/File:Kampinos_Forest_-_panoramio.jpg" } },
+    "8": { "file": "commons/warsaw-day8.jpg", "alt": "הטירה בצ'רסק", "credit": { "author": "Radosław Botev", "license": "CC BY 3.0 pl", "url": "https://commons.wikimedia.org/wiki/File:Masovian_Dukes_Castle_in_Czersk_(1).jpg" } },
+    "9": { "file": "commons/warsaw-day9.jpg", "alt": "נמל התעופה שופן בוורשה", "credit": { "author": "PerpetualTraveler", "license": "CC BY-SA 4.0", "url": "https://commons.wikimedia.org/wiki/File:Terminal_A_of_Warsaw_Chopin_Airport_July_2024.jpg" } }
+  }
+}
