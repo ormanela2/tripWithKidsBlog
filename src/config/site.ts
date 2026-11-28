@@ -67,11 +67,19 @@ export const site = {
   },
 
   forms: {
-    /** TODO(owner): decide which forms stay; one Formspree id per form, no email addresses in pages. */
-    provider: "formspree" as const,
-    ids: {} as Record<string, string>,
+    /**
+     * Formspree form codes (the part after formspree.io/f/). Never an email address in a page.
+     * Owner decision 28 Nov 2026: the website forms (newsletter, contact, packages, theme-park plan, waiting list)
+     * send to the trip questionnaire form; each keeps its own subject line. To split later, create a form in
+     * Formspree and change "website" here.
+     */
+    website: "mwvrkdon",
+    questionnaire: "mwvrkdon",
   },
 
 } as const;
+
+/** Formspree address of a form by name (see forms above). */
+export const formAction = (name: keyof typeof site.forms) => `https://formspree.io/f/${site.forms[name]}`;
 
 export const whatsappLink = (text?: string) => `https://wa.me/${site.contact.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;

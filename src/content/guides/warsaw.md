@@ -4,6 +4,7 @@ seoTitle: טיול לוורשה עם ילדים 2026 | מדריך, מסלול ו
 description: "מדריך מלא לטיול לוורשה עם ילדים: העיר העתיקה, מוזיאונים, לינה ומסלול יום־יום מהשטח. טיפים למשפחות · מתי טסים 2026"
 name: וורשה
 country: PL
+feedbackForm: mrejrqea
 hub: warsaw
 hero:
   image: ../../assets/photos/warsaw5.jpg

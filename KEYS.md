@@ -31,3 +31,8 @@ Project id `wrt3m0l4ow` (public; on 17 live pages, the guides among them). Now i
 
 ## Update (W7): OpenWeatherMap key (missed in W1)
 weather.html calls OpenWeatherMap with an API key written in the page (visible to every visitor, also on the live site). Kept so the page works as today. Owner options: restrict/rotate the key in the OpenWeatherMap account, or switch the page to Open-Meteo (free, no key; the page already uses it for part of the data).
+
+## Update (W10): forms
+- FormSubmit removed everywhere; no Gmail address in any page (info@mataytasim.co.il shown instead).
+- Formspree: website forms -> mwvrkdon (the questionnaire form; owner decision). Feedback widgets keep one form per guide (maqvdgna, xdablvpv, xjgljwaa, meenvgly, xeenvgaq, mzdoaqwz, mbdwqopk, mrejrqea). Formspree's free plan has a monthly submission limit per account: check it in the Formspree dashboard.
+- **Owner: make sure info@mataytasim.co.il receives mail** (it is now the only address shown on the site).

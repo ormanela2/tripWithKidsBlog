@@ -155,6 +155,7 @@ const fm = {
   ...(stay22 && { stay22: true }),
   ...(floatNav && { floatNav: true }),
   ...(hasAffiliate(body) && { partnerNote: true }),
+  ...(!/id="emailPopupOverlay"/.test(html) && { newsletter: false }),
   ...(readProgress && { readProgress: true }),
 };
 const yaml = Object.entries(fm).filter(([, v]) => v !== undefined && v !== "").map(([k, v]) => `${k}: ${typeof v === "string" ? JSON.stringify(v) : v}`).join("\n");

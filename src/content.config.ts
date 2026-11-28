@@ -148,6 +148,8 @@ const guides = defineCollection({
         .optional(),
       faq: z.array(z.object({ q: text, a: text })).default([]),
 
+      /** Formspree form for the "did you find what you were looking for?" widget (each guide has its own). */
+      feedbackForm: z.string().regex(/^[a-z0-9]+$/).optional(),
       /** The teal card in the sidebar. */
       sidebar: z.object({ title: text, text }).optional(),
 
@@ -181,6 +183,8 @@ const carriedFields = ({ image }: { image: () => z.ZodType }) => ({
   floatNav: z.boolean().default(false),
   /** Reading-progress plane in the menu bar, as the live page has. */
   readProgress: z.boolean().default(false),
+  /** Newsletter pop-up, as the live page has (on 31 of the live pages). */
+  newsletter: z.boolean().default(true),
   /** The page has affiliate links: show the partner disclosure at the end of the page. */
   partnerNote: z.boolean().default(false),
   draft: z.boolean().default(false),

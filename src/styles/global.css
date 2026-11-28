@@ -553,3 +553,40 @@ main { padding-top: var(--nav-height); min-height: 60vh; }
 .read-progress__plane { position: absolute; top: 50%; left: 100%; width: var(--read-plane-w); height: var(--read-plane-h); transform: translate3d(-100%, -50%, 0); color: #1b4372; filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9)); will-change: left; z-index: 2; }
 .read-progress__plane svg { display: block; width: 100%; height: 100%; transform: rotate(-8deg); transform-origin: 50% 50%; transition: transform 0.2s ease-out; }
 @media (max-width: 900px) { .read-progress { --read-bar-h: 3px; --read-plane-w: 15px; --read-plane-h: 15px; left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); bottom: 3px; } .read-progress__track { background: rgba(27, 67, 114, 0.09); } .read-progress__fill { background: linear-gradient(to left, rgba(27, 67, 114, 0.28) 0%, rgba(27, 67, 114, 0.78) 50%, rgba(230, 161, 92, 0.78) 100%); } }
+
+/* Newsletter pop-up (copied from the live pages) */
+
+@keyframes emailPopupIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.email-popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 10050; align-items: center; justify-content: center; padding: max(20px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); box-sizing: border-box; -webkit-overflow-scrolling: touch; }
+.email-popup-overlay.open { display: flex; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.email-popup { background: var(--cream); border-radius: 24px; padding: 40px 32px 51px; max-width: min(420px, calc(100vw - 32px)); width: 100%; max-height: min(92vh, calc(100dvh - 40px)); overflow-y: auto; -webkit-overflow-scrolling: touch; text-align: center; position: relative; box-shadow: 0 16px 48px rgba(0,0,0,0.2); animation: emailPopupIn 0.3s ease; box-sizing: border-box; }
+.email-popup__close { position: absolute; top: 12px; left: 12px; font-size: 24px; line-height: 1; cursor: pointer; color: #666; background: rgba(0,0,0,0.06); border: none; width: 44px; height: 44px; min-width: 44px; min-height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0; -webkit-tap-highlight-color: transparent; transition: background 0.2s, color 0.2s; }
+.email-popup__close:hover { color: var(--charcoal); background: rgba(0,0,0,0.1); }
+.email-popup__title { font-family: var(--font-heading); font-size: 22px; color: var(--teal); margin: 8px 0 6px; line-height: 1.25; }
+.email-popup__subtitle { font-size: 14px; color: #666; line-height: 1.55; margin: 0 0 20px; overflow-wrap: anywhere; word-break: break-word; }
+.email-popup__form { display: flex; flex-direction: column; gap: 14px; }
+.email-popup__input { padding: 14px 18px; border: 2px solid var(--sand-dark); border-radius: 40px; font-family: var(--font-body); font-size: 16px; background: #fff; color: var(--charcoal); outline: none; text-align: right; width: 100%; box-sizing: border-box; }
+.email-popup__input:focus { border-color: var(--teal); }
+.email-popup__btn { background: var(--teal); color: #fff; border: none; border-radius: 40px; padding: 14px 24px; font-family: var(--font-body); font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; min-height: 48px; -webkit-tap-highlight-color: transparent; }
+.email-popup__btn:hover { background: var(--teal-dark); }
+.email-popup__or { display: flex; align-items: center; gap: 14px; margin: 20px 0 12px; font-size: 12px; font-weight: 600; color: #9ca3af; letter-spacing: 0.02em; }
+.email-popup__or::before, .email-popup__or::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(26,107,114,0.2), transparent); }
+.email-popup__fb-lead { margin: 0 0 10px; font-size: 13px; line-height: 1.45; color: #6b7280; }
+.email-popup__fb-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; direction: rtl; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--teal-dark); text-decoration: none; transition: color 0.2s, opacity 0.2s; -webkit-tap-highlight-color: transparent; }
+.email-popup__fb-link:hover, .email-popup__fb-link:focus-visible { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; outline: none; }
+.email-popup__fb-icon { width: 18px; height: 18px; flex-shrink: 0; }
+.email-popup__fb-icon path { fill: #1877F2; }
+@media (max-width: 480px) {
+  .email-popup { padding: 44px 16px 37px; border-radius: 20px; max-width: calc(100vw - 24px); max-height: min(90vh, calc(100dvh - 48px)); }
+  .email-popup__title { font-size: 19px; }
+  .email-popup__subtitle { font-size: 13px; margin-bottom: 18px; }
+  .email-popup__fb-lead { font-size: 12px; }
+  .email-popup__fb-link { font-size: 13px; min-height: 44px; padding: 8px 6px; box-sizing: border-box; }
+}
+  
+.email-popup__done { font-size: 15px; color: var(--teal-dark); background: rgba(26,107,114,.08); border-radius: 14px; padding: 14px; margin: 0; }
+/* Forms: honeypot (hidden from people), status lines */
+.form-hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+.form-done { font-size: 15px; color: var(--teal-dark); background: rgba(26,107,114,.08); border-radius: 12px; padding: 12px 14px; }
+.form-error { font-size: 14px; color: #7f1d1d; background: rgba(220,38,38,.08); border: 1px solid rgba(220,38,38,.25); border-radius: 12px; padding: 10px 12px; margin-top: 8px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

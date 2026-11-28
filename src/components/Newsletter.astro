@@ -1,0 +1,70 @@
+---
+/**
+ * Newsletter pop-up, as on the live site (same text, look and behaviour), now sending through Formspree.
+ * Opens when someone taps a "#newsletter" link (menu "מצטרפים לקהילה", footer) or arrives at an address ending in #newsletter.
+ * Never opens by itself. Same Plausible events as the live site: Newsletter-Open-Nav, Newsletter-Submit.
+ */
+import { site, formAction } from "../config/site";
+---
+<div class="email-popup-overlay" id="emailPopupOverlay">
+  <div class="email-popup" role="dialog" aria-modal="true" aria-labelledby="emailPopupTitle">
+    <button type="button" class="email-popup__close" id="emailPopupClose" aria-label="סגור">×</button>
+    <h2 class="email-popup__title" id="emailPopupTitle">הטיול הבא שלכם מתחיל כאן</h2>
+    <p class="email-popup__subtitle">כל הטיפים, היעדים והמסלולים לטיול הבא שלכם - בואו להיות חלק מקהילת מתי טסים</p>
+    <form class="email-popup__form" action={formAction("website")} method="POST" id="emailPopupForm" data-ajax-form data-ajax-event="Newsletter-Submit" data-ajax-done="emailPopupDone">
+      <input type="hidden" name="_subject" value="הרשמה לעדכונים - מתי טסים" />
+      <input type="hidden" name="form" value="newsletter" />
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="form-hp" />
+      <label class="visually-hidden" for="emailPopupInput">כתובת מייל</label>
+      <input type="email" name="email" id="emailPopupInput" required placeholder="המייל שלכם" class="email-popup__input" inputmode="email" autocomplete="email" enterkeyhint="send" />
+      <button type="submit" class="email-popup__btn">אני רוצה להצטרף</button>
+    </form>
+    <p class="email-popup__done" id="emailPopupDone" hidden>תודה! נרשמתם בהצלחה. נשלח אליכם רק דברים שימושיים.</p>
+    <div class="email-popup__fb">
+      <p class="email-popup__or" role="separator">או</p>
+      <p class="email-popup__fb-lead">מעדיפים להתעדכן בפייסבוק?</p>
+      <a href={site.social.facebook} class="email-popup__fb-link" target="_blank" rel="noopener noreferrer" aria-label="עקבו אחרינו בפייסבוק - נפתח בלשונית חדשה">
+        <svg class="email-popup__fb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"></path></svg>
+        <span>עקבו אחרינו בלחיצה</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var overlay = document.getElementById("emailPopupOverlay");
+    var closeBtn = document.getElementById("emailPopupClose");
+    if (!overlay) return;
+    var openedAt = 0, opener = null;
+    var pageName = location.pathname.split("/").pop().replace(".html", "") || "home";
+    function track(name) { try { if (window.plausible) window.plausible(name, { props: { page: pageName } }); } catch (e) {} }
+    function openPopup() {
+      opener = document.activeElement;
+      if (!overlay.classList.contains("open")) { overlay.classList.add("open"); document.body.style.overflow = "hidden"; }
+      openedAt = Date.now();
+      track("Newsletter-Open-Nav");
+      var input = document.getElementById("emailPopupInput");
+      if (input) setTimeout(function () { input.focus(); }, 50);
+    }
+    function closePopup() {
+      if (!overlay.classList.contains("open")) return;
+      overlay.classList.remove("open");
+      document.body.style.overflow = "";
+      if (opener && opener.focus) opener.focus();
+    }
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest('a[href$="#newsletter"]');
+      if (!a) return;
+      e.preventDefault();
+      openPopup();
+    });
+    if (closeBtn) closeBtn.addEventListener("click", closePopup);
+    overlay.addEventListener("click", function (e) { if (e.target === overlay && Date.now() - openedAt > 400) closePopup(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closePopup(); });
+    // Coming back from the old confirmation address (?subscribed=1): remember the sign-up, as before.
+    try { if (new URLSearchParams(location.search).get("subscribed") === "1") localStorage.setItem("mtEmailSubmitted", "1"); } catch (e) {}
+    if (location.hash === "#newsletter") setTimeout(openPopup, 50);
+    window.openEmailPopup = openPopup;
+  })();
+</script>

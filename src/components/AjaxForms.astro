@@ -1,0 +1,47 @@
+---
+/**
+ * Sends any <form data-ajax-form> in the background (Formspree JSON) instead of leaving the page.
+ * On success: hides the form and shows the element named in data-ajax-done (or a short thank-you),
+ * remembers newsletter sign-ups (as the live site did) and sends the Plausible event in data-ajax-event.
+ * On failure: tells the visitor and offers WhatsApp / email.
+ */
+import { site, whatsappLink } from "../config/site";
+const failText = `לא הצלחנו לשלוח כרגע. אפשר לכתוב לנו בוואטסאפ או ל-${site.contact.email}`;
+const waHref = whatsappLink("היי, ניסיתי להירשם באתר ולא הצלחתי");
+---
+<script is:inline define:vars={{ failText, waHref }}>
+  document.addEventListener("submit", function (e) {
+    var form = e.target;
+    if (!form || !form.hasAttribute || !form.hasAttribute("data-ajax-form")) return;
+    e.preventDefault();
+    var btn = form.querySelector('[type="submit"]');
+    var label = btn ? btn.textContent : "";
+    if (btn) { btn.disabled = true; btn.textContent = "שולח..."; }
+    var old = form.parentNode && form.parentNode.querySelector(".form-error");
+    if (old) old.remove();
+    fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
+      .then(function (r) { if (!r.ok) throw new Error("form"); })
+      .then(function () {
+        try { if (form.querySelector('input[type="email"]')) localStorage.setItem("mtEmailSubmitted", "1"); } catch (x) {}
+        var ev = form.getAttribute("data-ajax-event");
+        try { if (ev && window.plausible) window.plausible(ev, { props: { page: location.pathname.split("/").pop().replace(".html", "") || "home" } }); } catch (x) {}
+        var doneId = form.getAttribute("data-ajax-done");
+        var done = doneId && document.getElementById(doneId);
+        if (!done) { done = document.createElement("p"); done.className = "form-done"; done.textContent = "תודה! קיבלנו."; form.parentNode.insertBefore(done, form.nextSibling); }
+        form.hidden = true;
+        done.hidden = false;
+        done.setAttribute("role", "status");
+      })
+      .catch(function () {
+        if (btn) { btn.disabled = false; btn.textContent = label; }
+        var p = document.createElement("p");
+        p.className = "form-error";
+        p.setAttribute("role", "alert");
+        p.textContent = failText + " ";
+        var a = document.createElement("a");
+        a.href = waHref; a.target = "_blank"; a.rel = "noopener"; a.textContent = "לוואטסאפ";
+        p.appendChild(a);
+        form.parentNode.insertBefore(p, form.nextSibling);
+      });
+  });
+</script>

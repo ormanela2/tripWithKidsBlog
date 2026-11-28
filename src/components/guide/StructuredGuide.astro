@@ -9,6 +9,7 @@ import { render, type CollectionEntry } from "astro:content";
 import { getImage } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Photo from "../Photo.astro";
+import FeedbackWidget from "../FeedbackWidget.astro";
 import { site, whatsappLink } from "../../config/site";
 import { breadcrumb, article, faq as faqSchema } from "../../lib/schema";
 import { destinations } from "../../data/destinations";
@@ -298,6 +299,8 @@ const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
               {g.faq.map(f => <details class="faq"><summary>{f.q}</summary><p>{f.a}</p></details>)}
             </section>
           )}
+
+          {g.feedbackForm && <FeedbackWidget formId={g.feedbackForm} page={entry.id} />}
 
           <section class="closing">
             <h2>רוצים טיול כזה, מותאם אליכם?</h2>
