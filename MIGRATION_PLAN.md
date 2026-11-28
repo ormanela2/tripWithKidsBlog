@@ -58,3 +58,8 @@ Every old URL works; Lighthouse performance and accessibility at least 90 on mob
 - Owner: remove any mention of Google Maps. Done with scripts/remove-google-maps.mjs plus two Austria popup texts ("נבדק ב-Google Maps" -> "זמן נסיעה ברכב", "פרטי מקום ב-Google Maps" -> "פרטי מקום").
 - Nothing a visitor can see mentions Google Maps. Dead code from the old Google setup remains inside the scripts of austria, poland-south (removed when they move to the new design, W16), airport-hotels, budapest and theme-parks (W12 clean-up).
 - Open question for the owner: theme-parks shows nearby hotels with a Google rating and review count (stored data from Google). Keep, replace or remove.
+
+## No Google text (28 Nov 2026)
+- Owner: no Google text anywhere on the site. scripts/remove-google-text.mjs (texts reworded, Google Play badges -> Android buttons, Google rating badge removed) and scripts/remove-smart-planner-terms.mjs (terms: the unused smart-planning service section removed, with its Google sign-in text).
+- Theme parks: nearby hotels via the Stay22 map only; stored Google ratings deleted.
+- Behind the scenes only: the Search Console verification file (needed for Search Console) and Google Fonts (could be self-hosted, W12 option).
