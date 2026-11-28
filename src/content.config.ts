@@ -163,6 +163,8 @@ const carriedFields = ({ image }: { image: () => z.ZodType }) => ({
   floatNav: z.boolean().default(false),
   /** Reading-progress plane in the menu bar, as the live page has. */
   readProgress: z.boolean().default(false),
+  /** The page has affiliate links: show the partner disclosure at the end of the page. */
+  partnerNote: z.boolean().default(false),
   draft: z.boolean().default(false),
 });
 

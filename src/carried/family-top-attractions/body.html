@@ -1,0 +1,116 @@
+<div class="bg-mesh" aria-hidden="true"></div>
+
+  
+
+  <section class="hero">
+    <div class="hero__eyebrow">✈️ 9 יעדים · 45 אטרקציות</div>
+    <h1 class="hero__title">מגלה האטרקציות <span>למשפחות</span></h1>
+    <p class="hero__sub">בחרו יעד, סננו לפי סוג, שמרו מועדפים - והתחילו לבנות את הטיול שלכם.</p>
+    <div class="stats">
+      <div class="stat"><div class="stat__num" id="statDest">9</div><div class="stat__label">יעדים</div></div>
+      <div class="stat"><div class="stat__num">45</div><div class="stat__label">אטרקציות Top 5</div></div>
+      <div class="stat"><div class="stat__num" id="statVisible">45</div><div class="stat__label">מוצגות עכשיו</div></div>
+    </div>
+    <div class="hero__actions">
+      <button type="button" class="btn btn--ghost" id="btnFavorites">
+        ❤️ הרשימה שלי <span class="fav-badge" id="favCount">0</span>
+      </button>
+      <a class="btn btn--primary" href="questionnaire_form.html">תכנון טיול</a>
+    </div>
+  </section>
+
+  <div class="controls">
+    <div class="controls__panel">
+      <div class="search-wrap">
+        <input type="search" id="searchInput" placeholder="חפשו אטרקציה או עיר…" autocomplete="off">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </div>
+      <div class="type-tabs" id="typeFilters" role="tablist" aria-label="סינון לפי סוג">
+        <div class="type-tabs__list" id="typeList">
+          <div class="type-tabs__thumb" id="typeThumb" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="dest-bar" role="tablist" aria-label="סינון לפי יעד">
+        <div class="dest-bar__label">בחרו יעד</div>
+        <div class="dest-bar__viewport" id="destViewport">
+          <div class="dest-bar__thumb" id="destThumb" aria-hidden="true"></div>
+          <div class="dest-bar__buttons" id="destButtons"></div>
+        </div>
+        <div class="dest-picker">
+          <button type="button" class="dest-picker__trigger" id="destPickerTrigger" aria-haspopup="dialog" aria-expanded="false" aria-controls="destSheetPanel">
+            <div class="dest-picker__trigger-main">
+              <span class="dest-picker__trigger-label">יעד ל-Top 5</span>
+              <span class="dest-picker__trigger-value" id="destPickerValue">🌍 כל היעדים</span>
+            </div>
+            <span class="dest-picker__chevron" aria-hidden="true">▾</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="main" id="app"></main>
+
+  <div class="dest-sheet" id="destSheet" aria-hidden="true">
+    <div class="dest-sheet__backdrop" id="destSheetBackdrop"></div>
+    <div class="dest-sheet__panel" id="destSheetPanel" role="dialog" aria-modal="true" aria-labelledby="destSheetTitle">
+      <div class="dest-sheet__head">
+        <h2 id="destSheetTitle">בחרו יעד</h2>
+        <button type="button" class="dest-sheet__close" id="destSheetClose" aria-label="סגור">×</button>
+      </div>
+      <div class="dest-sheet__grid" id="destSheetGrid" role="tablist" aria-label="יעדים"></div>
+    </div>
+  </div>
+
+  <section class="seo-block" id="about-guide" aria-labelledby="seoHeading">
+    <div class="container">
+      <h2 id="seoHeading">מדריך לאטרקציות משפחתיות באירופה</h2>
+      <p class="seo-intro">מגלה האטרקציות למשפחות של מתי טסים מרכז <strong>45 אטרקציות Top 5</strong> ב-<strong>9 יעדים</strong> שמשפחות ישראליות אוהבות: פארקי מים, טירות, טבע, שעשועים ואטרקציות עירוניות. סננו לפי יעד וסוג, חפשו בשם, שמרו מועדפים - וקפצו למדריך המלא לכל יעד.</p>
+      <div class="seo-dests" aria-label="יעדים במדריך">
+        <a href="budapest.html">בודפשט</a>
+        <a href="warsaw.html">וורשה והסביבה</a>
+        <a href="poland-south.html">זקופנה</a>
+        <a href="slovakia.html">סלובקיה</a>
+        <a href="czechia.html">דרום צ׳כיה</a>
+        <a href="austria.html">אוסטריה</a>
+        <a href="slovenia.html">סלובניה</a>
+        <a href="athens.html">אתונה</a>
+        <a href="romania.html">רומניה</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>מתי טסים &copy; 2026 · <a href="services.html">דף הבית</a> · <a href="destinations.html">יעדים</a> · <a href="tips.html">טיפים</a> · <a href="terms.html">תנאי שימוש</a></p>
+    </div>
+  </footer>
+
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="drawer__toolbar">
+      <button type="button" class="drawer__close" id="drawerClose" aria-label="סגור">
+        <span class="drawer__close-icon" aria-hidden="true">×</span>
+        <span>סגור</span>
+      </button>
+    </div>
+    <div class="drawer__hero" id="drawerHero"></div>
+    <div class="drawer__body">
+      <h2 class="drawer__title" id="drawerTitle"></h2>
+      <div class="drawer__en" id="drawerEn"></div>
+      <div class="drawer__facts" id="drawerFacts"></div>
+      <div class="drawer__highlights" id="drawerHighlights" hidden></div>
+      <p class="drawer__why" id="drawerWhy"></p>
+      <div class="drawer__tip" id="drawerTip" hidden></div>
+      <p class="drawer__credit" id="drawerCredit"></p>
+      <div class="drawer__actions" id="drawerActions"></div>
+    </div>
+  </aside>
+
+  <div class="fav-panel" id="favPanel">
+    <div class="fav-panel__head">
+      <h3>❤️ הרשימה שלי</h3>
+      <button type="button" class="btn btn--ghost" id="favPanelClose">סגור</button>
+    </div>
+    <div class="fav-panel__list" id="favList"></div>
+  </div>

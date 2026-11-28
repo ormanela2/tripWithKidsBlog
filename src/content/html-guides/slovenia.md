@@ -7,5 +7,6 @@ country: "SI"
 hub: "slovenia"
 clarity: true
 floatNav: true
+partnerNote: true
 readProgress: true
 ---

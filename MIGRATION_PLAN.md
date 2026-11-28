@@ -20,7 +20,7 @@
 | W5 ✅ | **Content model** | Content collection for destination guides (frontmatter: title, country, hero, best months, kids' ages, highlights, FAQ, partner blocks); guide page template | 1 d | Claude |
 | W6 ✅ | **Migrate destination guides (11)** | austria, czechia, poland-south, poland-three-experiences, warsaw, slovakia, slovakia-advanced, budapest, romania, slovenia, athens; plus `destinations` hub | 3 d | Claude |
 | W7 ✅ | **Migrate tool pages** | weather, calendar, budget, packing, quiz, planning, transport-europe, questionnaire_form, family_questionnaire, austria_trivia_game: keep their behaviour as small scripts on the page | 2 d | Claude |
-| W8 | **Partner pages + disclosure** | esim, airport-hotels, car-rental-partners, car-rental-klasswagen, packages, theme-parks, family-top-attractions, tips, services, about, terms; one `PartnerLink` component that always shows the disclosure | 1.5 d | Claude |
+| W8 ✅ | **Partner pages + disclosure** | esim, airport-hotels, car-rental-partners, car-rental-klasswagen, packages, theme-parks, family-top-attractions, tips, services, about, terms; one `PartnerLink` component that always shows the disclosure | 1.5 d | Claude |
 | W9 | **Maps** | One Leaflet map component (pinned versions, loads only when visible); "Open in Google Maps" links without a key. **No Google Maps API** (owner decision) | 0.5 d | Claude |
 | W10 | **Forms** | One form component (one provider, no email address in the page), honeypot against spam, short privacy line | 0.5 d | Claude |
 | W11 | **Analytics** | One Plausible snippet; keep the existing event names (e.g. article card clicks) | 0.25 d | Claude |
@@ -28,6 +28,7 @@
 | W13 | **QA** | Link check; Lighthouse speed/accessibility budget; iPhone Safari + Android; RTL; compare every page old vs new | 1 d | Claude + **you** |
 | W14 | **Switch over** | Merge to `main`; GitHub Pages source = GitHub Actions; check domain + HTTPS; Search Console: resubmit sitemap; keep the old version ready to roll back | 0.5 d | **you** + Claude |
 | W15 | **After launch** | "Plan this trip" button to the trip planner; how-to for adding a new destination in minutes | 0.5 d | Claude |
+| W16 | **Guides on shared templates** | After launch: merge the styles the guides share into one file, then move each carried-over guide onto the shared guide template (extended for climate, theme parks, gallery, discount cards...), one guide at a time, checking each against the live look. Result: a design change happens once for all guides; a new destination = one content file | 1-2 d per layout generation | Claude |
 
 **Total:** about 15-17 working days of build work, in the order above. W1 (keys) and W13/W14 need you.
 
@@ -45,3 +46,10 @@ Every old URL works; Lighthouse performance and accessibility at least 90 on mob
 - The 10 tool pages are carried over as they are (`scripts/carry-over.mjs <slug> --kind page`), same mechanism as the guides.
 - Many pages keep their tool in the same script as the old menu code; such scripts are kept, with the old menu lookups pointed at stand-in elements. Only scripts that touch nothing but the shared parts are dropped.
 - Still calling outside services, as today: budget (live exchange rates, `currency-api@latest` = today's rates), weather (OpenWeatherMap with a key in the page, plus Open-Meteo), calendar and questionnaire forms (FormSubmit / Formspree, W10).
+
+## W8 notes
+- 11 partner/info pages carried over as they are (esim, airport-hotels, car-rental-partners, car-rental-klasswagen, packages, theme-parks, family-top-attractions, tips, services, about, terms).
+- Their own script and data files are served at the same addresses (public/: european-theme-parks.embed.js + .json, park-xperience.embed.js, family-top-attractions.embed.js, theme-parks-nearby-lodging.json). theme-parks.html now exists, so the 6 guide iframes work.
+- Partner disclosure (PartnerNote) is added at the end of every page with affiliate links: the 8 guides with Stay22 links, esim, airport-hotels. car-rental-partners has no affiliate links (no note needed).
+- Fixed live bugs: dead Cloudflare email-decode script dropped (404 live); tips page logo pointed at the existing file (was broken live).
+- Open for W10: a script on packages and theme-parks posts to FormSubmit with the personal Gmail address.

@@ -8,5 +8,6 @@ hub: "slovakia"
 clarity: true
 stay22: true
 floatNav: true
+partnerNote: true
 readProgress: true
 ---

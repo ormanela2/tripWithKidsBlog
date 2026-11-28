@@ -1,0 +1,298 @@
+<header class="tp-hero">
+    <p id="tpFileBanner" class="tp-hero__file-hint" hidden role="status">מופיעה בקונסולה אזהרת <strong>Unsafe attempt… file://</strong>? זה קורה כשדף <code style="background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px">file://</code> רץ <strong>בתוך מסגרת</strong> (תצוגה מקדימה). זו מגבלת אבטחה של Chrome - לא באג בקוד האתר. פתרון: לפתוח את הקובץ בדפדפן רגיל, או <code style="background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px">npm start</code> → <code style="background:rgba(0,0,0,.12);padding:2px 6px;border-radius:4px">http://localhost:3000/data/theme-parks.html</code>.<br><button type="button" class="tp-filecta" id="tpBreakFrame">פתיחה בחלון עליון / לשונית</button></p>
+    <h1>פארקי שעשועים באירופה</h1>
+    <p>הפארקים הכי טובים באירופה מחכים לכם. בחרו מדינה על המפה כדי להתחיל.</p>
+  </header>
+  
+  <div class="tp-toolbar">
+    <div class="tp-toolbar__inner">
+      <div class="tp-flag-strip" id="tpFlagStrip" role="toolbar" aria-label="סינון מהיר לפי מדינה" hidden>
+        <span class="tp-flag-strip__label">מדינה בלחיצה</span>
+      </div>
+      <div class="tp-field">
+        <label for="countryFilter">בחרו מדינה</label>
+        <div class="tp-search-row">
+          <input type="text" id="countryFilter" class="tp-input" placeholder="למשל: אוסטריה, Italy, הולנד… (עברית או אנגלית)" autocomplete="off" list="countrySuggestions">
+          <button type="button" class="tp-reset" id="tpSearchReset" aria-label="איפוס חיפוש ומסננים">איפוס</button>
+        </div>
+        <datalist id="countrySuggestions">
+          <option value="פולין"></option>
+          <option value="אוסטריה"></option>
+          <option value="צ׳כיה"></option>
+          <option value="איטליה"></option>
+          <option value="גרמניה"></option>
+          <option value="הולנד"></option>
+          <option value="צרפת"></option>
+          <option value="ספרד"></option>
+          <option value="בריטניה"></option>
+          <option value="בלגיה"></option>
+          <option value="שבדיה"></option>
+          <option value="נורבגיה"></option>
+          <option value="דנמרק"></option>
+          <option value="פורטוגל"></option>
+          <option value="יוון"></option>
+          <option value="שווייץ"></option>
+          <option value="סלובקיה"></option>
+          <option value="הונגריה"></option>
+          <option value="פינלנד"></option>
+          <option value="רומניה"></option>
+          <option value="קרואטיה"></option>
+          <option value="אירלנד"></option>
+        </datalist>
+        <p class="tp-suggest-note">הרשימה בעברית בלבד כדי למנוע כפילויות בתפריט. עדיין אפשר להקליד גם באנגלית (Poland, Germany…) - הסינון מזהה את שני השמות.</p>
+        <div class="tp-quick-picks" role="toolbar" aria-label="בחירה מהירה של פארקים פופולריים">
+          <button type="button" class="tp-quick-chip" data-park="Gardaland">Gardaland</button>
+          <button type="button" class="tp-quick-chip" data-park="Efteling">Efteling</button>
+          <button type="button" class="tp-quick-chip" data-park="Europa-Park">Europa-Park</button>
+          <button type="button" class="tp-quick-chip" data-park="Energylandia">Energylandia</button>
+        </div>
+      </div>
+      <section class="tp-inspo" aria-label="השראה לפי יעד - לחיצה מסננת את הרשימה והמפה">
+        <div class="tp-inspo__head">
+          <span class="tp-inspo__kicker">השראה מהיעד</span>
+          <p class="tp-inspo__title">ארבעה אזורים שמשפחות אוהבות - לחצו כדי לסנן לפי המדינה</p>
+        </div>
+        <div class="tp-inspo__grid">
+          <button type="button" class="tp-inspo__card tp-inspo__card--de" data-country-filter="גרמניה" aria-label="סינון פארקים בגרמניה - היער השחור ואירופה־פארק">
+            <img class="tp-inspo__img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Europa-Park_Silver_Star.jpg/500px-Europa-Park_Silver_Star.jpg" width="500" height="375" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer">
+            <span class="tp-inspo__veil" aria-hidden="true"></span>
+            <span class="tp-inspo__body">
+              <span class="tp-inspo__name">היער השחור</span>
+              <span class="tp-inspo__hint">גרמניה · אירופה־פארק והסביבה</span>
+            </span>
+          </button>
+          <button type="button" class="tp-inspo__card tp-inspo__card--nl" data-country-filter="הולנד" aria-label="סינון פארקים בהולנד - אפטלינג והסביבה">
+            <img class="tp-inspo__img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Droomvlucht_entrance_Efteling.jpg/500px-Droomvlucht_entrance_Efteling.jpg" width="500" height="333" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer">
+            <span class="tp-inspo__veil" aria-hidden="true"></span>
+            <span class="tp-inspo__body">
+              <span class="tp-inspo__name">הולנד</span>
+              <span class="tp-inspo__hint">אפטלינג ויעדים נוספים</span>
+            </span>
+          </button>
+          <button type="button" class="tp-inspo__card tp-inspo__card--it" data-country-filter="איטליה" aria-label="סינון פארקים באיטליה - אגם גארדה">
+            <img class="tp-inspo__img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Blue_Tornado_%28Gardaland%29.JPG/500px-Blue_Tornado_%28Gardaland%29.JPG" width="500" height="341" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer">
+            <span class="tp-inspo__veil" aria-hidden="true"></span>
+            <span class="tp-inspo__body">
+              <span class="tp-inspo__name">אזור גארדה</span>
+              <span class="tp-inspo__hint">איטליה · גארדה־לנד ועוד</span>
+            </span>
+          </button>
+          <button type="button" class="tp-inspo__card tp-inspo__card--es" data-country-filter="ספרד" aria-label="סינון פארקים בספרד - חוף הזהב">
+            <img class="tp-inspo__img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Shambhala_lift_hill.JPG/500px-Shambhala_lift_hill.JPG" width="500" height="375" alt="" loading="eager" decoding="async" referrerpolicy="no-referrer">
+            <span class="tp-inspo__veil" aria-hidden="true"></span>
+            <span class="tp-inspo__body">
+              <span class="tp-inspo__name">ספרד</span>
+              <span class="tp-inspo__hint">פורטאוונטורה והחוף</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <section class="tp-family-planner" id="tpFamilyPlanner" aria-labelledby="tp-family-planner-title">
+        <h2 id="tp-family-planner-title" class="tp-family-planner__title">התאמה למשפחה</h2>
+        <p class="tp-family-planner__lead">
+          «התאם פארקים» מפעיל סינון לפי גיל/תקציב על בסיס המסננים למעלה. המסננים המהירים מתחת לכאן מציגים את כל הפארקים לפי הקטגוריה בלבד ומבטלים את מצב ההתאמה.
+        </p>
+        <details class="tp-family-planner__details">
+          <summary class="tp-family-planner__details-sum">איך זה עובד ומה חשוב לדעת</summary>
+          <p class="tp-family-planner__details-body">
+            ההתאמה חלה על הפארקים שנשארו אחרי המסננים שלמעלה. הסיווג הוא כללי (לא מחיר כניסה מדויק). גובה, גיל ומחירים - תמיד באתר הרשמי של כל פארק.
+          </p>
+        </details>
+        <div class="tp-family-planner__ages-wrap">
+          <span class="tp-family-planner__ages-kicker" id="tpFamilyAgesLabel">גילאי הילדים (בשנים)</span>
+          <div class="tp-family-planner__ages" id="tpFamilyAges" role="group" aria-labelledby="tpFamilyAgesLabel"></div>
+          <button type="button" class="tp-family-planner__add" id="tpFamilyAddChild">+ הוסף ילד</button>
+        </div>
+        <div class="tp-family-planner__controls-grid">
+          <fieldset class="tp-family-planner__budget">
+            <legend class="tp-family-planner__legend">רמת הוצאה יומית משוערת</legend>
+            <div class="tp-family-planner__budget-row tp-family-planner__budget-row--compact">
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyBudget" value="low"> צנוע (€)</label>
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyBudget" value="mid" checked> בינוני (€–€€)</label>
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyBudget" value="high"> גבוה (עד €€€)</label>
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyBudget" value="any"> ללא הגבלה</label>
+            </div>
+            <p class="tp-family-planner__budget-hint" id="tpFamilyBudgetHint">
+              לא מחיר כניסה - לפני רכישה בודקים באתר הפארק.
+            </p>
+          </fieldset>
+          <fieldset class="tp-family-planner__limit">
+            <legend class="tp-family-planner__legend">כמה להציג במפה</legend>
+            <div class="tp-family-planner__budget-row tp-family-planner__budget-row--compact">
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyLimit" value="4" checked> עד 4</label>
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyLimit" value="8"> עד 8</label>
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyLimit" value="12"> עד 12</label>
+              <label class="tp-family-planner__radio"><input type="radio" name="tpFamilyLimit" value="all"> הכול</label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="tp-family-planner__actions">
+          <button type="button" class="tp-family-planner__apply" id="tpFamilyApply">התאם פארקים</button>
+          <button type="button" class="tp-family-planner__clear" id="tpFamilyClear">נקה</button>
+        </div>
+        <button type="button" class="tp-family-planner__plan-cta" id="tpFamilyPlanCta" data-plan-source="family-planner">רוצים שנתכנן יחד מסלול עם הפארקים האלה?</button>
+        <p class="tp-family-planner__live visually-hidden" id="tpFamilyLive" aria-live="polite" aria-atomic="true"></p>
+      </section>
+
+      <div class="tp-filters" role="toolbar" aria-label="מסננים מהירים לפי משפחות">
+        <button type="button" class="tp-chip" data-filter="all" aria-pressed="true">הכל</button>
+        <button type="button" class="tp-chip" data-filter="toddlers" aria-pressed="false">פעוטות</button>
+        <button type="button" class="tp-chip" data-filter="youngkids" aria-pressed="false">ילדים קטנים</button>
+        <button type="button" class="tp-chip" data-filter="teens" aria-pressed="false">נוער ורכבות</button>
+        <button type="button" class="tp-chip" data-filter="indoor" aria-pressed="false">מקורה / גשם</button>
+        <button type="button" class="tp-chip" data-filter="water" aria-pressed="false">מים</button>
+        <button type="button" class="tp-chip" data-filter="animals" aria-pressed="false">חיות וטבע</button>
+        <button type="button" class="tp-chip" data-filter="learn" aria-pressed="false">חוויה לומדת</button>
+        <button type="button" class="tp-chip" data-filter="shows" aria-pressed="false">מופעים</button>
+        <button type="button" class="tp-chip" data-filter="hotel" aria-pressed="false">מלון באתר</button>
+        <button type="button" class="tp-chip" data-filter="resort" aria-pressed="false">ריזורט</button>
+      </div>
+      <p class="tp-filter-help">המסננים מבוססים על תגיות בעורך הנתונים - מתאימים לחיפושים נפוצים של הורים (גילאים, מים, מקורה, חיות, לימוד חווייתי). לפרטים מדויקים תמיד באתר הרשמי של כל פארק.</p>
+      <div class="tp-viewport-toggle">
+        <label><input type="checkbox" id="tpViewportList" checked> <span>הרשימה מתעדכנת לפי שטח המפה (הזיזו או זום)</span></label>
+      </div>
+      <p class="tp-meta" id="resultMeta"></p>
+    </div>
+  </div>
+
+  <div class="tp-split" id="splitRoot">
+    <div class="tp-split__map" id="mapWrap">
+      <div class="tp-embed-map-bar" id="tpEmbedMapBar" aria-label="מפת פארקים">
+        <span class="tp-embed-map-bar__text">ריחוף או לחיצה על סימון לפרטים מהירים</span>
+      </div>
+      <p class="tp-map-mobile-hint" id="tpMapMobileHint">לוחצים על סימון במפה כדי לבחור פארק ולפתוח פרטים - סינון וחיפוש למעלה</p>
+      <div class="tp-map-actions" id="tpMapActions" hidden>
+        <button type="button" class="tp-map-reset-home" id="tpMapResetHome">חזור למפה הכללית</button>
+        <a class="tp-map-destinations-pill" id="tpMapDestinationsPill" href="destinations.html" onclick="if(window.plausible){plausible('ThemeParks-CTA-Click',{props:{source:'theme-parks-map-pill',country:'ALL',target:'destinations'}});}">יעדים</a>
+      </div>
+      <div id="tpMap" style="height:100%;min-height:400px;"></div>
+    </div>
+    <div class="tp-split__list" id="listRoot">
+      <div id="skeletonWrap" aria-hidden="true"></div>
+      <div id="listHead" class="tp-list-country" hidden></div>
+      <div id="cardsWrap" hidden></div>
+      <div id="emptyState" class="tp-empty" hidden>
+        <strong id="emptyStateTitle">לא נמצאו פארקים</strong>
+        <span id="emptyStateHint">נסו שם מדינה אחר, או נקו את השדה ושינו את המסננים.</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="tp-guide" id="tp-guide" aria-labelledby="tp-guide-title">
+    <h2 id="tp-guide-title">מדריך גילאים לפי קטגוריה</h2>
+    <p class="tp-guide__intro">במקום רשימת קטגוריות בלבד, סידרנו את ההמלצות לפי תכנון אמיתי של הטיול: פארקים שמתאימים ליום אחד מול פארקים שעדיף לפצל ליומיים. לכל שורה נשמרת גם המלצת גיל כללית.</p>
+
+    <div class="tp-guide__plans">
+      <article class="tp-guide__plan">
+        <h3>פארקים ליום מלא <span class="tp-guide__day-label">יום אחד</span></h3>
+        <p class="tp-guide__plan-meta">בחירה טובה כשיש לכם חלון קצר ורוצים להספיק חוויה מרוכזת ביום אחד.</p>
+        <ul>
+          <li><strong>Tivoli Gardens</strong> (דנמרק) <span class="tp-age">גיל מתאים: 5–14</span></li>
+          <li><strong>Gröna Lund</strong> (שבדיה) <span class="tp-age">גיל מתאים: 8–18</span></li>
+          <li><strong>Linnanmäki</strong> (פינלנד) <span class="tp-age">גיל מתאים: 6–14</span></li>
+          <li><strong>Parc Asterix</strong> (צרפת) <span class="tp-age">גיל מתאים: 7–16</span></li>
+          <li><strong>Energylandia</strong> (פולין) <span class="tp-age">גיל מתאים: 10–20</span></li>
+          <li><strong>Mandoria</strong> (פולין) <span class="tp-age">גיל מתאים: 5–14</span></li>
+          <li><strong>Rabkoland</strong> (פולין) <span class="tp-age">גיל מתאים: 3–12</span></li>
+          <li><strong>Therme Erding</strong> (גרמניה) <span class="tp-age">גיל מתאים: 6–16</span></li>
+        </ul>
+      </article>
+
+      <article class="tp-guide__plan">
+        <h3>פארקים שכדאי לפרוס ליומיים <span class="tp-guide__day-label">יומיים</span></h3>
+        <p class="tp-guide__plan-meta">פארקים גדולים מאוד או ריזורטים עם הרבה אזורים שבהם יומיים נותנים חוויה רגועה ושלמה יותר.</p>
+        <ul>
+          <li><strong>Disneyland Paris</strong> (צרפת) <span class="tp-age">גיל מתאים: 4–14</span></li>
+          <li><strong>Europa-Park + Rulantica</strong> (גרמניה) <span class="tp-age">גיל מתאים: 6–16</span></li>
+          <li><strong>Efteling</strong> (הולנד) <span class="tp-age">גיל מתאים: 4–12</span></li>
+          <li><strong>PortAventura World</strong> (ספרד) <span class="tp-age">גיל מתאים: 8–18</span></li>
+          <li><strong>Gardaland</strong> (איטליה) <span class="tp-age">גיל מתאים: 6–14</span></li>
+          <li><strong>LEGOLAND Billund</strong> (דנמרק) <span class="tp-age">גיל מתאים: 3–10</span></li>
+          <li><strong>Phantasialand</strong> (גרמניה) <span class="tp-age">גיל מתאים: 8–18</span></li>
+          <li><strong>Puy du Fou</strong> (צרפת) <span class="tp-guide__hint">(מופעים, פחות רכבות)</span> <span class="tp-age">גיל מתאים: 8–16</span></li>
+        </ul>
+      </article>
+    </div>
+
+    <h3>קיצור דרך לפי סגנון משפחה</h3>
+    <ul>
+      <li><strong>גיל רך (2–7):</strong> LEGOLAND, PEPPA PIG Park, Rabkoland, Tivoli.</li>
+      <li><strong>משפחה מעורבת גילאים:</strong> Disneyland Paris, Efteling, Europa-Park, Gardaland.</li>
+      <li><strong>נוער ואדרנלין:</strong> Energylandia, Thorpe Park, Alton Towers, Heide Park.</li>
+      <li><strong>יום מים:</strong> Siam Park, Therme Erding, Aquapalace Prague, Aqualand Moravia.</li>
+    </ul>
+    <p class="tp-guide__intro" style="margin-bottom:0;">במפה למעלה אפשר לסנן גם לפי „מים” ולפי מדינה. שעות ועונות משתנות - תמיד מאמתים באתר הרשמי של הפארק לפני הזמנה.</p>
+
+    <div class="tp-guide__plan-cta">
+      <p>מצאתם פארק שמתאים למשפחה? אפשר לבנות יחד מסלול עם לינה, ימי פארק וימי מנוחה.</p>
+      <button type="button" id="tpGuidePlanCta" data-plan-source="guide">דברו איתי על תכנון הטיול</button>
+    </div>
+
+    <p class="tp-guide__note">הגילאים כאן הם המלצה כללית בלבד - כל ילד שונה, וגבולות גובה בכל אטרקציה הם הקובעים בשטח.</p>
+  </section>
+
+  <button type="button" class="tp-plan-fab" id="tpPlanFab" aria-label="תכנון טיול עם פארקים" data-plan-source="fab">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span>תכנון טיול</span>
+  </button>
+
+  <div class="tp-modal" id="tpModal" role="dialog" aria-modal="true" aria-labelledby="tpModalTitle">
+    <div class="tp-modal__box">
+      <button type="button" class="tp-modal__close" id="tpModalClose" aria-label="סגור">×</button>
+      <h2 id="tpModalTitle"></h2>
+      <p class="tp-modal__sub" id="tpModalSub"></p>
+      <div class="tp-modal__plan-hero" id="tpModalPlanHero"></div>
+      <div class="tp-modal__links" id="tpModalLinks"></div>
+      <div id="tpModalBody"></div>
+    </div>
+  </div>
+  <div class="tp-lead-overlay" id="tpLeadOverlay" role="dialog" aria-modal="true" aria-labelledby="tpLeadTitle">
+    <div class="tp-lead">
+      <button type="button" class="tp-lead__close" id="tpLeadClose" aria-label="סגור">×</button>
+      <h2 class="tp-lead__title" id="tpLeadTitle">מדריך פארקי המים בדרך</h2>
+      <p class="tp-lead__desc">אנחנו כרגע בודקים לעומק את פארקי המים הכי טובים באירופה. השאירו אימייל ותהיו הראשונים לקבל את המדריך.</p>
+      <form class="tp-lead__form" action="https://formsubmit.co/mataytasim@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="בקשה לעדכון: מדריך פארקי מים">
+        <input type="hidden" name="_next" value="https://mataytasim.co.il/theme-parks.html?subscribed=1">
+        <input type="hidden" name="_captcha" value="false">
+        <input class="tp-lead__input" type="email" name="email" required placeholder="האימייל שלכם" autocomplete="email" inputmode="email">
+        <button class="tp-lead__btn" type="submit">תעדכנו אותי כשזה מוכן</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="tp-lead-overlay tp-plan-overlay" id="tpPlanOverlay" role="dialog" aria-modal="true" aria-labelledby="tpPlanTitle" hidden>
+    <div class="tp-lead tp-plan">
+      <button type="button" class="tp-lead__close" id="tpPlanClose" aria-label="סגור">×</button>
+      <h2 class="tp-lead__title" id="tpPlanTitle">רוצים שנתכנן יחד טיול עם פארקים?</h2>
+      <p class="tp-lead__desc">ספרו קצת על המשפחה והיעד — אחזור אליכם תוך יום עסקים, או דברו איתי ישירות בוואטסאפ.</p>
+      <a class="tp-plan__wa" id="tpPlanWa" href="https://wa.me/972546758145" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.884 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        וואטסאפ — הכי מהיר
+      </a>
+      <p class="tp-plan__or" role="separator">או השאירו פרטים</p>
+      <div id="tpPlanFormWrap">
+        <form class="tp-lead__form tp-plan__form" id="tpPlanForm" novalidate>
+          <div class="tp-plan__field">
+            <label for="tpPlanName">שם</label>
+            <input class="tp-lead__input tp-plan__input" type="text" id="tpPlanName" name="name" required placeholder="השם שלכם" autocomplete="name">
+          </div>
+          <div class="tp-plan__field">
+            <label for="tpPlanPhone">וואטסאפ / טלפון</label>
+            <input class="tp-lead__input tp-plan__input" type="tel" id="tpPlanPhone" name="phone" required placeholder="05X-XXXXXXX" autocomplete="tel" inputmode="tel" dir="ltr">
+          </div>
+          <div class="tp-plan__field">
+            <label for="tpPlanMessage">על הטיול</label>
+            <textarea class="tp-plan__textarea" id="tpPlanMessage" name="message" rows="3" placeholder="מדינה, תאריכים משוערים, פארקים שמעניינים…"></textarea>
+          </div>
+          <button class="tp-lead__btn" type="submit" id="tpPlanSubmit">שלח פנייה</button>
+        </form>
+        <a class="tp-plan__link" href="questionnaire_form.html">למילוי שאלון מלא ←</a>
+      </div>
+      <div class="tp-plan__success" id="tpPlanSuccess">
+        <span class="tp-plan__success-icon" aria-hidden="true">✓</span>
+        <p class="tp-lead__desc" style="margin:0;">הפנייה נשלחה! אחזור אליכם בהקדם.</p>
+      </div>
+    </div>
+  </div>

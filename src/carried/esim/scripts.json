@@ -1,0 +1,8 @@
+[
+ {
+  "code": "(function() {\r\n  var btn = document.getElementById('scrollTopBtn');\r\n  if (btn) {\r\n    btn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });\r\n    window.addEventListener('scroll', function() {\r\n      var show = window.scrollY > 300;\r\n      btn.classList.toggle('visible', show);\r\n    }, { passive: true });\r\n  }\r\n})();"
+ },
+ {
+  "code": "(function() {\r\n  var params = new URLSearchParams(window.location.search);\r\n  if (params.get('subscribed') !== '1') return;\r\n  var toast = document.createElement('div');\r\n  toast.style.cssText = 'position:fixed;left:20px;right:20px;bottom:20px;z-index:11000;max-width:760px;margin:0 auto;background:#0f4a50;color:#fff;border-radius:14px;padding:14px 46px 14px 16px;box-shadow:0 10px 30px rgba(0,0,0,.25);text-align:right;line-height:1.6;';\r\n  toast.innerHTML = '<button type=\"button\" aria-label=\"סגור הודעה\" style=\"position:absolute;top:10px;left:10px;width:28px;height:28px;border:none;border-radius:50%;background:rgba(255,255,255,0.16);color:#fff;cursor:pointer;font-size:18px;line-height:1;\">×</button><div style=\"font-size:15px;font-weight:700;\">נרשמת בהצלחה! תודה שהצטרפת לקהילת \"מתי טסים\" ✈️</div>';\r\n  document.body.appendChild(toast);\r\n  function closeToast() { if (toast.parentNode) toast.parentNode.removeChild(toast); }\r\n  toast.querySelector('button').addEventListener('click', closeToast);\r\n  setTimeout(closeToast, 6000);\r\n  if (window.history && window.history.replaceState) {\r\n    var cleanUrl = window.location.origin + window.location.pathname + window.location.hash;\r\n    window.history.replaceState({}, document.title, cleanUrl);\r\n  }\r\n})();"
+ }
+]

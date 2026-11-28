@@ -1,0 +1,267 @@
+<button class="scroll-to-top" id="scrollToTopBtn" aria-label="חזור לראש העמוד" title="חזור לראש העמוד">
+      ↑
+    </button>
+
+    
+    <nav class="nav-pills" id="navPills">
+      <div class="nav-pills__container" id="navPillsContainer">
+        <a href="#hub-card-title-planning" class="nav-pills__pill" data-card="planning">📋 תכנון</a>
+        <a href="#hub-card-title-flightgen" class="nav-pills__pill" data-card="flightgen">✈️ טיסה</a>
+        <a href="#hub-card-title-weather" class="nav-pills__pill" data-card="weather">🌤️ מזג אוויר</a>
+        <a href="#hub-card-title-calendar" class="nav-pills__pill" data-card="calendar">📅 אירועים</a>
+        <a href="#hub-card-title-esim" class="nav-pills__pill" data-card="esim">📱 eSIM</a>
+        <a href="#hub-card-title-packing" class="nav-pills__pill" data-card="packing">🎒 ציוד</a>
+        <a href="#hub-card-title-budget" class="nav-pills__pill" data-card="budget">💰 תקציב</a>
+        <a href="#hub-card-title-transport" class="nav-pills__pill" data-card="transport">🚗 תחבורה</a>
+        <a href="#hub-card-title-airport-hotels" class="nav-pills__pill" data-card="airport-hotels">🏨 מלונות</a>
+        <a href="#hub-card-title-car-rental-partners" class="nav-pills__pill" data-card="car-rental">🚙 השכרה</a>
+        <a href="#hub-card-title-theme-parks" class="nav-pills__pill" data-card="theme-parks">🎡 פארקים</a>
+        <a href="#hub-auth-entry" class="nav-pills__pill" data-card="approvals">📄 אישורים</a>
+      </div>
+    </nav>
+
+    
+    <nav class="nav-pills-sidebar" id="navPillsSidebar">
+      <a href="#hub-card-title-planning" class="nav-pills-sidebar__pill" data-card="planning" title="תכנון">📋</a>
+      <a href="#hub-card-title-flightgen" class="nav-pills-sidebar__pill" data-card="flightgen" title="מחולל טיסה">✈️</a>
+      <a href="#hub-card-title-weather" class="nav-pills-sidebar__pill" data-card="weather" title="מזג אוויר">🌤️</a>
+      <a href="#hub-card-title-calendar" class="nav-pills-sidebar__pill" data-card="calendar" title="לוח אירועים">📅</a>
+      <a href="#hub-card-title-esim" class="nav-pills-sidebar__pill" data-card="esim" title="eSIM">📱</a>
+      <a href="#hub-card-title-packing" class="nav-pills-sidebar__pill" data-card="packing" title="רשימת ציוד">🎒</a>
+      <a href="#hub-card-title-budget" class="nav-pills-sidebar__pill" data-card="budget" title="תקציב">💰</a>
+      <a href="#hub-card-title-transport" class="nav-pills-sidebar__pill" data-card="transport" title="כבישים ותחבורה">🚗</a>
+      <a href="#hub-card-title-airport-hotels" class="nav-pills-sidebar__pill" data-card="airport-hotels" title="מלונות">🏨</a>
+      <a href="#hub-card-title-car-rental-partners" class="nav-pills-sidebar__pill" data-card="car-rental" title="השכרת רכב">🚙</a>
+      <a href="#hub-card-title-theme-parks" class="nav-pills-sidebar__pill" data-card="theme-parks" title="פארקי שעשועים">🎡</a>
+      <a href="#hub-auth-entry" class="nav-pills-sidebar__pill" data-card="approvals" title="אישורים">📄</a>
+    </nav>
+
+    
+
+  <header class="hub-hero">
+    <div class="container">
+      <nav class="hub-hero__breadcrumb" aria-label="breadcrumb">
+        <a href="services.html">מתי טסים</a>
+        <span aria-hidden="true">›</span>
+        <span>מרכז תכנון</span>
+      </nav>
+      <p class="hub-badge">מרכז כלים לתכנון טיול משפחתי</p>
+      <h1 class="hub-hero__title">מרכז תכנון הטיול</h1>
+      <p class="hub-hero__subtitle">נקודת כניסה אחת לתאריכים, מחולל טיסה לבחירת יעד, מזג אוויר, קישוריות, ציוד ותקציב – לפני שעולים לטיסה.</p>
+    </div>
+  </header>
+
+  <main class="hub-section">
+    <div class="container">
+      <div class="hub-intro">
+        <h2>בוחרים מה לפתוח הלאה</h2>
+        <p>כל הכלים המרכזיים לתכנון טיול משפחתי, מסודרים בכרטיסים – כולל מחולל טיסה לשאלון יעדים לפני הזמנה. לחצו על הכרטיס הרלוונטי כדי להתחיל.</p>
+      </div>
+
+      <div class="hub-grid">
+        <div class="hub-card">
+          <div class="hub-card__inner">
+            <p class="hub-card__crumb"><span class="hub-card__crumb-brand">מתי טסים</span><span aria-hidden="true"> › </span><span>שלב התכנון</span></p>
+            <div class="hub-card__preview">
+              <iframe src="planning.html" loading="lazy" tabindex="-1" title="תצוגה מקדימה של העמוד" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
+            </div>
+            <h3 class="hub-card__title" id="hub-card-title-planning">שלב התכנון</h3>
+            <p class="hub-card__desc">טיסות, חזרה, לינה, מסלול כוכב ותקציב - לפני שמתחילים לחפש. לחצו על כרטיס לקריאה מורחבת.</p>
+            <span class="hub-card__cta">לעמוד התכנון</span>
+          </div>
+          <a href="planning.html" class="hub-card__hit" aria-labelledby="hub-card-title-planning" onclick="plausible('Card Click', {props: {card: 'שלב התכנון'}})"></a>
+        </div>
+
+        <div class="hub-card hub-card--amber">
+          <div class="hub-card__inner">
+            <p class="hub-card__crumb"><span class="hub-card__crumb-brand">מתי טסים</span><span aria-hidden="true"> › </span><span>מחולל טיסה</span></p>
+            <div class="hub-card__preview">
+              <iframe src="quiz.html" loading="lazy" tabindex="-1" title="תצוגה מקדימה של מחולל הטיסה" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
+            </div>
+            <h3 class="hub-card__title" id="hub-card-title-flightgen">מחולל טיסה</h3>
+            <p class="hub-card__desc">שאלון קצר בעברית: תקציב, עונה, סגנון טיול ומה מתאים למשפחה – ואז שלוש המלצות יעד לחו״ל. מומלץ לפני שסוגרים לאן טסים ומחפשים טיסות.</p>
+            <span class="hub-card__cta">לשאלון לאן נטוס</span>
+          </div>
+          <a href="quiz.html" class="hub-card__hit" aria-labelledby="hub-card-title-flightgen" onclick="plausible('Card Click', {props: {card: 'מחולל טיסה'}})"></a>
+        </div>
+
+        <div class="hub-card">
+          <div class="hub-card__inner">
+            <p class="hub-card__crumb"><span class="hub-card__crumb-brand">מתי טסים</span><span aria-hidden="true"> › </span><span>מזג אוויר</span></p>
+            <div class="hub-card__preview">
+              <iframe src="weather.html" loading="lazy" tabindex="-1" title="תצוגה מקדימה של העמוד" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
+            </div>
+            <h3 class="hub-card__title" id="hub-card-title-weather">מזג אוויר</h3>
+            <p class="hub-card__desc">תחזית לפי עיר ויעד - כדי לבחור תאריכים ולבגד נכון.</p>
+            <span class="hub-card__cta">לתחזית</span>
+          </div>
+          <a href="weather.html" class="hub-card__hit" aria-labelledby="hub-card-title-weather" onclick="plausible('Card Click', {props: {card: 'מזג אוויר'}})"></a>
+        </div>
+
+        <div class="hub-card">
+          <div class="hub-card__inner">
+            <p class="hub-card__crumb"><span class="hub-card__crumb-brand">מתי טסים</span><span aria-hidden="true"> › </span><span>מתי קורה</span></p>
+            <div class="hub-card__preview">
+              <iframe src="calendar.html" loading="lazy" tabindex="-1" title="תצוגה מקדימה של העמוד" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
+            </div>
+            <h3 class="hub-card__title" id="hub-card-title-calendar">לוח אירועים</h3>
+            <p class="hub-card__desc">חגים, פסטיבלים ו״מתי קורה״ באירופה - תזמון הטיול סביב אירועים.</p>
+            <span class="hub-card__cta">ללוח</span>
+          </div>
+          <a href="calendar.html" class="hub-card__hit" aria-labelledby="hub-card-title-calendar" onclick="plausible('Card Click', {props: {card: 'לוח אירועים'}})"></a>
+        </div>
+
+        <div class="hub-card">
+          <div class="hub-card__inner">
+            <p class="hub-card__crumb"><span class="hub-card__crumb-brand">מתי טסים</span><span aria-hidden="true"> › </span><span>eSIM</span></p>
+            <div class="hub-card__preview">
+              <iframe src="esim.html" loading="lazy" tabindex="-1" title="תצוגה מקדימה של העמוד" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
+            </div>
+            <h3 class="hub-card__title" id="hub-card-title-esim">eSIM ואינטרנט</h3>
+            <p class="hub-card__desc">התקנה, השוואת ספקים וטיפים לגלישה בחו״ל עם הילדים.</p>
+            <span class="hub-card__cta">למדריך eSIM</span>
+          </div>
+          <a href="esim.html" class="hub-card__hit" aria-labelledby="hub-card-title-esim" onclick="plausible('Card Click', {props: {card: 'eSIM'}})"></a>
+        </div>
+
+        <div class="hub-card hub-card--amber">
+          <div class="hub-card__inner">
+            <p class="hub-card__crumb"><span class="hub-card__crumb-brand">מתי טסים</span><span aria-hidden="true"> › </span><span>רשימת ציוד</span></p>
+            <div class="hub-card__preview">
+              <iframe src="packing.html" loading="lazy" tabindex="-1" title="תצוגה מקדימה של העמוד" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
+            </div>
+            <h3 class="hub-card__title" id="hub-card-title-packing">רשימת ציוד</h3>
+            <p class="hub-card__desc">מה לארוז למשפחה - צ׳ק-ליסט מעשי לפני היציאה מהבית.</p>
+            <span class="hub-card__cta">לרשימה</span>
+          </div>
+          <a href="packing.html" class="hub-card__hit" aria-labelledby="hub-card-title-packing" onclick="plausible('Card Click', {props: {card: 'רשימת ציוד'}})"></a>
+        </div>
+
+        <div class="hub-card hub-card--amber">
+          <div class="hub-card__inner">
+            <p class="hub-card__crumb"><span class="hub-card__crumb-brand">מתי טסים</span><span aria-hidden="true"> › </span><span>תקציב</span></p>
+            <div class="hub-card__preview">
+              <iframe src="budget.html" loading="lazy" tabindex="-1" title="תצוגה מקדימה של העמוד" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
+            </div>
+            <h3 class="hub-card__title" id="hub-card-title-budget">תקציב</h3>
+            <p class="hub-card__desc">מחשבון תקציב לטיול משפחתי - הערכת עלות ועזרה בהחלטות.</p>
+            <span class="hub-card__cta">למחשבון</span>
+          </div>
+          <a href="budget.html" class="hub-card__hit" aria-labelledby="hub-card-title-budget" onclick="plausible('Card Click', {props: {card: 'תקציב'}})"></a>
+        </div>
+
+        <div class="hub-card">
+          <div class="hub-card__inner">
+            <p class="hub-card__crumb"><span class="hub-card__crumb-brand">מתי טסים</span><span aria-hidden="true"> › </span><span>תחבורה וכבישים</span></p>
+            <div class="hub-card__preview">
+              <iframe src="transport-europe.html" loading="lazy" tabindex="-1" title="תצוגה מקדימה של העמוד" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
+            </div>
+            <h3 class="hub-card__title" id="hub-card-title-transport">כבישים ותחבורה ציבורית</h3>
+            <p class="hub-card__desc">אגרות כבישים לשוכרי רכב, ותחבורה ציבורית לילדים ונוער - מה לבדוק לפני הטיול.</p>
+            <span class="hub-card__cta">למדריך</span>
+          </div>
+          <a href="transport-europe.html" class="hub-card__hit" aria-labelledby="hub-card-title-transport" onclick="plausible('Card Click', {props: {card: 'כבישים ותחבורה'}})"></a>
+        </div>
+
+        <div class="hub-card">
+          <div class="hub-card__inner">
+            <p class="hub-card__crumb"><span class="hub-card__crumb-brand">מתי טסים</span><span aria-hidden="true"> › </span><span>מלונות מומלצים ליד שדות תעופה</span></p>
+            <div class="hub-card__preview">
+              <iframe src="airport-hotels.html" loading="lazy" tabindex="-1" title="תצוגה מקדימה של מלונות מומלצים ליד שדות תעופה" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
+            </div>
+            <h3 class="hub-card__title" id="hub-card-title-airport-hotels">מלונות מומלצים ליד שדות תעופה</h3>
+            <p class="hub-card__desc">המלצות לינה קרובות לטרמינל ביעדים מרכזיים - פתרון מצוין ללילה ראשון/אחרון או לטיסה מוקדמת.</p>
+            <span class="hub-card__cta">למאגר המלונות</span>
+          </div>
+          <a href="airport-hotels.html" class="hub-card__hit" aria-labelledby="hub-card-title-airport-hotels" onclick="plausible('Card Click', {props: {card: 'מלונות מומלצים ליד שדות תעופה'}})"></a>
+        </div>
+
+        <div class="hub-card hub-card--amber">
+          <div class="hub-card__inner">
+            <p class="hub-card__crumb"><span class="hub-card__crumb-brand">מתי טסים</span><span aria-hidden="true"> › </span><span>השכרת רכב</span></p>
+            <div class="hub-card__preview hub-card__preview--partner-cr">
+              <iframe src="car-rental-partners.html" loading="lazy" tabindex="-1" title="תצוגה מקדימה של עמוד שותפי רכב" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
+              <div class="hub-card__preview-brand" aria-hidden="true">
+                <img src="Logo_barkro_purle@2x.png" alt="">
+              </div>
+            </div>
+            <h3 class="hub-card__title" id="hub-card-title-car-rental-partners">השכרת רכב</h3>
+            <p class="hub-card__desc">רכב משפחתי בלי הפתעות: BARKRO עם הזמנה מהירה, מחירים שקופים ותמיכה סביב השעון - ו־6% הנחה לקהילת מתי טסים עם קוד MATAY6. בעמוד ההטבה מסכמים למה כדאי, איך מזינים את הקוד ומה לבדוק לפני סגירה.</p>
+            <span class="hub-card__cta">להטבת השכרה</span>
+          </div>
+          <a href="car-rental-partners.html" class="hub-card__hit" aria-labelledby="hub-card-title-car-rental-partners" onclick="plausible('PartnerCarRental-Click', {props: {partner: 'barkro', code: 'MATAY6', source: 'tips-card'}})"></a>
+        </div>
+
+        <div class="hub-card">
+          <div class="hub-card__inner">
+            <p class="hub-card__crumb"><span class="hub-card__crumb-brand">מתי טסים</span><span aria-hidden="true"> › </span><span>פארקי שעשועים באירופה</span></p>
+            <div class="hub-card__preview hub-card__preview--themeparks">
+              <iframe src="theme-parks.html?embed=map" loading="lazy" tabindex="-1" title="תצוגה מקדימה של מפת פארקי השעשועים באירופה" aria-hidden="true" referrerpolicy="no-referrer-when-downgrade" scrolling="no"></iframe>
+            </div>
+            <h3 class="hub-card__title" id="hub-card-title-theme-parks">פארקי שעשועים באירופה</h3>
+            <p class="hub-card__desc">מפה אינטראקטיבית עם סינון לפי מדינה, גילאים וסוג חוויה - כולל תצוגת פארקים מהירה והמשך למדריך המלא.</p>
+            <span class="hub-card__cta">למפת הפארקים</span>
+          </div>
+          <a href="theme-parks.html" class="hub-card__hit" aria-labelledby="hub-card-title-theme-parks" onclick="if(window.plausible){plausible('ThemeParks-CTA-Click',{props:{source:'tips-card',country:'ALL',target:'theme-parks'}});}"></a>
+        </div>
+      </div>
+
+      <section class="hub-auth" id="hub-auth-entry" aria-labelledby="hub-auth-title">
+        <h2 class="hub-auth__heading" id="hub-auth-title">
+          <span class="hub-auth__kicker">באותו עמוד</span>
+          <strong>🛂 אישורי כניסה 2026</strong>
+        </h2>
+
+        <div class="hub-auth-grid">
+          <div class="auth-goodtoknow" role="region" aria-labelledby="hub-auth-goodtoknow-title">
+            <h3 class="auth-goodtoknow__title" id="hub-auth-goodtoknow-title">
+              <span aria-hidden="true">💡</span> כדאי לדעת
+              <span class="auth-goodtoknow__sub">Good to know</span>
+            </h3>
+            <ul class="auth-goodtoknow__list">
+              <li><strong>מקור רשמי בלבד:</strong> מגישים בקשות רק דרך האתרים הרשמיים של הממשלה הבריטית, האיחוד האירופי או גופי מידע ממשלתיים – לא דרך אתרי תיווך שגובים עמלה.</li>
+              <li><strong>דרכון:</strong> בודקים מראש שתוקף הדרכון עומד בדרישות היעד (לעיתים לפחות 3–6 חודשים מעבר לתאריך היציאה מהמדינה).</li>
+              <li><strong>תזמון:</strong> מגישים ETA / ETIAS לפני הטיסה ומשאירים מרווח – למקרה של עיכוב באישור או בקשת מסמכים נוספים.</li>
+              <li><strong>ילדים:</strong> לרוב נדרש אישור נפרד לכל ילד עם דרכון; פטורי תשלום (למשל ב-ETIAS) לפי הגדרות האתר הרשמי.</li>
+              <li><strong>כל מערכת אחרת:</strong> בריטניה, אזור שנגן ו-EES הם שלושה תהליכים נפרדים – הפרטים המדויקים בכרטיסים למטה.</li>
+            </ul>
+          </div>
+
+          <div class="auth-card">
+            <div class="auth-card__header">
+              <span class="auth-card__flag"><span class="fi fi-gb" style="border-radius:3px;"></span></span>
+              <div>
+                <div class="auth-card__title">בריטניה - ETA</div>
+                <div class="auth-card__subtitle">Electronic Travel Authorisation</div>
+              </div>
+              <span class="auth-card__badge">חובה מלאה</span>
+            </div>
+            <div class="auth-card__rows">
+              <div class="auth-card__row"><strong>מה זה:</strong> אישור כניסה דיגיטלי חובה לישראלים.</div>
+              <div class="auth-card__row"><strong>סטטוס 2026:</strong> חובה מלאה. אי אפשר לעלות לטיסה ללא אישור מאושר.</div>
+              <div class="auth-card__row"><strong>עלות:</strong> 16 ליש״ט.</div>
+              <div class="auth-card__warning">🗓️ It will cost £20 to apply for an ETA from 8 April 2026.</div>
+            </div>
+            <a href="https://www.gov.uk/eta" target="_blank" rel="noopener" class="auth-card__link" onclick="plausible('Card Click', {props: {card: 'ETA בריטניה'}})">GOV.UK - Apply for an ETA ←</a>
+            <div class="auth-card__warning">⚠️ הלינק הרשמי והזול ביותר – היזהרו מאתרי תיווך שגובים עמלות מיותרות.</div>
+          </div>
+
+          <div class="auth-card">
+            <div class="auth-card__header">
+              <span class="auth-card__flag"><span class="fi fi-eu" style="border-radius:3px;"></span></span>
+              <div>
+                <div class="auth-card__title">אירופה (שנגן) - ETIAS</div>
+                <div class="auth-card__subtitle">European Travel Information and Authorisation System</div>
+              </div>
+              <span class="auth-card__badge auth-card__badge--active">פעיל 2026</span>
+            </div>
+            <div class="auth-card__rows">
+              <div class="auth-card__row"><strong>מה זה:</strong> אישור כניסה ל-30 מדינות באירופה (צרפת, גרמניה, יוון וכו').</div>
+              <div class="auth-card__row" style="background:#f0f7ff;border-radius:8px;padding:8px 12px;border-right:3px solid #60a5fa;font-size:12px;">💡 <strong>מה זה אזור שנגן?</strong> שטח באירופה המונה כ-29 מדינות (נכון ל-2025) שביטלו את ביקורת הגבולות ביניהן. בעלי דרכון אירופאי ממדינות שנגן פטורים מהצורך ב-ETIAS.</div>
+              <div class="auth-card__row"><strong>סטטוס 2026:</strong> המערכת פעילה. מומלץ להגיש בקשה לפחות 96 שעות לפני הטיסה.</div>
+              <div class="auth-card__row"><strong>עלות:</strong> 7 יורו (פטור מתשלום מתחת לגיל 18 ומעל גיל 70).</div>
+            </div>
+</p>
+      <p class="footer__disclosure">* חלק מהקישורים באתר הם קישורי שותפים. ההמלצות תמיד מבוססות על ניסיון אישי בלבד.</p>
+    </div>
+  </footer>

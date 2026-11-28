@@ -1,0 +1,39 @@
+
+    :root {
+      --white:#FFFFFF;
+      --font-heading:"Secular One",sans-serif;
+      --font-body:"Rubik",sans-serif;
+      --amber:#e8a045;
+      --amber-dark:#c4872e;
+      --teal:#1a6b72;
+      --teal-dark:#124d52;
+      --cream:#fdf8f2;
+      --charcoal:#1e2328;
+      --sand:#f5edd8;
+      --sand-dark:#e8ddc4;
+      --border:rgba(0,0,0,0.08);
+      --nav-height:72px;
+      --ease:0.22s cubic-bezier(0.4,0,0.2,1);
+      --radius-md:12px;
+      --radius-xl:28px;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);line-height:1.7;}
+    .hero{background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);padding:calc(var(--nav-height) + 48px) 24px 60px;text-align:center;}
+    .hero h1{font-family:var(--font-heading);font-size:36px;color:white;margin-bottom:10px;}
+    .hero p{color:rgba(255,255,255,0.75);font-size:15px;}
+    .content{max-width:800px;margin:0 auto;padding:50px 24px;}
+    .section{background:var(--white);border-radius:16px;padding:32px;margin-bottom:24px;border:1px solid var(--sand-dark);}
+    .section h2{font-family:var(--font-heading);font-size:21px;color:var(--teal);margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--sand);}
+    .section p{font-size:15px;color:#555;margin-bottom:12px;}
+    .section p:last-child{margin-bottom:0;}
+    .section ul{padding-right:20px;margin:10px 0 12px;}
+    .section ul li{font-size:15px;color:#555;margin-bottom:6px;}
+    /* Site nav (inlined — upload nav-shared.css to repo root for other pages) */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+  @keyframes emailPopupIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }

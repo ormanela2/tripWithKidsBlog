@@ -11,6 +11,7 @@ import { getImage } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { site } from "../../config/site";
 import { breadcrumb, article } from "../../lib/schema";
+import PartnerNote from "../PartnerNote.astro";
 
 type Props =
   | { kind: "guide"; entry: CollectionEntry<"htmlGuides"> }
@@ -90,8 +91,10 @@ const country = kind === "guide" ? entry.data.country : undefined;
   <style slot="head" is:inline>
     /* Live pages start under the fixed menu and make room for it themselves; the shared layout pads <main>, so undo that here. */
     .carried { margin-top: calc(-1 * var(--nav-height)); }
+    .carried-partner-note { padding-block: 8px 20px; }
   </style>
   <div class="carried" data-good-to-know-country={country}><Fragment set:html={body} /></div>
+  {g.partnerNote && <div class="container carried-partner-note"><PartnerNote /></div>}
   <Fragment slot="after">
     {scripts.map(s => (s.src ? <script is:inline src={s.src}></script> : <script is:inline set:html={s.code}></script>))}
   </Fragment>

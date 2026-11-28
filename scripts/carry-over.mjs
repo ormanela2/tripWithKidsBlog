@@ -31,6 +31,8 @@ const country = bodyTag.match(/data-good-to-know-country="([A-Z]{2})"/)?.[1];
 const h1 = text(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1]);
 const clarity = /"clarity",\s*"script",\s*"([a-z0-9]+)"/.exec(html)?.[1];
 const floatNav = /id="floatNav"/.test(html);
+// Affiliate links (eSIM short links, Stay22, GetYourGuide, Booking) need the partner disclosure.
+const hasAffiliate = b => /tpk\.mx|stay22\.com|getyourguide\.com\/[^"]*partner|booking\.com\/[^"]*aid=|[?&](aid|partner_id|ref)=/.test(b);
 const readProgress = /id="readProgressFill"/.test(html);
 const stay22 = /Stay22\.params\s*=\s*\{\s*lmaID:\s*'([a-z0-9]+)'/.exec(html)?.[1];
 
@@ -118,6 +120,7 @@ for (const s of scriptTags) {
   const src = s.attrs.match(/src="([^"]+)"/)?.[1];
   if (src) {
     if (/plausible\.io/.test(src)) continue;
+    if (src.includes("/cdn-cgi/")) { notes.push("dropped Cloudflare email-decode script (404 on the live site too)"); continue; }
     if (/matay-gmaps-frugal/.test(src)) { notes.push("dropped matay-gmaps-frugal.js (Google Places; owner decision)"); continue; }
     scripts.push({ src: src.replace("@twemoji/api@latest", "@twemoji/api@17.0.3") });
     continue;
@@ -151,6 +154,7 @@ const fm = {
   ...(clarity && { clarity: true }),
   ...(stay22 && { stay22: true }),
   ...(floatNav && { floatNav: true }),
+  ...(hasAffiliate(body) && { partnerNote: true }),
   ...(readProgress && { readProgress: true }),
 };
 const yaml = Object.entries(fm).filter(([, v]) => v !== undefined && v !== "").map(([k, v]) => `${k}: ${typeof v === "string" ? JSON.stringify(v) : v}`).join("\n");

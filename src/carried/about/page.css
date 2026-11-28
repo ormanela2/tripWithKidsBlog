@@ -1,0 +1,137 @@
+
+    :root {
+      --amber: #E8A045; --amber-dark: #c4872e;
+      --teal: #1A6B72; --teal-dark: #124d52;
+      --cream: #FDF8F2; --charcoal: #2C2C2C;
+      --sand: #F5EDD8; --sand-dark: #e8ddc4;
+      --green: #4A9B6F; --white: #FFFFFF;
+      --font-heading: 'Heebo', sans-serif;
+      --font-body: 'Assistant', sans-serif;
+      --nav-height: 72px;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); font-size: 17px; line-height: 1.7; color: var(--charcoal); background: var(--cream); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    h1,h2,h3 { font-family: var(--font-heading); font-weight: 900; line-height: 1.25; letter-spacing: -0.3px; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+    .container { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    /* NAV */
+        .hero {
+      background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 100%);
+      color: white; position: relative; overflow: hidden;
+      padding-top: var(--nav-height);
+    }
+    .hero__layout {
+      display: flex; align-items: stretch;
+      max-width: 1140px; margin: 0 auto; min-height: 340px;
+    }
+    .hero__text-side {
+      flex: 1; padding: 52px 48px 52px 40px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .hero__photo-side {
+      width: 65%; flex-shrink: 0; position: relative;
+    }
+    .hero__photo-side img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center center;
+      display: block;
+    }
+    .hero__photo-side::before {
+      display: none;
+    }
+    .hero__title { font-size: clamp(26px, 3.5vw, 42px); margin-bottom: 10px; text-align: right; }
+    .hero__sub { font-size: 16px; opacity: 0.82; font-weight: 300; text-align: right; }
+    @media (max-width: 700px) {
+      .hero__layout { flex-direction: column-reverse; }
+      .hero__photo-side { width: 100%; height: auto; }
+      .hero__photo-side img { height: auto; object-fit: contain; }
+      .hero__photo-side::before { display: none; }
+      .hero__text-side { padding: 32px 24px; }
+    }
+    /* CONTENT */
+    .content { max-width: 720px; margin: 0 auto; padding: 60px 24px 80px; }
+    .about-block {
+      background: white; border-radius: 20px;
+      border: 2px solid var(--sand-dark);
+      padding: 36px 40px; margin-bottom: 24px;
+    }
+    .about-block__title {
+      font-size: 20px; color: var(--teal);
+      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .about-block p {
+      color: #444; line-height: 1.6; margin-bottom: 16px; font-size: 16px; font-family: 'Assistant', sans-serif; font-weight: 400;
+    }
+    .about-block p:last-child { margin-bottom: 0; }
+    .points { list-style: none; margin: 16px 0; }
+    .points li {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 12px 0; border-bottom: 1px solid var(--sand);
+      font-size: 16px; color: #444; line-height: 1.6; font-family: 'Assistant', sans-serif; font-weight: 400;
+    }
+    .points li:last-child { border-bottom: none; }
+    .points li .num {
+      min-width: 28px; height: 28px; border-radius: 50%;
+      background: var(--teal); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+    }
+    .cta-block {
+      background: var(--teal); border-radius: 20px;
+      padding: 36px 40px; text-align: center; color: white;
+    }
+    .cta-block h3 { font-size: 22px; margin-bottom: 10px; }
+    .cta-block p { font-size: 15px; opacity: 0.85; margin-bottom: 24px; line-height: 1.7; }
+    .cta-block__btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-amber {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--amber); color: var(--charcoal);
+      border-radius: 40px; padding: 13px 28px;
+      font-size: 15px; font-weight: 700; font-family: var(--font-body);
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-amber:hover { background: var(--amber-dark); transform: translateY(-2px); }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3);
+      color: white; border-radius: 40px; padding: 13px 28px;
+      font-size: 15px; font-weight: 500; font-family: var(--font-body);
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-white:hover { background: rgba(255,255,255,0.25); }
+    @media (max-width: 600px) {
+      .about-block { padding: 24px 20px; }
+      .cta-block { padding: 28px 20px; }
+    }
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .cards-3__item {
+      background: white;
+      border-radius: 16px;
+      border: 1.5px solid var(--sand-dark);
+      padding: 20px 18px;
+      text-align: center;
+      min-width: 0;
+    }
+    @media (max-width: 640px) {
+      .cards-3 { grid-template-columns: 1fr; gap: 10px; }
+      .cards-3__item { padding: 16px 14px; }
+    }
+    /* ── END NAV ─────────────────────────── */
+    /* EMAIL POPUP (aligned with services / destination guides) */
+    @keyframes emailPopupIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes nlFloat1 { 0%,100%{transform:translateY(0) rotate(-8deg)} 50%{transform:translateY(-18px) rotate(4deg)} }
+    @keyframes nlFloat2 { 0%,100%{transform:translateY(0) rotate(12deg)} 50%{transform:translateY(-14px) rotate(-6deg)} }
+    @keyframes nlFloat3 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-22px) rotate(10deg)} }
+    @keyframes nlPulseRing { 0%{transform:scale(1);opacity:0.6} 100%{transform:scale(1.5);opacity:0} }
+    @keyframes nlSlideUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+    .nl-visible { animation: nlSlideUp 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
+    .nl-hidden { opacity:0; transform:translateY(40px); }
+  
