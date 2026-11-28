@@ -3,6 +3,7 @@
  * Shared page shell: Hebrew RTL, fonts, SEO tags, analytics, nav, footer, WhatsApp button, back-to-top.
  * The newsletter popup (W10) plugs in here later.
  */
+import "../styles/fonts.css";
 import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
@@ -32,9 +33,9 @@ const stay22Id = stay22 ? site.partners.stay22.partnerId : null;
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <Seo {...seo} />
     <link rel="icon" href="/logo.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" />
+    {/* Fonts are self-hosted (src/styles/fonts.css, public/fonts). Preload the two used on every page (Hebrew). */}
+    <link rel="preload" href="/fonts/rubik-normal-300-900-hebrew.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/secular-one-normal-400-hebrew.woff2" as="font" type="font/woff2" crossorigin />
     {/* Plausible (cookieless): the site script from the Plausible dashboard; events sent before it loads are queued. */}
     <script async src={`https://plausible.io/js/${site.analytics.plausibleScript}.js`}></script>
     <script is:inline>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>

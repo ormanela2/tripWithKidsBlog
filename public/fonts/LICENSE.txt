@@ -1,0 +1,3 @@
+Fonts in this folder: Rubik, Secular One, Assistant, Heebo, Cormorant Garamond, Fraunces, Noto Serif Hebrew.
+Each is licensed under the SIL Open Font License, Version 1.1 (https://openfontlicense.org), by its respective authors.
+Downloaded from the Google Fonts service for self-hosting.
