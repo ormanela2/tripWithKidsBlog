@@ -3,9 +3,6 @@
   "code": "(function () {\r\n    try {\r\n      var q = new URLSearchParams(window.location.search).get('embed');\r\n      var ql = String(q || '').toLowerCase();\r\n      if (q === '1' || ql === 'true') document.documentElement.classList.add('tp-embed');\r\n      if (ql === 'map') {\r\n        document.documentElement.classList.add('tp-embed');\r\n        document.documentElement.classList.add('tp-embed-map');\r\n      }\r\n    } catch (e) {}\r\n  })();"
  },
  {
-  "code": "(function () {\r\n    if (location.protocol !== 'https:' || (location.hostname !== 'mataytasim.co.il' && location.hostname !== 'www.mataytasim.co.il')) return;\r\n    var s = document.createElement('script');\r\n    s.defer = true;\r\n    s.dataset.domain = 'mataytasim.co.il';\r\n    s.src = 'https://plausible.io/js/script.js';\r\n    document.head.appendChild(s);\r\n  })();"
- },
- {
   "code": "(function () {\r\n    try {\r\n      if (location.protocol !== 'file:') return;\r\n      if (window.top === window.self) return;\r\n      var el = document.getElementById('tpFileBanner');\r\n      if (el) el.hidden = false;\r\n      var btn = document.getElementById('tpBreakFrame');\r\n      if (btn) {\r\n        btn.addEventListener('click', function () {\r\n          try {\r\n            if (window.top !== window.self) window.top.location.href = window.location.href;\r\n          } catch (err) {\r\n            window.open(location.href, '_blank', 'noopener,noreferrer');\r\n          }\r\n        });\r\n      }\r\n    } catch (e) {}\r\n    })();"
  },
  {

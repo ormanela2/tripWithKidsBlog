@@ -39,7 +39,13 @@ export const site = {
   },
 
   analytics: {
-    plausibleDomain: "mataytasim.co.il",
+    /** Plausible site script (the newer setup configured in the Plausible dashboard; was on 25 live pages). */
+    plausibleScript: "pa-nFr2Tp1qjwr_0EXB175vP",
+    /** Page-specific newsletter pop-up events the live pages sent, in addition to Newsletter-Open-Nav / Newsletter-Submit. */
+    newsletterEvents: {
+      services: { open: "Services-Newsletter-Popup-Open", close: "Services-Newsletter-Popup-Close-X", submit: "Services-Newsletter-Popup-CTA-Click", facebook: "Services-Newsletter-Popup-Facebook-Click" },
+      quiz: { open: "Quiz-Newsletter-Popup-Shown", submit: "Quiz-Newsletter-Submit" },
+    } as Record<string, { open?: string; close?: string; submit?: string; facebook?: string }>,
   },
 
   seo: {

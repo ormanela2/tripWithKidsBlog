@@ -94,6 +94,7 @@ const css = filterCss(styles.join("\n")).replace(/\n\s*\n+/g, "\n");
 const DROP = [
   [/^\s*window\.GOOGLE_MAPS_API_KEY\s*=\s*'[^']*';?\s*$/, "Google Maps key (owner decision: no Google Maps API)"],
   [/^\s*window\.plausible\s*=\s*window\.plausible\s*\|\|/, "Plausible loader (layout adds analytics)"],
+  [/plausible\.io\/js\/script\.js/, "old Plausible loader (layout adds the current one; would count visits twice)"],
   [/"clarity",\s*"script"/, "Microsoft Clarity snippet (removed: owner decision 28 Nov 2026)"],
   [/Stay22\.params/, "Stay22 snippet (layout adds it from config)"],
 ];

@@ -35,8 +35,9 @@ const stay22Id = stay22 ? site.partners.stay22.partnerId : null;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Secular+One&family=Assistant:wght@300;400;600&display=swap" />
-    <script defer data-domain={site.analytics.plausibleDomain} src="https://plausible.io/js/script.js"></script>
-    <script is:inline>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments); };</script>
+    {/* Plausible (cookieless): the site script from the Plausible dashboard; events sent before it loads are queued. */}
+    <script async src={`https://plausible.io/js/${site.analytics.plausibleScript}.js`}></script>
+    <script is:inline>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
     {stay22Id && <script is:inline define:vars={{ stay22Id }}>(function (s, t, a, y) { s.Stay22 = s.Stay22 || {}; s.Stay22.params = { lmaID: stay22Id }; var e = t.createElement(a), f = t.getElementsByTagName(a)[0]; e.async = 1; e.src = y; f.parentNode.insertBefore(e, f); })(window, document, "script", "https://scripts.stay22.com/letmeallez.js");</script>}
     <slot name="head" />
   </head>

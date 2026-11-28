@@ -23,7 +23,7 @@
 | W8 ✅ | **Partner pages + disclosure** | esim, airport-hotels, car-rental-partners, car-rental-klasswagen, packages, theme-parks, family-top-attractions, tips, services, about, terms; one `PartnerLink` component that always shows the disclosure | 1.5 d | Claude |
 | W9 ✅ | **Maps** | No Google Maps anywhere on the site (owner decision, 28 Nov 2026): no key, no links, no texts. Maps are Leaflet (new guide design: loads when near the screen). Left for W12: check the map tile provider's terms for a commercial site | 0.5 d | Claude |
 | W10 ✅ | **Forms** | One form component (one provider, no email address in the page), honeypot against spam, short privacy line | 0.5 d | Claude |
-| W11 | **Analytics** | One Plausible snippet; keep the existing event names (e.g. article card clicks) | 0.25 d | Claude |
+| W11 ✅ | **Analytics** | One Plausible snippet; keep the existing event names (e.g. article card clicks) | 0.25 d | Claude |
 | W12 | **URL parity + clean-up** | Every old URL still works; test pages (`test2_fixed`, `test3`) removed; decide on `smart_plan_budapest/`; fix the broken links found in the review | 0.5 d | Claude |
 | W13 | **QA** | Link check; Lighthouse speed/accessibility budget; iPhone Safari + Android; RTL; compare every page old vs new | 1 d | Claude + **you** |
 | W14 | **Switch over** | Merge to `main`; GitHub Pages source = GitHub Actions; check domain + HTTPS; Search Console: resubmit sitemap; keep the old version ready to roll back | 0.5 d | **you** + Claude |
@@ -70,3 +70,9 @@ Every old URL works; Lighthouse performance and accessibility at least 90 on mob
 - Background sending with honeypot spam protection; a failed send says so and offers WhatsApp/email (the old scripts showed "sent" even on failure).
 - Gmail addresses replaced by info@mataytasim.co.il everywhere (links and email-draft fallbacks).
 - Feedback widget rebuilt for the new guide design (Warsaw: its own form, as live).
+
+## W11 notes (28 Nov 2026)
+- One Plausible setup on every page: the site script from the dashboard (pa-…, was on 25 live pages) + the queue/init line. The old script.js (5 live pages) is gone; theme-parks loaded it a second time on the live domain (double counting) and that loader is removed.
+- Event names kept: compared with every live page. Restored: Budapest-PDF-Download, services and quiz pop-up events (settings: analytics.newsletterEvents), ThemeParks-CTA-Click and GoodToKnow-CardClick / GoodToKnow-CTA in the new guide design.
+- Not sent anymore on Athens/Warsaw: GoodToKnow-Open, GoodToKnow-ToggleMore (the drawer they belonged to is gone in the new design).
+- Clarity removed (owner decision).

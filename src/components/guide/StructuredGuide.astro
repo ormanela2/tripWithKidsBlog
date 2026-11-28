@@ -246,7 +246,7 @@ const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
               <h2 id="parks-h">🎢 פארקי שעשועים</h2>
               {g.themeParks.intro && <p class="lede">{g.themeParks.intro}</p>}
               <div class="parksmap"><iframe src={`/theme-parks.html?cc=${g.themeParks.cc}&embed=map`} title={`מפת פארקי שעשועים: ${g.name}`} loading="lazy"></iframe></div>
-              <a class="more" href="/theme-parks.html">למדריך פארקי אירופה המלא ←</a>
+              <a class="more" href={`/theme-parks.html?cc=${g.themeParks.cc}`} data-track="ThemeParks-CTA-Click" data-track-props={JSON.stringify({ source: `${entry.id}-embed-title`, country: g.themeParks.cc, target: "theme-parks" })}>למדריך פארקי אירופה המלא ←</a>
             </section>
           )}
 
@@ -286,9 +286,10 @@ const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
               {gtk.lead_he && <p class="lede">{gtk.lead_he}</p>}
               <div class="gtk">
                 {gtk.items.map(it => (
-                  <article><h3>{it.title_he}</h3><p>{it.summary_he}</p>{it.tips_url && <a href={localUrl(it.tips_url)}>להרחבה ←</a>}</article>
+                  <article><h3>{it.title_he}</h3><p>{it.summary_he}</p>{it.tips_url && <a href={localUrl(it.tips_url)} data-track="GoodToKnow-CardClick" data-track-props={JSON.stringify({ country: g.country, href: localUrl(it.tips_url), card_id: it.id, card_title: it.title_he, card_position: String(gtk.items.indexOf(it) + 1), total_cards: String(gtk.items.length) })}>להרחבה ←</a>}</article>
                 ))}
               </div>
+              <a class="more" href="/tips.html" data-track="GoodToKnow-CTA" data-track-props={JSON.stringify({ country: g.country, href: "/tips.html", total_cards: String(gtk.items.length) })}>לדף הטיפים המלא ←</a>
               {g.phrasebook && <button type="button" class="btn btn--teal" data-open-pb>🗣️ {g.phrasebook.title} ({phraseCount} ביטויים)</button>}
             </section>
           )}
@@ -364,6 +365,13 @@ const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
 <script>
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T | null;
   const reduce = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---- analytics: links marked data-track send their Plausible event (same names as the live guides) ----
+  document.addEventListener("click", e => {
+    const a = (e.target as HTMLElement).closest<HTMLElement>("[data-track]");
+    if (!a) return;
+    try { (window as unknown as { plausible?: (n: string, o: object) => void }).plausible?.(a.dataset.track!, { props: JSON.parse(a.dataset.trackProps || "{}") }); } catch { /* analytics never breaks the page */ }
+  });
 
   // ---- story: first paragraph, rest on request (all visible without script) ----
   (() => {

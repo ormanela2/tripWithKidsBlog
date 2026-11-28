@@ -5,6 +5,8 @@
  * Never opens by itself. Same Plausible events as the live site: Newsletter-Open-Nav, Newsletter-Submit.
  */
 import { site, formAction } from "../config/site";
+const slug = Astro.url.pathname.split("/").pop()?.replace(".html", "") || "home";
+const extra = site.analytics.newsletterEvents[slug] ?? {};
 ---
 <div class="email-popup-overlay" id="emailPopupOverlay">
   <div class="email-popup" role="dialog" aria-modal="true" aria-labelledby="emailPopupTitle">
@@ -31,25 +33,30 @@ import { site, formAction } from "../config/site";
   </div>
 </div>
 
-<script is:inline>
+<script is:inline define:vars={{ extra }}>
   (function () {
     var overlay = document.getElementById("emailPopupOverlay");
     var closeBtn = document.getElementById("emailPopupClose");
     if (!overlay) return;
     var openedAt = 0, opener = null;
     var pageName = location.pathname.split("/").pop().replace(".html", "") || "home";
-    function track(name) { try { if (window.plausible) window.plausible(name, { props: { page: pageName } }); } catch (e) {} }
-    function openPopup() {
+    function track(name, props) { try { if (window.plausible && name) window.plausible(name, { props: Object.assign({ page: pageName }, props || {}) }); } catch (e) {} }
+    function openPopup(source) {
+      source = typeof source === "string" ? source : "nav";
+      // Opened by the page itself (e.g. after quiz results): not again once someone signed up.
+      try { if (source !== "nav" && localStorage.getItem("mtEmailSubmitted")) return; } catch (e) {}
       opener = document.activeElement;
       if (!overlay.classList.contains("open")) { overlay.classList.add("open"); document.body.style.overflow = "hidden"; }
       openedAt = Date.now();
-      track("Newsletter-Open-Nav");
+      if (source === "nav") track("Newsletter-Open-Nav");
+      track(extra.open, { source: source });
       var input = document.getElementById("emailPopupInput");
       if (input) setTimeout(function () { input.focus(); }, 50);
     }
-    function closePopup() {
+    function closePopup(how) {
       if (!overlay.classList.contains("open")) return;
       overlay.classList.remove("open");
+      if (how === "x") track(extra.close);
       document.body.style.overflow = "";
       if (opener && opener.focus) opener.focus();
     }
@@ -57,14 +64,18 @@ import { site, formAction } from "../config/site";
       var a = e.target.closest && e.target.closest('a[href$="#newsletter"]');
       if (!a) return;
       e.preventDefault();
-      openPopup();
+      openPopup("nav");
     });
-    if (closeBtn) closeBtn.addEventListener("click", closePopup);
+    if (closeBtn) closeBtn.addEventListener("click", function () { closePopup("x"); });
+    var fb = overlay.querySelector(".email-popup__fb-link");
+    if (fb) fb.addEventListener("click", function () { track(extra.facebook); });
+    var form = document.getElementById("emailPopupForm");
+    if (form) form.addEventListener("submit", function () { track(extra.submit); });
     overlay.addEventListener("click", function (e) { if (e.target === overlay && Date.now() - openedAt > 400) closePopup(); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") closePopup(); });
     // Coming back from the old confirmation address (?subscribed=1): remember the sign-up, as before.
     try { if (new URLSearchParams(location.search).get("subscribed") === "1") localStorage.setItem("mtEmailSubmitted", "1"); } catch (e) {}
-    if (location.hash === "#newsletter") setTimeout(openPopup, 50);
+    if (location.hash === "#newsletter") setTimeout(function () { openPopup("nav"); }, 50);
     window.openEmailPopup = openPopup;
   })();
 </script>
