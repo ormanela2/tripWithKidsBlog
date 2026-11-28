@@ -544,3 +544,12 @@ main { padding-top: var(--nav-height); min-height: 60vh; }
 .float-nav__btn--destinations { background: var(--teal); color: white; width: 44px; padding: 0; }
 .float-nav__btn--top { background: white; color: var(--teal); border: 2px solid var(--teal); width: 44px; padding: 0; }
 @media (max-width: 600px) { .float-nav__btn { height: 36px; font-size: 12px; } .float-nav__btn--destinations { width: 36px; } .float-nav__btn--top { width: 36px; } }
+
+/* Reading-progress plane in the menu bar (copied from the live guide pages). Rendered by Nav when readProgress is on. */
+.read-progress { --read-safe-h: 10px; --read-bar-h: 5px; --read-plane-w: 20px; --read-plane-h: 20px; position: absolute; left: max(24px, env(safe-area-inset-left, 0px)); right: max(24px, env(safe-area-inset-right, 0px)); bottom: 4px; height: var(--read-safe-h); z-index: 1; pointer-events: none; direction: ltr; }
+.read-progress__inner { position: relative; height: 100%; overflow: visible; }
+.read-progress__track { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); height: var(--read-bar-h); border-radius: 999px; background: rgba(27, 67, 114, 0.12); }
+.read-progress__fill { position: absolute; top: 50%; transform: translate3d(0, -50%, 0) scaleX(0); transform-origin: right center; height: var(--read-bar-h); width: 100%; right: 0; left: auto; border-radius: 999px; background: linear-gradient(to left, rgba(27, 67, 114, 0.4) 0%, rgba(27, 67, 114, 1) 50%, rgba(230, 161, 92, 1) 100%); box-shadow: inset 0 0 5px rgba(100, 200, 255, 0.2); will-change: transform; z-index: 1; }
+.read-progress__plane { position: absolute; top: 50%; left: 100%; width: var(--read-plane-w); height: var(--read-plane-h); transform: translate3d(-100%, -50%, 0); color: #1b4372; filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9)); will-change: left; z-index: 2; }
+.read-progress__plane svg { display: block; width: 100%; height: 100%; transform: rotate(-8deg); transform-origin: 50% 50%; transition: transform 0.2s ease-out; }
+@media (max-width: 900px) { .read-progress { --read-bar-h: 3px; --read-plane-w: 15px; --read-plane-h: 15px; left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); bottom: 3px; } .read-progress__track { background: rgba(27, 67, 114, 0.09); } .read-progress__fill { background: linear-gradient(to left, rgba(27, 67, 114, 0.28) 0%, rgba(27, 67, 114, 0.78) 50%, rgba(230, 161, 92, 0.78) 100%); } }
