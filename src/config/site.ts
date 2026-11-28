@@ -54,7 +54,7 @@ export const site = {
     defaultImage: "/og-image.png",
     logo: "/logo.png",
     /** Pages left out of the sitemap (redirects, test pages). Paths as served, ".html" form. */
-    sitemapExclude: ["/layout-check.html", "/404.html"],
+    sitemapExclude: ["/404.html"],
     /** Public files that are not pages but should be in the sitemap (added as they move into public/). */
     sitemapExtra: ["/MatayTasim-Budapest-Countdown.pdf", "/MatayTasim-Slovakia-Countdown.pdf"] as string[],
   },
@@ -70,6 +70,15 @@ export const site = {
     },
   },
 
+  maps: {
+    /**
+     * Free CARTO basemaps key (request at carto.com/basemaps/apikey; no account needed). Since 25 Sep 2026 CARTO tiles
+     * without a key show "API KEY REQUIRED". With a key: CARTO Voyager (the look the live site was built with).
+     * Without: OpenStreetMap's own tiles (free, credit required). Free commercial use: up to 1M tile requests a month.
+     */
+    cartoKey: null as string | null,
+  },
+
   forms: {
     /**
      * Formspree form codes (the part after formspree.io/f/). Never an email address in a page.
@@ -82,6 +91,16 @@ export const site = {
   },
 
 } as const;
+
+/** Map tile address and credit for Leaflet ("voyager" = the colourful CARTO style, "light" = the pale one). */
+export const mapTiles = (style: "voyager" | "light" = "voyager") => {
+  const key = site.maps.cartoKey;
+  if (key) {
+    const path = style === "light" ? "light_all" : "rastertiles/voyager";
+    return { url: `https://{s}.basemaps.cartocdn.com/${path}/{z}/{x}/{y}{r}.png?key=${key}`, attribution: "© OpenStreetMap © CARTO" };
+  }
+  return { url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png", attribution: "© OpenStreetMap contributors" };
+};
 
 /** Formspree address of a form by name (see forms above). */
 export const formAction = (name: keyof typeof site.forms) => `https://formspree.io/f/${site.forms[name]}`;

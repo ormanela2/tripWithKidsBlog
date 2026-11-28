@@ -1,0 +1,28 @@
+---
+/** "Page not found" (GitHub Pages serves /404.html for any missing address). */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { whatsappLink } from "../config/site";
+---
+<BaseLayout title="העמוד לא נמצא - מתי טסים" description="העמוד שחיפשתם לא נמצא. אפשר להמשיך ליעדים, לטיפים או לחבילות התכנון." noindex>
+  <section class="nf container">
+    <p class="nf__code" aria-hidden="true">404</p>
+    <h1>העמוד הזה לא נמצא</h1>
+    <p class="nf__lede">ייתכן שהקישור ישן או שהכתובת השתנתה. הנה כמה מקומות טובים להמשיך מהם:</p>
+    <div class="nf__links">
+      <a class="nf__btn nf__btn--main" href="/destinations.html">לכל היעדים</a>
+      <a class="nf__btn" href="/tips.html">טיפים וכלים</a>
+      <a class="nf__btn" href="/packages.html">חבילות תכנון</a>
+      <a class="nf__btn" href={whatsappLink("היי, הגעתי לעמוד שלא קיים באתר ואשמח לעזרה")} target="_blank" rel="noopener">שאלה בוואטסאפ</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf { padding-block: clamp(56px, 10vw, 110px); display: grid; gap: 14px; justify-items: center; text-align: center; }
+  .nf__code { font-family: var(--font-heading); font-size: clamp(4rem, 14vw, 7rem); line-height: 1; color: var(--sand-dark); }
+  .nf h1 { font-family: var(--font-heading); font-weight: 400; color: var(--teal-dark); font-size: clamp(1.8rem, 4vw, 2.4rem); }
+  .nf__lede { color: #5d625f; max-width: 52ch; }
+  .nf__links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 8px; }
+  .nf__btn { display: inline-flex; align-items: center; min-height: 46px; padding: 0 20px; border-radius: 999px; font-weight: 600; border: 1.5px solid var(--teal); color: var(--teal); background: #fff; }
+  .nf__btn--main { background: var(--teal); color: #fff; }
+</style>

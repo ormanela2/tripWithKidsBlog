@@ -9,7 +9,7 @@ import type { CollectionEntry } from "astro:content";
 import type { ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { site } from "../../config/site";
+import { site, mapTiles } from "../../config/site";
 const FORM_TOKEN = "__FORM_WEBSITE__";
 import { breadcrumb, article } from "../../lib/schema";
 import PartnerNote from "../PartnerNote.astro";
@@ -34,6 +34,11 @@ let css = styles[key("page.css")] ?? "";
 let scripts = scriptSets[key("scripts.json")] ?? [];
 if (!body) throw new Error(`Carried-over page "${slug}": src/carried/${slug}/body.html is missing. Run scripts/carry-over.mjs.`);
 
+// Map tiles from the settings (CARTO with a key, otherwise OpenStreetMap).
+{
+  const fill = (s: string) => s.split("__MAP_TILES_VOYAGER__").join(mapTiles("voyager").url).split("__MAP_TILES_LIGHT__").join(mapTiles("light").url).split("__MAP_ATTR__").join(mapTiles().attribution).split("__MAP_ATTR_CARTO__").join(site.maps.cartoKey ? ' &copy; <a href="https://carto.com/attributions">CARTO</a>' : "");
+  scripts = scripts.map(s => (s.code ? { code: fill(s.code) } : s));
+}
 // Formspree form code from the settings (pages carry a token, never an address).
 body = body.split(FORM_TOKEN).join(site.forms.website);
 scripts = scripts.map(s => (s.code ? { code: s.code.split(FORM_TOKEN).join(site.forms.website) } : s));

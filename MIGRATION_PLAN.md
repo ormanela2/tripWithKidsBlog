@@ -24,7 +24,7 @@
 | W9 ✅ | **Maps** | No Google Maps anywhere on the site (owner decision, 28 Nov 2026): no key, no links, no texts. Maps are Leaflet (new guide design: loads when near the screen). Left for W12: check the map tile provider's terms for a commercial site | 0.5 d | Claude |
 | W10 ✅ | **Forms** | One form component (one provider, no email address in the page), honeypot against spam, short privacy line | 0.5 d | Claude |
 | W11 ✅ | **Analytics** | One Plausible snippet; keep the existing event names (e.g. article card clicks) | 0.25 d | Claude |
-| W12 | **URL parity + clean-up** | Every old URL still works; test pages (`test2_fixed`, `test3`) removed; decide on `smart_plan_budapest/`; fix the broken links found in the review | 0.5 d | Claude |
+| W12 ✅ | **URL parity + clean-up** | Every old URL still works; test pages (`test2_fixed`, `test3`) removed; decide on `smart_plan_budapest/`; fix the broken links found in the review | 0.5 d | Claude |
 | W13 | **QA** | Link check; Lighthouse speed/accessibility budget; iPhone Safari + Android; RTL; compare every page old vs new | 1 d | Claude + **you** |
 | W14 | **Switch over** | Merge to `main`; GitHub Pages source = GitHub Actions; check domain + HTTPS; Search Console: resubmit sitemap; keep the old version ready to roll back | 0.5 d | **you** + Claude |
 | W15 | **After launch** | "Plan this trip" button to the trip planner; how-to for adding a new destination in minutes | 0.5 d | Claude |
@@ -76,3 +76,12 @@ Every old URL works; Lighthouse performance and accessibility at least 90 on mob
 - Event names kept: compared with every live page. Restored: Budapest-PDF-Download, services and quiz pop-up events (settings: analytics.newsletterEvents), ThemeParks-CTA-Click and GoodToKnow-CardClick / GoodToKnow-CTA in the new guide design.
 - Not sent anymore on Athens/Warsaw: GoodToKnow-Open, GoodToKnow-ToggleMore (the drawer they belonged to is gone in the new design).
 - Clarity removed (owner decision).
+
+## W12 notes (28 Nov 2026)
+- URL parity: every live page address exists on the new site except the two test pages (removed on purpose) and smart_plan_budapest/ (orphaned landing page of the smart planner, not linked, not in the sitemap; left out, still in legacy/ if wanted). Old direct image addresses (115) are not kept: photos are served compressed under new names.
+- Link crawl: 2 broken links (also broken live) fixed: Budapest smart-planner button removed (target page never existed), planning/transport "preprod-tips.html" -> tips.html. No broken files or anchors left.
+- New 404 page (noindex). Sitemap: every page, nothing else; robots.txt points to it.
+- Dead Google code removed from airport-hotels, budapest, theme-parks (austria and poland-south: with W16).
+- **Maps (live bug):** CARTO tiles need a key since 25 Sep 2026; without one they show "API KEY REQUIRED" (the live site's maps are affected). Tiles now come from one setting (site.ts -> maps.cartoKey): OpenStreetMap tiles until the owner adds a free CARTO key, then CARTO Voyager as before. Credits follow the provider.
+- Removed: layout-check test page, one-time conversion scripts (git history keeps them). Kept for W16: scripts/migrate-guide.mjs, scripts/add-guide-photos.mjs and legacy/.
+- Optional (owner): self-host the fonts (no request to Google Fonts).

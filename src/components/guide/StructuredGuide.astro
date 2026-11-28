@@ -10,7 +10,7 @@ import { getImage } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Photo from "../Photo.astro";
 import FeedbackWidget from "../FeedbackWidget.astro";
-import { site, whatsappLink } from "../../config/site";
+import { site, whatsappLink, mapTiles } from "../../config/site";
 import { breadcrumb, article, faq as faqSchema } from "../../lib/schema";
 import { destinations } from "../../data/destinations";
 import goodToKnowData from "../../data/good-to-know.json";
@@ -36,7 +36,8 @@ const otherLinks = g.links.filter(l => !l.partner);
 const phraseCount = g.phrasebook?.groups.reduce((n, grp) => n + grp.phrases.length, 0) ?? 0;
 
 const mapDays = g.days.flatMap((d, i) => (d.map ? [{ id: `day-${i + 1}`, day: i + 1, label: d.map.short ?? d.title, emoji: d.icon ?? "📍", lat: d.map.lat, lng: d.map.lng, color: d.map.color ?? g.color, title: d.map.label ?? d.title }] : []));
-const mapData = JSON.stringify({ center: g.map?.center ?? { lat: mapDays[0]?.lat ?? 0, lng: mapDays[0]?.lng ?? 0 }, zoom: g.map?.zoom ?? 10, days: mapDays }).replace(/</g, "\\u003c");
+const tiles = mapTiles("voyager");
+const mapData = JSON.stringify({ tiles, center: g.map?.center ?? { lat: mapDays[0]?.lat ?? 0, lng: mapDays[0]?.lng ?? 0 }, zoom: g.map?.zoom ?? 10, days: mapDays }).replace(/</g, "\\u003c");
 
 const sections = [
   { id: "why", label: `למה ${g.name} עם ילדים` },
@@ -430,7 +431,7 @@ const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
     const el = $("trip-map"), dataEl = $("tripMapData");
     if (!el || !dataEl) return;
     type Day = { id: string; day: number; label: string; emoji: string; lat: number; lng: number; color: string; title: string };
-    const data = JSON.parse(dataEl.textContent || "{}") as { center: { lat: number; lng: number }; zoom: number; days: Day[] };
+    const data = JSON.parse(dataEl.textContent || "{}") as { tiles: { url: string; attribution: string }; center: { lat: number; lng: number }; zoom: number; days: Day[] };
     const esc = (s: string) => s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
     const load = () => new Promise<void>((res, rej) => {
       if ((window as unknown as { L?: unknown }).L) return res();
@@ -440,7 +441,7 @@ const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const L = (window as any).L;
       const map = L.map(el, { center: [data.center.lat, data.center.lng], zoom: data.zoom, scrollWheelZoom: false });
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", { attribution: "© OpenStreetMap © CARTO", maxZoom: 18 }).addTo(map);
+      L.tileLayer(data.tiles.url, { attribution: data.tiles.attribution, maxZoom: 18 }).addTo(map);
       L.polyline(data.days.map(d => [d.lat, d.lng]), { color: "#E8A045", weight: 2.5, dashArray: "6,5", opacity: 0.8 }).addTo(map);
       const bounds: [number, number][] = [];
       data.days.forEach(d => {
