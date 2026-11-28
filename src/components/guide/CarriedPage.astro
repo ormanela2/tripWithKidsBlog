@@ -72,6 +72,17 @@ body = body.replace(/<img\b[^>]*>/g, tag => {
   const w = tag.match(/style="[^"]*\bwidth:\s*(\d+)px/)?.[1], h = tag.match(/style="[^"]*\bheight:\s*(\d+)px/)?.[1];
   return w && h ? tag.replace(/^<img\b/, `<img width="${w}" height="${h}"`) : tag;
 });
+// Photos below the first one load when scrolled near (same look, much lighter first load).
+{
+  let first = true;
+  body = body.replace(/<img\b[^>]*>/g, tag => {
+    if (first) { first = false; return tag; }
+    if (/\sloading=/.test(tag)) return tag;
+    return tag.replace(/^<img\b/, '<img loading="lazy" decoding="async"');
+  });
+}
+// The shared layout already has <main id="main">; a page's own <main> keeps its look but not a second id.
+body = body.replace(/(<main\b[^>]*?)\sid="main"/g, "$1");
 // Links in the page are relative ("budapest.html"); make them absolute so they work from any path.
 body = body.replace(/(href|src|action)="(?!https?:|\/|#|mailto:|tel:|javascript:|data:)([^"]+)"/g, '$1="/$2"');
 
