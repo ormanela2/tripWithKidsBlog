@@ -19,7 +19,7 @@
 | W4 ✅ | **Image pipeline** | Move photos into `src/assets` (replace the Google Places photo thumbnails with our own or Wikimedia Commons images, credited); automatic WebP/AVIF in the right sizes with width/height; lazy loading; alt text required; compress PDFs | 1 d | Claude |
 | W5 ✅ | **Content model** | Content collection for destination guides (frontmatter: title, country, hero, best months, kids' ages, highlights, FAQ, partner blocks); guide page template | 1 d | Claude |
 | W6 ✅ | **Migrate destination guides (11)** | austria, czechia, poland-south, poland-three-experiences, warsaw, slovakia, slovakia-advanced, budapest, romania, slovenia, athens; plus `destinations` hub | 3 d | Claude |
-| W7 | **Migrate tool pages** | weather, calendar, budget, packing, quiz, planning, transport-europe, questionnaire_form, family_questionnaire, austria_trivia_game: keep their behaviour as small scripts on the page | 2 d | Claude |
+| W7 ✅ | **Migrate tool pages** | weather, calendar, budget, packing, quiz, planning, transport-europe, questionnaire_form, family_questionnaire, austria_trivia_game: keep their behaviour as small scripts on the page | 2 d | Claude |
 | W8 | **Partner pages + disclosure** | esim, airport-hotels, car-rental-partners, car-rental-klasswagen, packages, theme-parks, family-top-attractions, tips, services, about, terms; one `PartnerLink` component that always shows the disclosure | 1.5 d | Claude |
 | W9 | **Maps** | One Leaflet map component (pinned versions, loads only when visible); "Open in Google Maps" links without a key. **No Google Maps API** (owner decision) | 0.5 d | Claude |
 | W10 | **Forms** | One form component (one provider, no email address in the page), honeypot against spam, short privacy line | 0.5 d | Claude |
@@ -40,3 +40,8 @@ Every old URL works; Lighthouse performance and accessibility at least 90 on mob
 - Removed from those pages: the Google Maps key and matay-gmaps-frugal.js (owner decision). The Google "place card" now shows the place name and a keyless Google Maps link (no photo, hours or rating). Twemoji pinned to 17.0.3 (was @latest). Photos are compressed WebP with real sizes.
 - Kept as live: Microsoft Clarity, Stay22, Leaflet maps, GetYourGuide widget (Budapest), the feedback widget, galleries.
 - Follow-ups: **W8** must build `theme-parks.html` (embedded as an iframe in 6 guides) and the other linked pages; **W9** can give the attraction cards their own or Commons photos in place of the Google ones; any guide can later be moved onto the structured template one at a time.
+
+## W7 notes
+- The 10 tool pages are carried over as they are (`scripts/carry-over.mjs <slug> --kind page`), same mechanism as the guides.
+- Many pages keep their tool in the same script as the old menu code; such scripts are kept, with the old menu lookups pointed at stand-in elements. Only scripts that touch nothing but the shared parts are dropped.
+- Still calling outside services, as today: budget (live exchange rates, `currency-api@latest` = today's rates), weather (OpenWeatherMap with a key in the page, plus Open-Meteo), calendar and questionnaire forms (FormSubmit / Formspree, W10).

@@ -28,3 +28,6 @@ The guides embed a Stay22 hotel map (`stay22.com/embed/<id>`) and use affiliate 
 
 ## Update (W6): Microsoft Clarity
 Project id `wrt3m0l4ow` (public; on 17 live pages, the guides among them). Now in `src/config/site.ts` (`analytics.clarityId`), added per page with the `clarity` option. Decide in W11 whether to keep it site-wide, per page, or drop it (it records visitor sessions; mention it in the privacy text if kept).
+
+## Update (W7): OpenWeatherMap key (missed in W1)
+weather.html calls OpenWeatherMap with an API key written in the page (visible to every visitor, also on the live site). Kept so the page works as today. Owner options: restrict/rotate the key in the OpenWeatherMap account, or switch the page to Open-Meteo (free, no key; the page already uses it for part of the data).
