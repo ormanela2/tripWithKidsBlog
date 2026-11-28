@@ -44,7 +44,14 @@ map:
     lng: 23.73
   zoom: 10
 days:
-  - title: "הגעה לאתונה"
+  - photo:
+      image: "../../assets/photos/commons/athens-day1.jpg"
+      alt: "כיכר מונסטירקי"
+      credit:
+        author: "Maksym Kozlenko"
+        license: "CC BY-SA 4.0"
+        url: "https://commons.wikimedia.org/wiki/File:2018-07-25_Monastiraki_Square,_Athens.jpg"
+    title: "הגעה לאתונה"
     icon: "✈️"
     date: "29.04 שלישי"
     where: "Athens Ikon, מונסטירקי"
@@ -72,7 +79,14 @@ days:
         text: "ארוחת ערב ראשונה באתונה. מקום מומלץ לפתיחת הטיול."
     tips: ["מונסטירקי הוא אחד האזורים הכי כיפיים לטיול ערב עם ילדים - שוק, מסעדות ואווירה."]
     stay: "Athens Ikon - Mitropoleos 21, מונסטירקי"
-  - title: "Allou! Fun Park + גבעת ליקאבטוס"
+  - photo:
+      image: "../../assets/photos/commons/athens-day2.jpg"
+      alt: "גבעת ליקאבטוס"
+      credit:
+        author: "Eusebius"
+        license: "CC BY 3.0"
+        url: "https://commons.wikimedia.org/wiki/File:Mont_Lycabettus_1.jpg"
+    title: "Allou! Fun Park + גבעת ליקאבטוס"
     icon: "🎢"
     date: "30.04 רביעי"
     where: "אתונה"
@@ -131,7 +145,14 @@ days:
         text: "מוזיאון האשליות - אטרקציה אהובה במיוחד על ילדים. תמונות מטורפות ואשליות אופטיות."
     tips: ["Museum of Illusions כדאי לאחר שעה 17:00 כשקצת פחות עמוס."]
     stay: "Athens Ikon - Mitropoleos 21, מונסטירקי"
-  - title: "האי אגינה + Ancient Agora"
+  - photo:
+      image: "../../assets/photos/commons/athens-day4.jpg"
+      alt: "נמל אגינה"
+      credit:
+        author: "Jebulon"
+        license: "CC0"
+        url: "https://commons.wikimedia.org/wiki/File:Aegina_harbour_1.jpg"
+    title: "האי אגינה + Ancient Agora"
     icon: "⛵"
     date: "02.05 שישי"
     where: "פיראוס → אגינה → אתונה"
@@ -162,7 +183,14 @@ days:
         text: "מסעדה מומלצת מאוד לארוחת ערב - מטבח יווני מסורתי ברמה גבוהה."
     tips: ["מעבורת לאגינה - כדאי להזמין כרטיסים מראש דרך האתר Hellenic Seaways. הגיעו לנמל 30 דקות לפחות לפני."]
     stay: "Athens Ikon - Mitropoleos 21, מונסטירקי"
-  - title: "יום אחרון וטיסה הביתה"
+  - photo:
+      image: "../../assets/photos/commons/athens-day5.jpg"
+      alt: "נמל התעופה של אתונה"
+      credit:
+        author: "Manfred Werner (Tsui)"
+        license: "CC BY-SA 4.0"
+        url: "https://commons.wikimedia.org/wiki/File:Athens_International_Airport_Eleftherios_Venizelos_%CE%94%CE%B9%CE%B5%CE%B8%CE%BD%CE%AE%CF%82_%CE%91%CE%B5%CF%81%CE%BF%CE%BB%CE%B9%CE%BC%CE%AD%CE%BD%CE%B1%CF%82_%CE%91%CE%B8%CE%B7%CE%BD%CF%8E%CE%BD_%CE%95%CE%BB%CE%B5%CF%85%CE%B8%CE%AD%CF%81%CE%B9%CE%BF%CF%82_%CE%92%CE%B5%CE%BD%CE%B9%CE%B6%CE%AD%CE%BB%CE%BF%CF%82_2019-12-01_i.jpg"
+    title: "יום אחרון וטיסה הביתה"
     icon: "🇮🇱"
     date: "03.05 שבת"
     where: "אתונה → נתב\"ג"

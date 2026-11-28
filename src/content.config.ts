@@ -3,7 +3,7 @@
  * One guide = one file in src/content/guides/<slug>.md (published at /<slug>.html).
  * Frontmatter holds the structured parts (trip facts, day-by-day plan, places, tips, phrasebook);
  * the Markdown body is the personal "why go" story.
- * The page looks exactly like the live guides (src/styles/guide.css); the fields below carry
+ * Rendered in the new guide design (StructuredGuide, approved 2026-11-28); the fields below carry
  * every text and colour those pages show. The build fails with a clear message when a guide breaks this shape.
  */
 import { defineCollection } from "astro:content";
@@ -21,7 +21,16 @@ const stop = z.object({
   text: text.optional(),
 });
 
-const day = z.object({
+const photo = (image: () => z.ZodType) => z.object({
+  image: image(),
+  alt: text,
+  /** Required for photos that are not our own (Wikimedia Commons etc.): shown under the route strip. */
+  credit: z.object({ author: text, license: text, url: z.url() }).optional(),
+});
+
+const day = (image: () => z.ZodType) => z.object({
+  /** One photo for the day: route strip tile + day card thumbnail. */
+  photo: photo(image).optional(),
   title: text,
   icon: text.optional(),
   /** "29.04 שלישי": label beside the timeline. */
@@ -116,7 +125,7 @@ const guides = defineCollection({
       /** Route map view; the points come from days[].map. */
       map: z.object({ center: coords, zoom: z.number().min(1).max(18) }).optional(),
 
-      days: z.array(day).default([]),
+      days: z.array(day(image)).default([]),
       staysIntro: text.optional(),
       stays: z.array(place).default([]),
       /** "What to do with kids". */

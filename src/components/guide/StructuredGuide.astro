@@ -1,54 +1,48 @@
 ---
 /**
- * Structured destination guide (src/content/guides/<slug>.md), rendered by src/pages/[guide].astro.
- * Markup and class names mirror the live guide pages (legacy/athens.html) and the styles come from
- * them (src/styles/guide.css), so the guides look exactly as they do today.
- * Everything shown comes from the guide's content file; nothing is fetched in the browser.
+ * Destination guide, new design (approved 2026-11-28; rules in .claude/skills/site-design).
+ * Decision first: photo hero + "trip at a glance", summary, then the route (photo strip + map + day cards),
+ * things to do, where to stay (Stay22 map, disclosure beside partner links), tips, good to know, phrasebook.
+ * Everything comes from the guide's content file (src/content/guides/<slug>.md); nothing is fetched to show content.
  */
 import { render, type CollectionEntry } from "astro:content";
 import { getImage } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Photo from "../Photo.astro";
-import PartnerNote from "../PartnerNote.astro";
 import { site, whatsappLink } from "../../config/site";
 import { breadcrumb, article, faq as faqSchema } from "../../lib/schema";
+import { destinations } from "../../data/destinations";
 import goodToKnowData from "../../data/good-to-know.json";
-import "../../styles/guide.css";
 
 type Props = { entry: CollectionEntry<"guides"> };
 const { entry } = Astro.props;
 const g = entry.data;
 const { Content } = await render(entry);
 const path = `/${entry.id}.html`;
-const h = g.headings;
 
+const MONTHS = ["ינו׳", "פבר׳", "מרץ", "אפר׳", "מאי", "יוני", "יולי", "אוג׳", "ספט׳", "אוק׳", "נוב׳", "דצמ׳"];
+const hub = destinations.find(d => d.id === g.hub);
+const flightLabel = hub ? (hub.flightHours === 1.5 ? "כשעה וחצי" : `כ-${hub.flightHours} שעות`) : undefined;
 type GoodToKnow = { title_he: string; lead_he?: string; items: { id: string; title_he: string; summary_he: string; tips_url?: string }[] };
-const goodToKnow = (goodToKnowData as Record<string, GoodToKnow>)[g.country];
+const gtk = (goodToKnowData as Record<string, GoodToKnow>)[g.country];
 const localUrl = (u: string) => (/^https?:/.test(u) ? u : `/${u.replace(/^\//, "")}`);
-// Same icon + label per tip type as the live drawer.
-const gtkMeta = (id: string) => {
-  const s = id.toLowerCase();
-  if (/etias|entry|schengen/.test(s)) return { icon: "🛂", chip: "כניסה" };
-  if (/esim|sim|internet/.test(s)) return { icon: "📶", chip: "קישוריות" };
-  if (/transport|drive|road/.test(s)) return { icon: "🚗", chip: "תחבורה" };
-  if (/weather|season/.test(s)) return { icon: "🌦️", chip: "מזג אוויר" };
-  if (/budget|money|cost/.test(s)) return { icon: "💶", chip: "תקציב" };
-  if (/packing|gear|bag/.test(s)) return { icon: "🎒", chip: "ציוד" };
-  return { icon: "💡", chip: "תכנון" };
-};
+const stopsCount = g.days.reduce((n, d) => n + d.stops.length, 0);
+const bandOf = (d: (typeof g.days)[number]) => d.band ?? ["var(--dest)", "var(--dest-dark)"];
+const credits = g.days.flatMap((d, i) => (d.photo?.credit ? [{ day: i + 1, alt: d.photo.alt, ...d.photo.credit }] : []));
+const phraseCount = g.phrasebook?.groups.reduce((n, grp) => n + grp.phrases.length, 0) ?? 0;
 
-const mapDays = g.days.flatMap((d, i) => d.map ? [{ id: `card${i + 1}`, day: i + 1, date: d.map.date ?? d.date ?? "", label: d.map.short ?? d.title, emoji: d.icon ?? "📍", lat: d.map.lat, lng: d.map.lng, color: d.map.color ?? g.color, title: d.map.label ?? d.title }] : []);
-const showMap = mapDays.length > 0;
+const mapDays = g.days.flatMap((d, i) => (d.map ? [{ id: `day-${i + 1}`, day: i + 1, label: d.map.short ?? d.title, emoji: d.icon ?? "📍", lat: d.map.lat, lng: d.map.lng, color: d.map.color ?? g.color, title: d.map.label ?? d.title }] : []));
 const mapData = JSON.stringify({ center: g.map?.center ?? { lat: mapDays[0]?.lat ?? 0, lng: mapDays[0]?.lng ?? 0 }, zoom: g.map?.zoom ?? 10, days: mapDays }).replace(/</g, "\\u003c");
 
 const sections = [
-  { id: "intro", h: h.intro },
-  showMap && { id: "route-map", h: h.map },
-  g.days.length && { id: "itinerary", h: h.itinerary },
-  (g.stays.length || g.partners.staysMap) && { id: "accommodation", h: h.stays },
-  g.attractions.length && { id: "attractions", h: h.attractions },
-  g.tips.length && { id: "tips", h: h.tips },
-].filter(Boolean) as { id: string; h: { icon?: string; title: string; toc?: string } }[];
+  { id: "why", label: `למה ${g.name} עם ילדים` },
+  g.days.length && { id: "days", label: "המסלול יום אחר יום" },
+  g.attractions.length && { id: "todo", label: "מה לעשות עם ילדים" },
+  (g.stays.length || g.partners.staysMap) && { id: "stay", label: "איפה ישנו" },
+  g.tips.length && { id: "tips", label: "טיפים חשובים" },
+  gtk && { id: "know", label: gtk.title_he },
+  g.faq.length && { id: "faq", label: "שאלות נפוצות" },
+].filter(Boolean) as { id: string; label: string }[];
 
 const share = await getImage({ src: g.hero.image, width: 1200, height: 630, fit: "cover", format: "jpg" });
 const schema = [
@@ -56,406 +50,533 @@ const schema = [
   article({ headline: g.title, path, description: g.description, image: share.src, datePublished: g.datePublished?.toISOString().slice(0, 10), dateModified: g.dateModified?.toISOString().slice(0, 10) }),
   ...(g.faq.length ? [faqSchema(g.faq)] : []),
 ];
-const destStyle = `--dest:${g.color};--dest-dark:${g.colorDark ?? g.color}`;
+const planText = g.sidebar?.text ?? `אבנה לכם מסלול מלא ל${g.name}: יום אחר יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.`;
+const waText = `היי, קראתי את ${g.title} ויש לי שאלה`;
 ---
 <BaseLayout title={g.seoTitle ?? g.title} description={g.description} image={share.src} imageAlt={g.title} type="article" schema={schema} readProgress floatNav stay22>
-  {showMap && <link slot="head" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />}
+  {mapDays.length > 0 && <link slot="head" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />}
 
-  <div class="guide-page" style={destStyle} data-good-to-know-country={g.country}>
-    <section class="article-hero article-hero--destination article-hero--mapglass">
-      <div class="article-hero__bg" aria-hidden="true">
-        <Photo src={g.hero.image} alt="" decorative widths={[640, 960, 1280, 1600]} sizes="100vw" priority />
-      </div>
-      <div class="container">
-        <div class="article-hero__inner">
-          <div class="article-hero__glass">
-            <nav class="article-hero__breadcrumb" aria-label="breadcrumb"><a href="/services.html">{site.name}</a><span>›</span><a href="/destinations.html">יעדים</a><span>›</span><span>{g.name}</span></nav>
-            <span class="article-hero__flag"><span class={`flag-icon flag-${g.country.toLowerCase()} flag-icon-hero`}></span></span>
-            <h1 class="article-hero__title">{g.title}</h1>
-            {g.hero.subtitle && <p class="article-hero__subtitle">{g.hero.subtitle}</p>}
-          </div>
-          <div class="article-hero__meta">
-            {g.trip.dates && <span class="article-hero__badge">📅 {g.trip.dates}</span>}
-            <span class="article-hero__badge">👨‍👩‍👧‍👦 {g.trip.days} ימים</span>
-            {g.trip.base && <span class="article-hero__badge">🏨 {g.trip.base}</span>}
-            {g.trip.flight && <span class="article-hero__badge">✈️ {g.trip.flight}</span>}
-          </div>
-          {goodToKnow && (
-            <button type="button" class="gtk-trigger" id="gtkOpenBtn" aria-expanded="false" aria-controls="gtkDrawerDialog" aria-haspopup="dialog">
-              <span class="gtk-trigger__icon" aria-hidden="true">🧭</span>
-              <span class="gtk-trigger__label"><span class="gtk-trigger__title">טוב לדעת לפני הטיול</span><span class="gtk-trigger__sub">טיפים ממוקדים ליעד הזה</span></span>
-            </button>
-          )}
-        </div>
-        {g.hero.osmCredit && <p class="article-hero__attr">מפת סטטית · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></p>}
-      </div>
-    </section>
-
-    <section class="article-body">
-      <div class="container">
-        <div class="article-layout">
-          <div class="article-content">
-            <div class="toc">
-              <div class="toc__title">📖 מה תמצאו במאמר הזה</div>
-              <div class="toc__list">
-                {sections.map((s, i) => <a href={`#${s.id}`} class="toc__link"><span class="toc__num">{i + 1}</span> {s.h.toc ?? s.h.title}</a>)}
-              </div>
+  <div class="gd" style={`--dest:${g.color};--dest-dark:${g.colorDark ?? g.color}`} data-good-to-know-country={g.country}>
+    <div class="container">
+      <header class="hero">
+        <Photo src={g.hero.image} alt={g.hero.alt || ""} decorative={!g.hero.alt} widths={[640, 960, 1280, 1600]} sizes="(max-width: 1200px) 100vw, 1160px" priority class="hero__img" />
+        <div class="hero__inner">
+          <div>
+            <nav class="crumbs" aria-label="מיקום באתר"><a href="/destinations.html">יעדים</a><span aria-hidden="true">›</span><span>{g.name}</span></nav>
+            <h1>{g.title}</h1>
+            {g.hero.subtitle && <p class="hero__sub">{g.hero.subtitle}</p>}
+            <div class="hero__ctas">
+              <a class="btn btn--amber" href="/packages.html">לתכנון טיול כזה</a>
+              <a class="btn btn--ghost" href={whatsappLink(waText)} target="_blank" rel="noopener">שאלה בוואטסאפ</a>
             </div>
-
-            <div class="article-section" id="intro">
-              <h2 class="article-section__title"><span>{h.intro.icon}</span> {h.intro.title}</h2>
-              <Content />
-            </div>
-
-            {showMap && (
-              <div class="article-section" id="route-map">
-                <h2 class="article-section__title"><span>{h.map.icon}</span> {h.map.title}</h2>
-                <p style="margin-bottom:16px;font-size:15px;color:#666;">לחצו על יום בטיימליין כדי לראות את המיקום במפה, או לחצו על סמן במפה כדי לפתוח את פרטי היום.</p>
-                <div id="trip-map" style="height:420px;border-radius:16px;overflow:hidden;border:2px solid var(--sand-dark);box-shadow:0 4px 20px rgba(0,0,0,0.1);"></div>
-                <div id="map-day-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;"></div>
+          </div>
+          <section class="glance" aria-labelledby="glance-title">
+            <h2 id="glance-title">הטיול בקצרה</h2>
+            <dl>
+              <div><dt>משך</dt><dd>{g.trip.days} ימים</dd></div>
+              {g.trip.dates && <div><dt>תאריכי הטיול</dt><dd>{g.trip.dates}</dd></div>}
+              {g.trip.base && <div><dt>בסיס</dt><dd>{g.trip.base}</dd></div>}
+              {(g.trip.flight || flightLabel) && <div><dt>טיסה</dt><dd>{[g.trip.flight, flightLabel].filter(Boolean).join(" · ")}</dd></div>}
+              {g.kidsAges && <div><dt>גילאי הילדים</dt><dd>{g.kidsAges}</dd></div>}
+            </dl>
+            {g.bestMonths.length > 0 && (
+              <div>
+                <p class="glance__label">מתי הכי כדאי</p>
+                <div class="months" role="img" aria-label={`חודשים מומלצים: ${g.bestMonths.map(m => MONTHS[m - 1]).join(", ")}`}>
+                  {MONTHS.map((m, i) => <span class={g.bestMonths.includes(i + 1) ? "on" : undefined}>{m}</span>)}
+                </div>
               </div>
             )}
+          </section>
+        </div>
+        {g.hero.osmCredit && <p class="hero__credit">מפה: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></p>}
+      </header>
 
-            {g.days.length > 0 && (
-              <div class="article-section" id="itinerary">
-                <h2 class="article-section__title"><span>{h.itinerary.icon}</span> {h.itinerary.title}</h2>
-                <div class="timeline">
-                  {g.days.map((d, i) => {
-                    const band = d.band ?? ["var(--dest)", "var(--dest-dark)"];
-                    return (
-                      <div class={`tl-item ${i % 2 === 0 ? "tl-odd" : "tl-even"}`}>
-                        <div class="tl-item__label">יום {i + 1}{d.date && <><br /><span style="font-size:11px;color:#ccc;">{d.date}</span></>}</div>
-                        <div class="tl-item__node"><div class="tl-item__icon">{d.icon}</div><span class="tl-item__day-label">יום {i + 1}</span></div>
-                        <div class="tl-item__card tl-card" id={`card${i + 1}`}>
-                          <div class="tl-card__band" style={`background:linear-gradient(90deg,${band[0]},${band[1]})`}></div>
-                          <div class="tl-card__header">
-                            <div>
-                              <div class="tl-card__title">{d.title}</div>
-                              {d.where && <div class="tl-card__where">📍 {d.where}</div>}
-                            </div>
-                            {d.badge && <span class="tl-card__star" style={d.badgeStyle ? `background:${d.badgeStyle.bg};color:${d.badgeStyle.color};` : undefined}>{d.badge}</span>}
-                          </div>
-                          <div class="tl-card__body">
-                            {d.stops.map(s => (
-                              <div class="tl-activity">
-                                <div class="tl-activity__time">{s.time}</div>
-                                <div><div class="tl-activity__name">{s.title}</div>{s.text && <div class="tl-activity__desc">{s.text}</div>}</div>
-                              </div>
-                            ))}
-                            {d.tips.map(t => <div class="tl-tip"><strong>💡 טיפ:</strong> {t}</div>)}
-                            {d.stay && <div class="tl-tip"><strong>לינה:</strong> {d.stay}</div>}
-                          </div>
-                          <button type="button" class="tl-card__toggle" data-card={`card${i + 1}`} aria-expanded="false"><span>פרטי היום</span><span class="tl-card__chevron">▾</span></button>
-                        </div>
+      <div class="layout">
+        <div class="main">
+          <section id="why" class="section" aria-labelledby="why-h">
+            <h2 id="why-h">למה {g.name} עם ילדים</h2>
+            <div class="summary">
+              <div class="story" id="story"><Content /></div>
+              <button type="button" class="more" id="storyMore" hidden aria-expanded="false">להמשך הסיפור ↓</button>
+              {g.highlights.length > 0 && (
+                <>
+                  <p class="glance__label">לא לפספס</p>
+                  <ul class="chips" aria-label="לא לפספס">{g.highlights.map(h => <li>{h}</li>)}</ul>
+                </>
+              )}
+            </div>
+          </section>
+
+          {g.days.length > 0 && (
+            <section id="days" class="section" aria-labelledby="days-h">
+              <h2 id="days-h">המסלול יום אחר יום</h2>
+              <p class="lede">{g.days.length} ימים, {stopsCount} עצירות. כל יום מתקפל: הכותרת אומרת מה עושים, והפרטים נפתחים בלחיצה.</p>
+
+              <div class="route">
+                <div class="route__head"><h3>המסלול במבט אחד</h3><span class="route__hint">לחצו על יום כדי לפתוח אותו</span></div>
+                <div class="route__scroll">
+                  <ol>
+                    {g.days.map((d, i) => (
+                      <li>
+                        <button type="button" class="stopbtn" data-day={i} style={`--band:${bandOf(d)[0]}`} aria-label={`יום ${i + 1}: ${d.map?.short ?? d.title}`}>
+                          {d.photo ? (
+                            <span class="stopbtn__ring" aria-hidden="true"><Photo src={d.photo.image} alt="" decorative widths={[256, 320]} sizes="128px" /></span>
+                          ) : (
+                            <span class="stopbtn__ring stopbtn__ring--empty" aria-hidden="true"><span>{d.icon ?? "📍"}</span></span>
+                          )}
+                          <span class="stopbtn__day">יום {i + 1}</span>
+                          <span class="stopbtn__name">{d.map?.short ?? d.title}</span>
+                          {(d.map?.date ?? d.date) && <span class="stopbtn__date">{d.map?.date ?? d.date}</span>}
+                        </button>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+                {credits.length > 0 && (
+                  <p class="credits">תמונות: {credits.map(c => <><a href={c.url} target="_blank" rel="noopener">יום {c.day}: {c.alt} · {c.author} · {c.license}</a>{" "}</>)}</p>
+                )}
+              </div>
+
+              {mapDays.length > 0 && (
+                <div class="mapbox">
+                  <div id="trip-map" class="map" role="region" aria-label={`מפת המסלול ב${g.name}`}></div>
+                </div>
+              )}
+
+              <div class="days-head"><button type="button" class="more" id="toggleAll">פתיחת כל הימים</button></div>
+              <ol class="days">
+                {g.days.map((d, i) => (
+                  <li class="day" style={`--band:${bandOf(d)[0]};--band2:${bandOf(d)[1]}`}>
+                    <span class="day__dot" aria-hidden="true">{d.icon ?? i + 1}</span>
+                    <div class="day__card" id={`day-${i + 1}`}>
+                      <div class="day__band"></div>
+                      <div class="day__top">
+                        <button type="button" class="day__btn" aria-expanded={i === 0 ? "true" : "false"} aria-controls={`day-body-${i + 1}`}>
+                          <span class="day__meta">
+                            <b>יום {i + 1}</b>
+                            {d.date && <span>{d.date}</span>}
+                            <span>· {d.stops.length} עצירות</span>
+                            {d.badge && <span class="badge" style={d.badgeStyle ? `background:${d.badgeStyle.bg};color:${d.badgeStyle.color}` : undefined}>{d.badge}</span>}
+                          </span>
+                          <span class="day__title">{d.title}</span>
+                          <span class="day__peek">{[d.where, d.stops.slice(0, 3).map(s => s.title).join(" · ")].filter(Boolean).join(" · ")}</span>
+                          <span class="day__chev" aria-hidden="true">{i === 0 ? "▲" : "▾"}</span>
+                        </button>
+                        {d.photo && <Photo src={d.photo.image} alt={d.photo.alt} widths={[192, 288]} sizes="96px" class="day__thumb" />}
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {(g.stays.length > 0 || g.partners.staysMap) && (
-              <div class="article-section" id="accommodation">
-                <h2 class="article-section__title"><span>{h.stays.icon}</span> {h.stays.title}</h2>
-                {g.staysIntro && <p style="color:#444;font-size:15px;margin-bottom:20px;">{g.staysIntro}</p>}
-                {g.partners.staysMap && <iframe id="stay22-widget" width="100%" height="428" src={g.partners.staysMap} title={`מפת מלונות: ${g.name}`} loading="lazy" frameborder="0"></iframe>}
-                {g.stays.map(s => (
-                  <div style="display:inline-flex;flex-direction:column;align-items:flex-start;background:white;border-radius:12px;border:2px solid var(--sand-dark);padding:12px 16px;margin-top:12px;gap:8px;max-width:100%;box-sizing:border-box;">
-                    <div style="font-weight:700;font-size:14px;">{s.icon ?? "🏨"} {s.name}</div>
-                    {s.text && <div style="font-size:12px;color:#888;">📍 {s.text}</div>}
-                    {s.url && <a href={s.url} target="_blank" rel={s.partner ? "sponsored noopener" : "noopener"} style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:white;border-radius:20px;padding:7px 14px;font-size:13px;font-weight:600;">להזמנה ←</a>}
-                  </div>
-                ))}
-                {(g.stays.some(s => s.partner) || g.partners.staysMap) && <PartnerNote class="guide-partner-note" />}
-              </div>
-            )}
-
-            {g.attractions.length > 0 && (
-              <div class="article-section" id="attractions">
-                <h2 class="article-section__title"><span>{h.attractions.icon}</span> {h.attractions.title}</h2>
-                <div class="tips-list">
-                  {g.attractions.map(a => (
-                    <div class="tip-item">
-                      {a.icon && <span class="tip-item__icon">{a.icon}</span>}
-                      <div class="tip-item__text"><strong>{a.url ? <a href={a.url}>{a.name}</a> : a.name}</strong>{a.text && <><br />{a.text}</>}</div>
+                      <div class="day__body" id={`day-body-${i + 1}`} hidden={i !== 0}>
+                        {d.stops.map(s => (
+                          <div class="stop"><span class="stop__t">{s.time}</span><div><b>{s.title}</b>{s.text && <p>{s.text}</p>}</div></div>
+                        ))}
+                        {d.tips.map(t => <p class="note">טיפ: {t}</p>)}
+                        {d.stay && <p class="note note--stay">לינה: {d.stay}</p>}
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
 
-            {g.tips.length > 0 && (
-              <div class="article-section" id="tips">
-                <h2 class="article-section__title"><span>{h.tips.icon}</span> {h.tips.title}</h2>
-                <div class="tips-list">
-                  {g.tips.map(t => <div class="tip-item"><span class="tip-item__icon">{t.icon}</span><span>{t.text}</span></div>)}
-                </div>
-              </div>
-            )}
+          {g.attractions.length > 0 && (
+            <section id="todo" class="section" aria-labelledby="todo-h">
+              <h2 id="todo-h">{g.headings.attractions.title}</h2>
+              <ul class="places">
+                {g.attractions.map(a => (
+                  <li class="place">
+                    <span class="place__icon" aria-hidden="true">{a.icon ?? "📍"}</span>
+                    <h3>{a.url ? <a href={a.url}>{a.name}</a> : a.name}</h3>
+                    {a.text && <p>{a.text}</p>}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
-            {g.faq.length > 0 && (
-              <div class="article-section" id="faq">
-                <h2 class="article-section__title"><span>❓</span> שאלות נפוצות</h2>
-                <div class="tips-list">
-                  {g.faq.map(f => <div class="tip-item"><div class="tip-item__text"><strong>{f.q}</strong><br />{f.a}</div></div>)}
+          {(g.stays.length > 0 || g.partners.staysMap) && (
+            <section id="stay" class="section" aria-labelledby="stay-h">
+              <h2 id="stay-h">איפה ישנו</h2>
+              {g.staysIntro && <p class="lede">{g.staysIntro}</p>}
+              {g.partners.staysMap && (
+                <div>
+                  <div class="staymap"><iframe src={g.partners.staysMap} title={`מפת מלונות ב${g.name}`} loading="lazy"></iframe></div>
+                  <p class="disclose">ⓘ מפת המלונות כוללת קישורי שותפים: אם תזמינו דרכה נקבל עמלה קטנה. המחיר שלכם לא משתנה.</p>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+              {g.stays.map(s => (
+                <div class="stay">
+                  <div class="stay__row">
+                    <div><h3>{s.name}</h3>{s.text && <p class="lede">📍 {s.text}</p>}</div>
+                    {s.url && <a class="btn btn--teal" href={s.url} target="_blank" rel={s.partner ? "sponsored noopener" : "noopener"}>בדיקת זמינות ←</a>}
+                  </div>
+                  {s.partner && <p class="disclose">ⓘ קישור שותפים: אם תזמינו דרכו נקבל עמלה קטנה. המחיר שלכם לא משתנה.</p>}
+                </div>
+              ))}
+            </section>
+          )}
 
-          <aside class="sidebar">
-            <div class="cta-card">
-              <div class="cta-card__title">{g.sidebar?.title ?? "רוצים מסלול מותאם?"}</div>
-              <div class="cta-card__text">{g.sidebar?.text ?? `אבנה לכם מסלול מלא ל${g.name} - יום יום, עם הילדים שלכם, התקציב שלכם והתאריכים שלכם.`}</div>
-              <a href="/packages.html" class="cta-card__btn">לחבילות תכנון ←</a>
-              <a href={whatsappLink(`אני מתעניין בטיול ל${g.name} עם ילדים`)} target="_blank" rel="noopener" class="cta-card__wa">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>וואטסאפ
-              </a>
-            </div>
-          </aside>
+          {g.tips.length > 0 && (
+            <section id="tips" class="section" aria-labelledby="tips-h">
+              <h2 id="tips-h">טיפים חשובים</h2>
+              <ul class="tips">{g.tips.map(t => <li><span aria-hidden="true">{t.icon ?? "•"}</span><span>{t.text}</span></li>)}</ul>
+            </section>
+          )}
+
+          {gtk && (
+            <section id="know" class="section" aria-labelledby="know-h">
+              <h2 id="know-h">{gtk.title_he}</h2>
+              {gtk.lead_he && <p class="lede">{gtk.lead_he}</p>}
+              <div class="gtk">
+                {gtk.items.map(it => (
+                  <article><h3>{it.title_he}</h3><p>{it.summary_he}</p>{it.tips_url && <a href={localUrl(it.tips_url)}>להרחבה ←</a>}</article>
+                ))}
+              </div>
+              {g.phrasebook && <button type="button" class="btn btn--teal" data-open-pb>🗣️ {g.phrasebook.title} ({phraseCount} ביטויים)</button>}
+            </section>
+          )}
+
+          {g.faq.length > 0 && (
+            <section id="faq" class="section" aria-labelledby="faq-h">
+              <h2 id="faq-h">שאלות נפוצות</h2>
+              {g.faq.map(f => <details class="faq"><summary>{f.q}</summary><p>{f.a}</p></details>)}
+            </section>
+          )}
+
+          <section class="closing">
+            <h2>רוצים טיול כזה, מותאם אליכם?</h2>
+            <p>{planText}</p>
+            <a class="btn btn--amber" href="/packages.html">לחבילות התכנון</a>
+          </section>
         </div>
+
+        <aside class="rail">
+          <nav class="toc" aria-label="בעמוד הזה">
+            <p class="toc__label">בעמוד הזה</p>
+            <ol>{sections.map(s => <li><a href={`#${s.id}`} data-id={s.id}>{s.label}</a></li>)}</ol>
+          </nav>
+          <div class="rail__help">
+            <h3>{g.sidebar?.title ?? "רוצים מסלול מותאם?"}</h3>
+            <p>{planText}</p>
+            <a class="btn btn--amber" href="/packages.html">לחבילות התכנון</a>
+            <a class="btn btn--wa" href={whatsappLink(`אני מתעניין בטיול ל${g.name} עם ילדים`)} target="_blank" rel="noopener">וואטסאפ</a>
+          </div>
+        </aside>
       </div>
-    </section>
+    </div>
   </div>
 
   <Fragment slot="after">
+    <div class="gd-actionbar"><a class="btn btn--wa" href={whatsappLink(waText)} target="_blank" rel="noopener">שאלה בוואטסאפ</a><a class="btn btn--teal" href="/packages.html">לתכנון טיול כזה</a></div>
     {g.phrasebook && (
       <>
-        <button type="button" class="pb-float-btn" id="pbOpenBtn" aria-label={`פתח ${g.phrasebook.title}`} title={g.phrasebook.title}><span class="pb-float-btn__icon" aria-hidden="true">🗣️</span></button>
-        <div class="pb-drawer-overlay" id="pbOverlay"></div>
-        <div class="pb-drawer" id="pbDrawer" role="dialog" aria-label={g.phrasebook.title}>
-          <div class="pb-drawer-head"><h3>🗣️ {g.phrasebook.title}</h3><button type="button" class="pb-drawer-close" id="pbCloseBtn" aria-label="סגירה">✕</button></div>
-          <div class="pb-drawer-cats">
-            <button type="button" class="pb-dcat active" data-cat="all">הכל</button>
-            {g.phrasebook.groups.map(grp => <button type="button" class="pb-dcat" data-cat={grp.id}>{grp.name}</button>)}
-          </div>
-          <div class="pb-drawer-body">
+        <button type="button" class="gd-pbfab" data-open-pb aria-label={g.phrasebook.title} title={g.phrasebook.title}>🗣️</button>
+        <div class="gd-sheet" id="pbSheet" hidden>
+          <div class="gd-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="pbTitle">
+            <div class="gd-sheet__head"><h2 id="pbTitle">{g.phrasebook.title}</h2><button type="button" class="gd-sheet__close" id="pbClose" aria-label="סגירה">✕</button></div>
+            <div class="gd-cats" role="group" aria-label="קטגוריות">
+              <button type="button" data-cat="all" aria-pressed="true">הכל</button>
+              {g.phrasebook.groups.map(grp => <button type="button" data-cat={grp.id} aria-pressed="false">{grp.name}</button>)}
+            </div>
             {g.phrasebook.groups.map(grp => (
-              <>
-                <div class="pb-section-label" data-cat={grp.id}>{grp.name}</div>
-                {grp.phrases.map(p => (
-                  <div class="pb-item" data-cat={grp.id}>
-                    <div class="pb-item-he-col"><span class="pb-item-he">{p.he}</span><span class="pb-item-pron">{p.say}</span></div>
-                    <div class="pb-item-sk">{p.local}</div>
-                  </div>
-                ))}
-                {grp.note && <div class="pb-emergency-note" data-cat={grp.id}><strong>מספרי חירום:</strong><br />{grp.note}</div>}
-              </>
+              <div class="gd-pbgroup" data-cat={grp.id}>
+                <h3>{grp.name}</h3>
+                {grp.phrases.map(p => <div class="gd-phr"><span>{p.he}</span><span>{p.say}<small lang="und">{p.local}</small></span></div>)}
+                {grp.note && <p class="note">מספרי חירום: {grp.note}</p>}
+              </div>
             ))}
           </div>
         </div>
       </>
     )}
-
-    {goodToKnow && (
-      <div class="gtk-drawer" id="gtkDrawerRoot" hidden>
-        <div class="gtk-drawer__backdrop" id="gtkDrawerBackdrop"></div>
-        <div class="gtk-drawer__panel" id="gtkDrawerDialog" role="dialog" aria-modal="true" aria-labelledby="gtkDrawerTitle">
-          <div class="gtk-drawer__head">
-            <h2 class="gtk-drawer__title" id="gtkDrawerTitle">{goodToKnow.title_he}</h2>
-            <button type="button" class="gtk-drawer__close" id="gtkDrawerClose" aria-label="סגירה">✕</button>
-          </div>
-          <div class="gtk-drawer__body" id="gtkDrawerBody">
-            {goodToKnow.lead_he && <p class="gtk-drawer__lead" id="gtkDrawerLead">{goodToKnow.lead_he}</p>}
-            <ul class="gtk-drawer__list" id="gtkDrawerList">
-              {goodToKnow.items.filter(it => it.tips_url).map((it, i) => {
-                const meta = gtkMeta(it.id);
-                return (
-                  <li class="gtk-drawer__item" hidden={i >= 4}>
-                    <a class="gtk-drawer__card" href={localUrl(it.tips_url!)} data-card-id={it.id} data-card-title={it.title_he} data-card-category={meta.chip} data-card-position={String(i + 1)}>
-                      <span class="gtk-drawer__headrow"><span class="gtk-drawer__icon">{meta.icon}</span><span class="gtk-drawer__card-title">{it.title_he}</span><span class="gtk-drawer__chip">{meta.chip}</span></span>
-                      <span class="gtk-drawer__card-summary">{it.summary_he}</span>
-                      <span class="gtk-drawer__card-more">להמשך קריאה ←</span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-            {goodToKnow.items.length > 4 && <button type="button" class="gtk-drawer__more-toggle" id="gtkDrawerMoreBtn" aria-expanded="false">הצג עוד טיפים</button>}
-          </div>
-          <div class="gtk-drawer__foot"><a href="/tips.html" class="gtk-drawer__cta" id="gtkDrawerCta">לדף הטיפים המלא</a></div>
-        </div>
-      </div>
-    )}
-
-    {showMap && <script type="application/json" id="tripMapData" set:html={mapData} />}
+    {mapDays.length > 0 && <script type="application/json" id="tripMapData" set:html={mapData} />}
   </Fragment>
 </BaseLayout>
 
 <script>
-  // Behaviour copied from the live guide pages: card toggle, reading progress, route map,
-  // phrasebook drawer (draggable button), good-to-know drawer. Same Plausible event names.
-  type Plausible = (name: string, opts?: { props: Record<string, string> }) => void;
-  const track = (name: string, props: Record<string, string>) => { try { (window as unknown as { plausible?: Plausible }).plausible?.(name, { props }); } catch { /* analytics never breaks the page */ } };
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T | null;
+  const reduce = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // ---- day cards ----
-  function toggleCard(id: string) {
-    const card = $(id); if (!card) return;
-    const isOpen = card.classList.toggle("open");
-    const chevron = card.querySelector(".tl-card__chevron"); if (chevron) chevron.textContent = isOpen ? "▲" : "▾";
-    card.querySelector(".tl-card__toggle")?.setAttribute("aria-expanded", String(isOpen));
+  // ---- story: first paragraph, rest on request (all visible without script) ----
+  (() => {
+    const story = $("story"), more = $("storyMore");
+    if (!story || !more) return;
+    const rest = [...story.querySelectorAll("p")].slice(1);
+    if (!rest.length) return;
+    rest.forEach(p => (p.hidden = true));
+    more.hidden = false;
+    more.addEventListener("click", () => {
+      const open = more.getAttribute("aria-expanded") === "true";
+      rest.forEach(p => (p.hidden = open));
+      more.setAttribute("aria-expanded", String(!open));
+      more.textContent = open ? "להמשך הסיפור ↓" : "פחות ↑";
+    });
+  })();
+
+  // ---- day cards, route strip, open all ----
+  const btns = [...document.querySelectorAll<HTMLButtonElement>(".day__btn")];
+  const cards = [...document.querySelectorAll<HTMLElement>(".day__card")];
+  const stops = [...document.querySelectorAll<HTMLButtonElement>(".stopbtn")];
+  const setOpen = (i: number, open: boolean) => {
+    const b = btns[i]; if (!b) return;
+    const body = $(b.getAttribute("aria-controls") || ""); if (body) body.hidden = !open;
+    b.setAttribute("aria-expanded", String(open));
+    const chev = b.querySelector(".day__chev"); if (chev) chev.textContent = open ? "▲" : "▾";
+  };
+  btns.forEach((b, i) => b.addEventListener("click", () => setOpen(i, b.getAttribute("aria-expanded") !== "true")));
+  function openDay(i: number, scroll: boolean) {
+    setOpen(i, true);
+    cards.forEach((c, j) => c.classList.toggle("is-active", j === i));
+    stops.forEach((s, j) => (j === i ? s.setAttribute("aria-current", "true") : s.removeAttribute("aria-current")));
+    if (scroll) cards[i]?.scrollIntoView({ behavior: reduce() ? "auto" : "smooth", block: "center" });
   }
-  document.querySelectorAll<HTMLButtonElement>(".tl-card__toggle").forEach(b => b.addEventListener("click", () => toggleCard(b.dataset.card || "")));
+  stops.forEach(s => s.addEventListener("click", () => openDay(Number(s.dataset.day), true)));
+  let allOpen = false;
+  $("toggleAll")?.addEventListener("click", e => {
+    allOpen = !allOpen;
+    btns.forEach((_, i) => setOpen(i, allOpen));
+    (e.currentTarget as HTMLElement).textContent = allOpen ? "סגירת כל הימים" : "פתיחת כל הימים";
+  });
 
-  // ---- route map (Leaflet, loaded when the map comes near the screen) ----
+  // ---- contents rail: highlight the section being read ----
+  (() => {
+    const links = [...document.querySelectorAll<HTMLAnchorElement>(".toc a")];
+    if (!links.length || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      links.forEach(a => { const on = a.dataset.id === e.target.id; a.classList.toggle("is-current", on); on ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"); });
+    }), { rootMargin: "-30% 0px -60% 0px" });
+    links.forEach(a => { const s = $(a.dataset.id || ""); if (s) io.observe(s); });
+  })();
+
+  // ---- route map (Leaflet + CARTO, as on the live guides), loads when near the screen ----
   (() => {
     const el = $("trip-map"), dataEl = $("tripMapData");
     if (!el || !dataEl) return;
-    type Day = { id: string; day: number; date: string; label: string; emoji: string; lat: number; lng: number; color: string; title: string };
+    type Day = { id: string; day: number; label: string; emoji: string; lat: number; lng: number; color: string; title: string };
     const data = JSON.parse(dataEl.textContent || "{}") as { center: { lat: number; lng: number }; zoom: number; days: Day[] };
     const esc = (s: string) => s.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
-    const loadLeaflet = () => new Promise<void>((resolve, reject) => {
-      if ((window as unknown as { L?: unknown }).L) return resolve();
-      const s = document.createElement("script");
-      s.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
-      s.onload = () => resolve(); s.onerror = reject;
-      document.head.appendChild(s);
+    const load = () => new Promise<void>((res, rej) => {
+      if ((window as unknown as { L?: unknown }).L) return res();
+      const s = document.createElement("script"); s.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"; s.onload = () => res(); s.onerror = rej; document.head.appendChild(s);
     });
-    const start = () => loadLeaflet().then(() => {
+    const start = () => load().then(() => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const L = (window as any).L;
       const map = L.map(el, { center: [data.center.lat, data.center.lng], zoom: data.zoom, scrollWheelZoom: false });
       L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", { attribution: "© OpenStreetMap © CARTO", maxZoom: 18 }).addTo(map);
-      L.polyline(data.days.map(d => [d.lat, d.lng]), { color: "#E8A045", weight: 2.5, dashArray: "6,5", opacity: 0.7 }).addTo(map);
-      const markers: Record<string, any> = {};
-      let active: string | null = null;
-      const makeIcon = (d: Day, on: boolean) => {
-        const size = on ? 46 : 38;
-        return L.divIcon({ className: "", iconSize: [size, size], iconAnchor: [size / 2, size / 2], popupAnchor: [0, -(size / 2 + 4)],
-          html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${on ? d.color : "#fff"};border:2.5px solid ${on ? "#fff" : d.color};display:flex;align-items:center;justify-content:center;font-size:${on ? 20 : 16}px;box-shadow:0 3px 12px rgba(0,0,0,0.22);cursor:pointer;"><span style="line-height:1;">${esc(d.emoji)}</span></div>` });
-      };
-      const setActive = (id: string) => {
-        if (active === id) return; active = id;
-        data.days.forEach(d => markers[d.id]?.setIcon(makeIcon(d, d.id === id)));
-        document.querySelectorAll<HTMLElement>(".map-pill").forEach(p => {
-          const on = p.dataset.id === id;
-          p.style.background = on ? "var(--teal)" : "var(--white)"; p.style.color = on ? "#fff" : "var(--charcoal)"; p.style.borderColor = on ? "var(--teal)" : "var(--sand-dark)";
-        });
-      };
-      const flyTo = (d: Day) => { map.flyTo([d.lat, d.lng], 12, { duration: 0.8 }); markers[d.id]?.openPopup(); setActive(d.id); };
-      const goToDay = (id: string) => {
-        map.closePopup();
-        const card = $(id); if (!card) return;
-        if (!card.classList.contains("open")) toggleCard(id);
-        card.scrollIntoView({ behavior: "smooth", block: "center" });
-      };
+      L.polyline(data.days.map(d => [d.lat, d.lng]), { color: "#E8A045", weight: 2.5, dashArray: "6,5", opacity: 0.8 }).addTo(map);
+      const bounds: [number, number][] = [];
       data.days.forEach(d => {
+        bounds.push([d.lat, d.lng]);
+        const icon = L.divIcon({ className: "", iconSize: [40, 40], iconAnchor: [20, 20], html: `<div style="width:40px;height:40px;border-radius:50%;background:#fff;border:3px solid ${d.color};display:grid;place-items:center;font:700 14px Rubik,sans-serif;color:#124d52;box-shadow:0 3px 10px rgba(0,0,0,.2)">${d.day}</div>` });
         const popup = document.createElement("div");
-        popup.dir = "rtl"; popup.style.cssText = "font-family:Rubik,sans-serif;min-width:160px;padding:4px 2px;";
-        popup.innerHTML = `<div style="font-size:11px;color:#aaa;margin-bottom:2px;">יום ${d.day}${d.date ? " · " + esc(d.date) : ""}</div><div style="font-size:15px;font-weight:600;color:${d.color};margin-bottom:4px;">${esc(d.emoji)} ${esc(d.label)}</div><div style="font-size:13px;color:#555;margin-bottom:8px;">${esc(d.title)}</div>`;
-        const btn = document.createElement("button");
-        btn.type = "button"; btn.textContent = "לפרטי היום ↓";
-        btn.style.cssText = `width:100%;background:${d.color};color:#fff;border:none;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:600;cursor:pointer;font-family:Rubik,sans-serif;`;
-        btn.addEventListener("click", () => goToDay(d.id));
-        popup.appendChild(btn);
-        markers[d.id] = L.marker([d.lat, d.lng], { icon: makeIcon(d, false) }).addTo(map).bindPopup(popup).on("click", () => setActive(d.id));
+        popup.dir = "rtl"; popup.style.cssText = "font-family:Rubik,sans-serif;min-width:150px";
+        popup.innerHTML = `<div style="font-size:12px;color:#777">יום ${d.day}</div><div style="font-weight:600;color:${d.color}">${esc(d.emoji)} ${esc(d.label)}</div><div style="font-size:13px;color:#555;margin:2px 0 8px">${esc(d.title)}</div>`;
+        const go = document.createElement("button");
+        go.type = "button"; go.textContent = "לפרטי היום ↓";
+        go.style.cssText = `width:100%;background:${d.color};color:#fff;border:0;border-radius:8px;padding:6px;font:600 12px Rubik,sans-serif;cursor:pointer`;
+        go.addEventListener("click", () => { map.closePopup(); openDay(d.day - 1, true); });
+        popup.appendChild(go);
+        L.marker([d.lat, d.lng], { icon }).addTo(map).bindPopup(popup);
       });
-      const pills = $("map-day-pills");
-      data.days.forEach(d => {
-        const b = document.createElement("button");
-        b.type = "button"; b.className = "map-pill"; b.dataset.id = d.id;
-        b.innerHTML = `<span>${esc(d.emoji)}</span><span style="font-size:12px;">יום ${d.day}</span>`;
-        b.style.cssText = "display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;border:1.5px solid var(--sand-dark);background:var(--white);cursor:pointer;font-family:Rubik,sans-serif;font-size:13px;transition:all 0.2s;";
-        b.addEventListener("click", () => flyTo(d));
-        pills?.appendChild(b);
-      });
-      data.days.forEach(d => {
-        const header = $(d.id)?.querySelector<HTMLElement>(".tl-card__header");
-        if (header) { header.style.cursor = "pointer"; header.addEventListener("click", () => flyTo(d)); }
-      });
+      if (bounds.length > 1) map.fitBounds(bounds, { padding: [30, 30] });
     }).catch(() => { el.textContent = "המפה לא נטענה כרגע."; });
-    if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) { io.disconnect(); start(); } }, { rootMargin: "400px" });
-      io.observe(el);
-    } else start();
+    if ("IntersectionObserver" in window) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); start(); } }, { rootMargin: "400px" }); io.observe(el); }
+    else start();
   })();
 
-  // ---- phrasebook drawer (draggable floating button, as on the live pages) ----
+  // ---- phrasebook sheet ----
   (() => {
-    const openBtn = $("pbOpenBtn"), closeBtn = $("pbCloseBtn"), drawer = $("pbDrawer"), overlay = $("pbOverlay");
-    if (!openBtn || !drawer || !overlay) return;
-    const openPb = () => { drawer.classList.add("open"); overlay.classList.add("open"); document.body.style.overflow = "hidden"; closeBtn?.focus(); };
-    const closePb = () => { drawer.classList.remove("open"); overlay.classList.remove("open"); document.body.style.overflow = ""; };
-    let dragging = false, moved = false, sx = 0, sy = 0, sl = 0, st = 0;
-    const point = (e: MouseEvent | TouchEvent) => ("touches" in e ? e.touches[0]! : e);
-    const onStart = (e: MouseEvent | TouchEvent) => {
-      const p = point(e), r = openBtn.getBoundingClientRect();
-      sx = p.clientX; sy = p.clientY; sl = r.left; st = r.top; dragging = true; moved = false;
-      openBtn.classList.add("dragging"); openBtn.style.animation = "none"; openBtn.style.bottom = "auto";
-      openBtn.style.left = `${sl}px`; openBtn.style.top = `${st}px`;
-      e.preventDefault();
-    };
-    const onMove = (e: MouseEvent | TouchEvent) => {
-      if (!dragging) return;
-      const p = point(e), dx = p.clientX - sx, dy = p.clientY - sy;
-      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) moved = true;
-      openBtn.style.left = `${Math.max(8, Math.min(window.innerWidth - openBtn.offsetWidth - 8, sl + dx))}px`;
-      openBtn.style.top = `${Math.max(8, Math.min(window.innerHeight - openBtn.offsetHeight - 8, st + dy))}px`;
-      e.preventDefault();
-    };
-    const onEnd = () => { if (!dragging) return; dragging = false; openBtn.classList.remove("dragging"); if (!moved) { openPb(); openBtn.style.animation = ""; } };
-    openBtn.addEventListener("mousedown", onStart);
-    openBtn.addEventListener("touchstart", onStart, { passive: false });
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("touchmove", onMove, { passive: false });
-    document.addEventListener("mouseup", onEnd);
-    document.addEventListener("touchend", onEnd);
-    openBtn.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPb(); } });
-    closeBtn?.addEventListener("click", closePb);
-    overlay.addEventListener("click", closePb);
-    document.addEventListener("keydown", e => { if (e.key === "Escape" && drawer.classList.contains("open")) closePb(); });
-    drawer.querySelectorAll<HTMLButtonElement>(".pb-dcat").forEach(btn => btn.addEventListener("click", () => {
-      drawer.querySelectorAll(".pb-dcat").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      const cat = btn.dataset.cat;
-      drawer.querySelectorAll<HTMLElement>(".pb-item, .pb-section-label, .pb-emergency-note").forEach(el => { el.style.display = cat === "all" || el.dataset.cat === cat ? "" : "none"; });
+    const sheet = $("pbSheet"), close = $("pbClose");
+    if (!sheet) return;
+    let opener: HTMLElement | null = null;
+    const open = (from: HTMLElement) => { opener = from; sheet.hidden = false; document.body.style.overflow = "hidden"; close?.focus(); };
+    const shut = () => { sheet.hidden = true; document.body.style.overflow = ""; opener?.focus(); };
+    document.querySelectorAll<HTMLElement>("[data-open-pb]").forEach(b => b.addEventListener("click", () => open(b)));
+    close?.addEventListener("click", shut);
+    sheet.addEventListener("click", e => { if (e.target === sheet) shut(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && !sheet.hidden) shut(); });
+    sheet.querySelectorAll<HTMLButtonElement>(".gd-cats button").forEach(b => b.addEventListener("click", () => {
+      sheet.querySelectorAll(".gd-cats button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      sheet.querySelectorAll<HTMLElement>(".gd-pbgroup").forEach(grp => (grp.hidden = b.dataset.cat !== "all" && grp.dataset.cat !== b.dataset.cat));
     }));
-  })();
-
-  // ---- good-to-know drawer (items are in the page; no fetch) ----
-  (() => {
-    const root = $("gtkDrawerRoot"), panel = $("gtkDrawerDialog"), openBtn = $("gtkOpenBtn"), closeBtn = $("gtkDrawerClose"), backdrop = $("gtkDrawerBackdrop"), list = $("gtkDrawerList"), more = $("gtkDrawerMoreBtn"), cta = $("gtkDrawerCta");
-    if (!root || !panel || !openBtn || !list) return;
-    const country = document.querySelector<HTMLElement>("[data-good-to-know-country]")?.dataset.goodToKnowCountry || "";
-    const items = [...list.querySelectorAll<HTMLElement>(".gtk-drawer__item")];
-    const total = () => String(list.querySelectorAll(".gtk-drawer__card").length);
-    let expanded = false, openedAt = 0, prevFocus: HTMLElement | null = null;
-    const collapse = () => {
-      items.forEach((it, i) => { it.hidden = items.length > 4 && !expanded && i >= 4; });
-      if (more) { more.setAttribute("aria-expanded", String(expanded)); more.textContent = expanded ? "הצג פחות" : "הצג עוד טיפים"; }
-    };
-    const open = () => {
-      prevFocus = document.activeElement as HTMLElement | null;
-      root.hidden = false;
-      requestAnimationFrame(() => { root.classList.add("is-open"); document.body.style.overflow = "hidden"; openedAt = Date.now(); openBtn.setAttribute("aria-expanded", "true"); track("GoodToKnow-Open", { country }); closeBtn?.focus(); });
-    };
-    const close = () => {
-      root.classList.remove("is-open"); document.body.style.overflow = ""; openBtn.setAttribute("aria-expanded", "false");
-      prevFocus?.focus(); prevFocus = null;
-      setTimeout(() => { if (!root.classList.contains("is-open")) root.hidden = true; }, 320);
-    };
-    openBtn.addEventListener("click", open);
-    closeBtn?.addEventListener("click", close);
-    backdrop?.addEventListener("click", () => { if (Date.now() - openedAt > 350) close(); });
-    document.addEventListener("keydown", e => { if (e.key === "Escape" && root.classList.contains("is-open")) { e.preventDefault(); close(); } }, true);
-    panel.addEventListener("keydown", e => {
-      if (e.key !== "Tab" || !root.classList.contains("is-open")) return;
-      const f = [...panel.querySelectorAll<HTMLElement>("a[href],button:not([disabled])")].filter(n => n.offsetParent !== null);
-      if (!f.length) return;
-      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1]!.focus(); }
-      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0]!.focus(); }
-    });
-    more?.addEventListener("click", () => { expanded = !expanded; collapse(); track("GoodToKnow-ToggleMore", { country, expanded: expanded ? "1" : "0" }); });
-    list.addEventListener("click", e => {
-      const a = (e.target as HTMLElement).closest<HTMLAnchorElement>("a.gtk-drawer__card"); if (!a) return;
-      track("GoodToKnow-CardClick", { country, href: a.getAttribute("href") || "", card_id: a.dataset.cardId || "", card_title: a.dataset.cardTitle || "", card_category: a.dataset.cardCategory || "", card_position: a.dataset.cardPosition || "", total_cards: total() });
-    });
-    cta?.addEventListener("click", () => track("GoodToKnow-CTA", { country, href: cta.getAttribute("href") || "/tips.html", total_cards: total(), expanded_items: expanded ? "1" : "0" }));
-    collapse();
   })();
 </script>
 
+<style>
+  .gd { --r-sm: 10px; --r-md: 14px; --r-lg: 20px; --muted: #5d625f; --shadow: 0 6px 24px rgba(18, 77, 82, .10); line-height: 1.75; }
+  .gd h1, .gd h2, .gd h3 { font-family: var(--font-heading); font-weight: 400; line-height: 1.2; text-wrap: balance; color: var(--teal-dark); }
+  .gd a { color: var(--teal); }
+
+  .hero { position: relative; margin-top: 16px; border-radius: var(--r-lg); overflow: hidden; min-height: 420px; display: grid; align-items: end; background: var(--teal-dark); }
+  .hero :global(.hero__img), .hero :global(picture) { position: absolute; inset: 0; }
+  .hero :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10, 30, 40, .15) 0%, rgba(10, 30, 40, .78) 78%); }
+  .hero__inner { position: relative; z-index: 1; padding: 28px clamp(18px, 4vw, 40px) 26px; display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr) 340px; align-items: end; }
+  .hero__credit { position: absolute; z-index: 1; bottom: 6px; inset-inline-end: 12px; font-size: 11px; color: rgba(255,255,255,.75); }
+  .gd .hero__credit a { color: rgba(255,255,255,.85); }
+  .crumbs { font-size: 13.5px; color: rgba(255,255,255,.85); display: flex; gap: 6px; }
+  .gd .crumbs a { color: #fff; }
+  .gd .hero h1 { color: #fff; font-size: clamp(2rem, 5vw, 3.2rem); margin-top: 6px; }
+  .hero__sub { color: rgba(255,255,255,.92); max-width: 52ch; margin-top: 8px; font-size: 1.05rem; }
+  .hero__ctas { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+  .gd .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 20px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 0; cursor: pointer; font-family: inherit; font-size: 15px; }
+  .gd .btn--amber { background: var(--amber); color: #2b1d07; }
+  .gd .btn--ghost { background: rgba(255,255,255,.14); color: #fff; border: 1.5px solid rgba(255,255,255,.5); }
+  .gd .btn--teal { background: var(--teal); color: #fff; }
+  .gd .btn--wa { background: var(--whatsapp); color: #fff; }
+
+  .glance { background: #fff; border-radius: var(--r-md); padding: 16px 18px; box-shadow: var(--shadow); display: grid; gap: 12px; }
+  .gd .glance h2 { font-size: 1.15rem; }
+  .glance dl { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; }
+  .glance dt { font-size: 12.5px; color: var(--muted); }
+  .glance dd { font-weight: 600; font-size: 15px; }
+  .months { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; }
+  .months span { font-size: 10.5px; text-align: center; padding: 4px 0; border-radius: 5px; background: var(--sand); color: #8a8a86; }
+  .months span.on { background: var(--dest); color: #fff; font-weight: 600; }
+  .glance__label { font-size: 12.5px; color: var(--muted); margin-bottom: 4px; }
+
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 40px; padding-block: 34px 72px; align-items: start; }
+  .main { display: grid; gap: 52px; min-width: 0; }
+  .section { display: grid; gap: 16px; scroll-margin-top: calc(var(--nav-height) + 16px); }
+  .gd .section > h2 { font-size: clamp(1.5rem, 3vw, 1.9rem); }
+  .lede { color: var(--muted); max-width: 64ch; }
+
+  .rail { position: sticky; top: calc(var(--nav-height) + 16px); display: grid; gap: 14px; }
+  .toc { background: #fff; border: 1px solid var(--sand-dark); border-radius: var(--r-md); padding: 14px; }
+  .toc__label { font-size: 12.5px; color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+  .toc ol { list-style: none; padding: 0; display: grid; gap: 2px; }
+  .gd .toc a { display: block; padding: 7px 10px; border-radius: 9px; text-decoration: none; color: var(--charcoal); font-size: 14.5px; border-inline-start: 3px solid transparent; }
+  .gd .toc a:hover { background: var(--sand); }
+  .gd .toc a.is-current { background: rgba(26,107,114,.08); color: var(--teal); font-weight: 600; border-inline-start-color: var(--teal); }
+  .rail__help { background: var(--teal); color: #fff; border-radius: var(--r-md); padding: 16px; display: grid; gap: 10px; }
+  .gd .rail__help h3 { color: #fff; font-size: 1.1rem; }
+  .rail__help p { font-size: 14.5px; opacity: .9; }
+
+  .summary { background: #fff; border: 1px solid var(--sand-dark); border-radius: var(--r-md); padding: 20px 22px; display: grid; gap: 12px; }
+  .story { display: grid; gap: 12px; max-width: 68ch; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; }
+  .chips li { background: color-mix(in srgb, var(--dest) 9%, #fff); border: 1px solid color-mix(in srgb, var(--dest) 25%, #fff); border-radius: 999px; padding: 3px 12px; font-size: 14px; }
+  .more { color: var(--teal); background: none; border: 0; font-weight: 600; padding: 0; justify-self: start; min-height: 32px; cursor: pointer; font: inherit; font-weight: 600; }
+
+  .route { background: #fff; border: 1px solid var(--sand-dark); border-radius: var(--r-md); padding: 16px 14px 12px; display: grid; gap: 8px; }
+  .route__head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .gd .route__head h3 { font-size: 1.05rem; }
+  .route__hint, .credits { font-size: 12px; color: var(--muted); }
+  .gd .credits a { color: var(--muted); }
+  .route__scroll { overflow-x: auto; padding: 6px 2px 4px; }
+  .route ol { list-style: none; padding: 0; display: flex; min-width: max-content; }
+  .route li { position: relative; width: 150px; flex: none; display: flex; justify-content: center; }
+  .route li + li::before { content: ""; position: absolute; top: 46px; inset-inline-end: 50%; width: 100%; border-top: 2.5px dashed var(--amber); }
+  .stopbtn { position: relative; z-index: 1; background: none; border: 0; padding: 0 6px; display: grid; justify-items: center; gap: 4px; text-align: center; cursor: pointer; font: inherit; color: inherit; }
+  .stopbtn__ring { width: 128px; height: 92px; border-radius: 14px; overflow: hidden; display: grid; place-items: center; font-size: 28px; background: #fff; border: 3px solid var(--band, var(--dest)); box-shadow: 0 4px 14px rgba(0,0,0,.12); transition: transform .2s, box-shadow .2s; }
+  .stopbtn__ring :global(picture), .stopbtn__ring :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .stopbtn__ring--empty { background: repeating-linear-gradient(135deg, var(--sand) 0 10px, #efe5cc 10px 20px); }
+  .stopbtn__day { font-size: 12px; font-weight: 700; color: #fff; background: var(--band, var(--dest)); border-radius: 999px; padding: 0 9px; margin-top: -12px; position: relative; }
+  .stopbtn__name { font-size: 13.5px; font-weight: 600; line-height: 1.3; color: var(--charcoal); max-width: 130px; }
+  .stopbtn__date { font-size: 12px; color: var(--muted); }
+  .stopbtn:hover .stopbtn__ring, .stopbtn[aria-current="true"] .stopbtn__ring { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.18); }
+
+  .mapbox { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--sand-dark); }
+  .map { height: 380px; background: var(--sand); }
+
+  .days-head { display: flex; justify-content: flex-end; }
+  .days { list-style: none; padding: 0; display: grid; gap: 12px; position: relative; }
+  .days::before { content: ""; position: absolute; inset-block: 22px; inset-inline-start: 21px; width: 2px; background: var(--sand-dark); }
+  .day { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 12px; position: relative; }
+  .day__dot { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: #fff; border: 2px solid var(--band, var(--dest)); font-size: 19px; z-index: 1; }
+  .day__card { background: #fff; border: 1px solid var(--sand-dark); border-radius: var(--r-md); overflow: hidden; scroll-margin-top: calc(var(--nav-height) + 16px); }
+  .day__card.is-active { box-shadow: 0 0 0 2px var(--band, var(--dest)); }
+  .day__band { height: 5px; background: linear-gradient(90deg, var(--band, var(--dest)), var(--band2, var(--dest-dark))); }
+  .day__top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: start; }
+  .day__btn { width: 100%; text-align: start; background: none; border: 0; padding: 12px 16px; padding-inline-end: 44px; display: grid; gap: 2px; position: relative; cursor: pointer; font: inherit; color: inherit; }
+  .day__chev { position: absolute; inset-inline-end: 16px; top: 14px; color: var(--teal); font-size: 15px; }
+  .day__meta { font-size: 13px; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .day__meta b { color: var(--teal); }
+  .day__title { font-family: var(--font-heading); font-size: 1.2rem; color: var(--charcoal); }
+  .day__peek { font-size: 14px; color: var(--muted); }
+  .badge { font-size: 12px; font-weight: 600; border-radius: 999px; padding: 1px 9px; background: var(--sand); }
+  .day__top :global(.day__thumb) { width: 96px; height: 70px; border-radius: 10px; object-fit: cover; margin: 12px 0 0; margin-inline-end: 16px; }
+  .day__body { padding: 0 16px 14px; display: grid; gap: 8px; }
+  .day__body[hidden] { display: none; }
+  .stop { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 10px; padding-block: 8px; border-top: 1px dashed var(--sand-dark); }
+  .stop__t { font-size: 13px; font-weight: 700; color: var(--teal); font-variant-numeric: tabular-nums; }
+  .stop b { display: block; }
+  .stop p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+  .note { font-size: 14.5px; background: color-mix(in srgb, var(--amber) 13%, #fff); border-radius: var(--r-sm); padding: 8px 12px; }
+  .note--stay { background: var(--sand); }
+
+  .places { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+  .place { background: #fff; border: 1px solid var(--sand-dark); border-radius: var(--r-md); padding: 16px; display: grid; gap: 6px; align-content: start; }
+  .place__icon { font-size: 26px; }
+  .gd .place h3 { font-size: 1.08rem; color: var(--charcoal); }
+  .place p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+
+  .staymap { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--sand-dark); background: var(--sand); }
+  .staymap iframe { width: 100%; height: 428px; border: 0; display: block; }
+  .stay { background: #fff; border: 1px solid var(--sand-dark); border-radius: var(--r-md); padding: 16px; display: grid; gap: 10px; }
+  .stay__row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .gd .stay h3 { font-size: 1.15rem; color: var(--charcoal); }
+  .disclose { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+
+  .tips { list-style: none; padding: 0; display: grid; gap: 8px; }
+  .tips li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 8px; background: #fff; border: 1px solid var(--sand-dark); border-radius: var(--r-sm); padding: 10px 14px; }
+
+  .gtk { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(230px, 1fr); gap: 12px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+  .gtk article { scroll-snap-align: start; background: var(--sand); border-radius: var(--r-md); padding: 14px; display: grid; gap: 6px; align-content: start; }
+  .gd .gtk h3 { font-size: 1.02rem; }
+  .gtk p { font-size: 14.5px; line-height: 1.6; }
+  .faq { background: #fff; border: 1px solid var(--sand-dark); border-radius: var(--r-sm); padding: 10px 14px; }
+  .faq summary { cursor: pointer; font-weight: 600; }
+
+  .closing { background: linear-gradient(135deg, var(--teal-dark), var(--teal)); color: #fff; border-radius: var(--r-lg); padding: 28px; display: grid; gap: 10px; justify-items: start; }
+  .gd .closing h2 { color: #fff; }
+
+  @media (max-width: 960px) {
+    .hero__inner { grid-template-columns: 1fr; }
+    .layout { grid-template-columns: 1fr; gap: 28px; padding-bottom: 110px; }
+    .rail { position: static; order: -1; }
+    .rail__help { display: none; }
+  }
+  @media (max-width: 520px) {
+    .hero { min-height: 0; }
+    .stop { grid-template-columns: 1fr; gap: 2px; }
+    .day__top :global(.day__thumb) { width: 72px; height: 54px; }
+    .route li { width: 130px; }
+    .stopbtn__ring { width: 112px; height: 80px; }
+    .route li + li::before { top: 40px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .stopbtn__ring { transition: none; } }
+</style>
+
 <style is:global>
-  .guide-partner-note { margin-top: 12px; }
+  /* Phone action bar, phrasebook button and sheet (outside the page wrapper). */
+  .gd-actionbar { display: none; }
+  .gd-actionbar .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 16px; border-radius: 999px; font-weight: 600; text-decoration: none; }
+  .gd-actionbar .btn--teal { background: var(--teal); color: #fff; }
+  .gd-actionbar .btn--wa { background: var(--whatsapp); color: #fff; }
+  .gd-pbfab { position: fixed; z-index: 900; bottom: calc(90px + env(safe-area-inset-bottom, 0px)); left: max(24px, env(safe-area-inset-left, 0px)); width: 52px; height: 52px; border-radius: 50%; background: var(--sand); color: var(--teal-dark); border: 1.5px solid var(--sand-dark); font-size: 24px; display: grid; place-items: center; box-shadow: 0 2px 10px rgba(0,0,0,.1); cursor: pointer; }
+  .gd-sheet { position: fixed; inset: 0; z-index: 1100; display: grid; align-items: end; background: rgba(18, 40, 45, .45); }
+  .gd-sheet[hidden] { display: none; }
+  .gd-sheet__panel { background: var(--cream); border-radius: 20px 20px 0 0; max-height: 80vh; overflow: auto; padding: 16px max(16px, env(safe-area-inset-left, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)); width: min(720px, 100%); margin-inline: auto; display: grid; gap: 10px; }
+  .gd-sheet__head { display: flex; justify-content: space-between; align-items: center; }
+  .gd-sheet__head h2 { font-family: var(--font-heading); font-weight: 400; color: var(--teal-dark); }
+  .gd-sheet__close { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--sand); font-size: 18px; cursor: pointer; }
+  .gd-cats { display: flex; gap: 6px; flex-wrap: wrap; }
+  .gd-cats button { border: 1.5px solid var(--sand-dark); background: #fff; border-radius: 999px; padding: 4px 12px; min-height: 36px; cursor: pointer; font: inherit; }
+  .gd-cats button[aria-pressed="true"] { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .gd-pbgroup[hidden] { display: none; }
+  .gd-pbgroup h3 { font-size: 1rem; margin-top: 8px; color: var(--teal-dark); }
+  .gd-phr { display: grid; grid-template-columns: 1fr 1.2fr; gap: 10px; padding: 8px 0; border-top: 1px solid var(--sand-dark); }
+  .gd-phr span:last-child { color: var(--teal-dark); }
+  .gd-phr small { display: block; color: #5d625f; direction: ltr; text-align: end; }
+  .gd-sheet .note { font-size: 14.5px; background: color-mix(in srgb, var(--amber) 13%, #fff); border-radius: 10px; padding: 8px 12px; margin-top: 8px; }
+  @media (max-width: 960px) {
+    .gd-actionbar { display: flex; gap: 8px; position: fixed; inset-inline: 0; bottom: 0; z-index: 950; padding: 10px max(12px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); background: rgba(253,248,242,.96); border-top: 1px solid var(--sand-dark); backdrop-filter: blur(6px); }
+    .gd-actionbar .btn { flex: 1; }
+    /* Keep the floating buttons above the action bar */
+    .gd-pbfab { bottom: calc(150px + env(safe-area-inset-bottom, 0px)); }
+    .float-nav { bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important; }
+  }
 </style>
