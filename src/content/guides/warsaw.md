@@ -6,9 +6,9 @@ name: וורשה
 country: PL
 hub: warsaw
 hero:
-  image: ../../assets/photos/poland-south.webp
+  image: ../../assets/photos/warsaw5.jpg
+  alt: מרכז המדע קופרניקוס בוורשה
   subtitle: עיר שמחברת היסטוריה עמוקה עם כיף אמיתי לילדים - מוזיאוני מדע, פארקי שעשועים, גנים מרהיבים ואוכל טעים בכל פינה
-  osmCredit: true
 trip:
   dates: 7-9 ימים מומלץ
   days: 9
